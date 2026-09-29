@@ -1,0 +1,27 @@
+{
+  "name": "greenhaven-idle-rpg",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node electron/dev.cjs",
+    "build": "tsc -b && vite build",
+    "test": "vitest run",
+    "preview": "vite preview",
+    "start": "electron ."
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "vite": "latest"
+  },
+  "devDependencies": {
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "electron": "latest",
+    "typescript": "latest",
+    "vitest": "latest"
+  },
+  "main": "electron/main.cjs"
+}
