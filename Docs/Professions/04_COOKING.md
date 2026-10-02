@@ -438,13 +438,16 @@ The future profession documents should respect these Cooking tags unless a later
 
 # 16. COMPLETE BASELINE RECIPE LIST
 
-Cooking v1.0 contains **40 baseline recipes**, roughly four per progression Tier.
+Cooking v1.0 contains **43 baseline recipes**, roughly four per progression Tier.
 
 | Lvl | Tier | Recipe | Method | Complexity | Inputs | Output | Qty | Food Value | Prep | Cook | XP | Role |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | T1 | Grilled River Fish | Grill | 1 | 1 [Basic Fish] or 1 [Small Fish] | Grilled River Fish | 1 | 12 | 1.8 | 3.5 | 7 | Early direct food |
 | 4 | T1 | Riverweed Broth | Pot | 1 | 1 [Basic Fish] + 1 River Weed | Riverweed Broth | 2 | 9 | 2.2 | 5.5 | 9 | Ingredient-efficient early food |
 | 8 | T1 | Roasted Root Bowl | Grill | 1 | 1 [Vegetable] + 1 [Fruit] | Roasted Root Bowl | 2 | 8 | 2.0 | 4.0 | 8 | Non-Fishing early food |
+| 38 | T4 | Orchard Fruit Preserve | Pot | 2 | 2 [Fruit] + 1 [Grain] | Orchard Fruit Preserve | 3 | 7 | 3.0 | 7.0 | 18 | Mid-tier Orchard sink |
+| 68 | T7 | Stormfruit Bake | Oven | 3 | 2 [Fruit] + 1 [Grain] + 1 [Herb] | Stormfruit Bake | 2 | 14 | 5.0 | 12.0 | 34 | Premium fruit dish |
+| 98 | T10 | Astral Fruit Banquet | Pot | 4 | 3 [Fruit] + 2 [Grain] + 1 [Herb] | Astral Fruit Banquet | 4 | 24 | 8.0 | 20.0 | 58 | Endgame banquet course |
 | 9 | T1 | Fish Strips | Prep Table | 1 | 2 [Small Fish] | Fish Strip | 4 | 0 | 2.0 | 0.0 | 8 | Fishing Bait |
 | 11 | T2 | Herbed Reedmere Fillet | Grill | 2 | 1 [Basic Fish] + 1 [Herb] | Herbed Reedmere Fillet | 1 | 20 | 2.8 | 4.2 | 13 | Direct combat food |
 | 14 | T2 | Mussel Chowder | Pot | 2 | 1 Freshwater Mussel + 1 [Grain] + 1 [Herb] | Mussel Chowder | 3 | 15 | 3.4 | 6.5 | 17 | Multi-serving meal |
@@ -1570,6 +1573,9 @@ not only Banquet Station.
 | 1 | T1 | Grilled River Fish | Grill | 1 | 1 [Basic Fish] or 1 [Small Fish] | Grilled River Fish | 1 | 12 | 1.8 | 3.5 | 7 | Early direct food |
 | 4 | T1 | Riverweed Broth | Pot | 1 | 1 [Basic Fish] + 1 River Weed | Riverweed Broth | 2 | 9 | 2.2 | 5.5 | 9 | Ingredient-efficient early food |
 | 8 | T1 | Roasted Root Bowl | Grill | 1 | 1 [Vegetable] + 1 [Fruit] | Roasted Root Bowl | 2 | 8 | 2.0 | 4.0 | 8 | Non-Fishing early food |
+| 38 | T4 | Orchard Fruit Preserve | Pot | 2 | 2 [Fruit] + 1 [Grain] | Orchard Fruit Preserve | 3 | 7 | 3.0 | 7.0 | 18 | Mid-tier Orchard sink |
+| 68 | T7 | Stormfruit Bake | Oven | 3 | 2 [Fruit] + 1 [Grain] + 1 [Herb] | Stormfruit Bake | 2 | 14 | 5.0 | 12.0 | 34 | Premium fruit dish |
+| 98 | T10 | Astral Fruit Banquet | Pot | 4 | 3 [Fruit] + 2 [Grain] + 1 [Herb] | Astral Fruit Banquet | 4 | 24 | 8.0 | 20.0 | 58 | Endgame banquet course |
 | 9 | T1 | Fish Strips | Prep Table | 1 | 2 [Small Fish] | Fish Strip | 4 | 0 | 2.0 | 0.0 | 8 | Fishing Bait |
 | 11 | T2 | Herbed Reedmere Fillet | Grill | 2 | 1 [Basic Fish] + 1 [Herb] | Herbed Reedmere Fillet | 1 | 20 | 2.8 | 4.2 | 13 | Direct combat food |
 | 14 | T2 | Mussel Chowder | Pot | 2 | 1 Freshwater Mussel + 1 [Grain] + 1 [Herb] | Mussel Chowder | 3 | 15 | 3.4 | 6.5 | 17 | Multi-serving meal |
@@ -2215,7 +2221,7 @@ Show:
 | 1 | Grilled River Fish; Worn Kitchen Knife; Prep Table + Grill |
 | 4 | Riverweed Broth |
 | 5 | Copper Kitchen Knife; Kitchen I |
-| 7 | Roasted Root Bowl |
+| 8 | Roasted Root Bowl |
 | 9 | Fish Strips |
 | 10 | Pot method available |
 | 11 | Herbed Reedmere Fillet |
@@ -2779,7 +2785,7 @@ The UI must show which items the next recipe craft will consume.
 # 105. COMPLETE LOCKED COOKING BASELINE
 
 1. Cooking uses Recipe Composition + Prep + Cooking Method + Batch.
-2. 40 baseline recipes.
+2. 43 baseline recipes.
 3. Six method families including Prep Table.
 4. No random food quality.
 5. No burning/failure.
@@ -2920,7 +2926,7 @@ Cooking recipes that accept [Fruit] may use eligible Farming Orchard fruit items
 
 
 
-The Roasted Root Bowl now provides the first explicit [Fruit] sink at Cooking 8; the first Apple Tree unlocks at Farming 8. Other suitable Orchard fruits also satisfy this semantic tag.
+Roasted Root Bowl provides the T1/T2 [Fruit] sink at Cooking 8; later [Fruit] sinks at Cooking 38, 68, and 98 align with Farming T4, T7, and T10 Orchard unlocks. Every Orchard output tagged [Fruit] is eligible; the tag is virtual, not an inventory item.
 
 
 

@@ -1,6 +1,6 @@
 ﻿# Profession Integration Hardening Report
 
-**Status:** Canonical documentation pass v1.0  
+**Status:** First-pass historical report; superseded by [Second-Pass Repair Report](PROFESSION_INTEGRATION_SECOND_PASS_REPORT.md)
 **Scope:** Documentation and registries only; no gameplay implementation code added.
 
 ## Changed
@@ -34,7 +34,7 @@
 - Smithing owns Basic, Reinforced, Precision/Runic, and Astral crossbow mechanism families.
 - Fletching owns the ten Fishing Rod recipes and reusable Trap Kit assembly; Fishing owns Rod stats/effects; Hunting owns use/methods.
 - Physical tool upgrades use the previous Tool, current-tier metal, and matching Utility Blank or named grip. T0 is granted by Chronicle/introduction or cheap Shop acquisition.
-- Tailoring's Thread recipe gates now match Foraging Fibre availability (L5 through L95). Simple Bowstring is explicitly L8; Reinforced/Runic/Astral remain L38/L68/L98.
+- Tailoring's Thread recipe gates now match Foraging Fibre availability (L5 through L95). First pass set Simple Bowstring to L8; the second pass corrected it to L5 so the first Fletching bow is craftable on gate.
 - Hunting's L32 Ambush uses Hardened Fittings, already available at Smithing L18. Later optional trap kits use existing Smithing/Runecrafting outputs.
 - `[Fruit]` is a semantic Cooking ingredient tag, not an inventory item. Roasted Root Bowl now uses a Farming Orchard fruit at Cooking L8, matching first fruit availability.
 - Farming physical loadouts are unique equipment assignments; offline crops use the same economic formulas.
@@ -54,12 +54,12 @@
 | Runic Cord | Sinew Cord + Aether Filament | Use existing physical and magical cord inputs |
 | Astral Cord | Sinew Cord + Astral Filament | Use existing physical and magical cord inputs |
 | generic metal Rivet Bundle | Hardened Fittings / Argent Mechanism / Tempered Assembly by tier | Smithing already owns these component families |
-| Dense Cloth Strips | Dense Cloth | Existing Tailoring Weave output |
-| Runic Cloth Strips | Runic Cloth | Existing Tailoring Weave output |
-| Astralweave Strips | Astralweave | Existing Tailoring Weave output |
+| retired alias: Dense Cloth Strips | Dense Cloth | Existing Tailoring Weave output |
+| retired alias: Runic Cloth Strips | Runic Cloth | Existing Tailoring Weave output |
+| retired alias: Astralweave Strips | Astralweave | Existing Tailoring Weave output |
 | Worldsilk Cord | 2 Worldsilk Thread + 1 Astral Filament | Uses the existing Worldsilk/Filament outputs |
 | unqualified Tool Handle | matching-tier Utility Blank | Fletching already produces the wooden structure |
-| Quintessence → World Matrix | Removed as a dependency | It conflicts with World Matrix → Quintessence; both now converge downstream at World Prism |
+| retired alias: prior World Matrix/Quintessence edge | Superseded | World Matrix and Quintessence are independent branches; World Prism consumes both |
 
 `Bone Rivet Bundle` remains a separate Leatherworking output and was not merged with metal fittings. No Fish Oil, Resin, or Prismatic Dust producer ownership was silently changed.
 
@@ -76,7 +76,7 @@
 | Astral Trap Assembly | 92 | 94 | Match Starwood Utility Blank availability; optional kit |
 | Roasted Root Bowl | 7 | 8 | First `[Fruit]` Orchard fruit is available at Farming 8 |
 
-Simple Bowstring is locked to the Level 8 gate already shown by the current Tailoring roadmap; it had no independent complete recipe gate elsewhere to preserve.
+Historical first-pass decision (superseded): Simple Bowstring was L8. Current canon is L5, aligned to the Alder Shortbow L5 gate.
 
 ## New required components and recipes
 
@@ -92,16 +92,16 @@ Simple Bowstring is locked to the Level 8 gate already shown by the current Tail
 - Final Combat balance remains intentionally open: weapon DPS, armor, Accuracy/Crit, jewelry/effect magnitudes, Ammo/Rune burn, and food healing remain design anchors until Combat Core is locked.
 - Gold amounts, Shop prices, sale values, and final worker capacity/economy tuning remain intentionally unnumbered.
 - Exact post-100 quantities for World Matrix, Quintessence, World Prism, and endgame project recipes remain intentionally deferred in the source designs; the DAG fixes their dependency order without guessing those quantities.
-- Exact action-time/XP recalculation after moved level gates is a balance pass; Mining's existing density/reward/XP formulas were retained as requested.
+- The second-pass repair rebalanced Mining Essence density and XP after earlier unlocks; see the second-pass report for calculated baseline XP/hour comparisons.
 
 ## Validation performed
 
 - Confirmed all 14 profession documents are present under `Docs/Professions/`.
 - Confirmed the old misspelled folder is absent and no live path references remain.
 - Confirmed canonical global rules, overview, four registries, Home/Estate/Workers, Activity Planner, Endgame DAG, and this report exist.
-- Searched for required stale names and updated their live recipe/source uses; historical alias explanations in this report/registries are intentional. No missing producer or dead resource was found among the audited cross-profession families.
+- Searched for required stale names and updated their live recipe/source uses; historical alias explanations in this report/registries are intentional. That first-pass audit was incomplete and made an overbroad no-missing-producer/no-dead-resource claim. See the second-pass report for the repository-wide counts and remaining gaps.
 - Checked internal Markdown link targets and endgame DAG order; no known bootstrap cycle remains in the audited cross-profession contracts.
-- Every consolidated integration item and every named undefined component in the requested search has a canonical producer/source and consumer; profession-specific rosters remain itemized in their owning documents to avoid duplicating their detailed tables. Stable item/recipe IDs follow deterministic owner-and-slug templates because the legacy docs had no IDs to collide.
+- This historical report did not fully enumerate every physical item, recipe, or gear input. The second-pass registries now materialize source rows and report explicit cross-reference counts; 302 gear recipe input specifications remain unspecified in source canon. Stable IDs use deterministic owner-and-slug templates because the legacy docs had no IDs to collide.
 - No gameplay implementation code was added.
 
 

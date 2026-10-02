@@ -176,11 +176,11 @@ Tailoring's defining mid/late-game mechanic:
 |---|---|---|---|---|---|---|
 | Plain Weave | 1 | 2 Thread â†’ 1 Cloth | 1.00x | 1.00x | 1.00x | Bulk baseline cloth |
 | Dense Weave | 15 | 3 Thread â†’ 1 Dense Cloth | 1.25x | 1.15x | 0.95x | Armor / reinforced profession gear |
-| Fine Weave | 35 | 3 Thread â†’ 1 Fine Cloth | 1.15x | 0.95x | 1.20x | High-quality profession clothes / mastery |
-| Runic Weave | 65 | 2 Cloth + 1 Runic Filament â†’ 1 Runic Cloth | 1.35x | 1.25x | 1.30x | Magic gear / high-tier profession gear |
+| Fine Weave | 35 | 3 Thread + 1 Runic Filament â†’ 1 Fine Cloth | 1.15x | 0.95x | 1.20x | High-quality profession clothes / mastery |
+| Runic Weave | 65 | 2 Cloth + 1 Aether Filament â†’ 1 Runic Cloth | 1.35x | 1.25x | 1.30x | Magic gear / high-tier profession gear |
 | Astral Weave | 95 | 2 Astralcloth + 1 Astral Filament â†’ 1 Astralweave | 1.50x | 1.35x | 1.40x | T10/endgame cloth |
 
-Weave choice changes what the material is good for.
+Weave choice changes what the material is good for. `[Thread]` and `[Cloth]` in generic Weave recipes select grade-appropriate physical Tailoring stacks; they are recipe selectors, not separate generic inventory items. Fine Weave also consumes 1 Runic Filament as its T4-T6 magical input.
 
 ---
 
@@ -242,11 +242,11 @@ Fine Weave trades bulk efficiency for:
 
 Unlock around Tailoring 65.
 
-Requires:
+For the T7-T9 grade, requires:
 
-**Runic Filament**
+**Aether Filament**
 
-Runic Filament will be defined in Runecrafting.
+Runic Filament is the T4-T6 textile/utility grade; Runecrafting defines all three canonical grades.
 
 Identity:
 
@@ -588,7 +588,7 @@ Tailoring owns the textile side of Fletching weapon strings.
 |---|---|---|---|
 | T1â€“T3 | Simple Bowstring | 3 Thread | Fletching bows/crossbows |
 | T4â€“T6 | Reinforced Bowstring | 1 Dense Cloth + 2 Thread | Mid-tier ranged weapons |
-| T7â€“T9 | Runic Bowstring | 1 Runic Cloth + 1 Runic Filament | Late ranged weapons |
+| T7â€“T9 | Runic Bowstring | 1 Runic Cloth + 1 Aether Filament | Late ranged weapons |
 | T10 | Astral Bowstring | 1 Astralweave + 1 Astral Filament | T10 ranged weapons |
 | T10+ | Worldroot Bowstring | Astral Bowstring + 2 Worldsilk Thread + 1 Astral Filament | Worldroot ranged crafting |
 
@@ -1289,8 +1289,8 @@ Example:
 
 Requirements:
 
-- Runic Filament from Runecrafting;
-- Runic cloth strips from Tailoring.
+- Aether Filament from Runecrafting;
+- Runic Cloth from Tailoring.
 
 Workers can maintain this once recipe is Proven.
 
@@ -1805,7 +1805,7 @@ Workers separately.
 | 5 | Spin Flax Thread; Worn Tailor's Shears |
 | 3 | Weave Flax Cloth |
 | 5 | Copper Shears; T1 cloth armor family |
-| 8 | Simple Bowstring |
+| 5 | Simple Bowstring |
 | 15 | Spin Rush Thread |
 | 13 | Weave Rushcloth |
 | 15 | Iron Shears; Dense Weave; Spinner's Ring |
@@ -2337,7 +2337,7 @@ Core Tailoring identity:
 
 # INTEGRATION HARDENING — THREAD, BOWSTRINGS, AND FILAMENTS
 
-Tailoring's Thread recipes unlock when their Foraging Fibre source becomes available (5, 15, 25, 35, 45, 55, 65, 75, 85, and 95). Simple Bowstring is canonically Level 8, matching the existing Tailoring roadmap; Reinforced Bowstring remains Level 38, Runic Bowstring Level 68, and Astral Bowstring Level 98. Reinforced strings consume Dense Cloth, Runic strings consume Runic Cloth + Runic Filament, and Astral strings consume Astralweave + Astral Filament. These are existing Tailoring weave outputs; undefined Cloth Strips intermediates are retired. Runecrafting owns all magical Filaments.
+Tailoring's Thread recipes unlock when their Foraging Fibre source becomes available (5, 15, 25, 35, 45, 55, 65, 75, 85, and 95). Simple Bowstring is canonically Level 5, matching the first Fletching weapon gate; Reinforced Bowstring remains Level 38, Runic Bowstring Level 68, and Astral Bowstring Level 98. Reinforced strings consume Dense Cloth, Runic strings consume Runic Cloth + Aether Filament, and Astral strings consume Astralweave + Astral Filament. These are existing Tailoring weave outputs; undefined Cloth Strips intermediates are retired. Runecrafting owns all magical Filaments.
 
 
 
@@ -2346,13 +2346,13 @@ Tailoring's Thread recipes unlock when their Foraging Fibre source becomes avail
 
 | Tailoring Level | Output | Exact inputs |
 |---:|---|---|
-| 8 | Simple Bowstring | 3 matching-tier Thread (Flax, Rush, or Nettle) |
+| 5 | Simple Bowstring | 3 matching-tier Thread (Flax, Rush, or Nettle) |
 | 38 | Reinforced Bowstring | 1 Dense Cloth + 2 matching-tier Thread |
-| 68 | Runic Bowstring | 1 Runic Cloth + 1 Runic Filament |
+| 68 | Runic Bowstring | 1 Runic Cloth + 1 Aether Filament |
 | 98 | Astral Bowstring | 1 Astralweave + 1 Astral Filament |
 | 100+ | Worldroot Bowstring | 1 Astral Bowstring + 2 Worldsilk Thread + 1 Astral Filament |
 
-Fibre enters Foraging at levels 5, 15, 25, 35, 45, 55, 65, 75, 85, and 95. Tailoring's matching Thread recipe now unlocks at those same levels. Simple Bowstring remains Level 8; other Bowstring gates remain 38/68/98.
+Fibre enters Foraging at levels 5, 15, 25, 35, 45, 55, 65, 75, 85, and 95. Tailoring's matching Thread recipe now unlocks at those same levels. Simple Bowstring is Level 5 so the first Fletching bow is normally craftable; other Bowstring gates remain 38/68/98.
 
 
 

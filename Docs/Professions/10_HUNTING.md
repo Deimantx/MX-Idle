@@ -577,10 +577,10 @@ Hunting has reusable method-enabling equipment.
 | Lvl | Trap Equipment | Inputs | Consumption | Role |
 |---|---|---|---|---|
 | 12 | Basic Snare Kit | 1 Alder Utility Blank + 1 Sinew Cord + 1 Iron Fasteners | Reusable method unlock component | Snare access |
-| 32 | Reinforced Trap Frame | 1 Silverpine Utility Blank + 1 Hardened Fittings | Reusable method unlock component | Ambush/trap upgrade |
+| 32 | Reinforced Trap Frame | 1 Ironwood Utility Blank + 1 Hardened Fittings | Reusable method unlock component | Ambush/trap upgrade |
 | 54 | Master Trap Kit | 1 Frostbark Utility Blank + 1 Argent Mechanism + 1 Resin | Reusable equipment upgrade | Better Snare/Ambush analytics |
 | 74 | Aether Trap Assembly | 1 Aetherwood Utility Blank + 1 Precision Mechanism + 1 Sinew Cord + 1 Aether Filament | Reusable late-game trap kit | Worker/hunt efficiency |
-| 94 | Astral Trap Assembly | 1 Starwood Utility Blank + 1 Umbral Reinforcement + 1 Sinew Cord + 1 Astral Filament | Reusable endgame trap kit | T10 hunting methods |
+| 95 | Astral Trap Assembly | 1 Starwood Utility Blank + 1 Umbral Reinforcement + 1 Sinew Cord + 1 Astral Filament | Reusable endgame trap kit | T10 hunting methods |
 
 Fletching owns these reusable assembly recipes (see its Trap Kit Assembly table); Hunting equips and uses them. These are not consumables.
 
@@ -900,7 +900,7 @@ Combat can separately equip weapons.
 
 # 45. KNIFE SOURCE
 
-Hunting Knife progression is crafted through:
+Hunting Knife progression is crafted by Smithing with the previous Knife, tier metal, and Utility Blank. Selected upgrades also use real Leatherworking components: T3 Cobalt Hunting Knife -> Rugged Grip Wrap (L25); T5 Emberite Hunting Knife -> Ember Grip Wrap (L45); T8 Aetherite Hunting Knife -> Aether Binding Set (L75); T10 Astralite Hunting Knife -> Umbral Grip Set (L88). Other Knife tiers have no mandatory wrap. Hunting Knife progression is crafted through:
 
 **Smithing**
 
@@ -1746,7 +1746,8 @@ Workers eventually maintain old Grounds.
 | 41 | Emberwild Hunting Ground |
 | 45 | Emberite Hunting Knife; Skinner set; Fletcher's Trophy Charm |
 | 51 | Frostwild Hunting Ground |
-| 52 | Trophy Hunt method / Master Trap Kit |
+| 52 | Trophy Hunt method |
+| 54 | Master Trap Kit |
 | 55 | Frostsilver Hunting Knife; Sinew Loop |
 | 61 | Stormmoor Hunting Ground |
 | 65 | Stormiron Hunting Knife; Gamekeeper set; Bonecarver Seal |
@@ -1756,7 +1757,7 @@ Workers eventually maintain old Grounds.
 | 81 | Umbral Hunting Ground |
 | 85 | Umbral Hunting Knife; Master Hunter set; Umbral Hunter Charm |
 | 91 | Starfall Hunting Ground |
-| 94 | Astral Trap Assembly |
+| 95 | Astral Trap Assembly |
 | 95 | Astralite Hunting Knife; Astral Hunter Emblem |
 | 100 | Hunting cap; Primal Hunt endgame path |
 

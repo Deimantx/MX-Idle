@@ -688,12 +688,12 @@ Leatherworking's permanent non-armor role:
 |---|---|---|---|---|
 | 8 | Leather Strap Bundle | 2 Light Leather | 4 Strap Bundles | Tool grips / traps / profession gear |
 | 18 | Reinforced Strap Bundle | 2 Tough Leather + 1 Sinew | 4 Reinforced Straps | Mid tools / crossbow / traps |
-| 28 | Rugged Grip Wrap | 2 Rugged Leather + 1 Sinew | 3 Grip Wraps | Tool handles / weapons |
+| 25 | Rugged Grip Wrap | 2 Rugged Leather + 1 Sinew | 3 Grip Wraps | Tool handles / weapons |
 | 38 | Moonbound Harness Parts | 2 Moon Leather + 1 Hardened Fittings | 3 Harness Parts | Profession gear / workers |
-| 48 | Ember Grip Wrap | 2 Ember Leather + 1 Resin | 3 Grip Wraps | T5 tools / weapons |
+| 45 | Ember Grip Wrap | 2 Ember Leather + 1 Resin | 3 Grip Wraps | T5 tools / weapons |
 | 58 | Frost Fur Lining | 2 Frost Leather + 1 Fur Bundle | 3 Fur Linings | Cold/profession gear |
 | 68 | Storm Reinforced Straps | 2 Storm Leather + 1 Sinew + 1 Hardened Fittings | 4 Straps | Late tools / traps |
-| 78 | Aether Binding Set | 2 Aether Leather + 1 Runic Filament | 3 Bindings | Runic gear / Fletching |
+| 75 | Aether Binding Set | 2 Aether Leather + 1 Runic Filament | 3 Bindings | Runic gear / Fletching |
 | 88 | Umbral Grip Set | 2 Umbral Leather + 1 Fang & Claw Fragment | 3 Grips | Late equipment |
 | 98 | Astral Binding Set | 2 Astral Leather + 1 Astral Filament | 3 Bindings | T10/endgame equipment |
 
@@ -1735,12 +1735,12 @@ Do not force absurd T1 Leather quantities into T10 recipes.
 |---|---|---|---|---|
 | 8 | Leather Strap Bundle | 2 Light Leather | 4 Strap Bundles | Tool grips / traps / profession gear |
 | 18 | Reinforced Strap Bundle | 2 Tough Leather + 1 Sinew | 4 Reinforced Straps | Mid tools / crossbow / traps |
-| 28 | Rugged Grip Wrap | 2 Rugged Leather + 1 Sinew | 3 Grip Wraps | Tool handles / weapons |
+| 25 | Rugged Grip Wrap | 2 Rugged Leather + 1 Sinew | 3 Grip Wraps | Tool handles / weapons |
 | 38 | Moonbound Harness Parts | 2 Moon Leather + 1 Hardened Fittings | 3 Harness Parts | Profession gear / workers |
-| 48 | Ember Grip Wrap | 2 Ember Leather + 1 Resin | 3 Grip Wraps | T5 tools / weapons |
+| 45 | Ember Grip Wrap | 2 Ember Leather + 1 Resin | 3 Grip Wraps | T5 tools / weapons |
 | 58 | Frost Fur Lining | 2 Frost Leather + 1 Fur Bundle | 3 Fur Linings | Cold/profession gear |
 | 68 | Storm Reinforced Straps | 2 Storm Leather + 1 Sinew + 1 Hardened Fittings | 4 Straps | Late tools / traps |
-| 78 | Aether Binding Set | 2 Aether Leather + 1 Runic Filament | 3 Bindings | Runic gear / Fletching |
+| 75 | Aether Binding Set | 2 Aether Leather + 1 Runic Filament | 3 Bindings | Runic gear / Fletching |
 | 88 | Umbral Grip Set | 2 Umbral Leather + 1 Fang & Claw Fragment | 3 Grips | Late equipment |
 | 98 | Astral Binding Set | 2 Astral Leather + 1 Astral Filament | 3 Bindings | T10/endgame equipment |
 

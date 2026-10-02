@@ -2547,10 +2547,9 @@ Quintessence is a highly condensed multi-system reagent.
 | Wildheart Essence | Foraging | Wild endgame catalyst |
 | Genesis Fruit or Worldgarden crop | Farming | Cultivated endgame life reagent |
 | Astral Essence | Runecrafting | Magical carrier |
-| World Matrix | Runecrafting | Structured magical substrate |
 | Astral Herbal/Fungal/Botanical Extracts | Alchemy supply | Refined alchemical body |
 
-Exact quantities should be locked only after Jewelcrafting and final endgame project economy exist.
+Quintessence is independent from World Matrix. It combines natural, cultivated, astral, and alchemical inputs; World Prism is the downstream recipe that requires both Quintessence and World Matrix. Exact quantities should be locked only after Jewelcrafting and final endgame project economy exist.
 
 ---
 

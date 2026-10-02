@@ -91,7 +91,7 @@ Runecrafting is an ordinary Level 1â€“100 profession. Mining supplies Raw E
 
 ## Endgame convergence
 
-The selective resource order is **Worldheart / Worldroot / Wildheart / Primal Hunt / Worldgarden â†’ Worldforged / Worldsilk / Primal Leather â†’ World Matrix â†’ Quintessence â†’ World Prism**. Dependencies are acyclic and no full T11 item ladder is implied. See [17_ENDGAME_RESOURCE_DAG.md](../17_ENDGAME_RESOURCE_DAG.md).
+Selective World/Primal/Astral endgame remains without a full T11 item ladder. World Matrix and Quintessence are independent branches that converge at World Prism. See [17_ENDGAME_RESOURCE_DAG.md](../17_ENDGAME_RESOURCE_DAG.md).
 
 ## Implementation rules
 

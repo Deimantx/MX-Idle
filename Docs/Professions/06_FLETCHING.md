@@ -2280,16 +2280,16 @@ Smithing owns one `<Metal> Projectile Head Bundle` recipe per metal tier. Fletch
 
 | Fletching unlock | Recipe output | Exact input |
 |---:|---|---|
-| 5 | Reed Rod | 1 Alder Utility Blank |
-| 15 | Alder Rod | 1 Alder Utility Blank |
-| 25 | Ironwood Rod | 1 Ironwood Utility Blank |
-| 35 | Silverpine Rod | 1 Silverpine Utility Blank |
-| 45 | Emberwood Rod | 1 Emberwood Utility Blank |
-| 55 | Frostbark Rod | 1 Frostbark Utility Blank |
-| 65 | Stormwillow Rod | 1 Stormwillow Utility Blank |
-| 75 | Aetherwood Rod | 1 Aetherwood Utility Blank |
-| 85 | Umbral Rod | 1 Umbralwood Utility Blank |
-| 95 | Starwood Rod | 1 Starwood Utility Blank |
+| 5 | Reed Rod | 1 Alder Utility Blank + 1 Flax Thread |
+| 15 | Alder Rod | 1 Alder Utility Blank + 1 Rush Thread + 1 Iron Fasteners |
+| 25 | Ironwood Rod | 1 Ironwood Utility Blank + 1 Nettle Thread + 1 Hardened Fittings |
+| 35 | Silverpine Rod | 1 Silverpine Utility Blank + 1 Sinew Cord + 1 Resin |
+| 45 | Emberwood Rod | 1 Emberwood Utility Blank + 1 Reinforced Strap Bundle + 1 Resin |
+| 55 | Frostbark Rod | 1 Frostbark Utility Blank + 1 Reinforced Strap Bundle + 1 Resin + 1 Hardened Fittings |
+| 65 | Stormwillow Rod | 1 Stormwillow Utility Blank + 1 Aether Filament + 1 Tempered Assembly |
+| 75 | Aetherwood Rod | 1 Aetherwood Utility Blank + 1 Aether Filament + 1 Precision Mechanism |
+| 85 | Umbralwood Rod | 1 Umbralwood Utility Blank + 1 Aether Filament + 1 Precision Mechanism |
+| 95 | Starwood Rod | 1 Starwood Utility Blank + 1 Astral Filament + 1 Umbral Reinforcement |
 
 Fishing defines equip requirements and effects; this table does not duplicate those values. `<Timber> Utility Blank` is the wooden Tool structure, not a Handle item.
 
@@ -2300,12 +2300,12 @@ Fletching assembles and owns the reusable Trap Kits; Hunting equips and uses the
 | Fletching Level | Output | Exact inputs |
 |---:|---|---|
 | 12 | Basic Snare Kit | 1 Alder Utility Blank + 1 Sinew Cord + 1 Iron Fasteners |
-| 32 | Reinforced Trap Frame | 1 Silverpine Utility Blank + 1 Hardened Fittings |
+| 32 | Reinforced Trap Frame | 1 Ironwood Utility Blank + 1 Hardened Fittings |
 | 54 | Master Trap Kit | 1 Frostbark Utility Blank + 1 Argent Mechanism + 1 Resin |
 | 74 | Aether Trap Assembly | 1 Aetherwood Utility Blank + 1 Precision Mechanism + 1 Sinew Cord + 1 Aether Filament |
-| 94 | Astral Trap Assembly | 1 Starwood Utility Blank + 1 Umbral Reinforcement + 1 Sinew Cord + 1 Astral Filament |
+| 95 | Astral Trap Assembly | 1 Starwood Utility Blank + 1 Umbral Reinforcement + 1 Sinew Cord + 1 Astral Filament |
 
-The Basic Snare Kit is available at Hunting 12; the mandatory Ambush Reinforced Trap Frame is available at Hunting 32. Later kit upgrades are optional and do not gate earlier methods. No durability.
+Each Rod recipe consumes a tier-matched Utility Blank and the listed available line/binding and selected metal fitting; no Rod is a wood-only recipe. The Basic Snare Kit is available at Hunting 12; the mandatory Ambush Reinforced Trap Frame is available at Hunting 32. Later kit upgrades are optional and do not gate earlier methods. No durability.
 
 
 

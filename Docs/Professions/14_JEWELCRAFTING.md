@@ -565,8 +565,8 @@ This separates:
 | T6 | Frostsilver | 54 | 58 | 1.50x | 3 | 6 | Accent Socket |
 | T7 | Stormiron | 64 | 68 | 1.60x | 4 | 7 | +1 Runic Filament |
 | T8 | Aetherite | 74 | 78 | 1.70x | 5 | 8 | +1 Runic Filament |
-| T9 | Umbral | 84 | 88 | 1.80x | 6 | 10 | +1 Umbral/Aether Filament |
-| T10 | Astralite | 94 | 98 | 1.90x | 8 | 12 | +1 Astral Filament |
+| T9 | Umbral | 84 | 88 | 1.80x | 6 | 10 | +1 Aether Filament |
+| T10 | Astralite | 95 | 98 | 1.90x | 8 | 12 | +1 Astral Filament |
 
 ---
 
@@ -590,9 +590,9 @@ This separates:
 | 68 | T7 | Stormiron Necklace Frame | 2 Stormiron Ingots + 7 Prismatic Dust + 1 Runic Filament | 1 Core + Necklace Accent at T5+ | 1.60x |
 | 74 | T8 | Aetherite Ring Frame | 1 Aetherite Ingot + 5 Prismatic Dust + 1 Runic Filament | 1 Core Socket | 1.70x |
 | 78 | T8 | Aetherite Necklace Frame | 2 Aetherite Ingots + 8 Prismatic Dust + 1 Runic Filament | 1 Core + Necklace Accent at T5+ | 1.70x |
-| 84 | T9 | Umbral Ring Frame | 1 Umbral Ingot + 6 Prismatic Dust + 1 Aether/Umbral Filament | 1 Core Socket | 1.80x |
-| 88 | T9 | Umbral Necklace Frame | 2 Umbral Ingots + 10 Prismatic Dust + 1 Aether/Umbral Filament | 1 Core + Necklace Accent at T5+ | 1.80x |
-| 94 | T10 | Astralite Ring Frame | 1 Astralite Ingot + 8 Prismatic Dust + 1 Astral Filament | 1 Core Socket | 1.90x |
+| 84 | T9 | Umbral Ring Frame | 1 Umbral Ingot + 6 Prismatic Dust + 1 Aether Filament | 1 Core Socket | 1.80x |
+| 88 | T9 | Umbral Necklace Frame | 2 Umbral Ingots + 10 Prismatic Dust + 1 Aether Filament | 1 Core + Necklace Accent at T5+ | 1.80x |
+| 95 | T10 | Astralite Ring Frame | 1 Astralite Ingot + 8 Prismatic Dust + 1 Astral Filament | 1 Core Socket | 1.90x |
 | 98 | T10 | Astralite Necklace Frame | 2 Astralite Ingots + 12 Prismatic Dust + 1 Astral Filament | 1 Core + Necklace Accent at T5+ | 1.90x |
 
 The Frame itself is deterministic.
@@ -831,7 +831,7 @@ The Gem does not replace metal progression.
 T7+ Jewelry starts using:
 
 - Runic Filament;
-- Aether/Umbral Filament;
+- Aether Filament;
 - Astral Filament.
 
 This makes high-tier jewelry feel like:
@@ -2538,8 +2538,8 @@ Player chooses based on build.
 | T6 | Frostsilver | 54 | 58 | 1.50x | 3 | 6 | Accent Socket |
 | T7 | Stormiron | 64 | 68 | 1.60x | 4 | 7 | +1 Runic Filament |
 | T8 | Aetherite | 74 | 78 | 1.70x | 5 | 8 | +1 Runic Filament |
-| T9 | Umbral | 84 | 88 | 1.80x | 6 | 10 | +1 Umbral/Aether Filament |
-| T10 | Astralite | 94 | 98 | 1.90x | 8 | 12 | +1 Astral Filament |
+| T9 | Umbral | 84 | 88 | 1.80x | 6 | 10 | +1 Aether Filament |
+| T10 | Astralite | 95 | 98 | 1.90x | 8 | 12 | +1 Astral Filament |
 
 ---
 
@@ -2716,7 +2716,7 @@ Player chooses based on build.
 | 88 | Umbral Necklace Frame |
 | 91 | Astral Prism cutting |
 | 92 | Diamond Precision Core |
-| 94 | Astralite Ring Frame |
+| 95 | Astralite Ring Frame |
 | 95 | Astralite Grand Jeweler's Kit; Astral Jeweler Emblem |
 | 98 | Astralite Necklace Frame |
 | 99 | Astral Prism Core |
@@ -2986,7 +2986,7 @@ Expected:
 
 - selective endgame combat jewelry;
 - Holdings upgrades;
-- World Matrix convergence components;
+- World Prism convergence components (World Matrix + Quintessence);
 - ultimate profession jewelry;
 - permanent account projects.
 

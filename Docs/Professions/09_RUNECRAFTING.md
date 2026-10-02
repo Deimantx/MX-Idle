@@ -187,7 +187,7 @@ Do not add additional Rune rarity/quality versions on top.
 | Tier Range | Essence | Primary Source | Main Uses |
 |---|---|---|---|
 | T1â€“T3 | Raw Essence | Mining: Raw Essence Seam | Basic rune imprinting; early Filaments |
-| T4â€“T6 | Runic Crystal | Mining: Runic Crystal Seam | Mid-tier runes; Reinforced/Runic Filaments |
+| T4â€“T6 | Runic Crystal | Mining: Runic Crystal Seam | Mid-tier runes; Runic Filament (T4-T6) |
 | T7â€“T9 | Aether Essence | Mining: Aether Essence Core | Late runes; high-grade Attunement; Aether catalysts |
 | T10 | Astral Essence | Refined from Aether Essence + Astral materials | T10 runes; Astral Filament |
 | T10+ | World Essence | Endgame conversion from Worldheart/Wildheart/Worldroot-linked components | Endgame rune matrices / permanent projects |
@@ -819,11 +819,10 @@ Runecrafting directly supports Tailoring.
 
 | Lvl | Filament | Inputs | Output | Main Consumer |
 |---|---|---|---|---|
-| 24 | Runic Filament | 2 Raw Essence + 1 Nettle Thread | 2 Runic Filament | Tailoring bridge / early runic textiles |
-| 44 | Refined Runic Filament | 1 Runic Crystal + 2 Silken Thread | 2 Refined Filament | Mid Tailoring / reinforced strings |
-| 64 | Aether Filament | 1 Aether Essence + 2 Storm Thread | 2 Aether Filament | Runic Weave / late Bowstrings |
-| 84 | Umbral Filament | 1 Aether Essence + 2 Umbral Thread | 2 Umbral Filament | T9 magic textiles |
-| 94 | Astral Filament | 1 Astral Essence + 2 Astral Thread | 2 Astral Filament | Astral Weave / T10 Bowstrings |
+| 24 | Runic Filament | 2 Raw Essence + 1 Flax Thread | 2 Runic Filament | Tailoring bridge / early runic textiles |
+| 35 | Runic Filament | 1 Runic Crystal + 2 Silken Thread | 2 Runic Filament | T4-T6 magical textile / utility bridge |
+| 65 | Aether Filament | 1 Aether Essence + 2 Storm Thread | 2 Aether Filament | T7-T9 Runic Weave, Runic Bowstrings, Hunting and Jewelcrafting |
+| 95 | Astral Filament | 1 Astral Essence + 2 Astral Thread | 2 Astral Filament | Astral Weave / T10 Bowstrings |
 
 These are magical thread-treatment components, not full cloth.
 
@@ -1506,9 +1505,7 @@ This is Runecrafting's strongest raw-material link.
 Runecrafting creates:
 
 - Runic Filament;
-- Refined Runic Filament;
 - Aether Filament;
-- Umbral Filament;
 - Astral Filament.
 
 Tailoring creates:
@@ -1634,11 +1631,10 @@ Runecrafting just exposes Rune availability clearly.
 
 | Lvl | Filament | Inputs | Output | Main Consumer |
 |---|---|---|---|---|
-| 24 | Runic Filament | 2 Raw Essence + 1 Nettle Thread | 2 Runic Filament | Tailoring bridge / early runic textiles |
-| 44 | Refined Runic Filament | 1 Runic Crystal + 2 Silken Thread | 2 Refined Filament | Mid Tailoring / reinforced strings |
-| 64 | Aether Filament | 1 Aether Essence + 2 Storm Thread | 2 Aether Filament | Runic Weave / late Bowstrings |
-| 84 | Umbral Filament | 1 Aether Essence + 2 Umbral Thread | 2 Umbral Filament | T9 magic textiles |
-| 94 | Astral Filament | 1 Astral Essence + 2 Astral Thread | 2 Astral Filament | Astral Weave / T10 Bowstrings |
+| 24 | Runic Filament | 2 Raw Essence + 1 Flax Thread | 2 Runic Filament | Tailoring bridge / early runic textiles |
+| 35 | Runic Filament | 1 Runic Crystal + 2 Silken Thread | 2 Runic Filament | T4-T6 magical textile / utility bridge |
+| 65 | Aether Filament | 1 Aether Essence + 2 Storm Thread | 2 Aether Filament | T7-T9 Runic Weave, Runic Bowstrings, Hunting and Jewelcrafting |
+| 95 | Astral Filament | 1 Astral Essence + 2 Astral Thread | 2 Astral Filament | Astral Weave / T10 Bowstrings |
 
 ---
 
@@ -2049,7 +2045,7 @@ Expected recipe:
 - Worldsilk Cloth;
 - Astral Essence.
 
-World Matrix is upstream of Quintessence and World Prism; it does not consume Quintessence. Exact quantities remain for a later economy pass.
+World Matrix and Quintessence are independent upstream branches. World Matrix uses frontier structural materials and T10 magical inputs; Quintessence uses Wildheart Essence, Worldgarden/Genesis Fruit, Astral Essence, and Astral-grade Extracts without requiring World Matrix. World Prism consumes both branches. Exact quantities remain for a later economy pass.
 
 Do not lock arbitrary quantities yet.
 

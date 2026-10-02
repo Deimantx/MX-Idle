@@ -16,9 +16,11 @@ flowchart TD
   WR --> WM
   WT[Foraging: Wildheart] --> WM
   WS --> WM
-  WM --> Q[Alchemy: Quintessence]
+  Q[Alchemy: Quintessence]
   WT --> Q
   WG --> Q
+  AE[Runecrafting: Astral Essence] --> Q
+  AX[Alchemy: Astral-grade Extracts] --> Q
   WM --> WP[Jewelcrafting: World Prism]
   Q --> WP
   WH --> WP
@@ -30,7 +32,7 @@ flowchart TD
 1. Frontier gathering establishes Worldheart, Worldroot, Wildheart, Primal Hunt, and Worldgarden resources from already mastered T10 systems.
 2. Frontier processing converts these into Worldforged, Worldsilk, and Primal Leather. Primal Leather is a terminal equipment/project material in this DAG; it is not an input to Quintessence or World Matrix.
 3. World Matrix uses Worldheart, Worldroot, Wildheart, Worldsilk, and T10 magical materials. It does not require Quintessence.
-4. Quintessence uses Wildheart, Worldgarden/Genesis Fruit, T10 Astral Essence, and Alchemy extracts. It does not feed World Matrix.
+4. Quintessence uses Wildheart Essence, Worldgarden/Genesis Fruit, T10 Astral Essence, and Astral-grade Alchemy extracts. It does not require World Matrix or feed it.
 5. World Prism is downstream of World Matrix and Quintessence, with its other registered endgame inputs.
 
 The graph is acyclic. World Prism is crafted, not mined. No endgame material is a mandatory input to the earlier profession unlock required to produce that same material. World Matrix and Quintessence can converge at World Prism without feeding one another in both directions.

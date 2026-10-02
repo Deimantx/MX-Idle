@@ -2456,20 +2456,20 @@ The baseline 1â€“100 Mining game contains **23 major Deposits**.
 | 15 | T2 | Coal Seam | Catalyst | Coal | 2 | Copper Pickaxe | 48 | 2.70s | 9 |
 | 18 | T2 | Shallow Geode Field | Gem | Gem Roll | 1 | Copper Pickaxe | 56 | 2.90s | 12 |
 | 21 | T3 | Cobalt Vein | Ore | Cobalt Ore | 1 | Iron Pickaxe | 66 | 2.70s | 16 |
-| 1 | T1 | Raw Essence Seam | Essence | Raw Essence | 1 | Worn Pickaxe | 77 | 3.00s | 18 |
+| 1 | T1 | Raw Essence Seam | Essence | Raw Essence | 1 | Worn Pickaxe | 55 | 3.00s | 8.5 |
 | 31 | T4 | Argent Vein | Ore | Argent Ore | 1 | Cobalt Pickaxe | 84 | 2.85s | 24 |
 | 35 | T4 | Granite Shelf | Quarry | Granite | 2 | Cobalt Pickaxe | 98 | 3.10s | 22 |
 | 41 | T5 | Emberite Vein | Ore | Emberite Ore | 1 | Argent Pickaxe | 108 | 3.00s | 35 |
 | 45 | T5 | Fluxstone Vein | Catalyst | Fluxstone | 1 | Argent Pickaxe | 126 | 3.25s | 32 |
 | 48 | T5 | Prismatic Gem Vein | Gem | Gem Roll | 1 | Argent Pickaxe | 144 | 3.35s | 40 |
 | 51 | T6 | Frostsilver Vein | Ore | Frostsilver Ore | 1 | Emberite Pickaxe | 132 | 3.15s | 49 |
-| 31 | T4 | Runic Crystal Seam | Essence | Runic Crystal | 1 | Copper Pickaxe | 154 | 3.50s | 55 |
+| 31 | T4 | Runic Crystal Seam | Essence | Runic Crystal | 1 | Copper Pickaxe | 110 | 3.50s | 32 |
 | 61 | T7 | Stormiron Vein | Ore | Stormiron Ore | 1 | Frostsilver Pickaxe | 162 | 3.30s | 67 |
 | 65 | T7 | Blackstone Quarry | Quarry | Blackstone | 2 | Frostsilver Pickaxe | 189 | 3.65s | 60 |
 | 71 | T8 | Aetherite Vein | Ore | Aetherite Ore | 1 | Stormiron Pickaxe | 198 | 3.45s | 89 |
 | 78 | T8 | Celestial Geode | Gem | Gem Roll | 1 | Stormiron Pickaxe | 264 | 3.85s | 98 |
 | 81 | T9 | Umbral Vein | Ore | Umbral Ore | 1 | Aetherite Pickaxe | 240 | 3.60s | 116 |
-| 61 | T7 | Aether Essence Core | Essence | Aether Essence | 1 | Frostsilver Pickaxe | 320 | 4.05s | 125 |
+| 61 | T7 | Aether Essence Core | Essence | Aether Essence | 1 | Frostsilver Pickaxe | 260 | 4.05s | 96 |
 | 91 | T10 | Astralite Vein | Ore | Astralite Ore | 1 | Umbral Pickaxe | 288 | 3.80s | 149 |
 | 95 | T10 | Aetherstone Quarry | Quarry | Aetherstone | 1 | Umbral Pickaxe | 384 | 4.20s | 140 |
 | 100 | T10+ | Worldheart Deposit | Deep-Core | Worldstone | 1 | Astralite Pickaxe | 580 | 4.50s | 200 |
@@ -2554,20 +2554,20 @@ Stage Density is derived from the global multipliers.
 | Coal Seam | 48 | 48 | 38 | 28 | 19 | 10 |
 | Shallow Geode Field | 56 | 56 | 44 | 33 | 22 | 12 |
 | Cobalt Vein | 66 | 66 | 52 | 39 | 26 | 14 |
-| Raw Essence Seam | 77 | 77 | 61 | 45 | 30 | 16 |
+| Raw Essence Seam | 55 | 55 | 44 | 33 | 22 | 12 |
 | Argent Vein | 84 | 84 | 66 | 49 | 32 | 17 |
 | Granite Shelf | 98 | 98 | 77 | 57 | 38 | 20 |
 | Emberite Vein | 108 | 108 | 85 | 63 | 42 | 22 |
 | Fluxstone Vein | 126 | 126 | 99 | 74 | 48 | 26 |
 | Prismatic Gem Vein | 144 | 144 | 113 | 84 | 55 | 29 |
 | Frostsilver Vein | 132 | 132 | 103 | 77 | 51 | 27 |
-| Runic Crystal Seam | 154 | 154 | 121 | 90 | 59 | 31 |
+| Runic Crystal Seam | 110 | 110 | 87 | 64 | 42 | 22 |
 | Stormiron Vein | 162 | 162 | 127 | 94 | 62 | 33 |
 | Blackstone Quarry | 189 | 189 | 148 | 110 | 72 | 38 |
 | Aetherite Vein | 198 | 198 | 155 | 115 | 76 | 40 |
 | Celestial Geode | 264 | 264 | 206 | 154 | 101 | 53 |
 | Umbral Vein | 240 | 240 | 188 | 140 | 92 | 48 |
-| Aether Essence Core | 320 | 320 | 250 | 186 | 122 | 64 |
+| Aether Essence Core | 260 | 260 | 203 | 151 | 99 | 52 |
 | Astralite Vein | 288 | 288 | 225 | 168 | 110 | 58 |
 | Aetherstone Quarry | 384 | 384 | 300 | 223 | 146 | 77 |
 | Worldheart Deposit | 580 | 580 | 453 | 337 | 221 | 116 |
@@ -2590,20 +2590,20 @@ The following shows strike counts before clothing, Mastery, Specialization, or o
 | Coal Seam | Copper Pickaxe | 8 | 6 | 5 | 4 | 3 | 2 | 20 |
 | Shallow Geode Field | Copper Pickaxe | 8 | 7 | 6 | 5 | 3 | 2 | 23 |
 | Cobalt Vein | Iron Pickaxe | 11 | 6 | 5 | 4 | 3 | 2 | 20 |
-| Raw Essence Seam | Worn Pickaxe | 11 | 7 | 6 | 5 | 3 | 2 | 23 |
+| Raw Essence Seam | Worn Pickaxe | 11 | 5 | 5 | 4 | 3 | 2 | 19 |
 | Argent Vein | Cobalt Pickaxe | 14 | 6 | 5 | 4 | 3 | 2 | 20 |
 | Granite Shelf | Cobalt Pickaxe | 14 | 7 | 6 | 5 | 3 | 2 | 23 |
 | Emberite Vein | Argent Pickaxe | 18 | 6 | 5 | 4 | 3 | 2 | 20 |
 | Fluxstone Vein | Argent Pickaxe | 18 | 7 | 6 | 5 | 3 | 2 | 23 |
 | Prismatic Gem Vein | Argent Pickaxe | 18 | 8 | 7 | 5 | 4 | 2 | 26 |
 | Frostsilver Vein | Emberite Pickaxe | 22 | 6 | 5 | 4 | 3 | 2 | 20 |
-| Runic Crystal Seam | Copper Pickaxe | 22 | 7 | 6 | 5 | 3 | 2 | 23 |
+| Runic Crystal Seam | Copper Pickaxe | 22 | 5 | 4 | 4 | 3 | 2 | 18 |
 | Stormiron Vein | Frostsilver Pickaxe | 27 | 6 | 5 | 4 | 3 | 2 | 20 |
 | Blackstone Quarry | Frostsilver Pickaxe | 27 | 7 | 6 | 5 | 3 | 2 | 23 |
 | Aetherite Vein | Stormiron Pickaxe | 33 | 6 | 5 | 4 | 3 | 2 | 20 |
 | Celestial Geode | Stormiron Pickaxe | 33 | 8 | 7 | 5 | 4 | 2 | 26 |
 | Umbral Vein | Aetherite Pickaxe | 40 | 6 | 5 | 4 | 3 | 2 | 20 |
-| Aether Essence Core | Frostsilver Pickaxe | 40 | 8 | 7 | 5 | 4 | 2 | 26 |
+| Aether Essence Core | Frostsilver Pickaxe | 40 | 7 | 6 | 5 | 4 | 3 | 25 |
 | Astralite Vein | Umbral Pickaxe | 48 | 6 | 5 | 4 | 3 | 2 | 20 |
 | Aetherstone Quarry | Umbral Pickaxe | 48 | 8 | 7 | 5 | 4 | 2 | 26 |
 | Worldheart Deposit | Astralite Pickaxe | 58 | 10 | 8 | 6 | 4 | 2 | 30 |
@@ -2626,20 +2626,20 @@ Using the minimum required Pickaxe and no Mining-Speed bonuses:
 | Coal Seam | 16.2s | 13.5s | 10.8s | 8.1s | 5.4s | 54.0s |
 | Shallow Geode Field | 20.3s | 17.4s | 14.5s | 8.7s | 5.8s | 66.7s |
 | Cobalt Vein | 16.2s | 13.5s | 10.8s | 8.1s | 5.4s | 54.0s |
-| Raw Essence Seam | 21.0s | 18.0s | 15.0s | 9.0s | 6.0s | 69.0s |
+| Raw Essence Seam | 15.0s | 15.0s | 12.0s | 9.0s | 6.0s | 57.0s |
 | Argent Vein | 17.1s | 14.2s | 11.4s | 8.6s | 5.7s | 57.0s |
 | Granite Shelf | 21.7s | 18.6s | 15.5s | 9.3s | 6.2s | 71.3s |
 | Emberite Vein | 18.0s | 15.0s | 12.0s | 9.0s | 6.0s | 60.0s |
 | Fluxstone Vein | 22.8s | 19.5s | 16.2s | 9.8s | 6.5s | 74.8s |
 | Prismatic Gem Vein | 26.8s | 23.4s | 16.8s | 13.4s | 6.7s | 87.1s |
 | Frostsilver Vein | 18.9s | 15.8s | 12.6s | 9.4s | 6.3s | 63.0s |
-| Runic Crystal Seam | 24.5s | 21.0s | 17.5s | 10.5s | 7.0s | 80.5s |
+| Runic Crystal Seam | 17.5s | 14.0s | 14.0s | 10.5s | 7.0s | 63.0s |
 | Stormiron Vein | 19.8s | 16.5s | 13.2s | 9.9s | 6.6s | 66.0s |
 | Blackstone Quarry | 25.6s | 21.9s | 18.2s | 10.9s | 7.3s | 84.0s |
 | Aetherite Vein | 20.7s | 17.2s | 13.8s | 10.4s | 6.9s | 69.0s |
 | Celestial Geode | 30.8s | 26.9s | 19.2s | 15.4s | 7.7s | 100.1s |
 | Umbral Vein | 21.6s | 18.0s | 14.4s | 10.8s | 7.2s | 72.0s |
-| Aether Essence Core | 32.4s | 28.3s | 20.2s | 16.2s | 8.1s | 105.3s |
+| Aether Essence Core | 28.35s | 24.3s | 20.25s | 16.2s | 12.15s | 101.25s |
 | Astralite Vein | 22.8s | 19.0s | 15.2s | 11.4s | 7.6s | 76.0s |
 | Aetherstone Quarry | 33.6s | 29.4s | 21.0s | 16.8s | 8.4s | 109.2s |
 | Worldheart Deposit | 45.0s | 36.0s | 27.0s | 18.0s | 9.0s | 135.0s |
@@ -2703,20 +2703,20 @@ Stage-completion XP uses:
 | Coal Seam | 9.0 | 12.6 | 18.0 | 27.0 | 40.5 | 107.1 |
 | Shallow Geode Field | 12.0 | 16.8 | 24.0 | 36.0 | 54.0 | 142.8 |
 | Cobalt Vein | 16.0 | 22.4 | 32.0 | 48.0 | 72.0 | 190.4 |
-| Raw Essence Seam | 18.0 | 25.2 | 36.0 | 54.0 | 81.0 | 214.2 |
+| Raw Essence Seam | 8.5 | 11.9 | 17.0 | 25.5 | 38.25 | 100.65 |
 | Argent Vein | 24.0 | 33.6 | 48.0 | 72.0 | 108.0 | 285.6 |
 | Granite Shelf | 22.0 | 30.8 | 44.0 | 66.0 | 99.0 | 261.8 |
 | Emberite Vein | 35.0 | 49.0 | 70.0 | 105.0 | 157.5 | 416.5 |
 | Fluxstone Vein | 32.0 | 44.8 | 64.0 | 96.0 | 144.0 | 380.8 |
 | Prismatic Gem Vein | 40.0 | 56.0 | 80.0 | 120.0 | 180.0 | 476.0 |
 | Frostsilver Vein | 49.0 | 68.6 | 98.0 | 147.0 | 220.5 | 583.1 |
-| Runic Crystal Seam | 55.0 | 77.0 | 110.0 | 165.0 | 247.5 | 654.5 |
+| Runic Crystal Seam | 32.0 | 44.8 | 64.0 | 96.0 | 144.0 | 380.8 |
 | Stormiron Vein | 67.0 | 93.8 | 134.0 | 201.0 | 301.5 | 797.3 |
 | Blackstone Quarry | 60.0 | 84.0 | 120.0 | 180.0 | 270.0 | 714.0 |
 | Aetherite Vein | 89.0 | 124.6 | 178.0 | 267.0 | 400.5 | 1059.1 |
 | Celestial Geode | 98.0 | 137.2 | 196.0 | 294.0 | 441.0 | 1166.2 |
 | Umbral Vein | 116.0 | 162.4 | 232.0 | 348.0 | 522.0 | 1380.4 |
-| Aether Essence Core | 125.0 | 175.0 | 250.0 | 375.0 | 562.5 | 1487.5 |
+| Aether Essence Core | 96.0 | 134.4 | 192.0 | 288.0 | 432.0 | 1142.4 |
 | Astralite Vein | 149.0 | 208.6 | 298.0 | 447.0 | 670.5 | 1773.1 |
 | Aetherstone Quarry | 140.0 | 196.0 | 280.0 | 420.0 | 630.0 | 1666.0 |
 | Worldheart Deposit | 200.0 | 280.0 | 400.0 | 600.0 | 900.0 | 2380.0 |
@@ -3823,7 +3823,7 @@ Over the account lifetime:
 
 # INTEGRATION HARDENING — ESSENCE ACCESS
 
-Essence deposits align to the Runecrafting grade bands: Raw Essence Seam unlocks at Mining 1/T1 with Worn Pickaxe; Runic Crystal Seam at Mining 31/T4 with Copper Pickaxe; Aether Essence Core at Mining 61/T7 with Frostsilver Pickaxe. The existing deposit stage, density, XP, and reward formulas remain unchanged. Astral Essence remains a Runecrafting refinement from Aether Essence and Astral Core Fragment. See the Unlock Dependency Matrix for the cross-skill contract.
+Essence deposits align to the Runecrafting grade bands: Raw Essence Seam unlocks at Mining 1/T1 with Worn Pickaxe; Runic Crystal Seam at Mining 31/T4 with Copper Pickaxe; Aether Essence Core at Mining 61/T7 with Frostsilver Pickaxe. Essence deposits were rebalanced after their unlock levels moved earlier during cross-profession integration. Density and Stage-1 XP are tuned to their new bands; five-stage identity and normal metal progression are unchanged. Astral Essence remains a Runecrafting refinement from Aether Essence and Astral Core Fragment. See the Unlock Dependency Matrix for the cross-skill contract.
 
 
 

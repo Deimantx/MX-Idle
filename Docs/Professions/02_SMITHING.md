@@ -737,7 +737,7 @@ Baseline categories:
 | Pickaxe Upgrade | 3 | Tool | 1.0 | Consumes previous Pickaxe + handle |
 | Logging Axe Upgrade | 3 | Tool | 1.0 | Consumes previous Logging Axe + handle |
 | Smithing Hammer Upgrade | 2 | Tool | 0.9 | Consumes previous Hammer + handle |
-| Hunting Knife Upgrade | 2 | Tool | 0.85 | Consumes previous Hunting Knife + leather wrap |
+| Hunting Knife Upgrade | 2 | Tool | 0.85 | Consumes previous Hunting Knife + the selected available Grip Wrap/Binding on T3, T5, T8, and T10 upgrades |
 
 The exact Combat stats belong to Combat / Equipment design.
 
@@ -3076,7 +3076,7 @@ Smithing owns every metal Tool and component previously labeled `Source: Smithin
 
 ## Tool upgrades
 
-For each physical tier after T0, inputs are explicit by Tool family: **Pickaxe = previous Pickaxe + 3 current-tier Ingots + matching-tier Utility Blank**; **Logging Axe = previous Axe + 3 current-tier Ingots + matching-tier Utility Blank**; **Smithing Hammer = previous Hammer + 2 current-tier Ingots + matching-tier Utility Blank**; **Hunting Knife = previous Knife + 2 current-tier Ingots + matching-tier Utility Blank + Leatherworking Wrap**. Fletching Knife/Drawknife, Tailor's Shears, Rune Chisel, and Skiving Knife use the previous Tool + 2 current-tier Ingots + matching-tier Utility Blank. Each recipe unlocks at its next Tool's documented equip unlock level. No durability is added.
+For each physical tier after T0, inputs are explicit by Tool family: **Pickaxe = previous Pickaxe + 3 current-tier Ingots + matching-tier Utility Blank**; **Logging Axe = previous Axe + 3 current-tier Ingots + matching-tier Utility Blank**; **Smithing Hammer = previous Hammer + 2 current-tier Ingots + matching-tier Utility Blank**; **Hunting Knife = previous Knife + 2 current-tier Ingots + matching-tier Utility Blank; T3 Cobalt adds Rugged Grip Wrap (L25), T5 Emberite adds Ember Grip Wrap (L45), T8 Aetherite adds Aether Binding Set (L75), and T10 Astralite adds Umbral Grip Set (L88); other tiers do not require a wrap**. Fletching Knife/Drawknife, Tailor's Shears, Rune Chisel, and Skiving Knife use the previous Tool + 2 current-tier Ingots + matching-tier Utility Blank. Each recipe unlocks at its next Tool's documented equip unlock level. No durability is added.
 
 ## Projectile Head Bundles
 
