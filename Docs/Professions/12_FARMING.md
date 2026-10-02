@@ -1,9 +1,11 @@
-# 12 — FARMING
+﻿# 12 â€” FARMING
 
 **Status:** Complete Design Draft  
 **Version:** 1.0  
 **Parent:** `00_PROFESSIONS_OVERVIEW.md` / Skills & Professions foundation  
-**Reference Professions:** `04_COOKING.md`, `07_FORAGING.md`, `08_TAILORING.md`, `10_HUNTING.md`  
+**Reference Professions:** `Cooking.md`, `Foraging.md`, `Alchemy.md`, `Tailoring.md`
+
+**Shared canon:** [00_GLOBAL_GAME_RULES.md](../00_GLOBAL_GAME_RULES.md) · [Item Registry](../Registries/ITEM_REGISTRY.md) · [Recipe Registry](../Registries/RECIPE_REGISTRY.md)
 **Purpose:** Define Farming as one complete profession in a single source-of-truth file: Estate-linked land expansion, Cultivation Capacity, plot types, background crop growth, crop classes, orchards, Crop Plans, rotations, soil preparation, Foraging domestication, profession Tool/gear, Mastery, Specializations, farmhands, Estate/House progression, planner, Chronicles, UI, formulas, offline growth, and post-100 agricultural endgame.
 
 ---
@@ -40,11 +42,11 @@ Instead:
 
 ---
 
-# 2. FARMING ↔ HOUSE / ESTATE IS A CORE SYSTEM
+# 2. FARMING â†” HOUSE / ESTATE IS A CORE SYSTEM
 
 Farming is deeply tied to:
 
-**House → Lodge → Manor → Estate → Holdings**
+**House â†’ Lodge â†’ Manor â†’ Estate â†’ Holdings**
 
 The property stage determines:
 
@@ -86,7 +88,7 @@ Late account:
 
 This directly supports the game's macro progression:
 
-**I do everything → I build infrastructure → I manage infrastructure → I command a workforce.**
+**I do everything â†’ I build infrastructure â†’ I manage infrastructure â†’ I command a workforce.**
 
 ---
 
@@ -207,7 +209,7 @@ These are strong baseline targets, not sacred final balance numbers.
 
 The important shape is:
 
-**small personal garden → real farm → estate agriculture → managed holdings**
+**small personal garden â†’ real farm â†’ estate agriculture â†’ managed holdings**
 
 ---
 
@@ -225,7 +227,7 @@ identical plots can be grouped into:
 
 Example:
 
-**North Field — 8× Astral Grain**
+**North Field â€” 8Ã— Astral Grain**
 
 One group displays:
 
@@ -248,7 +250,7 @@ This keeps large-scale Farming manageable.
 | Field Plot | 10 | 2 | Vegetable / Grain / Fibre | Higher bulk output; +10% yield to Field crops |
 | Herb Bed | 10 | 1 | Herb / Botanical / selected Berry | +10% Herb/Botanical yield |
 | Orchard Plot | 15 | 2 | Fruit / Nut trees | Persistent trees; repeated harvest cycles |
-| Nursery Bay | 20 | 2 | Domestication projects / saplings | Foraging → Farming bridge |
+| Nursery Bay | 20 | 2 | Domestication projects / saplings | Foraging â†’ Farming bridge |
 | Mycology Bed | 40 | 1 | Domesticated Fungi | Multi-flush fungal crops |
 | Greenhouse Bay | 40 | 2 | Any domesticated plant except Orchard tree | Ignores normal tier/climate restrictions; +10% growth speed |
 | Managed Field Block | 100 | 8 | Field crops | Represents 8 capacity as one Holdings management unit |
@@ -409,13 +411,13 @@ Mechanically it still uses the same Farming rules.
 
 | Crop Class | Cycle Type | Lifecycle | Main Role |
 |---|---|---|---|
-| Vegetable | Single Harvest | Plant → Grow → Harvest → plot empty | High Cooking value; moderate growth |
-| Grain | Single Harvest | Plant → Grow → Harvest → plot empty | Bulk Cooking / provisions; best Field Plot efficiency |
-| Herb | Perennial Cut | Plant → 3 harvest cycles → replant | Alchemy/Cooking; often domesticated from Foraging |
-| Fibre | Single Harvest | Plant → Grow → Harvest → plot empty | Tailoring bulk production; often domesticated from Foraging |
-| Botanical/Berry | Perennial Cut | Plant → 3 harvest cycles → replant | Cooking / Alchemy / specialty recipes |
-| Fungi | Multi-Flush | Inoculate → 3 flushes → reset bed | Cooking / Alchemy; requires Mycology Bed |
-| Orchard Tree | Persistent | Establish once → repeated fruiting cycles until uprooted | Long-term fruit/nut production |
+| Vegetable | Single Harvest | Plant â†’ Grow â†’ Harvest â†’ plot empty | High Cooking value; moderate growth |
+| Grain | Single Harvest | Plant â†’ Grow â†’ Harvest â†’ plot empty | Bulk Cooking / provisions; best Field Plot efficiency |
+| Herb | Perennial Cut | Plant â†’ 3 harvest cycles â†’ replant | Alchemy/Cooking; often domesticated from Foraging |
+| Fibre | Single Harvest | Plant â†’ Grow â†’ Harvest â†’ plot empty | Tailoring bulk production; often domesticated from Foraging |
+| Botanical/Berry | Perennial Cut | Plant â†’ 3 harvest cycles â†’ replant | Cooking / Alchemy / specialty recipes |
+| Fungi | Multi-Flush | Inoculate â†’ 3 flushes â†’ reset bed | Cooking / Alchemy; requires Mycology Bed |
+| Orchard Tree | Persistent | Establish once â†’ repeated fruiting cycles until uprooted | Long-term fruit/nut production |
 
 Different crop classes have different lifecycle behavior.
 
@@ -431,7 +433,7 @@ Includes:
 
 Lifecycle:
 
-**Plant → Grow → Harvest → Empty Plot**
+**Plant â†’ Grow â†’ Harvest â†’ Empty Plot**
 
 They must be replanted after harvest.
 
@@ -449,7 +451,7 @@ after planting.
 
 Lifecycle:
 
-**Plant → Grow → Harvest 1 → Regrow → Harvest 2 → Regrow → Harvest 3 → Replant**
+**Plant â†’ Grow â†’ Harvest 1 â†’ Regrow â†’ Harvest 2 â†’ Regrow â†’ Harvest 3 â†’ Replant**
 
 Regrowth time:
 
@@ -461,7 +463,7 @@ This makes perennial crops distinct without becoming permanent infinite plants.
 
 ---
 
-# 23. FUNGI — MULTI-FLUSH
+# 23. FUNGI â€” MULTI-FLUSH
 
 Domesticated Fungi use:
 
@@ -469,7 +471,7 @@ Domesticated Fungi use:
 
 Lifecycle:
 
-**Inoculate → Flush 1 → Flush 2 → Flush 3 → reset bed**
+**Inoculate â†’ Flush 1 â†’ Flush 2 â†’ Flush 3 â†’ reset bed**
 
 Each later Flush:
 
@@ -490,7 +492,7 @@ Yield stays consistent unless Mastery modifies it.
 
 Orchard tree:
 
-**Establish Tree → Mature → Fruit Cycle → Harvest → Fruit Cycle → Harvest...**
+**Establish Tree â†’ Mature â†’ Fruit Cycle â†’ Harvest â†’ Fruit Cycle â†’ Harvest...**
 
 Initial establishment is long.
 
@@ -613,21 +615,21 @@ Avoid adding 5 completely new resource items per Tier without a consumer.
 
 Baseline Farming outputs map to Cooking:
 
-- Vegetables → `[Vegetable]`;
-- Grains → `[Grain]`;
-- domesticated Herbs → `[Herb]`;
-- domesticated Fungi → `[Mushroom]`;
-- domesticated Berries → `[Berry]`.
+- Vegetables â†’ `[Vegetable]`;
+- Grains â†’ `[Grain]`;
+- domesticated Herbs â†’ `[Herb]`;
+- domesticated Fungi â†’ `[Mushroom]`;
+- domesticated Berries â†’ `[Berry]`.
 
 Orchard Fruit requires one small Cooking contract extension:
 
 **`[Fruit]`**
 
-This document recommends adding `[Fruit]` to Cooking rather than incorrectly treating apples/pears as Berries.
+Cooking accepts the `[Fruit]` tag for Orchard outputs; fruit is not relabeled as Berries.
 
 ---
 
-# 30. PLANTING STOCK — NO SEED ITEM EXPLOSION
+# 30. PLANTING STOCK â€” NO SEED ITEM EXPLOSION
 
 Farming does **not** create one Bank seed item for every crop.
 
@@ -692,7 +694,7 @@ This gives Orchard conversion some friction without creating Sapling inventory b
 
 Every planted crop has:
 
-**Growth 0–100%**
+**Growth 0â€“100%**
 
 Growth continues:
 
@@ -790,8 +792,8 @@ Annual plots can use Crop Plans.
 | Plan | Behavior | Benefit |
 |---|---|---|
 | Repeat | Plant same crop after every harvest | Maximum simplicity; no bonus |
-| Two-Crop Rotation | Alternate A ↔ B | +8% yield on rotated annual crops |
-| Three-Crop Rotation | A → B → C | +12% yield; +5% Farming Mastery XP |
+| Two-Crop Rotation | Alternate A â†” B | +8% yield on rotated annual crops |
+| Three-Crop Rotation | A â†’ B â†’ C | +12% yield; +5% Farming Mastery XP |
 | Reserve Rotation | Grow whichever configured resource is below target | Estate/worker economy |
 | Mastery Rotation | Rotate selected crops until each reaches target Mastery | Completion |
 
@@ -820,7 +822,7 @@ The system rewards planning rather than punishing simplicity.
 
 Example:
 
-**Turnip → Barley → Turnip → Barley**
+**Turnip â†’ Barley â†’ Turnip â†’ Barley**
 
 Bonus:
 
@@ -836,7 +838,7 @@ Good early/mid automation.
 
 Example:
 
-**Vegetable → Grain → Fibre**
+**Vegetable â†’ Grain â†’ Fibre**
 
 Bonus:
 
@@ -936,7 +938,7 @@ Avoid making trees require fertilizer to survive.
 
 ---
 
-# 47. FORAGING → FARMING DOMESTICATION
+# 47. FORAGING â†’ FARMING DOMESTICATION
 
 This is one of Farming's defining systems.
 
@@ -969,8 +971,8 @@ This matches the Foraging source-of-truth contract.
 | Herbs | All normal Foraging Herb Patch species | Herb Bed / Greenhouse | Strong Alchemy supply |
 | Botanicals | Most normal Botanicals/Berries/Seedpods | Herb Bed / Garden / Greenhouse | Cooking + Alchemy |
 | Fibres | Selected normal Foraging fibres | Field / Greenhouse | Tailoring bulk supply |
-| Fungi | Common T1–T6; selected T7+ with advanced Greenhouse | Mycology Bed | Cooking + Alchemy |
-| Wild Reagents | Generally NO | — | Remain Foraging-exclusive |
+| Fungi | Common T1â€“T6; selected T7+ with advanced Greenhouse | Mycology Bed | Cooking + Alchemy |
+| Wild Reagents | Generally NO | â€” | Remain Foraging-exclusive |
 
 Wild Reagents generally stay Foraging-exclusive.
 
@@ -989,9 +991,9 @@ not the player's Personal Activity Slot.
 | Stage | Requirement / Cost | Result |
 |---|---|---|
 | Eligibility | Foraging Resource Mastery 25 + 100 lifetime gathered | No Farming slot consumed |
-| Trial I — Propagation | Nursery Bay; 10 specimens | Learn basic reproduction |
-| Trial II — Stabilization | Nursery/Greenhouse; 15 specimens | Adapt species to controlled cultivation |
-| Trial III — Reliable Stock | Nursery/Greenhouse; 25 specimens | Establish repeatable planting stock |
+| Trial I â€” Propagation | Nursery Bay; 10 specimens | Learn basic reproduction |
+| Trial II â€” Stabilization | Nursery/Greenhouse; 15 specimens | Adapt species to controlled cultivation |
+| Trial III â€” Reliable Stock | Nursery/Greenhouse; 25 specimens | Establish repeatable planting stock |
 | Complete | Permanent crop unlock | Can be planted normally in valid plot type |
 
 No RNG failure.
@@ -1104,7 +1106,7 @@ Selected Foraging Fibres can be farmed.
 
 This creates:
 
-**Foraging discovers → Farming scales → Tailoring processes**
+**Foraging discovers â†’ Farming scales â†’ Tailoring processes**
 
 Ideal for large Textile demand.
 
@@ -1116,7 +1118,7 @@ Greenhouse is optional for high-tier sensitive Fibre.
 
 Policy inherited from Foraging:
 
-- common T1–T6 Fungi can be domesticated;
+- common T1â€“T6 Fungi can be domesticated;
 - selected T7+ require advanced Greenhouse/Mycology;
 - rare Wild Reagents such as Dreamcap remain wild unless a later design explicitly changes them.
 
@@ -1322,7 +1324,7 @@ Nursery/Greenhouse trials.
 
 Every crop has:
 
-**Mastery 1–100**
+**Mastery 1â€“100**
 
 Includes:
 
@@ -1514,14 +1516,14 @@ Farming should visually feel like:
 |---|---|---|---|---|
 | House Garden Beds | 1 | House | +6 capacity baseline | Farming becomes available |
 | Rain Cistern | 15 | House | +5% growth speed on House Garden | First land infrastructure |
-| Lodge Field Expansion | 20 | Lodge | Capacity 6 →14 | Field Plots + Nursery |
+| Lodge Field Expansion | 20 | Lodge | Capacity 6 â†’14 | Field Plots + Nursery |
 | Orchard Wall & Paths | 30 | Lodge | Orchard yield +5%; second Orchard area | Tree specialization |
-| Manor Irrigation Channels | 40 | Manor | Capacity 14 →28; +8% growth speed | Greenhouse/Mycology + farmhands |
+| Manor Irrigation Channels | 40 | Manor | Capacity 14 â†’28; +8% growth speed | Greenhouse/Mycology + farmhands |
 | Glasshouse Wing | 55 | Manor | 2 Greenhouse Bays; +10% Greenhouse growth | Advanced domestication |
-| Estate Farmland Expansion | 70 | Estate | Capacity 28 →48 | Large plot groups / worker teams |
+| Estate Farmland Expansion | 70 | Estate | Capacity 28 â†’48 | Large plot groups / worker teams |
 | Estate Irrigation Network | 80 | Estate | +12% global Farm growth speed | Large-scale farming |
 | Great Orchard | 85 | Estate | Orchard capacity +8 equivalent; Fruit yield +10% | Permanent orchard economy |
-| Holdings Agricultural Charter | 100 | Holdings | Capacity 48 →80 | Managed Field Blocks / department farming |
+| Holdings Agricultural Charter | 100 | Holdings | Capacity 48 â†’80 | Managed Field Blocks / department farming |
 
 These upgrades give the House/Manor/Empire system direct mechanical meaning.
 
@@ -1639,7 +1641,7 @@ Suggested capacity:
 | Property Stage | Suggested Farming Workers | Role |
 |---|---|---|
 | House | 0 | Player-managed only |
-| Lodge | 0–1 | Nursery assistant only; no full auto farm by default |
+| Lodge | 0â€“1 | Nursery assistant only; no full auto farm by default |
 | Manor | 3 | First real Farmhands; auto-harvest/replant |
 | Estate | 8 | Field/orchard worker teams |
 | Holdings | 16+ | Grouped Farm Blocks / department management |
@@ -1677,7 +1679,7 @@ They cannot:
 
 Base Farmhand Efficiency:
 
-**50% + Proficiency ×0.50%**
+**50% + Proficiency Ã—0.50%**
 
 Efficiency primarily affects:
 
@@ -1685,7 +1687,7 @@ Efficiency primarily affects:
 - worker-managed yield bonus;
 - management overhead.
 
-It should **not** magically make biological Growth 2× faster at Proficiency 100.
+It should **not** magically make biological Growth 2Ã— faster at Proficiency 100.
 
 Growth speed comes primarily from:
 
@@ -1700,7 +1702,7 @@ Growth speed comes primarily from:
 
 Recommended:
 
-**Worker Harvest Yield = Player baseline crop yield × Worker Efficiency**
+**Worker Harvest Yield = Player baseline crop yield Ã— Worker Efficiency**
 
 then worker gear/facility modifiers.
 
@@ -1729,7 +1731,7 @@ Crop Mastery represents player/account cultivation expertise.
 
 Workers can manage a crop only if:
 
-**Crop Mastery ≥10**
+**Crop Mastery â‰¥10**
 
 For domesticated crops:
 
@@ -1787,7 +1789,7 @@ Harvest remains manual.
 
 Can define:
 
-> Turnip ↔ Barley rotation.
+> Turnip â†” Barley rotation.
 
 and:
 
@@ -1801,9 +1803,9 @@ Still mostly player-managed harvest.
 
 Farmhands can execute:
 
-> Maintain Barley ≥5,000.  
-> If target reached → switch these 4 plots to Nettle Fibre.  
-> If both targets reached → idle.
+> Maintain Barley â‰¥5,000.  
+> If target reached â†’ switch these 4 plots to Nettle Fibre.  
+> If both targets reached â†’ idle.
 
 This is a major automation milestone.
 
@@ -1932,7 +1934,7 @@ Initial establishment:
 
 After mature:
 
-**Fruit Cycle = Base Establishment ×0.35 / (1 + Orchard-specific Growth Speed)**
+**Fruit Cycle = Base Establishment Ã—0.35 / (1 + Orchard-specific Growth Speed)**
 
 Tree remains planted.
 
@@ -1942,7 +1944,7 @@ Tree remains planted.
 
 After first Herb/Botanical harvest:
 
-**Regrowth Time = Initial Growth Time ×0.65**
+**Regrowth Time = Initial Growth Time Ã—0.65**
 
 for next two harvests.
 
@@ -1954,9 +1956,9 @@ Then crop requires replanting.
 
 Flush times:
 
-- first ×1.00;
-- second ×1.10;
-- third ×1.20.
+- first Ã—1.00;
+- second Ã—1.10;
+- third Ã—1.20.
 
 Then bed resets.
 
@@ -1969,14 +1971,14 @@ Greenhouse/Mycology bonuses apply.
 Recommended:
 
 **Final Base Yield = Crop Base Yield  
-× Plot Modifier  
-× Rotation Modifier  
-× Soil Modifier  
-× Mastery  
-× Gear  
-× Jewelry  
-× Specialization  
-× Estate bonuses**
+Ã— Plot Modifier  
+Ã— Rotation Modifier  
+Ã— Soil Modifier  
+Ã— Mastery  
+Ã— Gear  
+Ã— Jewelry  
+Ã— Specialization  
+Ã— Estate bonuses**
 
 Resolve fractional quantity normally.
 
@@ -1990,7 +1992,7 @@ Roll once per plot harvest.
 
 Success:
 
-**+ceil(Crop Base Yield ×0.20)**
+**+ceil(Crop Base Yield Ã—0.20)**
 
 not 20% of already fully multiplied output.
 
@@ -2002,11 +2004,11 @@ This prevents multipliers compounding too aggressively.
 
 Two-Crop:
 
-**×1.08 yield**
+**Ã—1.08 yield**
 
 Three-Crop:
 
-**×1.12 yield**
+**Ã—1.12 yield**
 
 Special gear can add:
 
@@ -2022,7 +2024,7 @@ Recommended total cap:
 
 Player harvest grants:
 
-**Base Crop XP × yield-independent crop completion**
+**Base Crop XP Ã— yield-independent crop completion**
 
 Do not scale XP directly with every bonus item produced.
 
@@ -2046,7 +2048,7 @@ XP per cut.
 
 Recommended:
 
-**Crop Mastery XP = Farming XP ×0.40**
+**Crop Mastery XP = Farming XP Ã—0.40**
 
 then apply:
 
@@ -2164,14 +2166,14 @@ Main value is:
 |---|---|---|---|---|
 | House Garden Beds | 1 | House | +6 capacity baseline | Farming becomes available |
 | Rain Cistern | 15 | House | +5% growth speed on House Garden | First land infrastructure |
-| Lodge Field Expansion | 20 | Lodge | Capacity 6 →14 | Field Plots + Nursery |
+| Lodge Field Expansion | 20 | Lodge | Capacity 6 â†’14 | Field Plots + Nursery |
 | Orchard Wall & Paths | 30 | Lodge | Orchard yield +5%; second Orchard area | Tree specialization |
-| Manor Irrigation Channels | 40 | Manor | Capacity 14 →28; +8% growth speed | Greenhouse/Mycology + farmhands |
+| Manor Irrigation Channels | 40 | Manor | Capacity 14 â†’28; +8% growth speed | Greenhouse/Mycology + farmhands |
 | Glasshouse Wing | 55 | Manor | 2 Greenhouse Bays; +10% Greenhouse growth | Advanced domestication |
-| Estate Farmland Expansion | 70 | Estate | Capacity 28 →48 | Large plot groups / worker teams |
+| Estate Farmland Expansion | 70 | Estate | Capacity 28 â†’48 | Large plot groups / worker teams |
 | Estate Irrigation Network | 80 | Estate | +12% global Farm growth speed | Large-scale farming |
 | Great Orchard | 85 | Estate | Orchard capacity +8 equivalent; Fruit yield +10% | Permanent orchard economy |
-| Holdings Agricultural Charter | 100 | Holdings | Capacity 48 →80 | Managed Field Blocks / department farming |
+| Holdings Agricultural Charter | 100 | Holdings | Capacity 48 â†’80 | Managed Field Blocks / department farming |
 
 ---
 
@@ -2227,7 +2229,7 @@ Main value is:
 
 ---
 
-# 116. FARMING ↔ COOKING
+# 116. FARMING â†” COOKING
 
 This is Farming's largest everyday consumer link.
 
@@ -2238,7 +2240,7 @@ Farming supplies:
 - `[Herb]`;
 - `[Mushroom]`;
 - `[Berry]`;
-- proposed `[Fruit]`.
+- `[Fruit]` (now canonical in Cooking).
 
 Cooking turns them into:
 
@@ -2251,7 +2253,7 @@ Cooking turns them into:
 
 ---
 
-# 117. FARMING ↔ ALCHEMY
+# 117. FARMING â†” ALCHEMY
 
 Farming supplies bulk:
 
@@ -2271,7 +2273,7 @@ This relationship should be central to the upcoming Alchemy document.
 
 ---
 
-# 118. FARMING ↔ TAILORING
+# 118. FARMING â†” TAILORING
 
 Selected domesticated Fibre can be grown in Fields.
 
@@ -2281,7 +2283,7 @@ Foraging still owns first discovery.
 
 ---
 
-# 119. FARMING ↔ FORAGING
+# 119. FARMING â†” FORAGING
 
 Foraging:
 
@@ -2299,7 +2301,7 @@ This is one of the game's strongest profession relationships.
 
 ---
 
-# 120. FARMING ↔ ESTATE WORKERS
+# 120. FARMING â†” ESTATE WORKERS
 
 Farming can supply future worker food/provisions through Cooking.
 
@@ -2310,13 +2312,13 @@ Estate workers in turn:
 
 This creates a useful circular infrastructure economy:
 
-**land → crops → food → workforce → more infrastructure**
+**land â†’ crops â†’ food â†’ workforce â†’ more infrastructure**
 
 without requiring harsh wages.
 
 ---
 
-# 121. FARMING ↔ ESTATE PROJECTS
+# 121. FARMING â†” ESTATE PROJECTS
 
 Estate / Long-Term Projects can consume:
 
@@ -2340,7 +2342,7 @@ Use resources logically, not as arbitrary sinks.
 
 # 122. OLD CROP RELEVANCE
 
-T1–T5 Farming outputs remain useful through:
+T1â€“T5 Farming outputs remain useful through:
 
 - cheap food;
 - provisions;
@@ -2354,7 +2356,7 @@ Workers eventually maintain older crop stock.
 
 ---
 
-# 123. FARMING SCREEN — HIGH-LEVEL UI
+# 123. FARMING SCREEN â€” HIGH-LEVEL UI
 
 The screen should visually reinforce:
 
@@ -2450,7 +2452,7 @@ Nursery panel:
 - required plot;
 - final Farming crop type.
 
-This makes the Foraging → Farming bridge visible.
+This makes the Foraging â†’ Farming bridge visible.
 
 ---
 
@@ -2619,7 +2621,7 @@ Store:
 
 ---
 
-# 136. CHRONICLES — EARLY FARMING
+# 136. CHRONICLES â€” EARLY FARMING
 
 Suggested:
 
@@ -2636,7 +2638,7 @@ Suggested:
 
 ---
 
-# 137. CHRONICLES — LODGE FARMING
+# 137. CHRONICLES â€” LODGE FARMING
 
 Suggested:
 
@@ -2651,7 +2653,7 @@ Suggested:
 
 ---
 
-# 138. CHRONICLES — MANOR FARMING
+# 138. CHRONICLES â€” MANOR FARMING
 
 Suggested:
 
@@ -2666,7 +2668,7 @@ Suggested:
 
 ---
 
-# 139. CHRONICLES — ESTATE FARMING
+# 139. CHRONICLES â€” ESTATE FARMING
 
 Suggested:
 
@@ -2680,7 +2682,7 @@ Suggested:
 
 ---
 
-# 140. CHRONICLES — LATE FARMING
+# 140. CHRONICLES â€” LATE FARMING
 
 Suggested:
 
@@ -2717,7 +2719,7 @@ Reward:
 
 ---
 
-# 142. WORLDGARDEN — POST-100
+# 142. WORLDGARDEN â€” POST-100
 
 Post-100 Farming endgame:
 
@@ -2849,7 +2851,7 @@ Farming especially needs long offline simulation tools.
 
 ---
 
-# 150. DATA MODEL — PROPERTY AGRICULTURE
+# 150. DATA MODEL â€” PROPERTY AGRICULTURE
 
 Account agricultural state:
 
@@ -2863,7 +2865,7 @@ Account agricultural state:
 
 ---
 
-# 151. DATA MODEL — PLOT GROUP
+# 151. DATA MODEL â€” PLOT GROUP
 
 Plot Group:
 
@@ -2883,7 +2885,7 @@ Plot Group:
 
 ---
 
-# 152. DATA MODEL — CROP
+# 152. DATA MODEL â€” CROP
 
 Crop:
 
@@ -2901,7 +2903,7 @@ Crop:
 
 ---
 
-# 153. DATA MODEL — DOMESTICATION
+# 153. DATA MODEL â€” DOMESTICATION
 
 Per resource:
 
@@ -2942,7 +2944,7 @@ Prefer:
 
 ---
 
-# 155. MAJOR OPEN QUESTIONS — RECOMMENDED ANSWERS
+# 155. MAJOR OPEN QUESTIONS â€” RECOMMENDED ANSWERS
 
 ## Should Farming be directly tied to House/Manor/Estate?
 
@@ -3154,7 +3156,7 @@ This supports Tailoring scale.
 
 ---
 
-## Should Farming add a new `[Fruit]` Cooking tag?
+## Canonical Cooking `[Fruit]` tag
 
 **Yes.**
 
@@ -3240,7 +3242,7 @@ Post-100:
 
 # 156. COMPLETE LOCKED FARMING BASELINE
 
-1. Farming is directly tied to House → Lodge → Manor → Estate → Holdings.
+1. Farming is directly tied to House â†’ Lodge â†’ Manor â†’ Estate â†’ Holdings.
 2. Property progression increases Cultivation Capacity.
 3. Farming Growth is a background exception to Personal Activity Slot.
 4. Crops grow online/offline while player does another activity.
@@ -3279,10 +3281,10 @@ Post-100:
 26. Domestication is deterministic 3-stage project.
 27. Recommended specimen total =50.
 28. Wild Reagents generally stay Foraging-exclusive.
-29. Farming adds proposed Cooking `[Fruit]` tag.
+29. Farming supplies `[Fruit]` items to Cooking.
 30. Gardening Set is profession Tool.
 31. No Tool durability.
-32. Crop Mastery 1–100.
+32. Crop Mastery 1â€“100.
 33. Skill-Wide Farming Mastery.
 34. Three reversible Specializations:
     - Field Farmer;
@@ -3304,67 +3306,67 @@ Farming begins with:
 
 **House Garden**
 
-↓
+â†“
 
 **a few Turnip / Barley plots**
 
-↓
+â†“
 
 **Apple Tree**
 
-↓
+â†“
 
 **background Growth while the player does other skills**
 
-↓
+â†“
 
 **Lodge Grounds**
 
-↓
+â†“
 
 **Fields + Orchard + Nursery**
 
-↓
+â†“
 
 **Foraging Domestication**
 
-↓
+â†“
 
 **Herbs / Fibres / Fungi become cultivatable**
 
-↓
+â†“
 
 **Crop Rotations**
 
-↓
+â†“
 
 **Manor**
 
-↓
+â†“
 
 **Greenhouse + Mycology + Farmhands**
 
-↓
+â†“
 
 **Estate Farmland**
 
-↓
+â†“
 
 **worker-managed reserves**
 
-↓
+â†“
 
 **Great Orchard**
 
-↓
+â†“
 
 **Farming 100**
 
-↓
+â†“
 
 **Holdings Agriculture**
 
-↓
+â†“
 
 **Worldgarden**
 
@@ -3391,26 +3393,39 @@ Long-term progression becomes:
 
 **I tend a few plants beside my House**
 
-↓
+â†“
 
 **I build a homestead**
 
-↓
+â†“
 
 **I operate Manor fields and a Greenhouse**
 
-↓
+â†“
 
 **workers maintain established crops**
 
-↓
+â†“
 
 **my Estate supplies entire profession chains**
 
-↓
+â†“
 
 **my Holdings run agriculture as part of a larger empire**
 
 Core Farming identity:
 
 > **Your farm grows because your home grows. Every new piece of land turns the player's property from a house into an economic engine.**
+
+
+
+# INTEGRATION HARDENING — PERSISTENT FARM LOADOUT
+
+The Farm Management Loadout assigns unique physical equipment items. An assigned item cannot simultaneously be player-worn, assigned to a worker, or assigned to another station/background loadout. Reassignment requires an explicit removal from its current owner; no loadout duplicates equipment. Offline crop growth uses the same growth/yield rules as online play. Manual early harvest remains available; background Growth grants no player XP/Mastery. Manor Farmhands manage crops only after the property and station gates in this document are met.
+
+
+
+
+
+
+

@@ -1,10 +1,12 @@
-# 10 — HUNTING
+﻿# 10 — HUNTING
 
 **Status:** Complete Design Draft  
 **Version:** 1.0  
 **Parent:** `00_PROFESSIONS_OVERVIEW.md` / Skills & Professions foundation  
-**Reference Professions:** `04_COOKING.md`, `05_WOODCUTTING.md`, `06_FLETCHING.md`, `08_TAILORING.md`  
+**Reference Professions:** `Woodcutting.md`, `Smithing.md`, `Fletching.md`, `Leatherworking.md`, `Cooking.md`, `Tailoring.md`, `Alchemy.md`
 **Purpose:** Define Hunting as one complete profession in a single source-of-truth file: Hunting Grounds, explicit prey targeting, Tracking, Hunt Methods, Field Dressing, tiered Hides/Meat, Feathers/Sinew/Fur/Bone/Fang components, profession Tool/gear, Mastery, Specializations, Hunting Lodge, workers, planner, Chronicles, UI, formulas, Cooking/Fletching/Leatherworking integration, and post-100 endgame hunting.
+
+**Shared canon:** [00_GLOBAL_GAME_RULES.md](../00_GLOBAL_GAME_RULES.md) · [Item Registry](../Registries/ITEM_REGISTRY.md) · [Recipe Registry](../Registries/RECIPE_REGISTRY.md)
 
 ---
 
@@ -568,19 +570,19 @@ Best for:
 
 ---
 
-# 28. REUSABLE TRAP EQUIPMENT
+# 28. REUSABLE TRAP EQUIPMENT — FLETCHING ASSEMBLY
 
 Hunting has reusable method-enabling equipment.
 
 | Lvl | Trap Equipment | Inputs | Consumption | Role |
 |---|---|---|---|---|
-| 12 | Basic Snare Kit | 1 Alder Utility Blank + 1 Feather/Sinew Cord | Reusable method unlock component | Snare access |
-| 32 | Reinforced Trap Frame | 1 Silverpine Utility Blank + 1 Argent Mechanism | Reusable method unlock component | Ambush/trap upgrade |
-| 52 | Master Trap Kit | 1 Frostbark Utility Blank + 1 Frostsilver Mechanism + 1 Resin | Reusable equipment upgrade | Better Snare/Ambush analytics |
-| 72 | Aether Trap Assembly | 1 Aetherwood Utility Blank + 1 Aetherite Mechanism + 1 Runic Cord | Reusable late-game trap kit | Worker/hunt efficiency |
-| 92 | Astral Trap Assembly | 1 Starwood Utility Blank + 1 Astralite Mechanism + 1 Astral Cord | Reusable endgame trap kit | T10 hunting methods |
+| 12 | Basic Snare Kit | 1 Alder Utility Blank + 1 Sinew Cord + 1 Iron Fasteners | Reusable method unlock component | Snare access |
+| 32 | Reinforced Trap Frame | 1 Silverpine Utility Blank + 1 Hardened Fittings | Reusable method unlock component | Ambush/trap upgrade |
+| 54 | Master Trap Kit | 1 Frostbark Utility Blank + 1 Argent Mechanism + 1 Resin | Reusable equipment upgrade | Better Snare/Ambush analytics |
+| 74 | Aether Trap Assembly | 1 Aetherwood Utility Blank + 1 Precision Mechanism + 1 Sinew Cord + 1 Aether Filament | Reusable late-game trap kit | Worker/hunt efficiency |
+| 94 | Astral Trap Assembly | 1 Starwood Utility Blank + 1 Umbral Reinforcement + 1 Sinew Cord + 1 Astral Filament | Reusable endgame trap kit | T10 hunting methods |
 
-These are not consumables.
+Fletching owns these reusable assembly recipes (see its Trap Kit Assembly table); Hunting equips and uses them. These are not consumables.
 
 No Trap durability.
 
@@ -904,7 +906,7 @@ Hunting Knife progression is crafted through:
 
 with:
 
-- Fletching Handle;
+- Fletching Utility Blank;
 - Leatherworking grip;
 - current metal.
 
@@ -1749,12 +1751,12 @@ Workers eventually maintain old Grounds.
 | 61 | Stormmoor Hunting Ground |
 | 65 | Stormiron Hunting Knife; Gamekeeper set; Bonecarver Seal |
 | 71 | Aetherwild Hunting Ground |
-| 72 | Aether Trap Assembly |
+| 74 | Aether Trap Assembly |
 | 75 | Aetherite Hunting Knife; Gamekeeper Chain |
 | 81 | Umbral Hunting Ground |
 | 85 | Umbral Hunting Knife; Master Hunter set; Umbral Hunter Charm |
 | 91 | Starfall Hunting Ground |
-| 92 | Astral Trap Assembly |
+| 94 | Astral Trap Assembly |
 | 95 | Astralite Hunting Knife; Astral Hunter Emblem |
 | 100 | Hunting cap; Primal Hunt endgame path |
 
@@ -2590,3 +2592,11 @@ That predictability is deliberate.
 Core Hunting identity:
 
 > **Choose the prey, track it deliberately, choose how to take it, then decide what part of the carcass matters most to your economy.**
+
+
+
+
+
+
+
+

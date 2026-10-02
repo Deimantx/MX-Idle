@@ -1,10 +1,12 @@
-# 05 — WOODCUTTING
+﻿# 05 — WOODCUTTING
 
 **Status:** Complete Design Draft  
 **Version:** 1.0  
 **Parent:** `00_PROFESSIONS_OVERVIEW.md` / Skills & Professions foundation  
-**Reference Professions:** `01_MINING_v1.1.md`, `02_SMITHING.md`, `03_FISHING.md`, `04_COOKING.md`  
+**Reference Professions:** `Smithing.md`, `Fletching.md`, `Hunting.md`
 **Purpose:** Define Woodcutting as one complete profession in a single source-of-truth file: Groves, Tree Stands, growth and maturity, automatic rotation, 10-tier timber progression, Axe progression, Bark/Resin/Heartwood, profession gear, Mastery, Specializations, Estate Forestry Yard, workers, planner, Chronicles, UI, formulas, balance, Fletching integration, Hunting traps, and endgame Worldroot progression.
+
+**Shared canon:** [00_GLOBAL_GAME_RULES.md](../00_GLOBAL_GAME_RULES.md) · [Item Registry](../Registries/ITEM_REGISTRY.md) · [Recipe Registry](../Registries/RECIPE_REGISTRY.md)
 
 ---
 
@@ -17,7 +19,7 @@ Its outputs feed:
 - Fletching;
 - Fishing Rods;
 - bows / crossbows;
-- Handles / Shafts;
+- Utility Blanks / Shafts;
 - Hunting traps;
 - Estate / facilities;
 - worker equipment;
@@ -391,7 +393,7 @@ Specialty Timber is cut only when:
 Best for:
 
 - Fletching bulk;
-- Handles;
+- Utility Blanks;
 - Estate Logs.
 
 ---
@@ -506,7 +508,7 @@ Primary Woodcutting progression:
 
 **Starwood**
 
-This line intentionally matches the core wood needs already implied by Fishing Rod progression and the future Fletching profession.
+This line intentionally matches the core wood needs already implied by Fishing Rod progression and the Fletching profession.
 
 ---
 
@@ -962,10 +964,10 @@ Normal Logging Axes are primarily crafted through:
 with:
 
 - current metal;
-- wood Handle;
+- tier-matched Utility Blank from Fletching;
 - previous Axe.
 
-Woodcutting supplies the Handle material ecosystem.
+Fletching turns Woodcutting Logs into tier-matched Utility Blanks for Tool structures.
 
 Smithing owns final Axe crafting recipes.
 
@@ -975,7 +977,7 @@ Smithing owns final Axe crafting recipes.
 
 Recommended:
 
-**Previous Logging Axe + current metal + current Handle → next Logging Axe**
+**Previous Logging Axe + current-tier metal + matching-tier Utility Blank → next Logging Axe**
 
 Higher tiers can additionally use:
 
@@ -1218,7 +1220,7 @@ Effects:
 Best for:
 
 - Fletching bulk;
-- Handles;
+- Utility Blanks;
 - Estate;
 - worker supply.
 
@@ -1663,7 +1665,7 @@ Workers remain the proper parallel Woodcutting layer.
 
 | Resource | Main Consumers |
 |---|---|
-| Alder / Oak | early Handles, Shafts, Fletching, Estate |
+| Alder / Oak | early Utility Blanks, Shafts, Fletching, Estate |
 | Ironwood / Silverpine | mid bows, Rods, traps, facilities |
 | Emberwood / Frostbark | advanced bows / Rods / tools |
 | Stormwillow / Aetherwood | late Fletching, worker gear, Estate |
@@ -1695,7 +1697,7 @@ Fletching converts them into:
 - bows;
 - crossbows;
 - arrows / shafts;
-- Handles;
+- Utility Blanks;
 - Fishing Rods;
 - Hunting trap components.
 
@@ -1735,7 +1737,7 @@ Smithing provides:
 
 Woodcutting provides:
 
-- Axe Handles;
+- Logging Axe Utility Blank components;
 - tool handles;
 - Estate timber.
 
@@ -1786,7 +1788,7 @@ Old Logs remain useful because infrastructure keeps consuming broad material tie
 
 T1–T5 woods remain useful through:
 
-- Handles;
+- Utility Blanks;
 - Shafts;
 - traps;
 - worker tools;
@@ -2719,7 +2721,7 @@ Woodcutting gathers raw Logs / forestry resources.
 Fletching converts them into:
 
 - Shafts;
-- Handles;
+- Utility Blanks;
 - bows;
 - Rods;
 - ranged components.
@@ -2902,3 +2904,11 @@ Long-term progression becomes:
 Core Woodcutting identity:
 
 > **The resource is not just the tree — it is the rotation. Let the grove grow, choose when to harvest, and build the timber economy around that rhythm.**
+
+
+
+
+
+
+
+

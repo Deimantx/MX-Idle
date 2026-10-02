@@ -414,7 +414,7 @@ Potential rules:
 
 Example:
 
-**Mine Iron until 5,000 → Mine Coal until 2,000 → Smith Steel until 500 Bars**
+**Mine Copper Ore until 5,000 → Mine Coal until 2,000 → Smith Copper Ingots until 500 Bars**
 
 Another example:
 

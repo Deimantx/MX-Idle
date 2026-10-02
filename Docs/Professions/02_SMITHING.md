@@ -1,10 +1,12 @@
-# 02 — SMITHING
+﻿# 02 — SMITHING
 
 **Status:** Complete Design Draft  
 **Version:** 1.0  
 **Parent:** `00_PROFESSIONS_OVERVIEW.md` / Skills & Professions foundation  
-**Reference Profession:** `01_MINING_v1.1.md`  
+**Reference Professions:** `Mining.md`, `Woodcutting.md`, `Fletching.md`, `Leatherworking.md`, `Runecrafting.md`
 **Purpose:** Define Smithing as one complete profession in a single source-of-truth file: core loop, Smelting, Forging, Heat, Work Required, 10-tier metal progression, alloys, recipe families, tools, heavy equipment, profession gear, Mastery, Specializations, Estate Forge, automation, workers, Chronicles, UI, formulas, balance rules, and endgame progression.
+
+**Shared canon:** [00_GLOBAL_GAME_RULES.md](../00_GLOBAL_GAME_RULES.md) · [Item Registry](../Registries/ITEM_REGISTRY.md) · [Recipe Registry](../Registries/RECIPE_REGISTRY.md)
 
 ---
 
@@ -837,15 +839,15 @@ Metal tools generally require:
 
 - previous Tool;
 - new Tier metal;
-- Handle / grip component.
+- matching-tier Utility Blank or named grip.
 
 Examples:
 
-**Previous Pickaxe + 3 current Ingots + Handle → new Pickaxe**
+**Previous Pickaxe + 3 current Ingots + matching-tier Utility Blank → new Pickaxe**
 
-**Previous Logging Axe + 3 current Ingots + Handle → new Logging Axe**
+**Previous Logging Axe + 3 current Ingots + matching-tier Utility Blank → new Logging Axe**
 
-**Previous Smithing Hammer + 2 current Ingots + Handle → new Hammer**
+**Previous Smithing Hammer + 2 current Ingots + matching-tier Utility Blank → new Hammer**
 
 **Previous Hunting Knife + 2 current Ingots + Leather Wrap → new Knife**
 
@@ -1137,7 +1139,7 @@ Smithing consumes:
 - Aether Essence;
 - Worldstone;
 - Worldheart Shard;
-- Handles / Shafts;
+- Utility Blanks / Shafts;
 - Leather wraps;
 - future boss components.
 
@@ -1193,7 +1195,7 @@ Smithing creates:
 
 Woodcutting / Fletching provide:
 
-- Handles;
+- Utility Blanks;
 - Shafts;
 - wooden components.
 
@@ -3066,3 +3068,61 @@ The long-term progression identity is:
 Smithing should feel like the profession that turns the player's accumulated raw economy into:
 
 **equipment, tools, infrastructure, and permanent account capability.**
+
+
+# INTEGRATION HARDENING — LATER TOOL AND FLETCHING COMPONENT RECIPES
+
+Smithing owns every metal Tool and component previously labeled `Source: Smithing`. T0 starter Tools are granted by the profession-introduction Chronicle or bought cheaply from the Shop; the first metal item is never required to begin its own production chain.
+
+## Tool upgrades
+
+For each physical tier after T0, inputs are explicit by Tool family: **Pickaxe = previous Pickaxe + 3 current-tier Ingots + matching-tier Utility Blank**; **Logging Axe = previous Axe + 3 current-tier Ingots + matching-tier Utility Blank**; **Smithing Hammer = previous Hammer + 2 current-tier Ingots + matching-tier Utility Blank**; **Hunting Knife = previous Knife + 2 current-tier Ingots + matching-tier Utility Blank + Leatherworking Wrap**. Fletching Knife/Drawknife, Tailor's Shears, Rune Chisel, and Skiving Knife use the previous Tool + 2 current-tier Ingots + matching-tier Utility Blank. Each recipe unlocks at its next Tool's documented equip unlock level. No durability is added.
+
+## Projectile Head Bundles
+
+| Smithing unlock | Output | Exact inputs |
+|---:|---|---|
+| 1 | Copper Projectile Head Bundle × 8 | 1 Copper Ingot |
+| 11 | Iron Projectile Head Bundle × 8 | 1 Iron Ingot |
+| 21 | Cobalt Projectile Head Bundle × 8 | 1 Cobalt Ingot |
+| 31 | Argent Projectile Head Bundle × 8 | 1 Argent Ingot |
+| 41 | Emberite Projectile Head Bundle × 8 | 1 Emberite Ingot |
+| 51 | Frostsilver Projectile Head Bundle × 8 | 1 Frostsilver Ingot |
+| 61 | Stormiron Projectile Head Bundle × 8 | 1 Stormiron Ingot |
+| 71 | Aetherite Projectile Head Bundle × 8 | 1 Aetherite Ingot |
+| 81 | Umbral Projectile Head Bundle × 8 | 1 Umbral Ingot |
+| 91 | Astralite Projectile Head Bundle × 8 | 1 Astralite Ingot |
+
+Fletching consumes one matching Bundle per Arrow or Bolt recipe batch. Arrow and Bolt batches differ in their Fletching structure/recipe and output quantity; Smithing does not create separate head stacks.
+
+## Crossbow mechanisms
+
+Smithing produces shared mechanisms; they are reusable equipment components, not consumables.
+
+| Smithing unlock | Output | Exact inputs |
+|---:|---|---|
+| 5 | Basic Trigger Assembly | 2 Copper Ingots |
+| 8 | Basic Winch Assembly | 2 Copper Ingots |
+| 25 | Reinforced Trigger Assembly | 1 Cobalt Ingot + 1 Hardened Fittings |
+| 25 | Reinforced Winch Assembly | 1 Cobalt Ingot + 1 Hardened Fittings |
+| 35 | Precision Trigger Assembly | 2 Argent Ingots + 1 Hardened Fittings |
+| 38 | Runic Winch Assembly | 2 Argent Ingots + 1 Runic Crystal |
+| 91 | Astral Trigger Assembly | 1 Umbral Reinforcement + 1 Astralite Ingot |
+| 91 | Astral Winch Assembly | 1 Umbral Reinforcement + 1 Astralite Ingot |
+
+Fletching uses Basic at T1–T3, Reinforced at T4–T6, Precision Trigger/Runic Winch at T7–T9, and Astral at T10. No variant without a matching Smithing producer is valid.
+
+## Multi-profession Tool kits
+
+- Gardening Set: Smithing makes tiered metal parts from 1 current-tier Ingot; Fletching supplies the matching Utility Blank; Farming assembles the Set.
+- Apothecary/Retort Kit: Smithing makes the tiered metal vessel/frame from 2 current-tier Ingots; Alchemy assembles the Kit with its existing apparatus ingredients.
+- Jeweler's Tools/Lapidary Kit: Smithing makes the tiered precision metal frame from 2 current-tier Ingots; Jewelcrafting assembles the Kit with its existing precision parts.
+
+Smithing is the metal-component producer; it does not take ownership of finished profession kits.
+
+
+
+
+
+
+

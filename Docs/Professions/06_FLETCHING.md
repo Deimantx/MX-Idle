@@ -1,9 +1,11 @@
-# 06 — FLETCHING
+﻿# 06 — FLETCHING
 
 **Status:** Complete Design Draft  
 **Version:** 1.0  
 **Parent:** `00_PROFESSIONS_OVERVIEW.md`  
-**Reference Professions:** `02_SMITHING.md`, `03_FISHING.md`, `05_WOODCUTTING.md`
+**Reference Professions:** `Woodcutting.md`, `Smithing.md`, `Tailoring.md`, `Hunting.md`, `Runecrafting.md`, `Fishing.md`
+
+**Shared canon:** [00_GLOBAL_GAME_RULES.md](../00_GLOBAL_GAME_RULES.md) · [Item Registry](../Registries/ITEM_REGISTRY.md) · [Recipe Registry](../Registries/RECIPE_REGISTRY.md)
 
 ---
 
@@ -15,7 +17,7 @@ Fletching is the precision woodcraft profession. It converts timber and cross-pr
 - Arrows;
 - Bolts;
 - Fishing Rods;
-- Tool Handles;
+- Utility Blanks;
 - Hunting trap frames;
 - shafts, limbs, stocks and utility parts.
 
@@ -163,7 +165,7 @@ Turns components into:
 - Bows;
 - Crossbows;
 - Fishing Rods;
-- Handles;
+- Utility Blanks;
 - trap parts.
 
 ## Ammunition
@@ -182,7 +184,7 @@ Mass-produces:
 | Shaft Bundle | Primary Logs | Arrows / Bolts / traps | High-volume component |
 | Bow Limbs | Primary or Specialty Logs | Shortbow / Longbow | Flexible weapon part |
 | Crossbow Stock | Primary or Specialty Logs | Light / Heavy Crossbow | Rigid body |
-| Utility Blank | Primary Logs | Rods / Handles / traps | Cross-profession part |
+| Utility Blank | Primary Logs | Rods / Utility Blanks / traps | Cross-profession part |
 
 ---
 
@@ -236,61 +238,61 @@ This ensures Fletching stays useful beyond ranged weapons.
 | 1 | T1 | Alder Shaft Bundle | 1 Alder Log | 6 | Ammo |
 | 2 | T1 | Alder Bow Limbs | 2 Alder Logs | 2 | Shortbow |
 | 3 | T1 | Alder Crossbow Stock | 2 Alder Logs | 1 | Light Crossbow |
-| 4 | T1 | Alder Utility Blank | 2 Alder Logs | 2 | Rods / Handles / Traps |
+| 4 | T1 | Alder Utility Blank | 2 Alder Logs | 2 | Rods / Utility Blanks / Traps |
 | 7 | T1 | Birch Reinforced Limbs | 2 Birch Logs | 2 | Longbow |
 | 8 | T1 | Birch Heavy Stock | 3 Birch Logs | 1 | Heavy Crossbow |
 | 11 | T2 | Oak Shaft Bundle | 1 Oak Log | 6 | Ammo |
 | 12 | T2 | Oak Bow Limbs | 2 Oak Logs | 2 | Shortbow |
 | 13 | T2 | Oak Crossbow Stock | 2 Oak Logs | 1 | Light Crossbow |
-| 14 | T2 | Oak Utility Blank | 2 Oak Logs | 2 | Rods / Handles / Traps |
+| 14 | T2 | Oak Utility Blank | 2 Oak Logs | 2 | Rods / Utility Blanks / Traps |
 | 17 | T2 | Willow Reinforced Limbs | 2 Willow Logs | 2 | Longbow |
 | 18 | T2 | Willow Heavy Stock | 3 Willow Logs | 1 | Heavy Crossbow |
 | 21 | T3 | Ironwood Shaft Bundle | 1 Ironwood Log | 6 | Ammo |
 | 22 | T3 | Ironwood Bow Limbs | 2 Ironwood Logs | 2 | Shortbow |
 | 23 | T3 | Ironwood Crossbow Stock | 2 Ironwood Logs | 1 | Light Crossbow |
-| 24 | T3 | Ironwood Utility Blank | 2 Ironwood Logs | 2 | Rods / Handles / Traps |
+| 24 | T3 | Ironwood Utility Blank | 2 Ironwood Logs | 2 | Rods / Utility Blanks / Traps |
 | 27 | T3 | Cedar Reinforced Limbs | 2 Cedar Logs | 2 | Longbow |
 | 28 | T3 | Cedar Heavy Stock | 3 Cedar Logs | 1 | Heavy Crossbow |
 | 31 | T4 | Silverpine Shaft Bundle | 1 Silverpine Log | 7 | Ammo |
 | 32 | T4 | Silverpine Bow Limbs | 2 Silverpine Logs | 2 | Shortbow |
 | 33 | T4 | Silverpine Crossbow Stock | 2 Silverpine Logs | 1 | Light Crossbow |
-| 34 | T4 | Silverpine Utility Blank | 2 Silverpine Logs | 2 | Rods / Handles / Traps |
+| 34 | T4 | Silverpine Utility Blank | 2 Silverpine Logs | 2 | Rods / Utility Blanks / Traps |
 | 37 | T4 | Moonwood Reinforced Limbs | 2 Moonwood Logs | 2 | Longbow |
 | 38 | T4 | Moonwood Heavy Stock | 3 Moonwood Logs | 1 | Heavy Crossbow |
 | 41 | T5 | Emberwood Shaft Bundle | 1 Emberwood Log | 7 | Ammo |
 | 42 | T5 | Emberwood Bow Limbs | 2 Emberwood Logs | 2 | Shortbow |
 | 43 | T5 | Emberwood Crossbow Stock | 2 Emberwood Logs | 1 | Light Crossbow |
-| 44 | T5 | Emberwood Utility Blank | 2 Emberwood Logs | 2 | Rods / Handles / Traps |
+| 44 | T5 | Emberwood Utility Blank | 2 Emberwood Logs | 2 | Rods / Utility Blanks / Traps |
 | 47 | T5 | Cinderbark Reinforced Limbs | 2 Cinderbark Logs | 2 | Longbow |
 | 48 | T5 | Cinderbark Heavy Stock | 3 Cinderbark Logs | 1 | Heavy Crossbow |
 | 51 | T6 | Frostbark Shaft Bundle | 1 Frostbark Log | 7 | Ammo |
 | 52 | T6 | Frostbark Bow Limbs | 2 Frostbark Logs | 2 | Shortbow |
 | 53 | T6 | Frostbark Crossbow Stock | 2 Frostbark Logs | 1 | Light Crossbow |
-| 54 | T6 | Frostbark Utility Blank | 2 Frostbark Logs | 2 | Rods / Handles / Traps |
+| 54 | T6 | Frostbark Utility Blank | 2 Frostbark Logs | 2 | Rods / Utility Blanks / Traps |
 | 57 | T6 | Icewillow Reinforced Limbs | 2 Icewillow Logs | 2 | Longbow |
 | 58 | T6 | Icewillow Heavy Stock | 3 Icewillow Logs | 1 | Heavy Crossbow |
 | 61 | T7 | Stormwillow Shaft Bundle | 1 Stormwillow Log | 8 | Ammo |
 | 62 | T7 | Stormwillow Bow Limbs | 2 Stormwillow Logs | 2 | Shortbow |
 | 63 | T7 | Stormwillow Crossbow Stock | 2 Stormwillow Logs | 1 | Light Crossbow |
-| 64 | T7 | Stormwillow Utility Blank | 2 Stormwillow Logs | 2 | Rods / Handles / Traps |
+| 64 | T7 | Stormwillow Utility Blank | 2 Stormwillow Logs | 2 | Rods / Utility Blanks / Traps |
 | 67 | T7 | Thunder Oak Reinforced Limbs | 2 Thunder Oak Logs | 2 | Longbow |
 | 68 | T7 | Thunder Oak Heavy Stock | 3 Thunder Oak Logs | 1 | Heavy Crossbow |
 | 71 | T8 | Aetherwood Shaft Bundle | 1 Aetherwood Log | 8 | Ammo |
 | 72 | T8 | Aetherwood Bow Limbs | 2 Aetherwood Logs | 2 | Shortbow |
 | 73 | T8 | Aetherwood Crossbow Stock | 2 Aetherwood Logs | 1 | Light Crossbow |
-| 74 | T8 | Aetherwood Utility Blank | 2 Aetherwood Logs | 2 | Rods / Handles / Traps |
+| 74 | T8 | Aetherwood Utility Blank | 2 Aetherwood Logs | 2 | Rods / Utility Blanks / Traps |
 | 77 | T8 | Prismwood Reinforced Limbs | 2 Prismwood Logs | 2 | Longbow |
 | 78 | T8 | Prismwood Heavy Stock | 3 Prismwood Logs | 1 | Heavy Crossbow |
 | 81 | T9 | Umbralwood Shaft Bundle | 1 Umbralwood Log | 8 | Ammo |
 | 82 | T9 | Umbralwood Bow Limbs | 2 Umbralwood Logs | 2 | Shortbow |
 | 83 | T9 | Umbralwood Crossbow Stock | 2 Umbralwood Logs | 1 | Light Crossbow |
-| 84 | T9 | Umbralwood Utility Blank | 2 Umbralwood Logs | 2 | Rods / Handles / Traps |
+| 84 | T9 | Umbralwood Utility Blank | 2 Umbralwood Logs | 2 | Rods / Utility Blanks / Traps |
 | 87 | T9 | Nightbark Reinforced Limbs | 2 Nightbark Logs | 2 | Longbow |
 | 88 | T9 | Nightbark Heavy Stock | 3 Nightbark Logs | 1 | Heavy Crossbow |
 | 91 | T10 | Starwood Shaft Bundle | 1 Starwood Log | 9 | Ammo |
 | 92 | T10 | Starwood Bow Limbs | 2 Starwood Logs | 2 | Shortbow |
 | 93 | T10 | Starwood Crossbow Stock | 2 Starwood Logs | 1 | Light Crossbow |
-| 94 | T10 | Starwood Utility Blank | 2 Starwood Logs | 2 | Rods / Handles / Traps |
+| 94 | T10 | Starwood Utility Blank | 2 Starwood Logs | 2 | Rods / Utility Blanks / Traps |
 | 97 | T10 | Astral Cedar Reinforced Limbs | 2 Astral Cedar Logs | 2 | Longbow |
 | 98 | T10 | Astral Cedar Heavy Stock | 3 Astral Cedar Logs | 1 | Heavy Crossbow |
 
@@ -367,7 +369,7 @@ No durability.
 
 Default:
 
-**Previous Fletching Knife + current Smithing metal + Handle → next Fletching Knife**
+**Previous Fletching Knife + current-tier Smithing metal + matching-tier Utility Blank → next Fletching Knife**
 
 Old knives naturally transfer to workers.
 
@@ -410,8 +412,8 @@ Shortbow and Light Crossbow baseline recipes do not require Resin.
 
 Smithing supplies:
 
-- Arrowheads;
-- Bolt Heads;
+- Projectile Head Bundles;
+- Projectile Head Bundles;
 - Trigger Assemblies;
 - Winch Assemblies;
 - fittings.
@@ -440,26 +442,26 @@ Early Shop/Chronicle supply prevents progression deadlock.
 
 | Tier | Lvl | Ammo | Inputs | Base Output |
 |---|---|---|---|---|
-| T1 | 5 | Copper Arrows | 1 Alder Shaft Bundle + 1 Copper Arrowhead + 1 Feather Bundle | 24 |
-| T1 | 6 | Copper Bolts | 1 Alder Shaft Bundle + 1 Copper Bolt Head + 1 Feather Bundle | 20 |
-| T2 | 15 | Iron Arrows | 1 Oak Shaft Bundle + 1 Iron Arrowhead + 1 Feather Bundle | 28 |
-| T2 | 16 | Iron Bolts | 1 Oak Shaft Bundle + 1 Iron Bolt Head + 1 Feather Bundle | 24 |
-| T3 | 25 | Cobalt Arrows | 1 Ironwood Shaft Bundle + 1 Cobalt Arrowhead + 1 Feather Bundle | 32 |
-| T3 | 26 | Cobalt Bolts | 1 Ironwood Shaft Bundle + 1 Cobalt Bolt Head + 1 Feather Bundle | 28 |
-| T4 | 35 | Argent Arrows | 1 Silverpine Shaft Bundle + 1 Argent Arrowhead + 1 Feather Bundle | 36 |
-| T4 | 36 | Argent Bolts | 1 Silverpine Shaft Bundle + 1 Argent Bolt Head + 1 Feather Bundle | 32 |
-| T5 | 45 | Emberite Arrows | 1 Emberwood Shaft Bundle + 1 Emberite Arrowhead + 1 Feather Bundle | 40 |
-| T5 | 46 | Emberite Bolts | 1 Emberwood Shaft Bundle + 1 Emberite Bolt Head + 1 Feather Bundle | 36 |
-| T6 | 55 | Frostsilver Arrows | 1 Frostbark Shaft Bundle + 1 Frostsilver Arrowhead + 1 Feather Bundle | 44 |
-| T6 | 56 | Frostsilver Bolts | 1 Frostbark Shaft Bundle + 1 Frostsilver Bolt Head + 1 Feather Bundle | 40 |
-| T7 | 65 | Stormiron Arrows | 1 Stormwillow Shaft Bundle + 1 Stormiron Arrowhead + 1 Feather Bundle | 48 |
-| T7 | 66 | Stormiron Bolts | 1 Stormwillow Shaft Bundle + 1 Stormiron Bolt Head + 1 Feather Bundle | 44 |
-| T8 | 75 | Aetherite Arrows | 1 Aetherwood Shaft Bundle + 1 Aetherite Arrowhead + 1 Feather Bundle | 52 |
-| T8 | 76 | Aetherite Bolts | 1 Aetherwood Shaft Bundle + 1 Aetherite Bolt Head + 1 Feather Bundle | 48 |
-| T9 | 85 | Umbral Arrows | 1 Umbralwood Shaft Bundle + 1 Umbral Arrowhead + 1 Feather Bundle | 56 |
-| T9 | 86 | Umbral Bolts | 1 Umbralwood Shaft Bundle + 1 Umbral Bolt Head + 1 Feather Bundle | 52 |
-| T10 | 95 | Astralite Arrows | 1 Starwood Shaft Bundle + 1 Astralite Arrowhead + 1 Feather Bundle | 60 |
-| T10 | 96 | Astralite Bolts | 1 Starwood Shaft Bundle + 1 Astralite Bolt Head + 1 Feather Bundle | 56 |
+| T1 | 5 | Copper Arrows | 1 Alder Shaft Bundle + 1 Copper Projectile Head Bundle + 1 Feather Bundle | 24 |
+| T1 | 6 | Copper Bolts | 1 Alder Shaft Bundle + 1 Copper Projectile Head Bundle + 1 Feather Bundle | 20 |
+| T2 | 15 | Iron Arrows | 1 Oak Shaft Bundle + 1 Iron Projectile Head Bundle + 1 Feather Bundle | 28 |
+| T2 | 16 | Iron Bolts | 1 Oak Shaft Bundle + 1 Iron Projectile Head Bundle + 1 Feather Bundle | 24 |
+| T3 | 25 | Cobalt Arrows | 1 Ironwood Shaft Bundle + 1 Cobalt Projectile Head Bundle + 1 Feather Bundle | 32 |
+| T3 | 26 | Cobalt Bolts | 1 Ironwood Shaft Bundle + 1 Cobalt Projectile Head Bundle + 1 Feather Bundle | 28 |
+| T4 | 35 | Argent Arrows | 1 Silverpine Shaft Bundle + 1 Argent Projectile Head Bundle + 1 Feather Bundle | 36 |
+| T4 | 36 | Argent Bolts | 1 Silverpine Shaft Bundle + 1 Argent Projectile Head Bundle + 1 Feather Bundle | 32 |
+| T5 | 45 | Emberite Arrows | 1 Emberwood Shaft Bundle + 1 Emberite Projectile Head Bundle + 1 Feather Bundle | 40 |
+| T5 | 46 | Emberite Bolts | 1 Emberwood Shaft Bundle + 1 Emberite Projectile Head Bundle + 1 Feather Bundle | 36 |
+| T6 | 55 | Frostsilver Arrows | 1 Frostbark Shaft Bundle + 1 Frostsilver Projectile Head Bundle + 1 Feather Bundle | 44 |
+| T6 | 56 | Frostsilver Bolts | 1 Frostbark Shaft Bundle + 1 Frostsilver Projectile Head Bundle + 1 Feather Bundle | 40 |
+| T7 | 65 | Stormiron Arrows | 1 Stormwillow Shaft Bundle + 1 Stormiron Projectile Head Bundle + 1 Feather Bundle | 48 |
+| T7 | 66 | Stormiron Bolts | 1 Stormwillow Shaft Bundle + 1 Stormiron Projectile Head Bundle + 1 Feather Bundle | 44 |
+| T8 | 75 | Aetherite Arrows | 1 Aetherwood Shaft Bundle + 1 Aetherite Projectile Head Bundle + 1 Feather Bundle | 52 |
+| T8 | 76 | Aetherite Bolts | 1 Aetherwood Shaft Bundle + 1 Aetherite Projectile Head Bundle + 1 Feather Bundle | 48 |
+| T9 | 85 | Umbral Arrows | 1 Umbralwood Shaft Bundle + 1 Umbral Projectile Head Bundle + 1 Feather Bundle | 56 |
+| T9 | 86 | Umbral Bolts | 1 Umbralwood Shaft Bundle + 1 Umbral Projectile Head Bundle + 1 Feather Bundle | 52 |
+| T10 | 95 | Astralite Arrows | 1 Starwood Shaft Bundle + 1 Astralite Projectile Head Bundle + 1 Feather Bundle | 60 |
+| T10 | 96 | Astralite Bolts | 1 Starwood Shaft Bundle + 1 Astralite Projectile Head Bundle + 1 Feather Bundle | 56 |
 
 ---
 
@@ -490,7 +492,7 @@ No chained bonus rolls.
 Each normal ammo input can be preserved independently:
 
 - Shaft Bundle;
-- Arrowhead/Bolt Head;
+- Projectile Head Bundle;
 - Feather Bundle.
 
 Material Preservation cap:
@@ -504,17 +506,17 @@ Material Preservation cap:
 | Lvl | Tier | Weapon | Inputs |
 |---|---|---|---|
 | 5 | T1 | Alder Shortbow | 2 Alder Bow Limbs + 1 Simple Bowstring |
-| 6 | T1 | Alder Light Crossbow | 1 Alder Crossbow Stock + 1 Light Trigger Assembly + 1 Simple Bowstring |
+| 6 | T1 | Alder Light Crossbow | 1 Alder Crossbow Stock + 1 Basic Trigger Assembly + 1 Simple Bowstring |
 | 8 | T1 | Birch Longbow | 2 Birch Reinforced Limbs + 1 Simple Bowstring + 1 Resin |
-| 9 | T1 | Birch Heavy Crossbow | 1 Birch Heavy Stock + 1 Heavy Winch Assembly + 1 Simple Bowstring + 1 Resin |
+| 9 | T1 | Birch Heavy Crossbow | 1 Birch Heavy Stock + 1 Basic Winch Assembly + 1 Simple Bowstring + 1 Resin |
 | 15 | T2 | Oak Shortbow | 2 Oak Bow Limbs + 1 Simple Bowstring |
-| 16 | T2 | Oak Light Crossbow | 1 Oak Crossbow Stock + 1 Light Trigger Assembly + 1 Simple Bowstring |
+| 16 | T2 | Oak Light Crossbow | 1 Oak Crossbow Stock + 1 Basic Trigger Assembly + 1 Simple Bowstring |
 | 18 | T2 | Willow Longbow | 2 Willow Reinforced Limbs + 1 Simple Bowstring + 1 Resin |
-| 19 | T2 | Willow Heavy Crossbow | 1 Willow Heavy Stock + 1 Heavy Winch Assembly + 1 Simple Bowstring + 1 Resin |
+| 19 | T2 | Willow Heavy Crossbow | 1 Willow Heavy Stock + 1 Basic Winch Assembly + 1 Simple Bowstring + 1 Resin |
 | 25 | T3 | Ironwood Shortbow | 2 Ironwood Bow Limbs + 1 Simple Bowstring |
-| 26 | T3 | Ironwood Light Crossbow | 1 Ironwood Crossbow Stock + 1 Light Trigger Assembly + 1 Simple Bowstring |
+| 26 | T3 | Ironwood Light Crossbow | 1 Ironwood Crossbow Stock + 1 Basic Trigger Assembly + 1 Simple Bowstring |
 | 28 | T3 | Cedar Longbow | 2 Cedar Reinforced Limbs + 1 Simple Bowstring + 1 Resin |
-| 29 | T3 | Cedar Heavy Crossbow | 1 Cedar Heavy Stock + 1 Heavy Winch Assembly + 1 Simple Bowstring + 1 Resin |
+| 29 | T3 | Cedar Heavy Crossbow | 1 Cedar Heavy Stock + 1 Basic Winch Assembly + 1 Simple Bowstring + 1 Resin |
 | 35 | T4 | Silverpine Shortbow | 2 Silverpine Bow Limbs + 1 Reinforced Bowstring |
 | 36 | T4 | Silverpine Light Crossbow | 1 Silverpine Crossbow Stock + 1 Reinforced Trigger Assembly + 1 Reinforced Bowstring |
 | 38 | T4 | Moonwood Longbow | 2 Moonwood Reinforced Limbs + 1 Reinforced Bowstring + 1 Resin |
@@ -601,7 +603,7 @@ Its cost comes from Smithing mechanisms rather than rare wood.
 Heavy Crossbow uses:
 
 - Specialty Heavy Stock;
-- Heavy Winch Assembly;
+- Basic Winch Assembly;
 - Bowstring;
 - Resin.
 
@@ -642,17 +644,17 @@ This creates:
 
 ---
 
-# 36. TOOL HANDLES
+# 36. TOOL STRUCTURAL PARTS
 
-Fletching creates tiered Handles from Utility Blanks.
+Woodcutting provides Logs; Fletching shapes them into tier-matched Utility Blanks.
 
-Handles feed:
+Utility Blanks feed:
 
 - Pickaxes;
 - Logging Axes;
 - Smithing Hammers;
 - Hunting Knives;
-- future tools.
+- profession Tool upgrades.
 
 ---
 
@@ -719,7 +721,7 @@ Examples:
 - Copper Arrows;
 - Birch Longbow;
 - Stormwillow Rod;
-- Starwood Handle.
+- Starwood Utility Blank.
 
 ---
 
@@ -896,7 +898,7 @@ Workers can perform:
 - Shaping;
 - Ammo;
 - Rods;
-- Handles;
+- Utility Blanks;
 - Weapon Assembly.
 
 They consume real materials.
@@ -1004,7 +1006,7 @@ Example:
 
 +
 
-**Smithing → Stormiron Arrowheads**
+**Smithing → Stormiron Projectile Head Bundles**
 
 +
 
@@ -1051,8 +1053,8 @@ Fletching respects protected Bank reserves for:
 - Heartwood;
 - Strings;
 - Feather Bundles;
-- Arrowheads;
-- Bolt Heads;
+- Projectile Head Bundles;
+- Projectile Head Bundles;
 - Trigger / Winch Assemblies.
 
 Example:
@@ -1091,7 +1093,7 @@ Recommended relative XP weights:
 | Category | XP Weight |
 |---|---:|
 | Shaft Bundle | 0.80x |
-| Utility Blank / Handle | 0.90x |
+| Utility Blank | 0.90x |
 | Bow Limb / Stock | 1.00x |
 | Ammo Batch | 1.00x |
 | Shortbow | 1.15x |
@@ -1145,7 +1147,7 @@ Family multipliers:
 - Longbow 1.20x;
 - Heavy Crossbow 1.40x;
 - Fishing Rod 1.00x;
-- Handle 0.65x.
+- Utility Blank 0.65x.
 
 ---
 
@@ -1315,7 +1317,7 @@ Show:
 - Bolts;
 - weapons;
 - Fishing Rods;
-- Handles;
+- Utility Blanks;
 - materials consumed;
 - materials preserved;
 - bonus Ammo;
@@ -1446,7 +1448,7 @@ Fletching analytics should show:
 - components/hour;
 - weapon/hour;
 - Rod/hour;
-- Handle/hour;
+- Utility Blank/hour;
 - Arrows/hour;
 - Bolts/hour;
 - Logs/hour consumed;
@@ -1471,7 +1473,7 @@ Workers shown separately.
 |---|---|
 | 1 | Alder Shaft Bundle; Worn Fletching Knife |
 | 2 | Alder Bow Limbs |
-| 3 | Alder Crossbow Stock / Handle |
+| 3 | Alder Crossbow Stock / Utility Blank |
 | 4 | Copper Shortbow / Copper Arrows |
 | 5 | Copper Bolts; Reed Rod; Copper Fletching Knife |
 | 7 | Birch Reinforced Limbs |
@@ -1527,7 +1529,7 @@ Suggested goals:
 3. Craft first Copper Arrows.
 4. Assemble first Shortbow.
 5. Explain consumable Ammo.
-6. Craft first Tool Handle.
+6. Craft first Utility Blank.
 7. Craft first Fishing Rod.
 8. Reach Recipe Mastery 10.
 9. Explain Proven recipe for workers.
@@ -1626,7 +1628,7 @@ Expected inputs:
 
 - Worldroot Timber;
 - Worldroot Heartwood;
-- Worldforged/Astral Winch Assembly;
+- Astral Winch Assembly;
 - Worldroot Bowstring;
 - Resin.
 
@@ -1666,7 +1668,7 @@ Fletching turns these into:
 - components;
 - ranged weapons;
 - Rods;
-- Handles;
+- Utility Blanks;
 - trap parts.
 
 This is the profession's strongest material link.
@@ -1677,15 +1679,15 @@ This is the profession's strongest material link.
 
 Smithing supplies:
 
-- Arrowheads;
-- Bolt Heads;
+- Projectile Head Bundles;
+- Projectile Head Bundles;
 - Trigger Assemblies;
 - Winch Assemblies;
 - Tool metal.
 
 Fletching returns:
 
-- Handles;
+- Utility Blanks;
 - ranged equipment.
 
 The two professions should remain heavily interconnected.
@@ -1737,7 +1739,7 @@ Old Logs/components remain useful through:
 
 - old Ammo for cheap farming;
 - worker weapons;
-- Tool Handles;
+- Utility Blanks;
 - Fishing Rods;
 - Hunting traps;
 - Estate components;
@@ -1754,7 +1756,7 @@ Late-game worker economy can maintain:
 - cheap low-tier Ammo for old content;
 - expensive high-tier Ammo for current Combat;
 - Fishing Rod replacement/progression;
-- worker Tool Handles;
+- worker Utility Blanks;
 - trap components.
 
 This is one of the clearest "infrastructure supports endgame" examples.
@@ -2030,7 +2032,7 @@ Use it for advanced selected recipes.
 
 ---
 
-## Should Tool Handles be Fletching recipes?
+## Should Utility Blanks be Fletching recipes?
 
 **Yes.**
 
@@ -2176,7 +2178,7 @@ Post-100:
 18. metal heads/mechanisms come from Smithing.
 19. Feathers mainly come from Hunting.
 20. Fletching makes Fishing Rods.
-21. Fletching makes Tool Handles.
+21. Fletching makes Utility Blanks.
 22. Fletching makes Hunting components.
 23. Fletching Knife/Drawknife is primary Tool.
 24. No durability.
@@ -2227,7 +2229,7 @@ Fletching begins with:
 
 ↓
 
-**Fishing Rods / Handles / Hunting parts**
+**Fishing Rods / Utility Blanks / Hunting parts**
 
 ↓
 
@@ -2270,3 +2272,44 @@ Economic identity:
 Core identity:
 
 > **Shape the wood, assemble the weapon, and keep the ranged economy supplied.**
+
+
+# INTEGRATION HARDENING — COMPONENT OWNERSHIP
+
+Smithing owns one `<Metal> Projectile Head Bundle` recipe per metal tier. Fletching consumes the matching Bundle for either Arrow or Bolt ammunition; this replaces separate Arrowhead and Bolt Head stacks. Smithing also produces Basic Trigger/Winch Assemblies (T1–T3), Reinforced Trigger/Winch Assemblies (T4–T6), Precision Trigger and Runic Winch Assemblies (T7–T9), and Astral Trigger/Winch Assemblies (T10). Fletching owns all Fishing Rod recipes; Fishing retains the Rod stat/effect table.
+
+| Fletching unlock | Recipe output | Exact input |
+|---:|---|---|
+| 5 | Reed Rod | 1 Alder Utility Blank |
+| 15 | Alder Rod | 1 Alder Utility Blank |
+| 25 | Ironwood Rod | 1 Ironwood Utility Blank |
+| 35 | Silverpine Rod | 1 Silverpine Utility Blank |
+| 45 | Emberwood Rod | 1 Emberwood Utility Blank |
+| 55 | Frostbark Rod | 1 Frostbark Utility Blank |
+| 65 | Stormwillow Rod | 1 Stormwillow Utility Blank |
+| 75 | Aetherwood Rod | 1 Aetherwood Utility Blank |
+| 85 | Umbral Rod | 1 Umbralwood Utility Blank |
+| 95 | Starwood Rod | 1 Starwood Utility Blank |
+
+Fishing defines equip requirements and effects; this table does not duplicate those values. `<Timber> Utility Blank` is the wooden Tool structure, not a Handle item.
+
+## Reusable Trap Kit Assembly Recipes
+
+Fletching assembles and owns the reusable Trap Kits; Hunting equips and uses them. Smithing supplies metal parts and Leatherworking supplies cord/bindings.
+
+| Fletching Level | Output | Exact inputs |
+|---:|---|---|
+| 12 | Basic Snare Kit | 1 Alder Utility Blank + 1 Sinew Cord + 1 Iron Fasteners |
+| 32 | Reinforced Trap Frame | 1 Silverpine Utility Blank + 1 Hardened Fittings |
+| 54 | Master Trap Kit | 1 Frostbark Utility Blank + 1 Argent Mechanism + 1 Resin |
+| 74 | Aether Trap Assembly | 1 Aetherwood Utility Blank + 1 Precision Mechanism + 1 Sinew Cord + 1 Aether Filament |
+| 94 | Astral Trap Assembly | 1 Starwood Utility Blank + 1 Umbral Reinforcement + 1 Sinew Cord + 1 Astral Filament |
+
+The Basic Snare Kit is available at Hunting 12; the mandatory Ambush Reinforced Trap Frame is available at Hunting 32. Later kit upgrades are optional and do not gate earlier methods. No durability.
+
+
+
+
+
+
+

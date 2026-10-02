@@ -1,10 +1,12 @@
-# 04 — COOKING
+﻿# 04 â€” COOKING
 
 **Status:** Complete Design Draft  
 **Version:** 1.0  
 **Parent:** `00_PROFESSIONS_OVERVIEW.md` / Skills & Professions foundation  
-**Reference Professions:** `01_MINING_v1.1.md`, `02_SMITHING.md`, `03_FISHING.md`  
-**Purpose:** Define Cooking as one complete profession in a single source-of-truth file: core preparation/cooking loop, recipe methods, batches, ingredient tags, 10-tier food progression, Fishing integration, future Farming/Hunting/Foraging integration, profession Tool/gear, Mastery, Specializations, Estate Kitchen, workers, Combat food loadout, automation, Chronicles, UI, formulas, and balance rules.
+**Reference Professions:** `Fishing.md`, `Farming.md`, `Hunting.md`, `Foraging.md`
+
+**Shared canon:** [00_GLOBAL_GAME_RULES.md](../00_GLOBAL_GAME_RULES.md) · [Item Registry](../Registries/ITEM_REGISTRY.md) · [Recipe Registry](../Registries/RECIPE_REGISTRY.md)
+**Purpose:** Define Cooking as one complete profession in a single source-of-truth file: core preparation/cooking loop, recipe methods, batches, ingredient tags, 10-tier food progression, Fishing integration, Farming/Hunting/Foraging integration, profession Tool/gear, Mastery, Specializations, Estate Kitchen, workers, Combat food loadout, automation, Chronicles, UI, formulas, and balance rules.
 
 ---
 
@@ -30,7 +32,7 @@ Main outputs support:
 
 Cooking should not become:
 
-**40 raw Fish → 40 identical Cooked Fish with larger numbers**
+**40 raw Fish â†’ 40 identical Cooked Fish with larger numbers**
 
 The profession should instead revolve around:
 
@@ -67,7 +69,7 @@ Over time they learn to:
 
 Long-term fantasy:
 
-**Camp Cook → Skilled Cook → Provisioner / Hearth Chef → Master Chef → Estate Kitchen Director**
+**Camp Cook â†’ Skilled Cook â†’ Provisioner / Hearth Chef â†’ Master Chef â†’ Estate Kitchen Director**
 
 ---
 
@@ -148,7 +150,7 @@ The game does not ask the player to click each ingredient.
 
 # 6. RECIPE COMPLEXITY
 
-Cooking uses Complexity 1–8.
+Cooking uses Complexity 1â€“8.
 
 | Complexity | Name | Prep Work Mult. | Typical Use |
 |---|---|---|---|
@@ -165,7 +167,7 @@ Complexity modifies Preparation.
 
 Recommended:
 
-**Final Prep Time = Base Prep Time × Complexity Modifier × Knife/gear modifiers**
+**Final Prep Time = Base Prep Time Ã— Complexity Modifier Ã— Knife/gear modifiers**
 
 Banquet Station reduces high Complexity penalties.
 
@@ -182,7 +184,7 @@ Methods:
 | Method | Unlock Lvl | Warm-Up | Primary Identity | Main Uses |
 |---|---|---|---|---|
 | Prep Table | 1 | 0.0 | Utility | Fish Strips, Shell Bait, Oils, sauces, ingredient prep |
-| Grill | 1 | 0.0 | Speed | Fast 1–2 ingredient foods; best simple throughput |
+| Grill | 1 | 0.0 | Speed | Fast 1â€“2 ingredient foods; best simple throughput |
 | Pot | 10 | 5.0 | Serving Efficiency | Soups, broths, chowders, stews; multi-serving recipes |
 | Oven | 25 | 7.0 | Food Value | Bakes, roasts, premium prepared foods |
 | Smokehouse | 35 | 12.0 | Provisioning | Long batches; rations / provisions / bait prep |
@@ -198,10 +200,10 @@ Each method should have a distinct economic role.
 |---|---|---|
 | Prep Table | No warm-up; no cooking time; uses Prep phase only | Utility production |
 | Grill | Cook Time -10% baseline versus equivalent recipes | Fast throughput |
-| Pot | Recipes usually output 3–4 servings | Ingredient efficiency |
+| Pot | Recipes usually output 3â€“4 servings | Ingredient efficiency |
 | Oven | Recipes usually have higher Food Value per serving | Premium sustain |
 | Smokehouse | Batch Efficiency improves 50% more from large batches | Provisions / long idle |
-| Banquet Station | Complexity penalty to Prep reduced by 20%; recipes output 6–8 servings | Endgame large meals |
+| Banquet Station | Complexity penalty to Prep reduced by 20%; recipes output 6â€“8 servings | Endgame large meals |
 
 ## Grill
 
@@ -442,7 +444,7 @@ Cooking v1.0 contains **40 baseline recipes**, roughly four per progression Tier
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | T1 | Grilled River Fish | Grill | 1 | 1 [Basic Fish] or 1 [Small Fish] | Grilled River Fish | 1 | 12 | 1.8 | 3.5 | 7 | Early direct food |
 | 4 | T1 | Riverweed Broth | Pot | 1 | 1 [Basic Fish] + 1 River Weed | Riverweed Broth | 2 | 9 | 2.2 | 5.5 | 9 | Ingredient-efficient early food |
-| 7 | T1 | Roasted Root Bowl | Grill | 1 | 2 [Vegetable] | Roasted Root Bowl | 2 | 8 | 2.0 | 4.0 | 8 | Non-Fishing early food |
+| 8 | T1 | Roasted Root Bowl | Grill | 1 | 1 [Vegetable] + 1 [Fruit] | Roasted Root Bowl | 2 | 8 | 2.0 | 4.0 | 8 | Non-Fishing early food |
 | 9 | T1 | Fish Strips | Prep Table | 1 | 2 [Small Fish] | Fish Strip | 4 | 0 | 2.0 | 0.0 | 8 | Fishing Bait |
 | 11 | T2 | Herbed Reedmere Fillet | Grill | 2 | 1 [Basic Fish] + 1 [Herb] | Herbed Reedmere Fillet | 1 | 20 | 2.8 | 4.2 | 13 | Direct combat food |
 | 14 | T2 | Mussel Chowder | Pot | 2 | 1 Freshwater Mussel + 1 [Grain] + 1 [Herb] | Mussel Chowder | 3 | 15 | 3.4 | 6.5 | 17 | Multi-serving meal |
@@ -453,7 +455,7 @@ Cooking v1.0 contains **40 baseline recipes**, roughly four per progression Tier
 | 27 | T3 | Oily Fish Cakes | Oven | 3 | 1 [Oily Fish] + 1 [Grain] + 1 [Herb] | Oily Fish Cakes | 2 | 27 | 4.5 | 7.0 | 31 | Balanced food |
 | 29 | T3 | Fish Oil | Prep Table | 2 | 2 [Oily Fish] | Fish Oil | 1 | 0 | 3.4 | 0.0 | 26 | Alchemy / Cooking reagent |
 | 31 | T4 | Brackwater Bake | Oven | 3 | 1 [Hearty Fish] + 1 [Vegetable] + 1 [Herb] | Brackwater Bake | 2 | 36 | 4.8 | 7.8 | 39 | Midgame sustain |
-| 34 | T4 | Pearlscale Consommé | Pot | 4 | 1 [Rare Delicacy] + 1 [Herb] + 1 Brine Kelp | Pearlscale Consommé | 2 | 42 | 5.3 | 8.5 | 46 | Rare-food conversion |
+| 34 | T4 | Pearlscale ConsommÃ© | Pot | 4 | 1 [Rare Delicacy] + 1 [Herb] + 1 Brine Kelp | Pearlscale ConsommÃ© | 2 | 42 | 5.3 | 8.5 | 46 | Rare-food conversion |
 | 37 | T4 | Kelp Grain Bowl | Pot | 3 | 1 [Basic Fish] + 1 [Grain] + 1 Brine Kelp | Kelp Grain Bowl | 3 | 31 | 4.6 | 7.6 | 41 | Bulk midgame food |
 | 39 | T4 | Shell Bait | Prep Table | 2 | 2 Freshwater Mussel or 2 Crayfish or 1 Stormshell | Shell Bait | 4 | 0 | 3.8 | 0.0 | 34 | Fishing Bait |
 | 41 | T5 | Embercoast Seared Predator | Grill | 3 | 1 [Predator Fish] + 1 [Herb] | Embercoast Seared Predator | 1 | 50 | 4.6 | 5.5 | 54 | Fast high-value food |
@@ -471,7 +473,7 @@ Cooking v1.0 contains **40 baseline recipes**, roughly four per progression Tier
 | 71 | T8 | Aether Herb Plate | Oven | 5 | 1 [Premium Fish] + 1 [Herb] + 1 [Vegetable] | Aether Herb Plate | 2 | 88 | 7.4 | 11.0 | 116 | Premium sustain |
 | 74 | T8 | Prism Eel Pot | Pot | 5 | 1 [Oily Fish] + 1 Aether Pearl + 1 [Mushroom] | Prism Eel Pot | 3 | 80 | 7.8 | 11.5 | 124 | High-efficiency meal |
 | 77 | T8 | Skyglass Banquet | Banquet Station | 6 | 1 [Rare Delicacy] + 1 [Premium Fish] + 1 [Grain] + 1 [Herb] | Skyglass Banquet | 6 | 77 | 9.5 | 13.0 | 138 | Large premium batch |
-| 79 | T8 | Aether Glaze | Prep Table | 4 | 1 Aether Pearl + 1 Fish Oil + 1 [Herb] | Aether Glaze | 2 | 0 | 6.0 | 0.0 | 104 | T9–T10 Cooking reagent |
+| 79 | T8 | Aether Glaze | Prep Table | 4 | 1 Aether Pearl + 1 Fish Oil + 1 [Herb] | Aether Glaze | 2 | 0 | 6.0 | 0.0 | 104 | T9â€“T10 Cooking reagent |
 | 81 | T9 | Umbral Cod Bake | Oven | 5 | 1 [Hearty Fish] + 1 [Mushroom] + 1 [Herb] | Umbral Cod Bake | 2 | 108 | 8.0 | 11.8 | 146 | T9 sustain |
 | 84 | T9 | Nightfin Steak | Grill | 5 | 1 [Predator Fish] + 1 Aether Glaze | Nightfin Steak | 1 | 120 | 7.6 | 7.2 | 154 | Fast premium food |
 | 87 | T9 | Abyssal Ray Stew | Pot | 6 | 1 [Rare Delicacy] + 1 Umbral Ink + 1 [Vegetable] + 1 [Herb] | Abyssal Ray Stew | 4 | 100 | 9.2 | 13.0 | 168 | Large rare meal |
@@ -542,7 +544,7 @@ Cooking should not rename those classes.
 
 They are the contract between:
 
-**Fishing → Cooking**
+**Fishing â†’ Cooking**
 
 ---
 
@@ -550,13 +552,13 @@ They are the contract between:
 
 Recipe:
 
-**2 [Small Fish] → 4 Fish Strips**
+**2 [Small Fish] â†’ 4 Fish Strips**
 
 Fish Strips are Fishing Bait.
 
 They create:
 
-**Fishing → Cooking → Fishing**
+**Fishing â†’ Cooking â†’ Fishing**
 
 The conversion rate must not enable a positive infinite loop where predator Fishing generates more Fish Strip supply than it spends while also increasing target Fish stock without meaningful cost.
 
@@ -620,7 +622,7 @@ High-tier Cooking includes culinary reagents.
 
 Used by:
 
-- T9–T10 premium meals;
+- T9â€“T10 premium meals;
 - possible future Alchemy recipes.
 
 ## Umbral Reduction
@@ -633,11 +635,11 @@ Used by:
 
 These prevent late Cooking from being only:
 
-> higher number Fish → higher number grilled Fish.
+> higher number Fish â†’ higher number grilled Fish.
 
 ---
 
-# 23. COOKING METHODS — UNLOCKS
+# 23. COOKING METHODS â€” UNLOCKS
 
 Baseline:
 
@@ -764,7 +766,7 @@ base output is:
 
 before Extra Serving rolls.
 
-Inputs scale ×10 before Preservation.
+Inputs scale Ã—10 before Preservation.
 
 ---
 
@@ -854,7 +856,7 @@ remain preservable unless recipe explicitly says otherwise.
 
 ---
 
-# 33. COOKING TOOL — KITCHEN KNIFE
+# 33. COOKING TOOL â€” KITCHEN KNIFE
 
 Cooking's primary Tool is:
 
@@ -898,7 +900,7 @@ Knife provides:
 
 Recommended formula:
 
-**Prep Time = Base Prep Time × Complexity Modifier × (10 / (10 + Prep Power)) × other modifiers**
+**Prep Time = Base Prep Time Ã— Complexity Modifier Ã— (10 / (10 + Prep Power)) Ã— other modifiers**
 
 This means better Knives significantly reduce preparation, but never make it instant.
 
@@ -908,7 +910,7 @@ This means better Knives significantly reduce preparation, but never make it ins
 
 Final Preparation Time cannot drop below:
 
-**30% of original Base Prep × Complexity**
+**30% of original Base Prep Ã— Complexity**
 
 This prevents very high-tier stacking from eliminating the Preparation phase.
 
@@ -940,7 +942,7 @@ Smithing owns exact crafting recipe.
 
 Default:
 
-**Previous Kitchen Knife + current-tier metal + grip/handle → next Knife**
+**Previous Kitchen Knife + current-tier metal + grip/handle â†’ next Knife**
 
 Old Knives can later move to Cooking workers.
 
@@ -1070,7 +1072,7 @@ Recommended saved presets:
 
 Every baseline recipe has:
 
-**Mastery 1–100**
+**Mastery 1â€“100**
 
 Examples:
 
@@ -1203,12 +1205,12 @@ Effects:
 - Ingredient Preservation +8 pp on Complexity 5+;
 - Recipe Mastery XP +12% on Complexity 5+;
 - Banquet Cook Time -10%;
-- simple Complexity 1–2 recipes Cook Time +5%.
+- simple Complexity 1â€“2 recipes Cook Time +5%.
 
 Best for:
 
 - rare Fish;
-- T8–T10;
+- T8â€“T10;
 - Starveil Feast;
 - expensive ingredients.
 
@@ -1288,13 +1290,13 @@ This means the player personally learns new Cooking before automating it.
 
 Base Worker Cooking Efficiency:
 
-**50% + (Proficiency × 0.50%)**
+**50% + (Proficiency Ã— 0.50%)**
 
 Examples:
 
-- Proficiency 1 → 50.5%;
-- 50 → 75%;
-- 100 → 100%.
+- Proficiency 1 â†’ 50.5%;
+- 50 â†’ 75%;
+- 100 â†’ 100%.
 
 Gear and Kitchen modifiers apply afterward.
 
@@ -1310,10 +1312,10 @@ For recipes in the highest Cooking Tier currently unlocked:
 
 | Player Recipe Mastery | Worker Frontier Multiplier |
 |---:|---:|
-| 10–24 | 75% |
-| 25–49 | 85% |
-| 50–74 | 92.5% |
-| 75–99 | 97.5% |
+| 10â€“24 | 75% |
+| 25â€“49 | 85% |
+| 50â€“74 | 92.5% |
+| 75â€“99 | 97.5% |
 | 100 | 100% |
 
 Older recipes have no Frontier penalty.
@@ -1341,7 +1343,7 @@ Additional Estate systems can expand total worker organization later.
 
 When player upgrades:
 
-**Frostsilver Knife → Stormiron Knife**
+**Frostsilver Knife â†’ Stormiron Knife**
 
 old Frostsilver Knife can move to a worker.
 
@@ -1373,7 +1375,7 @@ This is critical for long unattended sessions.
 
 ---
 
-# 58. ACTIVITY PLANNER — COOKING
+# 58. ACTIVITY PLANNER â€” COOKING
 
 Starter rules:
 
@@ -1413,14 +1415,14 @@ Holdings:
 
 ---
 
-# 59. FISHING → COOKING CHAIN
+# 59. FISHING â†’ COOKING CHAIN
 
 Example player chain:
 
 > Fish River Salmon until 2,000  
-> → cook compatible Oily Fish recipe  
-> → stop when prepared food reaches 2,000  
-> → switch activity.
+> â†’ cook compatible Oily Fish recipe  
+> â†’ stop when prepared food reaches 2,000  
+> â†’ switch activity.
 
 Worker version:
 
@@ -1436,16 +1438,16 @@ This is one of the first major profession automation chains.
 Future examples:
 
 **Farming**
-→ Grain / Vegetables / Herbs  
-→ Cooking.
+â†’ Grain / Vegetables / Herbs  
+â†’ Cooking.
 
 **Hunting**
-→ Game Meat  
-→ Cooking.
+â†’ Game Meat  
+â†’ Cooking.
 
 **Foraging**
-→ Mushrooms / Herbs / Berries  
-→ Cooking.
+â†’ Mushrooms / Herbs / Berries  
+â†’ Cooking.
 
 Cooking should become a consumer that gives all three gathering professions permanent relevance.
 
@@ -1501,7 +1503,7 @@ Example:
 
 Recipe:
 
-**Frostmere Salmon Roast — 1 [Oily Fish]**
+**Frostmere Salmon Roast â€” 1 [Oily Fish]**
 
 Player can set:
 
@@ -1529,10 +1531,10 @@ Example:
 
 [Oily Fish]:
 
-- River Salmon ×2,400;
-- Moonbelly Eel ×800;
-- Emberfin Tuna ×220;
-- Frost Salmon ×1,100.
+- River Salmon Ã—2,400;
+- Moonbelly Eel Ã—800;
+- Emberfin Tuna Ã—220;
+- Frost Salmon Ã—1,100.
 
 The player can immediately understand production capacity.
 
@@ -1543,7 +1545,7 @@ The player can immediately understand production capacity.
 | Method | Unlock Lvl | Warm-Up | Primary Identity | Main Uses |
 |---|---|---|---|---|
 | Prep Table | 1 | 0.0 | Utility | Fish Strips, Shell Bait, Oils, sauces, ingredient prep |
-| Grill | 1 | 0.0 | Speed | Fast 1–2 ingredient foods; best simple throughput |
+| Grill | 1 | 0.0 | Speed | Fast 1â€“2 ingredient foods; best simple throughput |
 | Pot | 10 | 5.0 | Serving Efficiency | Soups, broths, chowders, stews; multi-serving recipes |
 | Oven | 25 | 7.0 | Food Value | Bakes, roasts, premium prepared foods |
 | Smokehouse | 35 | 12.0 | Provisioning | Long batches; rations / provisions / bait prep |
@@ -1567,7 +1569,7 @@ not only Banquet Station.
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | T1 | Grilled River Fish | Grill | 1 | 1 [Basic Fish] or 1 [Small Fish] | Grilled River Fish | 1 | 12 | 1.8 | 3.5 | 7 | Early direct food |
 | 4 | T1 | Riverweed Broth | Pot | 1 | 1 [Basic Fish] + 1 River Weed | Riverweed Broth | 2 | 9 | 2.2 | 5.5 | 9 | Ingredient-efficient early food |
-| 7 | T1 | Roasted Root Bowl | Grill | 1 | 2 [Vegetable] | Roasted Root Bowl | 2 | 8 | 2.0 | 4.0 | 8 | Non-Fishing early food |
+| 8 | T1 | Roasted Root Bowl | Grill | 1 | 1 [Vegetable] + 1 [Fruit] | Roasted Root Bowl | 2 | 8 | 2.0 | 4.0 | 8 | Non-Fishing early food |
 | 9 | T1 | Fish Strips | Prep Table | 1 | 2 [Small Fish] | Fish Strip | 4 | 0 | 2.0 | 0.0 | 8 | Fishing Bait |
 | 11 | T2 | Herbed Reedmere Fillet | Grill | 2 | 1 [Basic Fish] + 1 [Herb] | Herbed Reedmere Fillet | 1 | 20 | 2.8 | 4.2 | 13 | Direct combat food |
 | 14 | T2 | Mussel Chowder | Pot | 2 | 1 Freshwater Mussel + 1 [Grain] + 1 [Herb] | Mussel Chowder | 3 | 15 | 3.4 | 6.5 | 17 | Multi-serving meal |
@@ -1578,7 +1580,7 @@ not only Banquet Station.
 | 27 | T3 | Oily Fish Cakes | Oven | 3 | 1 [Oily Fish] + 1 [Grain] + 1 [Herb] | Oily Fish Cakes | 2 | 27 | 4.5 | 7.0 | 31 | Balanced food |
 | 29 | T3 | Fish Oil | Prep Table | 2 | 2 [Oily Fish] | Fish Oil | 1 | 0 | 3.4 | 0.0 | 26 | Alchemy / Cooking reagent |
 | 31 | T4 | Brackwater Bake | Oven | 3 | 1 [Hearty Fish] + 1 [Vegetable] + 1 [Herb] | Brackwater Bake | 2 | 36 | 4.8 | 7.8 | 39 | Midgame sustain |
-| 34 | T4 | Pearlscale Consommé | Pot | 4 | 1 [Rare Delicacy] + 1 [Herb] + 1 Brine Kelp | Pearlscale Consommé | 2 | 42 | 5.3 | 8.5 | 46 | Rare-food conversion |
+| 34 | T4 | Pearlscale ConsommÃ© | Pot | 4 | 1 [Rare Delicacy] + 1 [Herb] + 1 Brine Kelp | Pearlscale ConsommÃ© | 2 | 42 | 5.3 | 8.5 | 46 | Rare-food conversion |
 | 37 | T4 | Kelp Grain Bowl | Pot | 3 | 1 [Basic Fish] + 1 [Grain] + 1 Brine Kelp | Kelp Grain Bowl | 3 | 31 | 4.6 | 7.6 | 41 | Bulk midgame food |
 | 39 | T4 | Shell Bait | Prep Table | 2 | 2 Freshwater Mussel or 2 Crayfish or 1 Stormshell | Shell Bait | 4 | 0 | 3.8 | 0.0 | 34 | Fishing Bait |
 | 41 | T5 | Embercoast Seared Predator | Grill | 3 | 1 [Predator Fish] + 1 [Herb] | Embercoast Seared Predator | 1 | 50 | 4.6 | 5.5 | 54 | Fast high-value food |
@@ -1596,7 +1598,7 @@ not only Banquet Station.
 | 71 | T8 | Aether Herb Plate | Oven | 5 | 1 [Premium Fish] + 1 [Herb] + 1 [Vegetable] | Aether Herb Plate | 2 | 88 | 7.4 | 11.0 | 116 | Premium sustain |
 | 74 | T8 | Prism Eel Pot | Pot | 5 | 1 [Oily Fish] + 1 Aether Pearl + 1 [Mushroom] | Prism Eel Pot | 3 | 80 | 7.8 | 11.5 | 124 | High-efficiency meal |
 | 77 | T8 | Skyglass Banquet | Banquet Station | 6 | 1 [Rare Delicacy] + 1 [Premium Fish] + 1 [Grain] + 1 [Herb] | Skyglass Banquet | 6 | 77 | 9.5 | 13.0 | 138 | Large premium batch |
-| 79 | T8 | Aether Glaze | Prep Table | 4 | 1 Aether Pearl + 1 Fish Oil + 1 [Herb] | Aether Glaze | 2 | 0 | 6.0 | 0.0 | 104 | T9–T10 Cooking reagent |
+| 79 | T8 | Aether Glaze | Prep Table | 4 | 1 Aether Pearl + 1 Fish Oil + 1 [Herb] | Aether Glaze | 2 | 0 | 6.0 | 0.0 | 104 | T9â€“T10 Cooking reagent |
 | 81 | T9 | Umbral Cod Bake | Oven | 5 | 1 [Hearty Fish] + 1 [Mushroom] + 1 [Herb] | Umbral Cod Bake | 2 | 108 | 8.0 | 11.8 | 146 | T9 sustain |
 | 84 | T9 | Nightfin Steak | Grill | 5 | 1 [Predator Fish] + 1 Aether Glaze | Nightfin Steak | 1 | 120 | 7.6 | 7.2 | 154 | Fast premium food |
 | 87 | T9 | Abyssal Ray Stew | Pot | 6 | 1 [Rare Delicacy] + 1 Umbral Ink + 1 [Vegetable] + 1 [Herb] | Abyssal Ray Stew | 4 | 100 | 9.2 | 13.0 | 168 | Large rare meal |
@@ -1606,7 +1608,7 @@ not only Banquet Station.
 | 97 | T10 | Celestial Sturgeon Banquet | Banquet Station | 7 | 1 [Premium Fish] + 1 [Rare Delicacy] + 1 [Grain] + 1 [Herb] + 1 Aether Glaze | Celestial Sturgeon Banquet | 6 | 132 | 11.5 | 14.5 | 218 | Large endgame meal |
 | 100 | T10+ | Starveil Feast | Banquet Station | 8 | 1 [Mythic Delicacy] + 1 Star Coral + 1 Umbral Reduction + 1 [Grain] + 1 [Herb] | Starveil Feast | 8 | 165 | 13.0 | 16.0 | 260 | Highest baseline Cooking dish |
 
-This is the baseline 1–100 Cooking content.
+This is the baseline 1â€“100 Cooking content.
 
 Future expansions should add:
 
@@ -1622,11 +1624,11 @@ rather than simply adding 50 more copies of existing Fish recipes.
 
 Baseline Food Values intentionally rise from roughly:
 
-**8–20 early**
+**8â€“20 early**
 
 to:
 
-**120–165 endgame**
+**120â€“165 endgame**
 
 per serving.
 
@@ -1643,7 +1645,7 @@ This creates two optimization axes:
 
 For a recipe:
 
-**Total Food Value = Output Quantity × Food Value per Serving**
+**Total Food Value = Output Quantity Ã— Food Value per Serving**
 
 Example:
 
@@ -1680,7 +1682,7 @@ The player chooses according to goal.
 
 ---
 
-# 70. COMBAT FOOD LOADOUT — THREE SLOTS
+# 70. COMBAT FOOD LOADOUT â€” THREE SLOTS
 
 Recommended Combat integration:
 
@@ -1815,7 +1817,7 @@ Base XP is listed in the recipe table.
 
 Batch:
 
-**XP × number of recipe crafts completed**
+**XP Ã— number of recipe crafts completed**
 
 Extra Serving does not grant additional Cooking XP.
 
@@ -1829,7 +1831,7 @@ Extra Serving is production efficiency, not additional cooking actions.
 
 Recommended:
 
-**Recipe Mastery XP = Cooking XP × 0.40**
+**Recipe Mastery XP = Cooking XP Ã— 0.40**
 
 then apply:
 
@@ -1847,9 +1849,9 @@ Extra Serving does not multiply Mastery XP.
 Recommended:
 
 **Final Prep Time = Base Prep Time  
-× Complexity Multiplier  
-× (10 / (10 + Prep Power))  
-× Prep modifiers**
+Ã— Complexity Multiplier  
+Ã— (10 / (10 + Prep Power))  
+Ã— Prep modifiers**
 
 Banquet Station applies its Complexity reduction before final multiplicative time bonuses.
 
@@ -1863,11 +1865,11 @@ Minimum:
 
 Per recipe craft:
 
-**Final Cook Time = Base Cook Time × method modifiers × gear × jewelry × specialization × Mastery**
+**Final Cook Time = Base Cook Time Ã— method modifiers Ã— gear Ã— jewelry Ã— specialization Ã— Mastery**
 
 Batch:
 
-**Warm-Up + Final Cook Time × Batch Size × Batch Efficiency**
+**Warm-Up + Final Cook Time Ã— Batch Size Ã— Batch Efficiency**
 
 Prep Table recipes have:
 
@@ -1952,7 +1954,7 @@ If an ingredient runs out:
 
 ---
 
-# 86. COOKING SCREEN — HIGH-LEVEL UI
+# 86. COOKING SCREEN â€” HIGH-LEVEL UI
 
 Recommended layout:
 
@@ -2227,7 +2229,7 @@ Show:
 | 27 | Oily Fish Cakes |
 | 29 | Fish Oil |
 | 31 | Brackwater Bake |
-| 34 | Pearlscale Consommé |
+| 34 | Pearlscale ConsommÃ© |
 | 35 | Argent Slicer; Smokehouse; Cooking Specializations; Serving Ring |
 | 37 | Kelp Grain Bowl |
 | 39 | Shell Bait |
@@ -2270,11 +2272,11 @@ Cooking receives major new:
 - gear;
 - specialization;
 
-throughout 1–100.
+throughout 1â€“100.
 
 ---
 
-# 97. CHRONICLES — EARLY COOKING
+# 97. CHRONICLES â€” EARLY COOKING
 
 Suggested goals:
 
@@ -2290,7 +2292,7 @@ Suggested goals:
 
 ---
 
-# 98. CHRONICLES — MIDGAME COOKING
+# 98. CHRONICLES â€” MIDGAME COOKING
 
 Suggested goals:
 
@@ -2303,11 +2305,11 @@ Suggested goals:
 - build Kitchen II / III;
 - make first Proven recipe;
 - assign Cooking worker;
-- create Fishing → Cooking planner chain.
+- create Fishing â†’ Cooking planner chain.
 
 ---
 
-# 99. CHRONICLES — LATE COOKING
+# 99. CHRONICLES â€” LATE COOKING
 
 Suggested goals:
 
@@ -2322,7 +2324,7 @@ Suggested goals:
 
 ---
 
-# 100. ENDGAME CHRONICLE — MASTER CHEF
+# 100. ENDGAME CHRONICLE â€” MASTER CHEF
 
 Recommended requirements:
 
@@ -2438,11 +2440,11 @@ Prefer:
 - clear method identities;
 - reusable utility items;
 - predictable production;
-- strong Cooking ↔ Fishing/Farming/Hunting/Foraging links.
+- strong Cooking â†” Fishing/Farming/Hunting/Foraging links.
 
 ---
 
-# 104. MAJOR OPEN QUESTIONS — RECOMMENDED ANSWERS
+# 104. MAJOR OPEN QUESTIONS â€” RECOMMENDED ANSWERS
 
 These are already answered with the recommended baseline.
 
@@ -2594,7 +2596,7 @@ Same reason.
 
 Priority:
 
-1 → 2 → 3.
+1 â†’ 2 â†’ 3.
 
 This directly supports long idle Combat.
 
@@ -2796,7 +2798,7 @@ The UI must show which items the next recipe craft will consume.
 18. Extra Serving adds +1, not double output.
 19. Ingredient Preservation cap 50%.
 20. Extra Serving cap 60%.
-21. Recipe Mastery 1–100.
+21. Recipe Mastery 1â€“100.
 22. Skill-Wide Cooking Mastery.
 23. Three reversible Specializations:
     - Provisioner;
@@ -2806,7 +2808,7 @@ The UI must show which items the next recipe craft will consume.
 25. Workers use real ingredients.
 26. Recipe Mastery 10 makes recipe Proven for workers.
 27. Worker frontier penalty decreases with player Recipe Mastery.
-28. Planner supports recipe chains, reserves, tagged input priority, and Fishing → Cooking automation.
+28. Planner supports recipe chains, reserves, tagged input priority, and Fishing â†’ Cooking automation.
 29. Cooking produces Fish Strip / Shell Bait / Fish Oil / advanced reagents.
 30. Cooking supplies Combat and future worker provisions.
 31. Combat uses 3 priority Food Slots.
@@ -2823,47 +2825,47 @@ Cooking begins with:
 
 **Campfire**
 
-↓
+â†“
 
 **Grilled River Fish**
 
-↓
+â†“
 
 **Broths / simple meals**
 
-↓
+â†“
 
 **Pot Cooking**
 
-↓
+â†“
 
 **Oven**
 
-↓
+â†“
 
 **Fish Oils / Bait / utility prep**
 
-↓
+â†“
 
 **Smokehouse provisions**
 
-↓
+â†“
 
 **Cooking Specialization**
 
-↓
+â†“
 
 **Estate Kitchen workers**
 
-↓
+â†“
 
 **Banquet Station**
 
-↓
+â†“
 
 **Aether / Umbral culinary reagents**
 
-↓
+â†“
 
 **Starveil Feast**
 
@@ -2886,26 +2888,44 @@ Long-term progression becomes:
 
 **I cook my own first Fish**
 
-↓
+â†“
 
 **I learn efficient recipes**
 
-↓
+â†“
 
 **I build a Kitchen**
 
-↓
+â†“
 
 **I automate food supply**
 
-↓
+â†“
 
 **workers maintain ordinary meals and provisions**
 
-↓
+â†“
 
 **I personally prepare rare endgame Banquets**
 
 Core Cooking identity:
 
-> **Cooking turns the whole gathering economy into sustain — from one Fish over a campfire to an Estate kitchen feeding the player's entire endgame.**
+> **Cooking turns the whole gathering economy into sustain â€” from one Fish over a campfire to an Estate kitchen feeding the player's entire endgame.**
+
+
+
+# INTEGRATION HARDENING — FARMING FRUIT
+
+Cooking recipes that accept [Fruit] may use eligible Farming Orchard fruit items. [Fruit] is a recipe tag, not a physical inventory item. Farming owns fruit production; each normal Orchard fruit has at least one Cooking sink. Cooking, not Fishing, produces Fish Oil and Refined Fish Oil.
+
+
+
+The Roasted Root Bowl now provides the first explicit [Fruit] sink at Cooking 8; the first Apple Tree unlocks at Farming 8. Other suitable Orchard fruits also satisfy this semantic tag.
+
+
+
+
+
+
+
+

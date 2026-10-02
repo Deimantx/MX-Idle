@@ -1,9 +1,11 @@
-# 03 — FISHING
+﻿# 03 â€” FISHING
 
 **Status:** Complete Design Draft  
 **Version:** 1.0  
 **Parent:** `00_PROFESSIONS_OVERVIEW.md` / Skills & Professions foundation  
-**Reference Professions:** `01_MINING_v1.1.md`, `02_SMITHING.md`  
+**Reference Professions:** `Fletching.md`, `Cooking.md`, `Jewelcrafting.md`, `Alchemy.md`
+
+**Shared canon:** [00_GLOBAL_GAME_RULES.md](../00_GLOBAL_GAME_RULES.md) · [Item Registry](../Registries/ITEM_REGISTRY.md) · [Recipe Registry](../Registries/RECIPE_REGISTRY.md)
 **Purpose:** Define Fishing as one complete profession in a single source-of-truth file: core catch loop, Fishing Spots, catch pools, fish species, Bite and Landing phases, Rods, Bait, Tackle, aquatic finds, 10-tier progression, profession gear, Mastery, Specializations, Estate support, workers, automation, Chronicles, UI, formulas, balance rules, Cooking integration, and long-term relevance.
 
 ---
@@ -25,7 +27,7 @@ Its main outputs support:
 
 Fishing must not become:
 
-**Select one Fish → wait → receive that Fish**
+**Select one Fish â†’ wait â†’ receive that Fish**
 
 The player selects a **Fishing Spot**, then influences what is caught by changing:
 
@@ -64,7 +66,7 @@ Over time they learn to:
 
 Long-term fantasy:
 
-**Bank Fisher → Skilled Angler → Specialist Fisher → Master Angler → Owner of an Estate Fishing Network**
+**Bank Fisher â†’ Skilled Angler â†’ Specialist Fisher â†’ Master Angler â†’ Owner of an Estate Fishing Network**
 
 ---
 
@@ -217,7 +219,7 @@ After Bite Phase:
 
 Formula concept:
 
-**Effective Weight = Base Weight × all applicable weight modifiers**
+**Effective Weight = Base Weight Ã— all applicable weight modifiers**
 
 Final chance:
 
@@ -279,17 +281,17 @@ Every Tier Spot introduces four Fish gradually.
 
 Pattern:
 
-- Tier start → Common;
-- +2 levels → Uncommon;
-- +5 levels → Rare;
-- +8 levels → Very Rare.
+- Tier start â†’ Common;
+- +2 levels â†’ Uncommon;
+- +5 levels â†’ Rare;
+- +8 levels â†’ Very Rare.
 
 Example T4:
 
-- Level 31 → Common;
-- Level 33 → Uncommon;
-- Level 36 → Rare;
-- Level 39 → Very Rare.
+- Level 31 â†’ Common;
+- Level 33 â†’ Uncommon;
+- Level 36 â†’ Rare;
+- Level 39 â†’ Very Rare.
 
 Locked Fish are completely excluded from the pool.
 
@@ -321,7 +323,7 @@ There is no random failure.
 
 Recommended baseline:
 
-**Landing Time = 0.75s + (Fish Fight / Final Fishing Power × 0.75s)**
+**Landing Time = 0.75s + (Fish Fight / Final Fishing Power Ã— 0.75s)**
 
 then apply:
 
@@ -552,7 +554,7 @@ Fishing uses:
 
 When it triggers:
 
-**final Fish quantity ×2**
+**final Fish quantity Ã—2**
 
 Double Catch affects:
 
@@ -604,8 +606,8 @@ They help Fishing connect to:
 Base chance depends on Spot:
 
 - early Spots: 4%;
-- mid Spots: 3–3.5%;
-- late Spots: 2–2.5%.
+- mid Spots: 3â€“3.5%;
+- late Spots: 2â€“2.5%.
 
 This is intentional.
 
@@ -645,7 +647,7 @@ A future collection/event system can add novelty catches, but they should not po
 
 ---
 
-# 23. ROD — PRIMARY FISHING TOOL
+# 23. ROD â€” PRIMARY FISHING TOOL
 
 Fishing's primary Tool is:
 
@@ -709,7 +711,7 @@ Fletching later defines:
 
 Recommended baseline:
 
-**Previous Rod + new wood / fittings / line components → next Rod**
+**Previous Rod + new wood / fittings / line components â†’ next Rod**
 
 Rods normally upgrade through the previous Rod.
 
@@ -756,11 +758,11 @@ It does not make Fishing possible or impossible.
 
 | Fishing Lvl | Bait | Primary Source | Pool Effect | Role |
 |---|---|---|---|---|
-| 1 | Worm Bait | Farming / Foraging | Matching species weight ×1.75 | Common freshwater targeting |
-| 21 | Insect Bait | Foraging / Farming | Matching species weight ×1.75 | Surface / river fish |
-| 41 | Fish Strip | Cooking from suitable raw fish | Matching species weight ×2.00 | Predator targeting |
-| 61 | Shell Bait | Fishing / Cooking aquatic resources | Matching species weight ×2.00 | Bottom / eel / ray targeting |
-| 81 | Luminous Bait | Alchemy + Runecrafting inputs | Matching species weight ×2.25; all Very Rare ×1.10 | Late rare targeting |
+| 1 | Worm Bait | Farming / Foraging | Matching species weight Ã—1.75 | Common freshwater targeting |
+| 21 | Insect Bait | Foraging / Farming | Matching species weight Ã—1.75 | Surface / river fish |
+| 41 | Fish Strip | Cooking from suitable raw fish | Matching species weight Ã—2.00 | Predator targeting |
+| 61 | Shell Bait | Fishing / Cooking aquatic resources | Matching species weight Ã—2.00 | Bottom / eel / ray targeting |
+| 81 | Luminous Bait | Alchemy + Runecrafting inputs | Matching species weight Ã—2.25; all Very Rare Ã—1.10 | Late rare targeting |
 
 Bait creates targeting decisions without forcing constant consumable use.
 
@@ -808,15 +810,15 @@ Every Fish has one Preferred Bait.
 
 Base matching multipliers:
 
-- Worm ×1.75;
-- Insect ×1.75;
-- Fish Strip ×2.00;
-- Shell ×2.00;
-- Luminous ×2.25.
+- Worm Ã—1.75;
+- Insect Ã—1.75;
+- Fish Strip Ã—2.00;
+- Shell Ã—2.00;
+- Luminous Ã—2.25.
 
 Luminous Bait additionally gives:
 
-**all Very Rare Fish ×1.10**
+**all Very Rare Fish Ã—1.10**
 
 Using non-matching Bait does not penalize a Fish.
 
@@ -848,7 +850,7 @@ Produced by Cooking from suitable raw Fish.
 
 This deliberately creates:
 
-**Fishing → Cooking → Fishing**
+**Fishing â†’ Cooking â†’ Fishing**
 
 ## Shell Bait
 
@@ -878,16 +880,16 @@ One Tackle is active at a time.
 
 | Fishing Lvl | Tackle | Effect | Primary Use |
 |---|---|---|---|
-| 5 | Cork Float | Surface species weight ×1.45; Bite Time -5% | Surface / common targeting |
-| 15 | Weighted Sinker | Bottom species weight ×1.60; Bite Time +5% | Bottom targeting |
-| 25 | Spinner Lure | Predator species weight ×1.60; Landing Time -5% vs Predator | Predator targeting |
-| 35 | Fine Hook | Rare + Very Rare weight ×1.25; Bite Time +3% | Rare targeting |
+| 5 | Cork Float | Surface species weight Ã—1.45; Bite Time -5% | Surface / common targeting |
+| 15 | Weighted Sinker | Bottom species weight Ã—1.60; Bite Time +5% | Bottom targeting |
+| 25 | Spinner Lure | Predator species weight Ã—1.60; Landing Time -5% vs Predator | Predator targeting |
+| 35 | Fine Hook | Rare + Very Rare weight Ã—1.25; Bite Time +3% | Rare targeting |
 | 45 | Double Hook | Double Catch +10 pp; Landing Time +10% | Bulk quantity |
-| 55 | Deepwater Rig | Bottom ×1.80; Very Rare ×1.10; Surface ×0.75 | Deep / rare |
+| 55 | Deepwater Rig | Bottom Ã—1.80; Very Rare Ã—1.10; Surface Ã—0.75 | Deep / rare |
 | 65 | Barbless Master Hook | Fishing Mastery XP +12%; Bait Preservation +10 pp | Mastery |
-| 75 | Aether Spinner | Predator ×1.40; Rare+ ×1.20; Bite Time -6% | Late predator / rare |
-| 85 | Umbral Sinker | Bottom ×1.50; Rare+ ×1.25; Landing Time -8% | Late deep targeting |
-| 95 | Astral Lure | Preferred Species weight ×1.35; Very Rare ×1.10 | Endgame precision targeting |
+| 75 | Aether Spinner | Predator Ã—1.40; Rare+ Ã—1.20; Bite Time -6% | Late predator / rare |
+| 85 | Umbral Sinker | Bottom Ã—1.50; Rare+ Ã—1.25; Landing Time -8% | Late deep targeting |
+| 95 | Astral Lure | Preferred Species weight Ã—1.35; Very Rare Ã—1.10 | Endgame precision targeting |
 
 Tackle is primarily about:
 
@@ -937,7 +939,7 @@ This gives a second axis beyond Water Tag.
 
 ---
 
-# 35. PREFERRED SPECIES — ENDGAME PRECISION TOOL
+# 35. PREFERRED SPECIES â€” ENDGAME PRECISION TOOL
 
 At Fishing 95, the player unlocks:
 
@@ -1001,13 +1003,13 @@ Fishing-specific clothing begins around T3.
 | T7 / L65 | Deepwater Leggings | Very Rare weight +8% |
 | T7 / L65 | Deepwater Gloves | Landing Time -7% |
 | T7 / L65 | Deepwater Boots | Bottom fish Landing Time -8% |
-| Set | Deepwater 5/5 | Bottom ×1.10 additional; Aquatic Find +10% |
+| Set | Deepwater 5/5 | Bottom Ã—1.10 additional; Aquatic Find +10% |
 | T9 / L85 | Master Angler Hat | Rare / Very Rare weight +10% |
 | T9 / L85 | Master Angler Coat | Bait Preservation +7 pp |
 | T9 / L85 | Master Angler Legguards | Fishing Mastery XP +8% |
 | T9 / L85 | Master Angler Gloves | Double Catch +6 pp |
 | T9 / L85 | Master Angler Boots | Landing Time -8% |
-| Set | Master Angler 5/5 | Preferred Species ×1.10; Bite Time -5% |
+| Set | Master Angler 5/5 | Preferred Species Ã—1.10; Bite Time -5% |
 
 Players can mix pieces.
 
@@ -1044,12 +1046,12 @@ This creates multiple valid Fishing builds.
 | 15 | Angler's Ring | Bait Preservation +8 pp | Bait economy |
 | 25 | River Charm | Bite Time -5% | General speed |
 | 35 | Catcher's Band | Double Catch +5 pp | Quantity |
-| 45 | Predator Pendant | Predator weight ×1.15; Landing Time -5% vs Predator | Predator targeting |
-| 55 | Bottomfinder Loop | Bottom weight ×1.18 | Bottom fish |
+| 45 | Predator Pendant | Predator weight Ã—1.15; Landing Time -5% vs Predator | Predator targeting |
+| 55 | Bottomfinder Loop | Bottom weight Ã—1.18 | Bottom fish |
 | 65 | Schoolman's Chain | Common / Uncommon Double Catch +8 pp | Bulk food |
 | 75 | Pearlseeker Ring | Aquatic Find chance +20% | Aquatic materials |
-| 85 | Umbral Hook Charm | Rare+ weight ×1.15; Landing Time -5% | Rare fishing |
-| 95 | Astral Angler Sigil | Preferred Species ×1.15; Very Rare ×1.10 | Endgame precision |
+| 85 | Umbral Hook Charm | Rare+ weight Ã—1.15; Landing Time -5% | Rare fishing |
+| 95 | Astral Angler Sigil | Preferred Species Ã—1.15; Very Rare Ã—1.10 | Endgame precision |
 
 Jewelry is situational.
 
@@ -1105,7 +1107,7 @@ Recommended saved presets:
 
 Every Fish species has:
 
-**Mastery 1–100**
+**Mastery 1â€“100**
 
 Examples:
 
@@ -1140,7 +1142,7 @@ Species Mastery makes the player gradually better at intentionally catching fami
 
 Recommended:
 
-**Species Mastery XP = Fish Fishing XP × 0.40 × Fish Quantity**
+**Species Mastery XP = Fish Fishing XP Ã— 0.40 Ã— Fish Quantity**
 
 then apply Mastery-XP bonuses.
 
@@ -1165,7 +1167,7 @@ Recommended milestones:
 | 10% | Bite Time -2% |
 | 25% | Bait Preservation +5 pp; second Fishing preset |
 | 50% | Worker Fishing efficiency +5%; Aquatic Find +5% |
-| 75% | Rare / Very Rare weight ×1.10; third Fishing preset |
+| 75% | Rare / Very Rare weight Ã—1.10; third Fishing preset |
 | 100% | Landing Time -5%; Double Catch +5 pp; Master Angler completion marker |
 
 100% is completion content.
@@ -1201,8 +1203,8 @@ Effects:
 - Bite Time -8%;
 - Double Catch +12 pp;
 - Bait Preservation +10 pp;
-- Common / Uncommon weight ×1.10;
-- Very Rare weight ×0.90.
+- Common / Uncommon weight Ã—1.10;
+- Very Rare weight Ã—0.90.
 
 Best for:
 
@@ -1221,8 +1223,8 @@ Focus:
 
 Effects:
 
-- Rare weight ×1.25;
-- Very Rare weight ×1.40;
+- Rare weight Ã—1.25;
+- Very Rare weight Ã—1.40;
 - Landing Time -12% on Rare / Very Rare;
 - Double Catch -5 pp.
 
@@ -1243,10 +1245,10 @@ Focus:
 
 Effects:
 
-- Bottom weight ×1.50;
+- Bottom weight Ã—1.50;
 - Aquatic Find Chance +30% multiplicative;
 - Landing Time -10% on Bottom Fish;
-- Surface weight ×0.85.
+- Surface weight Ã—0.85.
 
 Best for:
 
@@ -1271,7 +1273,7 @@ No respec currency.
 
 ---
 
-# 50. ANGLER STATION — ESTATE SUPPORT
+# 50. ANGLER STATION â€” ESTATE SUPPORT
 
 Fishing does not require Estate infrastructure to function.
 
@@ -1377,13 +1379,13 @@ This preserves the principle:
 
 Base Worker Fishing Efficiency:
 
-**50% + (Proficiency × 0.50%)**
+**50% + (Proficiency Ã— 0.50%)**
 
 Therefore:
 
-- Proficiency 1 → 50.5%;
-- 50 → 75%;
-- 100 → 100%.
+- Proficiency 1 â†’ 50.5%;
+- 50 â†’ 75%;
+- 100 â†’ 100%.
 
 Gear and Angler Station modifiers apply afterward.
 
@@ -1399,10 +1401,10 @@ On the highest Fishing Tier currently unlocked, worker efficiency against a Prov
 
 | Species Mastery | Worker Frontier Multiplier |
 |---:|---:|
-| 10–24 | 75% |
-| 25–49 | 85% |
-| 50–74 | 92.5% |
-| 75–99 | 97.5% |
+| 10â€“24 | 75% |
+| 25â€“49 | 85% |
+| 50â€“74 | 92.5% |
+| 75â€“99 | 97.5% |
 | 100 | 100% |
 
 Older Tier Fish have no Frontier penalty.
@@ -1471,7 +1473,7 @@ Worker UI should support templates / bulk assignment.
 
 ---
 
-# 59. ACTIVITY PLANNER — FISHING
+# 59. ACTIVITY PLANNER â€” FISHING
 
 Starter rules:
 
@@ -1512,14 +1514,14 @@ Holdings:
 
 ---
 
-# 60. CROSS-PROFESSION FISHING → COOKING PLANNER
+# 60. CROSS-PROFESSION FISHING â†’ COOKING PLANNER
 
 Important later workflow:
 
 > Fish River Salmon until Bank contains 2,000  
-> → switch to Cooking  
-> → cook until finished  
-> → return to Fishing.
+> â†’ switch to Cooking  
+> â†’ cook until finished  
+> â†’ return to Fishing.
 
 Another:
 
@@ -1679,7 +1681,7 @@ Final per-Fish XP values are already calculated in the complete Fish table.
 
 When Fish is landed:
 
-**Fishing XP = Species XP × final Fish Quantity × Fishing XP modifiers**
+**Fishing XP = Species XP Ã— final Fish Quantity Ã— Fishing XP modifiers**
 
 Therefore:
 
@@ -1698,11 +1700,11 @@ This intentionally rewards both:
 
 Recommended:
 
-**Final Bite Time = Spot Base Bite Time × Rod Bite-Speed Multiplier × Tackle × gear × Specialization × global Fishing modifiers**
+**Final Bite Time = Spot Base Bite Time Ã— Rod Bite-Speed Multiplier Ã— Tackle Ã— gear Ã— Specialization Ã— global Fishing modifiers**
 
 Rod Bite Speed of 20% means:
 
-**Base Bite Time × 0.80**
+**Base Bite Time Ã— 0.80**
 
 Minimum:
 
@@ -1715,12 +1717,12 @@ Minimum:
 For each eligible Fish:
 
 **Effective Weight = Base Weight  
-× Preferred Bait Multiplier  
-× Tackle Tag Multiplier  
-× Specialization Multiplier  
-× Species Mastery Multiplier  
-× Gear/Jewelry Multiplier  
-× Preferred Species Multiplier**
+Ã— Preferred Bait Multiplier  
+Ã— Tackle Tag Multiplier  
+Ã— Specialization Multiplier  
+Ã— Species Mastery Multiplier  
+Ã— Gear/Jewelry Multiplier  
+Ã— Preferred Species Multiplier**
 
 Final displayed chance:
 
@@ -1732,11 +1734,11 @@ All modifiers are visible in inspection.
 
 # 69. LANDING TIME FORMULA
 
-**Landing Time = 0.75s + (Fight / Final Fishing Power × 0.75s)**
+**Landing Time = 0.75s + (Fight / Final Fishing Power Ã— 0.75s)**
 
 then:
 
-**× Landing modifiers**
+**Ã— Landing modifiers**
 
 Minimum:
 
@@ -1752,7 +1754,7 @@ Roll once after species is determined.
 
 If success:
 
-**Final Quantity = Base Quantity ×2**
+**Final Quantity = Base Quantity Ã—2**
 
 Otherwise:
 
@@ -1788,11 +1790,11 @@ Do not add quantity scaling until economy testing proves necessary.
 
 | Fishing Lvl | Bait | Primary Source | Pool Effect | Role |
 |---|---|---|---|---|
-| 1 | Worm Bait | Farming / Foraging | Matching species weight ×1.75 | Common freshwater targeting |
-| 21 | Insect Bait | Foraging / Farming | Matching species weight ×1.75 | Surface / river fish |
-| 41 | Fish Strip | Cooking from suitable raw fish | Matching species weight ×2.00 | Predator targeting |
-| 61 | Shell Bait | Fishing / Cooking aquatic resources | Matching species weight ×2.00 | Bottom / eel / ray targeting |
-| 81 | Luminous Bait | Alchemy + Runecrafting inputs | Matching species weight ×2.25; all Very Rare ×1.10 | Late rare targeting |
+| 1 | Worm Bait | Farming / Foraging | Matching species weight Ã—1.75 | Common freshwater targeting |
+| 21 | Insect Bait | Foraging / Farming | Matching species weight Ã—1.75 | Surface / river fish |
+| 41 | Fish Strip | Cooking from suitable raw fish | Matching species weight Ã—2.00 | Predator targeting |
+| 61 | Shell Bait | Fishing / Cooking aquatic resources | Matching species weight Ã—2.00 | Bottom / eel / ray targeting |
+| 81 | Luminous Bait | Alchemy + Runecrafting inputs | Matching species weight Ã—2.25; all Very Rare Ã—1.10 | Late rare targeting |
 
 Bait is optional.
 
@@ -1808,16 +1810,16 @@ Using expensive Bait should visibly change:
 
 | Fishing Lvl | Tackle | Effect | Primary Use |
 |---|---|---|---|
-| 5 | Cork Float | Surface species weight ×1.45; Bite Time -5% | Surface / common targeting |
-| 15 | Weighted Sinker | Bottom species weight ×1.60; Bite Time +5% | Bottom targeting |
-| 25 | Spinner Lure | Predator species weight ×1.60; Landing Time -5% vs Predator | Predator targeting |
-| 35 | Fine Hook | Rare + Very Rare weight ×1.25; Bite Time +3% | Rare targeting |
+| 5 | Cork Float | Surface species weight Ã—1.45; Bite Time -5% | Surface / common targeting |
+| 15 | Weighted Sinker | Bottom species weight Ã—1.60; Bite Time +5% | Bottom targeting |
+| 25 | Spinner Lure | Predator species weight Ã—1.60; Landing Time -5% vs Predator | Predator targeting |
+| 35 | Fine Hook | Rare + Very Rare weight Ã—1.25; Bite Time +3% | Rare targeting |
 | 45 | Double Hook | Double Catch +10 pp; Landing Time +10% | Bulk quantity |
-| 55 | Deepwater Rig | Bottom ×1.80; Very Rare ×1.10; Surface ×0.75 | Deep / rare |
+| 55 | Deepwater Rig | Bottom Ã—1.80; Very Rare Ã—1.10; Surface Ã—0.75 | Deep / rare |
 | 65 | Barbless Master Hook | Fishing Mastery XP +12%; Bait Preservation +10 pp | Mastery |
-| 75 | Aether Spinner | Predator ×1.40; Rare+ ×1.20; Bite Time -6% | Late predator / rare |
-| 85 | Umbral Sinker | Bottom ×1.50; Rare+ ×1.25; Landing Time -8% | Late deep targeting |
-| 95 | Astral Lure | Preferred Species weight ×1.35; Very Rare ×1.10 | Endgame precision targeting |
+| 75 | Aether Spinner | Predator Ã—1.40; Rare+ Ã—1.20; Bite Time -6% | Late predator / rare |
+| 85 | Umbral Sinker | Bottom Ã—1.50; Rare+ Ã—1.25; Landing Time -8% | Late deep targeting |
+| 95 | Astral Lure | Preferred Species weight Ã—1.35; Very Rare Ã—1.10 | Endgame precision targeting |
 
 Tackle is situational rather than a simple linear Tier replacement.
 
@@ -1850,13 +1852,13 @@ when Surface Fish are the target.
 | T7 / L65 | Deepwater Leggings | Very Rare weight +8% |
 | T7 / L65 | Deepwater Gloves | Landing Time -7% |
 | T7 / L65 | Deepwater Boots | Bottom fish Landing Time -8% |
-| Set | Deepwater 5/5 | Bottom ×1.10 additional; Aquatic Find +10% |
+| Set | Deepwater 5/5 | Bottom Ã—1.10 additional; Aquatic Find +10% |
 | T9 / L85 | Master Angler Hat | Rare / Very Rare weight +10% |
 | T9 / L85 | Master Angler Coat | Bait Preservation +7 pp |
 | T9 / L85 | Master Angler Legguards | Fishing Mastery XP +8% |
 | T9 / L85 | Master Angler Gloves | Double Catch +6 pp |
 | T9 / L85 | Master Angler Boots | Landing Time -8% |
-| Set | Master Angler 5/5 | Preferred Species ×1.10; Bite Time -5% |
+| Set | Master Angler 5/5 | Preferred Species Ã—1.10; Bite Time -5% |
 
 ---
 
@@ -1867,12 +1869,12 @@ when Surface Fish are the target.
 | 15 | Angler's Ring | Bait Preservation +8 pp | Bait economy |
 | 25 | River Charm | Bite Time -5% | General speed |
 | 35 | Catcher's Band | Double Catch +5 pp | Quantity |
-| 45 | Predator Pendant | Predator weight ×1.15; Landing Time -5% vs Predator | Predator targeting |
-| 55 | Bottomfinder Loop | Bottom weight ×1.18 | Bottom fish |
+| 45 | Predator Pendant | Predator weight Ã—1.15; Landing Time -5% vs Predator | Predator targeting |
+| 55 | Bottomfinder Loop | Bottom weight Ã—1.18 | Bottom fish |
 | 65 | Schoolman's Chain | Common / Uncommon Double Catch +8 pp | Bulk food |
 | 75 | Pearlseeker Ring | Aquatic Find chance +20% | Aquatic materials |
-| 85 | Umbral Hook Charm | Rare+ weight ×1.15; Landing Time -5% | Rare fishing |
-| 95 | Astral Angler Sigil | Preferred Species ×1.15; Very Rare ×1.10 | Endgame precision |
+| 85 | Umbral Hook Charm | Rare+ weight Ã—1.15; Landing Time -5% | Rare fishing |
+| 95 | Astral Angler Sigil | Preferred Species Ã—1.15; Very Rare Ã—1.10 | Endgame precision |
 
 ---
 
@@ -1995,7 +1997,7 @@ The exact system belongs in `04_COOKING.md`.
 
 ---
 
-# 80. FISHING ↔ COOKING
+# 80. FISHING â†” COOKING
 
 Fishing supplies:
 
@@ -2017,7 +2019,7 @@ This creates a strong closed loop.
 
 ---
 
-# 81. FISHING ↔ ALCHEMY
+# 81. FISHING â†” ALCHEMY
 
 Fishing supplies:
 
@@ -2040,7 +2042,7 @@ Fishing should not be only a Cooking feeder.
 
 ---
 
-# 82. FISHING ↔ JEWELCRAFTING
+# 82. FISHING â†” JEWELCRAFTING
 
 Selected Aquatic Finds support Jewelcrafting:
 
@@ -2057,7 +2059,7 @@ This gives late Fishing additional economy value.
 
 ---
 
-# 83. FISHING ↔ FLETCHING
+# 83. FISHING â†” FLETCHING
 
 Fletching is expected to craft / upgrade:
 
@@ -2167,7 +2169,7 @@ Show:
 
 ---
 
-# 89. FISHING SCREEN — HIGH-LEVEL UI
+# 89. FISHING SCREEN â€” HIGH-LEVEL UI
 
 Recommended layout:
 
@@ -2333,7 +2335,7 @@ Workers shown separately.
 
 ---
 
-# 94. CHRONICLES — EARLY FISHING
+# 94. CHRONICLES â€” EARLY FISHING
 
 Suggested progression goals:
 
@@ -2353,7 +2355,7 @@ The tutorial should teach:
 
 ---
 
-# 95. CHRONICLES — MIDGAME FISHING
+# 95. CHRONICLES â€” MIDGAME FISHING
 
 Suggested goals:
 
@@ -2366,11 +2368,11 @@ Suggested goals:
 - establish first Fishing Spot for workers;
 - make first Fish species Proven;
 - assign Fishing worker;
-- create Fish → Cooking planner chain.
+- create Fish â†’ Cooking planner chain.
 
 ---
 
-# 96. CHRONICLES — LATE FISHING
+# 96. CHRONICLES â€” LATE FISHING
 
 Suggested goals:
 
@@ -2519,7 +2521,7 @@ Fishing should remain a pool-management profession.
 
 ---
 
-# 102. MAJOR OPEN QUESTIONS — RECOMMENDED ANSWERS
+# 102. MAJOR OPEN QUESTIONS â€” RECOMMENDED ANSWERS
 
 These are already answered with the recommended baseline.
 
@@ -2913,7 +2915,7 @@ This is central to the profession.
 24. Endgame Preferred Species system unlocks at 95.
 25. Aquatic Finds are bonus drops.
 26. No junk catch table.
-27. 40 Species Masteries 1–100.
+27. 40 Species Masteries 1â€“100.
 28. Skill-Wide Fishing Mastery.
 29. Three reversible Specializations:
     - Provisioner;
@@ -2941,11 +2943,11 @@ Fishing begins with:
 
 **Old Handline**
 
-↓
+â†“
 
 **Meadow Brook**
 
-↓
+â†“
 
 **Brook Minnow / River Perch / Mudfin / Glassscale Trout**
 
@@ -2953,39 +2955,39 @@ and gradually becomes:
 
 **better Rods**
 
-↓
+â†“
 
 **Bait targeting**
 
-↓
+â†“
 
 **situational Tackle**
 
-↓
+â†“
 
 **Species Mastery**
 
-↓
+â†“
 
 **Fishing Specialization**
 
-↓
+â†“
 
 **deep / rare / predator setups**
 
-↓
+â†“
 
 **Cooking supply chains**
 
-↓
+â†“
 
 **worker Fishing**
 
-↓
+â†“
 
 **Astral Expanse**
 
-↓
+â†“
 
 **Starveil Marlin**
 
@@ -3009,3 +3011,11 @@ Later:
 Core Fishing identity:
 
 > **You do not choose the catch directly. You build the setup that makes the water give you what you want.**
+
+
+
+
+
+
+
+

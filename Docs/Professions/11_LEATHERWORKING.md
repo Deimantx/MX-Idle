@@ -1,10 +1,12 @@
-# 11 — LEATHERWORKING
+﻿# 11 — LEATHERWORKING
 
 **Status:** Complete Design Draft  
 **Version:** 1.0  
 **Parent:** `00_PROFESSIONS_OVERVIEW.md` / Skills & Professions foundation  
-**Reference Professions:** `04_COOKING.md`, `05_WOODCUTTING.md`, `06_FLETCHING.md`, `08_TAILORING.md`, `10_HUNTING.md`  
+**Reference Professions:** `Hunting.md`, `Woodcutting.md`, `Cooking.md`, `Smithing.md`, `Fletching.md`, `Tailoring.md`, `Runecrafting.md`
 **Purpose:** Define Leatherworking as one complete profession in a single source-of-truth file: hide processing, curing, tanning methods, leather progression, pattern treatments, leather/ranged armor, profession gear, utility bindings/grips/straps, animal-component processing, profession Tool/gear, Mastery, Specializations, Tannery, workers, planner, Chronicles, UI, formulas, and post-100 Primal Leather progression.
+
+**Shared canon:** [00_GLOBAL_GAME_RULES.md](../00_GLOBAL_GAME_RULES.md) · [Item Registry](../Registries/ITEM_REGISTRY.md) · [Recipe Registry](../Registries/RECIPE_REGISTRY.md)
 
 ---
 
@@ -445,7 +447,7 @@ Finished equipment can use different pattern/treatment paths.
 | Pattern Treatment | Unlock | Extra Input | Main Uses | Role |
 |---|---|---|---|---|
 | Standard Pattern | 1 | Leather only | Normal armor/utility | Baseline |
-| Reinforced Pattern | 25 | Leather + metal Rivet Bundle | Defensive leather/profession gear | Smithing bridge |
+| Reinforced Pattern | 25 | Leather + Hardened Fittings | Defensive leather/profession gear | Smithing bridge |
 | Fur-Lined Pattern | 45 | Leather + Fur Bundle | Cold/worker/profession gear | Hunting utility |
 | Runic-Treated Pattern | 65 | Leather + Runic Filament | Magic-resistant / advanced profession gear | Runecrafting bridge |
 | Astral-Treated Pattern | 95 | Astral Leather + Astral Filament + rare component | T10/endgame equipment | Endgame |
@@ -472,7 +474,7 @@ Main:
 
 Adds:
 
-**metal Rivet Bundle**
+**Hardened Fittings**
 
 Expected source:
 
@@ -687,10 +689,10 @@ Leatherworking's permanent non-armor role:
 | 8 | Leather Strap Bundle | 2 Light Leather | 4 Strap Bundles | Tool grips / traps / profession gear |
 | 18 | Reinforced Strap Bundle | 2 Tough Leather + 1 Sinew | 4 Reinforced Straps | Mid tools / crossbow / traps |
 | 28 | Rugged Grip Wrap | 2 Rugged Leather + 1 Sinew | 3 Grip Wraps | Tool handles / weapons |
-| 38 | Moonbound Harness Parts | 2 Moon Leather + 1 Rivet Bundle | 3 Harness Parts | Profession gear / workers |
+| 38 | Moonbound Harness Parts | 2 Moon Leather + 1 Hardened Fittings | 3 Harness Parts | Profession gear / workers |
 | 48 | Ember Grip Wrap | 2 Ember Leather + 1 Resin | 3 Grip Wraps | T5 tools / weapons |
 | 58 | Frost Fur Lining | 2 Frost Leather + 1 Fur Bundle | 3 Fur Linings | Cold/profession gear |
-| 68 | Storm Reinforced Straps | 2 Storm Leather + 1 Sinew + 1 Rivet Bundle | 4 Straps | Late tools / traps |
+| 68 | Storm Reinforced Straps | 2 Storm Leather + 1 Sinew + 1 Hardened Fittings | 4 Straps | Late tools / traps |
 | 78 | Aether Binding Set | 2 Aether Leather + 1 Runic Filament | 3 Bindings | Runic gear / Fletching |
 | 88 | Umbral Grip Set | 2 Umbral Leather + 1 Fang & Claw Fragment | 3 Grips | Late equipment |
 | 98 | Astral Binding Set | 2 Astral Leather + 1 Astral Filament | 3 Bindings | T10/endgame equipment |
@@ -754,7 +756,7 @@ Leatherworking can refine Hunting support materials.
 |---|---|---|---|---|
 | 12 | Sinew Cord | 2 Sinew | 3 Sinew Cord | Reinforced Bowstrings / traps / leather gear |
 | 26 | Fur Lining | 2 Fur Bundle + 1 Leather | 2 Fur Linings | Profession clothing / worker gear |
-| 42 | Bone Rivet Bundle | 2 Bone Fragment + 1 metal fastener | 4 Bone Rivets | Armor reinforcement / utility |
+| 42 | Bone Rivet Bundle | 2 Bone Fragment + 1 Hardened Fittings | 4 Bone Rivet Bundles | Armor reinforcement / utility |
 | 62 | Predator Reinforcement | 2 Fang & Claw Fragment + 1 Leather | 2 Reinforcements | Advanced gear / trophies |
 
 ---
@@ -798,7 +800,7 @@ Bone can support selected Leatherworking reinforcement.
 
 Do not replace Smithing metal rivets universally.
 
-Bone Rivets are an alternative/special recipe component.
+Bone Rivet Bundles are an alternative/special recipe component.
 
 ---
 
@@ -892,7 +894,7 @@ Skiving Knives are primarily Smithing-crafted.
 Possible components:
 
 - current metal;
-- Fletching Handle;
+- Fletching Utility Blank;
 - Leather grip.
 
 Leatherworking defines:
@@ -907,7 +909,7 @@ Leatherworking defines:
 
 Recommended:
 
-**Previous Skiving Knife + current metal + Handle + Grip → next Skiving Knife**
+**Previous Skiving Knife + current-tier metal + matching-tier Utility Blank + Leatherworking Grip → next Skiving Knife**
 
 Old Tools move to workers.
 
@@ -1631,7 +1633,7 @@ This creates meaningful competition for Oily Fish.
 Smithing supplies:
 
 - Skiving Knives;
-- Rivet Bundles;
+- Hardened Fittings;
 - fasteners;
 - reinforced armor fittings.
 
@@ -1734,10 +1736,10 @@ Do not force absurd T1 Leather quantities into T10 recipes.
 | 8 | Leather Strap Bundle | 2 Light Leather | 4 Strap Bundles | Tool grips / traps / profession gear |
 | 18 | Reinforced Strap Bundle | 2 Tough Leather + 1 Sinew | 4 Reinforced Straps | Mid tools / crossbow / traps |
 | 28 | Rugged Grip Wrap | 2 Rugged Leather + 1 Sinew | 3 Grip Wraps | Tool handles / weapons |
-| 38 | Moonbound Harness Parts | 2 Moon Leather + 1 Rivet Bundle | 3 Harness Parts | Profession gear / workers |
+| 38 | Moonbound Harness Parts | 2 Moon Leather + 1 Hardened Fittings | 3 Harness Parts | Profession gear / workers |
 | 48 | Ember Grip Wrap | 2 Ember Leather + 1 Resin | 3 Grip Wraps | T5 tools / weapons |
 | 58 | Frost Fur Lining | 2 Frost Leather + 1 Fur Bundle | 3 Fur Linings | Cold/profession gear |
-| 68 | Storm Reinforced Straps | 2 Storm Leather + 1 Sinew + 1 Rivet Bundle | 4 Straps | Late tools / traps |
+| 68 | Storm Reinforced Straps | 2 Storm Leather + 1 Sinew + 1 Hardened Fittings | 4 Straps | Late tools / traps |
 | 78 | Aether Binding Set | 2 Aether Leather + 1 Runic Filament | 3 Bindings | Runic gear / Fletching |
 | 88 | Umbral Grip Set | 2 Umbral Leather + 1 Fang & Claw Fragment | 3 Grips | Late equipment |
 | 98 | Astral Binding Set | 2 Astral Leather + 1 Astral Filament | 3 Bindings | T10/endgame equipment |
@@ -1750,7 +1752,7 @@ Do not force absurd T1 Leather quantities into T10 recipes.
 |---|---|---|---|---|
 | 12 | Sinew Cord | 2 Sinew | 3 Sinew Cord | Reinforced Bowstrings / traps / leather gear |
 | 26 | Fur Lining | 2 Fur Bundle + 1 Leather | 2 Fur Linings | Profession clothing / worker gear |
-| 42 | Bone Rivet Bundle | 2 Bone Fragment + 1 metal fastener | 4 Bone Rivets | Armor reinforcement / utility |
+| 42 | Bone Rivet Bundle | 2 Bone Fragment + 1 Hardened Fittings | 4 Bone Rivet Bundles | Armor reinforcement / utility |
 | 62 | Predator Reinforcement | 2 Fang & Claw Fragment + 1 Leather | 2 Reinforcements | Advanced gear / trophies |
 
 ---
@@ -2655,3 +2657,16 @@ Then:
 Core Leatherworking identity:
 
 > **Hunting provides the carcass. Leatherworking turns the hide and animal materials into the durable equipment, grips, bindings, and armor that keep the rest of the account functioning.**
+
+
+
+# INTEGRATION HARDENING — METAL FITTINGS
+
+Hardened Fittings, Argent Mechanism, or Tempered Assembly are the canonical Smithing inputs for reinforced Leatherworking recipes by tier. Generic Rivet Bundle / metal Rivet Bundle is retired; Bone Rivet Bundle remains a separate Leatherworking recipe output and is not a metal item.
+
+
+
+
+
+
+
