@@ -1,7 +1,7 @@
 .dev-panel {
   position: fixed;
-  right: 10px;
-  bottom: 82px;
+  right: calc(10px * var(--ui-scale));
+  bottom: calc(82px * var(--ui-scale));
   z-index: 15;
 
 }
@@ -9,10 +9,10 @@
 .dev-panel>button {
   background: #442d23;
   border: 1px solid #795339;
-  border-radius: 4px;
-  padding: 5px 8px;
+  border-radius: calc(4px * var(--ui-scale));
+  padding: calc(5px * var(--ui-scale)) calc(8px * var(--ui-scale));
   color: #e3ab78;
-  font-size: 8px;
+  font-size: calc(8px * var(--ui-scale) * var(--text-scale));
   letter-spacing: 1px;
   cursor: pointer;
 
@@ -21,42 +21,42 @@
 .dev-controls {
   position: absolute;
   right: 0;
-  bottom: 29px;
-  width: 230px;
-  padding: 11px;
+  bottom: calc(29px * var(--ui-scale));
+  width: calc(230px * var(--ui-scale));
+  padding: calc(11px * var(--ui-scale));
   background: #171d1f;
   border: 1px solid #525b59;
-  border-radius: 6px;
-  box-shadow: 0 8px 25px #000b;
+  border-radius: calc(6px * var(--ui-scale));
+  box-shadow: 0 calc(8px * var(--ui-scale)) calc(25px * var(--ui-scale)) #000b;
 
 }
 
 .dev-controls>b {
   display: block;
-  font-size: 10px;
-  margin-bottom: 8px;
+  font-size: calc(10px * var(--ui-scale) * var(--text-scale));
+  margin-bottom: calc(8px * var(--ui-scale));
 
 }
 
 .dev-row {
   display: flex;
-  gap: 4px;
-  margin: 5px 0;
+  gap: calc(4px * var(--ui-scale));
+  margin: calc(5px * var(--ui-scale)) 0;
 
 }
 
 .dev-row .game-button {
-  font-size: 8px;
-  min-height: 27px;
-  gap: 4px;
-  padding: 0 6px;
+  font-size: calc(8px * var(--ui-scale) * var(--text-scale));
+  min-height: calc(27px * var(--ui-scale));
+  gap: calc(4px * var(--ui-scale));
+  padding: 0 calc(6px * var(--ui-scale));
   flex: 1;
 
 }
 
 .dev-controls>.game-button {
   width: 100%;
-  min-height: 29px;
-  margin-top: 4px;
+  min-height: calc(29px * var(--ui-scale));
+  margin-top: calc(4px * var(--ui-scale));
 
 }

@@ -9,27 +9,27 @@
 }
 
 .smith-tabs {
-  height: 43px;
+  height: calc(43px * var(--ui-scale));
   display: flex;
   align-items: stretch;
   border-bottom: 1px solid #41494a;
-  margin-bottom: 14px;
-  gap: 3px;
+  margin-bottom: calc(14px * var(--ui-scale));
+  gap: calc(3px * var(--ui-scale));
 
 }
 
 .smith-tabs>button {
-  min-width: 170px;
+  min-width: calc(170px * var(--ui-scale));
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 0 12px;
+  gap: calc(8px * var(--ui-scale));
+  padding: 0 calc(12px * var(--ui-scale));
   border: 1px solid transparent;
   border-bottom: 0;
-  border-radius: 5px 5px 0 0;
+  border-radius: calc(5px * var(--ui-scale)) calc(5px * var(--ui-scale)) 0 0;
   background: none;
   color: #9ca39e;
-  font-size: 10px;
+  font-size: calc(10px * var(--ui-scale) * var(--text-scale));
   font-weight: 700;
   cursor: pointer;
 
@@ -45,7 +45,7 @@
   background: linear-gradient(180deg,#39332c,#292b29);
   border-color: #69513b;
   color: #e4c19d;
-  box-shadow: inset 0 2px #c18350;
+  box-shadow: inset 0 calc(2px * var(--ui-scale)) #c18350;
 
 }
 
@@ -57,7 +57,7 @@
 .smith-tabs>button small {
   margin-left: auto;
   color: #818985;
-  font-size: 8px;
+  font-size: calc(8px * var(--ui-scale) * var(--text-scale));
   font-weight: 500;
 
 }
@@ -66,47 +66,47 @@
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: calc(8px * var(--ui-scale));
   color: #a1a59d;
-  font-size: 8px;
+  font-size: calc(8px * var(--ui-scale) * var(--text-scale));
   letter-spacing: 1px;
 
 }
 
 .forge-label b {
-  font-size: 8px;
+  font-size: calc(8px * var(--ui-scale) * var(--text-scale));
   color: #cd9a6d;
 
 }
 
 .heat-light {
-  width: 7px;
-  height: 7px;
+  width: calc(7px * var(--ui-scale));
+  height: calc(7px * var(--ui-scale));
   border-radius: 50%;
   background: #d18a52;
-  box-shadow: 0 0 8px #d18a5266;
+  box-shadow: 0 0 calc(8px * var(--ui-scale)) #d18a5266;
 
 }
 
 .smith-layout {
   display: grid;
-  gap: 14px;
+  gap: calc(14px * var(--ui-scale));
   align-items: stretch;
 
 }
 
 .furnace-panel {
-  padding: 15px 17px;
+  padding: calc(15px * var(--ui-scale)) calc(17px * var(--ui-scale));
   overflow: hidden;
 
 }
 
 .furnace-art {
-  height: 225px;
+  height: calc(225px * var(--ui-scale));
   position: relative;
   display: grid;
   place-items: end center;
-  margin: 1px -17px 10px;
+  margin: 1px calc(-17px * var(--ui-scale)) calc(10px * var(--ui-scale));
   background: radial-gradient(ellipse at 50% 94%,#8b512b4f,transparent 52%),linear-gradient(180deg,#1a2022,#1d2324 70%,#252a28);
   overflow: hidden;
   border-bottom: 1px solid #3a3d39;
@@ -123,73 +123,73 @@
 
 .furnace-chimney {
   position: absolute;
-  top: 16px;
-  width: 60px;
-  height: 91px;
+  top: calc(16px * var(--ui-scale));
+  width: calc(60px * var(--ui-scale));
+  height: calc(91px * var(--ui-scale));
   border: 1px solid #55584f;
   background: linear-gradient(90deg,#343936,#44443a 40%,#292f2e);
   clip-path: polygon(12% 0,88% 0,100% 100%,0 100%);
-  box-shadow: 0 0 12px #e3973a12;
+  box-shadow: 0 0 calc(12px * var(--ui-scale)) #e3973a12;
 
 }
 
 .furnace-crown {
   position: absolute;
-  top: 89px;
-  width: 172px;
-  height: 25px;
+  top: calc(89px * var(--ui-scale));
+  width: calc(172px * var(--ui-scale));
+  height: calc(25px * var(--ui-scale));
   background: linear-gradient(180deg,#71614b,#343832);
   clip-path: polygon(8% 0,92% 0,100% 100%,0 100%);
-  border-bottom: 2px solid #8e6a48;
+  border-bottom: calc(2px * var(--ui-scale)) solid #8e6a48;
 
 }
 
 .furnace-body {
   position: relative;
-  width: 160px;
-  height: 112px;
-  margin-bottom: 18px;
+  width: calc(160px * var(--ui-scale));
+  height: calc(112px * var(--ui-scale));
+  margin-bottom: calc(18px * var(--ui-scale));
   background: linear-gradient(90deg,#353b39,#555147 17%,#44463e 50%,#303634);
   border: 1px solid #716852;
   clip-path: polygon(3% 0,97% 0,90% 100%,10% 100%);
-  box-shadow: 0 9px 20px #0008;
+  box-shadow: 0 calc(9px * var(--ui-scale)) calc(20px * var(--ui-scale)) #0008;
   z-index: 1;
 
 }
 
 .furnace-window {
   position: absolute;
-  left: 38px;
-  right: 38px;
-  top: 26px;
-  height: 50px;
+  left: calc(38px * var(--ui-scale));
+  right: calc(38px * var(--ui-scale));
+  top: calc(26px * var(--ui-scale));
+  height: calc(50px * var(--ui-scale));
   display: flex;
   align-items: end;
   justify-content: center;
-  gap: 5px;
+  gap: calc(5px * var(--ui-scale));
   background: radial-gradient(ellipse at 50% 92%,#ffe08b 0,#e67d32 23%,#7b3825 53%,#281f1d 78%);
-  border: 4px solid #242927;
-  box-shadow: 0 0 15px #dd772b60,inset 0 3px 9px #ffda723e;
+  border: calc(4px * var(--ui-scale)) solid #242927;
+  box-shadow: 0 0 calc(15px * var(--ui-scale)) #dd772b60,inset 0 calc(3px * var(--ui-scale)) calc(9px * var(--ui-scale)) #ffda723e;
   overflow: hidden;
 
 }
 
 .furnace-window i {
-  width: 13px;
-  height: 27px;
-  margin-bottom: -12px;
+  width: calc(13px * var(--ui-scale));
+  height: calc(27px * var(--ui-scale));
+  margin-bottom: calc(-12px * var(--ui-scale));
   background: #f9bd63;
-  filter: blur(2px);
+  filter: blur(calc(2px * var(--ui-scale)));
   border-radius: 50% 50% 0 0;
 
 }
 
 .furnace-grate {
   position: absolute;
-  left: 18px;
-  right: 18px;
-  bottom: 7px;
-  height: 4px;
+  left: calc(18px * var(--ui-scale));
+  right: calc(18px * var(--ui-scale));
+  bottom: calc(7px * var(--ui-scale));
+  height: calc(4px * var(--ui-scale));
   background: #191f20;
   border-top: 1px solid #8a7250;
 
@@ -197,9 +197,9 @@
 
 .furnace-base {
   position: absolute;
-  bottom: 9px;
-  width: 199px;
-  height: 20px;
+  bottom: calc(9px * var(--ui-scale));
+  width: calc(199px * var(--ui-scale));
+  height: calc(20px * var(--ui-scale));
   background: linear-gradient(180deg,#5b5648,#313735);
   clip-path: polygon(8% 0,92% 0,100% 100%,0 100%);
   border-bottom: 1px solid #827154;
@@ -208,30 +208,30 @@
 
 .heat-haze {
   position: absolute;
-  width: 15px;
-  height: 38px;
+  width: calc(15px * var(--ui-scale));
+  height: calc(38px * var(--ui-scale));
   border-left: 1px solid #db9c6435;
   border-radius: 50%;
-  filter: blur(2px);
-  top: 42px;
+  filter: blur(calc(2px * var(--ui-scale)));
+  top: calc(42px * var(--ui-scale));
   animation: haze 3s ease-in-out infinite;
 
 }
 
 .heat-haze.h1 {
-  left: calc(50% - 30px);
+  left: calc(50% - calc(30px * var(--ui-scale)));
 
 }
 
 .heat-haze.h2 {
-  left: calc(50% + 15px);
+  left: calc(50% + calc(15px * var(--ui-scale)));
   animation-delay: -1.4s;
 
 }
 
 .furnace-panel:not(.furnace-lit) .furnace-window {
   filter: saturate(.28);
-  box-shadow: 0 0 4px #dd772b16;
+  box-shadow: 0 0 calc(4px * var(--ui-scale)) #dd772b16;
 
 }
 
@@ -250,12 +250,12 @@
   grid-template-columns: repeat(3,1fr);
   border: 1px solid #373d3e;
   background: #191e20;
-  border-radius: 4px;
+  border-radius: calc(4px * var(--ui-scale));
 
 }
 
 .furnace-readings>div {
-  padding: 9px 10px;
+  padding: calc(9px * var(--ui-scale)) calc(10px * var(--ui-scale));
   border-right: 1px solid #343a3b;
 
 }
@@ -271,22 +271,22 @@
 }
 
 .furnace-readings span {
-  font-size: 7px;
+  font-size: calc(7px * var(--ui-scale) * var(--text-scale));
   letter-spacing: .8px;
   color: #858c87;
 
 }
 
 .furnace-readings b {
-  font-size: 13px;
+  font-size: calc(13px * var(--ui-scale) * var(--text-scale));
   color: #dfddd4;
-  margin-top: 5px;
+  margin-top: calc(5px * var(--ui-scale));
   font-variant-numeric: tabular-nums;
 
 }
 
 .furnace-readings b small {
-  font-size: 9px;
+  font-size: calc(9px * var(--ui-scale) * var(--text-scale));
   color: #858c88;
   font-weight: 500;
 
@@ -294,15 +294,15 @@
 
 .recipe-panel {
   align-self: start;
-  padding: 16px;
+  padding: calc(16px * var(--ui-scale));
 
 }
 
 .recipe-hero {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding-bottom: 12px;
+  gap: calc(10px * var(--ui-scale));
+  padding-bottom: calc(12px * var(--ui-scale));
   border-bottom: 1px solid #393e3e;
 
 }
@@ -313,14 +313,14 @@
 }
 
 .recipe-hero h3 {
-  font: 17px Marcellus,serif;
-  margin: 0 0 4px;
+  font: calc(17px * var(--ui-scale) * var(--text-scale)) Marcellus,serif;
+  margin: 0 0 calc(4px * var(--ui-scale));
 
 }
 
 .recipe-hero span {
   color: #8f9891;
-  font-size: 9px;
+  font-size: calc(9px * var(--ui-scale) * var(--text-scale));
 
 }
 
@@ -328,8 +328,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 7px;
-  padding: 14px 5px;
+  gap: calc(7px * var(--ui-scale));
+  padding: calc(14px * var(--ui-scale)) calc(5px * var(--ui-scale));
   border-bottom: 1px solid #363c3d;
 
 }
@@ -337,7 +337,7 @@
 .recipe-equation>div {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: calc(7px * var(--ui-scale));
   min-width: 0;
 
 }
@@ -354,7 +354,7 @@
 }
 
 .recipe-equation b {
-  font-size: 9px;
+  font-size: calc(9px * var(--ui-scale) * var(--text-scale));
 
 }
 
@@ -364,39 +364,39 @@
 }
 
 .recipe-equation small {
-  font-size: 8px;
+  font-size: calc(8px * var(--ui-scale) * var(--text-scale));
   color: #8c938e;
-  margin-top: 3px;
+  margin-top: calc(3px * var(--ui-scale));
 
 }
 
 .recipe-arrow {
   color: #b88a65;
-  font-size: 16px;
+  font-size: calc(16px * var(--ui-scale) * var(--text-scale));
 
 }
 
 .recipe-stats {
-  margin: 6px 0 12px;
+  margin: calc(6px * var(--ui-scale)) 0 calc(12px * var(--ui-scale));
 
 }
 
 .recipe-footnote {
   color: #818985;
   text-align: center;
-  font-size: 8px;
-  margin: 8px 0 0;
+  font-size: calc(8px * var(--ui-scale) * var(--text-scale));
+  margin: calc(8px * var(--ui-scale)) 0 0;
 
 }
 
 .recipe-list-panel {
-  padding: 13px 12px;
+  padding: calc(13px * var(--ui-scale)) calc(12px * var(--ui-scale));
 
 }
 
 .recipe-list {
   display: grid;
-  gap: 5px;
+  gap: calc(5px * var(--ui-scale));
 
 }
 
@@ -404,12 +404,12 @@
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: calc(9px * var(--ui-scale));
   text-align: left;
   background: #1b2123;
   border: 1px solid #343b3c;
-  border-radius: 5px;
-  padding: 7px 8px;
+  border-radius: calc(5px * var(--ui-scale));
+  padding: calc(7px * var(--ui-scale)) calc(8px * var(--ui-scale));
   color: #d2d4cc;
   cursor: pointer;
   transition: background var(--fast),border var(--fast);
@@ -425,7 +425,7 @@
 .recipe-choice.selected {
   background: linear-gradient(90deg,#3a3027,#292c2b);
   border-color: #806040;
-  box-shadow: inset 2px 0 #cf8e57;
+  box-shadow: inset calc(2px * var(--ui-scale)) 0 #cf8e57;
 
 }
 
@@ -450,33 +450,33 @@
 }
 
 .recipe-choice-text b {
-  font-size: 10px;
+  font-size: calc(10px * var(--ui-scale) * var(--text-scale));
 
 }
 
 .recipe-choice-text small {
-  font-size: 8px;
+  font-size: calc(8px * var(--ui-scale) * var(--text-scale));
   color: #909892;
-  margin-top: 3px;
+  margin-top: calc(3px * var(--ui-scale));
 
 }
 
 .recipe-choice .badge {
-  font-size: 6px;
-  padding: 4px 5px;
+  font-size: calc(6px * var(--ui-scale) * var(--text-scale));
+  padding: calc(4px * var(--ui-scale)) calc(5px * var(--ui-scale));
 
 }
 
 .reservation-note {
   display: flex;
   align-items: center;
-  gap: 7px;
-  margin-top: 11px;
-  padding: 8px;
+  gap: calc(7px * var(--ui-scale));
+  margin-top: calc(11px * var(--ui-scale));
+  padding: calc(8px * var(--ui-scale));
   color: #929a94;
   background: #191e20;
-  border-radius: 4px;
-  font-size: 8px;
+  border-radius: calc(4px * var(--ui-scale));
+  font-size: calc(8px * var(--ui-scale) * var(--text-scale));
   line-height: 1.4;
 
 }
@@ -488,13 +488,13 @@
 }
 
 .workpiece-panel {
-  padding: 13px 16px;
+  padding: calc(13px * var(--ui-scale)) calc(16px * var(--ui-scale));
 
 }
 
 .workpiece-art {
-  height: 142px;
-  margin: 0 -16px 12px;
+  height: calc(142px * var(--ui-scale));
+  margin: 0 calc(-16px * var(--ui-scale)) calc(12px * var(--ui-scale));
   position: relative;
   display: grid;
   place-items: center;
@@ -507,19 +507,19 @@
 
 .anvil-shape {
   position: absolute;
-  bottom: 24px;
-  width: 173px;
-  height: 58px;
-  filter: drop-shadow(0 7px 6px #0009);
+  bottom: calc(24px * var(--ui-scale));
+  width: calc(173px * var(--ui-scale));
+  height: calc(58px * var(--ui-scale));
+  filter: drop-shadow(0 calc(7px * var(--ui-scale)) calc(6px * var(--ui-scale)) #0009);
 
 }
 
 .anvil-horn {
   position: absolute;
   top: 0;
-  left: -23px;
-  width: 54px;
-  height: 21px;
+  left: calc(-23px * var(--ui-scale));
+  width: calc(54px * var(--ui-scale));
+  height: calc(21px * var(--ui-scale));
   background: linear-gradient(180deg,#8c9087,#454e4c);
   clip-path: polygon(46% 0,100% 17%,100% 78%,0 78%,0 43%);
 
@@ -527,10 +527,10 @@
 
 .anvil-block {
   position: absolute;
-  top: 4px;
-  left: 20px;
-  width: 137px;
-  height: 25px;
+  top: calc(4px * var(--ui-scale));
+  left: calc(20px * var(--ui-scale));
+  width: calc(137px * var(--ui-scale));
+  height: calc(25px * var(--ui-scale));
   background: linear-gradient(180deg,#adb0a6,#65706b 48%,#39413f);
   clip-path: polygon(0 0,100% 0,92% 100%,8% 100%);
 
@@ -538,10 +538,10 @@
 
 .anvil-foot {
   position: absolute;
-  top: 27px;
-  left: 51px;
-  width: 82px;
-  height: 30px;
+  top: calc(27px * var(--ui-scale));
+  left: calc(51px * var(--ui-scale));
+  width: calc(82px * var(--ui-scale));
+  height: calc(30px * var(--ui-scale));
   background: linear-gradient(90deg,#3c4442,#70756b,#3c4440);
   clip-path: polygon(10% 0,90% 0,100% 100%,0 100%);
 
@@ -550,10 +550,10 @@
 .workpiece {
   z-index: 1;
   position: absolute;
-  top: 36px;
-  left: calc(50% - 29px);
+  top: calc(36px * var(--ui-scale));
+  left: calc(50% - calc(29px * var(--ui-scale)));
   color: #da9459;
-  filter: drop-shadow(0 0 10px #dc8c4d60);
+  filter: drop-shadow(0 0 calc(10px * var(--ui-scale)) #dc8c4d60);
   animation: workpiece-hover 2.6s ease-in-out infinite;
 
 }
@@ -568,11 +568,11 @@
 
 .forge-flare {
   position: absolute;
-  bottom: 49px;
-  width: 3px;
-  height: 14px;
+  bottom: calc(49px * var(--ui-scale));
+  width: calc(3px * var(--ui-scale));
+  height: calc(14px * var(--ui-scale));
   background: #eda158;
-  box-shadow: 0 0 9px #ed915a;
+  box-shadow: 0 0 calc(9px * var(--ui-scale)) #ed915a;
   opacity: 0;
 
 }
@@ -590,25 +590,25 @@
 }
 
 .workpiece-title h3 {
-  font: 16px Marcellus,serif;
-  margin: 3px 0 1px;
+  font: calc(16px * var(--ui-scale) * var(--text-scale)) Marcellus,serif;
+  margin: calc(3px * var(--ui-scale)) 0 1px;
 
 }
 
 .workpiece-title small {
   display: block;
   color: #909893;
-  font-size: 8px;
+  font-size: calc(8px * var(--ui-scale) * var(--text-scale));
 
 }
 
 .work-bar,.heat-bar {
-  height: 10px;
+  height: calc(10px * var(--ui-scale));
 
 }
 
 .heat-label {
-  margin-top: 9px;
+  margin-top: calc(9px * var(--ui-scale));
 
 }
 
@@ -616,14 +616,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
-  margin-top: 11px;
+  gap: calc(10px * var(--ui-scale));
+  margin-top: calc(11px * var(--ui-scale));
 
 }
 
 .forge-status {
   display: flex;
-  gap: 8px;
+  gap: calc(8px * var(--ui-scale));
   align-items: center;
   min-width: 0;
 
@@ -635,46 +635,46 @@
 }
 
 .forge-status b {
-  font-size: 9px;
+  font-size: calc(9px * var(--ui-scale) * var(--text-scale));
 
 }
 
 .forge-status small {
-  font-size: 8px;
+  font-size: calc(8px * var(--ui-scale) * var(--text-scale));
   color: #959c96;
-  margin-top: 3px;
+  margin-top: calc(3px * var(--ui-scale));
 
 }
 
 .smith-xp-strip {
   display: grid;
-  grid-template-columns: 90px minmax(120px,1fr) auto;
-  gap: 12px;
+  grid-template-columns: calc(90px * var(--ui-scale)) minmax(calc(120px * var(--ui-scale)),1fr) auto;
+  gap: calc(12px * var(--ui-scale));
   align-items: center;
-  padding: 10px 13px;
-  margin-top: 14px;
+  padding: calc(10px * var(--ui-scale)) calc(13px * var(--ui-scale));
+  margin-top: calc(14px * var(--ui-scale));
   border: 1px solid #353c3d;
   background: #1b2123;
-  border-radius: 5px;
+  border-radius: calc(5px * var(--ui-scale));
 
 }
 
 .smith-xp-strip>div {
   display: flex;
-  gap: 8px;
+  gap: calc(8px * var(--ui-scale));
   align-items: center;
   color: #bdc1bb;
-  font-size: 9px;
+  font-size: calc(9px * var(--ui-scale) * var(--text-scale));
 
 }
 
 .smith-xp-strip .badge {
-  font-size: 7px;
+  font-size: calc(7px * var(--ui-scale) * var(--text-scale));
 
 }
 
 .smith-xp-strip small {
-  font-size: 8px;
+  font-size: calc(8px * var(--ui-scale) * var(--text-scale));
   color: #929994;
 
 }

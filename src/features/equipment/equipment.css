@@ -1,26 +1,26 @@
 .equipment-layout {
   display: grid;
-  grid-template-columns: minmax(470px,1.05fr) minmax(380px,.95fr);
-  gap: 14px;
+  grid-template-columns: minmax(calc(470px * var(--ui-scale)),1.05fr) minmax(calc(380px * var(--ui-scale)),.95fr);
+  gap: calc(14px * var(--ui-scale));
   align-items: start;
 
 }
 
 .loadout-panel,.equipment-inspector {
-  min-height: 450px;
+  min-height: calc(450px * var(--ui-scale));
 
 }
 
 .loadout-board {
-  min-height: 335px;
+  min-height: calc(335px * var(--ui-scale));
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
-  gap: 12px;
-  padding: 13px 3px 0;
+  gap: calc(12px * var(--ui-scale));
+  padding: calc(13px * var(--ui-scale)) calc(3px * var(--ui-scale)) 0;
   background: radial-gradient(ellipse at center,#343737 0,#242a2b 44%,#1b2022 75%);
   border: 1px solid #373e3e;
-  border-radius: 5px;
+  border-radius: calc(5px * var(--ui-scale));
   position: relative;
   overflow: hidden;
 
@@ -37,24 +37,24 @@
 
 .slot-column {
   display: grid;
-  gap: 8px;
+  gap: calc(8px * var(--ui-scale));
   z-index: 1;
 
 }
 
 .equipment-slot {
-  width: 132px;
-  min-height: 72px;
-  padding: 7px;
+  width: calc(132px * var(--ui-scale));
+  min-height: calc(72px * var(--ui-scale));
+  padding: calc(7px * var(--ui-scale));
   display: grid;
-  grid-template-columns: 34px minmax(0,1fr);
-  grid-template-rows: 12px 1fr;
-  column-gap: 7px;
+  grid-template-columns: calc(34px * var(--ui-scale)) minmax(0,1fr);
+  grid-template-rows: calc(12px * var(--ui-scale)) 1fr;
+  column-gap: calc(7px * var(--ui-scale));
   align-items: center;
   text-align: left;
   background: #1b2123;
   border: 1px solid #41494a;
-  border-radius: 5px;
+  border-radius: calc(5px * var(--ui-scale));
   color: #c6cac2;
   cursor: pointer;
 
@@ -79,62 +79,62 @@
 }
 
 .equipment-slot .item-mark {
-  width: 31px;
-  height: 31px;
+  width: calc(31px * var(--ui-scale));
+  height: calc(31px * var(--ui-scale));
   grid-row: 2;
 
 }
 
 .equipment-slot b {
-  font-size: 8px;
+  font-size: calc(8px * var(--ui-scale) * var(--text-scale));
   line-height: 1.15;
 
 }
 
 .character-silhouette {
-  height: 279px;
+  height: calc(279px * var(--ui-scale));
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  filter: drop-shadow(0 6px 9px #0006);
+  filter: drop-shadow(0 calc(6px * var(--ui-scale)) calc(9px * var(--ui-scale)) #0006);
 
 }
 
 .loadout-hint {
   text-align: center;
   color: #818984;
-  font-size: 9px;
-  margin-top: 10px;
+  font-size: calc(9px * var(--ui-scale) * var(--text-scale));
+  margin-top: calc(10px * var(--ui-scale));
 
 }
 
 .candidate-list {
   border-top: 1px solid #3b4141;
-  margin-top: 9px;
-  padding-top: 11px;
+  margin-top: calc(9px * var(--ui-scale));
+  padding-top: calc(11px * var(--ui-scale));
 
 }
 
 .candidate-list>.tiny-label {
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: calc(6px * var(--ui-scale));
 
 }
 
 .candidate-row {
-  height: 44px;
+  height: calc(44px * var(--ui-scale));
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: calc(8px * var(--ui-scale));
   border-top: 1px solid #313839;
 
 }
 
 .candidate-row .item-mark {
-  width: 30px;
-  height: 30px;
+  width: calc(30px * var(--ui-scale));
+  height: calc(30px * var(--ui-scale));
 
 }
 
@@ -153,29 +153,29 @@
 }
 
 .candidate-row b {
-  font-size: 9px;
+  font-size: calc(9px * var(--ui-scale) * var(--text-scale));
 
 }
 
 .candidate-row small {
-  font-size: 8px;
+  font-size: calc(8px * var(--ui-scale) * var(--text-scale));
   color: #858e89;
-  margin-top: 2px;
+  margin-top: calc(2px * var(--ui-scale));
 
 }
 
 .candidate-count {
-  font-size: 9px;
+  font-size: calc(9px * var(--ui-scale) * var(--text-scale));
   color: #b6bcb5;
-  min-width: 24px;
+  min-width: calc(24px * var(--ui-scale));
   text-align: right;
 
 }
 
 .candidate-row .game-button {
-  min-height: 27px;
-  height: 27px;
-  padding: 0 8px;
-  font-size: 8px;
+  min-height: calc(27px * var(--ui-scale));
+  height: calc(27px * var(--ui-scale));
+  padding: 0 calc(8px * var(--ui-scale));
+  font-size: calc(8px * var(--ui-scale) * var(--text-scale));
 
 }

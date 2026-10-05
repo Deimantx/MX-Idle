@@ -2,8 +2,8 @@
   display: flex;
   justify-content: space-between;
   color: #9da39c;
-  font-size: 9px;
-  margin: 1px 0 7px;
+  font-size: calc(9px * var(--ui-scale) * var(--text-scale));
+  margin: 1px 0 calc(7px * var(--ui-scale));
 
 }
 
@@ -15,7 +15,7 @@
 .objective-track {
   display: grid;
   grid-template-columns: repeat(7,1fr);
-  gap: 4px;
+  gap: calc(4px * var(--ui-scale));
 
 }
 
@@ -23,27 +23,27 @@
   min-width: 0;
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 5px 6px;
+  gap: calc(5px * var(--ui-scale));
+  padding: calc(5px * var(--ui-scale)) calc(6px * var(--ui-scale));
   background: #1a2022;
   border: 1px solid #303739;
-  border-radius: 4px;
+  border-radius: calc(4px * var(--ui-scale));
   color: #89908c;
-  font-size: 8px;
+  font-size: calc(8px * var(--ui-scale) * var(--text-scale));
   white-space: nowrap;
   overflow: hidden;
 
 }
 
 .objective-check {
-  width: 16px;
-  height: 16px;
+  width: calc(16px * var(--ui-scale));
+  height: calc(16px * var(--ui-scale));
   flex: none;
   display: grid;
   place-items: center;
   border: 1px solid #515958;
   border-radius: 50%;
-  font-size: 7px;
+  font-size: calc(7px * var(--ui-scale) * var(--text-scale));
   color: #929a96;
 
 }
@@ -78,54 +78,25 @@
 .objective-row small {
   margin-left: auto;
   color: #d49b65;
-  font-size: 6px;
+  font-size: calc(6px * var(--ui-scale) * var(--text-scale));
   letter-spacing: .6px;
 
 }
 
 .objective-minimized {
-  font-size: 10px;
+  font-size: calc(10px * var(--ui-scale) * var(--text-scale));
   color: #a4aaa4;
-  padding: 3px;
+  padding: calc(3px * var(--ui-scale));
 
 }
 
-.notes-panel .panel-head {
-  margin-bottom: 6px;
-
-}
-
-.note-entry {
-  display: flex;
-  gap: 9px;
-  padding: 7px 1px;
-  border-top: 1px solid #303638;
-
-}
-
-.note-pin {
-  width: 6px;
-  height: 6px;
-  flex: none;
-  border-radius: 50%;
-  margin-top: 5px;
-
-}
-
-.note-entry b,.note-entry small {
-  display: block;
-
-}
-
-.note-entry b {
-  font-size: 9px;
-  color: #cacdc5;
-
-}
-
-.note-entry small {
-  margin-top: 2px;
-  color: #8e9690;
-  font-size: 8px;
-
-}
+.objectives-panel { margin:0 0 calc(16px * var(--ui-scale)); }
+.objectives-panel .panel-head { min-height:calc(38px * var(--ui-scale)); padding-block:calc(8px * var(--ui-scale)); }
+.objective-minimized { display:flex; align-items:center; gap:calc(18px * var(--ui-scale)); padding:calc(8px * var(--ui-scale)) calc(2px * var(--ui-scale)) calc(2px * var(--ui-scale)); }
+.objective-minimized>div:first-child { display:flex; flex-direction:column; gap:calc(3px * var(--ui-scale)); min-width:0; }
+.objective-minimized b { color:#e1c39f; font-size:calc(11px * var(--ui-scale) * var(--text-scale)); }
+.objective-minimized span { color:#9da49e; font-size:calc(9px * var(--ui-scale) * var(--text-scale)); }
+.objective-progress { flex:1; max-width:calc(150px * var(--ui-scale)); height:calc(5px * var(--ui-scale)); overflow:hidden; background:#151a1b; border:1px solid #3e4644; border-radius:999px; }
+.objective-progress i { display:block; height:100%; background:linear-gradient(90deg,#916443,#d69d68); transition:width 180ms ease; }
+.objective-guidance { margin:calc(9px * var(--ui-scale)) 0 0; color:#aab0a8; font-size:calc(10px * var(--ui-scale) * var(--text-scale)); }
+@media(max-width:680px) { .objective-minimized { align-items:stretch; flex-direction:column; gap:calc(8px * var(--ui-scale)); } .objective-progress { max-width:none; } }

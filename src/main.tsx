@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './app/App';
+import { AppBootstrap } from './app/AppBootstrap';
+import { applyAppSettings, loadAppSettings } from './game/persistence/settingsStorage';
 import './styles/tokens.css';
 import './styles/global.css';
 import './ui/primitives.css';
@@ -14,5 +15,9 @@ import './ui/overlays/overlays.css';
 import './features/settings/settings.css';
 import './features/devtools/devtools.css';
 import './styles/responsive.css';
+import './features/profiles/profiles.css';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><App /></React.StrictMode>);
+const initialSettings = loadAppSettings();
+applyAppSettings(initialSettings);
+
+ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><AppBootstrap initialSettings={initialSettings} /></React.StrictMode>);

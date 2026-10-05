@@ -1,4 +1,29 @@
 :root {
+  --ui-scale: 1;
+  --text-scale: 1;
+  --z-shell: 10;
+  --z-sticky: 30;
+  --z-dropdown: 300;
+  --z-modal-backdrop: 800;
+  --z-modal: 900;
+  --z-tooltip: 1000;
+  --z-toast: 1100;
+  font-size: calc(16px * var(--ui-scale) * var(--text-scale));
+  /* Shared, scale-aware sizing for new screens and components. */
+  --space-1: calc(4px * var(--ui-scale));
+  --space-2: calc(8px * var(--ui-scale));
+  --space-3: calc(12px * var(--ui-scale));
+  --space-4: calc(16px * var(--ui-scale));
+  --space-6: calc(24px * var(--ui-scale));
+  --icon-sm: calc(16px * var(--ui-scale));
+  --icon-md: calc(20px * var(--ui-scale));
+  --icon-lg: calc(28px * var(--ui-scale));
+  --control-height-sm: calc(30px * var(--ui-scale));
+  --control-height-md: calc(38px * var(--ui-scale));
+  --font-caption: calc(11px * var(--ui-scale) * var(--text-scale));
+  --font-label: calc(13px * var(--ui-scale) * var(--text-scale));
+  --font-body: calc(15px * var(--ui-scale) * var(--text-scale));
+  --font-section: calc(20px * var(--ui-scale) * var(--text-scale));
   font-family: 'DM Sans',Inter,ui-sans-serif,system-ui,sans-serif;
   color: #e9e5dc;
   background: #111417;
@@ -22,15 +47,14 @@
   --red: #c97568;
   --xp: #8d9bb2;
   --gold: #d6b870;
-  --r-sm: 5px;
-  --r-md: 8px;
-  --r-lg: 11px;
-  --shadow-panel: 0 10px 26px #080a0b66,0 1px 0 #ffffff08 inset;
+  --r-sm: calc(5px * var(--ui-scale));
+  --r-md: calc(8px * var(--ui-scale));
+  --r-lg: calc(11px * var(--ui-scale));
+  --shadow-panel: 0 calc(10px * var(--ui-scale)) calc(26px * var(--ui-scale)) #080a0b66,0 1px 0 #ffffff08 inset;
   --fast: 130ms;
   --normal: 220ms;
   --ease: cubic-bezier(.2,.75,.25,1);
-  --sidebar: 222px;
-  --dock: 74px;
+  --sidebar: calc(222px * var(--ui-scale));
   color-scheme: dark;
 
 }
