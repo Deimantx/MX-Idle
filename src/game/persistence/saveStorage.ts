@@ -7,7 +7,7 @@ import { advance, getForgeWorkRequired } from '../systems/simulation';
 import { getDepositStageDensity, getMasteryLevel } from '../systems/gameMath';
 import { ITEM_IDS, type DepositId, type EnemyId, type ForgingRecipeId, type ItemId, type SaveState } from '../types/gameTypes';
 
-export const SAVE_KEY = 'mx-idle-save-v3';
+export const SAVE_KEY = 'mx-idle-save-v4';
 const LEGACY_ITEMS: Record<string, ItemId> = {
   pickaxe: 'item.mining.worn_pickaxe', copperPickaxe: 'item.mining.copper_pickaxe', hammer: 'item.smithing.worn_smithing_hammer', copperHammer: 'item.smithing.copper_smithing_hammer',
   ore: 'item.mining.copper_ore', stone: 'item.mining.stone', opal: 'item.mining.opal', mineralCoreFragment: 'item.mining.mineral_core_fragment', ingot: 'item.smithing.copper_ingot',
@@ -22,13 +22,13 @@ export function decodeSave(raw: string | null, now = Date.now()): { state: SaveS
   if (!raw) return null;
   try {
     const envelope = JSON.parse(raw), legacy = envelope?.state;
-    if (![1, 2, 3].includes(envelope?.version) || !legacy || typeof legacy !== 'object' || Array.isArray(legacy)) return null;
+    if (![1, 2, 3, 4].includes(envelope?.version) || !legacy || typeof legacy !== 'object' || Array.isArray(legacy)) return null;
     const defaults = freshState(now), state = legacy as any, version = Number(state.version ?? 1);
-    if (version < 1 || version > 3) return null;
+    if (version < 1 || version > 4) return null;
     if (state.skills && (typeof state.skills !== 'object' || Array.isArray(state.skills))) return null;
     if (state.skills && Object.values(state.skills).some((skill: any) => !skill || typeof skill !== 'object' || (skill.xp !== undefined && (!Number.isFinite(skill.xp) || skill.xp < 0)) || (skill.level !== undefined && (!Number.isFinite(skill.level) || skill.level < 1)))) return null;
     if (state.bank && (typeof state.bank !== 'object' || Array.isArray(state.bank) || Object.values(state.bank).some((q: any) => typeof q !== 'number' || !Number.isFinite(q) || q < 0))) return null;
-    if (state.activity !== undefined && ![null, 'mining', 'smelting', 'forging', 'combat'].includes(state.activity)) return null;
+    if (state.activity !== undefined && ![null, 'mining', 'smelting', 'forging', 'fishing', 'cooking', 'combat'].includes(state.activity)) return null;
     const oldMining = state.mining ?? {}, oldSmithing = state.smithing ?? {}, oldCombat = state.combat ?? {}, oldEquipped = state.equipped ?? {};
     const bank = migratedBank(state.bank);
     const depositId = LEGACY_DEPOSITS[String(oldMining.deposit)] ?? defaults.mining.deposit;
@@ -55,8 +55,11 @@ export function decodeSave(raw: string | null, now = Date.now()): { state: SaveS
     for (const [key, amount] of Object.entries(oldSmithing.reservedItems ?? {})) { const id = toItem(key); if (id && Number.isFinite(amount)) reservedItems[id] = Math.max(0, Number(amount)); }
     if (!Object.keys(reservedItems).length && oldSmithing.reserved > 0 && recipe in FORGING_RECIPES) reservedItems['item.smithing.copper_ingot'] = Math.min(oldSmithing.reserved, FORGING_RECIPES[recipe as keyof typeof FORGING_RECIPES]?.inputs.find((i) => i.item === 'item.smithing.copper_ingot')?.amount ?? 0);
     const s: SaveState = {
-      ...defaults, ...state, version: 3, bank,
+      ...defaults, ...state, version: 4, bank,
       skills: { ...defaults.skills, ...(state.skills ?? {}) },
+      fishing: { ...defaults.fishing, ...(state.fishing ?? {}), mastery: { ...defaults.fishing.mastery, ...(state.fishing?.mastery ?? {}) }, sessionFish: { ...defaults.fishing.sessionFish, ...(state.fishing?.sessionFish ?? {}) } },
+      cooking: { ...defaults.cooking, ...(state.cooking ?? {}), mastery: { ...defaults.cooking.mastery, ...(state.cooking?.mastery ?? {}) }, selectedInputs: { ...defaults.cooking.selectedInputs, ...(state.cooking?.selectedInputs ?? {}) }, reservedInputs: Array.isArray(state.cooking?.reservedInputs) ? state.cooking.reservedInputs.filter((x:any)=>toItem(String(x?.item??''))&&Number.isFinite(x?.amount)&&x.amount>0).map((x:any)=>({item:toItem(String(x.item))!,amount:Math.max(0,Math.floor(x.amount))})) : defaults.cooking.reservedInputs, sessionOutputs: { ...defaults.cooking.sessionOutputs, ...(state.cooking?.sessionOutputs ?? {}) } },
+      food: { ...defaults.food, ...(state.food ?? {}), slots: Array.isArray(state.food?.slots) && state.food.slots.length === 3 ? state.food.slots.map((slot: any) => ({ item: toItem(String(slot?.item ?? '')) ?? null, enabled: slot?.enabled !== false, reserve: Math.max(0, Number(slot?.reserve) || 0) })) : defaults.food.slots },
       equipped: { ...defaults.equipped, miningTool, smithingHammer, weapon: equipment(oldEquipped.weapon), offhand: equipment(oldEquipped.offhand), head: equipment(oldEquipped.head), armor: equipment(oldEquipped.armor), hands: equipment(oldEquipped.hands), feet: equipment(oldEquipped.feet) },
       mining: { ...defaults.mining, deposits, deposit: depositId, stage: selectedRuntime.stageIndex, density: selectedRuntime.densityRemaining, cycles: selectedRuntime.cyclesCompleted, strikes: Math.max(0, oldMining.strikes ?? 0), timer: Number.isFinite(oldMining.timer) ? Math.max(0, oldMining.timer) : MINING_DEPOSITS[depositId].strikeMs, sessionOutputs: { ...(oldMining.sessionOutputs ?? {}), ...(oldMining.sessionOre ? { 'item.mining.copper_ore': oldMining.sessionOre } : {}) }, sessionXp: Math.max(0, oldMining.sessionXp ?? 0) },
       smithing: { ...defaults.smithing, ...oldSmithing, recipe, reservedItems, reservedEquipment: equipment(oldSmithing.reservedEquipment), category: oldSmithing.category ?? (recipe in FORGING_RECIPES ? FORGING_RECIPES[recipe as keyof typeof FORGING_RECIPES].category : 'weapons'), mastery: masteryMap },
@@ -68,7 +71,7 @@ export function decodeSave(raw: string | null, now = Date.now()): { state: SaveS
     if (s.smithing.recipe in FORGING_RECIPES && (!s.smithing.work || s.smithing.work < 0)) s.smithing.work = s.smithing.reserved ? getForgeWorkRequired(s.smithing.recipe) : 0;
     if (!s.skills.Mining || !s.bank || !s.combat || !Number.isFinite(envelope.savedAt ?? s.savedAt)) return null;
     const savedAt = envelope.savedAt ?? s.savedAt; s.savedAt = savedAt;
-    if (!['Mining', 'Smithing', 'Equipment', 'Combat', 'Bank'].includes(s.page)) s.page = 'Mining';
+    if (!['Mining', 'Smithing', 'Fishing', 'Cooking', 'Equipment', 'Combat', 'Bank'].includes(s.page)) s.page = 'Mining';
     return { state: s, savedAt };
   } catch { return null; }
 }

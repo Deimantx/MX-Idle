@@ -88,6 +88,7 @@ assert.notEqual(movingSwing, initialSwing, 'Mining swing interpolates between si
 await shot('mining-active-1920');
 await page.getByRole('button', { name: 'DEV' }).click();
 await page.getByRole('button', { name: '×20 speed' }).click();
+await page.getByRole('button', { name: 'DEV' }).click();
 await wait(3300);
 assert.match(await page.locator('.cycle-meta').innerText(), /Lifetime Copper Ore\s+\d+/);
 assert.equal(await page.locator('.xp-drop').count() > 0, true, 'confirmed XP gains appear in the top feedback layer');
@@ -95,11 +96,14 @@ assert.equal(await page.locator('.item-gain').count() > 0, true, 'confirmed item
 assert.equal(await page.locator('.item-gain-feed').evaluate((el) => el.getBoundingClientRect().bottom <= document.querySelector('.activity-hud').getBoundingClientRect().top), true, 'item feed remains above the responsive Activity HUD');
 await page.getByRole('button', { name: /Stop Mining/ }).first().click();
 await page.getByRole('button', { name: /^Smithing/ }).first().click();
+await page.getByRole('button', { name: 'DEV' }).click();
 await page.getByRole('button', { name: 'Grant Copper Ore' }).click();
+await page.getByRole('button', { name: 'DEV' }).click();
 await page.getByRole('button', { name: /Start Smelting/ }).click();
 await shot('smithing-smelting-active-1920');
 await wait(3100);
 await page.getByRole('tab', { name: /^Forging/ }).click();
+await page.getByRole('button', { name: 'DEV' }).click();
 await page.getByRole('button', { name: 'Smithing Lv. 5' }).click();
 await page.getByRole('button', { name: 'DEV' }).click();
 await page.getByRole('button', { name: /Copper Sword.*4 Ingots/ }).click();

@@ -7,7 +7,7 @@ import { Icon, Tip } from '../../ui/primitives';
 import { ItemMark } from '../../ui/game/ItemDisplay';
 import { formatDuration } from '../../ui/game/formatters';
 
-const skillIcon: Record<SkillId, string> = { Mining: 'mining', Smithing: 'anvil', Attack: 'sword', Defence: 'shield', Hitpoints: 'heart' };
+const skillIcon: Record<SkillId, string> = { Mining: 'mining', Smithing: 'anvil', Fishing: 'fish', Cooking: 'food', Attack: 'sword', Defence: 'shield', Hitpoints: 'heart' };
 export function FeedbackLayer({ events, game, metrics, settings, reducedMotion }: { events: GameFeedbackEvent[]; game: SaveState; metrics: Partial<Record<SkillId, { xpHour: number; sessionXp: number }>>; settings: FeedbackSettings; reducedMotion: boolean }) {
   const [drops, setDrops] = useState<GameFeedbackEvent[]>([]), [gains, setGains] = useState<Extract<GameFeedbackEvent,{type:'item'|'gold'}>[]>([]);
   const seen = useRef(0);

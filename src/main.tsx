@@ -7,6 +7,7 @@ import './styles/global.css';
 import './ui/primitives.css';
 import './features/professions/mining/mining.css';
 import './features/professions/smithing/smithing.css';
+import './features/professions/profession-screens.css';
 import './features/equipment/equipment.css';
 import './features/combat/combat.css';
 import './features/bank/bank.css';

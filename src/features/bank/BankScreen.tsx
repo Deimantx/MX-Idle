@@ -5,7 +5,7 @@ import { ScreenHeading } from '../../ui/game/ScreenPrimitives';
 import { fmt } from '../../ui/game/formatters';
 import { ITEMS, type ItemId, type SaveState } from '../../game/game';
 
-const FILTERS = ['All', 'Materials', 'Equipment', 'Tools', 'Combat Loot'];
+const FILTERS = ['All', 'Raw Fish', 'Aquatic Finds', 'Food', 'Cooking Utility', 'Bait', 'Profession Tools', 'Equipment', 'Materials', 'Combat Loot'];
 export function BankScreen({ game: g, filter, setFilter }: { game: SaveState; filter: string; setFilter: (f: string) => void }) {
   const [selected, setSelected] = useState<ItemId | null>(null);
   const entries = (Object.keys(ITEMS) as ItemId[]).filter((id) => (g.bank[id] ?? 0) > 0 && (filter === 'All' || ITEMS[id].category === filter));

@@ -153,26 +153,23 @@ It is only the first implementation proof.
 
 ---
 
-# 7. Phase 1 is built in integrated waves
+# 7. Phase 1 implementation blocks
 
-Do NOT implement:
+Phase 1 implementation proceeds in system-complete blocks rather than mandatory tier-wave gates:
 
 ```text
-Mining to Level 100
-then
-Smithing to Level 100
-then
-Fishing to Level 100
-then
-Combat
+A. Foundation / architecture
+B. Mining + Smithing
+C. Fishing + Cooking
+D. Food / Combat sustain + Combat core
+E. Combat world/content expansion
+F. remaining Phase-1 content fill
+G. Phase-1 balancing / QA / polish
 ```
 
-That creates large amounts of content with nothing meaningful to use it on.
-
-Instead build integrated waves.
+Once a system's architecture is ready, its baseline content may be implemented across T1�T10. Correctness and regression checks remain continuous. Tier-by-tier balance certification is deferred to the Phase 1 completion pass.
 
 ---
-
 # 8. PHASE 1A — FOUNDATION HARDENING
 
 Current stage.
@@ -202,292 +199,39 @@ Do not turn it into another redesign.
 
 ---
 
-# 9. PHASE 1B — COMPLETE T1 ECOSYSTEM
+# 9. Phase 1 implementation detail
 
-Before moving into T2, finish the actual T1 gameplay ecosystem.
+Implementation follows the system-complete blocks above. Tier bands are content data, not mandatory implementation or balance gates.
 
-## Mining T1
+## A. Foundation / architecture
 
-Implement the meaningful T1 Mining content, including:
+Harden shared save, simulation, telemetry, registry, and reusable UI contracts. Correctness and migration checks run continuously.
 
-- Copper Vein
-- Fieldstone Quarry
-- relevant T1 resources
-- Worn Pickaxe
-- Copper Pickaxe
-- five-stage deposit lifecycle
-- tool progression
-- Mining XP / Mastery hooks where currently required
+## B. Mining + Smithing
 
-Mining screen must become data-driven rather than Copper-specific.
+Implement the full T1�T10 Mining and Smithing economy with data-driven deposits, tools, materials, recipes, equipment, Mastery, and offline progress.
 
----
+## C. Fishing + Cooking
 
-# 10. Smithing T1
+Implement Fishing 1�100 with ten Spots, weighted pools and all forty baseline species. Implement Cooking 1�100 with all canonical recipes, tagged ingredients, utility outputs, Mastery, and explicit temporary Phase-1 dependency bridges.
 
-Implement meaningful T1 Smithing content:
+## D. Food / Combat sustain + Combat core
 
-- Copper Ingot
-- Copper weapon family that currently has valid dependencies
-- Heavy armor
-- Shield
-- Copper Pickaxe
-- Copper Smithing Hammer
-- real tool effects
-- forging / Heat / Reheat
-- Smelting
-- recipe-driven UI
+Integrate three Food slots, Auto Eat, Satiety, Overeat, persistent HP, death handling, deterministic offline Combat, generic enemies/actions/statuses, and supply analytics.
 
-Do not fake cross-profession dependencies.
+## E. Combat world/content expansion
 
-Example:
+Populate Combat Areas, normal enemies, Elites, Dungeons, Bosses, gates, loot, Bestiary data, and unique hooks. This is the next separate Combat implementation block.
 
-if Copper Spear requires a Shaft from future Woodcutting/Fletching content, keep it unavailable until the real dependency exists.
+## F. Remaining Phase-1 content fill
+
+Complete cross-system recipe, item, gear, and progression registries that belong to the Melee-era game. Keep temporary cross-phase bridges explicit and documented.
+
+## G. Phase-1 balancing / QA / polish
+
+After the systems and content exist, run integrated progression, economy, XP, drop, Combat, offline, accessibility, responsive UI, and long-session performance passes. Balance certification happens here rather than after each tier or small tier group.
 
 ---
-
-# 11. Fishing T1
-
-Implement the real Fishing foundation.
-
-Required:
-
-- Fishing screen
-- T1 Fishing Spot(s)
-- weighted catch pool
-- multiple fish
-- Fishing XP
-- Fishing action timing
-- Bank integration
-- XP feedback
-- item gain feedback
-- offline progress
-- activity metrics
-- Mastery integration where applicable
-
-Fishing must not be:
-
-`click exact fish → timer → fish`
-
-if the canonical design uses Fishing Spots and weighted catches.
-
----
-
-# 12. Cooking T1
-
-Implement:
-
-- Cooking screen
-- T1 recipes
-- cooked fish / food
-- Cooking XP
-- Cooking activity timing
-- Bank consumption/output
-- Food stats
-- Food loadout integration
-
-Cooking owns HP sustain.
-
-Alchemy does not replace baseline healing food.
-
----
-
-# 13. Food / Combat sustain
-
-Before T1 Dungeon/Boss completion, implement:
-
-- 3 Food slots
-- Food priority
-- Heal value
-- Satiety
-- Satiety decay
-- Auto Eat
-- Auto Eat threshold
-- Food Lock
-- Overeat
-- Overeat Stun
-- Manual Eat
-- offline equivalence
-
-This is part of Phase 1 core gameplay.
-
----
-
-# 14. Melee Combat T1
-
-Expand Broken Road beyond Road Wolf:
-
-- Road Wolf
-- Dust Rat
-- Ragged Poacher
-- Hedge Spark
-- Ironjaw Boar
-- Watch Deserter
-- Tower Bowman
-- Captain Veyr
-
-Implement:
-
-- normal enemies
-- Elite
-- Dungeon
-- Boss
-- enemy registry
-- generic status system
-- target selection
-- Bestiary-compatible data
-- full deterministic sequences
-
----
-
-# 15. Melee equipment depth T1
-
-Implement meaningful melee choices:
-
-- Sword
-- Battle Axe
-- Mace
-- Shield
-- relevant armor
-
-Spear only when real dependency exists.
-
-Implement:
-
-- Stamina
-- queued Special
-- Auto / Manual / Off
-- weapon-specific Specials
-- 1H / 2H behavior
-- off-hand restrictions
-
-Weapon choice should change gameplay.
-
----
-
-# 16. T1 Completion Gate
-
-T1 is complete when a fresh profile can play:
-
-```text
-Mining
-→ Smithing
-→ Fishing
-→ Cooking
-→ Food preparation
-→ multiple Broken Road enemies
-→ Elite
-→ Dungeon
-→ Captain Veyr
-```
-
-and then unlock T2 progression.
-
-Do not unlock T2 merely because Level 11 exists.
-
----
-
-# 17. PHASE 1C — T2–T3 EXPANSION
-
-Once T1 ecosystem is proven, expand the same systems together.
-
-Implement:
-
-## Mining
-
-T2–T3 deposits/resources/tools.
-
-## Smithing
-
-T2–T3 materials, tools, melee equipment.
-
-## Fishing
-
-T2–T3 spots and fish pools.
-
-## Cooking
-
-T2–T3 food progression.
-
-## Combat
-
-T2–T3 Areas, Elites, Dungeons, Bosses.
-
-Keep all systems progressing in roughly the same player band.
-
----
-
-# 18. PHASE 1D — T4–T6 EXPANSION
-
-Expand the same proven architecture.
-
-At this point:
-
-- screens contain enough real data to evaluate density properly;
-- filters become more important;
-- recipe/category navigation becomes meaningful;
-- Bank organization matters more;
-- Bestiary becomes useful;
-- Combat target browsing becomes a real UX problem.
-
-This is a good point for the first serious **mid-Phase UI pass**.
-
----
-
-# 19. MID-PHASE UI PASS
-
-Do not wait until the entire game is finished to fix terrible UX.
-
-But also do not attempt final AAA art while screens contain only one item.
-
-Around T4–T6, perform a focused UI/UX pass on:
-
-- profession target/category navigation
-- long recipe lists
-- Bank filtering
-- Equipment inspection
-- Combat target browsing
-- Bestiary
-- tooltips
-- Activity HUD
-- responsive density
-- animations / game feel
-- custom assets where needed
-
-Goal:
-
-make the now-content-rich UI scale cleanly.
-
-This is not final polish.
-
----
-
-# 20. PHASE 1E — T7–T10 EXPANSION
-
-Finish:
-
-- Mining 1–100
-- Smithing 1–100
-- Fishing 1–100
-- Cooking 1–100
-- Melee Combat T1–T10
-
-Implement late-tier:
-
-- resources
-- tools
-- gear
-- food
-- arenas
-- Elites
-- Dungeons
-- Bosses
-- unique reward hooks
-
-Phase 1 ends with a complete Melee-era baseline game.
-
----
-
 # 21. PHASE 1F — PHASE COMPLETION PASS
 
 Before starting Ranged:

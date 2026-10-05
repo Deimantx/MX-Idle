@@ -12,6 +12,7 @@
     "build": "tsc -b && vite build",
     "test": "vitest run",
     "qa": "node tests/first-playable-flow.mjs",
+    "qa:professions": "node tests/fishing-cooking-flow.mjs",
     "typecheck": "tsc -b --pretty false",
     "preview": "vite preview --host 0.0.0.0"
   },

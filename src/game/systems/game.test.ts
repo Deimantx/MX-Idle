@@ -141,10 +141,10 @@ describe('Combat compatibility', () => {
 });
 
 describe('Persistence and offline parity', () => {
-  it('migrates legacy v1 bank, equipped gear, deposit state, and recipe IDs to v3', () => {
+  it('migrates legacy v1 bank, equipped gear, deposit state, and recipe IDs to v4', () => {
     const legacy = { version: 1, savedAt: 1000, state: { version: 1, skills: { Mining: { xp: 0, level: 1 } }, bank: { ore: 8, ingot: 2, sword: 1 }, equipped: { tool: true, weapon: 'sword' }, mining: { deposit: 'copper-vein', stage: 2, density: 13 }, smithing: { recipe: 'sword' }, activity: null } };
     const loaded = loadState(JSON.stringify(legacy), 1000);
-    expect(loaded.fresh).toBe(false); expect(loaded.state.version).toBe(3); expect(loaded.state.bank[ORE]).toBe(8); expect(loaded.state.bank[INGOT]).toBe(2);
+    expect(loaded.fresh).toBe(false); expect(loaded.state.version).toBe(4); expect(loaded.state.skills.Fishing.level).toBe(1); expect(loaded.state.skills.Cooking.level).toBe(1); expect(loaded.state.bank[ORE]).toBe(8); expect(loaded.state.bank[INGOT]).toBe(2);
     expect(loaded.state.equipped.weapon).toBe(SWORD); expect(loaded.state.mining.deposit).toBe('mining.deposit.copper_vein'); expect(loaded.state.mining.density).toBe(13);
     expect(loaded.state.smithing.recipe).toBe('recipe.smithing.copper_sword');
   });
@@ -153,7 +153,7 @@ describe('Persistence and offline parity', () => {
     original.mining.deposits[original.mining.deposit]!.stageIndex = 2; original.mining.deposits[original.mining.deposit]!.densityRemaining = 13;
     const loaded = loadState(JSON.stringify({ version: 3, savedAt: 1000, state: original }), 1000).state;
     expect(loaded.skills.Mining.xp).toBe(27); expect(loaded.bank[ORE]).toBe(19); expect(loaded.mining).toMatchObject({ stage: 2, density: 13 });
-    expect(loadState('{broken').fresh).toBe(true); expect(SAVE_KEY).toBe('mx-idle-save-v3');
+    expect(loadState('{broken').fresh).toBe(true); expect(SAVE_KEY).toBe('mx-idle-save-v4');
   });
   it('matches batched simulation with repeated active ticks for Mining and Smelting', () => {
     const mining = freshState(); startActivity(mining, 'mining'); const onlineMine = tick(mining, 60_000), offlineMine = advance(mining, 60_000);

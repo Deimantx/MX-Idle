@@ -22,7 +22,10 @@
   position: absolute;
   right: 0;
   bottom: calc(29px * var(--ui-scale));
-  width: calc(230px * var(--ui-scale));
+  width: min(calc(440px * var(--ui-scale)), calc(100vw - 24px));
+  max-height: calc(100dvh - 130px);
+  overflow: auto;
+  overscroll-behavior: contain;
   padding: calc(11px * var(--ui-scale));
   background: #171d1f;
   border: 1px solid #525b59;
@@ -40,9 +43,15 @@
 
 .dev-row {
   display: flex;
+  flex-wrap: wrap;
   gap: calc(4px * var(--ui-scale));
   margin: calc(5px * var(--ui-scale)) 0;
 
+}
+
+.dev-row select {
+  max-width: 100%;
+  min-width: 0;
 }
 
 .dev-row .game-button {

@@ -4,9 +4,13 @@ MX-Idle is a premium, browser-based, single-player idle RPG. It is designed to f
 
 ## Current playable scope
 
-The current T1 slice includes Copper Vein and Fieldstone Quarry mining, per-deposit Mastery, copper smelting and recipe-based forging, profession tool upgrades, copper melee weapons and heavy armor, Broken Road enemies, and the Ironjaw Boar Elite. Progression runs from gathering through crafting and equipment into combat. The balance values remain provisional while the core loop is being exercised. Copper Pickaxe and Copper Smithing Hammer recipes use a documented temporary tool-handle bridge until Woodcutting/Fletching supplies the canonical component. Fieldstone's Opal/Sapphire weighting stays disabled until the source value is resolved.
+The current playable slice includes Mining and Smithing, Fishing 1–100 with ten spots and 40 fish, Cooking 1–100 with 43 recipes, and Combat Food/Satiety/Auto Eat. Fishing and Cooking use provisional Phase 1 dependency bridges while Farming, Foraging, Woodcutting/Fletching, Alchemy/Runecrafting, and Estate progression are not yet implemented. Combat currently covers the Broken Road enemies and Ironjaw Boar Elite; the broader T1–T10 world remains the next content expansion. Balance values remain provisional.
 
-Saves are local to the browser. Profile Select offers three independent character slots. An unnamed legacy save is migrated to a profile named **Adventurer** and the original legacy data is retained.
+### Phase 1 dependency bridges
+
+Angler Rod Bridge provides temporary rod progression from aquatic finds. The Field Pantry Bridge supplies temporary recipe ingredients, and the Field Kitchen Bridge represents temporary station progression. These keep the profession ladders playable; they are scaffolding, not final economy or profession design. See the [Fishing/Cooking/Combat core implementation report](Docs/Implementation/PHASE1_FISHING_COOKING_COMBAT_CORE_REPORT.md) for replacement plans and limitations.
+
+Saves are local to the browser. Profile Select offers three independent character slots. An unnamed legacy save is migrated to a profile named **Adventurer** and the original legacy data is retained. Character saves use schema v4; older saves initialize Fishing, Cooking, and Food fields during migration.
 
 ## Requirements
 
@@ -32,7 +36,7 @@ npm run build
 npm run qa
 ```
 
-`npm run qa` launches the Vite app and runs the Playwright first-playable browser flow. Run it with a working browser installation. `npm run preview` serves the production build locally after `npm run build`.
+`npm run qa` launches the Vite app and runs the Playwright first-playable browser flow. `npm run qa:professions` runs the Fishing/Cooking browser flow at desktop and 768px widths. Run either with a working browser installation. `npm run preview` serves the production build locally after `npm run build`.
 
 ## Project structure
 
@@ -54,9 +58,9 @@ tests/            Browser QA flows
 
 Character profiles are stored separately in browser local storage. Interface scale, text size, audio, and accessibility preferences use the device-wide `mx-idle-settings-v1` settings key and apply before Profile Select. Clearing browser storage removes local progress; manage character data with the in-game profile controls.
 
-The runtime migrates v1/v2 character data and reads current v3 saves, mapping legacy item, deposit, and recipe IDs into namespaced IDs while retaining bank, equipment, activity, and progression state. Profile migration preserves the original legacy save.
+The runtime migrates v1–v3 character data, mapping legacy item, deposit, and recipe IDs into namespaced IDs while retaining bank, equipment, activity, and progression state. Profile migration preserves the original legacy save.
 
-See [the Phase 1B Mining and Smithing implementation report](Docs/Implementation/PHASE1B_T1_MINING_SMITHING_REPORT.md) for the T1 formulas, migration behavior, temporary dependency bridge, and verification notes.
+See [the Phase 1B Mining and Smithing implementation report](Docs/Implementation/PHASE1B_T1_MINING_SMITHING_REPORT.md) and [the Fishing/Cooking/Combat core implementation report](Docs/Implementation/PHASE1_FISHING_COOKING_COMBAT_CORE_REPORT.md) for formulas, migration behavior, temporary dependency bridges, and verification notes.
 
 ## Contributor workflow
 
