@@ -1,4 +1,5 @@
 import { freshState } from '../state/initialState';
+import { ENEMIES, MINING_DEPOSITS, RECIPES } from '../content/firstSlice';
 import { advance } from '../systems/simulation';
 import type { SaveState } from '../types/gameTypes';
 
@@ -16,7 +17,12 @@ export function decodeSave(raw: string | null, now = Date.now()): { state: SaveS
     if (state.activity !== undefined && ![null, 'mining', 'smelting', 'forging', 'combat'].includes(state.activity)) return null;
     const numericFields: Record<string, string[]> = { mining: ['stage', 'density', 'timer', 'cycles', 'strikes', 'sessionOre', 'sessionXp'], smithing: ['timer', 'produced', 'work', 'heat', 'reserved'], combat: ['playerHp', 'wolfHp', 'playerTimer', 'enemyTimer', 'seq', 'bleed', 'bleedTicks', 'bleedTimer', 'kills', 'xp', 'gold', 'trophies', 'elapsed', 'respawn'] };
     if (Object.entries(numericFields).some(([group, fields]) => state[group] && fields.some((field) => state[group][field] !== undefined && (typeof state[group][field] !== 'number' || !Number.isFinite(state[group][field]))))) return null;
-    const s = { ...d, ...state, version: 1, skills: { ...d.skills, ...state.skills }, bank: state.bank ?? d.bank, equipped: { ...d.equipped, ...state.equipped }, mining: { ...d.mining, ...state.mining }, smithing: { ...d.smithing, ...state.smithing }, combat: { ...d.combat, ...state.combat }, objectives: { ...d.objectives, ...state.objectives }, settings: { ...d.settings, ...state.settings }, rng: Number.isFinite(state.rng) ? state.rng : d.rng } as SaveState;
+    const oldCombat = state.combat ?? {}, oldMining = state.mining ?? {}, oldEquipped = state.equipped ?? {};
+    const targetId = oldCombat.targetId && oldCombat.targetId in ENEMIES ? oldCombat.targetId : 'road-wolf';
+    const depositId = oldMining.deposit && oldMining.deposit in MINING_DEPOSITS ? oldMining.deposit : 'copper-vein';
+    const recipe = state.smithing?.recipe && state.smithing.recipe in RECIPES ? state.smithing.recipe : 'sword';
+    const s = { ...d, ...state, version: 2, skills: { ...d.skills, ...state.skills }, bank: state.bank ?? d.bank, equipped: { ...d.equipped, ...oldEquipped, miningTool: oldEquipped.miningTool ?? (state.bank?.copperPickaxe ? 'copperPickaxe' : 'pickaxe'), smithingHammer: oldEquipped.smithingHammer ?? (state.bank?.copperHammer ? 'copperHammer' : 'hammer') }, mining: { ...d.mining, ...oldMining, deposit: depositId }, smithing: { ...d.smithing, ...state.smithing, recipe }, combat: { ...d.combat, ...oldCombat, targetId, enemyHp: oldCombat.enemyHp ?? oldCombat.wolfHp ?? ENEMIES[targetId].hp, sequenceIndex: oldCombat.sequenceIndex ?? oldCombat.seq ?? 0, playerActionSerial: oldCombat.playerActionSerial ?? 0, enemyActionSerial: oldCombat.enemyActionSerial ?? 0, statuses: oldCombat.statuses ?? (oldCombat.bleedTicks ? [{ id: 'legacy-bleed', type: 'Bleed', sourceId: 'road-wolf', remainingMs: (oldCombat.bleedTicks as number) * 1000, magnitude: .1, tickMs: 1000, stacks: oldCombat.bleedTicks }] : []), stamina: oldCombat.stamina ?? 100, queuedSpecial: oldCombat.queuedSpecial ?? false, specialMode: oldCombat.specialMode ?? 'Auto', defeated: oldCombat.defeated ?? {} }, objectives: { ...d.objectives, ...state.objectives }, settings: { ...d.settings, ...state.settings }, rng: Number.isFinite(state.rng) ? state.rng : d.rng } as SaveState;
+    if (s.mining.stage < 0 || s.mining.stage >= MINING_DEPOSITS[s.mining.deposit].stages.length) { s.mining.stage = 0; s.mining.density = MINING_DEPOSITS[s.mining.deposit].baseDensity; }
     if (!s.skills.Mining || !s.bank || !s.combat || typeof (envelope.savedAt ?? s.savedAt) !== 'number' || !Number.isFinite(envelope.savedAt ?? s.savedAt) || (state.gold !== undefined && (typeof state.gold !== 'number' || !Number.isFinite(state.gold) || state.gold < 0))) return null;
     const savedAt = envelope.savedAt ?? s.savedAt;
     s.savedAt = savedAt;
