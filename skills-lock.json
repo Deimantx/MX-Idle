@@ -7,6 +7,12 @@
       "skillPath": "agent-skills/web-design/animation-systems/SKILL.md",
       "computedHash": "3b1538b9b7d54531ed0d83745d7748347b0285be6146b50af74b92224301eb3f"
     },
+    "design-system-patterns": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "skillPath": "plugins/ui-design/skills/design-system-patterns/SKILL.md",
+      "computedHash": "b6ba14bf8809ee027a3c4c9e88bdc71626eb7f68604b65dce000519d8e4ad458"
+    },
     "frontend-design": {
       "source": "anthropics/skills",
       "sourceType": "github",
@@ -18,6 +24,12 @@
       "sourceType": "github",
       "skillPath": "skills/game-audio/SKILL.md",
       "computedHash": "eb2ba3da86b490c299638b201efbdc014ca6f45108e5cae9b7ebcdae7c01c22e"
+    },
+    "game-ui-ux": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/disciplines/game-ui-ux/SKILL.md",
+      "computedHash": "4aeb677be89029728154d40bb1d98e07d809f019ff8cd0e9188fb4a1f9d51255"
     },
     "gsap": {
       "source": "mengto/skills",
