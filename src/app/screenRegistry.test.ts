@@ -10,7 +10,7 @@ describe('screen availability', () => {
     expect(isScreenUnlocked('Combat', game)).toBe(false);
     expect(screenLockReason('Combat', game)).toContain('Copper weapon and armor');
 
-    game.bank.ore = 1;
+    game.bank['item.mining.copper_ore'] = 1;
     expect(isScreenUnlocked('Smithing', game)).toBe(true);
     game.objectives.sword = true;
     game.objectives.helm = true;

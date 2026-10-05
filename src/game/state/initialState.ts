@@ -1,5 +1,16 @@
 import { ENEMIES, MINING_DEPOSITS, PROVISIONAL_FIRST_SLICE_COMBAT_VALUES } from '../content/firstSlice';
-import type { SaveState } from '../types/gameTypes';
+import type { DepositRuntimeState, SaveState } from '../types/gameTypes';
 
 const emptySkills = (): SaveState['skills'] => ({ Mining: { xp: 0, level: 1 }, Smithing: { xp: 0, level: 1 }, Attack: { xp: 0, level: 1 }, Defence: { xp: 0, level: 1 }, Hitpoints: { xp: 0, level: 1 } });
-export function freshState(now = Date.now()): SaveState { return { version: 2, savedAt: now, lastSaved: now, rng: 19790321, page: 'Mining', activity: null, skills: emptySkills(), bank: { pickaxe: 1, hammer: 1 }, gold: 0, equipped: { tool: true, hammer: false, miningTool: 'pickaxe', smithingHammer: 'hammer', weapon: null, offhand: null, head: null, armor: null, hands: null, feet: null }, mining: { deposit: 'copper-vein', stage: 0, density: MINING_DEPOSITS['copper-vein'].baseDensity, timer: MINING_DEPOSITS['copper-vein'].strikeMs, cycles: 0, strikes: 0, sessionOre: 0, sessionXp: 0 }, smithing: { mode: 'smelting', recipe: 'sword', timer: 0, warm: false, produced: 0, work: 0, heat: 100, reserved: 0, reheat: false, message: '' }, combat: { targetId: 'road-wolf', stance: 'Slash', playerHp: 100, enemyHp: ENEMIES['road-wolf'].hp, playerTimer: 2400, enemyTimer: PROVISIONAL_FIRST_SLICE_COMBAT_VALUES.wolfInterval, sequenceIndex: 0, playerActionSerial: 0, enemyActionSerial: 0, statuses: [], kills: 0, xp: 0, gold: 0, trophies: 0, elapsed: 0, respawn: 0, log: [], stamina: 100, queuedSpecial: false, specialMode: 'Auto', defeated: {} }, objectives: { dismissed: true, firstCycle: false, firstIngot: false, sword: false, helm: false, victory: false }, settings: { muted: false, volume: .35, reducedMotion: null }, lastEvent: '' }; }
+const freshDeposit = (id: keyof typeof MINING_DEPOSITS): DepositRuntimeState => ({ stageIndex: 0, densityRemaining: MINING_DEPOSITS[id].baseDensity, cyclesCompleted: 0, totalPrimary: 0, totalStagesCompleted: 0, mastery: { xp: 0, level: 1 } });
+export function freshState(now = Date.now()): SaveState {
+  const copperId = 'mining.deposit.copper_vein' as const;
+  return {
+    version: 3, savedAt: now, lastSaved: now, rng: 19790321, page: 'Mining', activity: null, skills: emptySkills(), bank: {}, gold: 0,
+    equipped: { miningTool: 'item.mining.worn_pickaxe', smithingHammer: 'item.smithing.worn_smithing_hammer', weapon: null, offhand: null, head: null, armor: null, hands: null, feet: null },
+    mining: { deposit: copperId, stage: 0, density: MINING_DEPOSITS[copperId].baseDensity, timer: MINING_DEPOSITS[copperId].strikeMs, cycles: 0, strikes: 0, sessionOutputs: {}, sessionXp: 0, deposits: { [copperId]: freshDeposit(copperId) } },
+    smithing: { mode: 'smelting', recipe: 'recipe.smithing.copper_sword', timer: 0, warm: false, produced: 0, work: 0, heat: 100, reserved: 0, reservedItems: {}, reservedEquipment: null, reheat: false, message: '', category: 'weapons', mastery: {} },
+    combat: { targetId: 'road-wolf', stance: 'Slash', playerHp: 100, enemyHp: ENEMIES['road-wolf'].hp, playerTimer: 2400, enemyTimer: PROVISIONAL_FIRST_SLICE_COMBAT_VALUES.wolfInterval, sequenceIndex: 0, playerActionSerial: 0, enemyActionSerial: 0, statuses: [], kills: 0, xp: 0, gold: 0, trophies: 0, elapsed: 0, respawn: 0, log: [], stamina: 100, queuedSpecial: false, specialMode: 'Auto', defeated: {}, eliteUnlocked: false },
+    objectives: { dismissed: true, firstCycle: false, firstIngot: false, sword: false, helm: false, victory: false },
+  };
+}

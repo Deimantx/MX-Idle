@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { advance, advanceWithEvents, ITEMS, ENEMIES, PROVISIONAL_FIRST_SLICE_COMBAT_VALUES, RECIPES, startActivity, stopActivity, xpForLevel, type Activity, type ItemId, type RecipeId, type SaveState } from '../game/game';
+import { advance, advanceWithEvents, ENEMIES, FORGING_RECIPES, getDepositStageDensity, masteryXpForLevel, selectDeposit, setCombatTarget, startActivity, stopActivity, getForgeWorkRequired, xpForLevel, type Activity, type DamageType, type EnemyId, type ForgingRecipeId, type ItemId, type SaveState } from '../game/game';
 import { GAME_SCREENS, screenLockReason, type GameScreenId } from './screenRegistry';
 import { MiningScreen } from '../features/professions/mining/MiningScreen';
 import { SmithingScreen } from '../features/professions/smithing/SmithingScreen';
@@ -16,6 +16,7 @@ import type { ProfileRecord } from '../game/persistence/profileIndex';
 import type { AppSettings } from '../game/persistence/settingsStorage';
 import type { GameFeedbackEvent } from '../features/feedback/feedback.types';
 import { adaptGameEvents } from '../features/feedback/gameFeedbackAdapter';
+import { useActivityTelemetry } from './useActivityTelemetry';
 
 type Page = GameScreenId;
 const xpProgress = (s: SaveState, id: keyof SaveState['skills']) => ({ value: s.skills[id].xp, max: xpForLevel(s.skills[id].level) });
@@ -30,7 +31,7 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
   const [minimized, setMinimized] = useState(initialState.objectives.dismissed);
   const [speed, setSpeed] = useState(1);
   const [feedbackEvents, setFeedbackEvents] = useState<GameFeedbackEvent[]>([]);
-  const [metricSamples, setMetricSamples] = useState({ key: '', elapsedMs: 0, Mining: 0, Smithing: 0, Attack: 0, Defence: 0, Hitpoints: 0, ore: 0, stone: 0, ingot: 0, kills: 0, forged: 0 });
+  const { record: recordTelemetry, metrics } = useActivityTelemetry();
   const eventId = useRef(0);
   const gameRef = useRef(game);
   gameRef.current = game;
@@ -43,15 +44,7 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
       gameRef.current = next;
       const fresh = adaptGameEvents(result.events, () => ++eventId.current);
       if (fresh.length) setFeedbackEvents((old) => [...old, ...fresh].slice(-24));
-      const keyOf = (s: SaveState) => s.activity === 'mining' ? `mining:${s.mining.deposit}` : s.activity === 'smelting' ? 'smithing:smelt:copper-ingot' : s.activity === 'forging' ? `smithing:forge:${s.smithing.recipe}` : s.activity === 'combat' ? `combat:broken-road:${s.combat.targetId}` : '';
-      const beforeKey = keyOf(before), nextKey = keyOf(next);
-      if (before.activity && beforeKey === nextKey) setMetricSamples((old) => {
-        const base = old.key === beforeKey ? old : { key: beforeKey, elapsedMs: 0, Mining: 0, Smithing: 0, Attack: 0, Defence: 0, Hitpoints: 0, ore: 0, stone: 0, ingot: 0, kills: 0, forged: 0 };
-        const xpBySkill = Object.fromEntries(result.events.filter((event) => event.type === 'xp-gained').map((event) => [event.skill, event.amount]).reduce((acc, [skill, amount]) => { const found = acc.find(([key]) => key === skill); if (found) found[1] = Number(found[1]) + Number(amount); else acc.push([skill, amount]); return acc; }, [] as [string, number][]));
-        const items = result.events.filter((event) => event.type === 'item-gained');
-        return { ...base, elapsedMs: base.elapsedMs + 250 * speed, Mining: base.Mining + Number(xpBySkill.Mining ?? 0), Smithing: base.Smithing + Number(xpBySkill.Smithing ?? 0), Attack: base.Attack + Number(xpBySkill.Attack ?? 0), Defence: base.Defence + Number(xpBySkill.Defence ?? 0), Hitpoints: base.Hitpoints + Number(xpBySkill.Hitpoints ?? 0), ore: base.ore + items.filter((e) => e.type === 'item-gained' && e.item === 'ore').reduce((n,e) => n + (e.type === 'item-gained' ? e.amount : 0),0), stone: base.stone + items.filter((e) => e.type === 'item-gained' && e.item === 'stone').reduce((n,e) => n + (e.type === 'item-gained' ? e.amount : 0),0), ingot: base.ingot + items.filter((e) => e.type === 'item-gained' && e.item === 'ingot').reduce((n,e) => n + (e.type === 'item-gained' ? e.amount : 0),0), kills: base.kills + result.events.filter((e) => e.type === 'enemy-killed').length, forged: base.forged + items.filter((e) => e.type === 'item-gained' && !['ore','stone','ingot'].includes(e.item)).reduce((n,e) => n + (e.type === 'item-gained' ? e.amount : 0),0) };
-      });
-      else if (next.activity && beforeKey !== nextKey) setMetricSamples({ key: nextKey, elapsedMs: 0, Mining: 0, Smithing: 0, Attack: 0, Defence: 0, Hitpoints: 0, ore: 0, stone: 0, ingot: 0, kills: 0, forged: 0 });
+      recordTelemetry(before, next, result.events, 250 * speed);
       setGame(next);
     }, 250);
     return () => window.clearInterval(handle);
@@ -60,7 +53,7 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
   const persist = useCallback((value: SaveState) => { try { const now = Date.now(), delta = playedMs.current + (activeSince.current === null ? 0 : now - activeSince.current); saveProfile(profile.slot, value, delta); playedMs.current = 0; activeSince.current = document.visibilityState === 'visible' ? now : null; setSaveStatus('Saved'); } catch { setSaveStatus('Save failed'); } }, [profile.slot]);
   useEffect(() => { onRegisterFlush(() => persist(gameRef.current)); return () => onRegisterFlush(null); }, [onRegisterFlush, persist]);
   useEffect(() => { const timer = window.setInterval(() => persist(gameRef.current), 4000); const save = () => persist(gameRef.current); const onVis = () => { if (document.visibilityState === 'hidden') { if (activeSince.current !== null) playedMs.current += Date.now() - activeSince.current; activeSince.current = null; save(); } else if (activeSince.current === null) activeSince.current = Date.now(); }; window.addEventListener('beforeunload', save); document.addEventListener('visibilitychange', onVis); return () => { window.clearInterval(timer); window.removeEventListener('beforeunload', save); document.removeEventListener('visibilitychange', onVis); persist(gameRef.current); }; }, [persist]);
-  useEffect(() => { const systems = feedbackEvents.filter((event): event is Extract<GameFeedbackEvent,{type:'system'}> => event.type === 'system' && event.id > Number(toastSeen.current || 0)); const event = systems.at(-1); if (event && (event.tone === 'error' || event.tone === 'defeat' || event.tone === 'milestone' || appSettings.feedback.systemToasts)) { toastSeen.current = String(event.id); setToast(event.message); window.clearTimeout(toastTimer.current); toastTimer.current = window.setTimeout(() => setToast(''), event.tone === 'milestone' ? 4200 : 2600); } }, [feedbackEvents, appSettings.feedback.systemToasts]);
+  useEffect(() => { const systems = feedbackEvents.filter((event): event is Extract<GameFeedbackEvent,{type:'system'}> => event.type === 'system' && event.id > Number(toastSeen.current || 0)); const event = systems[systems.length - 1]; if (event && (event.tone === 'error' || event.tone === 'defeat' || event.tone === 'milestone' || appSettings.feedback.systemToasts)) { toastSeen.current = String(event.id); setToast(event.message); window.clearTimeout(toastTimer.current); toastTimer.current = window.setTimeout(() => setToast(''), event.tone === 'milestone' ? 4200 : 2600); } }, [feedbackEvents, appSettings.feedback.systemToasts]);
   const mut = (fn: (s: SaveState) => void) => { setGame((old) => { const s = structuredClone(old); fn(s); s.savedAt = Date.now(); return s; }); };
   const sound = (freq: number, duration: number, intensity = .08) => { if (!appSettings.audio.muted && appSettings.audio.masterVolume > 0) voice(freq, duration, intensity * appSettings.audio.masterVolume); };
   useEffect(() => {
@@ -72,25 +65,28 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
     else if (fresh.length) sound(520, .05, .03);
   }, [feedbackEvents, appSettings.audio.muted, appSettings.audio.masterVolume]);
   const go = (page: Page) => { setScreen(page); mut((s) => { s.page = page; }); sound(300, .035, .035); };
-  const start = (a: Exclude<Activity, null>) => { mut((s) => { if (a === 'smelting' && (s.bank.ore ?? 0) < 2) { s.smithing.message = 'Not enough Copper Ore'; return; } if (a === 'combat' && (s.equipped.weapon !== 'sword' || !s.equipped.head)) { s.lastEvent = 'Equip a melee weapon and one armor piece to begin'; return; } startActivity(s, a); }); sound(a === 'combat' ? 220 : 380, .07); };
+  const start = (a: Exclude<Activity, null>) => { mut((s) => startActivity(s, a)); sound(a === 'combat' ? 220 : 380, .07); };
   const stop = () => { mut(stopActivity); sound(190, .05, .035); };
-  const buyForgeRecipe = (id: RecipeId) => mut((s) => { if (s.activity === 'forging' || (s.smithing.reserved && s.smithing.recipe !== id)) return; s.smithing.recipe = id; s.smithing.work = Math.round(28 * RECIPES[id].work); s.smithing.heat = 100; s.smithing.message = ''; });
-  const equip = (item: ItemId, slot: 'weapon' | 'head' | 'armor' | 'hands' | 'feet' | 'offhand') => mut((s) => {
+  const buyForgeRecipe = (id: ForgingRecipeId) => mut((s) => { if (s.activity === 'forging' || (s.smithing.reserved && s.smithing.recipe !== id)) return; s.smithing.recipe = id; s.smithing.category = FORGING_RECIPES[id].category; s.smithing.work = getForgeWorkRequired(id); s.smithing.heat = 100; s.smithing.message = ''; });
+  const equip = (item: ItemId, slot: 'weapon' | 'head' | 'armor' | 'hands' | 'feet' | 'offhand' | 'miningTool' | 'smithingHammer') => mut((s) => {
     if ((s.bank[item] ?? 0) < 1) return;
-    if (item === 'sword' && s.skills.Attack.level < 1) return;
-    if (['helm', 'plate', 'gloves', 'greaves'].includes(item) && s.skills.Defence.level < 1) return;
-    const old = s.equipped[slot]; if (old) gainItem(s, old);
-    s.equipped[slot] = item as never; const n = (s.bank[item] ?? 1) - 1; if (n) s.bank[item] = n; else delete s.bank[item]; s.lastEvent = `${ITEMS[item].name} equipped`; sound(540, .085, .06);
+    if (['combat.weapon.melee.copper_battle_axe', 'combat.weapon.melee.copper_mace'].includes(item) && s.skills.Attack.level < 5) return;
+    if (['item.mining.copper_pickaxe', 'item.smithing.copper_smithing_hammer', 'combat.offhand.melee.copper_shield'].includes(item) && s.skills.Smithing.level < 5) return;
+    if (['combat.armor.heavy.copper_helm', 'combat.armor.heavy.copper_armor', 'combat.armor.heavy.copper_gauntlets', 'combat.armor.heavy.copper_greaves'].includes(item) && s.skills.Defence.level < 1) return;
+    const old = s.equipped[slot]; if (old) gainItem(s, old as ItemId);
+    if (slot === 'miningTool') { if (item !== 'item.mining.worn_pickaxe' && item !== 'item.mining.copper_pickaxe') return; s.equipped.miningTool = item; }
+    else if (slot === 'smithingHammer') { if (item !== 'item.smithing.worn_smithing_hammer' && item !== 'item.smithing.copper_smithing_hammer') return; s.equipped.smithingHammer = item; }
+    else s.equipped[slot] = item as never;
+    const n = (s.bank[item] ?? 1) - 1; if (n) s.bank[item] = n; else delete s.bank[item]; sound(540, .085, .06);
   });
-  const unequip = (slot: 'weapon' | 'head' | 'armor' | 'hands' | 'feet' | 'offhand') => mut((s) => { const old = s.equipped[slot]; if (old) { gainItem(s, old); s.equipped[slot] = null; } });
+  const unequip = (slot: 'weapon' | 'head' | 'armor' | 'hands' | 'feet' | 'offhand' | 'miningTool' | 'smithingHammer') => mut((s) => { const old = s.equipped[slot]; if (old) { gainItem(s, old as ItemId); if (slot === 'miningTool') s.equipped.miningTool = null; else if (slot === 'smithingHammer') s.equipped.smithingHammer = null; else s.equipped[slot] = null; } });
   const grant = (item: ItemId, n = 1) => mut((s) => { gainItem(s, item, n); });
+  const grantT1Kit = () => mut((s) => { for (const item of ['item.mining.copper_pickaxe','item.smithing.copper_smithing_hammer','combat.weapon.melee.copper_battle_axe','combat.weapon.melee.copper_mace','combat.offhand.melee.copper_shield','combat.armor.heavy.copper_armor','combat.armor.heavy.copper_gauntlets','combat.armor.heavy.copper_greaves'] as ItemId[]) gainItem(s,item); s.skills.Mining.level = Math.max(5,s.skills.Mining.level); s.skills.Smithing.level = Math.max(5,s.skills.Smithing.level); s.skills.Attack.level = Math.max(5,s.skills.Attack.level); s.skills.Defence.level = Math.max(5,s.skills.Defence.level); });
+  const devSetDeposit = (id: SaveState['mining']['deposit']) => mut((s) => { s.skills.Mining.level = Math.max(5, s.skills.Mining.level); selectDeposit(s, id); });
+  const devSetStage = (stage: number) => mut((s) => { const runtime = s.mining.deposits[s.mining.deposit]!; runtime.stageIndex = stage; runtime.densityRemaining = getDepositStageDensity(stage, s.mining.deposit); s.mining.stage = stage; s.mining.density = runtime.densityRemaining; });
+  const devSetMastery = (domain: 'mining' | 'smithing', level: number) => mut((s) => { const progress = domain === 'mining' ? s.mining.deposits[s.mining.deposit]!.mastery : (s.smithing.mastery[s.smithing.recipe] ??= { xp: 0, level: 1 }); progress.level = level; progress.xp = masteryXpForLevel(level); });
   const offlineSim = (ms: number) => { setGame((old) => advance(old, ms)); };
   const xp = useMemo(() => ({ mining: xpProgress(game, 'Mining'), smithing: xpProgress(game, 'Smithing') }), [game.skills]);
-  const metrics = useMemo(() => {
-    const skills = Object.fromEntries((['Mining','Smithing','Attack','Defence','Hitpoints'] as const).map((id) => [id, { sessionXp: metricSamples[id], xpHour: metricSamples.elapsedMs >= 8000 ? metricSamples[id] * 3_600_000 / metricSamples.elapsedMs : 0 }]));
-    const rate = (key: 'ore' | 'stone' | 'ingot' | 'kills') => metricSamples.elapsedMs >= 8000 ? metricSamples[key] * 3_600_000 / metricSamples.elapsedMs : 0;
-    return { ...skills, key: metricSamples.key, activeMs: metricSamples.elapsedMs, oreHour: rate('ore'), stoneHour: rate('stone'), ingotHour: rate('ingot'), killsHour: rate('kills'), forged: metricSamples.forged } as Record<'Mining'|'Smithing'|'Attack'|'Defence'|'Hitpoints', { sessionXp: number; xpHour: number }> & { key: string; activeMs: number; oreHour: number; stoneHour: number; ingotHour: number; killsHour: number; forged: number };
-  }, [metricSamples]);
   const tab = game.smithing.mode;
   const setMode = (m: 'smelting' | 'forging') => mut((s) => { if (s.activity) stopActivity(s); s.smithing.mode = m; s.page = 'Smithing'; });
   const isMotionReduced = appSettings.accessibility.reducedMotion === 'system' ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : appSettings.accessibility.reducedMotion === 'on';
@@ -110,32 +106,17 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
       <header className="topbar"><div className="active-profile"><b>{profile.name}</b><small>PROFILE {profile.slot}</small></div><div className="top-status"><div className="gold-chip"><Icon name="gold" size={17} /><span>{fmt(game.gold)}</span><small>GOLD</small></div><div className="status-divider" /><div className="skill-chip"><span className="skill-glyph">{screen === 'Mining' ? 'M' : screen === 'Smithing' ? 'S' : screen === 'Combat' ? 'A' : '•'}</span><div><b>{screen === 'Mining' ? `Mining ${game.skills.Mining.level}` : screen === 'Smithing' ? `Smithing ${game.skills.Smithing.level}` : screen === 'Combat' ? `Attack ${game.skills.Attack.level}` : 'Adventurer'}</b><div className="mini-xp"><span style={{ width: `${Math.min(100, (screen === 'Mining' ? xp.mining.value / xp.mining.max : xp.smithing.value / xp.smithing.max) * 100)}%` }} /></div></div></div><div className="save-label"><span className="save-dot" />{saveStatus}</div><button className="icon-button top-settings" aria-label="Settings" onClick={onOpenSettings}><Icon name="gear" size={19} /></button></div></header>
       <div className="content-scroll" id="game-content" tabIndex={-1}><div className="content-wrap">
         {!game.objectives.victory && <FirstStepsPanel game={game} minimized={minimized} onToggle={() => { setMinimized(!minimized); mut((s) => { s.objectives.dismissed = !s.objectives.dismissed; }); }} />}
-        {screen === 'Mining' && <MiningScreen game={game} xp={xp.mining.value} maxXp={xp.mining.max} speedMultiplier={speed} metrics={metrics} start={() => start('mining')} stop={stop} />}
-        {screen === 'Smithing' && <SmithingScreen game={game} speedMultiplier={speed} mode={tab} setMode={setMode} start={start} stop={stop} choose={buyForgeRecipe} />}
+        {screen === 'Mining' && <MiningScreen game={game} xp={xp.mining.value} maxXp={xp.mining.max} speedMultiplier={speed} metrics={metrics} select={(id) => mut((s) => { selectDeposit(s, id); })} equipTool={(item) => equip(item, 'miningTool')} start={() => start('mining')} stop={stop} />}
+        {screen === 'Smithing' && <SmithingScreen game={game} speedMultiplier={speed} mode={tab} setMode={setMode} start={start} stop={stop} choose={buyForgeRecipe} setCategory={(category) => mut((s) => { s.smithing.category = category; })} equipHammer={(item) => equip(item, 'smithingHammer')} />}
         {screen === 'Equipment' && <EquipmentScreen game={game} equip={equip} unequip={unequip} />}
-        {screen === 'Combat' && <CombatScreen game={game} speedMultiplier={speed} start={() => start('combat')} stop={stop} stance={(stance) => mut((s) => { s.combat.stance = stance; })} />}
+        {screen === 'Combat' && <CombatScreen game={game} speedMultiplier={speed} start={() => start('combat')} stop={stop} stance={(stance: DamageType) => mut((s) => { s.combat.stance = stance; })} target={(id: EnemyId) => mut((s) => { setCombatTarget(s, id); })} queueSpecial={() => mut((s) => { if (!s.combat.queuedSpecial) s.combat.queuedSpecial = true; })} setSpecialMode={(mode) => mut((s) => { s.combat.specialMode = mode; if (mode === 'Off') s.combat.queuedSpecial = false; })} />}
         {screen === 'Bank' && <BankScreen game={game} filter={filter} setFilter={setFilter} />}
       </div></div>
       <ActivityHud game={game} stop={stop} onNavigate={go} speed={speed} metrics={metrics} events={feedbackEvents} settings={appSettings.feedback} reducedMotion={isMotionReduced} />
     </main>
     {toast && <div className="toast" role="status"><span className="toast-mark"><Icon name="ore" size={18} /></span>{toast}</div>}
-    {import.meta.env.DEV && <DevPanel game={game} grant={grant} simulate={offlineSim} setSpeed={setSpeed} setLevel={(skill, level) => mut((s) => { s.skills[skill].level = level; s.skills[skill].xp = 0; })} setHp={(hp) => mut((s) => { s.combat.playerHp = hp; })} resetWolf={() => mut((s) => { s.combat.wolfHp = PROVISIONAL_FIRST_SLICE_COMBAT_VALUES.wolfHp; s.combat.respawn = 0; s.combat.seq = 0; })} reset={() => {}} />}
+    {import.meta.env.DEV && <DevPanel game={game} grant={grant} grantT1Kit={grantT1Kit} simulate={offlineSim} setSpeed={setSpeed} setLevel={(skill, level) => mut((s) => { s.skills[skill].level = level; s.skills[skill].xp = 0; })} setHp={(hp) => mut((s) => { s.combat.playerHp = hp; })} resetWolf={() => mut((s) => { s.combat.enemyHp = ENEMIES[s.combat.targetId].hp; s.combat.respawn = 0; s.combat.sequenceIndex = 0; })} unlockElite={() => mut((s) => { for (const enemy of ['road-wolf','dust-rat','ragged-poacher','hedge-spark'] as const) s.combat.defeated[enemy] = Math.max(1, s.combat.defeated[enemy] ?? 0); s.combat.eliteUnlocked = true; })} setDeposit={devSetDeposit} setStage={devSetStage} setMastery={devSetMastery} setForge={(work, heat) => mut((s) => { s.smithing.work = work; s.smithing.heat = heat; })} setPreservation={(enabled) => mut((s) => { s.smithing.forcePreservation = enabled; })} reset={() => {}} />}
   </div>;
 }
 
 function gainItem(s: SaveState, id: ItemId, n = 1) { s.bank[id] = (s.bank[id] ?? 0) + n; }
-
-function skillTotal(state: SaveState, id: keyof SaveState['skills']) { let total = state.skills[id].xp; for (let level = 1; level < state.skills[id].level; level++) total += xpForLevel(level); return total; }
-function skillDelta(before: SaveState, after: SaveState, id: keyof SaveState['skills']) { return Math.max(0, skillTotal(after, id) - skillTotal(before, id)); }
-function collectFeedback(before: SaveState, after: SaveState, nextId: () => number): GameFeedbackEvent[] {
-  if (!before.activity) return [];
-  const events: GameFeedbackEvent[] = [], now = Date.now();
-  for (const skill of Object.keys(before.skills) as (keyof SaveState['skills'])[]) {
-    const amount = skillDelta(before, after, skill);
-    if (amount > 0) events.push({ id: nextId(), type: 'xp', skillId: skill, amount, occurredAt: now });
-    if (after.skills[skill].level > before.skills[skill].level) events.push({ id: nextId(), type: 'level-up', skillId: skill, oldLevel: before.skills[skill].level, newLevel: after.skills[skill].level, occurredAt: now });
-  }
-  for (const item of Object.keys(ITEMS) as ItemId[]) { const amount = (after.bank[item] ?? 0) - (before.bank[item] ?? 0); if (amount > 0) events.push({ id: nextId(), type: 'item', itemId: item, amount, source: before.activity, occurredAt: now }); }
-  if (after.gold > before.gold) events.push({ id: nextId(), type: 'gold', amount: after.gold - before.gold, source: before.activity, occurredAt: now });
-  return events;
-}

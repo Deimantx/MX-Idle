@@ -1,0 +1,1 @@
+export const OFFHANDS = { 'combat.offhand.melee.copper_shield': { id: 'combat.offhand.melee.copper_shield', name: 'Copper Shield', smithingLevel: 5, physicalResistance: 4, attackIntervalPenaltyMs: 100, compatibleWeapon: '1H Melee' } } as const;

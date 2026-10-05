@@ -83,8 +83,9 @@ button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-v
   height: calc(35px * var(--ui-scale));
   border: 1px solid #8f6245;
   background: linear-gradient(145deg,#705039,#282725 65%);
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #e5b182;
   font: calc(17px * var(--ui-scale) * var(--text-scale)) Marcellus,serif;
   letter-spacing: calc(-2px * var(--ui-scale));
@@ -94,6 +95,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-v
 
 .brand-mark span {
   color: #ddd1bf;
+  margin-left: calc(-2px * var(--ui-scale));
 
 }
 

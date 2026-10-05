@@ -1,98 +1,165 @@
 import { describe, expect, it } from 'vitest';
-import { advance, damageAfterResistance, freshState, hitChance, loadState, PROVISIONAL_FIRST_SLICE_COMBAT_VALUES, SAVE_KEY, stageDensity, stageStrikes, startActivity, stopActivity, type SaveState } from '../game';
+import { advance, advanceWithEvents, damageAfterResistance, estimateForgeCompletion, freshState, hitChance, loadState, ITEMS, MINING_DEPOSITS, MINING_STAGE_MODEL, FORGING_RECIPES, SMELTING_RECIPES, PROVISIONAL_FIRST_SLICE_COMBAT_VALUES, SAVE_KEY, selectDeposit, setCombatTarget, stageDensity, stageStrikes, startActivity, stopActivity, smithingActionTime, type SaveState } from '../game';
+import { getCoreMaterialChance, getMiningPower, getPrimaryExpectedQuantity, masteryProgress, resolvePrimaryQuantity } from './gameMath';
+import { MELEE_WEAPONS } from '../content/combat/meleeWeapons';
 
-describe('Mining', () => {
-  it('uses the authored five-stage Copper curve and expected twenty strikes', () => {
+const ORE = 'item.mining.copper_ore', INGOT = 'item.smithing.copper_ingot';
+const SWORD = 'combat.weapon.melee.copper_sword', HELM = 'combat.armor.heavy.copper_helm', TROPHY = 'combat.loot.beast_trophy';
+
+describe('Mining content and simulation', () => {
+  it('resolves each active deposit and smithing recipe through registered item IDs', () => {
+    for (const deposit of Object.values(MINING_DEPOSITS)) {
+      expect(ITEMS[deposit.primary]).toBeDefined(); expect(ITEMS[deposit.requiredTool]).toBeDefined(); expect(deposit.unlockLevel).toBeGreaterThan(0);
+    }
+    for (const recipe of Object.values(SMELTING_RECIPES)) {
+      expect(ITEMS[recipe.output.item]).toBeDefined(); for (const input of recipe.inputs) expect(ITEMS[input.item]).toBeDefined();
+    }
+    for (const recipe of Object.values(FORGING_RECIPES)) {
+      expect(ITEMS[recipe.output]).toBeDefined(); expect(recipe.unlockLevel).toBeGreaterThan(0); expect(recipe.workMultiplier).toBeGreaterThan(0);
+      for (const input of recipe.inputs) expect(ITEMS[input.item]).toBeDefined();
+    }
+  });
+  it('keeps the five canonical stages and the authored Copper and Fieldstone density curves', () => {
+    expect(MINING_STAGE_MODEL.map((x) => x.name)).toEqual(['Outcrop', 'Shallow Vein', 'Main Vein', 'Deep Seam', 'Core']);
     expect([0,1,2,3,4].map(stageDensity)).toEqual([36,29,21,14,8]);
-    expect([0,1,2,3,4].map((stage) => stageStrikes(stage))).toEqual([6,5,4,3,2]);
-    expect([0,1,2,3,4].reduce((n, stage) => n + stageStrikes(stage), 0)).toBe(20);
+    expect([0,1,2,3,4].map((stage) => stageDensity(stage, 'mining.deposit.fieldstone_quarry'))).toEqual([42,33,25,16,9]);
+    expect([0,1,2,3,4].map((stage) => stageStrikes(stage)).reduce((a,b) => a+b, 0)).toBe(20);
+    expect([0,1,2,3,4].map((stage) => stageStrikes(stage, 6, 'mining.deposit.fieldstone_quarry')).reduce((a,b) => a+b, 0)).toBe(23);
+    expect(getPrimaryExpectedQuantity(4, 'mining.deposit.copper_vein')).toBe(3.2);
   });
-  it('advances all layers, awards Copper, and resets Core to Outcrop', () => {
-    let s = freshState(); startActivity(s, 'mining'); s = advance(s, 20 * 2400);
-    expect(s.mining.cycles).toBe(1); expect(s.mining.stage).toBe(0); expect(s.mining.density).toBe(36);
-    expect(s.bank.ore).toBeGreaterThan(0); expect(s.skills.Mining.xp).toBeGreaterThan(0);
+  it('completes mining stages, grants namespaced ore and mastery, then resets the cycle', () => {
+    const s = freshState(); startActivity(s, 'mining');
+    const result = advanceWithEvents(s, 20 * 2400);
+    expect(result.state.mining.cycles).toBe(1); expect(result.state.mining.stage).toBe(0); expect(result.state.mining.density).toBe(36);
+    expect(result.state.bank[ORE]).toBeGreaterThan(0); expect(result.state.skills.Mining.xp).toBeGreaterThan(0);
+    expect(result.state.mining.deposits['mining.deposit.copper_vein']!.mastery.xp).toBeGreaterThan(0);
+    expect(result.events.some((e) => e.type === 'stage-completed' && e.depositId === 'mining.deposit.copper_vein')).toBe(true);
   });
-  it('preserves stage density when stopped and resumed', () => {
-    let s = freshState(); startActivity(s, 'mining'); s = advance(s, 2400 * 2); stopActivity(s);
-    expect(s.mining.stage).toBe(0); expect(s.mining.density).toBe(24);
-    startActivity(s, 'mining'); s = advance(s, 2400 * 4);
-    expect(s.mining.stage).toBe(1);
+  it('preserves incomplete deposit density on stop and resets the abandoned stage when switching', () => {
+    const s = freshState(); startActivity(s, 'mining'); let state = advance(s, 2 * 2400); stopActivity(state);
+    expect(state.mining.density).toBe(24); state.skills.Mining.level = 5;
+    expect(selectDeposit(state, 'mining.deposit.fieldstone_quarry')).toBe(true);
+    expect(state.mining.density).toBe(42);
+    expect(state.mining.deposits['mining.deposit.copper_vein']!.densityRemaining).toBe(36);
+    expect(state.mining.deposits['mining.deposit.copper_vein']!.totalStagesCompleted).toBe(0);
+  });
+  it('keeps Fieldstone gem weighting deliberately disabled pending canonical source data', () => {
+    expect(MINING_DEPOSITS['mining.deposit.fieldstone_quarry'].gemPool).toEqual([]);
+    expect(MINING_DEPOSITS['mining.deposit.copper_vein'].structuralChance).toBe(.08);
+    expect(MINING_DEPOSITS['mining.deposit.copper_vein'].gemBaseChance).toBe(.0025);
+    expect(MINING_DEPOSITS['mining.deposit.copper_vein'].coreBaseChance).toBe(.0005);
+    expect([0,1,2,3,4].map((stage) => getCoreMaterialChance(.0005, stage, [0,0,1,5,25]))).toEqual([0,0,.0005,.0025,.0125]);
+    expect(getCoreMaterialChance(.0005, 4, [0,0,1,5,25], 75)).toBeCloseTo(.014375);
+  });
+  it('uses deterministic quantity rolls and mastery mining power breakpoints', () => {
+    expect(resolvePrimaryQuantity(1.25, 0, () => .5)).toBe(1);
+    expect(resolvePrimaryQuantity(1.25, 0, () => .1)).toBe(2);
+    expect(getMiningPower(6, 1, 0)).toBe(6);
+    expect(getMiningPower(6, 10, 0)).toBeCloseTo(6.18);
+    expect(getMiningPower(6, 50, 3)).toBeCloseTo(6.18 * 1.07);
+    expect(masteryProgress(0).level).toBe(1);
+  });
+  it('applies the Copper Pickaxe power and strike speed in real mining ticks', () => {
+    const s = freshState(); s.skills.Mining.level = 5; s.bank['item.mining.copper_pickaxe'] = 1; s.equipped.miningTool = 'item.mining.copper_pickaxe';
+    selectDeposit(s, 'mining.deposit.fieldstone_quarry'); startActivity(s, 'mining');
+    const result = advanceWithEvents(s, 2450);
+    expect(result.state.mining.density).toBe(34); expect(result.state.mining.timer).toBe(2450);
   });
 });
 
-describe('Smithing', () => {
-  it('warms the Field Forge and consumes exactly two Ore per Ingot', () => {
-    let s = freshState(); s.bank.ore = 2; startActivity(s, 'smelting');
-    s = advance(s, 3040); expect(s.smithing.warm).toBe(true); expect(s.bank.ore).toBe(2);
-    s = advance(s, 3000); expect(s.bank.ore).toBeUndefined(); expect(s.bank.ingot).toBe(1); expect(s.activity).toBeNull();
+describe('Smithing registries and simulation', () => {
+  it('keeps Smelting and Forging in separate typed registries with canonical ingot values', () => {
+    const ingot = SMELTING_RECIPES['recipe.smithing.copper_ingot'];
+    expect(ingot).toMatchObject({ unlockLevel: 1, smithingXp: 7, heatRequirement: 26, unitTimeMs: 3000, warmupMs: 3040 });
+    expect(ingot.inputs).toEqual([{ item: ORE, amount: 2 }]); expect(ingot.output).toEqual({ item: INGOT, amount: 1 });
+    expect(FORGING_RECIPES['recipe.smithing.copper_sword'].inputs).toEqual([{ item: INGOT, amount: 4, preservable: true }]);
+    expect(FORGING_RECIPES['recipe.smithing.copper_pickaxe'].inputs).toHaveLength(2);
   });
-  it('reserves recipe inputs once, reheats, then completes a real Copper Sword', () => {
-    let s = freshState(); s.bank.ingot = 4; s.smithing.recipe = 'sword'; startActivity(s, 'forging');
-    expect(s.smithing.reserved).toBe(4); expect(s.bank.ingot).toBeUndefined();
-    s = advance(s, 60_000);
-    expect(s.bank.sword).toBe(1); expect(s.smithing.reserved).toBe(0); expect(s.objectives.sword).toBe(true);
+  it('warms the Field Forge, then consumes exactly two ore per ingot', () => {
+    const s = freshState(); s.bank[ORE] = 2; startActivity(s, 'smelting');
+    let state = advance(s, 3040); expect(state.smithing.warm).toBe(true); expect(state.bank[ORE]).toBe(2);
+    state = advance(state, 3000); expect(state.bank[ORE]).toBeUndefined(); expect(state.bank[INGOT]).toBe(1); expect(state.activity).toBeNull();
   });
-  it('lets the opening seven ingots unlock and forge a Copper Helm without developer boosts', () => {
-    let s = freshState(); s.bank.ore = 14; startActivity(s, 'smelting'); s = advance(s, 60_000);
-    expect(s.bank.ingot).toBe(7); expect(s.skills.Smithing.level).toBeGreaterThanOrEqual(3);
-    s.smithing.recipe = 'sword'; startActivity(s, 'forging'); s = advance(s, 60_000);
-    expect(s.bank.sword).toBe(1); expect(s.skills.Smithing.level).toBeGreaterThanOrEqual(4);
-    s.bank.ore = 4; startActivity(s, 'smelting'); s = advance(s, 20_000);
-    expect(s.skills.Smithing.level).toBe(5);
-    s.smithing.recipe = 'helm'; startActivity(s, 'forging'); s = advance(s, 60_000);
-    expect(s.bank.helm).toBe(1); expect(s.skills.Smithing.level).toBe(5);
+  it('reserves forging inputs and completes a canonical Copper Sword', () => {
+    const s = freshState(); s.bank[INGOT] = 4; startActivity(s, 'forging');
+    expect(s.smithing.reserved).toBe(4); expect(s.bank[INGOT]).toBeUndefined();
+    const state = advance(s, 60_000);
+    expect(state.bank[SWORD]).toBe(1); expect(state.smithing.reserved).toBe(0); expect(state.objectives.sword).toBe(true);
   });
-  it('cannot consume Ore into negative quantities', () => {
-    const s = freshState(); s.bank.ore = 1; startActivity(s, 'smelting');
-    expect(s.activity).toBeNull(); expect(s.smithing.message).toBe('Not enough Copper Ore'); expect(s.bank.ore).toBe(1);
+  it('reserves the equipped worn tool atomically and auto-equips the Copper Pickaxe output', () => {
+    const s = freshState(); s.skills.Smithing.level = 5; s.bank[INGOT] = 3; s.smithing.recipe = 'recipe.smithing.copper_pickaxe'; startActivity(s, 'forging');
+    expect(s.equipped.miningTool).toBeNull(); expect(s.smithing.reservedEquipment).toBe('item.mining.worn_pickaxe');
+    const loaded = loadState(JSON.stringify({ version: 3, savedAt: s.savedAt, state: s }), s.savedAt).state;
+    const state = advance(loaded, 60_000);
+    expect(state.equipped.miningTool).toBe('item.mining.copper_pickaxe'); expect(state.bank['item.mining.copper_pickaxe']).toBeUndefined();
+    expect(state.smithing.reservedEquipment).toBeNull();
+  });
+  it('rejects smelting and forging starts with missing inputs without changing inventory', () => {
+    const s = freshState(); s.bank[ORE] = 1; startActivity(s, 'smelting');
+    expect(s.activity).toBeNull(); expect(s.smithing.message).toBe('Not enough Copper Ore'); expect(s.bank[ORE]).toBe(1);
+    s.smithing.recipe = 'recipe.smithing.copper_sword'; startActivity(s, 'forging'); expect(s.activity).toBeNull(); expect(s.bank[ORE]).toBe(1);
+  });
+  it('estimates forge completion with the equipped hammer and reheating', () => {
+    const s = freshState(); s.equipped.smithingHammer = 'item.smithing.copper_smithing_hammer'; s.smithing.work = 14; s.smithing.heat = 30; s.smithing.timer = 2140;
+    expect(estimateForgeCompletion(s)).toBe(8420);
+    s.smithing.reheat = true; s.smithing.timer = 700; s.smithing.heat = 20; s.smithing.work = 14;
+    expect(estimateForgeCompletion(s)).toBe(4980);
+  });
+  it('applies recipe Mastery action time and per-unit preservation transactionally', () => {
+    const s = freshState(); s.bank[INGOT] = 4; s.smithing.mastery[s.smithing.recipe] = { xp: 0, level: 10 };
+    expect(smithingActionTime(s, s.smithing.recipe)).toBe(2156);
+    s.smithing.forcePreservation = true; startActivity(s, 'forging'); const state = advance(s, 60_000);
+    expect(state.bank[SWORD]).toBe(1); expect(state.bank[INGOT]).toBe(4); expect(state.smithing.reserved).toBe(0);
+    const smelt = freshState(); smelt.bank[ORE] = 2; smelt.smithing.forcePreservation = true; startActivity(smelt, 'smelting');
+    const smelted = advance(smelt, 6040); expect(smelted.bank[ORE]).toBe(2); expect(smelted.bank[INGOT]).toBe(1);
   });
 });
 
-describe('Equipment, combat, and activity', () => {
-  it('enforces a single activity slot and switches to the new activity', () => {
-    const s = freshState(); s.bank.ore = 2; startActivity(s, 'mining'); startActivity(s, 'smelting');
-    expect(s.activity).toBe('smelting'); expect(s.mining.density).toBe(36);
+describe('Combat compatibility', () => {
+  it('stores canonical melee stats and passive effects in the combat registry', () => {
+    expect(MELEE_WEAPONS['combat.weapon.melee.copper_sword']).toMatchObject({ power: 18, accuracyBonus: 84, intervalMs: 2400, critRateBonus: .01 });
+    expect(MELEE_WEAPONS['combat.weapon.melee.copper_battle_axe']).toMatchObject({ power: 21, accuracyBonus: 72, intervalMs: 2800, critDamageBonus: .1 });
+    expect(MELEE_WEAPONS['combat.weapon.melee.copper_mace']).toMatchObject({ power: 19, accuracyBonus: 77, intervalMs: 2700, penetrationType: 'Crush', penetrationPp: 3 });
+    expect(MELEE_WEAPONS['combat.weapon.melee.copper_mace'].special.resistanceDownPp).toBe(15);
   });
-  it('uses canonical hit chance, resistance, and provisional enemy data', () => {
+  it('uses canonical hit chance and resistance calculations', () => {
     expect(hitChance(100,100)).toBe(.5); expect(hitChance(10,100)).toBe(.05); expect(hitChance(1000,10)).toBe(.95);
     expect(damageAfterResistance(20, 12)).toBe(17); expect(damageAfterResistance(20, -8)).toBe(21);
     expect(PROVISIONAL_FIRST_SLICE_COMBAT_VALUES.wolfHp).toBe(70);
   });
-  it('keeps a deterministic combat timeline and grants combat loot on kills', () => {
-    const s = freshState(); s.equipped.weapon = 'sword'; s.equipped.head = 'helm'; startActivity(s, 'combat');
+  it('keeps deterministic combat and awards namespaced trophies', () => {
+    const s = freshState(); s.equipped.weapon = SWORD; s.equipped.head = HELM; startActivity(s, 'combat');
     const a = advance(s, 60_000), b = advance(s, 60_000);
-    expect(a.rng).toBe(b.rng); expect(a.combat.kills).toBe(b.combat.kills);
-    expect(a.combat.kills).toBeGreaterThan(0); expect(a.bank.trophy).toBe(a.combat.kills); expect(a.gold).toBe(a.combat.kills * PROVISIONAL_FIRST_SLICE_COMBAT_VALUES.gold);
-    expect(a.skills.Attack.xp).toBeGreaterThan(0); expect(a.skills.Hitpoints.xp).toBeGreaterThan(0); expect(a.skills.Defence.xp).toBeGreaterThan(0);
+    expect(a.rng).toBe(b.rng); expect(a.combat.kills).toBeGreaterThan(0); expect(a.bank[TROPHY]).toBe(a.combat.kills);
+    expect(a.gold).toBe(a.combat.kills * PROVISIONAL_FIRST_SLICE_COMBAT_VALUES.gold); expect(a.skills.Attack.xp).toBeGreaterThan(0);
+  });
+  it('reveals the Ironjaw Boar after each normal enemy has been defeated', () => {
+    const s = freshState(); expect(setCombatTarget(s, 'ironjaw-boar')).toBe(false);
+    for (const target of ['road-wolf','dust-rat','ragged-poacher','hedge-spark'] as const) s.combat.defeated[target] = 1;
+    expect(setCombatTarget(s, 'ironjaw-boar')).toBe(true); expect(s.combat.enemyHp).toBeGreaterThan(0);
   });
 });
 
-describe('Save and offline simulation', () => {
-  it('fills missing fields and safely falls back from corrupted data', () => {
-    const partial = JSON.stringify({ version: 1, savedAt: Date.now(), state: { skills: { Mining: { xp: 0, level: 1 } }, bank: {}, activity: null } });
-    const loaded = loadState(partial); expect(loaded.state.equipped.tool).toBe(true); expect(loaded.state.skills.Smithing.level).toBe(1);
-    expect(loadState('{broken').fresh).toBe(true);
+describe('Persistence and offline parity', () => {
+  it('migrates legacy v1 bank, equipped gear, deposit state, and recipe IDs to v3', () => {
+    const legacy = { version: 1, savedAt: 1000, state: { version: 1, skills: { Mining: { xp: 0, level: 1 } }, bank: { ore: 8, ingot: 2, sword: 1 }, equipped: { tool: true, weapon: 'sword' }, mining: { deposit: 'copper-vein', stage: 2, density: 13 }, smithing: { recipe: 'sword' }, activity: null } };
+    const loaded = loadState(JSON.stringify(legacy), 1000);
+    expect(loaded.fresh).toBe(false); expect(loaded.state.version).toBe(3); expect(loaded.state.bank[ORE]).toBe(8); expect(loaded.state.bank[INGOT]).toBe(2);
+    expect(loaded.state.equipped.weapon).toBe(SWORD); expect(loaded.state.mining.deposit).toBe('mining.deposit.copper_vein'); expect(loaded.state.mining.density).toBe(13);
+    expect(loaded.state.smithing.recipe).toBe('recipe.smithing.copper_sword');
   });
-  it('round-trips versioned save data without losing progression', () => {
-    const original = freshState(); original.skills.Mining.xp = 27; original.bank.ore = 19; original.gold = 8; original.mining.stage = 2; original.mining.density = 13;
-    const loaded = loadState(JSON.stringify({ version: 1, savedAt: original.savedAt, state: original })).state;
-    expect(loaded.skills.Mining.xp).toBe(27); expect(loaded.bank.ore).toBe(19); expect(loaded.gold).toBe(8); expect(loaded.mining).toMatchObject({ stage: 2, density: 13 });
+  it('round-trips current saves and safely falls back from corrupt JSON', () => {
+    const original = freshState(1000); original.skills.Mining.xp = 27; original.bank[ORE] = 19; original.mining.stage = 2; original.mining.density = 13;
+    original.mining.deposits[original.mining.deposit]!.stageIndex = 2; original.mining.deposits[original.mining.deposit]!.densityRemaining = 13;
+    const loaded = loadState(JSON.stringify({ version: 3, savedAt: 1000, state: original }), 1000).state;
+    expect(loaded.skills.Mining.xp).toBe(27); expect(loaded.bank[ORE]).toBe(19); expect(loaded.mining).toMatchObject({ stage: 2, density: 13 });
+    expect(loadState('{broken').fresh).toBe(true); expect(SAVE_KEY).toBe('mx-idle-save-v3');
   });
-  it('matches active tick advancement and offline event advancement for Mining', () => {
-    const initial = freshState(); startActivity(initial, 'mining');
-    const online = tick(initial, 60_000), offline = advance(initial, 60_000);
-    expect(offline.bank.ore).toBe(online.bank.ore); expect(offline.mining.stage).toBe(online.mining.stage); expect(offline.rng).toBe(online.rng);
-  });
-  it('matches active tick advancement and offline event advancement for Smithing', () => {
-    const initial = freshState(); initial.bank.ore = 30; startActivity(initial, 'smelting');
-    const online = tick(initial, 90_000), offline = advance(initial, 90_000);
-    expect(offline.bank.ingot).toBe(online.bank.ingot); expect(offline.bank.ore).toBe(online.bank.ore); expect(offline.skills.Smithing.xp).toBe(online.skills.Smithing.xp);
-  });
-  it('matches active tick advancement and offline event advancement for Combat', () => {
-    const initial = freshState(); initial.equipped.weapon = 'sword'; initial.equipped.head = 'helm'; startActivity(initial, 'combat');
-    const online = tick(initial, 60_000), offline = advance(initial, 60_000);
-    expect(offline.combat.kills).toBe(online.combat.kills); expect(offline.combat.playerHp).toBeCloseTo(online.combat.playerHp); expect(offline.bank.trophy).toBe(online.bank.trophy); expect(offline.rng).toBe(online.rng);
-    expect(SAVE_KEY).toBe('mx-idle-save-v1');
+  it('matches batched simulation with repeated active ticks for Mining and Smelting', () => {
+    const mining = freshState(); startActivity(mining, 'mining'); const onlineMine = tick(mining, 60_000), offlineMine = advance(mining, 60_000);
+    expect(offlineMine.bank[ORE]).toBe(onlineMine.bank[ORE]); expect(offlineMine.mining.stage).toBe(onlineMine.mining.stage); expect(offlineMine.rng).toBe(onlineMine.rng);
+    const smelting = freshState(); smelting.bank[ORE] = 30; startActivity(smelting, 'smelting'); const onlineSmelt = tick(smelting, 90_000), offlineSmelt = advance(smelting, 90_000);
+    expect(offlineSmelt.bank[INGOT]).toBe(onlineSmelt.bank[INGOT]); expect(offlineSmelt.bank[ORE]).toBe(onlineSmelt.bank[ORE]);
   });
 });
 

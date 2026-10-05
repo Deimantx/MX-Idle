@@ -7,7 +7,7 @@ export function FirstStepsPanel({ game, minimized, onToggle }: { game: SaveState
     ['Reach the Core', game.objectives.firstCycle],
     ['Light the Forge', game.objectives.firstIngot],
     ['Forge a Weapon', game.objectives.sword],
-    ['Prepare for Battle', game.objectives.helm && game.equipped.weapon === 'sword' && game.equipped.head === 'helm'],
+    ['Prepare for Battle', game.objectives.helm && game.equipped.weapon === 'combat.weapon.melee.copper_sword' && game.equipped.head === 'combat.armor.heavy.copper_helm'],
     ['Broken Road', game.objectives.sword && game.objectives.helm],
     ['First Victory', game.objectives.victory],
   ];

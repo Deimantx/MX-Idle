@@ -4,7 +4,7 @@ import type { ProfileRecord } from '../../game/persistence/profileIndex';
 import { Button, Icon, Modal } from '../../ui/primitives';
 
 type Category = 'Interface' | 'Feedback' | 'Audio' | 'Accessibility' | 'Profile';
-const categoryIcon: Record<Category, string> = { Interface: 'gear', Feedback: 'ore', Audio: 'combat', Accessibility: 'shield', Profile: 'helm' };
+const categoryIcon: Record<Category, string> = { Interface: 'gear', Feedback: 'spark', Audio: 'combat', Accessibility: 'shield', Profile: 'helm' };
 export function SettingsModal({ settings, profile, saveError, onSettings, onClose, onSwitchProfile, onRenameProfile, onDeleteProfile }: { settings: AppSettings; profile: ProfileRecord | null; saveError?: string; onSettings: (next: AppSettings) => void; onClose: () => void; onSwitchProfile?: () => void; onRenameProfile?: (name: string) => void; onDeleteProfile?: () => void }) {
   const [category, setCategory] = useState<Category>('Interface'), [rename, setRename] = useState(false), [name, setName] = useState(profile?.name ?? ''), [confirmDelete, setConfirmDelete] = useState(false), [error, setError] = useState('');
   const update = (change: (next: AppSettings) => void) => { const next = structuredClone(settings); change(next); onSettings(next); };

@@ -33,6 +33,35 @@
 
 }
 
+.target-list { display:grid; gap:calc(5px * var(--ui-scale)); margin-bottom:calc(9px * var(--ui-scale)); }
+.enemy-choice { display:grid; grid-template-columns:calc(30px * var(--ui-scale)) minmax(0,1fr) auto; align-items:center; gap:calc(7px * var(--ui-scale)); width:100%; min-height:calc(46px * var(--ui-scale)); padding:calc(5px * var(--ui-scale)); color:#c8ccc5; text-align:left; background:#202627; border:1px solid #394142; border-radius:calc(4px * var(--ui-scale)); cursor:pointer; }
+.enemy-choice:hover:not(:disabled),.enemy-choice:focus-visible { border-color:#a4774e; background:#2b2c28; }
+.enemy-choice.selected { border-color:#96714a; background:linear-gradient(90deg,#3b3228,#252a29); }
+.enemy-choice.locked { opacity:.58; cursor:not-allowed; }
+.enemy-choice>span:nth-child(2) { min-width:0; }
+.enemy-choice b,.enemy-choice small { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.enemy-choice b { font-size:calc(9px * var(--ui-scale) * var(--text-scale)); }
+.enemy-choice small { margin-top:2px; color:#89928b; font-size:calc(7px * var(--ui-scale) * var(--text-scale)); }
+.enemy-mark { display:grid; place-items:center; width:calc(28px * var(--ui-scale)); height:calc(28px * var(--ui-scale)); color:#c39866; background:#302d27; border:1px solid #514738; border-radius:4px; }
+.enemy-kills { color:#a9b0a9; font-size:calc(8px * var(--ui-scale) * var(--text-scale)); font-variant-numeric:tabular-nums; }
+.selected-enemy { margin-top:calc(7px * var(--ui-scale)); }
+.enemy-large-mark { display:grid; place-items:center; color:#c3a170; }
+.enemy-glyph { display:grid; place-items:center; width:calc(94px * var(--ui-scale)); height:calc(88px * var(--ui-scale)); color:#a9a28b; filter:drop-shadow(0 8px 6px #0008); }
+.enemy-glyph-dust-rat { color:#9c8369; transform:scale(.78); }
+.enemy-glyph-ragged-poacher { color:#888f86; }
+.enemy-glyph-hedge-spark { color:#95b4a0; filter:drop-shadow(0 0 9px #91c5a233); }
+.enemy-glyph-ironjaw-boar { color:#b58058; transform:scale(1.15); }
+.special-control { display:grid; grid-template-columns:minmax(0,1fr) auto auto; align-items:end; gap:calc(10px * var(--ui-scale)); padding:calc(9px * var(--ui-scale)); margin-top:calc(8px * var(--ui-scale)); background:#202627; border:1px solid #3b4141; border-radius:4px; }
+.special-control>div:first-child small { display:block; margin-top:4px; color:#929a92; font-size:calc(8px * var(--ui-scale) * var(--text-scale)); }
+.special-control label { display:grid; gap:3px; color:#a4aaa3; font-size:calc(8px * var(--ui-scale) * var(--text-scale)); }
+.special-control select { min-height:calc(28px * var(--ui-scale)); color:#d1d4cc; background:#171c1d; border:1px solid #4a5150; border-radius:3px; }
+.special-control .bar { height:calc(5px * var(--ui-scale)); margin-top:4px; }
+.deposit-selected { width:100%; text-align:left; color:inherit; cursor:pointer; }
+.deposit-selected:hover:not(:disabled),.deposit-selected:focus-visible { border-color:#a4774e; }
+.deposit-selected.locked { opacity:.68; cursor:not-allowed; }
+.deposit-selected.selected { outline:1px solid #98724b; }
+.stone-vein-art .ore-face { filter:grayscale(.8) brightness(1.22); }
+
 .enemy-card {
   display: flex;
   align-items: center;

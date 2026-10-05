@@ -286,8 +286,9 @@
   .activity-hud {
     position: sticky;
     bottom: 0;
-    height: calc(65px * var(--ui-scale));
-    padding: 0 calc(16px * var(--ui-scale));
+    height: auto;
+    min-height: calc(65px * var(--ui-scale));
+    padding: calc(8px * var(--ui-scale)) calc(16px * var(--ui-scale));
     grid-template-columns: minmax(calc(200px * var(--ui-scale)),1fr) minmax(calc(130px * var(--ui-scale)),.7fr) minmax(calc(150px * var(--ui-scale)),.8fr) auto;
     gap: calc(12px * var(--ui-scale));
 
@@ -369,7 +370,7 @@
 
   }
   .deposit-rail {
-    display: none;
+    display: flex;
 
   }
   .mine-focus {

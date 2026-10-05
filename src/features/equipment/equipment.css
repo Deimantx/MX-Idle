@@ -82,8 +82,31 @@
   width: calc(31px * var(--ui-scale));
   height: calc(31px * var(--ui-scale));
   grid-row: 2;
+  grid-column: 1;
 
 }
+
+.equipment-slot .slot-name {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  color: #929991;
+  font-size: calc(7px * var(--ui-scale) * var(--text-scale));
+  text-transform: uppercase;
+  letter-spacing: .08em;
+
+}
+
+.equipment-slot b {
+  grid-column: 2;
+  grid-row: 2;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+}
+
+.equipment-slot .slot-placeholder { grid-column: 1 / -1; grid-row: 2; color: #59615d; text-align: center; }
 
 .equipment-slot b {
   font-size: calc(8px * var(--ui-scale) * var(--text-scale));

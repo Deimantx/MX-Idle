@@ -12,7 +12,7 @@ export const GAME_SCREENS: { id: GameScreenId; icon: string }[] = [
 
 export function isScreenUnlocked(screen: GameScreenId, game: SaveState) {
   if (screen === 'Combat') return game.objectives.sword && game.objectives.helm;
-  if (screen === 'Smithing') return (game.bank.ore ?? 0) + game.mining.sessionOre > 0 || game.skills.Mining.xp > 0;
+  if (screen === 'Smithing') return (game.bank['item.mining.copper_ore'] ?? 0) + Object.values(game.mining.sessionOutputs).reduce((sum, amount) => sum + (amount ?? 0), 0) > 0 || game.skills.Mining.xp > 0;
   return true;
 }
 
