@@ -1,0 +1,222 @@
+.bank-layout {
+
+}
+
+.bank-screen .screen-heading {
+  margin-bottom: 18px;
+
+}
+
+.bank-panel {
+  padding: 15px 16px;
+  min-height: 390px;
+
+}
+
+.bank-capacity {
+  font-size: 7px;
+  color: #818b85;
+  letter-spacing: .7px;
+
+}
+
+.bank-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 11px;
+  border-bottom: 1px solid #3b4243;
+
+}
+
+.bank-filters {
+  display: flex;
+  gap: 4px;
+
+}
+
+.bank-filters button {
+  border: 1px solid transparent;
+  background: transparent;
+  border-radius: 4px;
+  color: #929a94;
+  padding: 6px 9px;
+  font-size: 9px;
+  cursor: pointer;
+
+}
+
+.bank-filters button:hover {
+  background: #2b3234;
+  color: #d4d7ce;
+
+}
+
+.bank-filters button.selected {
+  background: #393128;
+  border-color: #69513b;
+  color: #e0b88c;
+
+}
+
+.bank-gold {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #d3b36f;
+
+}
+
+.bank-gold b {
+  font-size: 11px;
+
+}
+
+.bank-gold small {
+  font-size: 7px;
+  letter-spacing: 1px;
+  color: #948e7b;
+
+}
+
+.bank-grid {
+  min-height: 205px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(130px,1fr));
+  gap: 7px;
+  padding: 13px 0;
+
+}
+
+.bank-item {
+  min-height: 112px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 11px 7px 8px;
+  background: #1b2123;
+  border: 1px solid #343c3d;
+  border-radius: 5px;
+  color: #d2d4cc;
+  cursor: pointer;
+  transition: background var(--fast),border var(--fast),transform var(--fast);
+
+}
+
+.bank-item:hover {
+  background: #282f30;
+  border-color: #696455;
+  transform: translateY(-1px);
+
+}
+
+.bank-item.selected {
+  background: linear-gradient(145deg,#373027,#232a29);
+  border-color: #98704b;
+  box-shadow: inset 0 0 0 1px #b6825233;
+
+}
+
+.bank-item>.item-mark {
+  width: 42px;
+  height: 42px;
+
+}
+
+.bank-item>.item-mark svg {
+  width: 27px;
+  height: 27px;
+
+}
+
+.bank-item>b {
+  font-size: 9px;
+  text-align: center;
+
+}
+
+.bank-item>small {
+  font-size: 7px;
+  color: #858d88;
+
+}
+
+.bank-empty {
+  grid-column: 1/-1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #77817c;
+  gap: 8px;
+  min-height: 180px;
+
+}
+
+.bank-empty svg {
+  color: #8b785e;
+
+}
+
+.bank-empty b {
+  font: 15px Marcellus,serif;
+  color: #b9bcb4;
+
+}
+
+.bank-empty small {
+  font-size: 9px;
+
+}
+
+.bank-detail {
+  min-height: 55px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 10px;
+  border: 1px solid #363d3e;
+  background: #191f21;
+  border-radius: 4px;
+
+}
+
+.bank-detail>div {
+  flex: 1;
+  min-width: 0;
+
+}
+
+.bank-detail b,.bank-detail small {
+  display: block;
+
+}
+
+.bank-detail b {
+  font-size: 10px;
+
+}
+
+.bank-detail small {
+  font-size: 8px;
+  color: #939a95;
+  margin-top: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
+.bank-detail .badge {
+  font-size: 7px;
+
+}
+
+.bank-detail>small {
+  font-size: 8px;
+  color: #7f8882;
+
+}

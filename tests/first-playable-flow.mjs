@@ -1,10 +1,15 @@
 import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { chromium } from 'playwright';
 
 const out = 'artifacts/qa';
+const baseUrl = process.env.BASE_URL ?? 'http://127.0.0.1:5173';
 await mkdir(out, { recursive: true });
-const browser = await chromium.launch({ headless: true, executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', args: ['--no-sandbox'] });
+const browserCandidates = [process.env.CHROME_PATH, chromium.executablePath(), 'C:/Program Files/Google/Chrome/Application/chrome.exe', '/usr/bin/chromium', '/usr/bin/google-chrome'].filter(Boolean);
+const executablePath = browserCandidates.find((candidate) => existsSync(candidate));
+assert.ok(executablePath, 'Install Chrome/Chromium or set CHROME_PATH before running browser QA.');
+const browser = await chromium.launch({ headless: true, executablePath, args: ['--no-sandbox'] });
 const context = await browser.newContext({ viewport: { width: 1920, height: 1080 }, reducedMotion: 'reduce' });
 const page = await context.newPage();
 const errors = [];
@@ -13,7 +18,7 @@ page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
 const shot = async (name) => page.screenshot({ path: `${out}/${name}.png`, fullPage: true });
 const wait = (ms) => page.waitForTimeout(ms);
 
-await page.goto('http://127.0.0.1:5173/', { waitUntil: 'networkidle' });
+await page.goto(baseUrl, { waitUntil: 'networkidle' });
 assert.equal(await page.locator('h1').innerText(), 'Mining');
 await shot('mining-ready-1920');
 await page.getByRole('button', { name: /Start Mining/ }).click();

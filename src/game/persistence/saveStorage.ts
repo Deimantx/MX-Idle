@@ -1,0 +1,6 @@
+import { freshState } from '../state/initialState';
+import { advance } from '../systems/simulation';
+import type { SaveState } from '../types/gameTypes';
+
+export const SAVE_KEY = 'mx-idle-save-v1';
+export function loadState(raw: string | null, now = Date.now()): { state: SaveState; awayMs: number; fresh: boolean } { if (!raw) return { state: freshState(now), awayMs: 0, fresh: true }; try { const envelope = JSON.parse(raw); if (envelope.version !== 1 || !envelope.state || typeof envelope.state !== 'object') throw Error('Unsupported save'); const d = freshState(now), s = { ...d, ...envelope.state, version: 1, skills: { ...d.skills, ...envelope.state.skills }, bank: envelope.state.bank ?? d.bank, equipped: { ...d.equipped, ...envelope.state.equipped }, mining: { ...d.mining, ...envelope.state.mining }, smithing: { ...d.smithing, ...envelope.state.smithing }, combat: { ...d.combat, ...envelope.state.combat }, objectives: { ...d.objectives, ...envelope.state.objectives }, settings: { ...d.settings, ...envelope.state.settings }, rng: Number.isFinite(envelope.state.rng) ? envelope.state.rng : d.rng } as SaveState; const awayMs = Math.max(0, now - Number(envelope.savedAt || now)); return { state: advance(s, awayMs), awayMs, fresh: false }; } catch { return { state: freshState(now), awayMs: 0, fresh: true }; } }

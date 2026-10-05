@@ -1,0 +1,92 @@
+
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 13px 0;
+  border-bottom: 1px solid #343b3d;
+
+}
+
+.setting-row b,.setting-row small {
+  display: block;
+
+}
+
+.setting-row b {
+  font-size: 11px;
+
+}
+
+.setting-row small {
+  font-size: 9px;
+  color: #969e99;
+  margin-top: 4px;
+
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+}
+
+.volume-control input {
+  width: 100px;
+  accent-color: #d18a52;
+
+}
+
+.volume-control span {
+  font-size: 9px;
+  color: #b8bdb7;
+  min-width: 31px;
+  text-align: right;
+
+}
+
+.toggle {
+  width: 36px;
+  height: 20px;
+  border-radius: 12px;
+  border: 1px solid #555e5e;
+  background: #1a1e20;
+  padding: 2px;
+  cursor: pointer;
+
+}
+
+.toggle i {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #87908c;
+  transition: transform var(--fast),background var(--fast);
+
+}
+
+.toggle.on {
+  background: #755337;
+  border-color: #a77a53;
+
+}
+
+.toggle.on i {
+  transform: translateX(15px);
+  background: #f0c497;
+
+}
+
+.setting-row select {
+  background: #242b2d;
+  border: 1px solid #51595b;
+  padding: 6px 8px;
+  border-radius: 4px;
+  color: #d6d8d1;
+  font-size: 10px;
+
+}

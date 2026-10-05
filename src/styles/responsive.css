@@ -1,0 +1,790 @@
+@keyframes dot-pulse {
+  0%,100% {
+    box-shadow: 0 0 0 3px #c98c591b,0 0 6px #c98c5944;
+
+  }
+  50% {
+    box-shadow: 0 0 0 5px #c98c5926,0 0 11px #c98c5977;
+
+  }
+
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+
+  }
+
+}
+
+@keyframes haze {
+  0%,100% {
+    transform: translateY(0) scaleY(.8);
+    opacity: .25;
+
+  }
+  50% {
+    transform: translateY(-11px) scaleY(1.2);
+    opacity: .7;
+
+  }
+
+}
+
+@keyframes furnace-glow {
+  from {
+    filter: brightness(.87);
+
+  }
+  to {
+    filter: brightness(1.12);
+
+  }
+
+}
+
+@keyframes workpiece-hover {
+  0%,100% {
+    transform: translateY(0);
+
+  }
+  50% {
+    transform: translateY(-3px);
+
+  }
+
+}
+
+@keyframes spark {
+  0% {
+    transform: translate(0,7px) scale(.6);
+    opacity: 0;
+
+  }
+  25% {
+    opacity: .85;
+
+  }
+  100% {
+    transform: translate(6px,-19px) scale(.2);
+    opacity: 0;
+
+  }
+
+}
+
+@keyframes wolf-shift {
+  0%,100% {
+    transform: translateX(0);
+
+  }
+  50% {
+    transform: translateX(-4px);
+
+  }
+
+}
+
+@keyframes float-hit {
+  from {
+    opacity: 0;
+    transform: translateY(9px) scale(.8);
+
+  }
+  25% {
+    opacity: 1;
+
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-22px) scale(1.03);
+
+  }
+
+}
+
+@media (prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+
+  }
+
+}
+
+@media (max-width:1200px) {
+  :root {
+    --sidebar: 190px;
+
+  }
+  .content-wrap {
+    padding-left: 20px;
+    padding-right: 20px;
+
+  }
+  .mine-layout {
+    grid-template-columns: minmax(165px,.7fr) minmax(370px,1.8fr);
+
+  }
+  .mine-inspector {
+    grid-column: 1/-1;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr 1fr;
+    gap: 12px;
+    align-items: center;
+
+  }
+  .mine-inspector .panel-head {
+    display: none;
+
+  }
+  .mine-inspector .stat-rows {
+    margin: 0;
+
+  }
+  .mine-inspector .xp-block,.mine-inspector .cycle-block {
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+  }
+  .combat-layout {
+    grid-template-columns: minmax(200px,.75fr) minmax(400px,1.55fr);
+
+  }
+  .combat-intel {
+    grid-column: 1/-1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr 1.1fr;
+    align-items: center;
+    gap: 10px;
+
+  }
+  .combat-intel .panel-head {
+    display: none;
+
+  }
+  .combat-intel .stat-rows,.combat-intel .log-panel,.combat-intel .loot-preview {
+    margin: 0;
+
+  }
+  .combat-intel .log-panel {
+    border-top: 0;
+    border-left: 1px solid #383e3f;
+    padding: 0 0 0 10px;
+
+  }
+  .combat-intel .log-lines {
+    height: 68px;
+
+  }
+  .combat-intel .loot-preview {
+    height: 48px;
+
+  }
+  .objective-track {
+    grid-template-columns: repeat(4,1fr);
+
+  }
+
+}
+
+@media (max-width:930px) {
+  html,body,#root {
+    height: auto;
+    min-height: 100%;
+    overflow: auto;
+
+  }
+  .game-shell {
+    height: auto;
+    min-height: 100dvh;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+
+  }
+  .sidebar {
+    position: sticky;
+    top: 0;
+    height: 59px;
+    flex-direction: row;
+    align-items: center;
+    border-right: 0;
+    border-bottom: 1px solid #3a4142;
+
+  }
+  .brand {
+    height: 58px;
+    width: 172px;
+    flex: none;
+    border-bottom: 0;
+    padding-left: 14px;
+
+  }
+  .brand-mark {
+    width: 31px;
+    height: 31px;
+
+  }
+  .brand b {
+    font-size: 15px;
+
+  }
+  .brand small {
+    font-size: 7px;
+
+  }
+  .nav-caption,.sidebar-bottom {
+    display: none;
+
+  }
+  nav {
+    display: flex;
+    gap: 3px;
+    flex: 1;
+    justify-content: flex-end;
+    padding: 0 10px;
+
+  }
+  nav .nav-item {
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    padding: 0;
+
+  }
+  nav .nav-item>span:not(.lock-mark) {
+    display: none;
+
+  }
+  .nav-item.selected {
+    border-radius: 5px;
+
+  }
+  .main-frame {
+    min-height: calc(100dvh - 59px);
+
+  }
+  .topbar {
+    height: 52px;
+    padding: 0 17px;
+
+  }
+  .content-wrap {
+    padding: 19px 17px 20px;
+
+  }
+  .activity-dock {
+    position: sticky;
+    bottom: 0;
+    height: 65px;
+    padding: 0 16px;
+    grid-template-columns: minmax(200px,1fr) minmax(130px,.7fr) minmax(150px,.8fr) auto;
+    gap: 12px;
+
+  }
+  .mine-layout {
+    grid-template-columns: minmax(150px,.65fr) minmax(0,1.5fr);
+
+  }
+  .mine-inspector {
+    grid-column: 1/-1;
+
+  }
+  .combat-layout {
+    grid-template-columns: minmax(0,1fr) minmax(0,1.7fr);
+
+  }
+  .combat-intel {
+    grid-column: 1/-1;
+
+  }
+  .equipment-layout {
+    grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+
+  }
+  .bottom-grid {
+    grid-template-columns: 1fr;
+
+  }
+  .smithing-layout.smelting-layout {
+    grid-template-columns: 1fr 1fr;
+
+  }
+
+}
+
+@media (max-width:680px) {
+  .brand {
+    width: 58px;
+    padding: 0 12px;
+
+  }
+  .brand>div:nth-child(2) {
+    display: none;
+
+  }
+  nav {
+    justify-content: space-around;
+    padding: 0 4px;
+
+  }
+  .top-status {
+    gap: 10px;
+
+  }
+  .save-label,.status-divider {
+    display: none;
+
+  }
+  .topbar {
+    padding: 0 12px;
+
+  }
+  .content-wrap {
+    padding: 16px 11px 18px;
+
+  }
+  .screen-heading {
+    margin-bottom: 15px;
+
+  }
+  .screen-heading h1 {
+    font-size: 26px;
+
+  }
+  .screen-heading p {
+    max-width: 350px;
+    font-size: 10px;
+    line-height: 1.4;
+
+  }
+  .mine-layout,.combat-layout,.equipment-layout,.smithing-layout.smelting-layout,.smithing-layout.forging-layout {
+    grid-template-columns: 1fr;
+
+  }
+  .deposit-rail {
+    display: none;
+
+  }
+  .mine-focus {
+    grid-row: 1;
+
+  }
+  .mine-inspector {
+    grid-template-columns: 1fr 1fr;
+    grid-column: auto;
+
+  }
+  .mine-inspector .tool-card {
+    grid-column: 1/-1;
+
+  }
+  .mine-inspector .stat-rows {
+    grid-column: 1/-1;
+
+  }
+  .mine-inspector .cycle-block,.mine-inspector .xp-block {
+    padding-top: 7px;
+    border-top: 1px solid #353c3d;
+
+  }
+  .stage-node b {
+    font-size: 8px;
+
+  }
+  .stage-node small {
+    font-size: 7px;
+
+  }
+  .bottom-grid {
+    grid-template-columns: 1fr;
+
+  }
+  .objective-track {
+    grid-template-columns: repeat(2,1fr);
+
+  }
+  .objective-row {
+    font-size: 8px;
+
+  }
+  .notes-panel {
+    display: none;
+
+  }
+  .activity-dock {
+    height: auto;
+    min-height: 67px;
+    grid-template-columns: minmax(0,1fr) auto;
+    gap: 6px 12px;
+    padding: 8px 11px;
+
+  }
+  .dock-activity {
+    grid-row: 1;
+    grid-column: 1;
+
+  }
+  .dock-phase {
+    display: none;
+
+  }
+  .dock-progress {
+    grid-row: 2;
+    grid-column: 1;
+
+  }
+  .dock-stop,.dock-choose {
+    grid-row: 1/3;
+    grid-column: 2;
+
+  }
+  .dock-icon {
+    width: 32px;
+    height: 32px;
+
+  }
+  .dock-activity b {
+    font-size: 9px;
+
+  }
+  .smith-tabs>button {
+    min-width: 0;
+    flex: 1;
+    padding: 0 6px;
+    font-size: 9px;
+
+  }
+  .smith-tabs>button small {
+    display: none;
+
+  }
+  .forge-label {
+    display: none;
+
+  }
+  .furnace-art {
+    height: 190px;
+
+  }
+  .forging-layout .recipe-list-panel {
+    order: 2;
+
+  }
+  .forging-layout .workpiece-panel {
+    order: 1;
+
+  }
+  .combat-intel {
+    grid-column: auto;
+    display: block;
+
+  }
+  .combat-intel .panel-head {
+    display: flex;
+
+  }
+  .combat-intel .log-panel {
+    border: 0;
+    border-top: 1px solid #383e3f;
+    padding: 8px 0 0;
+    margin-top: 9px;
+
+  }
+  .combat-intel .log-lines {
+    height: 80px;
+
+  }
+  .battle-scene {
+    height: 175px;
+
+  }
+  .battle-wolf {
+    width: 138px;
+    right: 9%;
+
+  }
+  .battle-figure {
+    left: 13%;
+    transform: scale(.8);
+    transform-origin: bottom left;
+
+  }
+  .target-panel {
+    order: 2;
+
+  }
+  .battle-panel {
+    order: 1;
+
+  }
+  .combat-intel {
+    order: 3;
+
+  }
+  .equipment-layout .loadout-panel,.equipment-layout .equipment-inspector {
+    min-height: auto;
+
+  }
+  .loadout-board {
+    min-height: 310px;
+
+  }
+  .equipment-slot {
+    width: min(126px,100%);
+
+  }
+  .character-silhouette {
+    transform: scale(.85);
+
+  }
+  .candidate-row {
+    gap: 5px;
+
+  }
+  .candidate-row b {
+    font-size: 8px;
+
+  }
+  .candidate-row .game-button {
+    padding: 0 5px;
+
+  }
+  .smith-xp-strip {
+    grid-template-columns: 1fr auto;
+    gap: 7px;
+
+  }
+  .smith-xp-strip>.bar {
+    grid-column: 1/-1;
+    grid-row: 2;
+
+  }
+  .smith-xp-strip>small {
+    grid-column: 1/-1;
+    grid-row: 3;
+
+  }
+  .toast {
+    top: 66px;
+    right: 10px;
+    left: 10px;
+    max-width: max-content;
+
+  }
+  .modal {
+    padding: 15px;
+
+  }
+  .bank-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+
+  }
+  .bank-toolbar {
+    align-items: start;
+    gap: 8px;
+    flex-direction: column;
+
+  }
+  .bank-filters {
+    width: 100%;
+    justify-content: space-between;
+
+  }
+  .bank-filters button {
+    padding: 6px 5px;
+    font-size: 8px;
+
+  }
+  .bank-capacity {
+    font-size: 6px;
+
+  }
+
+}
+
+@media (max-width:400px) {
+  .gold-chip small {
+    display: none;
+
+  }
+  .gold-chip {
+    gap: 3px;
+
+  }
+  .skill-chip {
+    gap: 5px;
+
+  }
+  .skill-glyph {
+    width: 23px;
+    height: 23px;
+
+  }
+  .mini-xp {
+    width: 62px;
+
+  }
+  .top-settings {
+    display: none;
+
+  }
+  .screen-heading .badge {
+    font-size: 6px;
+
+  }
+  .mine-focus {
+    padding: 12px;
+
+  }
+  .vein-art {
+    margin-left: -12px;
+    margin-right: -12px;
+
+  }
+  .stage-name-line h3 {
+    font-size: 15px;
+
+  }
+  .stage-reward b {
+    font-size: 8px;
+
+  }
+  .stage-node b {
+    font-size: 7px;
+
+  }
+  .stage-node small {
+    white-space: normal;
+
+  }
+  .mine-inspector {
+    padding: 12px 10px;
+
+  }
+  .objective-row {
+    padding: 5px 4px;
+    font-size: 7px;
+
+  }
+  .battle-health,.action-timers {
+    gap: 8px;
+
+  }
+  .stance-control {
+    align-items: flex-start;
+    flex-direction: column;
+
+  }
+  .segmented {
+    width: 100%;
+
+  }
+  .segmented button {
+    flex: 1;
+
+  }
+  .battle-footer .game-button {
+    min-width: 100px;
+
+  }
+  .furnace-readings>div {
+    padding: 8px 6px;
+
+  }
+  .recipe-equation {
+    gap: 3px;
+
+  }
+  .recipe-equation .item-mark {
+    width: 27px;
+    height: 27px;
+
+  }
+  .recipe-equation b {
+    font-size: 8px;
+
+  }
+  .forge-action-row .game-button {
+    padding: 0 8px;
+
+  }
+
+}
+
+@media (min-width:681px) and (max-width:930px) {
+  .topbar {
+    gap: 10px;
+    padding: 0 14px;
+
+  }
+  .location-crumb {
+    min-width: 0;
+    white-space: nowrap;
+    font-size: 11px;
+
+  }
+  .location-crumb span {
+    font-size: 8px;
+
+  }
+  .top-status {
+    flex: none;
+    gap: 9px;
+
+  }
+  .gold-chip {
+    gap: 4px;
+
+  }
+  .gold-chip small {
+    display: none;
+
+  }
+  .skill-chip {
+    max-width: 112px;
+    flex: none;
+    overflow: hidden;
+
+  }
+  .skill-chip>div {
+    min-width: 0;
+
+  }
+  .skill-chip b {
+    max-width: 68px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 9px;
+
+  }
+  .skill-glyph {
+    width: 24px;
+    height: 24px;
+    flex: none;
+
+  }
+  .mini-xp {
+    width: 60px;
+
+  }
+  .top-settings {
+    flex: none;
+    width: 30px;
+    height: 30px;
+    margin-left: 0;
+
+  }
+
+}

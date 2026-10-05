@@ -1,0 +1,680 @@
+.bar.heat-label {
+  color: #d89157;
+
+}
+
+.screen-heading.smithing .screen-overline {
+  color: #bb916c;
+
+}
+
+.smith-tabs {
+  height: 43px;
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid #41494a;
+  margin-bottom: 14px;
+  gap: 3px;
+
+}
+
+.smith-tabs>button {
+  min-width: 170px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  border-bottom: 0;
+  border-radius: 5px 5px 0 0;
+  background: none;
+  color: #9ca39e;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+
+}
+
+.smith-tabs>button:hover {
+  background: #252b2d;
+  color: #e2e0d6;
+
+}
+
+.smith-tabs>button.selected {
+  background: linear-gradient(180deg,#39332c,#292b29);
+  border-color: #69513b;
+  color: #e4c19d;
+  box-shadow: inset 0 2px #c18350;
+
+}
+
+.smith-tabs>button.selected svg {
+  color: #d79861;
+
+}
+
+.smith-tabs>button small {
+  margin-left: auto;
+  color: #818985;
+  font-size: 8px;
+  font-weight: 500;
+
+}
+
+.forge-label {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #a1a59d;
+  font-size: 8px;
+  letter-spacing: 1px;
+
+}
+
+.forge-label b {
+  font-size: 8px;
+  color: #cd9a6d;
+
+}
+
+.heat-light {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #d18a52;
+  box-shadow: 0 0 8px #d18a5266;
+
+}
+
+.smith-layout {
+  display: grid;
+  gap: 14px;
+  align-items: stretch;
+
+}
+
+.furnace-panel {
+  padding: 15px 17px;
+  overflow: hidden;
+
+}
+
+.furnace-art {
+  height: 225px;
+  position: relative;
+  display: grid;
+  place-items: end center;
+  margin: 1px -17px 10px;
+  background: radial-gradient(ellipse at 50% 94%,#8b512b4f,transparent 52%),linear-gradient(180deg,#1a2022,#1d2324 70%,#252a28);
+  overflow: hidden;
+  border-bottom: 1px solid #3a3d39;
+
+}
+
+.furnace-art:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg,#ffffff09,transparent 30%,transparent 70%,#ffffff05);
+
+}
+
+.furnace-chimney {
+  position: absolute;
+  top: 16px;
+  width: 60px;
+  height: 91px;
+  border: 1px solid #55584f;
+  background: linear-gradient(90deg,#343936,#44443a 40%,#292f2e);
+  clip-path: polygon(12% 0,88% 0,100% 100%,0 100%);
+  box-shadow: 0 0 12px #e3973a12;
+
+}
+
+.furnace-crown {
+  position: absolute;
+  top: 89px;
+  width: 172px;
+  height: 25px;
+  background: linear-gradient(180deg,#71614b,#343832);
+  clip-path: polygon(8% 0,92% 0,100% 100%,0 100%);
+  border-bottom: 2px solid #8e6a48;
+
+}
+
+.furnace-body {
+  position: relative;
+  width: 160px;
+  height: 112px;
+  margin-bottom: 18px;
+  background: linear-gradient(90deg,#353b39,#555147 17%,#44463e 50%,#303634);
+  border: 1px solid #716852;
+  clip-path: polygon(3% 0,97% 0,90% 100%,10% 100%);
+  box-shadow: 0 9px 20px #0008;
+  z-index: 1;
+
+}
+
+.furnace-window {
+  position: absolute;
+  left: 38px;
+  right: 38px;
+  top: 26px;
+  height: 50px;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 5px;
+  background: radial-gradient(ellipse at 50% 92%,#ffe08b 0,#e67d32 23%,#7b3825 53%,#281f1d 78%);
+  border: 4px solid #242927;
+  box-shadow: 0 0 15px #dd772b60,inset 0 3px 9px #ffda723e;
+  overflow: hidden;
+
+}
+
+.furnace-window i {
+  width: 13px;
+  height: 27px;
+  margin-bottom: -12px;
+  background: #f9bd63;
+  filter: blur(2px);
+  border-radius: 50% 50% 0 0;
+
+}
+
+.furnace-grate {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 7px;
+  height: 4px;
+  background: #191f20;
+  border-top: 1px solid #8a7250;
+
+}
+
+.furnace-base {
+  position: absolute;
+  bottom: 9px;
+  width: 199px;
+  height: 20px;
+  background: linear-gradient(180deg,#5b5648,#313735);
+  clip-path: polygon(8% 0,92% 0,100% 100%,0 100%);
+  border-bottom: 1px solid #827154;
+
+}
+
+.heat-haze {
+  position: absolute;
+  width: 15px;
+  height: 38px;
+  border-left: 1px solid #db9c6435;
+  border-radius: 50%;
+  filter: blur(2px);
+  top: 42px;
+  animation: haze 3s ease-in-out infinite;
+
+}
+
+.heat-haze.h1 {
+  left: calc(50% - 30px);
+
+}
+
+.heat-haze.h2 {
+  left: calc(50% + 15px);
+  animation-delay: -1.4s;
+
+}
+
+.furnace-panel:not(.furnace-lit) .furnace-window {
+  filter: saturate(.28);
+  box-shadow: 0 0 4px #dd772b16;
+
+}
+
+.furnace-panel:not(.furnace-lit) .heat-haze {
+  display: none;
+
+}
+
+.furnace-lit .furnace-window {
+  animation: furnace-glow 2s ease-in-out infinite alternate;
+
+}
+
+.furnace-readings {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  border: 1px solid #373d3e;
+  background: #191e20;
+  border-radius: 4px;
+
+}
+
+.furnace-readings>div {
+  padding: 9px 10px;
+  border-right: 1px solid #343a3b;
+
+}
+
+.furnace-readings>div:last-child {
+  border: 0;
+
+}
+
+.furnace-readings span,.furnace-readings b {
+  display: block;
+
+}
+
+.furnace-readings span {
+  font-size: 7px;
+  letter-spacing: .8px;
+  color: #858c87;
+
+}
+
+.furnace-readings b {
+  font-size: 13px;
+  color: #dfddd4;
+  margin-top: 5px;
+  font-variant-numeric: tabular-nums;
+
+}
+
+.furnace-readings b small {
+  font-size: 9px;
+  color: #858c88;
+  font-weight: 500;
+
+}
+
+.recipe-panel {
+  align-self: start;
+  padding: 16px;
+
+}
+
+.recipe-hero {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #393e3e;
+
+}
+
+.recipe-hero>div:nth-child(2) {
+  flex: 1;
+
+}
+
+.recipe-hero h3 {
+  font: 17px Marcellus,serif;
+  margin: 0 0 4px;
+
+}
+
+.recipe-hero span {
+  color: #8f9891;
+  font-size: 9px;
+
+}
+
+.recipe-equation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+  padding: 14px 5px;
+  border-bottom: 1px solid #363c3d;
+
+}
+
+.recipe-equation>div {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+
+}
+
+.recipe-equation>div>div {
+  min-width: 0;
+
+}
+
+.recipe-equation b,.recipe-equation small {
+  display: block;
+  white-space: nowrap;
+
+}
+
+.recipe-equation b {
+  font-size: 9px;
+
+}
+
+.recipe-equation b span {
+  color: #b78257;
+
+}
+
+.recipe-equation small {
+  font-size: 8px;
+  color: #8c938e;
+  margin-top: 3px;
+
+}
+
+.recipe-arrow {
+  color: #b88a65;
+  font-size: 16px;
+
+}
+
+.recipe-stats {
+  margin: 6px 0 12px;
+
+}
+
+.recipe-footnote {
+  color: #818985;
+  text-align: center;
+  font-size: 8px;
+  margin: 8px 0 0;
+
+}
+
+.recipe-list-panel {
+  padding: 13px 12px;
+
+}
+
+.recipe-list {
+  display: grid;
+  gap: 5px;
+
+}
+
+.recipe-choice {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-align: left;
+  background: #1b2123;
+  border: 1px solid #343b3c;
+  border-radius: 5px;
+  padding: 7px 8px;
+  color: #d2d4cc;
+  cursor: pointer;
+  transition: background var(--fast),border var(--fast);
+
+}
+
+.recipe-choice:hover:not(:disabled) {
+  background: #272d2f;
+  border-color: #59605d;
+
+}
+
+.recipe-choice.selected {
+  background: linear-gradient(90deg,#3a3027,#292c2b);
+  border-color: #806040;
+  box-shadow: inset 2px 0 #cf8e57;
+
+}
+
+.recipe-choice:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+
+}
+
+.recipe-choice-text {
+  flex: 1;
+  min-width: 0;
+
+}
+
+.recipe-choice-text b,.recipe-choice-text small {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
+.recipe-choice-text b {
+  font-size: 10px;
+
+}
+
+.recipe-choice-text small {
+  font-size: 8px;
+  color: #909892;
+  margin-top: 3px;
+
+}
+
+.recipe-choice .badge {
+  font-size: 6px;
+  padding: 4px 5px;
+
+}
+
+.reservation-note {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 11px;
+  padding: 8px;
+  color: #929a94;
+  background: #191e20;
+  border-radius: 4px;
+  font-size: 8px;
+  line-height: 1.4;
+
+}
+
+.reservation-note svg {
+  flex: none;
+  color: #a88661;
+
+}
+
+.workpiece-panel {
+  padding: 13px 16px;
+
+}
+
+.workpiece-art {
+  height: 142px;
+  margin: 0 -16px 12px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 54% 73%,#a1592e46,transparent 41%),linear-gradient(180deg,#1b2022,#242724);
+  border-top: 1px solid #363d3c;
+  border-bottom: 1px solid #393e3c;
+
+}
+
+.anvil-shape {
+  position: absolute;
+  bottom: 24px;
+  width: 173px;
+  height: 58px;
+  filter: drop-shadow(0 7px 6px #0009);
+
+}
+
+.anvil-horn {
+  position: absolute;
+  top: 0;
+  left: -23px;
+  width: 54px;
+  height: 21px;
+  background: linear-gradient(180deg,#8c9087,#454e4c);
+  clip-path: polygon(46% 0,100% 17%,100% 78%,0 78%,0 43%);
+
+}
+
+.anvil-block {
+  position: absolute;
+  top: 4px;
+  left: 20px;
+  width: 137px;
+  height: 25px;
+  background: linear-gradient(180deg,#adb0a6,#65706b 48%,#39413f);
+  clip-path: polygon(0 0,100% 0,92% 100%,8% 100%);
+
+}
+
+.anvil-foot {
+  position: absolute;
+  top: 27px;
+  left: 51px;
+  width: 82px;
+  height: 30px;
+  background: linear-gradient(90deg,#3c4442,#70756b,#3c4440);
+  clip-path: polygon(10% 0,90% 0,100% 100%,0 100%);
+
+}
+
+.workpiece {
+  z-index: 1;
+  position: absolute;
+  top: 36px;
+  left: calc(50% - 29px);
+  color: #da9459;
+  filter: drop-shadow(0 0 10px #dc8c4d60);
+  animation: workpiece-hover 2.6s ease-in-out infinite;
+
+}
+
+.workpiece .item-mark {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: #e3a36a;
+
+}
+
+.forge-flare {
+  position: absolute;
+  bottom: 49px;
+  width: 3px;
+  height: 14px;
+  background: #eda158;
+  box-shadow: 0 0 9px #ed915a;
+  opacity: 0;
+
+}
+
+.hammering .forge-flare {
+  animation: spark .72s ease-out infinite;
+
+}
+
+.workpiece-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.workpiece-title h3 {
+  font: 16px Marcellus,serif;
+  margin: 3px 0 1px;
+
+}
+
+.workpiece-title small {
+  display: block;
+  color: #909893;
+  font-size: 8px;
+
+}
+
+.work-bar,.heat-bar {
+  height: 10px;
+
+}
+
+.heat-label {
+  margin-top: 9px;
+
+}
+
+.forge-action-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 11px;
+
+}
+
+.forge-status {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  min-width: 0;
+
+}
+
+.forge-status b,.forge-status small {
+  display: block;
+
+}
+
+.forge-status b {
+  font-size: 9px;
+
+}
+
+.forge-status small {
+  font-size: 8px;
+  color: #959c96;
+  margin-top: 3px;
+
+}
+
+.smith-xp-strip {
+  display: grid;
+  grid-template-columns: 90px minmax(120px,1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 13px;
+  margin-top: 14px;
+  border: 1px solid #353c3d;
+  background: #1b2123;
+  border-radius: 5px;
+
+}
+
+.smith-xp-strip>div {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: #bdc1bb;
+  font-size: 9px;
+
+}
+
+.smith-xp-strip .badge {
+  font-size: 7px;
+
+}
+
+.smith-xp-strip small {
+  font-size: 8px;
+  color: #929994;
+
+}

@@ -3,11 +3,16 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "engines": {
+    "node": ">=20",
+    "npm": ">=10"
+  },
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "tsc -b && vite build",
     "test": "vitest run",
-    "qa": "node scripts/qa-browser.mjs",
+    "qa": "node tests/first-playable-flow.mjs",
+    "typecheck": "tsc -b --pretty false",
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {

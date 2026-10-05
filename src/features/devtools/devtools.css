@@ -1,0 +1,62 @@
+.dev-panel {
+  position: fixed;
+  right: 10px;
+  bottom: 82px;
+  z-index: 15;
+
+}
+
+.dev-panel>button {
+  background: #442d23;
+  border: 1px solid #795339;
+  border-radius: 4px;
+  padding: 5px 8px;
+  color: #e3ab78;
+  font-size: 8px;
+  letter-spacing: 1px;
+  cursor: pointer;
+
+}
+
+.dev-controls {
+  position: absolute;
+  right: 0;
+  bottom: 29px;
+  width: 230px;
+  padding: 11px;
+  background: #171d1f;
+  border: 1px solid #525b59;
+  border-radius: 6px;
+  box-shadow: 0 8px 25px #000b;
+
+}
+
+.dev-controls>b {
+  display: block;
+  font-size: 10px;
+  margin-bottom: 8px;
+
+}
+
+.dev-row {
+  display: flex;
+  gap: 4px;
+  margin: 5px 0;
+
+}
+
+.dev-row .game-button {
+  font-size: 8px;
+  min-height: 27px;
+  gap: 4px;
+  padding: 0 6px;
+  flex: 1;
+
+}
+
+.dev-controls>.game-button {
+  width: 100%;
+  min-height: 29px;
+  margin-top: 4px;
+
+}

@@ -1,0 +1,181 @@
+.equipment-layout {
+  display: grid;
+  grid-template-columns: minmax(470px,1.05fr) minmax(380px,.95fr);
+  gap: 14px;
+  align-items: start;
+
+}
+
+.loadout-panel,.equipment-inspector {
+  min-height: 450px;
+
+}
+
+.loadout-board {
+  min-height: 335px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 3px 0;
+  background: radial-gradient(ellipse at center,#343737 0,#242a2b 44%,#1b2022 75%);
+  border: 1px solid #373e3e;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+
+}
+
+.loadout-board:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,transparent 49.7%,#525b5829 50%,transparent 50.3%),linear-gradient(0deg,transparent 49.7%,#525b5820 50%,transparent 50.3%);
+  pointer-events: none;
+
+}
+
+.slot-column {
+  display: grid;
+  gap: 8px;
+  z-index: 1;
+
+}
+
+.equipment-slot {
+  width: 132px;
+  min-height: 72px;
+  padding: 7px;
+  display: grid;
+  grid-template-columns: 34px minmax(0,1fr);
+  grid-template-rows: 12px 1fr;
+  column-gap: 7px;
+  align-items: center;
+  text-align: left;
+  background: #1b2123;
+  border: 1px solid #41494a;
+  border-radius: 5px;
+  color: #c6cac2;
+  cursor: pointer;
+
+}
+
+.equipment-slot.filled {
+  border-color: #72563e;
+  background: linear-gradient(120deg,#352d25,#242a29);
+
+}
+
+.equipment-slot:hover:not(:disabled) {
+  border-color: #ad7a52;
+  background: #302c27;
+
+}
+
+.equipment-slot:disabled {
+  cursor: default;
+  opacity: .77;
+
+}
+
+.equipment-slot .item-mark {
+  width: 31px;
+  height: 31px;
+  grid-row: 2;
+
+}
+
+.equipment-slot b {
+  font-size: 8px;
+  line-height: 1.15;
+
+}
+
+.character-silhouette {
+  height: 279px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  filter: drop-shadow(0 6px 9px #0006);
+
+}
+
+.loadout-hint {
+  text-align: center;
+  color: #818984;
+  font-size: 9px;
+  margin-top: 10px;
+
+}
+
+.candidate-list {
+  border-top: 1px solid #3b4141;
+  margin-top: 9px;
+  padding-top: 11px;
+
+}
+
+.candidate-list>.tiny-label {
+  display: block;
+  margin-bottom: 6px;
+
+}
+
+.candidate-row {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px solid #313839;
+
+}
+
+.candidate-row .item-mark {
+  width: 30px;
+  height: 30px;
+
+}
+
+.candidate-row>div {
+  min-width: 0;
+  flex: 1;
+
+}
+
+.candidate-row b,.candidate-row small {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
+.candidate-row b {
+  font-size: 9px;
+
+}
+
+.candidate-row small {
+  font-size: 8px;
+  color: #858e89;
+  margin-top: 2px;
+
+}
+
+.candidate-count {
+  font-size: 9px;
+  color: #b6bcb5;
+  min-width: 24px;
+  text-align: right;
+
+}
+
+.candidate-row .game-button {
+  min-height: 27px;
+  height: 27px;
+  padding: 0 8px;
+  font-size: 8px;
+
+}

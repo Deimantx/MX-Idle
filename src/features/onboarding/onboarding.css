@@ -1,0 +1,131 @@
+.objective-topline {
+  display: flex;
+  justify-content: space-between;
+  color: #9da39c;
+  font-size: 9px;
+  margin: 1px 0 7px;
+
+}
+
+.objective-topline b {
+  color: #c89a6b;
+
+}
+
+.objective-track {
+  display: grid;
+  grid-template-columns: repeat(7,1fr);
+  gap: 4px;
+
+}
+
+.objective-row {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 6px;
+  background: #1a2022;
+  border: 1px solid #303739;
+  border-radius: 4px;
+  color: #89908c;
+  font-size: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+
+}
+
+.objective-check {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border: 1px solid #515958;
+  border-radius: 50%;
+  font-size: 7px;
+  color: #929a96;
+
+}
+
+.objective-row.done {
+  color: #b5c4b4;
+  border-color: #394c3e;
+  background: #202a24;
+
+}
+
+.objective-row.done .objective-check {
+  color: #acd0ad;
+  border-color: #63806a;
+  background: #2b3b30;
+
+}
+
+.objective-row.current {
+  color: #e5c19b;
+  border-color: #72563f;
+  background: #302a25;
+
+}
+
+.objective-row.current .objective-check {
+  border-color: #bc8656;
+  color: #e8ba90;
+
+}
+
+.objective-row small {
+  margin-left: auto;
+  color: #d49b65;
+  font-size: 6px;
+  letter-spacing: .6px;
+
+}
+
+.objective-minimized {
+  font-size: 10px;
+  color: #a4aaa4;
+  padding: 3px;
+
+}
+
+.notes-panel .panel-head {
+  margin-bottom: 6px;
+
+}
+
+.note-entry {
+  display: flex;
+  gap: 9px;
+  padding: 7px 1px;
+  border-top: 1px solid #303638;
+
+}
+
+.note-pin {
+  width: 6px;
+  height: 6px;
+  flex: none;
+  border-radius: 50%;
+  margin-top: 5px;
+
+}
+
+.note-entry b,.note-entry small {
+  display: block;
+
+}
+
+.note-entry b {
+  font-size: 9px;
+  color: #cacdc5;
+
+}
+
+.note-entry small {
+  margin-top: 2px;
+  color: #8e9690;
+  font-size: 8px;
+
+}

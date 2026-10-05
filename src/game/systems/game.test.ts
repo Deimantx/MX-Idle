@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { advance, damageAfterResistance, freshState, hitChance, loadState, PROVISIONAL_FIRST_SLICE_COMBAT_VALUES, SAVE_KEY, stageDensity, stageStrikes, startActivity, stopActivity, type SaveState } from './game';
+import { advance, damageAfterResistance, freshState, hitChance, loadState, PROVISIONAL_FIRST_SLICE_COMBAT_VALUES, SAVE_KEY, stageDensity, stageStrikes, startActivity, stopActivity, type SaveState } from '../game';
 
 describe('Mining', () => {
   it('uses the authored five-stage Copper curve and expected twenty strikes', () => {
