@@ -53,13 +53,79 @@
       "source": "vercel-labs/agent-skills",
       "sourceType": "github",
       "skillPath": "skills/react-best-practices/SKILL.md",
-      "computedHash": "6b526d013e28073246a36f99b529bc43745d30832ecfa8217b359c34f260ca6b"
+      "computedHash": "7657a8a28760242c786d5b14fcf467dbc2daf770ef9666327bbd3ce154c48075"
     },
     "web-design-guidelines": {
       "source": "vercel-labs/agent-skills",
       "sourceType": "github",
       "skillPath": "skills/web-design-guidelines/SKILL.md",
       "computedHash": "d8e7d3afe37dcc8a97b99ffb5afdb4d0919ae0092ea8b68f44eb201f035e33ac"
+    },
+    "beautiful-shadows": {
+      "source": "mengto/skills",
+      "sourceType": "github",
+      "skillPath": "agent-skills/web-design/beautiful-shadows/SKILL.md",
+      "computedHash": "6abcd3ab6141c617f4e8514886d0ac744a1d6c1e4b0ccbd7087a19bedd5746f1"
+    },
+    "build-awwwards-quality-sites": {
+      "source": "mengto/skills",
+      "sourceType": "github",
+      "skillPath": "agent-skills/web-design/build-awwwards-quality-sites/SKILL.md",
+      "computedHash": "64017fdb07bf9b015ed25c4f286cde2238ab14b44e9a22ce2330167ee861f547"
+    },
+    "build-game-audio-feedback": {
+      "source": "mengto/skills",
+      "sourceType": "github",
+      "skillPath": "agent-skills/game-development/build-game-audio-feedback/SKILL.md",
+      "computedHash": "7ae51fa8952af75de1cb7c71a29f43e5497d66edda09fee931be02b5cb4e48f4"
+    },
+    "create-game-vfx": {
+      "source": "mengto/skills",
+      "sourceType": "github",
+      "skillPath": "agent-skills/game-development/create-game-vfx/SKILL.md",
+      "computedHash": "996e509eb40f020398ba16e4281da0b83108d002f6903910aaac962fe3c47ef4"
+    },
+    "css-border-gradient": {
+      "source": "mengto/skills",
+      "sourceType": "github",
+      "skillPath": "agent-skills/web-design/css-border-gradient/SKILL.md",
+      "computedHash": "0db19b7e0dde9fbb317cdfa2631bd55e00e049ea6d6cfe854709eb3e89843d28"
+    },
+    "gooey-blob-system": {
+      "source": "mengto/skills",
+      "sourceType": "github",
+      "skillPath": "agent-skills/web-design/gooey-blob-system/SKILL.md",
+      "computedHash": "f246d8bd9d529a6898b771401bb030f62f2fa027278cccab4bc316866c0605e1"
+    },
+    "number-details": {
+      "source": "mengto/skills",
+      "sourceType": "github",
+      "skillPath": "agent-skills/web-design/number-details/SKILL.md",
+      "computedHash": "d5031e7f438012623adf150c7a4084437597b7b6e0227913d435ff24962b87d8"
+    },
+    "optimize-threejs-games": {
+      "source": "mengto/skills",
+      "sourceType": "github",
+      "skillPath": "agent-skills/game-development/optimize-threejs-games/SKILL.md",
+      "computedHash": "c4e92fe1a580f0c204b284b27bcb083011fdee9a3569a30a3b80c93c5b3ff478"
+    },
+    "progressive-blur": {
+      "source": "mengto/skills",
+      "sourceType": "github",
+      "skillPath": "agent-skills/web-design/progressive-blur/SKILL.md",
+      "computedHash": "27ac9443c3e2e6c55312cfa253505fb7239bc40c032451f17abff06de0aa1692"
+    },
+    "skeuomorphic-ui": {
+      "source": "mengto/skills",
+      "sourceType": "github",
+      "skillPath": "agent-skills/web-design/skeuomorphic-ui/SKILL.md",
+      "computedHash": "da9978a73571b5ad8a3924875be0e83d5a3d8fa1a76cdc212bf4e8b81ea0ec07"
+    },
+    "test-playable-web-games": {
+      "source": "mengto/skills",
+      "sourceType": "github",
+      "skillPath": "agent-skills/game-development/test-playable-web-games/SKILL.md",
+      "computedHash": "8a7402ca383ead9c295de6b10f8c9aafe95822a4cd9aedaa1e61129e1aaeea80"
     }
   }
 }
