@@ -1,4 +1,4 @@
-﻿# 09 â€” RUNECRAFTING
+﻿# 09 — RUNECRAFTING
 
 **Status:** Complete Design Draft  
 **Version:** 1.0  
@@ -47,11 +47,11 @@ Its consumers include:
 
 Runecrafting should not become:
 
-**1 Essence â†’ 1 Rune**
+**1 Essence → 1 Rune**
 
 Its identity is:
 
-**Attunement â†’ Pattern â†’ Stabilization**
+**Attunement → Pattern → Stabilization**
 
 ---
 
@@ -74,7 +74,7 @@ Over time they learn to:
 
 Long-term fantasy:
 
-**Rune Scriber â†’ Inscriber â†’ Runewright â†’ Master Runecrafter â†’ Architect of magical infrastructure**
+**Rune Scriber → Inscriber → Runewright → Master Runecrafter → Architect of magical infrastructure**
 
 ---
 
@@ -145,23 +145,23 @@ Example progression:
 
 **Minor Ember Rune**
 
-â†’ Lesser Ember Rune
+→ Lesser Ember Rune
 
-â†’ Common Ember Rune
+→ Common Ember Rune
 
-â†’ Greater Ember Rune
+→ Greater Ember Rune
 
-â†’ Refined Ember Rune
+→ Refined Ember Rune
 
-â†’ Empowered Ember Rune
+→ Empowered Ember Rune
 
-â†’ Aetheric Ember Rune
+→ Aetheric Ember Rune
 
-â†’ Resonant Ember Rune
+→ Resonant Ember Rune
 
-â†’ Umbral Ember Rune
+→ Umbral Ember Rune
 
-â†’ Astral Ember Rune
+→ Astral Ember Rune
 
 Same grade architecture applies to all six families.
 
@@ -169,7 +169,7 @@ Same grade architecture applies to all six families.
 
 # 6. ITEM BLOAT CONTROL
 
-Ten grades Ã— six families = 60 normal Rune stacks.
+Ten grades × six families = 60 normal Rune stacks.
 
 That is substantial but acceptable because:
 
@@ -186,9 +186,9 @@ Do not add additional Rune rarity/quality versions on top.
 
 | Tier Range | Essence | Primary Source | Main Uses |
 |---|---|---|---|
-| T1â€“T3 | Raw Essence | Mining: Raw Essence Seam | Basic rune imprinting; early Filaments |
-| T4â€“T6 | Runic Crystal | Mining: Runic Crystal Seam | Mid-tier runes; Runic Filament (T4-T6) |
-| T7â€“T9 | Aether Essence | Mining: Aether Essence Core | Late runes; high-grade Attunement; Aether catalysts |
+| T1–T3 | Raw Essence | Mining: Raw Essence Seam | Basic rune imprinting; early Filaments |
+| T4–T6 | Runic Crystal | Mining: Runic Crystal Seam | Mid-tier runes; Runic Filament (T4-T6) |
+| T7–T9 | Aether Essence | Mining: Aether Essence Core | Late runes; high-grade Attunement; Aether catalysts |
 | T10 | Astral Essence | Refined from Aether Essence + Astral materials | T10 runes; Astral Filament |
 | T10+ | World Essence | Endgame conversion from Worldheart/Wildheart/Worldroot-linked components | Endgame rune matrices / permanent projects |
 
@@ -287,7 +287,7 @@ Recommended Tier Base Work:
 
 Final:
 
-**Tier Work Ã— Grade Work Multiplier Ã— Pattern Family Work Multiplier**
+**Tier Work × Grade Work Multiplier × Pattern Family Work Multiplier**
 
 ---
 
@@ -349,7 +349,7 @@ Stabilization represents:
 
 Base Stabilization Time:
 
-**1.5s + 0.15s Ã— Tier**
+**1.5s + 0.15s × Tier**
 
 before modifiers.
 
@@ -413,9 +413,9 @@ Grade progression can increase base batch:
 
 | Grade Range | Base Output |
 |---|---:|
-| T1â€“T3 | 4 |
-| T4â€“T6 | 5 |
-| T7â€“T9 | 6 |
+| T1–T3 | 4 |
+| T4–T6 | 5 |
+| T7–T9 | 6 |
 | T10 | 8 |
 
 This keeps high-tier Runecrafting productive enough to supply Combat.
@@ -456,15 +456,15 @@ No chained bonus rolls.
 
 Recommended baseline:
 
-T1â€“T3:
+T1–T3:
 
 **1 Essence per craft**
 
-T4â€“T6:
+T4–T6:
 
 **1 Runic Crystal per craft**
 
-T7â€“T9:
+T7–T9:
 
 **1 Aether Essence per craft**
 
@@ -736,7 +736,7 @@ Baseline:
 
 **No automatic downcraft**
 
-T10 Rune â†’ 10 T1 Runes is not allowed.
+T10 Rune → 10 T1 Runes is not allowed.
 
 That would undermine old-tier production.
 
@@ -746,7 +746,7 @@ That would undermine old-tier production.
 
 Recommended limited conversion:
 
-**4 lower-grade same-family Runes â†’ 1 next-grade Rune**
+**4 lower-grade same-family Runes → 1 next-grade Rune**
 
 Unlocked midgame.
 
@@ -809,7 +809,7 @@ But baseline recommendation:
 
 use **generic grade matrices** unless a recipe genuinely needs a functional family.
 
-Avoid multiplying 5 Matrix grades Ã—6 families without gameplay reason.
+Avoid multiplying 5 Matrix grades ×6 families without gameplay reason.
 
 ---
 
@@ -872,7 +872,7 @@ Late Filaments use:
 
 This creates:
 
-**Mining â†’ Runecrafting â†’ Tailoring â†’ Fletching / Magic Gear**
+**Mining → Runecrafting → Tailoring → Fletching / Magic Gear**
 
 ---
 
@@ -884,7 +884,7 @@ T10 Runecrafting refines:
 
 Recommended recipe:
 
-**2 Aether Essence + 1 Astral Core Fragment â†’ 1 Astral Essence**
+**2 Aether Essence + 1 Astral Core Fragment → 1 Astral Essence**
 
 Unlock:
 
@@ -943,7 +943,7 @@ Runecrafting defines progression/effects.
 
 Default:
 
-**Previous Rune Chisel + current metal + magical component â†’ next Rune Chisel**
+**Previous Rune Chisel + current metal + magical component → next Rune Chisel**
 
 Old Chisels move to workers.
 
@@ -1061,7 +1061,7 @@ Recommended:
 
 Every Rune grade/family recipe and major utility recipe has:
 
-**Mastery 1â€“100**
+**Mastery 1–100**
 
 Examples:
 
@@ -1206,7 +1206,7 @@ Rules:
 
 Estate infrastructure:
 
-**Runic Study Iâ€“V**
+**Runic Study I–V**
 
 | Facility | Estate Stage | Max Batch | Queue | Main Unlocks |
 |---|---|---|---|---|
@@ -1269,13 +1269,13 @@ Workers maintain.
 
 Base Worker Runecrafting Efficiency:
 
-**50% + Proficiency Ã—0.50%**
+**50% + Proficiency ×0.50%**
 
 Examples:
 
-- 1 â†’50.5%;
-- 50 â†’75%;
-- 100 â†’100%.
+- 1 →50.5%;
+- 50 →75%;
+- 100 →100%.
 
 Workers gain Proficiency.
 
@@ -1289,10 +1289,10 @@ Highest unlocked Rune grade:
 
 | Recipe Mastery | Worker Multiplier |
 |---:|---:|
-| 10â€“24 | 75% |
-| 25â€“49 | 85% |
-| 50â€“74 | 92.5% |
-| 75â€“99 | 97.5% |
+| 10–24 | 75% |
+| 25–49 | 85% |
+| 50–74 | 92.5% |
+| 75–99 | 97.5% |
 | 100 | 100% |
 
 Older grades:
@@ -1484,7 +1484,7 @@ Idle-first preserved.
 
 ---
 
-# 73. RUNECRAFTING â†” MINING
+# 73. RUNECRAFTING ↔ MINING
 
 Mining supplies:
 
@@ -1500,7 +1500,7 @@ This is Runecrafting's strongest raw-material link.
 
 ---
 
-# 74. RUNECRAFTING â†” TAILORING
+# 74. RUNECRAFTING ↔ TAILORING
 
 Runecrafting creates:
 
@@ -1517,17 +1517,17 @@ Tailoring creates:
 
 ---
 
-# 75. RUNECRAFTING â†” FLETCHING
+# 75. RUNECRAFTING ↔ FLETCHING
 
 Indirect path:
 
-**Runecrafting â†’ Filament â†’ Tailoring Bowstring â†’ Fletching**
+**Runecrafting → Filament → Tailoring Bowstring → Fletching**
 
 Late ranged weapons therefore interact with magical progression without Fletching directly crafting magic thread.
 
 ---
 
-# 76. RUNECRAFTING â†” MAGIC COMBAT
+# 76. RUNECRAFTING ↔ MAGIC COMBAT
 
 Runecrafting supplies consumable Runes.
 
@@ -1544,7 +1544,7 @@ Melee has no direct Ammo but can have other tradeoffs later.
 
 ---
 
-# 77. RUNECRAFTING â†” ESTATE
+# 77. RUNECRAFTING ↔ ESTATE
 
 Estate consumes:
 
@@ -1729,7 +1729,7 @@ Runecrafting just exposes Rune availability clearly.
 
 # 88. ATTUNEMENT TIME FORMULA
 
-**Final Attunement Time = Tier Base Attunement Ã— Tool/gear/Mastery/Specialization/Study modifiers**
+**Final Attunement Time = Tier Base Attunement × Tool/gear/Mastery/Specialization/Study modifiers**
 
 Minimum:
 
@@ -1739,7 +1739,7 @@ Minimum:
 
 # 89. PATTERN WORK FORMULA
 
-**Final Pattern Work = Tier Base Work Ã— Grade Work Mult. Ã— Pattern Family Work Mult. Ã— Work modifiers**
+**Final Pattern Work = Tier Base Work × Grade Work Mult. × Pattern Family Work Mult. × Work modifiers**
 
 Every Chisel action:
 
@@ -1749,7 +1749,7 @@ Every Chisel action:
 
 # 90. STABILIZATION TIME FORMULA
 
-**Base Stabilization = 1.5s + 0.15s Ã— Tier**
+**Base Stabilization = 1.5s + 0.15s × Tier**
 
 then apply:
 
@@ -1771,7 +1771,7 @@ Minimum:
 1. create Base Output by tier band;
 2. roll Rune Output Chance;
 3. success:
-   **+ceil(Base Output Ã—0.25)**.
+   **+ceil(Base Output ×0.25)**.
 
 Hard cap:
 
@@ -1893,9 +1893,9 @@ Show three phases clearly:
 
 **Attunement**
 
-â†’ **Pattern**
+→ **Pattern**
 
-â†’ **Stabilization**
+→ **Stabilization**
 
 Display:
 
@@ -1958,7 +1958,7 @@ This prevents hidden cross-profession bottlenecks.
 
 ---
 
-# 101. CHRONICLES â€” EARLY
+# 101. CHRONICLES — EARLY
 
 Suggested:
 
@@ -1973,7 +1973,7 @@ Suggested:
 
 ---
 
-# 102. CHRONICLES â€” MIDGAME
+# 102. CHRONICLES — MIDGAME
 
 Suggested:
 
@@ -1988,7 +1988,7 @@ Suggested:
 
 ---
 
-# 103. CHRONICLES â€” LATE
+# 103. CHRONICLES — LATE
 
 Suggested:
 
@@ -2003,7 +2003,7 @@ Suggested:
 
 ---
 
-# 104. WORLD MATRIX â€” POST-100
+# 104. WORLD MATRIX — POST-100
 
 Runecrafting endgame:
 
@@ -2177,7 +2177,7 @@ Prefer:
 
 ---
 
-# 112. MAJOR OPEN QUESTIONS â€” RECOMMENDED ANSWERS
+# 112. MAJOR OPEN QUESTIONS — RECOMMENDED ANSWERS
 
 ## How many Rune families?
 
@@ -2413,7 +2413,7 @@ Post-100:
 
 # 113. COMPLETE LOCKED RUNECRAFTING BASELINE
 
-1. Runecrafting uses Attunement â†’ Pattern â†’ Stabilization.
+1. Runecrafting uses Attunement → Pattern → Stabilization.
 2. Six functional Rune families:
    - Ember;
    - Frost;
@@ -2440,7 +2440,7 @@ Post-100:
 15. No durability.
 16. Rune Output Chance adds +25% Base Output.
 17. Essence Preservation cap 50%.
-18. Recipe Mastery 1â€“100.
+18. Recipe Mastery 1–100.
 19. Skill-Wide Mastery.
 20. Three reversible Specializations:
     - Channeler;
@@ -2467,63 +2467,63 @@ Runecrafting begins with:
 
 **Raw Essence**
 
-â†“
+↓
 
 **Attunement**
 
-â†“
+↓
 
 **Minor Ember / Frost / Storm / Stone / Spirit / Arcane Runes**
 
-â†“
+↓
 
 **Pattern Work**
 
-â†“
+↓
 
 **Stabilization**
 
-â†“
+↓
 
 **Magic Combat supply**
 
-â†“
+↓
 
 **Runic Crystal**
 
-â†“
+↓
 
 **Catalysts**
 
-â†“
+↓
 
 **Runic Filaments**
 
-â†“
+↓
 
 **Rune Matrices**
 
-â†“
+↓
 
 **Aether Essence**
 
-â†“
+↓
 
 **worker Rune reserves**
 
-â†“
+↓
 
 **Astral Essence**
 
-â†“
+↓
 
 **Astral Runes / Astral Filament**
 
-â†“
+↓
 
 **Runecrafting 100**
 
-â†“
+↓
 
 **World Matrix**
 
@@ -2543,29 +2543,29 @@ Long-term:
 
 **I inscribe every Rune myself**
 
-â†“
+↓
 
 **I learn advanced Patterns**
 
-â†“
+↓
 
 **I build a Runic Study**
 
-â†“
+↓
 
 **I automate ordinary Rune supply**
 
-â†“
+↓
 
 **workers keep Magic Combat stocked**
 
-â†“
+↓
 
 **I personally create Astral and World-level magical constructs**
 
 Core Runecrafting identity:
 
-> **Attune the essence, inscribe the pattern, stabilize the power â€” then decide whether that magic becomes fuel, fabric, or permanent infrastructure.**
+> **Attune the essence, inscribe the pattern, stabilize the power — then decide whether that magic becomes fuel, fabric, or permanent infrastructure.**
 
 
 

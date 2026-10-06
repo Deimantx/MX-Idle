@@ -18,6 +18,19 @@
 
 }
 
+.deposit-browser {
+  display: grid;
+  gap: calc(5px * var(--ui-scale));
+  max-height: min(62vh, 620px);
+  min-height: 180px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  align-content: start;
+  scrollbar-gutter: stable;
+}
+
+.deposit-browser:focus-visible { outline: 2px solid #d69b63; outline-offset: 2px; }
+
 .deposit-selected {
   position: relative;
   display: flex;

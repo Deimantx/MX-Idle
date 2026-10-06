@@ -19,10 +19,10 @@ Each implementation slice should follow:
 
 ```text
 Implement
-â†’ Play
-â†’ Fix blockers / UX problems
-â†’ Expand
-â†’ Play again
+→ Play
+→ Fix blockers / UX problems
+→ Expand
+→ Play again
 ```
 
 Avoid long periods of design-only work after implementation has started.
@@ -33,26 +33,26 @@ Avoid long periods of design-only work after implementation has started.
 
 The baseline game uses:
 
-**10 tiers / Levels 1â€“100**
+**10 tiers / Levels 1–100**
 
 ```text
-T1   1â€“10
-T2  11â€“20
-T3  21â€“30
-T4  31â€“40
-T5  41â€“50
-T6  51â€“60
-T7  61â€“70
-T8  71â€“80
-T9  81â€“90
-T10 91â€“100
+T1   1–10
+T2  11–20
+T3  21–30
+T4  31–40
+T5  41–50
+T6  51–60
+T7  61–70
+T8  71–80
+T9  81–90
+T10 91–100
 ```
 
 When this roadmap says a system is **complete**, it means its planned baseline progression exists through **T10 / Level 100**, not only the first tutorial tier.
 
 ---
 
-# 3. PHASE 1 â€” CORE MELEE GAME
+# 3. PHASE 1 — CORE MELEE GAME
 
 ## Goal
 
@@ -66,7 +66,7 @@ Create a fully playable MX-Idle game based around:
 
 All five reach their complete baseline:
 
-**T1 â†’ T10 / Level 1 â†’ 100**
+**T1 → T10 / Level 1 → 100**
 
 Melee Combat must contain substantial content across the full progression, not only one arena per ten levels.
 
@@ -80,13 +80,13 @@ Primary Phase 1 loop:
 
 ```text
 Mining
-â†“
+↓
 Smithing
-â†“
+↓
 Melee Equipment
-â†“
+↓
 Combat
-â†“
+↓
 Loot / progression
 ```
 
@@ -94,11 +94,11 @@ Parallel sustain loop:
 
 ```text
 Fishing
-â†“
+↓
 Cooking
-â†“
+↓
 Food
-â†“
+↓
 Combat Sustain
 ```
 
@@ -208,14 +208,14 @@ Complete cross-system recipe, item, gear, and progression registries that belong
 After the systems and content exist, run integrated progression, economy, XP, drop, Combat, offline, accessibility, responsive UI, and long-session performance passes. Balance certification happens here rather than after each tier or small tier group.
 
 ---
-# 21. PHASE 1F â€” PHASE COMPLETION PASS
+# 21. PHASE 1F — PHASE COMPLETION PASS
 
 Before starting Ranged:
 
 perform:
 
 - full fresh-profile playthrough
-- T1â€“T10 progression test
+- T1–T10 progression test
 - save/offline testing
 - economy sanity
 - combat sanity
@@ -241,7 +241,7 @@ UI is improved continuously, but not all at once.
 
 Use three rules.
 
-## Rule A â€” Fix blockers immediately
+## Rule A — Fix blockers immediately
 
 Fix immediately if UI:
 
@@ -256,7 +256,7 @@ Fix immediately if UI:
 
 ---
 
-# 23. Rule B â€” Fix severe annoyances when encountered
+# 23. Rule B — Fix severe annoyances when encountered
 
 Examples:
 
@@ -271,7 +271,7 @@ These should be fixed during normal implementation.
 
 ---
 
-# 24. Rule C â€” Delay full aesthetic polish
+# 24. Rule C — Delay full aesthetic polish
 
 Do NOT spend weeks finalizing:
 
@@ -287,7 +287,7 @@ A final design decision should be made with realistic content density.
 
 ---
 
-# 25. PHASE 2 â€” RANGED ERA
+# 25. PHASE 2 — RANGED ERA
 
 After Phase 1 completion, add playable:
 
@@ -308,7 +308,7 @@ Potential supporting systems are integrated only when actually required.
 
 # 26. Phase 2 goals
 
-Implement through T1â€“T10 / Level 1â€“100 where applicable:
+Implement through T1–T10 / Level 1–100 where applicable:
 
 - Woodcutting
 - Fletching
@@ -324,13 +324,13 @@ Implement through T1â€“T10 / Level 1â€“100 where applicable:
 - Ranged Combat presets
 - existing Combat content support for Ranged
 
-The existing T1â€“T10 combat world should be reused.
+The existing T1–T10 combat world should be reused.
 
 Do not build a completely separate Ranged world.
 
 ---
 
-# 27. PHASE 3 â€” MAGIC ERA
+# 27. PHASE 3 — MAGIC ERA
 
 Add playable:
 
@@ -368,7 +368,7 @@ reuse the existing combat world.
 
 ---
 
-# 28. PHASE 4 â€” REMAINING PROFESSIONS / META SYSTEMS
+# 28. PHASE 4 — REMAINING PROFESSIONS / META SYSTEMS
 
 After the three primary combat/economy eras are playable, expand remaining systems.
 
@@ -389,7 +389,7 @@ Exact sequencing may change based on what the playable game needs.
 
 ---
 
-# 29. PHASE 5 â€” COMPLETION / POLISH / QA
+# 29. PHASE 5 — COMPLETION / POLISH / QA
 
 Only when all primary gameplay pillars exist:
 
@@ -441,7 +441,7 @@ not developer roadmap terminology.
 
 Work proceeds in the system-complete blocks in sections 7 and 9. Mining and Smithing now have broad T1–T10 content, while the current playable Combat world remains an early slice. Complete and integrate the Phase 1 professions, then continue the separate Combat world/content expansion. Do not require completing an entire tier across every system before moving to the next system.
 
-Mining, Smithing, Fishing, and Cooking have Skill Levels, tools, content unlocks, and authored choices. The former Mastery design is removed and must not return through historical requirements below.
+Mining, Smithing, Fishing, and Cooking have Skill Levels, tools, content unlocks, and authored choices. The former Mastery design is removed and must not return through historical requirements below. Their broad baseline and sustain integration are in place; the immediate next implementation task is the full T1-T10 Combat world and content expansion.
 
 The screens should continue to improve as content density grows. Use realistic registry sizes when tuning layout and keep visual polish alongside implementation instead of deferring all UI work to a final tier pass.
 

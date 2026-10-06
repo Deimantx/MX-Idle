@@ -8,12 +8,12 @@ describe('screen availability', () => {
     expect(isScreenUnlocked('Smithing', game)).toBe(false);
     expect(screenLockReason('Smithing', game)).toContain('Copper Vein');
     expect(isScreenUnlocked('Combat', game)).toBe(false);
-    expect(screenLockReason('Combat', game)).toContain('Copper weapon and armor');
+    expect(screenLockReason('Combat', game)).toContain('weapon');
 
     game.bank['item.mining.copper_ore'] = 1;
     expect(isScreenUnlocked('Smithing', game)).toBe(true);
-    game.objectives.sword = true;
-    game.objectives.helm = true;
+    game.skills.Attack.level = 5;
+    game.equipped.weapon = 'combat.weapon.melee.copper_sword';
     expect(isScreenUnlocked('Combat', game)).toBe(true);
   });
 });

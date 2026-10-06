@@ -2,9 +2,9 @@
 >
 > The earlier per-deposit / per-recipe / per-species Mastery system is no longer part of the active MX-Idle baseline. Ignore all historical Mastery sections, rewards, XP formulas, worker-Proven rules, and Mastery-based modifiers unless a future dedicated progression redesign explicitly restores them.
 
-# 01 â€” MINING
+# 01 — MINING
 
-**Status:** Complete Design Draft â€” Core Loop Corrected
+**Status:** Complete Design Draft — Core Loop Corrected
 **Version:** 1.1
 **Parent:** `00_PROFESSIONS_OVERVIEW.md` / Skills & Professions foundation
 **Reference Professions:** `Smithing.md`, `Jewelcrafting.md`, `Runecrafting.md`
@@ -35,7 +35,7 @@ Mining should remain important from early game through endgame.
 
 It should not become:
 
-**Select Ore â†’ wait forever â†’ receive Ore**
+**Select Ore → wait forever → receive Ore**
 
 The defining Mining gameplay should come from:
 
@@ -69,7 +69,7 @@ Over time the player becomes capable of:
 
 The long-term fantasy is:
 
-**Surface Miner â†’ Skilled Prospector â†’ Deep Miner â†’ Master Extractor â†’ Owner of an Automated Mining Network**
+**Surface Miner → Skilled Prospector → Deep Miner → Master Extractor → Owner of an Automated Mining Network**
 
 Mining should still be something the player personally pushes at the frontier, while workers increasingly maintain older resource tiers.
 
@@ -101,13 +101,13 @@ Core loop:
 
 The intended feeling is:
 
-**work through a large, dense outer mass â†’ progressively expose richer material â†’ reach a small, valuable Core â†’ finish the Deposit â†’ start the next one.**
+**work through a large, dense outer mass → progressively expose richer material → reach a small, valuable Core → finish the Deposit → start the next one.**
 
 The player chooses **which Deposit to mine and how to build for it**, not how far into the Deposit to go.
 
 ---
 
-# 4. UNIQUE MECHANIC â€” FIVE-STAGE DEPOSITS
+# 4. UNIQUE MECHANIC — FIVE-STAGE DEPOSITS
 
 Every standard Mining Deposit has exactly five sequential Stages:
 
@@ -176,7 +176,7 @@ Every Deposit defines a **Base Density**.
 
 Stage Density is:
 
-**Base Density Ã— Stage Density Multiplier**
+**Base Density × Stage Density Multiplier**
 
 Example:
 
@@ -196,7 +196,7 @@ The exact number of Mining actions required depends on Pickaxe Mining Power and 
 
 Every normal Mining cycle always completes:
 
-**Outcrop â†’ Shallow â†’ Main â†’ Deep â†’ Core**
+**Outcrop → Shallow → Main → Deep → Core**
 
 There is no:
 
@@ -211,7 +211,7 @@ The outer layers are the cost of reaching the more valuable center.
 
 The reward curve therefore becomes a built-in anticipation loop:
 
-**large amount of work / lower-value payout early â†’ progressively less work / better payout deeper â†’ valuable Core finish.**
+**large amount of work / lower-value payout early → progressively less work / better payout deeper → valuable Core finish.**
 
 After Core completion:
 
@@ -237,11 +237,11 @@ Recommended baseline:
 
 | Stage | Density Mult. | Primary Quantity Mult. | Mining XP Mult. | Mastery XP Mult. | Rare / Crystal Chance Mult. |
 |---|---:|---:|---:|---:|---:|
-| 1 â€” Outcrop | 1.00x | 1.00x | 1.00x | 1.00x | 1.00x |
-| 2 â€” Shallow Vein | 0.78x | 1.25x | 1.40x | 1.50x | 1.75x |
-| 3 â€” Main Vein | 0.58x | 1.60x | 2.00x | 2.30x | 3.00x |
-| 4 â€” Deep Seam | 0.38x | 2.20x | 3.00x | 3.50x | 5.50x |
-| 5 â€” Core | 0.20x | 3.20x | 4.50x | 5.50x | 10.00x |
+| 1 — Outcrop | 1.00x | 1.00x | 1.00x | 1.00x | 1.00x |
+| 2 — Shallow Vein | 0.78x | 1.25x | 1.40x | 1.50x | 1.75x |
+| 3 — Main Vein | 0.58x | 1.60x | 2.00x | 2.30x | 3.00x |
+| 4 — Deep Seam | 0.38x | 2.20x | 3.00x | 3.50x | 5.50x |
+| 5 — Core | 0.20x | 3.20x | 4.50x | 5.50x | 10.00x |
 
 Design intent:
 
@@ -376,7 +376,7 @@ Recommended baseline content budget:
 For each major progression Tier:
 
 - 1 primary Ore family;
-- 0â€“1 secondary utility mineral;
+- 0–1 secondary utility mineral;
 - shared Stone / structural progression where needed;
 - access to a relevant Gem / rare-resource table;
 - occasional special Deposit rather than one in every Tier.
@@ -385,7 +385,7 @@ Across 10 Tiers this should create enough variety without producing 50 nearly id
 
 Target initial scale:
 
-**Approximately 15â€“20 major Mining targets**, not 40â€“60.
+**Approximately 15–20 major Mining targets**, not 40–60.
 
 Additional special deposits can be added later.
 
@@ -397,16 +397,16 @@ Mining follows the global 10-tier profession structure.
 
 | Tier | Approx. Skill Level | Main Purpose |
 |---|---:|---|
-| T1 | 1â€“10 | Learn Mining, first Ore, Stone, basic Pickaxe |
-| T2 | 11â€“20 | Second material family, first meaningful by-products |
-| T3 | 21â€“30 | Deeper resource interactions, improved Gem access |
-| T4 | 31â€“40 | Specialization unlock, more advanced deposits |
-| T5 | 41â€“50 | Midgame alloys / catalysts / stronger profession gear |
-| T6 | 51â€“60 | Advanced deposits and stronger deep-stage rewards |
-| T7 | 61â€“70 | Rare minerals, worker economy becomes more important |
-| T8 | 71â€“80 | Runic / exotic materials, advanced infrastructure demand |
-| T9 | 81â€“90 | High-end deep deposits and rare crafting materials |
-| T10 | 91â€“100 | Endgame deposits, Core materials, highest profession progression |
+| T1 | 1–10 | Learn Mining, first Ore, Stone, basic Pickaxe |
+| T2 | 11–20 | Second material family, first meaningful by-products |
+| T3 | 21–30 | Deeper resource interactions, improved Gem access |
+| T4 | 31–40 | Specialization unlock, more advanced deposits |
+| T5 | 41–50 | Midgame alloys / catalysts / stronger profession gear |
+| T6 | 51–60 | Advanced deposits and stronger deep-stage rewards |
+| T7 | 61–70 | Rare minerals, worker economy becomes more important |
+| T8 | 71–80 | Runic / exotic materials, advanced infrastructure demand |
+| T9 | 81–90 | High-end deep deposits and rare crafting materials |
+| T10 | 91–100 | Endgame deposits, Core materials, highest profession progression |
 
 Exact resource names, deposit unlocks, Pickaxes, stage values, by-products, and progression tables are defined in the complete content sections below.
 
@@ -434,7 +434,7 @@ Profession equipment or recipe.
 
 Special Deposit / richer variant / Jewelcrafting interaction.
 
-### Level X9â€“X0
+### Level X9–X0
 
 Major Tier milestone.
 
@@ -570,7 +570,7 @@ This creates one predictable reward arc every Deposit cycle.
 
 ---
 
-# 17. GEMS â€” BY-PRODUCTS AND DEDICATED DEPOSITS
+# 17. GEMS — BY-PRODUCTS AND DEDICATED DEPOSITS
 
 Recommended answer:
 
@@ -595,7 +595,7 @@ Exact Gem names and tiers should be designed with Jewelcrafting.
 
 ---
 
-# 18. TOOL â€” PICKAXE
+# 18. TOOL — PICKAXE
 
 Mining requires a Pickaxe.
 
@@ -666,7 +666,7 @@ Do not always craft the next Pickaxe from nothing.
 
 Example:
 
-**T4 Pickaxe + T5 Materials â†’ T5 Pickaxe**
+**T4 Pickaxe + T5 Materials → T5 Pickaxe**
 
 Benefits:
 
@@ -743,7 +743,7 @@ More Mastery XP.
 
 ## Deep-Mining Setup
 
-Better Stage 4â€“5 performance.
+Better Stage 4–5 performance.
 
 ## Infrastructure Setup
 
@@ -793,7 +793,7 @@ Loadouts change **what the cycle is good at**, not which Stages are skipped.
 
 Each major Mining target has:
 
-**Mastery Level 1â€“100**
+**Mastery Level 1–100**
 
 Examples:
 
@@ -886,7 +886,7 @@ It is freely swappable outside the current action.
 
 ---
 
-# 29. SPECIALIZATION â€” EXTRACTOR
+# 29. SPECIALIZATION — EXTRACTOR
 
 Focus:
 
@@ -910,7 +910,7 @@ Extractor still completes the full Deposit cycle.
 
 ---
 
-# 30. SPECIALIZATION â€” PROSPECTOR
+# 30. SPECIALIZATION — PROSPECTOR
 
 Focus:
 
@@ -934,7 +934,7 @@ Prospector does not alter Stage order.
 
 ---
 
-# 31. SPECIALIZATION â€” DEEP DELVER
+# 31. SPECIALIZATION — DEEP DELVER
 
 Focus:
 
@@ -942,9 +942,9 @@ Focus:
 
 Potential identity:
 
-- higher Mining Power during Stages 4â€“5;
-- more Mining XP from Stages 4â€“5;
-- more Mastery XP from Stages 4â€“5;
+- higher Mining Power during Stages 4–5;
+- more Mining XP from Stages 4–5;
+- more Mastery XP from Stages 4–5;
 - higher Core-material chance;
 - stronger Core-only drop rate.
 
@@ -983,7 +983,7 @@ Estate facilities improve it.
 
 Recommended primary support:
 
-**Workshop â€” Mining Branch / Mining Bay**
+**Workshop — Mining Branch / Mining Bay**
 
 This keeps facility count manageable.
 
@@ -1092,7 +1092,7 @@ A Mining worker can have:
 
 Workers follow the **same full five-Stage Deposit lifecycle** as the player:
 
-**Outcrop â†’ Shallow â†’ Main â†’ Deep â†’ Core â†’ Reset**
+**Outcrop → Shallow → Main → Deep → Core → Reset**
 
 They cannot be configured to skip outer Stages or farm Core directly.
 
@@ -1149,7 +1149,7 @@ Example:
 
 Player upgrades:
 
-T5 Pickaxe â†’ T6 Pickaxe
+T5 Pickaxe → T6 Pickaxe
 
 Old T5 Pickaxe can move to a worker.
 
@@ -1170,7 +1170,7 @@ Avoid manual micromanagement of dozens of workers.
 
 ---
 
-# 41. ACTIVITY PLANNER â€” MINING
+# 41. ACTIVITY PLANNER — MINING
 
 Mining supports Activity Planner rules without changing the five-Stage lifecycle.
 
@@ -1202,7 +1202,7 @@ Mining has one important planner safety rule:
 
 Recommended options:
 
-### Safe Transition â€” Default
+### Safe Transition — Default
 
 Finish the current Stage, grant its reward, then switch.
 
@@ -1301,7 +1301,7 @@ Bad example:
 
 ---
 
-# 46. MINING â†” SMITHING
+# 46. MINING ↔ SMITHING
 
 Mining and Smithing form one of the game's most important economy loops.
 
@@ -1325,7 +1325,7 @@ A player should not become permanently stuck because Mining requires an item tha
 
 ---
 
-# 47. MINING â†” JEWELCRAFTING
+# 47. MINING ↔ JEWELCRAFTING
 
 Mining supplies:
 
@@ -1342,13 +1342,13 @@ Jewelcrafting returns:
 
 This creates a circular optimization loop:
 
-**Mine Gems â†’ Craft Mining Jewelry â†’ Mine More Efficiently**
+**Mine Gems → Craft Mining Jewelry → Mine More Efficiently**
 
 The loop must provide progression without becoming mandatory too early.
 
 ---
 
-# 48. MINING â†” RUNECRAFTING
+# 48. MINING ↔ RUNECRAFTING
 
 Higher Mining tiers can provide:
 
@@ -1366,7 +1366,7 @@ This gives Mining importance to Magic progression without requiring every magica
 
 ---
 
-# 49. MINING â†” HUNTING
+# 49. MINING ↔ HUNTING
 
 Mining can support Hunting indirectly through:
 
@@ -1436,7 +1436,7 @@ Rare finds should feel exciting without making progression impossible to plan.
 
 ---
 
-# 53. MINING SCREEN â€” HIGH-LEVEL UI
+# 53. MINING SCREEN — HIGH-LEVEL UI
 
 Recommended layout:
 
@@ -1502,7 +1502,7 @@ The five-Stage lifecycle must be visually obvious.
 
 Example:
 
-**Outcrop â†’ Shallow Vein â†’ Main Vein â†’ Deep Seam â†’ Core**
+**Outcrop → Shallow Vein → Main Vein → Deep Seam → Core**
 
 Each Stage tile should show:
 
@@ -1517,7 +1517,7 @@ The active Stage has its own Density bar.
 
 Example:
 
-**Main Vein â€” 31 / 58 Density remaining**
+**Main Vein — 31 / 58 Density remaining**
 
 Below it:
 
@@ -1643,7 +1643,7 @@ Because stackable Bank resources are unlimited, Mining does not stop from invent
 
 ---
 
-# 59. CHRONICLES â€” EARLY MINING GOALS
+# 59. CHRONICLES — EARLY MINING GOALS
 
 Chronicles should introduce Mining gradually.
 
@@ -1670,7 +1670,7 @@ Chronicles should explain:
 
 ---
 
-# 60. CHRONICLES â€” MIDGAME MINING GOALS
+# 60. CHRONICLES — MIDGAME MINING GOALS
 
 Possible goals:
 
@@ -1686,7 +1686,7 @@ Possible goals:
 
 ---
 
-# 61. CHRONICLES â€” LATE MINING GOALS
+# 61. CHRONICLES — LATE MINING GOALS
 
 Possible goals:
 
@@ -1718,7 +1718,7 @@ These belong to completion systems rather than mandatory progression.
 
 ---
 
-# 63. CONTENT NAMING â€” FINAL DIRECTION
+# 63. CONTENT NAMING — FINAL DIRECTION
 
 This document now owns the complete baseline Mining content.
 
@@ -1842,7 +1842,7 @@ Prefer:
 Recommended Mining baseline:
 
 1. Mining uses **5 sequential Stages**.
-2. Stage order is always Outcrop â†’ Shallow Vein â†’ Main Vein â†’ Deep Seam â†’ Core.
+2. Stage order is always Outcrop → Shallow Vein → Main Vein → Deep Seam → Core.
 3. The player cannot choose a Depth Target.
 4. The player cannot intentionally reset a Deposit early.
 5. Every Stage has Density.
@@ -1861,7 +1861,7 @@ Recommended Mining baseline:
 18. Pickaxes often upgrade through previous Pickaxes.
 19. Mining has approximately 20+ meaningful targets across 10 Tiers.
 20. Gems exist both as by-products and dedicated Deposits.
-21. Mining uses individual Deposit Mastery 1â€“100.
+21. Mining uses individual Deposit Mastery 1–100.
 22. Skill-Wide Mining Mastery also exists.
 23. Mining Specializations unlock around Level 35.
 24. Specializations:
@@ -1884,7 +1884,7 @@ Recommended Mining baseline:
 
 ---
 
-# 68. MAJOR OPEN QUESTIONS â€” RECOMMENDED ANSWERS
+# 68. MAJOR OPEN QUESTIONS — RECOMMENDED ANSWERS
 
 These are filled with the recommended baseline so the Mining design can be reviewed instead of re-invented from scratch.
 
@@ -1896,7 +1896,7 @@ There is no Depth Target system.
 
 Every Deposit always runs:
 
-**Outcrop â†’ Shallow Vein â†’ Main Vein â†’ Deep Seam â†’ Core**
+**Outcrop → Shallow Vein → Main Vein → Deep Seam → Core**
 
 before it resets.
 
@@ -2073,7 +2073,7 @@ This makes tool upgrades more tactile and understandable.
 
 ## How many main Mining targets should exist?
 
-**23 baseline Deposits** in the completed 1â€“100 design, including Worldheart.
+**23 baseline Deposits** in the completed 1–100 design, including Worldheart.
 
 This includes Ore, Quarry, Gem, Catalyst, Essence, and Deep-Core targets with different economic roles.
 
@@ -2096,7 +2096,7 @@ Use only four structural grades:
 - Blackstone;
 - Aetherstone.
 
-This is enough to support House â†’ Holdings progression without useless inventory bloat.
+This is enough to support House → Holdings progression without useless inventory bloat.
 
 ---
 
@@ -2236,9 +2236,9 @@ They are freely swappable outside the active Mining action.
 
 The three clean goals are:
 
-- Extractor â€” Primary quantity;
-- Prospector â€” Gems / Crystals / by-products;
-- Deep Delver â€” Deep/Core progression.
+- Extractor — Primary quantity;
+- Prospector — Gems / Crystals / by-products;
+- Deep Delver — Deep/Core progression.
 
 Only add a fourth if it creates a genuinely different build.
 
@@ -2251,7 +2251,7 @@ Only add a fourth if it creates a genuinely different build.
 
 Use:
 
-- Deposit Mastery 1â€“100;
+- Deposit Mastery 1–100;
 - Skill-Wide Mastery completion.
 
 Post-100 systems can be considered with future endgame expansion.
@@ -2384,11 +2384,11 @@ This is one of the main reasons Density exists.
 
 A tool upgrade should visibly turn:
 
-**6 strikes â†’ 5 strikes**
+**6 strikes → 5 strikes**
 
 or:
 
-**3 strikes â†’ 2 strikes**
+**3 strikes → 2 strikes**
 
 on appropriate Stages.
 
@@ -2461,7 +2461,7 @@ Mining owns raw acquisition.
 
 # 70. COMPLETE MINING DEPOSIT ROSTER
 
-The baseline 1â€“100 Mining game contains **23 major Deposits**.
+The baseline 1–100 Mining game contains **23 major Deposits**.
 
 | Lvl | Tier | Deposit | Archetype | Primary | Base Qty | Required Pickaxe | Base Density | Strike Time | S1 XP |
 |---|---|---|---|---|---|---|---|---|---|
@@ -2504,7 +2504,7 @@ A new Deposit needs a distinct economic or progression role.
 
 ---
 
-# 71. GLOBAL FIVE-STAGE MODEL â€” FINAL
+# 71. GLOBAL FIVE-STAGE MODEL — FINAL
 
 All normal Mining Deposits use:
 
@@ -2518,15 +2518,15 @@ All normal Mining Deposits use:
 
 The most important relationship is:
 
-**Density â†“ as depth increases**
+**Density ↓ as depth increases**
 
 while:
 
-**Reward quality â†‘ as depth increases**
+**Reward quality ↑ as depth increases**
 
 This produces the intended cycle:
 
-**large outer layer â†’ progressively thinner rich layers â†’ small high-value Core**
+**large outer layer → progressively thinner rich layers → small high-value Core**
 
 ---
 
@@ -2678,7 +2678,7 @@ The Core is normally the shortest Stage because it has the least Density.
 
 Expected Primary payout uses:
 
-**Base Quantity Ã— Stage Primary Quantity Multiplier**
+**Base Quantity × Stage Primary Quantity Multiplier**
 
 | Base Qty | Outcrop | Shallow | Main | Deep | Core | Expected Cycle Total |
 |---|---|---|---|---|---|---|
@@ -2708,7 +2708,7 @@ This allows rewards to scale smoothly without requiring every Stage to drop gian
 
 Stage-completion XP uses:
 
-**Stage-1 Base XP Ã— Stage XP Multiplier**
+**Stage-1 Base XP × Stage XP Multiplier**
 
 | Deposit | Outcrop XP | Shallow XP | Main XP | Deep XP | Core XP | Cycle XP |
 |---|---|---|---|---|---|---|
@@ -2746,7 +2746,7 @@ This makes reaching the deeper part of the Deposit feel increasingly rewarding.
 
 Base Mastery XP per completed Stage:
 
-**Stage-1 Base XP Ã— 0.35 Ã— Stage Mastery Multiplier**
+**Stage-1 Base XP × 0.35 × Stage Mastery Multiplier**
 
 Therefore, for a Deposit with Stage-1 Base XP = 100:
 
@@ -2800,10 +2800,10 @@ Base chance per completed Stage:
 
 Reward family:
 
-- T1â€“T3 â†’ Stone;
-- T4â€“T6 â†’ Granite;
-- T7â€“T9 â†’ Blackstone;
-- T10 â†’ Aetherstone.
+- T1–T3 → Stone;
+- T4–T6 → Granite;
+- T7–T9 → Blackstone;
+- T10 → Aetherstone.
 
 Structural Rubble is a common by-product and does not use the rare multiplier.
 
@@ -2839,10 +2839,10 @@ Core Chance modifiers apply afterward.
 
 Core family:
 
-- T1â€“T3 â†’ Mineral Core Fragment;
-- T4â€“T6 â†’ Refined Core Fragment;
-- T7â€“T9 â†’ Prismatic Core Fragment;
-- T10 â†’ Astral Core Fragment.
+- T1–T3 → Mineral Core Fragment;
+- T4–T6 → Refined Core Fragment;
+- T7–T9 → Prismatic Core Fragment;
+- T10 → Astral Core Fragment.
 
 ---
 
@@ -2854,7 +2854,7 @@ Every completed Stage gives at least one Gem Roll.
 
 Extra Primary Quantity creates additional independent Gem Rolls.
 
-## Shallow Geode Field â€” Level 18
+## Shallow Geode Field — Level 18
 
 | Stage | Opal | Sapphire | Garnet |
 |---|---:|---:|---:|
@@ -2864,7 +2864,7 @@ Extra Primary Quantity creates additional independent Gem Rolls.
 | Deep | 40% | 35% | 25% |
 | Core | 35% | 35% | 30% |
 
-## Prismatic Gem Vein â€” Level 48
+## Prismatic Gem Vein — Level 48
 
 | Stage | Emerald | Ruby | Topaz | Amethyst |
 |---|---:|---:|---:|---:|
@@ -2874,7 +2874,7 @@ Extra Primary Quantity creates additional independent Gem Rolls.
 | Deep | 25% | 28% | 27% | 20% |
 | Core | 20% | 25% | 30% | 25% |
 
-## Celestial Geode â€” Level 78
+## Celestial Geode — Level 78
 
 | Stage | Aquamarine | Diamond | Astral Prism |
 |---|---:|---:|---:|
@@ -2925,10 +2925,10 @@ Base Outcrop chance:
 
 Pools:
 
-- Fieldstone â†’ Opal / Sapphire;
-- Granite â†’ Emerald / Ruby;
-- Blackstone â†’ Amethyst / Aquamarine;
-- Aetherstone â†’ Diamond / Astral Prism.
+- Fieldstone → Opal / Sapphire;
+- Granite → Emerald / Ruby;
+- Blackstone → Amethyst / Aquamarine;
+- Aetherstone → Diamond / Astral Prism.
 
 Stage rare multipliers apply.
 
@@ -2940,7 +2940,7 @@ Quarries use the same Main / Deep / Core Core-material chances as Ore Deposits.
 
 # 83. CATALYST DEPOSITS
 
-## Coal Seam â€” Level 15
+## Coal Seam — Level 15
 
 Primary:
 
@@ -2964,7 +2964,7 @@ By-products:
 
 Coal remains useful beyond T2.
 
-## Fluxstone Vein â€” Level 45
+## Fluxstone Vein — Level 45
 
 Primary:
 
@@ -2991,7 +2991,7 @@ By-products:
 
 # 84. ESSENCE / RUNIC DEPOSITS
 
-## Raw Essence Seam â€” Level 1
+## Raw Essence Seam — Level 1
 
 Primary:
 
@@ -3002,7 +3002,7 @@ Rare:
 - Runic Shard: 0.20% Outcrop base chance;
 - Mineral Core Fragment: normal Core rule.
 
-## Runic Crystal Seam â€” Level 31
+## Runic Crystal Seam — Level 31
 
 Primary:
 
@@ -3013,7 +3013,7 @@ Rare:
 - Runic Shard: 0.30% Outcrop base chance;
 - Refined Core Fragment: normal Core rule.
 
-## Aether Essence Core â€” Level 61
+## Aether Essence Core — Level 61
 
 Primary:
 
@@ -3029,7 +3029,7 @@ All rare chances scale automatically toward Core using the global rare multiplie
 
 ---
 
-# 85. WORLDHEART DEPOSIT â€” LEVEL 100
+# 85. WORLDHEART DEPOSIT — LEVEL 100
 
 Worldheart is Mining's first major Level-100 objective.
 
@@ -3076,9 +3076,9 @@ Mining uses only four normal Core-material families.
 
 | Progression | Core Material | Main Uses |
 |---|---|---|
-| T1â€“T3 | Mineral Core Fragment | early tools, profession gear, facilities |
-| T4â€“T6 | Refined Core Fragment | midgame tools, gear, facilities |
-| T7â€“T9 | Prismatic Core Fragment | advanced profession gear, Estate |
+| T1–T3 | Mineral Core Fragment | early tools, profession gear, facilities |
+| T4–T6 | Refined Core Fragment | midgame tools, gear, facilities |
+| T7–T9 | Prismatic Core Fragment | advanced profession gear, Estate |
 | T10 | Astral Core Fragment | endgame tools, Holdings, high-tier facilities |
 
 Special:
@@ -3089,7 +3089,7 @@ is a unique Level-100 project material.
 
 ---
 
-# 87. PICKAXE PROGRESSION â€” FINAL
+# 87. PICKAXE PROGRESSION — FINAL
 
 | Tier | Pickaxe | Lvl | Mining Power | Mining Speed | Source | Mechanical Effect |
 |---|---|---|---|---|---|---|
@@ -3114,7 +3114,7 @@ is a unique Level-100 project material.
 
 ## Default upgrade chain
 
-**Previous Pickaxe + New-Tier Metal + supporting components â†’ New Pickaxe**
+**Previous Pickaxe + New-Tier Metal + supporting components → New Pickaxe**
 
 Exact recipe quantities belong to Smithing.
 
@@ -3122,7 +3122,7 @@ Exact recipe quantities belong to Smithing.
 
 Each strike removes:
 
-**Pickaxe Mining Power Ã— Mining-Power modifiers**
+**Pickaxe Mining Power × Mining-Power modifiers**
 
 from current Stage Density.
 
@@ -3137,7 +3137,7 @@ A Pickaxe upgrade should therefore visibly:
 
 ---
 
-# 88. MINING PROFESSION CLOTHING â€” FINAL
+# 88. MINING PROFESSION CLOTHING — FINAL
 
 Early game can use shared Gathering equipment.
 
@@ -3183,7 +3183,7 @@ Intended crafting sources:
 
 ---
 
-# 89. MINING JEWELRY â€” FINAL
+# 89. MINING JEWELRY — FINAL
 
 | Mining Lvl | Jewelry | Effect | Use |
 |---|---|---|---|
@@ -3211,9 +3211,9 @@ for a large Stone / Ore project.
 
 ---
 
-# 90. DEPOSIT MASTERY â€” FINAL VALUES
+# 90. DEPOSIT MASTERY — FINAL VALUES
 
-Every major Deposit has Mastery 1â€“100.
+Every major Deposit has Mastery 1–100.
 
 | Mastery | Deposit Effect |
 |---:|---|
@@ -3246,7 +3246,7 @@ Milestones:
 
 ---
 
-# 91. MINING SPECIALIZATIONS â€” FINAL
+# 91. MINING SPECIALIZATIONS — FINAL
 
 Specializations unlock at:
 
@@ -3300,7 +3300,7 @@ Effects:
 
 ---
 
-# 92. MINING BAY â€” ESTATE SUPPORT
+# 92. MINING BAY — ESTATE SUPPORT
 
 Mining uses an Estate Workshop branch called:
 
@@ -3327,13 +3327,13 @@ It should not replace personal gear progression.
 
 ---
 
-# 93. WORKER MINING â€” FINAL
+# 93. WORKER MINING — FINAL
 
 Workers use the same Mining model as the player.
 
 They have:
 
-- Mining Proficiency 1â€“100;
+- Mining Proficiency 1–100;
 - Pickaxe;
 - profession clothing;
 - profession jewelry;
@@ -3343,7 +3343,7 @@ They have:
 
 They always mine:
 
-**Outcrop â†’ Shallow â†’ Main â†’ Deep â†’ Core**
+**Outcrop → Shallow → Main → Deep → Core**
 
 and then reset.
 
@@ -3363,13 +3363,13 @@ and can be assigned to workers.
 
 Base Worker Efficiency:
 
-**50% + (Proficiency Ã— 0.50%)**
+**50% + (Proficiency × 0.50%)**
 
 Examples:
 
-- Proficiency 1 â†’ 50.5%;
-- Proficiency 50 â†’ 75%;
-- Proficiency 100 â†’ 100%.
+- Proficiency 1 → 50.5%;
+- Proficiency 50 → 75%;
+- Proficiency 100 → 100%.
 
 Equipment / Estate modifiers apply afterward.
 
@@ -3379,17 +3379,17 @@ For the highest currently unlocked Mining Tier:
 
 | Player Deposit Mastery | Worker Frontier Multiplier |
 |---:|---:|
-| 0â€“24 | 75% |
-| 25â€“49 | 85% |
-| 50â€“74 | 92.5% |
-| 75â€“99 | 97.5% |
+| 0–24 | 75% |
+| 25–49 | 85% |
+| 50–74 | 92.5% |
+| 75–99 | 97.5% |
 | 100 | 100% |
 
 Older established Tiers have no Frontier penalty.
 
 ---
 
-# 94. ACTIVITY PLANNER â€” FINAL MINING RULES
+# 94. ACTIVITY PLANNER — FINAL MINING RULES
 
 ## From the start
 
@@ -3490,7 +3490,7 @@ Smaller Mastery, Chronicles, and Estate unlocks can occur between these levels.
 
 ---
 
-# 97. CHRONICLES â€” COMPLETE MINING PATH
+# 97. CHRONICLES — COMPLETE MINING PATH
 
 ## First Deposit
 
@@ -3591,11 +3591,11 @@ This is an intentional Chronicle gate for endgame Mining.
 
 ## Stage Density
 
-**Stage Density = ceil(Base Density Ã— Stage Density Multiplier)**
+**Stage Density = ceil(Base Density × Stage Density Multiplier)**
 
 ## Effective Mining Power
 
-**Pickaxe Mining Power Ã— Mining-Power modifiers**
+**Pickaxe Mining Power × Mining-Power modifiers**
 
 Stage-specific bonuses can apply afterward.
 
@@ -3605,7 +3605,7 @@ Stage-specific bonuses can apply afterward.
 
 ## Final Strike Time
 
-**Base Strike Time Ã— (1 - Mining Speed)**
+**Base Strike Time × (1 - Mining Speed)**
 
 then apply other Strike-Time modifiers.
 
@@ -3615,11 +3615,11 @@ Recommended minimum Strike Time:
 
 ## Stage Duration
 
-**Strikes Required Ã— Final Strike Time**
+**Strikes Required × Final Strike Time**
 
 ## Primary Quantity
 
-**Base Quantity Ã— Stage Quantity Multiplier**
+**Base Quantity × Stage Quantity Multiplier**
 
 Then apply Primary extra-quantity modifiers.
 
@@ -3627,16 +3627,16 @@ Fractional Quantity becomes an extra-item roll.
 
 ## Mining XP
 
-**Stage-1 Base XP Ã— Stage XP Multiplier Ã— XP modifiers**
+**Stage-1 Base XP × Stage XP Multiplier × XP modifiers**
 
 [DEPRECATED — DO NOT IMPLEMENT]
 ## Mastery XP
 
-**Stage-1 Base XP Ã— 0.35 Ã— Stage Mastery Multiplier Ã— Mastery modifiers**
+**Stage-1 Base XP × 0.35 × Stage Mastery Multiplier × Mastery modifiers**
 
 ## Rare Chance
 
-**Base Chance Ã— Stage Rare Multiplier Ã— rare modifiers**
+**Base Chance × Stage Rare Multiplier × rare modifiers**
 
 Chance above 100%:
 
@@ -3705,7 +3705,7 @@ Avoid adding additional Mining stats unless they enable a clearly different buil
 Recommended baseline caps:
 
 - total Strike-Time reduction: 60%;
-- Mining Power bonuses can stack but should target no more than roughly 2.0Ã— baseline personal Power during the original 1â€“100 game;
+- Mining Power bonuses can stack but should target no more than roughly 2.0× baseline personal Power during the original 1–100 game;
 - Primary extra-quantity chance converts every 100 pp into one guaranteed additional unit;
 - rare-chance overflow converts into extra rolls;
 - worker efficiency can exceed 100% through equipment / facilities but baseline design should generally remain below ~140%.
@@ -3792,7 +3792,7 @@ Changing gear or Specialization should update estimates immediately.
 Mining is considered design-complete under these rules:
 
 1. Five mandatory sequential Stages.
-2. Outcrop â†’ Shallow Vein â†’ Main Vein â†’ Deep Seam â†’ Core.
+2. Outcrop → Shallow Vein → Main Vein → Deep Seam → Core.
 3. No player-selected Depth Target.
 4. No intentional early reset.
 5. Density is Stage HP.
@@ -3815,7 +3815,7 @@ Mining is considered design-complete under these rules:
 22. Three Essence / Runic Deposit families.
 23. Four normal Core-material families.
 24. Worldheart Shard is Core-only endgame content.
-25. Deposit Mastery 1â€“100.
+25. Deposit Mastery 1–100.
 26. Skill-Wide Mining Mastery.
 27. Extractor / Prospector / Deep Delver Specializations.
 28. Mining-specific clothes and jewelry.
@@ -3831,7 +3831,7 @@ Mining is considered design-complete under these rules:
 
 The profession fantasy is:
 
-**break through the dense exterior â†’ expose increasingly rich material â†’ reach the valuable Core â†’ finish the Deposit â†’ begin again.**
+**break through the dense exterior → expose increasingly rich material → reach the valuable Core → finish the Deposit → begin again.**
 
 Over the account lifetime:
 

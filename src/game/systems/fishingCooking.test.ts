@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { advanceWithEvents, canStartCooking, canStartFishing, COOKING_RECIPES, COOKING_METHOD_UNLOCK, FISHING_SPOTS, FISH_SPECIES, freshState, fishingCatchWeights, resolveRecipeInputs, startActivity, stopActivity, ITEMS, PHASE1_PANTRY, eatFood, loadState, type GameEvent, type ItemId } from '../game';
+import { advanceWithEvents, canStartCooking, canStartFishing, COOKING_RECIPES, COOKING_METHOD_UNLOCK, FISHING_RODS, FISHING_SPOTS, FISH_SPECIES, freshState, fishingCatchWeights, resolveRecipeInputs, startActivity, stopActivity, ITEMS, PHASE1_PANTRY, eatFood, loadState, type GameEvent, type ItemId } from '../game';
 
 describe('Fishing and Cooking registries',()=>{
   it('registers all ten spots, forty species, and forty-three recipes with stable unique IDs',()=>{
@@ -11,6 +11,12 @@ describe('Fishing and Cooking registries',()=>{
     expect(FISH_SPECIES.every(x=>x.unlockLevel>=FISHING_SPOTS.find(s=>s.id===x.spotId)!.unlockLevel&&x.weight>0&&x.fight>0&&x.xp>0)).toBe(true);
     const pantry=freshState();for(const fish of FISH_SPECIES)pantry.bank[fish.id as keyof typeof pantry.bank]=50;for(const spot of FISHING_SPOTS)pantry.bank[spot.findId as keyof typeof pantry.bank]=50;for(const recipe of COOKING_RECIPES)pantry.bank[recipe.output as keyof typeof pantry.bank]=50;for(const item of Object.values(PHASE1_PANTRY))pantry.bank[item.id as keyof typeof pantry.bank]=50;
     for(const recipe of COOKING_RECIPES){expect(ITEMS[recipe.output as keyof typeof ITEMS]).toBeDefined();expect(resolveRecipeInputs(pantry,recipe.id)).not.toBeNull();expect(COOKING_METHOD_UNLOCK[recipe.method]).toBeGreaterThan(0);expect((recipe.foodValue>0)===recipe.output.startsWith('cooking.food.')).toBe(true);}
+  });
+  it('keeps T2 and T10 Fishing spot gates at their authored levels',()=>{
+    const s=freshState();s.fishing.spot='fishing.spot.reedmere_pond';s.fishing.rod=FISHING_RODS.find(x=>x.name==='Reed Rod')!.id as ItemId;
+    expect(canStartFishing(s)).toBe(false);s.skills.Fishing.level=11;expect(canStartFishing(s)).toBe(true);
+    s.fishing.spot='fishing.spot.astral_expanse';s.fishing.rod=FISHING_RODS.find(x=>x.name==='Umbralwood Rod')!.id as ItemId;
+    s.skills.Fishing.level=90;expect(canStartFishing(s)).toBe(false);s.skills.Fishing.level=91;expect(canStartFishing(s)).toBe(true);
   });
 });
 
@@ -51,7 +57,7 @@ describe('Food sustain',()=>{
     const s=freshState();s.food.threshold=100;expect(loadState(JSON.stringify({version:5,savedAt:s.savedAt,state:s}),s.savedAt).state.food.threshold).toBe(99);
   });
   it('stops combat when Auto Eat triggers with no usable stock',()=>{
-    const s=freshState();s.food.autoEat=true;s.food.threshold=70;s.combat.playerHp=1;s.equipped.weapon='combat.weapon.melee.copper_sword';s.equipped.head='combat.armor.heavy.copper_helm';startActivity(s,'combat');const result=advanceWithEvents(s,10);
+    const s=freshState();s.skills.Attack.level=5;s.food.autoEat=true;s.food.threshold=70;s.combat.playerHp=1;s.equipped.weapon='combat.weapon.melee.copper_sword';s.equipped.head='combat.armor.heavy.copper_helm';startActivity(s,'combat');const result=advanceWithEvents(s,10);
     expect(s.activity).toBe('combat');expect(result.state.activity).toBeNull();expect(result.events).toEqual(expect.arrayContaining([{type:'combat-stopped-food-empty'}]));
   });
 });

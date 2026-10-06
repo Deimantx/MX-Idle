@@ -89,7 +89,7 @@
 | Cooking | 4 | Riverweed Broth | River Weed | Fishing | 1 | 4 | -3 | Yes | Exact named input; source Docs/Professions/04_COOKING.md:443 |
 | Cooking | 14 | Mussel Chowder | Freshwater Mussel | Fishing | 11 | 14 | -3 | Yes | Exact named input; source Docs/Professions/04_COOKING.md:443 |
 | Cooking | 24 | Crayfish Grain Pot | Crayfish | Fishing | Source-defined | Source-defined | Source-defined | Yes | Exact named input; source Docs/Professions/04_COOKING.md:443 |
-| Cooking | 34 | Pearlscale ConsommÃ© | Brine Kelp | Fishing | source-defined | Source-defined | Source-defined | Yes | Exact named input; source Docs/Professions/04_COOKING.md:443 |
+| Cooking | 34 | Pearlscale Consommé | Brine Kelp | Fishing | source-defined | Source-defined | Source-defined | Yes | Exact named input; source Docs/Professions/04_COOKING.md:443 |
 | Cooking | 37 | Kelp Grain Bowl | Brine Kelp | Fishing | source-defined | Source-defined | Source-defined | Yes | Exact named input; source Docs/Professions/04_COOKING.md:443 |
 | Cooking | 39 | Shell Bait | Freshwater Mussel | Fishing | 11 | 39 | -28 | Yes | Exact named input; source Docs/Professions/04_COOKING.md:443 |
 | Cooking | 39 | Shell Bait | Crayfish | Fishing | Source-defined | Source-defined | Source-defined | Yes | Exact named input; source Docs/Professions/04_COOKING.md:443 |

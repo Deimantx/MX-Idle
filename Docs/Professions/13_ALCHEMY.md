@@ -1,4 +1,4 @@
-﻿# 13 â€” ALCHEMY
+﻿# 13 — ALCHEMY
 
 **Status:** Complete Design Draft  
 **Version:** 1.0  
@@ -31,15 +31,15 @@ Its main raw suppliers are:
 
 Alchemy should not become:
 
-**click Herb â†’ instantly receive potion**
+**click Herb → instantly receive potion**
 
 Its core progression is:
 
-**Raw Ingredient â†’ Extraction â†’ Formula â†’ Brewing â†’ Finished Consumable**
+**Raw Ingredient → Extraction → Formula → Brewing → Finished Consumable**
 
 ---
 
-# 2. IMPORTANT BOUNDARY â€” COOKING VS ALCHEMY
+# 2. IMPORTANT BOUNDARY — COOKING VS ALCHEMY
 
 Cooking remains the primary source of:
 
@@ -133,15 +133,15 @@ Alchemy has four production categories:
 
 ## Extraction
 
-Raw wild/farmed ingredients â†’ standardized Extracts.
+Raw wild/farmed ingredients → standardized Extracts.
 
 ## Brewing
 
-Extracts â†’ Elixirs / Tonics / Remedies.
+Extracts → Elixirs / Tonics / Remedies.
 
 ## Concentration
 
-Wild Reagents â†’ high-value Concentrates.
+Wild Reagents → high-value Concentrates.
 
 ## Utility
 
@@ -208,11 +208,11 @@ The exact raw species still matter for:
 
 | Grade | Tiers | Herbal | Fungal | Botanical |
 |---|---|---|---|---|
-| Crude | T1â€“T2 | Crude Herbal Extract | Crude Fungal Extract | Crude Botanical Extract |
-| Refined | T3â€“T4 | Refined Herbal Extract | Refined Fungal Extract | Refined Botanical Extract |
-| Potent | T5â€“T6 | Potent Herbal Extract | Potent Fungal Extract | Potent Botanical Extract |
-| Aetheric | T7â€“T8 | Aetheric Herbal Extract | Aetheric Fungal Extract | Aetheric Botanical Extract |
-| Astral | T9â€“T10 | Astral Herbal Extract | Astral Fungal Extract | Astral Botanical Extract |
+| Crude | T1–T2 | Crude Herbal Extract | Crude Fungal Extract | Crude Botanical Extract |
+| Refined | T3–T4 | Refined Herbal Extract | Refined Fungal Extract | Refined Botanical Extract |
+| Potent | T5–T6 | Potent Herbal Extract | Potent Fungal Extract | Potent Botanical Extract |
+| Aetheric | T7–T8 | Aetheric Herbal Extract | Aetheric Fungal Extract | Aetheric Botanical Extract |
+| Astral | T9–T10 | Astral Herbal Extract | Astral Fungal Extract | Astral Botanical Extract |
 
 Five grade bands are enough.
 
@@ -234,21 +234,21 @@ Each Extract grade spans two Tiers.
 
 Earlier Tier source:
 
-**2 raw â†’ 3 Extract**
+**2 raw → 3 Extract**
 
 Later Tier source:
 
-**2 raw â†’ 4 Extract**
+**2 raw → 4 Extract**
 
 Example:
 
 Wild Mint:
 
-2 â†’3 Crude Herbal Extract.
+2 →3 Crude Herbal Extract.
 
 Marsh Sage:
 
-2 â†’4 Crude Herbal Extract.
+2 →4 Crude Herbal Extract.
 
 This means later resources within the same grade remain more efficient without requiring another Extract item.
 
@@ -345,7 +345,7 @@ Effects:
 
 Best for:
 
-- scarce T8â€“T10 ingredients;
+- scarce T8–T10 ingredients;
 - expensive domesticated/wild resources.
 
 ---
@@ -872,11 +872,11 @@ Foraging hidden resources remain valuable to Alchemy.
 
 | Grade | Tiers | Foraging Wild Reagents | Conversion |
 |---|---|---|---|
-| Crude | T1â€“T2 | Golden Yarrow / Glowroot | 1 Wild Reagent â†’ 3 Crude Concentrate |
-| Refined | T3â€“T4 | Silverleaf / Dreamcap | 1 Wild Reagent â†’ 3 Refined Concentrate |
-| Potent | T5â€“T6 | Phoenix Root / Crystal Bloom | 1 Wild Reagent â†’ 3 Potent Concentrate |
-| Aetheric | T7â€“T8 | Fulmin Root / Lumen Orchid | 1 Wild Reagent â†’ 3 Aetheric Concentrate |
-| Astral | T9â€“T10 | Voidblossom / Celestial Lotus | 1 Wild Reagent â†’ 3 Astral Concentrate |
+| Crude | T1–T2 | Golden Yarrow / Glowroot | 1 Wild Reagent → 3 Crude Concentrate |
+| Refined | T3–T4 | Silverleaf / Dreamcap | 1 Wild Reagent → 3 Refined Concentrate |
+| Potent | T5–T6 | Phoenix Root / Crystal Bloom | 1 Wild Reagent → 3 Potent Concentrate |
+| Aetheric | T7–T8 | Fulmin Root / Lumen Orchid | 1 Wild Reagent → 3 Aetheric Concentrate |
+| Astral | T9–T10 | Voidblossom / Celestial Lotus | 1 Wild Reagent → 3 Astral Concentrate |
 
 Concentrates are used for:
 
@@ -1159,7 +1159,7 @@ Otherwise Bank stacking becomes impossible/ambiguous.
 
 Every important recipe has:
 
-**Mastery 1â€“100**
+**Mastery 1–100**
 
 Examples:
 
@@ -1225,7 +1225,7 @@ All reversible.
 
 Focus:
 
-**raw ingredient â†’ Extract**
+**raw ingredient → Extract**
 
 Best for:
 
@@ -1403,7 +1403,7 @@ Alchemy works from an early:
 
 Property upgrades unlock:
 
-**Apothecary Iâ€“V**
+**Apothecary I–V**
 
 | Facility | Property Stage | Max Batch | Queue | Main Unlocks |
 |---|---|---|---|---|
@@ -1463,13 +1463,13 @@ Player learns first.
 
 Base Worker Alchemy Efficiency:
 
-**50% + Proficiency Ã—0.50%**
+**50% + Proficiency ×0.50%**
 
 Examples:
 
-- 1 â†’ 50.5%;
-- 50 â†’ 75%;
-- 100 â†’ 100%.
+- 1 → 50.5%;
+- 50 → 75%;
+- 100 → 100%.
 
 Workers gain Proficiency.
 
@@ -1483,10 +1483,10 @@ Highest unlocked grade:
 
 | Recipe Mastery | Worker Multiplier |
 |---:|---:|
-| 10â€“24 | 75% |
-| 25â€“49 | 85% |
-| 50â€“74 | 92.5% |
-| 75â€“99 | 97.5% |
+| 10–24 | 75% |
+| 25–49 | 85% |
+| 50–74 | 92.5% |
+| 75–99 | 97.5% |
 | 100 | 100% |
 
 Older grades have no frontier penalty.
@@ -1612,11 +1612,11 @@ Same for Profession Tonic.
 
 Example:
 
-**Power Elixir VII â€” 43m remaining â€” 31 doses â€” ~31h supply**
+**Power Elixir VII — 43m remaining — 31 doses — ~31h supply**
 
 ---
 
-# 84. ACTIVITY PLANNER â€” ALCHEMY
+# 84. ACTIVITY PLANNER — ALCHEMY
 
 Starter:
 
@@ -1655,13 +1655,13 @@ Holdings:
 
 ---
 
-# 85. EXTRACTION â†’ ELIXIR CHAIN
+# 85. EXTRACTION → ELIXIR CHAIN
 
 Example:
 
 > Maintain 2,000 Potent Herbal Extract  
-> â†’ maintain 1,000 Potent Botanical Extract  
-> â†’ brew Power Elixir VI until Bank â‰¥250.
+> → maintain 1,000 Potent Botanical Extract  
+> → brew Power Elixir VI until Bank â‰¥250.
 
 If Extract reserve is low:
 
@@ -1732,7 +1732,7 @@ No worker should silently drain a cross-profession rare resource.
 
 ---
 
-# 89. FORAGING â†” ALCHEMY
+# 89. FORAGING ↔ ALCHEMY
 
 Foraging is the main discovery supplier.
 
@@ -1747,7 +1747,7 @@ Wild Reagents remain especially valuable because Farming generally cannot reprod
 
 ---
 
-# 90. FARMING â†” ALCHEMY
+# 90. FARMING ↔ ALCHEMY
 
 Farming is the main scale supplier.
 
@@ -1761,11 +1761,11 @@ Farming mass-produces selected:
 
 This creates the intended loop:
 
-**Foraging discovers â†’ Farming domesticates â†’ Alchemy consumes**
+**Foraging discovers → Farming domesticates → Alchemy consumes**
 
 ---
 
-# 91. FISHING â†” ALCHEMY
+# 91. FISHING ↔ ALCHEMY
 
 Fishing contributes selected:
 
@@ -1781,7 +1781,7 @@ This keeps Fishing relevant without turning Alchemy into another Cooking depende
 
 ---
 
-# 92. HUNTING â†” ALCHEMY
+# 92. HUNTING ↔ ALCHEMY
 
 Hunting can supply:
 
@@ -1797,7 +1797,7 @@ not required for the entire potion ladder.
 
 ---
 
-# 93. RUNECRAFTING â†” ALCHEMY
+# 93. RUNECRAFTING ↔ ALCHEMY
 
 Late Alchemy can consume small optional amounts of:
 
@@ -1813,7 +1813,7 @@ Alchemy uses them only as:
 
 ---
 
-# 94. JEWELCRAFTING â†” ALCHEMY
+# 94. JEWELCRAFTING ↔ ALCHEMY
 
 Upcoming Jewelcrafting can supply:
 
@@ -1851,7 +1851,7 @@ Container cost is abstracted.
 
 ---
 
-# 96. ALCHEMY â†” ESTATE
+# 96. ALCHEMY ↔ ESTATE
 
 Estate can consume:
 
@@ -1977,14 +1977,14 @@ Relative targets:
 | Category | XP Weight |
 |---|---:|
 | Standard Extraction | 0.80x |
-| Cold/Precision Extraction | 1.00â€“1.15x |
+| Cold/Precision Extraction | 1.00–1.15x |
 | Combat Elixir | 1.00x |
 | Profession Tonic | 1.10x |
 | Remedy | 1.20x |
 | Wild Concentrate | 1.25x |
 | Endgame utility | 1.40x |
 
-Exact numeric XP follows global 1â€“100 balancing.
+Exact numeric XP follows global 1–100 balancing.
 
 ---
 
@@ -1992,7 +1992,7 @@ Exact numeric XP follows global 1â€“100 balancing.
 
 Recommended:
 
-**Recipe Mastery XP = Alchemy XP Ã—0.40**
+**Recipe Mastery XP = Alchemy XP ×0.40**
 
 then apply:
 
@@ -2005,7 +2005,7 @@ then apply:
 
 # 104. BREW TIME FORMULA
 
-**Final Brew Time = Base Tier Time Ã— gear Ã— Mastery Ã— Specialization Ã— Apothecary Ã— Catalyst modifiers**
+**Final Brew Time = Base Tier Time × gear × Mastery × Specialization × Apothecary × Catalyst modifiers**
 
 Minimum:
 
@@ -2015,7 +2015,7 @@ Minimum:
 
 # 105. EXTRACTION TIME FORMULA
 
-**Final Extraction Time = Base Source Time Ã— Method Ã— gear Ã— Mastery Ã— Specialization Ã— Apothecary**
+**Final Extraction Time = Base Source Time × Method × gear × Mastery × Specialization × Apothecary**
 
 Recommended raw extraction base:
 
@@ -2037,7 +2037,7 @@ Minimum:
 
 ---
 
-# 106. OUTPUT FORMULA â€” EXTRACTS
+# 106. OUTPUT FORMULA — EXTRACTS
 
 1. Create base output from source Tier.
 2. Apply Cold Infusion guaranteed +1 if used.
@@ -2048,7 +2048,7 @@ No quality roll.
 
 ---
 
-# 107. OUTPUT FORMULA â€” BREWS
+# 107. OUTPUT FORMULA — BREWS
 
 1. Create Base 2 doses.
 2. Roll Brew Output Chance.
@@ -2079,7 +2079,7 @@ Remedies can use smaller batch caps if necessary.
 
 ---
 
-# 109. APOTHECARY SCREEN â€” MAIN TABS
+# 109. APOTHECARY SCREEN — MAIN TABS
 
 Recommended:
 
@@ -2210,11 +2210,11 @@ Workers separately.
 
 | Grade | Tiers | Herbal | Fungal | Botanical |
 |---|---|---|---|---|
-| Crude | T1â€“T2 | Crude Herbal Extract | Crude Fungal Extract | Crude Botanical Extract |
-| Refined | T3â€“T4 | Refined Herbal Extract | Refined Fungal Extract | Refined Botanical Extract |
-| Potent | T5â€“T6 | Potent Herbal Extract | Potent Fungal Extract | Potent Botanical Extract |
-| Aetheric | T7â€“T8 | Aetheric Herbal Extract | Aetheric Fungal Extract | Aetheric Botanical Extract |
-| Astral | T9â€“T10 | Astral Herbal Extract | Astral Fungal Extract | Astral Botanical Extract |
+| Crude | T1–T2 | Crude Herbal Extract | Crude Fungal Extract | Crude Botanical Extract |
+| Refined | T3–T4 | Refined Herbal Extract | Refined Fungal Extract | Refined Botanical Extract |
+| Potent | T5–T6 | Potent Herbal Extract | Potent Fungal Extract | Potent Botanical Extract |
+| Aetheric | T7–T8 | Aetheric Herbal Extract | Aetheric Fungal Extract | Aetheric Botanical Extract |
+| Astral | T9–T10 | Astral Herbal Extract | Astral Fungal Extract | Astral Botanical Extract |
 
 ---
 
@@ -2459,7 +2459,7 @@ Workers separately.
 
 ---
 
-# 128. CHRONICLES â€” EARLY ALCHEMY
+# 128. CHRONICLES — EARLY ALCHEMY
 
 Suggested:
 
@@ -2474,7 +2474,7 @@ Suggested:
 
 ---
 
-# 129. CHRONICLES â€” MIDGAME
+# 129. CHRONICLES — MIDGAME
 
 Suggested:
 
@@ -2490,7 +2490,7 @@ Suggested:
 
 ---
 
-# 130. CHRONICLES â€” LATE
+# 130. CHRONICLES — LATE
 
 Suggested:
 
@@ -2526,7 +2526,7 @@ Reward:
 
 ---
 
-# 132. POST-100 ENDGAME â€” QUINTESSENCE
+# 132. POST-100 ENDGAME — QUINTESSENCE
 
 Alchemy's endgame should not simply be:
 
@@ -2631,7 +2631,7 @@ Alchemy DevTools should support:
 
 ---
 
-# 138. DATA MODEL â€” FORMULA
+# 138. DATA MODEL — FORMULA
 
 Formula:
 
@@ -2651,7 +2651,7 @@ Formula:
 
 ---
 
-# 139. DATA MODEL â€” ACTIVE BUFF
+# 139. DATA MODEL — ACTIVE BUFF
 
 Combat Elixir State:
 
@@ -2674,7 +2674,7 @@ Remedy policy:
 
 ---
 
-# 140. DATA MODEL â€” EXTRACTION
+# 140. DATA MODEL — EXTRACTION
 
 Extraction Recipe:
 
@@ -2722,7 +2722,7 @@ Prefer:
 
 ---
 
-# 142. MAJOR OPEN QUESTIONS â€” RECOMMENDED ANSWERS
+# 142. MAJOR OPEN QUESTIONS — RECOMMENDED ANSWERS
 
 ## Should Alchemy own combat buffs?
 
@@ -3013,20 +3013,20 @@ Post-100:
 23. Material Preservation cap 50%.
 24. Apothecary/Retort Kit is primary Tool.
 25. No durability.
-26. Recipe Mastery 1â€“100.
+26. Recipe Mastery 1–100.
 27. Skill-Wide Mastery.
 28. Three reversible Specializations:
     - Distiller;
     - Elixirist;
     - Apothecary.
-29. Apothecary Iâ€“V is property infrastructure.
+29. Apothecary I–V is property infrastructure.
 30. Workers consume real ingredients.
 31. Recipe Mastery 10 makes recipes Proven.
 32. Workers gain Proficiency, not player XP/Mastery.
 33. Auto-consume supports Elixir/Tonic/Remedy reserves.
 34. Offline simulation consumes buffs if configured.
 35. UI shows hours of consumable supply.
-36. Planner supports Extract â†’ Brew â†’ reserve chains.
+36. Planner supports Extract → Brew → reserve chains.
 37. Foraging discovers ingredients.
 38. Farming scales normal ingredient supply.
 39. Wild Reagents remain important Foraging-only resources.
@@ -3041,51 +3041,51 @@ Alchemy begins with:
 
 **Wild Mint / Buttoncap / Sunberry**
 
-â†“
+↓
 
 **Crude Extracts**
 
-â†“
+↓
 
 **Power / Precision / Fortitude / Celerity / Warding Elixirs**
 
-â†“
+↓
 
 **Profession Tonics**
 
-â†“
+↓
 
 **Foraging Wild Reagent Concentrates**
 
-â†“
+↓
 
 **Extraction Methods**
 
-â†“
+↓
 
 **Alchemy Specialization**
 
-â†“
+↓
 
 **Apothecary**
 
-â†“
+↓
 
 **worker Elixir/Tonic reserves**
 
-â†“
+↓
 
 **Aetheric / Astral Extracts**
 
-â†“
+↓
 
 **120-minute endgame consumables**
 
-â†“
+↓
 
 **Alchemy 100**
 
-â†“
+↓
 
 **Quintessence**
 
@@ -3093,11 +3093,11 @@ The key relationship is:
 
 **Foraging discovers**
 
-â†“
+↓
 
 **Farming domesticates and scales**
 
-â†“
+↓
 
 **Alchemy extracts and brews**
 
@@ -3113,7 +3113,7 @@ Alchemy should feel like preparation, not mandatory consumable clutter.
 
 Core Alchemy identity:
 
-> **Turn the natural economy into controlled temporary power â€” one deliberate combat elixir, one deliberate profession tonic, and a supply chain capable of sustaining both for as long as the player chooses.**
+> **Turn the natural economy into controlled temporary power — one deliberate combat elixir, one deliberate profession tonic, and a supply chain capable of sustaining both for as long as the player chooses.**
 
 
 

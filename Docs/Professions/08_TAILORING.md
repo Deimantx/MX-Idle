@@ -1,4 +1,4 @@
-﻿# 08 â€” TAILORING
+﻿# 08 — TAILORING
 
 **Status:** Complete Design Draft  
 **Version:** 1.0  
@@ -44,11 +44,11 @@ Its main consumers are:
 
 Tailoring should not become:
 
-**2 Fibre â†’ 1 Cloth forever**
+**2 Fibre → 1 Cloth forever**
 
 Its identity is:
 
-**Spinning â†’ Weaving â†’ Pattern Assembly**
+**Spinning → Weaving → Pattern Assembly**
 
 with meaningful weave choices.
 
@@ -72,7 +72,7 @@ Over time they learn to:
 
 Long-term fantasy:
 
-**Spinner â†’ Weaver â†’ Clothier â†’ Runewright â†’ Master Tailor**
+**Spinner → Weaver → Clothier → Runewright → Master Tailor**
 
 ---
 
@@ -82,15 +82,15 @@ Tailoring has three main production modes:
 
 ## Spinning
 
-Raw Fibre â†’ Thread.
+Raw Fibre → Thread.
 
 ## Weaving
 
-Thread / Cloth + Weave rules â†’ Cloth family.
+Thread / Cloth + Weave rules → Cloth family.
 
 ## Pattern Assembly
 
-Cloth + supporting materials â†’ finished equipment / utility.
+Cloth + supporting materials → finished equipment / utility.
 
 All three grant:
 
@@ -118,11 +118,11 @@ The main textile progression is inherited directly from Foraging.
 
 This is the locked baseline fibre contract between:
 
-**Foraging â†’ Tailoring**
+**Foraging → Tailoring**
 
 ---
 
-# 5. CORE LOOP â€” SPINNING
+# 5. CORE LOOP — SPINNING
 
 1. Select Thread recipe.
 2. Select Batch Size.
@@ -139,7 +139,7 @@ No active timing minigame.
 
 ---
 
-# 6. CORE LOOP â€” WEAVING
+# 6. CORE LOOP — WEAVING
 
 1. Select Cloth / Weave recipe.
 2. Select Batch Size.
@@ -154,7 +154,7 @@ No active timing minigame.
 
 ---
 
-# 7. CORE LOOP â€” PATTERN ASSEMBLY
+# 7. CORE LOOP — PATTERN ASSEMBLY
 
 1. Select equipment / utility pattern.
 2. Reserve Cloth + secondary materials.
@@ -174,11 +174,11 @@ Tailoring's defining mid/late-game mechanic:
 
 | Weave | Unlock | Recipe | Work Mult. | XP Mult. | Mastery Mult. | Identity |
 |---|---|---|---|---|---|---|
-| Plain Weave | 1 | 2 Thread â†’ 1 Cloth | 1.00x | 1.00x | 1.00x | Bulk baseline cloth |
-| Dense Weave | 15 | 3 Thread â†’ 1 Dense Cloth | 1.25x | 1.15x | 0.95x | Armor / reinforced profession gear |
-| Fine Weave | 35 | 3 Thread + 1 Runic Filament â†’ 1 Fine Cloth | 1.15x | 0.95x | 1.20x | High-quality profession clothes / mastery |
-| Runic Weave | 65 | 2 Cloth + 1 Aether Filament â†’ 1 Runic Cloth | 1.35x | 1.25x | 1.30x | Magic gear / high-tier profession gear |
-| Astral Weave | 95 | 2 Astralcloth + 1 Astral Filament â†’ 1 Astralweave | 1.50x | 1.35x | 1.40x | T10/endgame cloth |
+| Plain Weave | 1 | 2 Thread → 1 Cloth | 1.00x | 1.00x | 1.00x | Bulk baseline cloth |
+| Dense Weave | 15 | 3 Thread → 1 Dense Cloth | 1.25x | 1.15x | 0.95x | Armor / reinforced profession gear |
+| Fine Weave | 35 | 3 Thread + 1 Runic Filament → 1 Fine Cloth | 1.15x | 0.95x | 1.20x | High-quality profession clothes / mastery |
+| Runic Weave | 65 | 2 Cloth + 1 Aether Filament → 1 Runic Cloth | 1.35x | 1.25x | 1.30x | Magic gear / high-tier profession gear |
+| Astral Weave | 95 | 2 Astralcloth + 1 Astral Filament → 1 Astralweave | 1.50x | 1.35x | 1.40x | T10/endgame cloth |
 
 Weave choice changes what the material is good for. `[Thread]` and `[Cloth]` in generic Weave recipes select grade-appropriate physical Tailoring stacks; they are recipe selectors, not separate generic inventory items. Fine Weave also consumes 1 Runic Filament as its T4-T6 magical input.
 
@@ -255,7 +255,7 @@ Identity:
 - Runic Bowstrings;
 - advanced worker / Estate textiles.
 
-This is the main Tailoring â†” Runecrafting bridge.
+This is the main Tailoring ↔ Runecrafting bridge.
 
 ---
 
@@ -307,11 +307,11 @@ Identity:
 
 Normal baseline:
 
-**2 Raw Fibre â†’ 3 Thread**
+**2 Raw Fibre → 3 Thread**
 
 Then:
 
-**2 Thread â†’ 1 Base Cloth**
+**2 Thread → 1 Base Cloth**
 
 Higher Weaves add their own conversion rules.
 
@@ -331,7 +331,7 @@ It is used directly by:
 
 Therefore the chain is not always:
 
-Fibre â†’ Thread â†’ Cloth â†’ Item.
+Fibre → Thread → Cloth → Item.
 
 Sometimes Thread is the final useful component.
 
@@ -586,9 +586,9 @@ Tailoring owns the textile side of Fletching weapon strings.
 
 | Tier Range | String | Tailoring Inputs | Main Consumer |
 |---|---|---|---|
-| T1â€“T3 | Simple Bowstring | 3 Thread | Fletching bows/crossbows |
-| T4â€“T6 | Reinforced Bowstring | 1 Dense Cloth + 2 Thread | Mid-tier ranged weapons |
-| T7â€“T9 | Runic Bowstring | 1 Runic Cloth + 1 Aether Filament | Late ranged weapons |
+| T1–T3 | Simple Bowstring | 3 Thread | Fletching bows/crossbows |
+| T4–T6 | Reinforced Bowstring | 1 Dense Cloth + 2 Thread | Mid-tier ranged weapons |
+| T7–T9 | Runic Bowstring | 1 Runic Cloth + 1 Aether Filament | Late ranged weapons |
 | T10 | Astral Bowstring | 1 Astralweave + 1 Astral Filament | T10 ranged weapons |
 | T10+ | Worldroot Bowstring | Astral Bowstring + 2 Worldsilk Thread + 1 Astral Filament | Worldroot ranged crafting |
 
@@ -598,7 +598,7 @@ This closes the contract established in Fletching.
 
 # 26. SIMPLE BOWSTRING
 
-T1â€“T3.
+T1–T3.
 
 Made from basic Thread.
 
@@ -615,7 +615,7 @@ No need for separate Bow/Crossbow string items.
 
 # 27. REINFORCED BOWSTRING
 
-T4â€“T6.
+T4–T6.
 
 Uses Dense textile components.
 
@@ -629,7 +629,7 @@ Identity:
 
 # 28. RUNIC BOWSTRING
 
-T7â€“T9.
+T7–T9.
 
 Uses:
 
@@ -638,7 +638,7 @@ Uses:
 
 This makes high-tier Fletching depend on:
 
-**Foraging â†’ Tailoring â†’ Runecrafting â†’ Fletching**
+**Foraging → Tailoring → Runecrafting → Fletching**
 
 ---
 
@@ -737,7 +737,7 @@ Tailoring defines:
 
 Default:
 
-**Previous Shears + current metal + grip â†’ next Shears**
+**Previous Shears + current metal + grip → next Shears**
 
 Old Shears move naturally to workers.
 
@@ -885,7 +885,7 @@ Spinning gets an additional small large-batch benefit.
 
 Every important recipe has:
 
-**Mastery 1â€“100**
+**Mastery 1–100**
 
 Examples:
 
@@ -1020,7 +1020,7 @@ Rules:
 
 ---
 
-# 51. PROFESSION CLOTHING â€” TAILOR'S OWN SETS
+# 51. PROFESSION CLOTHING — TAILOR'S OWN SETS
 
 | Unlock | Item | Effect |
 |---|---|---|
@@ -1102,7 +1102,7 @@ Recommended presets:
 
 ---
 
-# 54. TEXTILE ROOM â€” ESTATE INFRASTRUCTURE
+# 54. TEXTILE ROOM — ESTATE INFRASTRUCTURE
 
 Tailoring works early with a simple personal:
 
@@ -1110,7 +1110,7 @@ Tailoring works early with a simple personal:
 
 Estate adds:
 
-**Textile Room Iâ€“V**
+**Textile Room I–V**
 
 | Facility | Estate Stage | Max Batch | Queue | Main Unlocks |
 |---|---|---|---|---|
@@ -1168,13 +1168,13 @@ The player learns it first.
 
 Base Worker Tailoring Efficiency:
 
-**50% + Proficiency Ã—0.50%**
+**50% + Proficiency ×0.50%**
 
 Examples:
 
-- 1 â†’ 50.5%;
-- 50 â†’ 75%;
-- 100 â†’ 100%.
+- 1 → 50.5%;
+- 50 → 75%;
+- 100 → 100%.
 
 Workers do not grant player Tailoring XP/Mastery.
 
@@ -1186,10 +1186,10 @@ Highest unlocked Tailoring Tier:
 
 | Recipe Mastery | Worker Multiplier |
 |---:|---:|
-| 10â€“24 | 75% |
-| 25â€“49 | 85% |
-| 50â€“74 | 92.5% |
-| 75â€“99 | 97.5% |
+| 10–24 | 75% |
+| 25–49 | 85% |
+| 50–74 | 92.5% |
+| 75–99 | 97.5% |
 | 100 | 100% |
 
 Older tiers have no frontier penalty.
@@ -1247,7 +1247,7 @@ Lodge:
 
 - resource reserves;
 - 4-step queue;
-- Threadâ†’Cloth chains.
+- Thread→Cloth chains.
 
 Manor:
 
@@ -1268,14 +1268,14 @@ Holdings:
 
 ---
 
-# 63. SPINNING â†’ WEAVING CHAIN
+# 63. SPINNING → WEAVING CHAIN
 
 Example:
 
 > Spin 3,000 Nettle Thread  
-> â†’ Weave 1,000 Nettlecloth  
-> â†’ keep 500 Thread reserve  
-> â†’ use remaining Cloth for Tailoring.
+> → Weave 1,000 Nettlecloth  
+> → keep 500 Thread reserve  
+> → use remaining Cloth for Tailoring.
 
 This is a common automation chain.
 
@@ -1301,8 +1301,8 @@ Workers can maintain this once recipe is Proven.
 Example:
 
 > Maintain enough Dense Cloth  
-> â†’ assemble Mining / Foraging / Cooking specialist pieces  
-> â†’ hand older pieces to workers.
+> → assemble Mining / Foraging / Cooking specialist pieces  
+> → hand older pieces to workers.
 
 This makes Tailoring a central account-support profession.
 
@@ -1328,7 +1328,7 @@ Never consume below without override.
 
 ---
 
-# 67. FORAGING â†” TAILORING
+# 67. FORAGING ↔ TAILORING
 
 Foraging supplies:
 
@@ -1349,19 +1349,19 @@ No rename/duplication needed.
 
 ---
 
-# 68. FARMING â†” TAILORING
+# 68. FARMING ↔ TAILORING
 
 Farming may later domesticate selected Fibre species.
 
 This creates:
 
-**Foraging discovery â†’ Farming bulk production â†’ Tailoring**
+**Foraging discovery → Farming bulk production → Tailoring**
 
 Tailoring should accept the same Fibre item regardless of whether it came from wild Foraging or domesticated Farming.
 
 ---
 
-# 69. HUNTING â†” TAILORING
+# 69. HUNTING ↔ TAILORING
 
 Hunting can supply:
 
@@ -1380,7 +1380,7 @@ Do not make every Tailoring recipe require Hunting.
 
 ---
 
-# 70. RUNECRAFTING â†” TAILORING
+# 70. RUNECRAFTING ↔ TAILORING
 
 Runecrafting supplies:
 
@@ -1399,7 +1399,7 @@ This is a major planned cross-profession loop.
 
 ---
 
-# 71. TAILORING â†” FLETCHING
+# 71. TAILORING ↔ FLETCHING
 
 Tailoring supplies:
 
@@ -1418,7 +1418,7 @@ Fletching consumes them for:
 
 ---
 
-# 72. TAILORING â†” ESTATE
+# 72. TAILORING ↔ ESTATE
 
 Estate can consume:
 
@@ -1516,7 +1516,7 @@ Global skill curve determines exact XP.
 
 Recommended:
 
-**Recipe Mastery XP = Tailoring XP Ã—0.40**
+**Recipe Mastery XP = Tailoring XP ×0.40**
 
 then apply:
 
@@ -1529,7 +1529,7 @@ then apply:
 
 # 79. SPINNING TIME FORMULA
 
-**Final Spinning Time = Base Time Ã— Tool modifier Ã— gear Ã— Mastery Ã— Specialization Ã— facility**
+**Final Spinning Time = Base Time × Tool modifier × gear × Mastery × Specialization × facility**
 
 Minimum:
 
@@ -1539,7 +1539,7 @@ Minimum:
 
 # 80. WEAVING WORK FORMULA
 
-**Final Work = Tier Base Work Ã— Weave Work Multiplier Ã— recipe modifiers**
+**Final Work = Tier Base Work × Weave Work Multiplier × recipe modifiers**
 
 Every Tool action:
 
@@ -1553,7 +1553,7 @@ Cloth completes.
 
 # 81. PATTERN ASSEMBLY FORMULA
 
-**Final Work = Tier Base Work Ã— Pattern Multiplier Ã— Weave/gear modifiers**
+**Final Work = Tier Base Work × Pattern Multiplier × Weave/gear modifiers**
 
 Same Tailoring Power framework.
 
@@ -1643,7 +1643,7 @@ Show:
 
 ---
 
-# 86. TAILORING SCREEN â€” HIGH-LEVEL UI
+# 86. TAILORING SCREEN — HIGH-LEVEL UI
 
 Tabs:
 
@@ -1846,7 +1846,7 @@ Workers separately.
 
 ---
 
-# 95. CHRONICLES â€” EARLY TAILORING
+# 95. CHRONICLES — EARLY TAILORING
 
 Suggested goals:
 
@@ -1861,7 +1861,7 @@ Suggested goals:
 
 ---
 
-# 96. CHRONICLES â€” MIDGAME
+# 96. CHRONICLES — MIDGAME
 
 Suggested:
 
@@ -1876,7 +1876,7 @@ Suggested:
 
 ---
 
-# 97. CHRONICLES â€” LATE
+# 97. CHRONICLES — LATE
 
 Suggested:
 
@@ -1891,7 +1891,7 @@ Suggested:
 
 ---
 
-# 98. ENDGAME â€” WORLDSILK
+# 98. ENDGAME — WORLDSILK
 
 Post-100 Tailoring uses:
 
@@ -1901,7 +1901,7 @@ Expected source:
 
 **Wildheart Expedition / Foraging**
 
-Worldsilk is not part of normal T1â€“T10 progression.
+Worldsilk is not part of normal T1–T10 progression.
 
 ---
 
@@ -1909,9 +1909,9 @@ Worldsilk is not part of normal T1â€“T10 progression.
 
 Recommended:
 
-**2 Worldsilk Fibre â†’ 3 Worldsilk Thread**
+**2 Worldsilk Fibre → 3 Worldsilk Thread**
 
-**3 Worldsilk Thread + 1 Astral Filament â†’ 1 Worldsilk Cloth**
+**3 Worldsilk Thread + 1 Astral Filament → 1 Worldsilk Cloth**
 
 Worldsilk Cloth feeds:
 
@@ -2036,7 +2036,7 @@ Prefer:
 
 ---
 
-# 105. MAJOR OPEN QUESTIONS â€” RECOMMENDED ANSWERS
+# 105. MAJOR OPEN QUESTIONS — RECOMMENDED ANSWERS
 
 ## Should Tailoring process raw Fibre?
 
@@ -2234,7 +2234,7 @@ Post-100:
 
 # 106. COMPLETE LOCKED TAILORING BASELINE
 
-1. Tailoring uses Spinning â†’ Weaving â†’ Pattern Assembly.
+1. Tailoring uses Spinning → Weaving → Pattern Assembly.
 2. 10 Fibre tiers directly follow Foraging.
 3. Each tier has Thread + base Cloth.
 4. Weave types:
@@ -2253,7 +2253,7 @@ Post-100:
 12. No durability.
 13. Thread/Cloth output bonuses use +1 output, not random quality.
 14. Material Preservation cap 50%.
-15. Recipe Mastery 1â€“100.
+15. Recipe Mastery 1–100.
 16. Skill-Wide Mastery.
 17. Three reversible Specializations:
     - Spinner-Weaver;
@@ -2264,7 +2264,7 @@ Post-100:
 20. Mastery 10 makes recipe Proven.
 21. Workers gain Proficiency, not player XP/Mastery.
 22. Workers are ideal Thread/Cloth/Bowstring suppliers.
-23. Planner supports full Fibreâ†’Threadâ†’Clothâ†’item chains.
+23. Planner supports full Fibre→Thread→Cloth→item chains.
 24. Tailoring strongly connects Foraging, Farming, Fletching, Runecrafting, Estate.
 25. Post-100 endgame uses Worldsilk.
 26. All baseline Tailoring content lives in this single MD.
@@ -2277,51 +2277,51 @@ Tailoring begins with:
 
 **Flaxgrass**
 
-â†“
+↓
 
 **Flax Thread**
 
-â†“
+↓
 
 **Flax Cloth**
 
-â†“
+↓
 
 **simple cloth armor / profession clothing**
 
-â†“
+↓
 
 **Dense / Fine Weaves**
 
-â†“
+↓
 
 **Bowstrings**
 
-â†“
+↓
 
 **specialist profession gear**
 
-â†“
+↓
 
 **Runic Weave**
 
-â†“
+↓
 
 **Runic Bowstrings / Magic gear**
 
-â†“
+↓
 
 **Textile Room workers**
 
-â†“
+↓
 
 **Astral Cloth / Astral Weave**
 
-â†“
+↓
 
 **Tailoring 100**
 
-â†“
+↓
 
 **Worldsilk**
 
@@ -2331,7 +2331,7 @@ The profession's identity is:
 
 Core Tailoring identity:
 
-> **Spin the fibre, choose the weave, assemble the pattern â€” and turn raw plants into the fabric economy of the entire account.**
+> **Spin the fibre, choose the weave, assemble the pattern — and turn raw plants into the fabric economy of the entire account.**
 
 
 

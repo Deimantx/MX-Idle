@@ -1,4 +1,4 @@
-﻿# 14 â€” JEWELCRAFTING
+﻿# 14 — JEWELCRAFTING
 
 **Status:** Complete Design Draft  
 **Version:** 1.0  
@@ -48,7 +48,7 @@ Jewelcrafting should not become:
 
 Its identity is:
 
-**Cutting â†’ Polishing â†’ Setting â†’ Socketing / Specialized Assembly**
+**Cutting → Polishing → Setting → Socketing / Specialized Assembly**
 
 ---
 
@@ -60,19 +60,19 @@ It directly consumes outputs from systems already designed:
 
 **Mining Gems**
 
-â†“
+↓
 
 **Smithing Metal**
 
-â†“
+↓
 
 **Runecrafting Filaments / Matrices**
 
-â†“
+↓
 
 **Jewelcrafting Frames / Profession Jewelry**
 
-â†“
+↓
 
 **Combat and every Profession**
 
@@ -99,7 +99,7 @@ Over time they learn to:
 
 Long-term fantasy:
 
-**Gem Cutter â†’ Goldsmith â†’ Prismwright â†’ Master Jeweler**
+**Gem Cutter → Goldsmith → Prismwright → Master Jeweler**
 
 ---
 
@@ -109,7 +109,7 @@ Jewelcrafting has five production categories:
 
 ## Gem Cutting
 
-Raw Gem â†’ Faceted Gem.
+Raw Gem → Faceted Gem.
 
 ## Polishing
 
@@ -117,7 +117,7 @@ Completes the final Faceted Gem.
 
 ## Dust / Regrinding
 
-Sacrifice Gems â†’ Prismatic Dust.
+Sacrifice Gems → Prismatic Dust.
 
 ## Jewelry Assembly
 
@@ -211,15 +211,15 @@ This is one of Jewelcrafting's core economic strengths.
 
 ---
 
-# 9. RAW GEM â†’ FACETED GEM
+# 9. RAW GEM → FACETED GEM
 
 Normal recipe:
 
-**1 Raw Gem â†’ 1 Faceted Gem**
+**1 Raw Gem → 1 Faceted Gem**
 
 Example:
 
-**Ruby â†’ Faceted Ruby**
+**Ruby → Faceted Ruby**
 
 Faceted Gems are:
 
@@ -456,7 +456,7 @@ The player should always have a deterministic way to acquire Dust:
 
 # 23. GEM CRUSHING
 
-| Gem | Raw Gem Crush â†’ Dust | Faceted Gem Regrind â†’ Dust | Cutting Dust-Recovery Context |
+| Gem | Raw Gem Crush → Dust | Faceted Gem Regrind → Dust | Cutting Dust-Recovery Context |
 |---|---|---|---|
 | Opal | 2 | 1 | 5% target max through gear/mastery |
 | Sapphire | 3 | 2 | 10% target max through gear/mastery |
@@ -615,7 +615,7 @@ from T1 onward.
 
 Ring is the simplest:
 
-**one Gem â†’ one focused effect**
+**one Gem → one focused effect**
 
 combat jewelry item.
 
@@ -623,7 +623,7 @@ combat jewelry item.
 
 # 31. NECKLACE IDENTITY
 
-T1â€“T4 Necklace:
+T1–T4 Necklace:
 
 **1 Core Socket**
 
@@ -639,8 +639,8 @@ This gives Necklace a broader late-game identity.
 
 | Socket | Available | Socket Efficiency | Gem Rule | Effect |
 |---|---|---|---|---|
-| Ring Core | T1+ | 1.0 | Any Faceted Gem | Full frame Resonance Ã— gem base effect |
-| Necklace Core | T1+ | 1.0 | Any Faceted Gem | Full frame Resonance Ã— gem base effect |
+| Ring Core | T1+ | 1.0 | Any Faceted Gem | Full frame Resonance × gem base effect |
+| Necklace Core | T1+ | 1.0 | Any Faceted Gem | Full frame Resonance × gem base effect |
 | Necklace Accent | T5+ | 0.5 | Any different Faceted Gem | Half-strength secondary effect |
 
 ---
@@ -754,7 +754,7 @@ Ruby base:
 
 Astralite Frame:
 
-**2% Ã—1.90 = 3.8%**
+**2% ×1.90 = 3.8%**
 
 before any slot-specific rules.
 
@@ -764,11 +764,11 @@ before any slot-specific rules.
 
 Ring/Core:
 
-**Gem Base Effect Ã— Frame Resonance Ã—1.00**
+**Gem Base Effect × Frame Resonance ×1.00**
 
 Necklace Accent:
 
-**Gem Base Effect Ã— Frame Resonance Ã—0.50**
+**Gem Base Effect × Frame Resonance ×0.50**
 
 If Gem has multiple effect lines:
 
@@ -780,16 +780,16 @@ scale each supported numeric line.
 
 | Gem | Affinity | Base Effect Anchor | T10 Core Scaling | T10 Necklace Accent |
 |---|---|---|---|---|
-| Opal | Vitality | Max Health +3.0% | Ã—1.90 in Astralite Core Socket | Accent = Ã—0.95 base effect |
-| Sapphire | Efficiency | Combat Resource Cost -2.0% | Ã—1.90 in Astralite Core Socket | Accent = Ã—0.95 base effect |
-| Garnet | Precision | Critical Chance +1.0 pp | Ã—1.90 in Astralite Core Socket | Accent = Ã—0.95 base effect |
-| Emerald | Guard | Defense +3.0% | Ã—1.90 in Astralite Core Socket | Accent = Ã—0.95 base effect |
-| Ruby | Power | Damage Done +2.0% | Ã—1.90 in Astralite Core Socket | Accent = Ã—0.95 base effect |
-| Topaz | Accuracy | Accuracy +3.5% | Ã—1.90 in Astralite Core Socket | Accent = Ã—0.95 base effect |
-| Amethyst | Tempo | Cooldown Recovery +2.5% | Ã—1.90 in Astralite Core Socket | Accent = Ã—0.95 base effect |
-| Aquamarine | Recovery | Healing Received +4.0% | Ã—1.90 in Astralite Core Socket | Accent = Ã—0.95 base effect |
-| Diamond | Impact | Critical Damage +6.0% | Ã—1.90 in Astralite Core Socket | Accent = Ã—0.95 base effect |
-| Astral Prism | Prismatic | Damage +1.0%; Defense +1.0%; Accuracy +1.0% | Ã—1.90 in Astralite Core Socket | Accent = Ã—0.95 base effect |
+| Opal | Vitality | Max Health +3.0% | ×1.90 in Astralite Core Socket | Accent = ×0.95 base effect |
+| Sapphire | Efficiency | Combat Resource Cost -2.0% | ×1.90 in Astralite Core Socket | Accent = ×0.95 base effect |
+| Garnet | Precision | Critical Chance +1.0 pp | ×1.90 in Astralite Core Socket | Accent = ×0.95 base effect |
+| Emerald | Guard | Defense +3.0% | ×1.90 in Astralite Core Socket | Accent = ×0.95 base effect |
+| Ruby | Power | Damage Done +2.0% | ×1.90 in Astralite Core Socket | Accent = ×0.95 base effect |
+| Topaz | Accuracy | Accuracy +3.5% | ×1.90 in Astralite Core Socket | Accent = ×0.95 base effect |
+| Amethyst | Tempo | Cooldown Recovery +2.5% | ×1.90 in Astralite Core Socket | Accent = ×0.95 base effect |
+| Aquamarine | Recovery | Healing Received +4.0% | ×1.90 in Astralite Core Socket | Accent = ×0.95 base effect |
+| Diamond | Impact | Critical Damage +6.0% | ×1.90 in Astralite Core Socket | Accent = ×0.95 base effect |
+| Astral Prism | Prismatic | Damage +1.0%; Defense +1.0%; Accuracy +1.0% | ×1.90 in Astralite Core Socket | Accent = ×0.95 base effect |
 
 These remain tuning anchors until final Combat balance.
 
@@ -820,7 +820,7 @@ This connects Jewelcrafting to:
 
 The player needs:
 
-Ore â†’ Ingot â†’ Jewelry Frame.
+Ore → Ingot → Jewelry Frame.
 
 The Gem does not replace metal progression.
 
@@ -987,7 +987,7 @@ This keeps flavorful names without creating 8 accessory slots.
 
 ---
 
-# 51. EXAMPLE â€” ANGLER'S RING
+# 51. EXAMPLE — ANGLER'S RING
 
 Fishing source document defines:
 
@@ -1009,7 +1009,7 @@ The effect remains owned by Fishing.
 
 ---
 
-# 52. EXAMPLE â€” TANNER'S RING
+# 52. EXAMPLE — TANNER'S RING
 
 Leatherworking source document defines the effect.
 
@@ -1024,7 +1024,7 @@ Same universal bracket logic.
 
 ---
 
-# 53. EXAMPLE â€” ASTRAL PROFESSION EMBLEM
+# 53. EXAMPLE — ASTRAL PROFESSION EMBLEM
 
 Level-95 profession Emblem template:
 
@@ -1256,25 +1256,25 @@ Recommended Base Work by Tier:
 
 Ring:
 
-**Ã—0.80**
+**×0.80**
 
 Necklace:
 
-**Ã—1.15**
+**×1.15**
 
 Profession jewelry:
 
-**Ã—1.25**
+**×1.25**
 
 Precision utility:
 
-**Ã—1.10â€“1.40**
+**×1.10–1.40**
 
 ---
 
 # 66. POLISH TIME FORMULA
 
-**Final Polish Time = Base Polish Time Ã— Tool Ã— gear Ã— Mastery Ã— Specialization Ã— Atelier**
+**Final Polish Time = Base Polish Time × Tool × gear × Mastery × Specialization × Atelier**
 
 Minimum:
 
@@ -1284,7 +1284,7 @@ Minimum:
 
 # 67. CUT WORK FORMULA
 
-**Final Cut Work = Gem Base Cut Work Ã— Method Ã— gear Ã— Mastery Ã— Specialization**
+**Final Cut Work = Gem Base Cut Work × Method × gear × Mastery × Specialization**
 
 Each Tool action:
 
@@ -1294,7 +1294,7 @@ Each Tool action:
 
 # 68. ASSEMBLY WORK FORMULA
 
-**Final Assembly Work = Tier Base Work Ã— Recipe Multiplier Ã— gear Ã— Mastery Ã— Specialization**
+**Final Assembly Work = Tier Base Work × Recipe Multiplier × gear × Mastery × Specialization**
 
 Every Tool action:
 
@@ -1379,7 +1379,7 @@ Fixed unique/endgame jewelry may ignore large Batch sizes.
 
 Every important recipe has:
 
-**Mastery 1â€“100**
+**Mastery 1–100**
 
 Examples:
 
@@ -1453,7 +1453,7 @@ Unlock:
 |---|---|---|---|
 | Lapidary | Gem cutting / Dust | Cut Work -12%; Gem Preservation +6 pp; Dust Recovery +15 pp; Frame Assembly Time +5% | Raw gem economy / Mastery |
 | Goldsmith | Frames / profession jewelry | Frame & special Jewelry Work -12%; metal/dust Preservation +6 pp; setting time -8%; Gem cutting time +5% | Equipment production |
-| Prismwright | Runic/Astral / utility | T7+ Work -12%; Filament/Matrix Preservation +6 pp; Utility component time -10%; normal T1â€“T6 Frame time +5% | High-tier / endgame |
+| Prismwright | Runic/Astral / utility | T7+ Work -12%; Filament/Matrix Preservation +6 pp; Utility component time -10%; normal T1–T6 Frame time +5% | High-tier / endgame |
 
 All reversible.
 
@@ -1623,7 +1623,7 @@ Recommended:
 
 Property infrastructure:
 
-**Jewelcrafting Atelier Iâ€“V**
+**Jewelcrafting Atelier I–V**
 
 | Facility | Property Stage | Max Batch | Queue | Main Unlocks |
 |---|---|---|---|---|
@@ -1731,13 +1731,13 @@ Player learns first.
 
 Base Worker Jewelcrafting Efficiency:
 
-**50% + Proficiency Ã—0.50%**
+**50% + Proficiency ×0.50%**
 
 Examples:
 
-- 1 â†’ 50.5%;
-- 50 â†’ 75%;
-- 100 â†’ 100%.
+- 1 → 50.5%;
+- 50 → 75%;
+- 100 → 100%.
 
 Workers gain Proficiency.
 
@@ -1751,10 +1751,10 @@ Highest unlocked Jewelcrafting Tier:
 
 | Recipe Mastery | Worker Multiplier |
 |---:|---:|
-| 10â€“24 | 75% |
-| 25â€“49 | 85% |
-| 50â€“74 | 92.5% |
-| 75â€“99 | 97.5% |
+| 10–24 | 75% |
+| 25–49 | 85% |
+| 50–74 | 92.5% |
+| 75–99 | 97.5% |
 | 100 | 100% |
 
 Older recipes have no frontier penalty.
@@ -1970,7 +1970,7 @@ No automatic process can cross reserve without override.
 
 ---
 
-# 105. MINING â†” JEWELCRAFTING
+# 105. MINING ↔ JEWELCRAFTING
 
 This is Jewelcrafting's strongest gathering link.
 
@@ -2011,7 +2011,7 @@ This avoids the common problem:
 
 ---
 
-# 107. SMITHING â†” JEWELCRAFTING
+# 107. SMITHING ↔ JEWELCRAFTING
 
 Smithing supplies:
 
@@ -2035,7 +2035,7 @@ Fine jewelry metalworking is part of Jewelcrafting identity.
 
 Requiring:
 
-Smithing â†’ Ring Blank â†’ Jewelcrafting â†’ Ring Frame
+Smithing → Ring Blank → Jewelcrafting → Ring Frame
 
 would add an intermediary item with little gameplay value.
 
@@ -2043,7 +2043,7 @@ Use Ingots directly.
 
 ---
 
-# 109. RUNECRAFTING â†” JEWELCRAFTING
+# 109. RUNECRAFTING ↔ JEWELCRAFTING
 
 Late Frames use:
 
@@ -2062,7 +2062,7 @@ The professions support each other.
 
 ---
 
-# 110. ALCHEMY â†” JEWELCRAFTING
+# 110. ALCHEMY ↔ JEWELCRAFTING
 
 Alchemy consumes:
 
@@ -2080,7 +2080,7 @@ This creates a strong endgame bridge.
 
 ---
 
-# 111. FISHING â†” JEWELCRAFTING
+# 111. FISHING ↔ JEWELCRAFTING
 
 Fishing can supply:
 
@@ -2094,7 +2094,7 @@ Do not make every jewelry recipe require Fishing.
 
 ---
 
-# 112. FORAGING â†” JEWELCRAFTING
+# 112. FORAGING ↔ JEWELCRAFTING
 
 Foraging hidden reagents can contribute to:
 
@@ -2105,7 +2105,7 @@ Normal combat Frames do not require Herbs.
 
 ---
 
-# 113. HUNTING â†” JEWELCRAFTING
+# 113. HUNTING ↔ JEWELCRAFTING
 
 Hunting materials:
 
@@ -2123,7 +2123,7 @@ Avoid species-specific trophy Gem recipes.
 
 ---
 
-# 114. LEATHERWORKING â†” JEWELCRAFTING
+# 114. LEATHERWORKING ↔ JEWELCRAFTING
 
 Leatherworking supplies:
 
@@ -2141,7 +2141,7 @@ Normal metal Frames remain metal-focused.
 
 ---
 
-# 115. TAILORING â†” JEWELCRAFTING
+# 115. TAILORING ↔ JEWELCRAFTING
 
 Tailoring supplies:
 
@@ -2153,7 +2153,7 @@ High-tier magical jewelry relies more strongly on Tailoring/Runecrafting.
 
 ---
 
-# 116. FARMING â†” JEWELCRAFTING
+# 116. FARMING ↔ JEWELCRAFTING
 
 Farming is not a main raw-material supplier.
 
@@ -2167,7 +2167,7 @@ Do not force crops into normal Ring crafting.
 
 ---
 
-# 117. COOKING â†” JEWELCRAFTING
+# 117. COOKING ↔ JEWELCRAFTING
 
 Cooking has no major direct baseline dependency.
 
@@ -2182,7 +2182,7 @@ This is enough.
 
 ---
 
-# 118. JEWELCRAFTING â†” EVERY PROFESSION
+# 118. JEWELCRAFTING ↔ EVERY PROFESSION
 
 Jewelcrafting's strongest systemic purpose is:
 
@@ -2356,7 +2356,7 @@ UI calculates final exact result.
 
 Example:
 
-**Astralite Ring Frame â€” 1.90x Resonance**
+**Astralite Ring Frame — 1.90x Resonance**
 
 **Ruby**
 
@@ -2386,9 +2386,9 @@ Accent Garnet:
 
 Garnet base Crit +1.0 pp
 
-Ã—1.90
+×1.90
 
-Ã—0.50
+×0.50
 
 =
 
@@ -2647,7 +2647,7 @@ Player chooses based on build.
 |---|---|---|---|
 | Lapidary | Gem cutting / Dust | Cut Work -12%; Gem Preservation +6 pp; Dust Recovery +15 pp; Frame Assembly Time +5% | Raw gem economy / Mastery |
 | Goldsmith | Frames / profession jewelry | Frame & special Jewelry Work -12%; metal/dust Preservation +6 pp; setting time -8%; Gem cutting time +5% | Equipment production |
-| Prismwright | Runic/Astral / utility | T7+ Work -12%; Filament/Matrix Preservation +6 pp; Utility component time -10%; normal T1â€“T6 Frame time +5% | High-tier / endgame |
+| Prismwright | Runic/Astral / utility | T7+ Work -12%; Filament/Matrix Preservation +6 pp; Utility component time -10%; normal T1–T6 Frame time +5% | High-tier / endgame |
 
 ---
 
@@ -2758,7 +2758,7 @@ Gem Crushing should not become the best leveling method.
 
 Recommended:
 
-**Recipe Mastery XP = Jewelcrafting XP Ã—0.40**
+**Recipe Mastery XP = Jewelcrafting XP ×0.40**
 
 then apply:
 
@@ -2779,7 +2779,7 @@ Crushing gives low XP because it is:
 
 This prevents:
 
-buy/farm cheap Opal â†’ crush forever
+buy/farm cheap Opal → crush forever
 
 from becoming optimal leveling.
 
@@ -2852,7 +2852,7 @@ Show:
 
 ---
 
-# 154. CHRONICLES â€” EARLY JEWELCRAFTING
+# 154. CHRONICLES — EARLY JEWELCRAFTING
 
 Suggested:
 
@@ -2869,7 +2869,7 @@ Suggested:
 
 ---
 
-# 155. CHRONICLES â€” MIDGAME
+# 155. CHRONICLES — MIDGAME
 
 Suggested:
 
@@ -2886,7 +2886,7 @@ Suggested:
 
 ---
 
-# 156. CHRONICLES â€” LATE
+# 156. CHRONICLES — LATE
 
 Suggested:
 
@@ -2926,7 +2926,7 @@ Reward:
 
 ---
 
-# 158. POST-100 â€” WORLD PRISM
+# 158. POST-100 — WORLD PRISM
 
 Jewelcrafting's post-100 endgame material:
 
@@ -2942,7 +2942,7 @@ It is a crafted convergence material.
 
 | Input Family | Source | Role |
 |---|---|---|
-| Astral Prism | Mining â†’ Jewelcrafting | High-tier gem body |
+| Astral Prism | Mining → Jewelcrafting | High-tier gem body |
 | Worldstone / Worldheart material | Mining endgame | Physical core |
 | Wildheart Essence | Foraging endgame | Natural/living resonance |
 | Quintessence | Alchemy endgame | Alchemical binding |
@@ -3107,7 +3107,7 @@ Jewelcrafting DevTools should support:
 
 ---
 
-# 168. DATA MODEL â€” GEM
+# 168. DATA MODEL — GEM
 
 Gem data:
 
@@ -3124,7 +3124,7 @@ Gem data:
 
 ---
 
-# 169. DATA MODEL â€” FRAME
+# 169. DATA MODEL — FRAME
 
 Frame:
 
@@ -3141,7 +3141,7 @@ Frame:
 
 ---
 
-# 170. DATA MODEL â€” SOCKETED JEWELRY
+# 170. DATA MODEL — SOCKETED JEWELRY
 
 Instance state:
 
@@ -3156,7 +3156,7 @@ Do not store random affixes.
 
 ---
 
-# 171. DATA MODEL â€” PROFESSION JEWELRY
+# 171. DATA MODEL — PROFESSION JEWELRY
 
 Fixed profession item:
 
@@ -3174,7 +3174,7 @@ Fixed profession item:
 
 ---
 
-# 172. DATA MODEL â€” CUTTING METHOD
+# 172. DATA MODEL — CUTTING METHOD
 
 Method:
 
@@ -3216,7 +3216,7 @@ Prefer:
 
 ---
 
-# 174. MAJOR OPEN QUESTIONS â€” RECOMMENDED ANSWERS
+# 174. MAJOR OPEN QUESTIONS — RECOMMENDED ANSWERS
 
 ## Should Jewelcrafting be the last baseline profession?
 
@@ -3230,7 +3230,7 @@ It naturally consumes outputs from almost the entire economy.
 
 **Yes.**
 
-Raw Gem â†’ Faceted Gem.
+Raw Gem → Faceted Gem.
 
 ---
 
@@ -3601,13 +3601,13 @@ Post-100:
 34. High-tier Frames use Runic/Astral materials.
 35. Jeweler's Tools/Lapidary Kit is primary Tool.
 36. No durability.
-37. Recipe Mastery 1â€“100.
+37. Recipe Mastery 1–100.
 38. Skill-Wide Mastery.
 39. Three reversible Specializations:
    - Lapidary;
    - Goldsmith;
    - Prismwright.
-40. Jewelcrafting Atelier Iâ€“V is property infrastructure.
+40. Jewelcrafting Atelier I–V is property infrastructure.
 41. Workers consume real materials.
 42. Recipe Mastery 10 makes recipe Proven.
 43. Workers gain Proficiency, not player XP/Mastery.
@@ -3633,7 +3633,7 @@ provides:
 - Gems;
 - Essence.
 
-â†“
+↓
 
 **Smithing**
 
@@ -3644,7 +3644,7 @@ turns metal into:
 - mechanisms;
 - heavy equipment.
 
-â†“
+↓
 
 **Woodcutting**
 
@@ -3655,7 +3655,7 @@ provides:
 - Bark;
 - Heartwood.
 
-â†“
+↓
 
 **Fletching**
 
@@ -3666,7 +3666,7 @@ turns timber/metal/textile components into:
 - Rods;
 - Utility Blanks.
 
-â†“
+↓
 
 **Fishing**
 
@@ -3675,7 +3675,7 @@ provides:
 - Fish;
 - aquatic reagents.
 
-â†“
+↓
 
 **Cooking**
 
@@ -3684,7 +3684,7 @@ turns food resources into:
 - healing;
 - provisions.
 
-â†“
+↓
 
 **Foraging**
 
@@ -3696,7 +3696,7 @@ discovers:
 - Botanicals;
 - Wild Reagents.
 
-â†“
+↓
 
 **Farming**
 
@@ -3707,7 +3707,7 @@ domesticates/scales:
 - Fibre;
 - Fungi.
 
-â†“
+↓
 
 **Tailoring**
 
@@ -3718,7 +3718,7 @@ turns Fibre into:
 - Bowstrings;
 - cloth gear.
 
-â†“
+↓
 
 **Hunting**
 
@@ -3730,7 +3730,7 @@ provides:
 - Sinew;
 - animal components.
 
-â†“
+↓
 
 **Leatherworking**
 
@@ -3742,7 +3742,7 @@ turns Hide into:
 - grips;
 - bindings.
 
-â†“
+↓
 
 **Runecrafting**
 
@@ -3752,7 +3752,7 @@ turns Essence into:
 - Filaments;
 - Matrices.
 
-â†“
+↓
 
 **Alchemy**
 
@@ -3763,7 +3763,7 @@ turns natural/magical resources into:
 - Remedies;
 - Quintessence.
 
-â†“
+↓
 
 **Jewelcrafting**
 
@@ -3789,27 +3789,27 @@ The Jewelcrafting-specific fantasy is:
 
 **I find rough Gems through Mining**
 
-â†“
+↓
 
 **I learn to facet them**
 
-â†“
+↓
 
 **I choose which Gem Affinity my Combat build needs**
 
-â†“
+↓
 
 **I create stronger Frames without invalidating old Gems**
 
-â†“
+↓
 
 **I craft specialist jewelry for every profession**
 
-â†“
+↓
 
 **workers maintain ordinary Gem/Dust production**
 
-â†“
+↓
 
 **I personally assemble Astral and World-level precision artifacts**
 
@@ -3819,7 +3819,7 @@ Core Jewelcrafting identity:
 
 ---
 
-# 177. BASELINE PROFESSION SET â€” COMPLETE
+# 177. BASELINE PROFESSION SET — COMPLETE
 
 The intended 14-profession baseline is now:
 
@@ -3859,7 +3859,7 @@ That pass should check:
 - dead resources;
 - circular dependencies;
 - early-game deadlocks;
-- Level 1â€“100 unlock pacing;
+- Level 1–100 unlock pacing;
 - profession Tool sources;
 - clothing/jewelry recipe ownership;
 - worker interactions;

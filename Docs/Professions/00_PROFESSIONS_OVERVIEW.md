@@ -16,7 +16,7 @@ MX-Idle is an interconnected idle RPG. Professions gather, process, and craft re
 
 The core account loop is:
 
-**Gather â†’ Process â†’ Craft â†’ Combat â†’ Build infrastructure â†’ Delegate established work â†’ Personally push frontier content â†’ Master systems â†’ Converge selective endgame resources**
+**Gather → Process → Craft → Combat → Build infrastructure → Delegate established work → Personally push frontier content → Master systems → Converge selective endgame resources**
 
 Each profession keeps its own identity and signature mechanic. There are exactly 14 baseline professions; Home/Estate is a separate account progression system.
 
@@ -43,8 +43,8 @@ Gathering professions are Mining, Woodcutting, Fishing, Farming, Hunting, and Fo
 
 ## Shared progression axes
 
-- Profession level unlocks content from Level 1 to 100 across ten global tiers. T1=1â€“10, T2=11â€“20, T3=21â€“30, T4=31â€“40, T5=41â€“50, T6=51â€“60, T7=61â€“70, T8=71â€“80, T9=81â€“90, T10=91â€“100.
-- Important actions, resources, and recipes have their own Mastery from 1â€“100. Milestones are 10, 25, 50, 75, and 100.
+- Profession level unlocks content from Level 1 to 100 across ten global tiers. T1=1–10, T2=11–20, T3=21–30, T4=31–40, T5=41–50, T6=51–60, T7=61–70, T8=71–80, T9=81–90, T10=91–100.
+- Important actions, resources, and recipes have their own Mastery from 1–100. Milestones are 10, 25, 50, 75, and 100.
 - Specialization normally unlocks around Level 35/T4. It is reversible, can be changed between active actions, and is stored in presets.
 - Tool, Head, Body, Legs, Hands, Feet, Ring, and Necklace are the shared profession equipment slots. Profession-specific tables own their stats and items.
 - Profession facilities and account unlocks support these systems without becoming extra skills.
@@ -55,13 +55,13 @@ The player normally performs one active personal activity: a normal profession o
 
 ## Mastery, workers, and automation
 
-Player Mastery improves a specific action/resource/recipe and ordinarily makes it Proven for workers at Mastery 10. Workers produce real outputs, consume real inputs, and gain their own Proficiency; they grant no player Skill XP or Mastery XP. Where documented, Worker Efficiency remains `50% + Proficiency Ã— 0.50%`. Workers are weaker on frontier content and primarily sustain content the player has established. Old profession equipment may be assigned to workers as unique items.
+Player Mastery improves a specific action/resource/recipe and ordinarily makes it Proven for workers at Mastery 10. Workers produce real outputs, consume real inputs, and gain their own Proficiency; they grant no player Skill XP or Mastery XP. Where documented, Worker Efficiency remains `50% + Proficiency × 0.50%`. Workers are weaker on frontier content and primarily sustain content the player has established. Old profession equipment may be assigned to workers as unique items.
 
 Automated systems obey protected-item permissions, hard reserves, recipe targets, fallback, and stop conditions. Offline simulation uses active economic formulas and advances between events. Full shared contracts are in [00_GLOBAL_GAME_RULES.md](../00_GLOBAL_GAME_RULES.md) and [15_HOME_ESTATE_WORKERS.md](../15_HOME_ESTATE_WORKERS.md).
 
 ## Home / Estate relationship
 
-Home is account infrastructure, not a profession and not Construction XP. Canonical progression is **House â†’ Lodge â†’ Manor â†’ Estate â†’ Holdings**. It manages residence progression, profession stations, worker capacity, logistics, storage, planning, land, and permanent projects. Profession stations are housed within this progression; Farming uses property land and background growth. Infrastructure is the primary long-term Gold sink. See [15_HOME_ESTATE_WORKERS.md](../15_HOME_ESTATE_WORKERS.md).
+Home is account infrastructure, not a profession and not Construction XP. Canonical progression is **House → Lodge → Manor → Estate → Holdings**. It manages residence progression, profession stations, worker capacity, logistics, storage, planning, land, and permanent projects. Profession stations are housed within this progression; Farming uses property land and background growth. Infrastructure is the primary long-term Gold sink. See [15_HOME_ESTATE_WORKERS.md](../15_HOME_ESTATE_WORKERS.md).
 
 ## Canonical material ladders
 
@@ -91,7 +91,7 @@ Home is account infrastructure, not a profession and not Construction XP. Canoni
 
 ### Critical source timing
 
-Runecrafting is an ordinary Level 1â€“100 profession. Mining supplies Raw Essence in T1, Runic Crystal by T4, and Aether Essence by T7; Runecrafting refines Astral Essence during T10 from Aether Essence and Astral Core Fragment. This prevents the Rune grade ladder from being gated several tiers after its recipes.
+Runecrafting is an ordinary Level 1–100 profession. Mining supplies Raw Essence in T1, Runic Crystal by T4, and Aether Essence by T7; Runecrafting refines Astral Essence during T10 from Aether Essence and Astral Core Fragment. This prevents the Rune grade ladder from being gated several tiers after its recipes.
 
 ## Endgame convergence
 

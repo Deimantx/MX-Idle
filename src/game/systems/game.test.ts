@@ -138,13 +138,13 @@ describe('Combat compatibility', () => {
     expect(PROVISIONAL_FIRST_SLICE_COMBAT_VALUES.wolfHp).toBe(70);
   });
   it('keeps deterministic combat and awards namespaced trophies', () => {
-    const s = freshState(); s.equipped.weapon = SWORD; s.equipped.head = HELM; startActivity(s, 'combat');
+    const s = freshState(); s.skills.Attack.level = 5; s.equipped.weapon = SWORD; s.equipped.head = HELM; startActivity(s, 'combat');
     const a = advance(s, 60_000), b = advance(s, 60_000);
     expect(a.rng).toBe(b.rng); expect(a.combat.kills).toBeGreaterThan(0); expect(a.bank[TROPHY]).toBe(a.combat.kills);
     expect(a.gold).toBe(a.combat.kills * PROVISIONAL_FIRST_SLICE_COMBAT_VALUES.gold); expect(a.skills.Attack.xp).toBeGreaterThan(0);
   });
   it('reveals the Ironjaw Boar after each normal enemy has been defeated', () => {
-    const s = freshState(); expect(setCombatTarget(s, 'ironjaw-boar')).toBe(false);
+    const s = freshState(); s.skills.Attack.level = 10; expect(setCombatTarget(s, 'ironjaw-boar')).toBe(false);
     for (const target of ['road-wolf','dust-rat','ragged-poacher','hedge-spark'] as const) s.combat.defeated[target] = 1;
     expect(setCombatTarget(s, 'ironjaw-boar')).toBe(true); expect(s.combat.enemyHp).toBeGreaterThan(0);
   });

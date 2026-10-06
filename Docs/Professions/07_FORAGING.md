@@ -1,4 +1,4 @@
-﻿# 07 â€” FORAGING
+﻿# 07 — FORAGING
 
 **Status:** Complete Design Draft  
 **Version:** 1.0  
@@ -34,7 +34,7 @@ Core resource families:
 
 Foraging should not become:
 
-**Select Herb â†’ wait â†’ receive Herb**
+**Select Herb → wait → receive Herb**
 
 Its defining systems are:
 
@@ -61,11 +61,11 @@ Over time they learn to:
 
 Long-term fantasy:
 
-**Gatherer â†’ Herbalist â†’ Naturalist â†’ Master Forager â†’ Keeper of an Estate Herbarium and Expedition Network**
+**Gatherer → Herbalist → Naturalist → Master Forager → Keeper of an Estate Herbarium and Expedition Network**
 
 ---
 
-# 3. CORE IDENTITY â€” FORAGING ROUTES
+# 3. CORE IDENTITY — FORAGING ROUTES
 
 The player chooses a:
 
@@ -506,7 +506,7 @@ The player always sees:
 
 Recommended:
 
-**Discovery Gain = 1 Ã— Focus modifier Ã— gear Ã— Field Kit Ã— Specialization Ã— facility modifiers**
+**Discovery Gain = 1 × Focus modifier × gear × Field Kit × Specialization × facility modifiers**
 
 Normal Patch:
 
@@ -514,7 +514,7 @@ Normal Patch:
 
 Survey:
 
-Ã—2.25.
+×2.25.
 
 Focused category Patch:
 
@@ -708,7 +708,7 @@ when it drops, award:
 
 Every normal resource and hidden Wild Reagent has:
 
-**Mastery 1â€“100**
+**Mastery 1–100**
 
 Examples:
 
@@ -745,7 +745,7 @@ because they do not have a normal dedicated Patch.
 
 Recommended:
 
-**Resource Mastery XP = Foraging XP Ã—0.40**
+**Resource Mastery XP = Foraging XP ×0.40**
 
 then apply:
 
@@ -757,7 +757,7 @@ then apply:
 
 Rare Wild Reagent Mastery XP:
 
-**Route Tier Base XP Ã—1.50**
+**Route Tier Base XP ×1.50**
 
 when the reagent drops.
 
@@ -846,7 +846,7 @@ Not every fungus should be farmable.
 
 Recommended:
 
-- common T1â€“T6 Fungi can become candidates;
+- common T1–T6 Fungi can become candidates;
 - T7+ special Fungi require advanced Farming facility;
 - Dreamcap remains Wild Reagent and is not ordinary farm crop.
 
@@ -860,7 +860,7 @@ Some Fibres can become Farm crops.
 
 This creates:
 
-**Foraging discovers fibre species â†’ Farming scales fibre production â†’ Tailoring consumes it**
+**Foraging discovers fibre species → Farming scales fibre production → Tailoring consumes it**
 
 Foraging remains useful for:
 
@@ -871,7 +871,7 @@ Foraging remains useful for:
 
 ---
 
-# 41. FIELD KIT â€” PROGRESSION ANCHOR
+# 41. FIELD KIT — PROGRESSION ANCHOR
 
 Foraging does not need a Pickaxe-like single-purpose tool.
 
@@ -937,7 +937,7 @@ Field Kit Search Speed reduces:
 
 Formula:
 
-**Final Search Time = Route Base Search Time Ã— (1 - Search Speed) Ã— other modifiers**
+**Final Search Time = Route Base Search Time × (1 - Search Speed) × other modifiers**
 
 Use multiplicative stacking if multiple sources exist.
 
@@ -1167,7 +1167,7 @@ Rules:
 
 ---
 
-# 55. HERBARIUM â€” ESTATE SUPPORT
+# 55. HERBARIUM — ESTATE SUPPORT
 
 Foraging uses a shared-style Estate facility:
 
@@ -1275,13 +1275,13 @@ Player learns the ecosystem first.
 
 Base Worker Foraging Efficiency:
 
-**50% + Proficiency Ã—0.50%**
+**50% + Proficiency ×0.50%**
 
 Examples:
 
-- 1 â†’ 50.5%;
-- 50 â†’ 75%;
-- 100 â†’ 100%.
+- 1 → 50.5%;
+- 50 → 75%;
+- 100 → 100%.
 
 Workers gain Proficiency.
 
@@ -1295,10 +1295,10 @@ For highest unlocked Route Tier:
 
 | Relevant Resource Mastery | Worker Multiplier |
 |---:|---:|
-| 10â€“24 | 75% |
-| 25â€“49 | 85% |
-| 50â€“74 | 92.5% |
-| 75â€“99 | 97.5% |
+| 10–24 | 75% |
+| 25–49 | 85% |
+| 50–74 | 92.5% |
+| 75–99 | 97.5% |
 | 100 | 100% |
 
 Older routes have no frontier penalty.
@@ -1399,8 +1399,8 @@ This is one of Foraging's defining automation paths.
 Example:
 
 > Maintain 5,000 Nettle Fibre.  
-> If below target â†’ Fibre Focus / Rapid Gather.  
-> Once target reached â†’ switch to Tailoring.
+> If below target → Fibre Focus / Rapid Gather.  
+> Once target reached → switch to Tailoring.
 
 This directly links Foraging into textile production.
 
@@ -1440,10 +1440,10 @@ Alchemy cannot consume below 25 unless override is enabled.
 
 Save exact current Patch index:
 
-1 â†’ Herb  
-2 â†’ Fungi  
-3 â†’ Fibre  
-4 â†’ Botanical
+1 → Herb  
+2 → Fungi  
+3 → Fibre  
+4 → Botanical
 
 Leaving and returning to same Route resumes from that Patch.
 
@@ -1480,7 +1480,7 @@ No manual respawn timer.
 
 ---
 
-# 73. FORAGING â†” ALCHEMY
+# 73. FORAGING ↔ ALCHEMY
 
 Strongest consumer relationship.
 
@@ -1495,7 +1495,7 @@ Alchemy should later use Foraging as one of its most important input professions
 
 ---
 
-# 74. FORAGING â†” TAILORING
+# 74. FORAGING ↔ TAILORING
 
 Foraging supplies the baseline wild Fibre ladder:
 
@@ -1516,7 +1516,7 @@ This is the planned core input ladder for the next Tailoring document.
 
 ---
 
-# 75. FORAGING â†” FARMING
+# 75. FORAGING ↔ FARMING
 
 Foraging:
 
@@ -1533,7 +1533,7 @@ This is intentional interdependence, not duplication.
 
 ---
 
-# 76. FORAGING â†” COOKING
+# 76. FORAGING ↔ COOKING
 
 Cooking can use:
 
@@ -1552,7 +1552,7 @@ Cooking's existing ingredient tags can map these resources cleanly.
 
 ---
 
-# 77. FORAGING â†” FLETCHING
+# 77. FORAGING ↔ FLETCHING
 
 Fletching can use:
 
@@ -1564,7 +1564,7 @@ Tailoring remains the main converter of fibres into string/textile components.
 
 ---
 
-# 78. FORAGING â†” ESTATE
+# 78. FORAGING ↔ ESTATE
 
 Estate uses:
 
@@ -1674,7 +1674,7 @@ This roadmap is intentionally dense because every Route contains multiple resour
 
 ---
 
-# 81. WILDHEART EXPEDITION â€” LEVEL 100+
+# 81. WILDHEART EXPEDITION — LEVEL 100+
 
 Post-100 Foraging endgame:
 
@@ -1708,10 +1708,10 @@ Recommended requirements:
 
 Wildheart Expedition contains four endgame Patch resources:
 
-- **Everbloom** â€” Herb;
-- **Mycelian Crown** â€” Fungi;
-- **Worldsilk Fibre** â€” Fibre;
-- **Genesis Seedpod** â€” Botanical.
+- **Everbloom** — Herb;
+- **Mycelian Crown** — Fungi;
+- **Worldsilk Fibre** — Fibre;
+- **Genesis Seedpod** — Botanical.
 
 Hidden reagent:
 
@@ -1759,7 +1759,7 @@ This keeps endgame exploration player-led.
 
 # 86. SEARCH TIME FORMULA
 
-**Final Search Time = Route Base Search Time Ã— Field Kit Search modifier Ã— Focus Ã— gear Ã— Specialization Ã— facility**
+**Final Search Time = Route Base Search Time × Field Kit Search modifier × Focus × gear × Specialization × facility**
 
 Minimum:
 
@@ -1788,7 +1788,7 @@ Recommended Tier Base Gather Time:
 
 Then apply:
 
-**Category multiplier Ã— Gather Style Ã— Field Kit Ã— gear Ã— Specialization**
+**Category multiplier × Gather Style × Field Kit × gear × Specialization**
 
 Minimum:
 
@@ -1800,7 +1800,7 @@ Minimum:
 
 Normal expected yield:
 
-**Base Category Yield Ã— Focus Yield Modifier Ã— gear Ã— Specialization**
+**Base Category Yield × Focus Yield Modifier × gear × Specialization**
 
 Resolve fractional output as:
 
@@ -1819,7 +1819,7 @@ for +1 item.
 
 After hidden reagent discovered:
 
-**Final Rare Chance = Base Route Rare Chance Ã— Survey Ã— Gather Style Ã— Field Kit Ã— gear Ã— jewelry Ã— Specialization Ã— Mastery**
+**Final Rare Chance = Base Route Rare Chance × Survey × Gather Style × Field Kit × gear × jewelry × Specialization × Mastery**
 
 Normal cap:
 
@@ -1890,7 +1890,7 @@ Store:
 
 ---
 
-# 93. FORAGING SCREEN â€” HIGH-LEVEL UI
+# 93. FORAGING SCREEN — HIGH-LEVEL UI
 
 Recommended layout:
 
@@ -1954,11 +1954,11 @@ Example:
 
 **Moonfield Ridge**
 
-1. Moon Thyme â€” Herb â€” 100% known  
-2. Pale Chanterelle â€” Fungi  
-3. Silken Grass â€” Fibre  
-4. Moonseed â€” Botanical  
-5. Hidden Species â€” Discovery 74 / 115
+1. Moon Thyme — Herb — 100% known  
+2. Pale Chanterelle — Fungi  
+3. Silken Grass — Fibre  
+4. Moonseed — Botanical  
+5. Hidden Species — Discovery 74 / 115
 
 Focus:
 
@@ -2033,7 +2033,7 @@ Workers separately.
 
 ---
 
-# 98. CHRONICLES â€” EARLY FORAGING
+# 98. CHRONICLES — EARLY FORAGING
 
 Suggested:
 
@@ -2049,7 +2049,7 @@ Suggested:
 
 ---
 
-# 99. CHRONICLES â€” MIDGAME
+# 99. CHRONICLES — MIDGAME
 
 Suggested:
 
@@ -2060,11 +2060,11 @@ Suggested:
 - establish worker Route;
 - mark first rare reagent Proven;
 - automate Fibre reserve for Tailoring;
-- complete Survey â†’ rare-farming planner.
+- complete Survey → rare-farming planner.
 
 ---
 
-# 100. CHRONICLES â€” LATE
+# 100. CHRONICLES — LATE
 
 Suggested:
 
@@ -2190,7 +2190,7 @@ Prefer:
 
 ---
 
-# 105. MAJOR OPEN QUESTIONS â€” RECOMMENDED ANSWERS
+# 105. MAJOR OPEN QUESTIONS — RECOMMENDED ANSWERS
 
 ## Should Foraging remain a separate profession?
 
@@ -2478,7 +2478,7 @@ Resources only; workers gain Proficiency.
 16. Exact rare rates visible in UI.
 17. Field Kit is profession progression anchor.
 18. No durability.
-19. Resource Mastery 1â€“100.
+19. Resource Mastery 1–100.
 20. Skill-Wide Mastery.
 21. Three reversible Specializations:
     - Gatherer;
@@ -2507,63 +2507,63 @@ Foraging begins with:
 
 **Meadowpath Verge**
 
-â†“
+↓
 
 **Wild Mint / Buttoncap / Flaxgrass / Sunberry**
 
-â†“
+↓
 
 **Search Focus**
 
-â†“
+↓
 
 **Survey**
 
-â†“
+↓
 
 **Golden Yarrow Discovery**
 
-â†“
+↓
 
 **Resource Mastery**
 
-â†“
+↓
 
 **Domestication Candidates**
 
-â†“
+↓
 
 **Fibre supply for Tailoring**
 
-â†“
+↓
 
 **rare reagents for Alchemy**
 
-â†“
+↓
 
 **Foraging Specialization**
 
-â†“
+↓
 
 **Herbarium**
 
-â†“
+↓
 
 **worker routes**
 
-â†“
+↓
 
 **Starfall Sanctuary**
 
-â†“
+↓
 
 **Celestial Lotus**
 
-â†“
+↓
 
 **Foraging 100**
 
-â†“
+↓
 
 **Wildheart Expedition**
 

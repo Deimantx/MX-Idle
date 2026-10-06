@@ -641,6 +641,27 @@
 
 }
 
+.area-picker-label { display:flex; align-items:center; gap:8px; color:#aeb2aa; font-size:calc(9px * var(--ui-scale) * var(--text-scale)); }
+.area-picker-label select { min-height:30px; max-width:190px; color:#e2ded3; background:#202627; border:1px solid #48504f; border-radius:4px; padding:4px 7px; }
+.combat-readiness { display:grid; grid-template-columns:repeat(auto-fit,minmax(112px,1fr)); gap:6px; padding:9px; margin-top:8px; background:#171c1d; border:1px solid #343b3c; border-radius:4px; }
+.combat-readiness span,.player-resistance-grid span { display:flex; justify-content:space-between; gap:6px; color:#9ba29b; font-size:calc(8px * var(--ui-scale) * var(--text-scale)); }
+.combat-readiness b,.player-resistance-grid b { color:#dfd8c9; font-variant-numeric:tabular-nums; }
+.player-resistance-grid { display:grid; grid-template-columns:repeat(9,minmax(0,1fr)); gap:5px; padding:8px 9px; border:1px solid #343b3c; border-top:0; background:#1b2122; }
+.player-resistance-grid span { display:grid; justify-items:center; gap:3px; }
+.food-reserve { display:flex; align-items:center; gap:4px; color:#8e9791; font-size:calc(8px * var(--ui-scale) * var(--text-scale)); }
+.food-reserve input { width:48px; height:27px; padding:3px 4px; color:#e2ded3; background:#171c1d; border:1px solid #454d4d; border-radius:3px; }
+.combat-readiness + .player-resistance-grid { margin-bottom:6px; }
+
+@media (max-width: 900px) {
+  .player-resistance-grid { grid-template-columns:repeat(5,minmax(0,1fr)); }
+}
+
+@media (max-width: 560px) {
+  .player-resistance-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .area-picker-label { flex-wrap:wrap; }
+  .area-picker-label select { max-width:140px; }
+}
+
 .combat-screen .screen-heading .screen-overline {
   color: #bf8b6c;
 

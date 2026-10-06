@@ -427,6 +427,12 @@
 .recipe-list {
   display: grid;
   gap: calc(5px * var(--ui-scale));
+  max-height: min(64vh, 680px);
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  align-content: start;
+  scrollbar-gutter: stable;
 
 }
 

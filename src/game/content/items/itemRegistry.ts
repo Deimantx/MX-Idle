@@ -9,8 +9,8 @@ import { FORGE_HAMMERS } from '../smithing/smithingTools';
 import { MELEE_WEAPONS } from '../combat/meleeWeapons';
 import { HEAVY_ARMOR } from '../combat/heavyArmor';
 import { OFFHANDS } from '../combat/offhands';
-export type EquipmentMeta = { context:'combat'|'profession'; slot:string; profession?:'Mining'|'Smithing'|'Fishing'|'Cooking'; skill:'Attack'|'Defence'|'Mining'|'Smithing'|'Fishing'|'Cooking'; requiredLevel:number; tier:number; stats:Record<string,string|number>; compatibleWeapon?:'one-handed' };
-export type ItemDefinition = { name: string; icon: string; category: string; desc: string; rarity?: 'Common' | 'Uncommon' | 'Rare'; tier?: number; equipment?:EquipmentMeta };
+export type EquipmentMeta = { context:'combat'|'profession'; slot:string; profession?:'Mining'|'Smithing'|'Fishing'|'Cooking'; skill:'Attack'|'Defence'|'Mining'|'Smithing'|'Fishing'|'Cooking'; requiredLevel:number; tier:number; stats:Record<string,string|number>; handedness?:'1H'|'2H'; allowedOffhandTypes?:readonly string[]; offhandType?:string };
+export type ItemDefinition = { name: string; icon: string; category: string; desc: string; rarity?: 'Common' | 'Uncommon' | 'Rare'; tier?: number; equipment?:EquipmentMeta; offeringValue?:number };
 const BASE_ITEMS = {
   'item.mining.worn_pickaxe': { name: 'Worn Pickaxe', icon: 'pick', category: 'Tools', desc: 'A battered starter tool. Mining Power 6.', tier: 1 },
   'item.mining.copper_pickaxe': { name: 'Copper Pickaxe', icon: 'pick', category: 'Tools', desc: 'Mining Power 8 · Mining Speed +2% · Primary extra quantity +2 pp.', tier: 1, rarity: 'Uncommon' },
@@ -29,7 +29,7 @@ const BASE_ITEMS = {
   'combat.armor.heavy.copper_gauntlets': { name: 'Copper Gauntlets', icon: 'gloves', category: 'Equipment', desc: 'Copper hand protection.', tier: 1 },
   'combat.armor.heavy.copper_greaves': { name: 'Copper Greaves', icon: 'greaves', category: 'Equipment', desc: 'Copper leg protection.', tier: 1 },
   'combat.offhand.melee.copper_shield': { name: 'Copper Shield', icon: 'shield', category: 'Equipment', desc: '1H Melee off-hand · +0.10s attack interval.', tier: 1 },
-  'combat.loot.beast_trophy': { name: 'Beast Trophy', icon: 'trophy', category: 'Combat Loot', desc: 'T1 offering · Offering Value 5.', tier: 1 },
+  'combat.loot.beast_trophy': { name: 'Beast Trophy', icon: 'trophy', category: 'Combat Loot', desc: 'A mark of a dangerous hunt.', tier: 1, offeringValue:5 },
 } satisfies Record<Exclude<ItemId, `fishing.${string}` | `cooking.${string}`>, ItemDefinition>;
 const FISHING_ITEMS = Object.fromEntries([
   ...FISH_SPECIES.map((fish) => [fish.id,{name:fish.name,icon:'fish',category:'Raw Fish',desc:`${fish.rarity} ${fish.cookingClass} · ${fish.xp} Fishing XP`,tier:fish.tier,rarity:fish.rarity==='Very Rare'?'Rare':fish.rarity==='Rare'?'Uncommon':'Common'}]),
@@ -49,9 +49,9 @@ const MINING_ITEMS=Object.fromEntries([
 function forgeEquipment(output:ItemId,tier:number):EquipmentMeta|undefined{
  if(output in MINING_TOOLS){const tool=MINING_TOOLS[output as keyof typeof MINING_TOOLS];return{context:'profession',profession:'Mining',slot:'Pickaxe',skill:'Mining',requiredLevel:tool.equipLevel,tier,stats:{Power:tool.power,Speed:`+${Math.round(tool.speed*100)}%`,Effect:tool.effect}};}
  if(output in FORGE_HAMMERS){const tool=FORGE_HAMMERS[output as keyof typeof FORGE_HAMMERS];return{context:'profession',profession:'Smithing',slot:'Hammer',skill:'Smithing',requiredLevel:tool.equipLevel,tier,stats:{Power:tool.power,Strike:`${(tool.strikeMs/1000).toFixed(2)}s`,Effect:Object.keys(tool.effects).join(', ')||'None'}};}
- if(output in MELEE_WEAPONS){const weapon=MELEE_WEAPONS[output as keyof typeof MELEE_WEAPONS];return{context:'combat',slot:'Weapon',skill:'Attack',requiredLevel:weapon.attackLevel,tier,stats:{Power:weapon.power,Accuracy:weapon.accuracyBonus,Interval:`${(weapon.intervalMs/1000).toFixed(2)}s`}};}
- if(output in HEAVY_ARMOR){const armor=HEAVY_ARMOR[output as keyof typeof HEAVY_ARMOR];return{context:'combat',slot:armor.slot,skill:'Defence',requiredLevel:armor.smithingLevel,tier,stats:{'Ranged Resistance':`${armor.physicalResistance}%`}};}
- if(output in OFFHANDS){const offhand=OFFHANDS[output as keyof typeof OFFHANDS];return{context:'combat',slot:'Off-hand',skill:'Smithing',requiredLevel:offhand.smithingLevel,tier,compatibleWeapon:'one-handed',stats:{'Melee Resistance':`${offhand.physicalResistance}%`,Interval:'+0.10s'}};}
+ if(output in MELEE_WEAPONS){const weapon=MELEE_WEAPONS[output as keyof typeof MELEE_WEAPONS];return{context:'combat',slot:'Weapon',skill:'Attack',requiredLevel:weapon.attackLevel,tier,handedness:weapon.handedness,allowedOffhandTypes:weapon.allowedOffhandTypes,stats:{Power:weapon.power,Accuracy:weapon.accuracyBonus,Interval:`${(weapon.intervalMs/1000).toFixed(2)}s`,Handedness:weapon.handedness,Special:weapon.special.name}};}
+ if(output in HEAVY_ARMOR){const armor=HEAVY_ARMOR[output as keyof typeof HEAVY_ARMOR];return{context:'combat',slot:armor.slot,skill:'Defence',requiredLevel:armor.smithingLevel,tier,stats:{'Slash Resistance':`${armor.resistances.Slash}%`,'Ranged Resistance':`${armor.resistances.Pierce}%`,'Magic Resistance':`${armor.resistances.Fire}%`}};}
+ if(output in OFFHANDS){const offhand=OFFHANDS[output as keyof typeof OFFHANDS];return{context:'combat',slot:'Off-hand',skill:'Smithing',requiredLevel:offhand.smithingLevel,tier,offhandType:offhand.offhandType,stats:{'Melee Resistance':`${offhand.resistances.Slash}%`,'Ranged Resistance':`${offhand.resistances.Pierce}%`,Interval:`+${(offhand.attackIntervalPenaltyMs/1000).toFixed(2)}s`}};}
 }
 const SMITHING_ITEMS=Object.fromEntries([
  ...Object.values(SMELTING_RECIPES).map(recipe=>[recipe.output.item,{name:recipe.name,icon:'ingot',category:recipe.category==='alloy'?'Alloys':'Ingots',desc:`Smithing output · Smithing ${recipe.unlockLevel}.`,tier:Math.min(10,Math.ceil(recipe.unlockLevel/10))}]),
