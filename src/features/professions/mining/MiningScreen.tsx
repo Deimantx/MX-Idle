@@ -9,7 +9,7 @@ import { ActionProgress } from '../../../ui/game/ActionProgress';
 import { canMineDeposit } from '../../../game/systems/mining/miningResolver';
 import { GameProgress, GameState } from '../../../ui/game-v2/GameKit';
 
-type Metrics = { outputs: Partial<Record<ItemId, number>>; Mining: { xpHour: number } };
+type Metrics = { outputs: Partial<Record<ItemId, number>>; Mining: { xpHour: number }; activeMs?: number };
 const CATEGORIES = ['All', 'Ore', 'Quarry', 'Catalyst', 'Gem', 'Essence', 'Deep-Core'] as const;
 
 export function MiningScreen({ game: g, xp, maxXp, start, stop, select, equipTool, speedMultiplier = 1, metrics }: {
@@ -30,6 +30,7 @@ export function MiningScreen({ game: g, xp, maxXp, start, stop, select, equipToo
   const maxDensity = getDepositStageDensity(runtime.stageIndex, deposit.id);
   const strikes = Math.ceil(runtime.densityRemaining / power);
   const rate = metrics?.outputs[deposit.primary] ?? 0;
+  const telemetryStable = active && (metrics?.activeMs ?? 0) >= 8000;
   const deposits = useMemo(() => Object.values(MINING_DEPOSITS).filter(entry =>
     (category === 'All' || entry.category === category) &&
     `${entry.name} ${entry.resourceName}`.toLowerCase().includes(query.toLowerCase())), [category, query]);
@@ -66,7 +67,7 @@ export function MiningScreen({ game: g, xp, maxXp, start, stop, select, equipToo
             <GameState tone={locked?'locked':active&&selected?'active':selected?'ready':'neutral'} icon={locked?'shield':active&&selected?'mining':undefined}>{entry.endgameGated?'GATED':toolLocked?'TOOL':levelLocked?`LV ${entry.unlockLevel}`:active&&selected?'WORKING':selected?'SELECTED':'READY'}</GameState>
           </button>;
         })}</div>
-        <div className="deposit-req"><div><span>REQUIRES</span><b>Mining {deposit.unlockLevel}</b></div><div><span>PICKAXE</span><b>{MINING_TOOLS[deposit.requiredTool as keyof typeof MINING_TOOLS]?.name ?? '-'}</b></div><div><span>YIELDS</span><b>{deposit.resourceName} x{deposit.baseQuantity}</b></div><div><span>STRIKE</span><b>{(deposit.strikeMs / 1000).toFixed(2)}s</b></div></div>
+        <div className="deposit-req"><div><span>REQUIRES</span><b>Mining {deposit.unlockLevel}</b></div><div><span>PICKAXE</span><b>{MINING_TOOLS[deposit.requiredTool as keyof typeof MINING_TOOLS]?.name ?? '-'}</b></div><div><span>YIELDS</span><b>{deposit.resourceName} ×{deposit.baseQuantity}</b></div></div>
       </Panel>
 
       <Panel className={`mine-focus ${active ? 'is-active' : ''}`}>
@@ -82,17 +83,18 @@ export function MiningScreen({ game: g, xp, maxXp, start, stop, select, equipToo
         <div className="stage-name-line"><div><span className="tiny-label">CURRENT LAYER</span><h3>{stage.name}</h3></div><div className="stage-reward"><span>EXPECTED YIELD</span><b><ItemMark id={deposit.primary} /> {getPrimaryExpectedQuantity(runtime.stageIndex, deposit.id).toFixed(2)} x {deposit.resourceName}</b></div></div>
         <div className="bar-label mine-density-heading"><span>Deposit density <small>geological resistance</small></span><b>{runtime.densityRemaining.toFixed(1)} <small>/ {maxDensity}</small></b></div><GameProgress value={runtime.densityRemaining} max={maxDensity} kind="density" label={`Deposit density, ${strikes} strikes remaining`}/><div className="density-strike-marks" aria-hidden="true">{Array.from({length:Math.min(10,Math.max(1,strikes))},(_,index)=><i key={index}/>)}</div>
         <div className="mine-action-progress"><div><span className="tiny-label">NEXT SWING</span><b>{active ? formatActionTime(g.mining.timer) : formatActionTime(strikeMs)}</b></div><ActionProgress active={active} remainingMs={g.mining.timer || strikeMs} durationMs={strikeMs} phaseKey={`${deposit.id}:${g.mining.strikes}`} speedMultiplier={speedMultiplier} label="Mining swing progress" /></div>
-        <div className="mine-controls"><div className="strike-readout"><span className={`pulse-dot ${active ? 'pulsing' : ''}`} /><div><b>{active ? 'Next strike' : 'Strike time'}</b><small>{formatActionTime(strikeMs)} / {power} power</small></div></div><Button tone="copper" onClick={active ? stop : start}><Icon name={active?'combat':'pick'} size={18}/>{active ? 'Stop Mining' : 'Start Mining'}</Button></div>
+        <div className="mine-controls"><Button tone="copper" onClick={active ? stop : start}><Icon name={active?'combat':'pick'} size={18}/>{active ? 'Stop Mining' : 'Start Mining'}</Button></div>
         <div className="stage-path" aria-label="Excavation depth">{MINING_STAGE_MODEL.map((item, index) => <div key={item.id} className={`stage-node ${index  < runtime.stageIndex  ? 'complete' : ''} ${index=== runtime.stageIndex  ? 'current' : ''}`}><div className="node-head"><span className="node-mark">{index  < runtime.stageIndex  ? 'DONE' : `0${index  + 1}`}</span><span className="node-join" /></div><b>{item.name}</b><small>{getPrimaryExpectedQuantity(index, deposit.id).toFixed(2)} x / {index  < runtime.stageIndex  ? 'cleared' : index=== runtime.stageIndex  ? 'working' : 'ahead'}</small></div>)}</div>
       </Panel>
 
-      <Panel className="mine-inspector" title="Mine Operations">
-        <div className="tool-card"><div className="tool-insignia"><ItemMark id={tool.item} /></div><div><span className="tiny-label">EQUIPPED PICKAXE</span><b>{tool.name}</b><small>Power {tool.power} / Speed +{Math.round(tool.speed * 100)}% / {tool.effect}</small></div><Badge tone="equipped">EQUIPPED</Badge></div>
-        {equipTool && <div className="tool-picker"><Button tone="quiet" aria-expanded={toolPickerOpen} onClick={() => setToolPickerOpen(!toolPickerOpen)}>Pickaxe slot / {toolPickerOpen ? 'Close' : 'Change'}</Button>{toolPickerOpen && <div className="tool-upgrades" role="group" aria-label="Choose owned pickaxe">{Object.values(MINING_TOOLS).filter(candidate => (g.bank[candidate.item] ?? 0) > 0 && candidate.item !== tool.item).map(candidate => <Button key={candidate.item} tone="quiet" onClick={() => { equipTool(candidate.item); setToolPickerOpen(false); }}>{candidate.name} / Power {candidate.power}</Button>)}</div>}</div>}
-        <div className="mine-operations-grid">
-          <section><h3>Yield</h3><Stat label={`${deposit.resourceName} per hour`} value={rate ? Math.round(rate).toLocaleString() : 'Estimating'} accent="copper-text" /><Stat label="Mining XP per hour" value={metrics?.Mining.xpHour ? Math.round(metrics.Mining.xpHour).toLocaleString() : 'Estimating'} accent="xp-text" /><Stat label="Next level" value={metrics?.Mining.xpHour ? formatDuration(Math.max (0, maxXp - xp) / metrics.Mining.xpHour * 3_600_000) : 'Estimating'} /></section>
-          <section><h3>Excavation</h3><Stat label="Mining power" value={`${power}`} /><Stat label="Strikes left" value={`${strikes}`} /><Stat label="Stage time" value={formatDuration(strikes * strikeMs)} /><Stat label="Full deposit cycle" value={`~${formatDuration(cycleMs)}`} /><Stat label="Cycles completed" value={fmt(runtime.cyclesCompleted)} /></section>
-          <section><h3>Tool effect</h3><Stat label="Strike interval" value={formatActionTime(strikeMs)} /><Stat label="Extra yield chance" value={`${tool.extraQuantityChance + (tool.effects.primaryExtraPp ?? 0)} pp`} /></section>
+      <Panel className="mine-inspector mine-shift-panel" title="Current Shift" action={<Badge tone={active ? 'live' : ''}>{active ? 'ON THE SEAM' : 'STANDBY'}</Badge>}>
+        <section className="shift-tool-module"><div className="tool-insignia"><ItemMark id={tool.item} /></div><div><span className="tiny-label">EQUIPPED PICKAXE</span><b>{tool.name}</b><small>Power {power} · {tool.effect}</small></div><Badge tone="equipped">EQUIPPED</Badge>
+          {equipTool && <div className="tool-picker"><Button tone="quiet" aria-expanded={toolPickerOpen} onClick={() => setToolPickerOpen(!toolPickerOpen)}><Icon name="pick" size={15}/>{toolPickerOpen ? 'Close pickaxe list' : 'Change pickaxe'}</Button>{toolPickerOpen && <div className="tool-upgrades" role="group" aria-label="Choose owned pickaxe">{Object.values(MINING_TOOLS).filter(candidate => (g.bank[candidate.item] ?? 0) > 0 && candidate.item !== tool.item).map(candidate => <Button key={candidate.item} tone="quiet" onClick={() => { equipTool(candidate.item); setToolPickerOpen(false); }}>{candidate.name} · Power {candidate.power}</Button>)}</div>}</div>}
+        </section>
+        <div className="mine-shift-grid">
+          <section className="yield-forecast"><header><Icon name="ore" size={16}/><h3>Yield forecast</h3></header>{telemetryStable ? <><div className="forecast-main"><span>{deposit.resourceName} per hour</span><b>{Math.round(rate).toLocaleString()}</b></div><Stat label="Mining XP / h" value={Math.round(metrics!.Mining.xpHour).toLocaleString()} accent="xp-text"/>{metrics!.Mining.xpHour > 0 && <Stat label="Next level" value={formatDuration(Math.max(0, maxXp - xp) / metrics!.Mining.xpHour * 3_600_000)} />}</> : <div className="forecast-status">{active ? 'Collecting rate data…' : 'Start a shift to measure yield.'}</div>}</section>
+          <section className="seam-telemetry"><header><Icon name="mining" size={16}/><h3>Seam telemetry</h3></header><Stat label="Strikes to next layer" value={`${strikes}`} /><Stat label="Layer ETA" value={formatDuration(strikes * strikeMs)} /><Stat label="Full seam cycle" value={`~${formatDuration(cycleMs)}`} /><Stat label="Cycles completed" value={fmt(runtime.cyclesCompleted)} /></section>
+          <section className="tool-profile"><header><Icon name="pick" size={16}/><h3>Pick profile</h3></header><Stat label="Strike power" value={`${power}`} /><Stat label="Extra yield chance" value={`${tool.extraQuantityChance + (tool.effects.primaryExtraPp ?? 0)} pp`} /></section>
         </div>
       </Panel>
     </div>

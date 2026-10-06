@@ -67,6 +67,11 @@
   --slot-face: #262d30;
   --slot-raised: #343b3d;
   --sidebar: calc(222px * var(--ui-scale));
+  /* Shared frame measurements keep the shell and scroll reserve in sync. */
+  --topbar-h: calc(62px * var(--ui-scale));
+  --activity-idle-h: calc(56px * var(--ui-scale));
+  --activity-active-h: calc(76px * var(--ui-scale));
+  --activity-reserve: calc(var(--activity-active-h) + 24px * var(--ui-scale));
   color-scheme: dark;
 
 }

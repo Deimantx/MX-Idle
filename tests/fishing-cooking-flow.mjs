@@ -3,7 +3,7 @@ import { mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { chromium } from 'playwright';
 
-const out='artifacts/ui-generation-2', executablePath=[process.env.CHROME_PATH,chromium.executablePath(),'C:/Program Files/Google/Chrome/Application/chrome.exe'].find(path=>path&&existsSync(path)),browser=await chromium.launch({headless:true,executablePath,args:['--no-sandbox']}), context=await browser.newContext({viewport:{width:2560,height:1440},reducedMotion:'reduce'}),page=await context.newPage(),errors=[];
+const out='artifacts/ui-generation-2-5', executablePath=[process.env.CHROME_PATH,chromium.executablePath(),'C:/Program Files/Google/Chrome/Application/chrome.exe'].find(path=>path&&existsSync(path)),browser=await chromium.launch({headless:true,executablePath,args:['--no-sandbox']}), context=await browser.newContext({viewport:{width:2560,height:1440},reducedMotion:'reduce'}),page=await context.newPage(),errors=[];
 page.on('pageerror',error=>errors.push(error.message));page.on('console',message=>{if(message.type()==='error')errors.push(message.text());});
 await mkdir(out,{recursive:true});
 const shot = async (name) => page.screenshot({ path: `${out}/${name}.png`, fullPage: true });

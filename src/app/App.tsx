@@ -9,9 +9,9 @@ import { EquipmentScreen } from '../features/equipment/EquipmentScreen';
 import { CombatScreen } from '../features/combat/CombatScreen';
 import { BankScreen } from '../features/bank/BankScreen';
 import { ActivityHud } from '../ui/game/ActivityHud';
+import { GameTopBar } from '../ui/game/GameTopBar';
 import { DevPanel } from '../features/devtools/DevPanel';
 import { FirstStepsPanel } from '../features/onboarding/FirstStepsPanel';
-import { fmt } from '../ui/game/formatters';
 import { Icon, Tip } from '../ui/primitives';
 import { saveProfile } from '../game/persistence/profileStorage';
 import type { ProfileRecord } from '../game/persistence/profileIndex';
@@ -150,10 +150,10 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
         const item = <button key={name} aria-label={lockReason ? `${name}. Locked. ${lockReason}` : name} aria-disabled={locked} className={`nav-item ${screen === name ? 'selected' : ''} ${locked ? 'nav-locked' : ''}`} onClick={() => { if (!locked) go(name); }} aria-current={screen === name ? 'page' : undefined}><Icon name={icon} size={19} /><span>{name}</span>{name === 'Smithing' && !locked && <i className="new-dot" />}{name === 'Combat' && locked && <span className="lock-mark">LOCK</span>}</button>;
         return lockReason ? <Tip key={`${name}-tip`} content={lockReason} focusable={false} className="nav-tip-wrap">{item}</Tip> : item;
       })}</nav>
-      <div className="sidebar-bottom"><div className="mini-save"><span className="save-dot" />Save {saveStatus}</div><button className="nav-item settings-nav" onClick={onOpenSettings}><Icon name="gear" size={18} /><span>Settings</span></button><button className="nav-item profile-nav" onClick={() => { persist(gameRef.current); onBackToProfiles(); }}><span>â†</span><span>Profile Select</span></button><div className="build-tag">FIRST PLAYABLE <span>0.1</span></div></div>
+      <div className="sidebar-bottom"><button className="nav-item profile-nav" onClick={() => { persist(gameRef.current); onBackToProfiles(); }}><Icon name="arrow-left" size={17}/><span>Profile Select</span></button><div className="build-tag">FIRST PLAYABLE <span>0.1</span></div></div>
     </aside>
     <main className="main-frame">
-      <header className="topbar"><div className="active-profile"><b>{profile.name}</b><small>PROFILE {profile.slot}</small></div><div className="top-status"><div className="gold-chip"><Icon name="gold" size={17} /><span>{fmt(game.gold)}</span><small>GOLD</small></div><div className="status-divider" /><div className="skill-chip"><span className="skill-glyph">{screen === 'Mining' ? 'M' : screen === 'Smithing' ? 'S' : screen === 'Combat' ? 'A' : '*'}</span><div><b>{screen === 'Mining' ? `Mining ${game.skills.Mining.level}` : screen === 'Smithing' ? `Smithing ${game.skills.Smithing.level}` : screen === 'Combat' ? `Attack ${game.skills.Attack.level}` : 'Adventurer'}</b><div className="mini-xp"><span style={{ width: `${Math.min(100, (screen === 'Mining' ? xp.mining.value / xp.mining.max: xp.smithing.value / xp.smithing.max) * 100)}%` }} /></div></div></div><div className="save-label"><span className="save-dot" />{saveStatus}</div><button className="icon-button top-settings" aria-label="Settings" onClick={onOpenSettings}><Icon name="gear" size={19} /></button></div></header>
+      <GameTopBar game={game} screen={screen} profile={profile} saveStatus={saveStatus} onOpenSettings={onOpenSettings}/>
       <div className="content-scroll" id="game-content" tabIndex={-1}><div className="content-wrap">
         {!game.objectives.victory && <FirstStepsPanel game={game} minimized={minimized} onToggle={() => { setMinimized(!minimized); mut((s) => { s.objectives.dismissed = !s.objectives.dismissed; }); }} />}
         {screen === 'Mining' && <MiningScreen game={game} xp={xp.mining.value} maxXp={xp.mining.max} speedMultiplier={speed} metrics={metrics} select={(id) => mut((s) => { selectDeposit(s, id); })} equipTool={(item) => equip(item, 'miningTool')} start={() => start('mining')} stop={stop} />}

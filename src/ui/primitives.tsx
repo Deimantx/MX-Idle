@@ -70,6 +70,8 @@ export function Modal({ title, eyebrow, children, onClose, className = '' }: { t
 export function Icon({ name, size = 22 }: { name: string; size?: number }) {
   const common = { width: size, height: size, style: { width: `calc(${size}px  * var(--ui-scale))`, height: `calc(${size}px  * var(--ui-scale))`, flex: 'none' }, viewBox: '0 0 48 48', fill: 'none', stroke: 'currentColor', strokeWidth: 2.1, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, 'aria-hidden': true as const };
   const paths: Record<string, React.ReactNode> = {
+    'arrow-left': <><path d="M39 24H9m0 0 12-12M9 24l12 12"/></>,
+    stop: <><rect x="11" y="11" width="26" height="26" rx="3"/><path d="M17 17h14v14H17z" fill="currentColor" stroke="none"/></>,
     pick: <><path d="M8 15c9-10 23-10 32 0M18 17 9 42m21-27 8 27"/><path d="M6 42h8m20 0h8"/></>,
     hammer: <><path d="M10 8h28v13H10zM24 21 14 43m7-28h15"/><path d="m9 8 5-5h20l5 5"/></>,
     ore: <><path d="m24 4 18 10v20L24 44 6 34V14z"/><path d="m6 14 18 11 18-11M24 25v19M16 9l17 12"/></>,
