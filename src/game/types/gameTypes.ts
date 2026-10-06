@@ -3,7 +3,7 @@ export const ITEM_IDS = [
   'item.mining.copper_ore','item.mining.stone','item.mining.opal','item.mining.mineral_core_fragment','item.smithing.copper_ingot',
   'combat.weapon.melee.copper_sword','combat.weapon.melee.copper_battle_axe','combat.weapon.melee.copper_mace',
   'combat.armor.heavy.copper_helm','combat.armor.heavy.copper_armor','combat.armor.heavy.copper_gauntlets','combat.armor.heavy.copper_greaves',
-  'combat.offhand.melee.copper_shield','combat.loot.beast_trophy',
+  'combat.offhand.melee.copper_shield',
 ] as const;
 export type ItemId = typeof ITEM_IDS[number] | `item.mining.${string}` | `item.smithing.${string}` | `combat.weapon.melee.${string}` | `combat.armor.heavy.${string}` | `combat.offhand.melee.${string}` | `combat.loot.${string}` | `fishing.fish.${string}` | `fishing.find.${string}` | `fishing.bait.${string}` | `fishing.tool.${string}` | `fishing.tackle.${string}` | `cooking.food.${string}` | `cooking.utility.${string}` | `cooking.tool.${string}`;
 export type MiningToolId = `item.mining.${string}`;

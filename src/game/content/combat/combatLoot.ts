@@ -3,7 +3,7 @@ export const OFFERING_VALUES=[5,8,12,18,26,36,50,70,95,130] as const;
 export const OFFERING_FAMILIES=['Beast Trophy','War Mark','Arcane Remnant'] as const;
 export const ELITE_COMPONENT_NAMES=['Ironjaw Tusk','Mirecoil Gland','Granite Core','Moonbound Crest','Magmahorn Core','Whitehorn Tusk','Venomglass Sac','Prismatic Coil','Nightglass Core','Astral Heart'] as const;
 export const BOSS_COMPONENT_NAMES=["Veyr's Broken Crest",'Miremother Broodheart',"Korr's Forge Sigil",'Pale Crown Fragment','Cindermaw Core','Winterheart','Skybreaker Dynamo','Oracle Lens','Hollow Crown','Zenith Core'] as const;
-export const UNIQUE_HOOK_NAMES=['Rusthook Blade','Mirecoil Whip','Forgeheart Mace','Moonward Bulwark','Cinderchain Whip','Winterheart Ward','Venomglass Blowpipe','Oracle Prism','Nightglass Carapace','Zenith Staff'] as const;
+export const UNIQUE_HOOK_NAMES=['Rusthook Blade','Mirecoil Whip','Forgeheart Maul','Moonward Bulwark','Cinderchain Whip','Winterheart Ward','Venomglass Blowpipe','Oracle Prism','Nightglass Carapace','Zenith Staff'] as const;
 const slug=(x:string)=>x.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'');
 export const UNIQUE_HOOK_IDS=UNIQUE_HOOK_NAMES.map((name,i)=>`combat.unique.t${i+1}.${slug(name)}`);
 export const OFFERINGS=OFFERING_VALUES.flatMap((value,i)=>OFFERING_FAMILIES.map((family,j)=>({id:`combat.loot.t${i+1}_${slug(family)}` as ItemId,name:`T${i+1} ${family}`,tier:i+1,value,category:'Offerings',protected:false,description:`Tier ${i+1} ${family.toLowerCase()} for future Devotion offerings.`,family:['Beast','War','Arcane'][j]!})));

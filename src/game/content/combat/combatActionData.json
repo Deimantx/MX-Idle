@@ -1,0 +1,7572 @@
+{
+  "enemies": {
+    "road-wolf": {
+      "id": "road-wolf",
+      "name": "Road Wolf",
+      "tier": 1,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Beast",
+      "tags": [
+        "Beast"
+      ],
+      "areaId": "broken-road",
+      "style": "Melee",
+      "basicDamageType": "Stab",
+      "maxHp": 90,
+      "accuracy": 120,
+      "minHit": 8,
+      "maxHit": 10,
+      "intervalMs": 3000,
+      "evasion": 105,
+      "evasions": {
+        "Melee": 105,
+        "Ranged": 105,
+        "Magic": 105
+      },
+      "resistanceProfile": "M-C",
+      "resistances": {
+        "Slash": 12,
+        "Stab": 18,
+        "Crush": 14,
+        "Pierce": 24,
+        "Puncture": 20,
+        "Air": 0,
+        "Fire": -5,
+        "Water": 8,
+        "Earth": -8
+      },
+      "sequence": [
+        "road-wolf:bite",
+        "road-wolf:bite",
+        "road-wolf:rending-fang"
+      ],
+      "xp": 29,
+      "gold": 8,
+      "loot": [
+        {
+          "item": "combat.loot.t1_beast_trophy",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t1_beast_trophy",
+      "unlockRequirements": [],
+      "actions": {
+        "road-wolf:bite": {
+          "name": "Bite",
+          "type": "Stab",
+          "multiplier": 1,
+          "id": "road-wolf:bite",
+          "damageEnabled": true
+        },
+        "road-wolf:rending-fang": {
+          "name": "Rending Fang",
+          "type": "Stab",
+          "multiplier": 1.25,
+          "status": {
+            "type": "Bleed",
+            "magnitude": 0.1,
+            "durationMs": 6000
+          },
+          "id": "road-wolf:rending-fang",
+          "damageEnabled": true
+        }
+      }
+    },
+    "dust-rat": {
+      "id": "dust-rat",
+      "name": "Dust Rat",
+      "tier": 1,
+      "rank": "Light",
+      "combatClass": "Light",
+      "kind": "Beast",
+      "tags": [
+        "Beast"
+      ],
+      "areaId": "broken-road",
+      "style": "Melee",
+      "basicDamageType": "Stab",
+      "maxHp": 72,
+      "accuracy": 120,
+      "minHit": 7,
+      "maxHit": 9,
+      "intervalMs": 3000,
+      "evasion": 105,
+      "evasions": {
+        "Melee": 105,
+        "Ranged": 105,
+        "Magic": 105
+      },
+      "resistanceProfile": "M-C",
+      "resistances": {
+        "Slash": 12,
+        "Stab": 18,
+        "Crush": 14,
+        "Pierce": 24,
+        "Puncture": 20,
+        "Air": 0,
+        "Fire": -5,
+        "Water": 8,
+        "Earth": 0
+      },
+      "sequence": [
+        "dust-rat:bite",
+        "dust-rat:quick-bite",
+        "dust-rat:bite"
+      ],
+      "xp": 29,
+      "gold": 7,
+      "loot": [
+        {
+          "item": "combat.loot.t1_beast_trophy",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t1_beast_trophy",
+      "unlockRequirements": [],
+      "actions": {
+        "dust-rat:bite": {
+          "name": "Bite",
+          "type": "Stab",
+          "multiplier": 1,
+          "id": "dust-rat:bite",
+          "damageEnabled": true
+        },
+        "dust-rat:quick-bite": {
+          "name": "Quick Bite",
+          "type": "Stab",
+          "multiplier": 0.7,
+          "id": "dust-rat:quick-bite",
+          "damageEnabled": true,
+          "intervalMultiplier": 0.75
+        }
+      }
+    },
+    "ragged-poacher": {
+      "id": "ragged-poacher",
+      "name": "Ragged Poacher",
+      "tier": 1,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid",
+        "Archer"
+      ],
+      "areaId": "broken-road",
+      "style": "Ranged",
+      "basicDamageType": "Pierce",
+      "maxHp": 90,
+      "accuracy": 120,
+      "minHit": 8,
+      "maxHit": 10,
+      "intervalMs": 3000,
+      "evasion": 105,
+      "evasions": {
+        "Melee": 105,
+        "Ranged": 105,
+        "Magic": 105
+      },
+      "resistanceProfile": "R-A",
+      "resistances": {
+        "Slash": -8,
+        "Stab": 0,
+        "Crush": 4,
+        "Pierce": 16,
+        "Puncture": 18,
+        "Air": 28,
+        "Fire": 18,
+        "Water": 22,
+        "Earth": 26
+      },
+      "sequence": [
+        "ragged-poacher:arrow",
+        "ragged-poacher:arrow",
+        "ragged-poacher:barbed-shot"
+      ],
+      "xp": 29,
+      "gold": 8,
+      "loot": [
+        {
+          "item": "combat.loot.t1_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t1_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "ragged-poacher:arrow": {
+          "name": "Arrow",
+          "type": "Pierce",
+          "multiplier": 1,
+          "id": "ragged-poacher:arrow",
+          "damageEnabled": true
+        },
+        "ragged-poacher:barbed-shot": {
+          "name": "Barbed Shot",
+          "type": "Pierce",
+          "multiplier": 1.15,
+          "status": {
+            "type": "Bleed",
+            "magnitude": 0.08,
+            "durationMs": 6000
+          },
+          "id": "ragged-poacher:barbed-shot",
+          "damageEnabled": true
+        }
+      }
+    },
+    "hedge-spark": {
+      "id": "hedge-spark",
+      "name": "Hedge Spark",
+      "tier": 1,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Elemental",
+      "tags": [
+        "Elemental",
+        "Caster"
+      ],
+      "areaId": "broken-road",
+      "style": "Magic",
+      "basicDamageType": "Air",
+      "maxHp": 90,
+      "accuracy": 120,
+      "minHit": 8,
+      "maxHit": 10,
+      "intervalMs": 3000,
+      "evasion": 105,
+      "evasions": {
+        "Melee": 105,
+        "Ranged": 105,
+        "Magic": 105
+      },
+      "resistanceProfile": "G-A",
+      "resistances": {
+        "Slash": 28,
+        "Stab": 24,
+        "Crush": 30,
+        "Pierce": -8,
+        "Puncture": 0,
+        "Air": 28,
+        "Fire": 18,
+        "Water": 14,
+        "Earth": -8
+      },
+      "sequence": [
+        "hedge-spark:gust",
+        "hedge-spark:gust",
+        "hedge-spark:static-burst"
+      ],
+      "xp": 29,
+      "gold": 8,
+      "loot": [
+        {
+          "item": "combat.loot.t1_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t1_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "hedge-spark:gust": {
+          "name": "Gust",
+          "type": "Air",
+          "multiplier": 1,
+          "id": "hedge-spark:gust",
+          "damageEnabled": true
+        },
+        "hedge-spark:static-burst": {
+          "name": "Static Burst",
+          "type": "Air",
+          "multiplier": 1.2,
+          "status": {
+            "type": "AccuracyDown",
+            "magnitude": 0.08,
+            "durationMs": 5000
+          },
+          "id": "hedge-spark:static-burst",
+          "damageEnabled": true
+        }
+      }
+    },
+    "ironjaw-boar": {
+      "id": "ironjaw-boar",
+      "name": "Ironjaw Boar",
+      "tier": 1,
+      "rank": "Elite",
+      "combatClass": "Elite",
+      "kind": "Beast",
+      "tags": [
+        "Beast",
+        "Elite"
+      ],
+      "areaId": "broken-road",
+      "style": "Melee",
+      "basicDamageType": "Crush",
+      "maxHp": 203,
+      "accuracy": 126,
+      "minHit": 9,
+      "maxHit": 12,
+      "intervalMs": 3000,
+      "evasion": 105,
+      "evasions": {
+        "Melee": 105,
+        "Ranged": 105,
+        "Magic": 105
+      },
+      "resistanceProfile": "M-C",
+      "resistances": {
+        "Slash": 12,
+        "Stab": 18,
+        "Crush": 26,
+        "Pierce": 24,
+        "Puncture": 20,
+        "Air": 0,
+        "Fire": -12,
+        "Water": 8,
+        "Earth": -8
+      },
+      "sequence": [
+        "ironjaw-boar:gore",
+        "ironjaw-boar:gore",
+        "ironjaw-boar:iron-charge"
+      ],
+      "xp": 29,
+      "gold": 9,
+      "loot": [
+        {
+          "item": "combat.loot.t1_beast_trophy",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t1_beast_trophy",
+      "unlockRequirements": [
+        {
+          "type": "defeatAll",
+          "targets": [
+            "road-wolf",
+            "dust-rat",
+            "ragged-poacher",
+            "hedge-spark"
+          ]
+        }
+      ],
+      "firstKillReward": [
+        {
+          "item": "combat.loot.t1_elite_component",
+          "chance": 1,
+          "min": 1,
+          "max": 1,
+          "guaranteed": true,
+          "firstKillOnly": true,
+          "protected": true
+        }
+      ],
+      "eliteComponent": "Ironjaw Tusk",
+      "actions": {
+        "ironjaw-boar:gore": {
+          "name": "Gore",
+          "type": "Crush",
+          "multiplier": 1,
+          "id": "ironjaw-boar:gore",
+          "damageEnabled": true
+        },
+        "ironjaw-boar:iron-charge": {
+          "name": "Iron Charge",
+          "type": "Crush",
+          "multiplier": 1.55,
+          "intervalMultiplier": 1.25,
+          "status": {
+            "type": "Stun",
+            "magnitude": 1,
+            "durationMs": 1000
+          },
+          "id": "ironjaw-boar:iron-charge",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t1-watch-deserter": {
+      "id": "t1-watch-deserter",
+      "name": "Watch Deserter",
+      "tier": 1,
+      "rank": "Dungeon",
+      "combatClass": "Dungeon",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid",
+        "Dungeon"
+      ],
+      "areaId": "t1-ruined-watch",
+      "style": "Melee",
+      "basicDamageType": "Slash",
+      "maxHp": 113,
+      "accuracy": 126,
+      "minHit": 8,
+      "maxHit": 11,
+      "intervalMs": 3000,
+      "evasion": 105,
+      "evasions": {
+        "Melee": 105,
+        "Ranged": 105,
+        "Magic": 105
+      },
+      "resistanceProfile": "M-A",
+      "resistances": {
+        "Slash": 16,
+        "Stab": 20,
+        "Crush": 18,
+        "Pierce": 28,
+        "Puncture": 24,
+        "Air": 2,
+        "Fire": -8,
+        "Water": 4,
+        "Earth": 0
+      },
+      "sequence": [
+        "t1-watch-deserter:slash",
+        "t1-watch-deserter:slash",
+        "t1-watch-deserter:shield-bash"
+      ],
+      "xp": 29,
+      "gold": 8,
+      "loot": [
+        {
+          "item": "combat.loot.t1_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t1_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t1-watch-deserter:slash": {
+          "name": "Slash",
+          "type": "Slash",
+          "multiplier": 1,
+          "id": "t1-watch-deserter:slash",
+          "damageEnabled": true
+        },
+        "t1-watch-deserter:shield-bash": {
+          "name": "Shield Bash",
+          "type": "Crush",
+          "multiplier": 1.1,
+          "status": {
+            "type": "AccuracyDown",
+            "magnitude": 0.1,
+            "durationMs": 5000
+          },
+          "id": "t1-watch-deserter:shield-bash",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t1-tower-bowman": {
+      "id": "t1-tower-bowman",
+      "name": "Tower Bowman",
+      "tier": 1,
+      "rank": "Dungeon",
+      "combatClass": "Dungeon",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid",
+        "Archer",
+        "Dungeon"
+      ],
+      "areaId": "t1-ruined-watch",
+      "style": "Ranged",
+      "basicDamageType": "Pierce",
+      "maxHp": 113,
+      "accuracy": 126,
+      "minHit": 8,
+      "maxHit": 11,
+      "intervalMs": 3000,
+      "evasion": 105,
+      "evasions": {
+        "Melee": 105,
+        "Ranged": 105,
+        "Magic": 105
+      },
+      "resistanceProfile": "R-B",
+      "resistances": {
+        "Slash": -8,
+        "Stab": -5,
+        "Crush": 6,
+        "Pierce": 22,
+        "Puncture": 16,
+        "Air": 30,
+        "Fire": 26,
+        "Water": 20,
+        "Earth": 28
+      },
+      "sequence": [
+        "t1-tower-bowman:arrow",
+        "t1-tower-bowman:aimed-shot",
+        "t1-tower-bowman:arrow"
+      ],
+      "xp": 29,
+      "gold": 8,
+      "loot": [
+        {
+          "item": "combat.loot.t1_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t1_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t1-tower-bowman:arrow": {
+          "name": "Arrow",
+          "type": "Pierce",
+          "multiplier": 1,
+          "id": "t1-tower-bowman:arrow",
+          "damageEnabled": true
+        },
+        "t1-tower-bowman:aimed-shot": {
+          "name": "Aimed Shot",
+          "type": "Pierce",
+          "multiplier": 1.4,
+          "intervalMultiplier": 1.2,
+          "accuracyMultiplier": 1.1,
+          "id": "t1-tower-bowman:aimed-shot",
+          "damageEnabled": true
+        }
+      }
+    },
+    "captain-veyr": {
+      "id": "captain-veyr",
+      "name": "Captain Veyr",
+      "tier": 1,
+      "rank": "Boss",
+      "combatClass": "Boss",
+      "kind": "Boss",
+      "tags": [
+        "Boss",
+        "Dungeon"
+      ],
+      "areaId": "t1-ruined-watch",
+      "style": "Melee",
+      "basicDamageType": "Slash",
+      "maxHp": 450,
+      "accuracy": 132,
+      "minHit": 10,
+      "maxHit": 13,
+      "intervalMs": 3000,
+      "evasion": 105,
+      "evasions": {
+        "Melee": 105,
+        "Ranged": 105,
+        "Magic": 105
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 10,
+        "Crush": 28,
+        "Pierce": 32,
+        "Puncture": 28,
+        "Air": -5,
+        "Fire": -15,
+        "Water": 0,
+        "Earth": 8
+      },
+      "sequence": [
+        "captain-veyr:slash",
+        "captain-veyr:slash",
+        "captain-veyr:crushing-pommel",
+        "captain-veyr:guard-break"
+      ],
+      "xp": 29,
+      "gold": 10,
+      "loot": [
+        {
+          "item": "combat.loot.t1_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t1_arcane_remnant",
+      "unlockRequirements": [],
+      "bossComponent": "Veyr's Broken Crest",
+      "uniqueHook": "combat.unique.t1.rusthook_blade",
+      "firstKillReward": [
+        {
+          "item": "combat.loot.t1_boss_component",
+          "chance": 1,
+          "min": 1,
+          "max": 1,
+          "guaranteed": true,
+          "firstKillOnly": true,
+          "protected": true
+        }
+      ],
+      "actions": {
+        "captain-veyr:slash": {
+          "name": "Slash",
+          "type": "Slash",
+          "multiplier": 1,
+          "id": "captain-veyr:slash",
+          "damageEnabled": true
+        },
+        "captain-veyr:crushing-pommel": {
+          "name": "Crushing Pommel",
+          "type": "Crush",
+          "multiplier": 1.45,
+          "status": {
+            "type": "Stun",
+            "magnitude": 1,
+            "durationMs": 1000
+          },
+          "id": "captain-veyr:crushing-pommel",
+          "damageEnabled": true
+        },
+        "captain-veyr:guard-break": {
+          "name": "Guard Break",
+          "type": "Slash",
+          "multiplier": 1.1,
+          "status": {
+            "type": "ResistanceDown",
+            "magnitude": 8,
+            "durationMs": 8000
+          },
+          "resistanceDownTypes": [
+            "Slash",
+            "Stab",
+            "Crush"
+          ],
+          "id": "captain-veyr:guard-break",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t2-mirewolf": {
+      "id": "t2-mirewolf",
+      "name": "Mirewolf",
+      "tier": 2,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Beast",
+      "tags": [
+        "Beast"
+      ],
+      "areaId": "t2-thornfen",
+      "style": "Melee",
+      "basicDamageType": "Stab",
+      "maxHp": 145,
+      "accuracy": 155,
+      "minHit": 11,
+      "maxHit": 15,
+      "intervalMs": 3000,
+      "evasion": 125,
+      "evasions": {
+        "Melee": 125,
+        "Ranged": 125,
+        "Magic": 125
+      },
+      "resistanceProfile": "M-C",
+      "resistances": {
+        "Slash": 12,
+        "Stab": 18,
+        "Crush": 14,
+        "Pierce": 24,
+        "Puncture": 20,
+        "Air": 0,
+        "Fire": -12,
+        "Water": 14,
+        "Earth": -8
+      },
+      "sequence": [
+        "t2-mirewolf:bite",
+        "t2-mirewolf:bite",
+        "t2-mirewolf:bog-lunge"
+      ],
+      "xp": 46,
+      "gold": 8,
+      "loot": [
+        {
+          "item": "combat.loot.t2_beast_trophy",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t2_beast_trophy",
+      "unlockRequirements": [],
+      "actions": {
+        "t2-mirewolf:bite": {
+          "name": "Bite",
+          "type": "Stab",
+          "multiplier": 1,
+          "id": "t2-mirewolf:bite",
+          "damageEnabled": true
+        },
+        "t2-mirewolf:bog-lunge": {
+          "name": "Bog Lunge",
+          "type": "Stab",
+          "multiplier": 1.3,
+          "status": {
+            "type": "EvasionDown",
+            "magnitude": 0.08,
+            "durationMs": 5000
+          },
+          "id": "t2-mirewolf:bog-lunge",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t2-shellback-toad": {
+      "id": "t2-shellback-toad",
+      "name": "Shellback Toad",
+      "tier": 2,
+      "rank": "Heavy",
+      "combatClass": "Heavy",
+      "kind": "Beast",
+      "tags": [
+        "Beast"
+      ],
+      "areaId": "t2-thornfen",
+      "style": "Melee",
+      "basicDamageType": "Crush",
+      "maxHp": 181,
+      "accuracy": 147,
+      "minHit": 13,
+      "maxHit": 17,
+      "intervalMs": 3000,
+      "evasion": 125,
+      "evasions": {
+        "Melee": 125,
+        "Ranged": 125,
+        "Magic": 125
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 18,
+        "Crush": 28,
+        "Pierce": 32,
+        "Puncture": 36,
+        "Air": -5,
+        "Fire": -8,
+        "Water": 0,
+        "Earth": 8
+      },
+      "sequence": [
+        "t2-shellback-toad:headbutt",
+        "t2-shellback-toad:headbutt",
+        "t2-shellback-toad:shell-slam"
+      ],
+      "xp": 46,
+      "gold": 9,
+      "loot": [
+        {
+          "item": "combat.loot.t2_beast_trophy",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t2_beast_trophy",
+      "unlockRequirements": [],
+      "actions": {
+        "t2-shellback-toad:headbutt": {
+          "name": "Headbutt",
+          "type": "Crush",
+          "multiplier": 1,
+          "id": "t2-shellback-toad:headbutt",
+          "damageEnabled": true
+        },
+        "t2-shellback-toad:shell-slam": {
+          "name": "Shell Slam",
+          "type": "Crush",
+          "multiplier": 1.45,
+          "status": {
+            "type": "ResistanceDown",
+            "magnitude": 6,
+            "durationMs": 6000
+          },
+          "resistanceDownTypes": [
+            "Crush"
+          ],
+          "id": "t2-shellback-toad:shell-slam",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t2-briar-archer": {
+      "id": "t2-briar-archer",
+      "name": "Briar Archer",
+      "tier": 2,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid",
+        "Archer"
+      ],
+      "areaId": "t2-thornfen",
+      "style": "Ranged",
+      "basicDamageType": "Pierce",
+      "maxHp": 145,
+      "accuracy": 155,
+      "minHit": 11,
+      "maxHit": 15,
+      "intervalMs": 3000,
+      "evasion": 125,
+      "evasions": {
+        "Melee": 125,
+        "Ranged": 125,
+        "Magic": 125
+      },
+      "resistanceProfile": "R-A",
+      "resistances": {
+        "Slash": -8,
+        "Stab": 0,
+        "Crush": 4,
+        "Pierce": 16,
+        "Puncture": 18,
+        "Air": 28,
+        "Fire": -6,
+        "Water": 22,
+        "Earth": 32
+      },
+      "sequence": [
+        "t2-briar-archer:arrow",
+        "t2-briar-archer:arrow",
+        "t2-briar-archer:thornshot"
+      ],
+      "xp": 46,
+      "gold": 8,
+      "loot": [
+        {
+          "item": "combat.loot.t2_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t2_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t2-briar-archer:arrow": {
+          "name": "Arrow",
+          "type": "Pierce",
+          "multiplier": 1,
+          "id": "t2-briar-archer:arrow",
+          "damageEnabled": true
+        },
+        "t2-briar-archer:thornshot": {
+          "name": "Thornshot",
+          "type": "Pierce",
+          "multiplier": 1.1,
+          "status": {
+            "type": "Bleed",
+            "magnitude": 0.12,
+            "durationMs": 6000
+          },
+          "id": "t2-briar-archer:thornshot",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t2-bog-witch": {
+      "id": "t2-bog-witch",
+      "name": "Bog Witch",
+      "tier": 2,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid",
+        "Caster"
+      ],
+      "areaId": "t2-thornfen",
+      "style": "Magic",
+      "basicDamageType": "Water",
+      "maxHp": 145,
+      "accuracy": 155,
+      "minHit": 11,
+      "maxHit": 15,
+      "intervalMs": 3000,
+      "evasion": 125,
+      "evasions": {
+        "Melee": 125,
+        "Ranged": 125,
+        "Magic": 125
+      },
+      "resistanceProfile": "G-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 30,
+        "Crush": 22,
+        "Pierce": 0,
+        "Puncture": -6,
+        "Air": 20,
+        "Fire": -15,
+        "Water": 30,
+        "Earth": 16
+      },
+      "sequence": [
+        "t2-bog-witch:frost-hex",
+        "t2-bog-witch:frost-hex",
+        "t2-bog-witch:mire-chill"
+      ],
+      "xp": 46,
+      "gold": 8,
+      "loot": [
+        {
+          "item": "combat.loot.t2_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t2_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "t2-bog-witch:frost-hex": {
+          "name": "Frost Hex",
+          "type": "Water",
+          "multiplier": 1,
+          "id": "t2-bog-witch:frost-hex",
+          "damageEnabled": true
+        },
+        "t2-bog-witch:mire-chill": {
+          "name": "Mire Chill",
+          "type": "Water",
+          "multiplier": 1.05,
+          "status": {
+            "type": "Chill",
+            "magnitude": 0.08,
+            "durationMs": 5000
+          },
+          "id": "t2-bog-witch:mire-chill",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t2-mirecoil-serpent": {
+      "id": "t2-mirecoil-serpent",
+      "name": "Mirecoil Serpent",
+      "tier": 2,
+      "rank": "Elite",
+      "combatClass": "Elite",
+      "kind": "Beast",
+      "tags": [
+        "Beast",
+        "Elite"
+      ],
+      "areaId": "t2-thornfen",
+      "style": "Melee",
+      "basicDamageType": "Stab",
+      "maxHp": 326,
+      "accuracy": 163,
+      "minHit": 13,
+      "maxHit": 17,
+      "intervalMs": 3000,
+      "evasion": 125,
+      "evasions": {
+        "Melee": 125,
+        "Ranged": 125,
+        "Magic": 125
+      },
+      "resistanceProfile": "M-C",
+      "resistances": {
+        "Slash": 12,
+        "Stab": 26,
+        "Crush": 14,
+        "Pierce": 24,
+        "Puncture": 20,
+        "Air": 0,
+        "Fire": -15,
+        "Water": 8,
+        "Earth": -8
+      },
+      "sequence": [
+        "t2-mirecoil-serpent:fang",
+        "t2-mirecoil-serpent:coil-strike",
+        "t2-mirecoil-serpent:fang",
+        "t2-mirecoil-serpent:venom-bite"
+      ],
+      "xp": 46,
+      "gold": 9,
+      "loot": [
+        {
+          "item": "combat.loot.t2_beast_trophy",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t2_beast_trophy",
+      "unlockRequirements": [
+        {
+          "type": "defeatAll",
+          "targets": [
+            "t2-mirewolf",
+            "t2-shellback-toad",
+            "t2-briar-archer",
+            "t2-bog-witch"
+          ]
+        }
+      ],
+      "firstKillReward": [
+        {
+          "item": "combat.loot.t2_elite_component",
+          "chance": 1,
+          "min": 1,
+          "max": 1,
+          "guaranteed": true,
+          "firstKillOnly": true,
+          "protected": true
+        }
+      ],
+      "eliteComponent": "Mirecoil Gland",
+      "actions": {
+        "t2-mirecoil-serpent:fang": {
+          "name": "Fang",
+          "type": "Stab",
+          "multiplier": 1,
+          "id": "t2-mirecoil-serpent:fang",
+          "damageEnabled": true
+        },
+        "t2-mirecoil-serpent:coil-strike": {
+          "name": "Coil Strike",
+          "type": "Crush",
+          "multiplier": 1.2,
+          "id": "t2-mirecoil-serpent:coil-strike",
+          "damageEnabled": true
+        },
+        "t2-mirecoil-serpent:venom-bite": {
+          "name": "Venom Bite",
+          "type": "Stab",
+          "multiplier": 1.15,
+          "status": {
+            "type": "Poison",
+            "magnitude": 0.04,
+            "durationMs": 8000
+          },
+          "id": "t2-mirecoil-serpent:venom-bite",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t2-drowned-stalker": {
+      "id": "t2-drowned-stalker",
+      "name": "Drowned Stalker",
+      "tier": 2,
+      "rank": "Dungeon",
+      "combatClass": "Dungeon",
+      "kind": "Undead",
+      "tags": [
+        "Undead",
+        "Dungeon"
+      ],
+      "areaId": "t2-drowned-burrow",
+      "style": "Melee",
+      "basicDamageType": "Slash",
+      "maxHp": 181,
+      "accuracy": 163,
+      "minHit": 12,
+      "maxHit": 16,
+      "intervalMs": 3000,
+      "evasion": 125,
+      "evasions": {
+        "Melee": 125,
+        "Ranged": 125,
+        "Magic": 125
+      },
+      "resistanceProfile": "M-A",
+      "resistances": {
+        "Slash": 16,
+        "Stab": 14,
+        "Crush": 18,
+        "Pierce": 28,
+        "Puncture": 24,
+        "Air": 2,
+        "Fire": -10,
+        "Water": 24,
+        "Earth": 0
+      },
+      "sequence": [
+        "t2-drowned-stalker:claw",
+        "t2-drowned-stalker:claw",
+        "t2-drowned-stalker:drown-grip"
+      ],
+      "xp": 46,
+      "gold": 8,
+      "loot": [
+        {
+          "item": "combat.loot.t2_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t2_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t2-drowned-stalker:claw": {
+          "name": "Claw",
+          "type": "Slash",
+          "multiplier": 1,
+          "id": "t2-drowned-stalker:claw",
+          "damageEnabled": true
+        },
+        "t2-drowned-stalker:drown-grip": {
+          "name": "Drown Grip",
+          "type": "Crush",
+          "multiplier": 1.3,
+          "status": {
+            "type": "Chill",
+            "magnitude": 0.06,
+            "durationMs": 4000
+          },
+          "id": "t2-drowned-stalker:drown-grip",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t2-fen-channeler": {
+      "id": "t2-fen-channeler",
+      "name": "Fen Channeler",
+      "tier": 2,
+      "rank": "Dungeon",
+      "combatClass": "Dungeon",
+      "kind": "Caster",
+      "tags": [
+        "Caster",
+        "Dungeon"
+      ],
+      "areaId": "t2-drowned-burrow",
+      "style": "Magic",
+      "basicDamageType": "Water",
+      "maxHp": 181,
+      "accuracy": 163,
+      "minHit": 12,
+      "maxHit": 16,
+      "intervalMs": 3000,
+      "evasion": 125,
+      "evasions": {
+        "Melee": 125,
+        "Ranged": 125,
+        "Magic": 125
+      },
+      "resistanceProfile": "G-A",
+      "resistances": {
+        "Slash": 28,
+        "Stab": 24,
+        "Crush": 30,
+        "Pierce": -8,
+        "Puncture": -10,
+        "Air": 16,
+        "Fire": 18,
+        "Water": 28,
+        "Earth": 16
+      },
+      "sequence": [
+        "t2-fen-channeler:water-bolt",
+        "t2-fen-channeler:water-bolt",
+        "t2-fen-channeler:silt-ward"
+      ],
+      "xp": 46,
+      "gold": 8,
+      "loot": [
+        {
+          "item": "combat.loot.t2_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t2_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "t2-fen-channeler:water-bolt": {
+          "name": "Water Bolt",
+          "type": "Water",
+          "multiplier": 1,
+          "id": "t2-fen-channeler:water-bolt",
+          "damageEnabled": true
+        },
+        "t2-fen-channeler:silt-ward": {
+          "name": "Silt Ward",
+          "type": "Earth",
+          "multiplier": 0.8,
+          "selfResistancePp": 8,
+          "selfResistanceActions": 2,
+          "selfResistanceTypes": [
+            "Earth"
+          ],
+          "selfResistanceScope": "Melee",
+          "id": "t2-fen-channeler:silt-ward",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t2-miremother-ilyss": {
+      "id": "t2-miremother-ilyss",
+      "name": "Miremother Ilyss",
+      "tier": 2,
+      "rank": "Boss",
+      "combatClass": "Boss",
+      "kind": "Boss",
+      "tags": [
+        "Boss",
+        "Dungeon"
+      ],
+      "areaId": "t2-drowned-burrow",
+      "style": "Magic",
+      "basicDamageType": "Water",
+      "maxHp": 725,
+      "accuracy": 171,
+      "minHit": 14,
+      "maxHit": 19,
+      "intervalMs": 3000,
+      "evasion": 125,
+      "evasions": {
+        "Melee": 125,
+        "Ranged": 125,
+        "Magic": 125
+      },
+      "resistanceProfile": "G-C",
+      "resistances": {
+        "Slash": 32,
+        "Stab": 26,
+        "Crush": 24,
+        "Pierce": -15,
+        "Puncture": -5,
+        "Air": 14,
+        "Fire": -20,
+        "Water": 32,
+        "Earth": 18
+      },
+      "sequence": [
+        "t2-miremother-ilyss:mire-bolt",
+        "t2-miremother-ilyss:mire-bolt",
+        "t2-miremother-ilyss:brood-chill"
+      ],
+      "xp": 46,
+      "gold": 10,
+      "loot": [
+        {
+          "item": "combat.loot.t2_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t2_arcane_remnant",
+      "unlockRequirements": [],
+      "bossComponent": "Miremother Broodheart",
+      "uniqueHook": "combat.unique.t2.mirecoil_whip",
+      "firstKillReward": [
+        {
+          "item": "combat.loot.t2_boss_component",
+          "chance": 1,
+          "min": 1,
+          "max": 1,
+          "guaranteed": true,
+          "firstKillOnly": true,
+          "protected": true
+        }
+      ],
+      "phases": [
+        {
+          "thresholdPct": 50,
+          "sequence": [
+            "t2-miremother-ilyss:brood-chill",
+            "t2-miremother-ilyss:venom-wave",
+            "t2-miremother-ilyss:mire-bolt"
+          ]
+        }
+      ],
+      "actions": {
+        "t2-miremother-ilyss:mire-bolt": {
+          "name": "Mire Bolt",
+          "type": "Water",
+          "multiplier": 1,
+          "id": "t2-miremother-ilyss:mire-bolt",
+          "damageEnabled": true
+        },
+        "t2-miremother-ilyss:brood-chill": {
+          "name": "Brood Chill",
+          "type": "Water",
+          "multiplier": 1.25,
+          "status": {
+            "type": "Chill",
+            "magnitude": 0.1,
+            "durationMs": 6000
+          },
+          "id": "t2-miremother-ilyss:brood-chill",
+          "damageEnabled": true
+        },
+        "t2-miremother-ilyss:venom-wave": {
+          "name": "Venom Wave",
+          "type": "Water",
+          "multiplier": 1.15,
+          "status": {
+            "type": "Poison",
+            "magnitude": 0.05,
+            "durationMs": 10000
+          },
+          "id": "t2-miremother-ilyss:venom-wave",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t3-cliff-ram": {
+      "id": "t3-cliff-ram",
+      "name": "Cliff Ram",
+      "tier": 3,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Beast",
+      "tags": [
+        "Beast"
+      ],
+      "areaId": "t3-ironcliff-pass",
+      "style": "Melee",
+      "basicDamageType": "Crush",
+      "maxHp": 225,
+      "accuracy": 195,
+      "minHit": 16,
+      "maxHit": 22,
+      "intervalMs": 3000,
+      "evasion": 150,
+      "evasions": {
+        "Melee": 150,
+        "Ranged": 150,
+        "Magic": 150
+      },
+      "resistanceProfile": "M-C",
+      "resistances": {
+        "Slash": 12,
+        "Stab": 18,
+        "Crush": 26,
+        "Pierce": 24,
+        "Puncture": 20,
+        "Air": -8,
+        "Fire": -5,
+        "Water": 8,
+        "Earth": -8
+      },
+      "sequence": [
+        "t3-cliff-ram:ram",
+        "t3-cliff-ram:ram",
+        "t3-cliff-ram:cliff-charge"
+      ],
+      "xp": 72,
+      "gold": 12,
+      "loot": [
+        {
+          "item": "combat.loot.t3_beast_trophy",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t3_beast_trophy",
+      "unlockRequirements": [],
+      "actions": {
+        "t3-cliff-ram:ram": {
+          "name": "Ram",
+          "type": "Crush",
+          "multiplier": 1,
+          "id": "t3-cliff-ram:ram",
+          "damageEnabled": true
+        },
+        "t3-cliff-ram:cliff-charge": {
+          "name": "Cliff Charge",
+          "type": "Crush",
+          "multiplier": 1.5,
+          "intervalMultiplier": 1.25,
+          "id": "t3-cliff-ram:cliff-charge",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t3-ironcloak-skirmisher": {
+      "id": "t3-ironcloak-skirmisher",
+      "name": "Ironcloak Skirmisher",
+      "tier": 3,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid"
+      ],
+      "areaId": "t3-ironcliff-pass",
+      "style": "Melee",
+      "basicDamageType": "Slash",
+      "maxHp": 225,
+      "accuracy": 195,
+      "minHit": 16,
+      "maxHit": 22,
+      "intervalMs": 3000,
+      "evasion": 150,
+      "evasions": {
+        "Melee": 150,
+        "Ranged": 150,
+        "Magic": 150
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 18,
+        "Crush": 8,
+        "Pierce": 32,
+        "Puncture": 28,
+        "Air": -5,
+        "Fire": -10,
+        "Water": 0,
+        "Earth": 8
+      },
+      "sequence": [
+        "t3-ironcloak-skirmisher:slash",
+        "t3-ironcloak-skirmisher:stab",
+        "t3-ironcloak-skirmisher:shield-hook"
+      ],
+      "xp": 72,
+      "gold": 12,
+      "loot": [
+        {
+          "item": "combat.loot.t3_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t3_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t3-ironcloak-skirmisher:slash": {
+          "name": "Slash",
+          "type": "Slash",
+          "multiplier": 1,
+          "id": "t3-ironcloak-skirmisher:slash",
+          "damageEnabled": true
+        },
+        "t3-ironcloak-skirmisher:stab": {
+          "name": "Stab",
+          "type": "Stab",
+          "multiplier": 1,
+          "id": "t3-ironcloak-skirmisher:stab",
+          "damageEnabled": true
+        },
+        "t3-ironcloak-skirmisher:shield-hook": {
+          "name": "Shield Hook",
+          "type": "Crush",
+          "multiplier": 1.1,
+          "status": {
+            "type": "EvasionDown",
+            "magnitude": 0.1,
+            "durationMs": 5000
+          },
+          "id": "t3-ironcloak-skirmisher:shield-hook",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t3-cragbow-scout": {
+      "id": "t3-cragbow-scout",
+      "name": "Cragbow Scout",
+      "tier": 3,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid",
+        "Archer"
+      ],
+      "areaId": "t3-ironcliff-pass",
+      "style": "Ranged",
+      "basicDamageType": "Pierce",
+      "maxHp": 225,
+      "accuracy": 195,
+      "minHit": 16,
+      "maxHit": 22,
+      "intervalMs": 3000,
+      "evasion": 150,
+      "evasions": {
+        "Melee": 150,
+        "Ranged": 150,
+        "Magic": 150
+      },
+      "resistanceProfile": "R-B",
+      "resistances": {
+        "Slash": -10,
+        "Stab": -5,
+        "Crush": 6,
+        "Pierce": 22,
+        "Puncture": 16,
+        "Air": 30,
+        "Fire": 26,
+        "Water": 20,
+        "Earth": 34
+      },
+      "sequence": [
+        "t3-cragbow-scout:arrow",
+        "t3-cragbow-scout:quick-shot",
+        "t3-cragbow-scout:arrow",
+        "t3-cragbow-scout:stonehead-shot"
+      ],
+      "xp": 72,
+      "gold": 12,
+      "loot": [
+        {
+          "item": "combat.loot.t3_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t3_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t3-cragbow-scout:arrow": {
+          "name": "Arrow",
+          "type": "Pierce",
+          "multiplier": 1,
+          "id": "t3-cragbow-scout:arrow",
+          "damageEnabled": true
+        },
+        "t3-cragbow-scout:quick-shot": {
+          "name": "Quick Shot",
+          "type": "Pierce",
+          "multiplier": 0.7,
+          "id": "t3-cragbow-scout:quick-shot",
+          "damageEnabled": true
+        },
+        "t3-cragbow-scout:stonehead-shot": {
+          "name": "Stonehead Shot",
+          "type": "Crush",
+          "multiplier": 1.25,
+          "id": "t3-cragbow-scout:stonehead-shot",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t3-stonecaller": {
+      "id": "t3-stonecaller",
+      "name": "Stonecaller",
+      "tier": 3,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid",
+        "Caster"
+      ],
+      "areaId": "t3-ironcliff-pass",
+      "style": "Magic",
+      "basicDamageType": "Earth",
+      "maxHp": 225,
+      "accuracy": 195,
+      "minHit": 16,
+      "maxHit": 22,
+      "intervalMs": 3000,
+      "evasion": 150,
+      "evasions": {
+        "Melee": 150,
+        "Ranged": 150,
+        "Magic": 150
+      },
+      "resistanceProfile": "G-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 30,
+        "Crush": 22,
+        "Pierce": 0,
+        "Puncture": -6,
+        "Air": -12,
+        "Fire": 12,
+        "Water": 18,
+        "Earth": 30
+      },
+      "sequence": [
+        "t3-stonecaller:stone-bolt",
+        "t3-stonecaller:stone-bolt",
+        "t3-stonecaller:fracture"
+      ],
+      "xp": 72,
+      "gold": 12,
+      "loot": [
+        {
+          "item": "combat.loot.t3_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t3_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "t3-stonecaller:stone-bolt": {
+          "name": "Stone Bolt",
+          "type": "Earth",
+          "multiplier": 1,
+          "id": "t3-stonecaller:stone-bolt",
+          "damageEnabled": true
+        },
+        "t3-stonecaller:fracture": {
+          "name": "Fracture",
+          "type": "Earth",
+          "multiplier": 1.15,
+          "status": {
+            "type": "ResistanceDown",
+            "magnitude": 8,
+            "durationMs": 6000
+          },
+          "resistanceDownTypes": [
+            "Earth"
+          ],
+          "id": "t3-stonecaller:fracture",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t3-graniteback-ram": {
+      "id": "t3-graniteback-ram",
+      "name": "Graniteback Ram",
+      "tier": 3,
+      "rank": "Elite",
+      "combatClass": "Elite",
+      "kind": "Beast",
+      "tags": [
+        "Beast",
+        "Elite"
+      ],
+      "areaId": "t3-ironcliff-pass",
+      "style": "Melee",
+      "basicDamageType": "Crush",
+      "maxHp": 506,
+      "accuracy": 205,
+      "minHit": 18,
+      "maxHit": 25,
+      "intervalMs": 3000,
+      "evasion": 150,
+      "evasions": {
+        "Melee": 150,
+        "Ranged": 150,
+        "Magic": 150
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 18,
+        "Crush": 38,
+        "Pierce": 32,
+        "Puncture": 18,
+        "Air": -15,
+        "Fire": -10,
+        "Water": 0,
+        "Earth": 8
+      },
+      "sequence": [
+        "t3-graniteback-ram:horn",
+        "t3-graniteback-ram:horn",
+        "t3-graniteback-ram:granite-charge",
+        "t3-graniteback-ram:quake"
+      ],
+      "xp": 72,
+      "gold": 14,
+      "loot": [
+        {
+          "item": "combat.loot.t3_beast_trophy",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t3_beast_trophy",
+      "unlockRequirements": [
+        {
+          "type": "defeatAll",
+          "targets": [
+            "t3-cliff-ram",
+            "t3-ironcloak-skirmisher",
+            "t3-cragbow-scout",
+            "t3-stonecaller"
+          ]
+        }
+      ],
+      "firstKillReward": [
+        {
+          "item": "combat.loot.t3_elite_component",
+          "chance": 1,
+          "min": 1,
+          "max": 1,
+          "guaranteed": true,
+          "firstKillOnly": true,
+          "protected": true
+        }
+      ],
+      "eliteComponent": "Granite Core",
+      "actions": {
+        "t3-graniteback-ram:horn": {
+          "name": "Horn",
+          "type": "Crush",
+          "multiplier": 1,
+          "id": "t3-graniteback-ram:horn",
+          "damageEnabled": true
+        },
+        "t3-graniteback-ram:granite-charge": {
+          "name": "Granite Charge",
+          "type": "Crush",
+          "multiplier": 1.55,
+          "id": "t3-graniteback-ram:granite-charge",
+          "damageEnabled": true
+        },
+        "t3-graniteback-ram:quake": {
+          "name": "Quake",
+          "type": "Earth",
+          "multiplier": 1.2,
+          "status": {
+            "type": "Stun",
+            "magnitude": 1,
+            "durationMs": 1000
+          },
+          "id": "t3-graniteback-ram:quake",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t3-forge-thrall": {
+      "id": "t3-forge-thrall",
+      "name": "Forge Thrall",
+      "tier": 3,
+      "rank": "Dungeon",
+      "combatClass": "Dungeon",
+      "kind": "Construct",
+      "tags": [
+        "Construct",
+        "Dungeon"
+      ],
+      "areaId": "t3-hollow-forge",
+      "style": "Melee",
+      "basicDamageType": "Crush",
+      "maxHp": 281,
+      "accuracy": 205,
+      "minHit": 17,
+      "maxHit": 23,
+      "intervalMs": 3000,
+      "evasion": 150,
+      "evasions": {
+        "Melee": 150,
+        "Ranged": 150,
+        "Magic": 150
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 18,
+        "Crush": 28,
+        "Pierce": 32,
+        "Puncture": 28,
+        "Air": -5,
+        "Fire": 20,
+        "Water": 0,
+        "Earth": 8
+      },
+      "sequence": [
+        "t3-forge-thrall:hammer",
+        "t3-forge-thrall:hammer",
+        "t3-forge-thrall:furnace-smash"
+      ],
+      "xp": 72,
+      "gold": 13,
+      "loot": [
+        {
+          "item": "combat.loot.t3_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t3_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t3-forge-thrall:hammer": {
+          "name": "Hammer",
+          "type": "Crush",
+          "multiplier": 1,
+          "id": "t3-forge-thrall:hammer",
+          "damageEnabled": true
+        },
+        "t3-forge-thrall:furnace-smash": {
+          "name": "Furnace Smash",
+          "type": "Crush",
+          "multiplier": 1.4,
+          "status": {
+            "type": "Burn",
+            "magnitude": 0.1,
+            "durationMs": 6000
+          },
+          "id": "t3-forge-thrall:furnace-smash",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t3-cinder-smith": {
+      "id": "t3-cinder-smith",
+      "name": "Cinder Smith",
+      "tier": 3,
+      "rank": "Dungeon",
+      "combatClass": "Dungeon",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid",
+        "Caster",
+        "Dungeon"
+      ],
+      "areaId": "t3-hollow-forge",
+      "style": "Magic",
+      "basicDamageType": "Fire",
+      "maxHp": 281,
+      "accuracy": 205,
+      "minHit": 17,
+      "maxHit": 23,
+      "intervalMs": 3000,
+      "evasion": 150,
+      "evasions": {
+        "Melee": 150,
+        "Ranged": 150,
+        "Magic": 150
+      },
+      "resistanceProfile": "G-A",
+      "resistances": {
+        "Slash": 28,
+        "Stab": 24,
+        "Crush": 30,
+        "Pierce": -8,
+        "Puncture": 0,
+        "Air": 16,
+        "Fire": 30,
+        "Water": -15,
+        "Earth": 16
+      },
+      "sequence": [
+        "t3-cinder-smith:fire-bolt",
+        "t3-cinder-smith:fire-bolt",
+        "t3-cinder-smith:molten-brand"
+      ],
+      "xp": 72,
+      "gold": 13,
+      "loot": [
+        {
+          "item": "combat.loot.t3_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t3_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "t3-cinder-smith:fire-bolt": {
+          "name": "Fire Bolt",
+          "type": "Fire",
+          "multiplier": 1,
+          "id": "t3-cinder-smith:fire-bolt",
+          "damageEnabled": true
+        },
+        "t3-cinder-smith:molten-brand": {
+          "name": "Molten Brand",
+          "type": "Fire",
+          "multiplier": 1.2,
+          "status": {
+            "type": "ResistanceDown",
+            "magnitude": 8,
+            "durationMs": 6000
+          },
+          "resistanceDownTypes": [
+            "Fire"
+          ],
+          "id": "t3-cinder-smith:molten-brand",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t3-forgemaster-korr": {
+      "id": "t3-forgemaster-korr",
+      "name": "Forgemaster Korr",
+      "tier": 3,
+      "rank": "Boss",
+      "combatClass": "Boss",
+      "kind": "Boss",
+      "tags": [
+        "Boss",
+        "Dungeon"
+      ],
+      "areaId": "t3-hollow-forge",
+      "style": "Melee",
+      "basicDamageType": "Crush",
+      "maxHp": 1125,
+      "accuracy": 215,
+      "minHit": 21,
+      "maxHit": 28,
+      "intervalMs": 3000,
+      "evasion": 150,
+      "evasions": {
+        "Melee": 150,
+        "Ranged": 150,
+        "Magic": 150
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 18,
+        "Crush": 40,
+        "Pierce": 32,
+        "Puncture": 28,
+        "Air": -5,
+        "Fire": 22,
+        "Water": -18,
+        "Earth": 8
+      },
+      "sequence": [
+        "t3-forgemaster-korr:hammer",
+        "t3-forgemaster-korr:hammer",
+        "t3-forgemaster-korr:furnace-slam",
+        "t3-forgemaster-korr:tempered-guard"
+      ],
+      "xp": 72,
+      "gold": 15,
+      "loot": [
+        {
+          "item": "combat.loot.t3_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t3_arcane_remnant",
+      "unlockRequirements": [],
+      "bossComponent": "Korr's Forge Sigil",
+      "uniqueHook": "combat.unique.t3.forgeheart_mace",
+      "firstKillReward": [
+        {
+          "item": "combat.loot.t3_boss_component",
+          "chance": 1,
+          "min": 1,
+          "max": 1,
+          "guaranteed": true,
+          "firstKillOnly": true,
+          "protected": true
+        }
+      ],
+      "phases": [
+        {
+          "thresholdPct": 40,
+          "sequence": [
+            "t3-forgemaster-korr:furnace-slam",
+            "t3-forgemaster-korr:molten-hammer",
+            "t3-forgemaster-korr:hammer"
+          ]
+        }
+      ],
+      "actions": {
+        "t3-forgemaster-korr:hammer": {
+          "name": "Hammer",
+          "type": "Crush",
+          "multiplier": 1,
+          "id": "t3-forgemaster-korr:hammer",
+          "damageEnabled": true
+        },
+        "t3-forgemaster-korr:furnace-slam": {
+          "name": "Furnace Slam",
+          "type": "Crush",
+          "multiplier": 1.5,
+          "status": {
+            "type": "Burn",
+            "magnitude": 0.12,
+            "durationMs": 6000
+          },
+          "id": "t3-forgemaster-korr:furnace-slam",
+          "damageEnabled": true
+        },
+        "t3-forgemaster-korr:tempered-guard": {
+          "name": "Tempered Guard",
+          "selfResistancePp": 10,
+          "selfResistanceActions": 2,
+          "selfResistanceTypes": [],
+          "selfResistanceScope": "Melee/Ranged",
+          "id": "t3-forgemaster-korr:tempered-guard",
+          "damageEnabled": false
+        },
+        "t3-forgemaster-korr:molten-hammer": {
+          "name": "Molten Hammer",
+          "type": "Crush",
+          "multiplier": 1.35,
+          "damageComponents": [
+            {
+              "type": "Crush",
+              "ratio": 1
+            },
+            {
+              "type": "Fire",
+              "ratio": 0.35
+            }
+          ],
+          "id": "t3-forgemaster-korr:molten-hammer",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t4-graveblade": {
+      "id": "t4-graveblade",
+      "name": "Graveblade",
+      "tier": 4,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Undead",
+      "tags": [
+        "Undead"
+      ],
+      "areaId": "t4-moonlit-barrows",
+      "style": "Melee",
+      "basicDamageType": "Slash",
+      "maxHp": 330,
+      "accuracy": 240,
+      "minHit": 22,
+      "maxHit": 30,
+      "intervalMs": 3000,
+      "evasion": 180,
+      "evasions": {
+        "Melee": 180,
+        "Ranged": 180,
+        "Magic": 180
+      },
+      "resistanceProfile": "M-A",
+      "resistances": {
+        "Slash": 16,
+        "Stab": 14,
+        "Crush": 18,
+        "Pierce": 28,
+        "Puncture": 24,
+        "Air": 2,
+        "Fire": -10,
+        "Water": 12,
+        "Earth": 0
+      },
+      "sequence": [
+        "t4-graveblade:slash",
+        "t4-graveblade:slash",
+        "t4-graveblade:grave-rend"
+      ],
+      "xp": 106,
+      "gold": 16,
+      "loot": [
+        {
+          "item": "combat.loot.t4_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t4_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t4-graveblade:slash": {
+          "name": "Slash",
+          "type": "Slash",
+          "multiplier": 1,
+          "id": "t4-graveblade:slash",
+          "damageEnabled": true
+        },
+        "t4-graveblade:grave-rend": {
+          "name": "Grave Rend",
+          "type": "Slash",
+          "multiplier": 1.25,
+          "status": {
+            "type": "Bleed",
+            "magnitude": 0.14,
+            "durationMs": 6000
+          },
+          "id": "t4-graveblade:grave-rend",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t4-wight-hound": {
+      "id": "t4-wight-hound",
+      "name": "Wight Hound",
+      "tier": 4,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Undead",
+      "tags": [
+        "Undead",
+        "Beast"
+      ],
+      "areaId": "t4-moonlit-barrows",
+      "style": "Melee",
+      "basicDamageType": "Stab",
+      "maxHp": 330,
+      "accuracy": 240,
+      "minHit": 22,
+      "maxHit": 30,
+      "intervalMs": 3000,
+      "evasion": 180,
+      "evasions": {
+        "Melee": 180,
+        "Ranged": 180,
+        "Magic": 180
+      },
+      "resistanceProfile": "M-C",
+      "resistances": {
+        "Slash": 12,
+        "Stab": 18,
+        "Crush": 14,
+        "Pierce": 24,
+        "Puncture": 20,
+        "Air": 0,
+        "Fire": -12,
+        "Water": 8,
+        "Earth": 14
+      },
+      "sequence": [
+        "t4-wight-hound:bite",
+        "t4-wight-hound:quick-bite",
+        "t4-wight-hound:soul-fang"
+      ],
+      "xp": 106,
+      "gold": 16,
+      "loot": [
+        {
+          "item": "combat.loot.t4_beast_trophy",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t4_beast_trophy",
+      "unlockRequirements": [],
+      "actions": {
+        "t4-wight-hound:bite": {
+          "name": "Bite",
+          "type": "Stab",
+          "multiplier": 1,
+          "id": "t4-wight-hound:bite",
+          "damageEnabled": true
+        },
+        "t4-wight-hound:quick-bite": {
+          "name": "Quick Bite",
+          "type": "Stab",
+          "multiplier": 1,
+          "id": "t4-wight-hound:quick-bite",
+          "damageEnabled": true
+        },
+        "t4-wight-hound:soul-fang": {
+          "name": "Soul Fang",
+          "type": "Stab",
+          "multiplier": 1.2,
+          "status": {
+            "type": "AccuracyDown",
+            "magnitude": 0.1,
+            "durationMs": 6000
+          },
+          "id": "t4-wight-hound:soul-fang",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t4-bone-archer": {
+      "id": "t4-bone-archer",
+      "name": "Bone Archer",
+      "tier": 4,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Undead",
+      "tags": [
+        "Undead",
+        "Archer"
+      ],
+      "areaId": "t4-moonlit-barrows",
+      "style": "Ranged",
+      "basicDamageType": "Pierce",
+      "maxHp": 330,
+      "accuracy": 240,
+      "minHit": 22,
+      "maxHit": 30,
+      "intervalMs": 3000,
+      "evasion": 180,
+      "evasions": {
+        "Melee": 180,
+        "Ranged": 180,
+        "Magic": 180
+      },
+      "resistanceProfile": "R-A",
+      "resistances": {
+        "Slash": -8,
+        "Stab": 0,
+        "Crush": -15,
+        "Pierce": 16,
+        "Puncture": 18,
+        "Air": 28,
+        "Fire": 8,
+        "Water": 22,
+        "Earth": 26
+      },
+      "sequence": [
+        "t4-bone-archer:arrow",
+        "t4-bone-archer:arrow",
+        "t4-bone-archer:splinter-volley"
+      ],
+      "xp": 106,
+      "gold": 16,
+      "loot": [
+        {
+          "item": "combat.loot.t4_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t4_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t4-bone-archer:arrow": {
+          "name": "Arrow",
+          "type": "Pierce",
+          "multiplier": 1,
+          "id": "t4-bone-archer:arrow",
+          "damageEnabled": true
+        },
+        "t4-bone-archer:splinter-volley": {
+          "name": "Splinter Volley",
+          "type": "Pierce",
+          "multiplier": 0.65,
+          "hits": 2,
+          "separateHitRolls": true,
+          "id": "t4-bone-archer:splinter-volley",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t4-pale-hexer": {
+      "id": "t4-pale-hexer",
+      "name": "Pale Hexer",
+      "tier": 4,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Undead",
+      "tags": [
+        "Undead",
+        "Caster"
+      ],
+      "areaId": "t4-moonlit-barrows",
+      "style": "Magic",
+      "basicDamageType": "Water",
+      "maxHp": 330,
+      "accuracy": 240,
+      "minHit": 22,
+      "maxHit": 30,
+      "intervalMs": 3000,
+      "evasion": 180,
+      "evasions": {
+        "Melee": 180,
+        "Ranged": 180,
+        "Magic": 180
+      },
+      "resistanceProfile": "G-A",
+      "resistances": {
+        "Slash": 28,
+        "Stab": 24,
+        "Crush": 30,
+        "Pierce": -8,
+        "Puncture": 0,
+        "Air": 16,
+        "Fire": -20,
+        "Water": 26,
+        "Earth": 16
+      },
+      "sequence": [
+        "t4-pale-hexer:rime-bolt",
+        "t4-pale-hexer:hex",
+        "t4-pale-hexer:rime-bolt"
+      ],
+      "xp": 106,
+      "gold": 16,
+      "loot": [
+        {
+          "item": "combat.loot.t4_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t4_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "t4-pale-hexer:rime-bolt": {
+          "name": "Rime Bolt",
+          "type": "Water",
+          "multiplier": 1,
+          "id": "t4-pale-hexer:rime-bolt",
+          "damageEnabled": true
+        },
+        "t4-pale-hexer:hex": {
+          "name": "Hex",
+          "type": "Water",
+          "multiplier": 0.9,
+          "status": {
+            "type": "AccuracyDown",
+            "magnitude": 0.12,
+            "durationMs": 6000
+          },
+          "id": "t4-pale-hexer:hex",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t4-moonbound-knight": {
+      "id": "t4-moonbound-knight",
+      "name": "Moonbound Knight",
+      "tier": 4,
+      "rank": "Elite",
+      "combatClass": "Elite",
+      "kind": "Undead",
+      "tags": [
+        "Undead",
+        "Elite"
+      ],
+      "areaId": "t4-moonlit-barrows",
+      "style": "Melee",
+      "basicDamageType": "Slash",
+      "maxHp": 743,
+      "accuracy": 252,
+      "minHit": 26,
+      "maxHit": 35,
+      "intervalMs": 3000,
+      "evasion": 180,
+      "evasions": {
+        "Melee": 180,
+        "Ranged": 180,
+        "Magic": 180
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 32,
+        "Crush": 28,
+        "Pierce": 32,
+        "Puncture": 28,
+        "Air": -5,
+        "Fire": -12,
+        "Water": 0,
+        "Earth": 8
+      },
+      "sequence": [
+        "t4-moonbound-knight:slash",
+        "t4-moonbound-knight:guard-break",
+        "t4-moonbound-knight:stab",
+        "t4-moonbound-knight:moon-cleave"
+      ],
+      "xp": 106,
+      "gold": 18,
+      "loot": [
+        {
+          "item": "combat.loot.t4_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t4_war_mark",
+      "unlockRequirements": [
+        {
+          "type": "defeatAll",
+          "targets": [
+            "t4-graveblade",
+            "t4-wight-hound",
+            "t4-bone-archer",
+            "t4-pale-hexer"
+          ]
+        }
+      ],
+      "firstKillReward": [
+        {
+          "item": "combat.loot.t4_elite_component",
+          "chance": 1,
+          "min": 1,
+          "max": 1,
+          "guaranteed": true,
+          "firstKillOnly": true,
+          "protected": true
+        }
+      ],
+      "eliteComponent": "Moonbound Crest",
+      "actions": {
+        "t4-moonbound-knight:slash": {
+          "name": "Slash",
+          "type": "Slash",
+          "multiplier": 1,
+          "id": "t4-moonbound-knight:slash",
+          "damageEnabled": true
+        },
+        "t4-moonbound-knight:guard-break": {
+          "name": "Guard Break",
+          "type": "Crush",
+          "multiplier": 1.05,
+          "status": {
+            "type": "ResistanceDown",
+            "magnitude": 10,
+            "durationMs": 7000
+          },
+          "resistanceDownTypes": [
+            "Crush"
+          ],
+          "id": "t4-moonbound-knight:guard-break",
+          "damageEnabled": true
+        },
+        "t4-moonbound-knight:stab": {
+          "name": "Stab",
+          "type": "Stab",
+          "multiplier": 1,
+          "id": "t4-moonbound-knight:stab",
+          "damageEnabled": true
+        },
+        "t4-moonbound-knight:moon-cleave": {
+          "name": "Moon Cleave",
+          "type": "Slash",
+          "multiplier": 1.5,
+          "id": "t4-moonbound-knight:moon-cleave",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t4-crypt-sentinel": {
+      "id": "t4-crypt-sentinel",
+      "name": "Crypt Sentinel",
+      "tier": 4,
+      "rank": "Dungeon",
+      "combatClass": "Dungeon",
+      "kind": "Undead",
+      "tags": [
+        "Undead",
+        "Dungeon"
+      ],
+      "areaId": "t4-mooncrypt",
+      "style": "Melee",
+      "basicDamageType": "Crush",
+      "maxHp": 413,
+      "accuracy": 252,
+      "minHit": 24,
+      "maxHit": 32,
+      "intervalMs": 3000,
+      "evasion": 180,
+      "evasions": {
+        "Melee": 180,
+        "Ranged": 180,
+        "Magic": 180
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 18,
+        "Crush": 36,
+        "Pierce": 32,
+        "Puncture": 28,
+        "Air": -5,
+        "Fire": -15,
+        "Water": 0,
+        "Earth": 8
+      },
+      "sequence": [
+        "t4-crypt-sentinel:mace",
+        "t4-crypt-sentinel:mace",
+        "t4-crypt-sentinel:bone-crush"
+      ],
+      "xp": 106,
+      "gold": 17,
+      "loot": [
+        {
+          "item": "combat.loot.t4_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t4_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t4-crypt-sentinel:mace": {
+          "name": "Mace",
+          "type": "Crush",
+          "multiplier": 1,
+          "id": "t4-crypt-sentinel:mace",
+          "damageEnabled": true
+        },
+        "t4-crypt-sentinel:bone-crush": {
+          "name": "Bone Crush",
+          "type": "Crush",
+          "multiplier": 1.45,
+          "status": {
+            "type": "Stun",
+            "magnitude": 1,
+            "durationMs": 1000
+          },
+          "id": "t4-crypt-sentinel:bone-crush",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t4-moon-priest": {
+      "id": "t4-moon-priest",
+      "name": "Moon Priest",
+      "tier": 4,
+      "rank": "Dungeon",
+      "combatClass": "Dungeon",
+      "kind": "Undead",
+      "tags": [
+        "Undead",
+        "Caster",
+        "Dungeon"
+      ],
+      "areaId": "t4-mooncrypt",
+      "style": "Magic",
+      "basicDamageType": "Water",
+      "maxHp": 413,
+      "accuracy": 252,
+      "minHit": 24,
+      "maxHit": 32,
+      "intervalMs": 3000,
+      "evasion": 180,
+      "evasions": {
+        "Melee": 180,
+        "Ranged": 180,
+        "Magic": 180
+      },
+      "resistanceProfile": "G-C",
+      "resistances": {
+        "Slash": 32,
+        "Stab": 26,
+        "Crush": 24,
+        "Pierce": -12,
+        "Puncture": -5,
+        "Air": 14,
+        "Fire": -18,
+        "Water": 16,
+        "Earth": 18
+      },
+      "sequence": [
+        "t4-moon-priest:moon-bolt",
+        "t4-moon-priest:pale-ward",
+        "t4-moon-priest:moon-bolt",
+        "t4-moon-priest:soul-chill"
+      ],
+      "xp": 106,
+      "gold": 17,
+      "loot": [
+        {
+          "item": "combat.loot.t4_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t4_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "t4-moon-priest:moon-bolt": {
+          "name": "Moon Bolt",
+          "type": "Water",
+          "multiplier": 1,
+          "id": "t4-moon-priest:moon-bolt",
+          "damageEnabled": true
+        },
+        "t4-moon-priest:pale-ward": {
+          "name": "Pale Ward",
+          "selfResistancePp": 8,
+          "selfResistanceActions": 1,
+          "selfResistanceTypes": [],
+          "id": "t4-moon-priest:pale-ward",
+          "damageEnabled": false
+        },
+        "t4-moon-priest:soul-chill": {
+          "name": "Soul Chill",
+          "type": "Water",
+          "multiplier": 1.2,
+          "status": {
+            "type": "Chill",
+            "magnitude": 0.1,
+            "durationMs": 5000
+          },
+          "id": "t4-moon-priest:soul-chill",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t4-the-pale-castellan": {
+      "id": "t4-the-pale-castellan",
+      "name": "The Pale Castellan",
+      "tier": 4,
+      "rank": "Boss",
+      "combatClass": "Boss",
+      "kind": "Boss",
+      "tags": [
+        "Boss",
+        "Dungeon"
+      ],
+      "areaId": "t4-mooncrypt",
+      "style": "Magic",
+      "basicDamageType": "Water",
+      "maxHp": 1650,
+      "accuracy": 264,
+      "minHit": 28,
+      "maxHit": 38,
+      "intervalMs": 3000,
+      "evasion": 180,
+      "evasions": {
+        "Melee": 180,
+        "Ranged": 180,
+        "Magic": 180
+      },
+      "resistanceProfile": "G-C",
+      "resistances": {
+        "Slash": 32,
+        "Stab": 26,
+        "Crush": 24,
+        "Pierce": -15,
+        "Puncture": -5,
+        "Air": 14,
+        "Fire": -25,
+        "Water": 34,
+        "Earth": 18
+      },
+      "sequence": [
+        "t4-the-pale-castellan:pale-bolt",
+        "t4-the-pale-castellan:pale-bolt",
+        "t4-the-pale-castellan:moon-spear"
+      ],
+      "xp": 106,
+      "gold": 20,
+      "loot": [
+        {
+          "item": "combat.loot.t4_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t4_arcane_remnant",
+      "unlockRequirements": [],
+      "bossComponent": "Pale Crown Fragment",
+      "uniqueHook": "combat.unique.t4.moonward_bulwark",
+      "firstKillReward": [
+        {
+          "item": "combat.loot.t4_boss_component",
+          "chance": 1,
+          "min": 1,
+          "max": 1,
+          "guaranteed": true,
+          "firstKillOnly": true,
+          "protected": true
+        }
+      ],
+      "phases": [
+        {
+          "thresholdPct": 50,
+          "sequence": [
+            "t4-the-pale-castellan:moon-spear",
+            "t4-the-pale-castellan:grave-decree",
+            "t4-the-pale-castellan:pale-bolt",
+            "t4-the-pale-castellan:soul-chill"
+          ]
+        }
+      ],
+      "actions": {
+        "t4-the-pale-castellan:pale-bolt": {
+          "name": "Pale Bolt",
+          "type": "Water",
+          "multiplier": 1,
+          "id": "t4-the-pale-castellan:pale-bolt",
+          "damageEnabled": true
+        },
+        "t4-the-pale-castellan:moon-spear": {
+          "name": "Moon Spear",
+          "type": "Water",
+          "multiplier": 1.45,
+          "id": "t4-the-pale-castellan:moon-spear",
+          "damageEnabled": true
+        },
+        "t4-the-pale-castellan:grave-decree": {
+          "name": "Grave Decree",
+          "type": "Earth",
+          "multiplier": 0.9,
+          "status": {
+            "type": "ResistanceDown",
+            "magnitude": 12,
+            "durationMs": 8000
+          },
+          "resistanceDownTypes": [
+            "Air",
+            "Fire",
+            "Water",
+            "Earth"
+          ],
+          "id": "t4-the-pale-castellan:grave-decree",
+          "damageEnabled": true
+        },
+        "t4-the-pale-castellan:soul-chill": {
+          "name": "Soul Chill",
+          "type": "Water",
+          "multiplier": 1.1,
+          "status": {
+            "type": "Chill",
+            "magnitude": 0.12,
+            "durationMs": 6000
+          },
+          "id": "t4-the-pale-castellan:soul-chill",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t5-emberclaw": {
+      "id": "t5-emberclaw",
+      "name": "Emberclaw",
+      "tier": 5,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Beast",
+      "tags": [
+        "Beast"
+      ],
+      "areaId": "t5-cinder-wastes",
+      "style": "Melee",
+      "basicDamageType": "Stab",
+      "maxHp": 470,
+      "accuracy": 290,
+      "minHit": 29,
+      "maxHit": 40,
+      "intervalMs": 3000,
+      "evasion": 215,
+      "evasions": {
+        "Melee": 215,
+        "Ranged": 215,
+        "Magic": 215
+      },
+      "resistanceProfile": "M-C",
+      "resistances": {
+        "Slash": 12,
+        "Stab": 18,
+        "Crush": 14,
+        "Pierce": 24,
+        "Puncture": 20,
+        "Air": 0,
+        "Fire": 32,
+        "Water": -18,
+        "Earth": -8
+      },
+      "sequence": [
+        "t5-emberclaw:claw",
+        "t5-emberclaw:claw",
+        "t5-emberclaw:burning-pounce"
+      ],
+      "xp": 150,
+      "gold": 20,
+      "loot": [
+        {
+          "item": "combat.loot.t5_beast_trophy",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t5_beast_trophy",
+      "unlockRequirements": [],
+      "actions": {
+        "t5-emberclaw:claw": {
+          "name": "Claw",
+          "type": "Stab",
+          "multiplier": 1,
+          "id": "t5-emberclaw:claw",
+          "damageEnabled": true
+        },
+        "t5-emberclaw:burning-pounce": {
+          "name": "Burning Pounce",
+          "type": "Stab",
+          "multiplier": 1.25,
+          "status": {
+            "type": "Burn",
+            "magnitude": 0.12,
+            "durationMs": 6000
+          },
+          "id": "t5-emberclaw:burning-pounce",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t5-ash-reaver": {
+      "id": "t5-ash-reaver",
+      "name": "Ash Reaver",
+      "tier": 5,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid"
+      ],
+      "areaId": "t5-cinder-wastes",
+      "style": "Melee",
+      "basicDamageType": "Slash",
+      "maxHp": 470,
+      "accuracy": 290,
+      "minHit": 29,
+      "maxHit": 40,
+      "intervalMs": 3000,
+      "evasion": 215,
+      "evasions": {
+        "Melee": 215,
+        "Ranged": 215,
+        "Magic": 215
+      },
+      "resistanceProfile": "M-A",
+      "resistances": {
+        "Slash": 16,
+        "Stab": 14,
+        "Crush": 18,
+        "Pierce": 28,
+        "Puncture": 24,
+        "Air": 2,
+        "Fire": 28,
+        "Water": -15,
+        "Earth": 0
+      },
+      "sequence": [
+        "t5-ash-reaver:slash",
+        "t5-ash-reaver:slash",
+        "t5-ash-reaver:ash-cleave"
+      ],
+      "xp": 150,
+      "gold": 20,
+      "loot": [
+        {
+          "item": "combat.loot.t5_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t5_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t5-ash-reaver:slash": {
+          "name": "Slash",
+          "type": "Slash",
+          "multiplier": 1,
+          "id": "t5-ash-reaver:slash",
+          "damageEnabled": true
+        },
+        "t5-ash-reaver:ash-cleave": {
+          "name": "Ash Cleave",
+          "type": "Slash",
+          "multiplier": 1.35,
+          "status": {
+            "type": "AccuracyDown",
+            "magnitude": 0.08,
+            "durationMs": 5000
+          },
+          "id": "t5-ash-reaver:ash-cleave",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t5-cinder-archer": {
+      "id": "t5-cinder-archer",
+      "name": "Cinder Archer",
+      "tier": 5,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid",
+        "Archer"
+      ],
+      "areaId": "t5-cinder-wastes",
+      "style": "Ranged",
+      "basicDamageType": "Pierce",
+      "maxHp": 470,
+      "accuracy": 290,
+      "minHit": 29,
+      "maxHit": 40,
+      "intervalMs": 3000,
+      "evasion": 215,
+      "evasions": {
+        "Melee": 215,
+        "Ranged": 215,
+        "Magic": 215
+      },
+      "resistanceProfile": "R-A",
+      "resistances": {
+        "Slash": -8,
+        "Stab": 0,
+        "Crush": 4,
+        "Pierce": 16,
+        "Puncture": 18,
+        "Air": 28,
+        "Fire": 30,
+        "Water": -15,
+        "Earth": 26
+      },
+      "sequence": [
+        "t5-cinder-archer:arrow",
+        "t5-cinder-archer:ember-arrow",
+        "t5-cinder-archer:arrow"
+      ],
+      "xp": 150,
+      "gold": 20,
+      "loot": [
+        {
+          "item": "combat.loot.t5_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t5_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t5-cinder-archer:arrow": {
+          "name": "Arrow",
+          "type": "Pierce",
+          "multiplier": 1,
+          "id": "t5-cinder-archer:arrow",
+          "damageEnabled": true
+        },
+        "t5-cinder-archer:ember-arrow": {
+          "name": "Ember Arrow",
+          "type": "Pierce",
+          "multiplier": 1.1,
+          "status": {
+            "type": "Burn",
+            "magnitude": 0.1,
+            "durationMs": 6000
+          },
+          "id": "t5-cinder-archer:ember-arrow",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t5-flame-seer": {
+      "id": "t5-flame-seer",
+      "name": "Flame Seer",
+      "tier": 5,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Caster",
+      "tags": [
+        "Caster"
+      ],
+      "areaId": "t5-cinder-wastes",
+      "style": "Magic",
+      "basicDamageType": "Fire",
+      "maxHp": 470,
+      "accuracy": 290,
+      "minHit": 29,
+      "maxHit": 40,
+      "intervalMs": 3000,
+      "evasion": 215,
+      "evasions": {
+        "Melee": 215,
+        "Ranged": 215,
+        "Magic": 215
+      },
+      "resistanceProfile": "G-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 30,
+        "Crush": 22,
+        "Pierce": 0,
+        "Puncture": -6,
+        "Air": 20,
+        "Fire": 38,
+        "Water": -22,
+        "Earth": 16
+      },
+      "sequence": [
+        "t5-flame-seer:fire-bolt",
+        "t5-flame-seer:fire-bolt",
+        "t5-flame-seer:cinderburst"
+      ],
+      "xp": 150,
+      "gold": 20,
+      "loot": [
+        {
+          "item": "combat.loot.t5_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t5_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "t5-flame-seer:fire-bolt": {
+          "name": "Fire Bolt",
+          "type": "Fire",
+          "multiplier": 1,
+          "id": "t5-flame-seer:fire-bolt",
+          "damageEnabled": true
+        },
+        "t5-flame-seer:cinderburst": {
+          "name": "Cinderburst",
+          "type": "Fire",
+          "multiplier": 1.35,
+          "status": {
+            "type": "Burn",
+            "magnitude": 0.14,
+            "durationMs": 6000
+          },
+          "id": "t5-flame-seer:cinderburst",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t5-magmahorn": {
+      "id": "t5-magmahorn",
+      "name": "Magmahorn",
+      "tier": 5,
+      "rank": "Elite",
+      "combatClass": "Elite",
+      "kind": "Beast",
+      "tags": [
+        "Beast",
+        "Elite"
+      ],
+      "areaId": "t5-cinder-wastes",
+      "style": "Melee",
+      "basicDamageType": "Crush",
+      "maxHp": 1058,
+      "accuracy": 305,
+      "minHit": 34,
+      "maxHit": 46,
+      "intervalMs": 3000,
+      "evasion": 215,
+      "evasions": {
+        "Melee": 215,
+        "Ranged": 215,
+        "Magic": 215
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 18,
+        "Crush": 34,
+        "Pierce": 32,
+        "Puncture": 28,
+        "Air": -5,
+        "Fire": 45,
+        "Water": -25,
+        "Earth": 8
+      },
+      "sequence": [
+        "t5-magmahorn:horn",
+        "t5-magmahorn:lava-charge",
+        "t5-magmahorn:horn",
+        "t5-magmahorn:magma-slam"
+      ],
+      "xp": 150,
+      "gold": 23,
+      "loot": [
+        {
+          "item": "combat.loot.t5_beast_trophy",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t5_beast_trophy",
+      "unlockRequirements": [
+        {
+          "type": "defeatAll",
+          "targets": [
+            "t5-emberclaw",
+            "t5-ash-reaver",
+            "t5-cinder-archer",
+            "t5-flame-seer"
+          ]
+        }
+      ],
+      "firstKillReward": [
+        {
+          "item": "combat.loot.t5_elite_component",
+          "chance": 1,
+          "min": 1,
+          "max": 1,
+          "guaranteed": true,
+          "firstKillOnly": true,
+          "protected": true
+        }
+      ],
+      "eliteComponent": "Magmahorn Core",
+      "actions": {
+        "t5-magmahorn:horn": {
+          "name": "Horn",
+          "type": "Crush",
+          "multiplier": 1,
+          "id": "t5-magmahorn:horn",
+          "damageEnabled": true
+        },
+        "t5-magmahorn:lava-charge": {
+          "name": "Lava Charge",
+          "type": "Crush",
+          "multiplier": 1.35,
+          "id": "t5-magmahorn:lava-charge",
+          "damageEnabled": true,
+          "status": {
+            "type": "Burn",
+            "magnitude": 0.1,
+            "durationMs": 6000
+          },
+          "provisional": true
+        },
+        "t5-magmahorn:magma-slam": {
+          "name": "Magma Slam",
+          "type": "Crush",
+          "multiplier": 1.5,
+          "status": {
+            "type": "ResistanceDown",
+            "magnitude": 10,
+            "durationMs": 7000
+          },
+          "resistanceDownTypes": [
+            "Crush"
+          ],
+          "id": "t5-magmahorn:magma-slam",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t5-ember-guard": {
+      "id": "t5-ember-guard",
+      "name": "Ember Guard",
+      "tier": 5,
+      "rank": "Dungeon",
+      "combatClass": "Dungeon",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid",
+        "Dungeon"
+      ],
+      "areaId": "t5-embervault",
+      "style": "Melee",
+      "basicDamageType": "Slash",
+      "maxHp": 588,
+      "accuracy": 305,
+      "minHit": 31,
+      "maxHit": 42,
+      "intervalMs": 3000,
+      "evasion": 215,
+      "evasions": {
+        "Melee": 215,
+        "Ranged": 215,
+        "Magic": 215
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 18,
+        "Crush": 28,
+        "Pierce": 32,
+        "Puncture": 28,
+        "Air": -5,
+        "Fire": 34,
+        "Water": -18,
+        "Earth": 8
+      },
+      "sequence": [
+        "t5-ember-guard:slash",
+        "t5-ember-guard:slash",
+        "t5-ember-guard:heat-guard",
+        "t5-ember-guard:flame-cleave"
+      ],
+      "xp": 150,
+      "gold": 21,
+      "loot": [
+        {
+          "item": "combat.loot.t5_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t5_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t5-ember-guard:slash": {
+          "name": "Slash",
+          "type": "Slash",
+          "multiplier": 1,
+          "id": "t5-ember-guard:slash",
+          "damageEnabled": true
+        },
+        "t5-ember-guard:heat-guard": {
+          "name": "Heat Guard",
+          "selfResistancePp": 10,
+          "selfResistanceActions": 1,
+          "selfResistanceTypes": [],
+          "id": "t5-ember-guard:heat-guard",
+          "damageEnabled": false
+        },
+        "t5-ember-guard:flame-cleave": {
+          "name": "Flame Cleave",
+          "type": "Slash",
+          "multiplier": 1.4,
+          "id": "t5-ember-guard:flame-cleave",
+          "damageEnabled": true,
+          "status": {
+            "type": "Burn",
+            "magnitude": 0.1,
+            "durationMs": 6000
+          },
+          "provisional": true
+        }
+      }
+    },
+    "t5-pyre-channeler": {
+      "id": "t5-pyre-channeler",
+      "name": "Pyre Channeler",
+      "tier": 5,
+      "rank": "Dungeon",
+      "combatClass": "Dungeon",
+      "kind": "Caster",
+      "tags": [
+        "Caster",
+        "Dungeon"
+      ],
+      "areaId": "t5-embervault",
+      "style": "Magic",
+      "basicDamageType": "Fire",
+      "maxHp": 588,
+      "accuracy": 305,
+      "minHit": 31,
+      "maxHit": 42,
+      "intervalMs": 3000,
+      "evasion": 215,
+      "evasions": {
+        "Melee": 215,
+        "Ranged": 215,
+        "Magic": 215
+      },
+      "resistanceProfile": "G-C",
+      "resistances": {
+        "Slash": 32,
+        "Stab": 26,
+        "Crush": 24,
+        "Pierce": -12,
+        "Puncture": -5,
+        "Air": 14,
+        "Fire": 42,
+        "Water": -25,
+        "Earth": 18
+      },
+      "sequence": [
+        "t5-pyre-channeler:pyre-bolt",
+        "t5-pyre-channeler:pyre-bolt",
+        "t5-pyre-channeler:furnace-wave"
+      ],
+      "xp": 150,
+      "gold": 21,
+      "loot": [
+        {
+          "item": "combat.loot.t5_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t5_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "t5-pyre-channeler:pyre-bolt": {
+          "name": "Pyre Bolt",
+          "type": "Fire",
+          "multiplier": 1,
+          "id": "t5-pyre-channeler:pyre-bolt",
+          "damageEnabled": true
+        },
+        "t5-pyre-channeler:furnace-wave": {
+          "name": "Furnace Wave",
+          "type": "Fire",
+          "multiplier": 1.35,
+          "status": {
+            "type": "ResistanceDown",
+            "magnitude": 10,
+            "durationMs": 7000
+          },
+          "resistanceDownTypes": [
+            "Fire"
+          ],
+          "id": "t5-pyre-channeler:furnace-wave",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t5-cindermaw": {
+      "id": "t5-cindermaw",
+      "name": "Cindermaw",
+      "tier": 5,
+      "rank": "Boss",
+      "combatClass": "Boss",
+      "kind": "Boss",
+      "tags": [
+        "Boss",
+        "Dungeon"
+      ],
+      "areaId": "t5-embervault",
+      "style": "Melee",
+      "basicDamageType": "Crush",
+      "maxHp": 2350,
+      "accuracy": 319,
+      "minHit": 36,
+      "maxHit": 50,
+      "intervalMs": 3000,
+      "evasion": 215,
+      "evasions": {
+        "Melee": 215,
+        "Ranged": 215,
+        "Magic": 215
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 18,
+        "Crush": 28,
+        "Pierce": 32,
+        "Puncture": 34,
+        "Air": -5,
+        "Fire": 50,
+        "Water": -30,
+        "Earth": 8
+      },
+      "sequence": [
+        "t5-cindermaw:bite",
+        "t5-cindermaw:bite",
+        "t5-cindermaw:cinder-breath"
+      ],
+      "xp": 150,
+      "gold": 25,
+      "loot": [
+        {
+          "item": "combat.loot.t5_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t5_arcane_remnant",
+      "unlockRequirements": [],
+      "bossComponent": "Cindermaw Core",
+      "uniqueHook": "combat.unique.t5.cinderchain_whip",
+      "firstKillReward": [
+        {
+          "item": "combat.loot.t5_boss_component",
+          "chance": 1,
+          "min": 1,
+          "max": 1,
+          "guaranteed": true,
+          "firstKillOnly": true,
+          "protected": true
+        }
+      ],
+      "phases": [
+        {
+          "thresholdPct": 60,
+          "sequence": [
+            "t5-cindermaw:cinder-breath",
+            "t5-cindermaw:tail-crush",
+            "t5-cindermaw:bite"
+          ]
+        },
+        {
+          "thresholdPct": 30,
+          "sequence": [
+            "t5-cindermaw:tail-crush",
+            "t5-cindermaw:cinder-breath",
+            "t5-cindermaw:magma-roar"
+          ]
+        }
+      ],
+      "actions": {
+        "t5-cindermaw:bite": {
+          "name": "Bite",
+          "type": "Stab",
+          "multiplier": 1,
+          "id": "t5-cindermaw:bite",
+          "damageEnabled": true
+        },
+        "t5-cindermaw:cinder-breath": {
+          "name": "Cinder Breath",
+          "type": "Fire",
+          "multiplier": 1.3,
+          "status": {
+            "type": "Burn",
+            "magnitude": 0.16,
+            "durationMs": 8000
+          },
+          "id": "t5-cindermaw:cinder-breath",
+          "damageEnabled": true
+        },
+        "t5-cindermaw:tail-crush": {
+          "name": "Tail Crush",
+          "type": "Crush",
+          "multiplier": 1.55,
+          "status": {
+            "type": "Stun",
+            "magnitude": 1,
+            "durationMs": 1000
+          },
+          "id": "t5-cindermaw:tail-crush",
+          "damageEnabled": true
+        },
+        "t5-cindermaw:magma-roar": {
+          "name": "Magma Roar",
+          "type": "Fire",
+          "multiplier": 0.9,
+          "status": {
+            "type": "ResistanceDown",
+            "magnitude": 12,
+            "durationMs": 8000
+          },
+          "resistanceDownTypes": [
+            "Crush",
+            "Fire"
+          ],
+          "id": "t5-cindermaw:magma-roar",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t6-frostfang-wolf": {
+      "id": "t6-frostfang-wolf",
+      "name": "Frostfang Wolf",
+      "tier": 6,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Beast",
+      "tags": [
+        "Beast"
+      ],
+      "areaId": "t6-frostbound-vale",
+      "style": "Melee",
+      "basicDamageType": "Stab",
+      "maxHp": 650,
+      "accuracy": 345,
+      "minHit": 38,
+      "maxHit": 52,
+      "intervalMs": 3000,
+      "evasion": 255,
+      "evasions": {
+        "Melee": 255,
+        "Ranged": 255,
+        "Magic": 255
+      },
+      "resistanceProfile": "M-C",
+      "resistances": {
+        "Slash": 12,
+        "Stab": 18,
+        "Crush": 14,
+        "Pierce": 24,
+        "Puncture": 20,
+        "Air": 0,
+        "Fire": -20,
+        "Water": 34,
+        "Earth": -8
+      },
+      "sequence": [
+        "t6-frostfang-wolf:bite",
+        "t6-frostfang-wolf:frost-bite",
+        "t6-frostfang-wolf:bite"
+      ],
+      "xp": 208,
+      "gold": 24,
+      "loot": [
+        {
+          "item": "combat.loot.t6_beast_trophy",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t6_beast_trophy",
+      "unlockRequirements": [],
+      "actions": {
+        "t6-frostfang-wolf:bite": {
+          "name": "Bite",
+          "type": "Stab",
+          "multiplier": 1,
+          "id": "t6-frostfang-wolf:bite",
+          "damageEnabled": true
+        },
+        "t6-frostfang-wolf:frost-bite": {
+          "name": "Frost Bite",
+          "type": "Stab",
+          "multiplier": 1.15,
+          "status": {
+            "type": "Chill",
+            "magnitude": 0.08,
+            "durationMs": 5000
+          },
+          "id": "t6-frostfang-wolf:frost-bite",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t6-iceguard-raider": {
+      "id": "t6-iceguard-raider",
+      "name": "Iceguard Raider",
+      "tier": 6,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid"
+      ],
+      "areaId": "t6-frostbound-vale",
+      "style": "Melee",
+      "basicDamageType": "Slash",
+      "maxHp": 650,
+      "accuracy": 345,
+      "minHit": 38,
+      "maxHit": 52,
+      "intervalMs": 3000,
+      "evasion": 255,
+      "evasions": {
+        "Melee": 255,
+        "Ranged": 255,
+        "Magic": 255
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 18,
+        "Crush": 28,
+        "Pierce": 32,
+        "Puncture": 28,
+        "Air": -5,
+        "Fire": -18,
+        "Water": 30,
+        "Earth": 8
+      },
+      "sequence": [
+        "t6-iceguard-raider:slash",
+        "t6-iceguard-raider:shield-bash",
+        "t6-iceguard-raider:slash"
+      ],
+      "xp": 208,
+      "gold": 24,
+      "loot": [
+        {
+          "item": "combat.loot.t6_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t6_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t6-iceguard-raider:slash": {
+          "name": "Slash",
+          "type": "Slash",
+          "multiplier": 1,
+          "id": "t6-iceguard-raider:slash",
+          "damageEnabled": true
+        },
+        "t6-iceguard-raider:shield-bash": {
+          "name": "Shield Bash",
+          "type": "Crush",
+          "multiplier": 1.15,
+          "status": {
+            "type": "Stun",
+            "magnitude": 1,
+            "durationMs": 750
+          },
+          "id": "t6-iceguard-raider:shield-bash",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t6-snowstalker-archer": {
+      "id": "t6-snowstalker-archer",
+      "name": "Snowstalker Archer",
+      "tier": 6,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid",
+        "Archer"
+      ],
+      "areaId": "t6-frostbound-vale",
+      "style": "Ranged",
+      "basicDamageType": "Pierce",
+      "maxHp": 650,
+      "accuracy": 345,
+      "minHit": 38,
+      "maxHit": 52,
+      "intervalMs": 3000,
+      "evasion": 255,
+      "evasions": {
+        "Melee": 255,
+        "Ranged": 255,
+        "Magic": 255
+      },
+      "resistanceProfile": "R-A",
+      "resistances": {
+        "Slash": -8,
+        "Stab": 0,
+        "Crush": 4,
+        "Pierce": 16,
+        "Puncture": 18,
+        "Air": 28,
+        "Fire": -18,
+        "Water": 32,
+        "Earth": 26
+      },
+      "sequence": [
+        "t6-snowstalker-archer:arrow",
+        "t6-snowstalker-archer:arrow",
+        "t6-snowstalker-archer:rime-shot"
+      ],
+      "xp": 208,
+      "gold": 24,
+      "loot": [
+        {
+          "item": "combat.loot.t6_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t6_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t6-snowstalker-archer:arrow": {
+          "name": "Arrow",
+          "type": "Pierce",
+          "multiplier": 1,
+          "id": "t6-snowstalker-archer:arrow",
+          "damageEnabled": true
+        },
+        "t6-snowstalker-archer:rime-shot": {
+          "name": "Rime Shot",
+          "type": "Pierce",
+          "multiplier": 1.2,
+          "status": {
+            "type": "Chill",
+            "magnitude": 0.08,
+            "durationMs": 5000
+          },
+          "id": "t6-snowstalker-archer:rime-shot",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t6-rimecaller": {
+      "id": "t6-rimecaller",
+      "name": "Rimecaller",
+      "tier": 6,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Caster",
+      "tags": [
+        "Caster"
+      ],
+      "areaId": "t6-frostbound-vale",
+      "style": "Magic",
+      "basicDamageType": "Water",
+      "maxHp": 650,
+      "accuracy": 345,
+      "minHit": 38,
+      "maxHit": 52,
+      "intervalMs": 3000,
+      "evasion": 255,
+      "evasions": {
+        "Melee": 255,
+        "Ranged": 255,
+        "Magic": 255
+      },
+      "resistanceProfile": "G-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 30,
+        "Crush": 22,
+        "Pierce": 0,
+        "Puncture": -6,
+        "Air": 20,
+        "Fire": -25,
+        "Water": 42,
+        "Earth": 16
+      },
+      "sequence": [
+        "t6-rimecaller:rime-bolt",
+        "t6-rimecaller:rime-bolt",
+        "t6-rimecaller:deep-freeze"
+      ],
+      "xp": 208,
+      "gold": 24,
+      "loot": [
+        {
+          "item": "combat.loot.t6_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t6_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "t6-rimecaller:rime-bolt": {
+          "name": "Rime Bolt",
+          "type": "Water",
+          "multiplier": 1,
+          "id": "t6-rimecaller:rime-bolt",
+          "damageEnabled": true
+        },
+        "t6-rimecaller:deep-freeze": {
+          "name": "Deep Freeze",
+          "type": "Water",
+          "multiplier": 1.25,
+          "status": {
+            "type": "Chill",
+            "magnitude": 0.12,
+            "durationMs": 6000
+          },
+          "id": "t6-rimecaller:deep-freeze",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t6-whitehorn-mammoth": {
+      "id": "t6-whitehorn-mammoth",
+      "name": "Whitehorn Mammoth",
+      "tier": 6,
+      "rank": "Elite",
+      "combatClass": "Elite",
+      "kind": "Beast",
+      "tags": [
+        "Beast",
+        "Elite"
+      ],
+      "areaId": "t6-frostbound-vale",
+      "style": "Melee",
+      "basicDamageType": "Crush",
+      "maxHp": 1463,
+      "accuracy": 362,
+      "minHit": 44,
+      "maxHit": 60,
+      "intervalMs": 3000,
+      "evasion": 255,
+      "evasions": {
+        "Melee": 255,
+        "Ranged": 255,
+        "Magic": 255
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 18,
+        "Crush": 40,
+        "Pierce": 32,
+        "Puncture": 28,
+        "Air": -5,
+        "Fire": -25,
+        "Water": 38,
+        "Earth": 8
+      },
+      "sequence": [
+        "t6-whitehorn-mammoth:tusk",
+        "t6-whitehorn-mammoth:tusk",
+        "t6-whitehorn-mammoth:avalanche-charge"
+      ],
+      "xp": 208,
+      "gold": 28,
+      "loot": [
+        {
+          "item": "combat.loot.t6_beast_trophy",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t6_beast_trophy",
+      "unlockRequirements": [
+        {
+          "type": "defeatAll",
+          "targets": [
+            "t6-frostfang-wolf",
+            "t6-iceguard-raider",
+            "t6-snowstalker-archer",
+            "t6-rimecaller"
+          ]
+        }
+      ],
+      "firstKillReward": [
+        {
+          "item": "combat.loot.t6_elite_component",
+          "chance": 1,
+          "min": 1,
+          "max": 1,
+          "guaranteed": true,
+          "firstKillOnly": true,
+          "protected": true
+        }
+      ],
+      "eliteComponent": "Whitehorn Tusk",
+      "actions": {
+        "t6-whitehorn-mammoth:tusk": {
+          "name": "Tusk",
+          "type": "Crush",
+          "multiplier": 1,
+          "id": "t6-whitehorn-mammoth:tusk",
+          "damageEnabled": true
+        },
+        "t6-whitehorn-mammoth:avalanche-charge": {
+          "name": "Avalanche Charge",
+          "type": "Crush",
+          "multiplier": 1.65,
+          "status": {
+            "type": "Chill",
+            "magnitude": 0.1,
+            "durationMs": 6000
+          },
+          "id": "t6-whitehorn-mammoth:avalanche-charge",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t6-frost-warden": {
+      "id": "t6-frost-warden",
+      "name": "Frost Warden",
+      "tier": 6,
+      "rank": "Dungeon",
+      "combatClass": "Dungeon",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid",
+        "Dungeon"
+      ],
+      "areaId": "t6-frostspire",
+      "style": "Melee",
+      "basicDamageType": "Crush",
+      "maxHp": 813,
+      "accuracy": 362,
+      "minHit": 40,
+      "maxHit": 55,
+      "intervalMs": 3000,
+      "evasion": 255,
+      "evasions": {
+        "Melee": 255,
+        "Ranged": 255,
+        "Magic": 255
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 18,
+        "Crush": 28,
+        "Pierce": 32,
+        "Puncture": 28,
+        "Air": -5,
+        "Fire": -24,
+        "Water": 40,
+        "Earth": 8
+      },
+      "sequence": [
+        "t6-frost-warden:hammer",
+        "t6-frost-warden:hammer",
+        "t6-frost-warden:icebreaker"
+      ],
+      "xp": 208,
+      "gold": 25,
+      "loot": [
+        {
+          "item": "combat.loot.t6_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t6_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t6-frost-warden:hammer": {
+          "name": "Hammer",
+          "type": "Crush",
+          "multiplier": 1,
+          "id": "t6-frost-warden:hammer",
+          "damageEnabled": true
+        },
+        "t6-frost-warden:icebreaker": {
+          "name": "Icebreaker",
+          "type": "Crush",
+          "multiplier": 1.45,
+          "status": {
+            "type": "ResistanceDown",
+            "magnitude": 10,
+            "durationMs": 8000
+          },
+          "resistanceDownTypes": [
+            "Crush"
+          ],
+          "id": "t6-frost-warden:icebreaker",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t6-glacial-adept": {
+      "id": "t6-glacial-adept",
+      "name": "Glacial Adept",
+      "tier": 6,
+      "rank": "Dungeon",
+      "combatClass": "Dungeon",
+      "kind": "Caster",
+      "tags": [
+        "Caster",
+        "Dungeon"
+      ],
+      "areaId": "t6-frostspire",
+      "style": "Magic",
+      "basicDamageType": "Water",
+      "maxHp": 813,
+      "accuracy": 362,
+      "minHit": 40,
+      "maxHit": 55,
+      "intervalMs": 3000,
+      "evasion": 255,
+      "evasions": {
+        "Melee": 255,
+        "Ranged": 255,
+        "Magic": 255
+      },
+      "resistanceProfile": "G-C",
+      "resistances": {
+        "Slash": 32,
+        "Stab": 26,
+        "Crush": 24,
+        "Pierce": -14,
+        "Puncture": -5,
+        "Air": 14,
+        "Fire": -28,
+        "Water": 45,
+        "Earth": 18
+      },
+      "sequence": [
+        "t6-glacial-adept:ice-spear",
+        "t6-glacial-adept:ice-spear",
+        "t6-glacial-adept:whiteout"
+      ],
+      "xp": 208,
+      "gold": 25,
+      "loot": [
+        {
+          "item": "combat.loot.t6_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t6_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "t6-glacial-adept:ice-spear": {
+          "name": "Ice Spear",
+          "type": "Water",
+          "multiplier": 1,
+          "id": "t6-glacial-adept:ice-spear",
+          "damageEnabled": true
+        },
+        "t6-glacial-adept:whiteout": {
+          "name": "Whiteout",
+          "type": "Water",
+          "multiplier": 1.2,
+          "status": {
+            "type": "AccuracyDown",
+            "magnitude": 0.15,
+            "durationMs": 6000
+          },
+          "id": "t6-glacial-adept:whiteout",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t6-winter-matriarch": {
+      "id": "t6-winter-matriarch",
+      "name": "Winter Matriarch",
+      "tier": 6,
+      "rank": "Boss",
+      "combatClass": "Boss",
+      "kind": "Boss",
+      "tags": [
+        "Boss",
+        "Dungeon"
+      ],
+      "areaId": "t6-frostspire",
+      "style": "Magic",
+      "basicDamageType": "Water",
+      "maxHp": 3250,
+      "accuracy": 380,
+      "minHit": 47,
+      "maxHit": 65,
+      "intervalMs": 3000,
+      "evasion": 255,
+      "evasions": {
+        "Melee": 255,
+        "Ranged": 255,
+        "Magic": 255
+      },
+      "resistanceProfile": "G-C",
+      "resistances": {
+        "Slash": 32,
+        "Stab": 26,
+        "Crush": 24,
+        "Pierce": -15,
+        "Puncture": -5,
+        "Air": 14,
+        "Fire": -30,
+        "Water": 50,
+        "Earth": 18
+      },
+      "sequence": [
+        "t6-winter-matriarch:ice-spear",
+        "t6-winter-matriarch:ice-spear",
+        "t6-winter-matriarch:whiteout"
+      ],
+      "xp": 208,
+      "gold": 30,
+      "loot": [
+        {
+          "item": "combat.loot.t6_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t6_arcane_remnant",
+      "unlockRequirements": [],
+      "bossComponent": "Winterheart",
+      "uniqueHook": "combat.unique.t6.winterheart_ward",
+      "firstKillReward": [
+        {
+          "item": "combat.loot.t6_boss_component",
+          "chance": 1,
+          "min": 1,
+          "max": 1,
+          "guaranteed": true,
+          "firstKillOnly": true,
+          "protected": true
+        }
+      ],
+      "phases": [
+        {
+          "thresholdPct": 50,
+          "sequence": [
+            "t6-winter-matriarch:whiteout",
+            "t6-winter-matriarch:glacial-crush",
+            "t6-winter-matriarch:ice-spear"
+          ]
+        }
+      ],
+      "actions": {
+        "t6-winter-matriarch:ice-spear": {
+          "name": "Ice Spear",
+          "type": "Water",
+          "multiplier": 1.1,
+          "id": "t6-winter-matriarch:ice-spear",
+          "damageEnabled": true
+        },
+        "t6-winter-matriarch:whiteout": {
+          "name": "Whiteout",
+          "type": "Water",
+          "multiplier": 1.2,
+          "status": {
+            "type": "AccuracyDown",
+            "magnitude": 0.15,
+            "durationMs": 7000
+          },
+          "id": "t6-winter-matriarch:whiteout",
+          "damageEnabled": true
+        },
+        "t6-winter-matriarch:glacial-crush": {
+          "name": "Glacial Crush",
+          "type": "Crush",
+          "multiplier": 1.55,
+          "status": {
+            "type": "Chill",
+            "magnitude": 0.15,
+            "durationMs": 7000
+          },
+          "id": "t6-winter-matriarch:glacial-crush",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t7-stormfang": {
+      "id": "t7-stormfang",
+      "name": "Stormfang",
+      "tier": 7,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Beast",
+      "tags": [
+        "Beast"
+      ],
+      "areaId": "t7-stormreach-heights",
+      "style": "Melee",
+      "basicDamageType": "Stab",
+      "maxHp": 880,
+      "accuracy": 405,
+      "minHit": 48,
+      "maxHit": 66,
+      "intervalMs": 3000,
+      "evasion": 300,
+      "evasions": {
+        "Melee": 300,
+        "Ranged": 300,
+        "Magic": 300
+      },
+      "resistanceProfile": "M-C",
+      "resistances": {
+        "Slash": 12,
+        "Stab": 18,
+        "Crush": 14,
+        "Pierce": 24,
+        "Puncture": 20,
+        "Air": 34,
+        "Fire": -5,
+        "Water": 8,
+        "Earth": -18
+      },
+      "sequence": [
+        "t7-stormfang:bite",
+        "t7-stormfang:bite",
+        "t7-stormfang:static-fang"
+      ],
+      "xp": 282,
+      "gold": 28,
+      "loot": [
+        {
+          "item": "combat.loot.t7_beast_trophy",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t7_beast_trophy",
+      "unlockRequirements": [],
+      "actions": {
+        "t7-stormfang:bite": {
+          "name": "Bite",
+          "type": "Stab",
+          "multiplier": 1,
+          "id": "t7-stormfang:bite",
+          "damageEnabled": true
+        },
+        "t7-stormfang:static-fang": {
+          "name": "Static Fang",
+          "type": "Stab",
+          "multiplier": 1.2,
+          "status": {
+            "type": "AccuracyDown",
+            "magnitude": 0.1,
+            "durationMs": 5000
+          },
+          "id": "t7-stormfang:static-fang",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t7-gale-raider": {
+      "id": "t7-gale-raider",
+      "name": "Gale Raider",
+      "tier": 7,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid"
+      ],
+      "areaId": "t7-stormreach-heights",
+      "style": "Melee",
+      "basicDamageType": "Slash",
+      "maxHp": 880,
+      "accuracy": 405,
+      "minHit": 48,
+      "maxHit": 66,
+      "intervalMs": 3000,
+      "evasion": 300,
+      "evasions": {
+        "Melee": 300,
+        "Ranged": 300,
+        "Magic": 300
+      },
+      "resistanceProfile": "M-A",
+      "resistances": {
+        "Slash": 16,
+        "Stab": 14,
+        "Crush": 18,
+        "Pierce": 28,
+        "Puncture": 24,
+        "Air": 28,
+        "Fire": -8,
+        "Water": 4,
+        "Earth": -15
+      },
+      "sequence": [
+        "t7-gale-raider:slash",
+        "t7-gale-raider:quick-slash",
+        "t7-gale-raider:gale-cleave"
+      ],
+      "xp": 282,
+      "gold": 28,
+      "loot": [
+        {
+          "item": "combat.loot.t7_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t7_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t7-gale-raider:slash": {
+          "name": "Slash",
+          "type": "Slash",
+          "multiplier": 1,
+          "id": "t7-gale-raider:slash",
+          "damageEnabled": true
+        },
+        "t7-gale-raider:quick-slash": {
+          "name": "Quick Slash",
+          "type": "Slash",
+          "multiplier": 1,
+          "id": "t7-gale-raider:quick-slash",
+          "damageEnabled": true
+        },
+        "t7-gale-raider:gale-cleave": {
+          "name": "Gale Cleave",
+          "type": "Slash",
+          "multiplier": 1.3,
+          "intervalMultiplier": 0.9,
+          "id": "t7-gale-raider:gale-cleave",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t7-thunderbow": {
+      "id": "t7-thunderbow",
+      "name": "Thunderbow",
+      "tier": 7,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid",
+        "Archer"
+      ],
+      "areaId": "t7-stormreach-heights",
+      "style": "Ranged",
+      "basicDamageType": "Pierce",
+      "maxHp": 880,
+      "accuracy": 405,
+      "minHit": 48,
+      "maxHit": 66,
+      "intervalMs": 3000,
+      "evasion": 300,
+      "evasions": {
+        "Melee": 300,
+        "Ranged": 300,
+        "Magic": 300
+      },
+      "resistanceProfile": "R-B",
+      "resistances": {
+        "Slash": 0,
+        "Stab": -5,
+        "Crush": 6,
+        "Pierce": 22,
+        "Puncture": 16,
+        "Air": 36,
+        "Fire": 26,
+        "Water": 20,
+        "Earth": -16
+      },
+      "sequence": [
+        "t7-thunderbow:arrow",
+        "t7-thunderbow:arrow",
+        "t7-thunderbow:storm-shot"
+      ],
+      "xp": 282,
+      "gold": 28,
+      "loot": [
+        {
+          "item": "combat.loot.t7_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t7_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t7-thunderbow:arrow": {
+          "name": "Arrow",
+          "type": "Pierce",
+          "multiplier": 1,
+          "id": "t7-thunderbow:arrow",
+          "damageEnabled": true
+        },
+        "t7-thunderbow:storm-shot": {
+          "name": "Storm Shot",
+          "type": "Pierce",
+          "multiplier": 1.2,
+          "status": {
+            "type": "AccuracyDown",
+            "magnitude": 0.1,
+            "durationMs": 5000
+          },
+          "id": "t7-thunderbow:storm-shot",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t7-tempest-adept": {
+      "id": "t7-tempest-adept",
+      "name": "Tempest Adept",
+      "tier": 7,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Caster",
+      "tags": [
+        "Caster"
+      ],
+      "areaId": "t7-stormreach-heights",
+      "style": "Magic",
+      "basicDamageType": "Air",
+      "maxHp": 880,
+      "accuracy": 405,
+      "minHit": 48,
+      "maxHit": 66,
+      "intervalMs": 3000,
+      "evasion": 300,
+      "evasions": {
+        "Melee": 300,
+        "Ranged": 300,
+        "Magic": 300
+      },
+      "resistanceProfile": "G-A",
+      "resistances": {
+        "Slash": 28,
+        "Stab": 24,
+        "Crush": 30,
+        "Pierce": -8,
+        "Puncture": 0,
+        "Air": 42,
+        "Fire": 18,
+        "Water": 14,
+        "Earth": -22
+      },
+      "sequence": [
+        "t7-tempest-adept:gale-bolt",
+        "t7-tempest-adept:gale-bolt",
+        "t7-tempest-adept:cyclone"
+      ],
+      "xp": 282,
+      "gold": 28,
+      "loot": [
+        {
+          "item": "combat.loot.t7_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t7_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "t7-tempest-adept:gale-bolt": {
+          "name": "Gale Bolt",
+          "type": "Air",
+          "multiplier": 1,
+          "id": "t7-tempest-adept:gale-bolt",
+          "damageEnabled": true
+        },
+        "t7-tempest-adept:cyclone": {
+          "name": "Cyclone",
+          "type": "Air",
+          "multiplier": 1.25,
+          "status": {
+            "type": "EvasionDown",
+            "magnitude": 0.12,
+            "durationMs": 6000
+          },
+          "id": "t7-tempest-adept:cyclone",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t7-stormcoil-viper": {
+      "id": "t7-stormcoil-viper",
+      "name": "Stormcoil Viper",
+      "tier": 7,
+      "rank": "Elite",
+      "combatClass": "Elite",
+      "kind": "Beast",
+      "tags": [
+        "Beast",
+        "Elite"
+      ],
+      "areaId": "t7-stormreach-heights",
+      "style": "Melee",
+      "basicDamageType": "Stab",
+      "maxHp": 1980,
+      "accuracy": 425,
+      "minHit": 55,
+      "maxHit": 76,
+      "intervalMs": 3000,
+      "evasion": 300,
+      "evasions": {
+        "Melee": 300,
+        "Ranged": 300,
+        "Magic": 300
+      },
+      "resistanceProfile": "M-C",
+      "resistances": {
+        "Slash": 12,
+        "Stab": 18,
+        "Crush": 14,
+        "Pierce": 24,
+        "Puncture": 20,
+        "Air": 38,
+        "Fire": -8,
+        "Water": 8,
+        "Earth": -22
+      },
+      "sequence": [
+        "t7-stormcoil-viper:fang",
+        "t7-stormcoil-viper:static-coil",
+        "t7-stormcoil-viper:fang",
+        "t7-stormcoil-viper:venom-burst"
+      ],
+      "xp": 282,
+      "gold": 32,
+      "loot": [
+        {
+          "item": "combat.loot.t7_beast_trophy",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t7_beast_trophy",
+      "unlockRequirements": [
+        {
+          "type": "defeatAll",
+          "targets": [
+            "t7-stormfang",
+            "t7-gale-raider",
+            "t7-thunderbow",
+            "t7-tempest-adept"
+          ]
+        }
+      ],
+      "firstKillReward": [
+        {
+          "item": "combat.loot.t7_elite_component",
+          "chance": 1,
+          "min": 1,
+          "max": 1,
+          "guaranteed": true,
+          "firstKillOnly": true,
+          "protected": true
+        }
+      ],
+      "eliteComponent": "Venomglass Sac",
+      "actions": {
+        "t7-stormcoil-viper:fang": {
+          "name": "Fang",
+          "type": "Stab",
+          "multiplier": 1,
+          "id": "t7-stormcoil-viper:fang",
+          "damageEnabled": true
+        },
+        "t7-stormcoil-viper:static-coil": {
+          "name": "Static Coil",
+          "type": "Air",
+          "multiplier": 1.15,
+          "id": "t7-stormcoil-viper:static-coil",
+          "damageEnabled": true
+        },
+        "t7-stormcoil-viper:venom-burst": {
+          "name": "Venom Burst",
+          "type": "Stab",
+          "multiplier": 1.15,
+          "status": {
+            "type": "Poison",
+            "magnitude": 0.06,
+            "durationMs": 10000
+          },
+          "id": "t7-stormcoil-viper:venom-burst",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t7-tempest-guard": {
+      "id": "t7-tempest-guard",
+      "name": "Tempest Guard",
+      "tier": 7,
+      "rank": "Dungeon",
+      "combatClass": "Dungeon",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid",
+        "Dungeon"
+      ],
+      "areaId": "t7-tempest-bastion",
+      "style": "Melee",
+      "basicDamageType": "Crush",
+      "maxHp": 1100,
+      "accuracy": 425,
+      "minHit": 50,
+      "maxHit": 69,
+      "intervalMs": 3000,
+      "evasion": 300,
+      "evasions": {
+        "Melee": 300,
+        "Ranged": 300,
+        "Magic": 300
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 18,
+        "Crush": 28,
+        "Pierce": 32,
+        "Puncture": 28,
+        "Air": 38,
+        "Fire": -10,
+        "Water": 0,
+        "Earth": -20
+      },
+      "sequence": [
+        "t7-tempest-guard:hammer",
+        "t7-tempest-guard:hammer",
+        "t7-tempest-guard:thunder-slam"
+      ],
+      "xp": 282,
+      "gold": 29,
+      "loot": [
+        {
+          "item": "combat.loot.t7_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t7_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t7-tempest-guard:hammer": {
+          "name": "Hammer",
+          "type": "Crush",
+          "multiplier": 1,
+          "id": "t7-tempest-guard:hammer",
+          "damageEnabled": true
+        },
+        "t7-tempest-guard:thunder-slam": {
+          "name": "Thunder Slam",
+          "type": "Crush",
+          "multiplier": 1.5,
+          "status": {
+            "type": "AccuracyDown",
+            "magnitude": 0.12,
+            "durationMs": 6000
+          },
+          "id": "t7-tempest-guard:thunder-slam",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t7-storm-savant": {
+      "id": "t7-storm-savant",
+      "name": "Storm Savant",
+      "tier": 7,
+      "rank": "Dungeon",
+      "combatClass": "Dungeon",
+      "kind": "Caster",
+      "tags": [
+        "Caster",
+        "Dungeon"
+      ],
+      "areaId": "t7-tempest-bastion",
+      "style": "Magic",
+      "basicDamageType": "Air",
+      "maxHp": 1100,
+      "accuracy": 425,
+      "minHit": 50,
+      "maxHit": 69,
+      "intervalMs": 3000,
+      "evasion": 300,
+      "evasions": {
+        "Melee": 300,
+        "Ranged": 300,
+        "Magic": 300
+      },
+      "resistanceProfile": "G-C",
+      "resistances": {
+        "Slash": 32,
+        "Stab": 26,
+        "Crush": 24,
+        "Pierce": -10,
+        "Puncture": -12,
+        "Air": 46,
+        "Fire": 20,
+        "Water": 16,
+        "Earth": -25
+      },
+      "sequence": [
+        "t7-storm-savant:air-lance",
+        "t7-storm-savant:air-lance",
+        "t7-storm-savant:tempest-cage"
+      ],
+      "xp": 282,
+      "gold": 29,
+      "loot": [
+        {
+          "item": "combat.loot.t7_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t7_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "t7-storm-savant:air-lance": {
+          "name": "Air Lance",
+          "type": "Air",
+          "multiplier": 1,
+          "id": "t7-storm-savant:air-lance",
+          "damageEnabled": true
+        },
+        "t7-storm-savant:tempest-cage": {
+          "name": "Tempest Cage",
+          "type": "Air",
+          "multiplier": 1.15,
+          "status": {
+            "type": "EvasionDown",
+            "magnitude": 0.15,
+            "durationMs": 7000
+          },
+          "id": "t7-storm-savant:tempest-cage",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t7-skybreaker-raal": {
+      "id": "t7-skybreaker-raal",
+      "name": "Skybreaker Raal",
+      "tier": 7,
+      "rank": "Boss",
+      "combatClass": "Boss",
+      "kind": "Boss",
+      "tags": [
+        "Boss",
+        "Dungeon"
+      ],
+      "areaId": "t7-tempest-bastion",
+      "style": "Ranged",
+      "basicDamageType": "Puncture",
+      "maxHp": 4400,
+      "accuracy": 446,
+      "minHit": 60,
+      "maxHit": 83,
+      "intervalMs": 3000,
+      "evasion": 300,
+      "evasions": {
+        "Melee": 300,
+        "Ranged": 300,
+        "Magic": 300
+      },
+      "resistanceProfile": "R-C",
+      "resistances": {
+        "Slash": -15,
+        "Stab": 2,
+        "Crush": 0,
+        "Pierce": 14,
+        "Puncture": 22,
+        "Air": 48,
+        "Fire": 30,
+        "Water": 18,
+        "Earth": -28
+      },
+      "sequence": [
+        "t7-skybreaker-raal:bolt",
+        "t7-skybreaker-raal:bolt",
+        "t7-skybreaker-raal:skybreaker-shot"
+      ],
+      "xp": 282,
+      "gold": 35,
+      "loot": [
+        {
+          "item": "combat.loot.t7_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t7_arcane_remnant",
+      "unlockRequirements": [],
+      "bossComponent": "Skybreaker Dynamo",
+      "uniqueHook": "combat.unique.t7.venomglass_blowpipe",
+      "firstKillReward": [
+        {
+          "item": "combat.loot.t7_boss_component",
+          "chance": 1,
+          "min": 1,
+          "max": 1,
+          "guaranteed": true,
+          "firstKillOnly": true,
+          "protected": true
+        }
+      ],
+      "phases": [
+        {
+          "thresholdPct": 50,
+          "sequence": [
+            "t7-skybreaker-raal:skybreaker-shot",
+            "t7-skybreaker-raal:tempest-barrage",
+            "t7-skybreaker-raal:bolt"
+          ]
+        }
+      ],
+      "actions": {
+        "t7-skybreaker-raal:bolt": {
+          "name": "Bolt",
+          "type": "Puncture",
+          "multiplier": 1,
+          "id": "t7-skybreaker-raal:bolt",
+          "damageEnabled": true
+        },
+        "t7-skybreaker-raal:skybreaker-shot": {
+          "name": "Skybreaker Shot",
+          "type": "Puncture",
+          "multiplier": 1.6,
+          "penetrationPp": 15,
+          "id": "t7-skybreaker-raal:skybreaker-shot",
+          "damageEnabled": true
+        },
+        "t7-skybreaker-raal:tempest-barrage": {
+          "name": "Tempest Barrage",
+          "type": "Air",
+          "multiplier": 0.55,
+          "hits": 3,
+          "separateHitRolls": true,
+          "id": "t7-skybreaker-raal:tempest-barrage",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t8-aetherblade": {
+      "id": "t8-aetherblade",
+      "name": "Aetherblade",
+      "tier": 8,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid"
+      ],
+      "areaId": "t8-aetherfall-expanse",
+      "style": "Melee",
+      "basicDamageType": "Stab",
+      "maxHp": 1160,
+      "accuracy": 470,
+      "minHit": 60,
+      "maxHit": 82,
+      "intervalMs": 3000,
+      "evasion": 350,
+      "evasions": {
+        "Melee": 350,
+        "Ranged": 350,
+        "Magic": 350
+      },
+      "resistanceProfile": "M-A",
+      "resistances": {
+        "Slash": 16,
+        "Stab": 14,
+        "Crush": 18,
+        "Pierce": 28,
+        "Puncture": 24,
+        "Air": 16,
+        "Fire": 16,
+        "Water": 16,
+        "Earth": 16
+      },
+      "sequence": [
+        "t8-aetherblade:stab",
+        "t8-aetherblade:slash",
+        "t8-aetherblade:aether-cut"
+      ],
+      "xp": 371,
+      "gold": 32,
+      "loot": [
+        {
+          "item": "combat.loot.t8_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t8_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t8-aetherblade:stab": {
+          "name": "Stab",
+          "type": "Stab",
+          "multiplier": 1,
+          "id": "t8-aetherblade:stab",
+          "damageEnabled": true
+        },
+        "t8-aetherblade:slash": {
+          "name": "Slash",
+          "type": "Slash",
+          "multiplier": 1,
+          "id": "t8-aetherblade:slash",
+          "damageEnabled": true
+        },
+        "t8-aetherblade:aether-cut": {
+          "name": "Aether Cut",
+          "type": "Stab",
+          "multiplier": 1.3,
+          "status": {
+            "type": "ResistanceDown",
+            "magnitude": 8,
+            "durationMs": 6000
+          },
+          "resistanceDownTypes": [
+            "Stab"
+          ],
+          "id": "t8-aetherblade:aether-cut",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t8-rift-hound": {
+      "id": "t8-rift-hound",
+      "name": "Rift Hound",
+      "tier": 8,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Beast",
+      "tags": [
+        "Beast"
+      ],
+      "areaId": "t8-aetherfall-expanse",
+      "style": "Melee",
+      "basicDamageType": "Stab",
+      "maxHp": 1160,
+      "accuracy": 470,
+      "minHit": 60,
+      "maxHit": 82,
+      "intervalMs": 3000,
+      "evasion": 350,
+      "evasions": {
+        "Melee": 350,
+        "Ranged": 350,
+        "Magic": 350
+      },
+      "resistanceProfile": "M-C",
+      "resistances": {
+        "Slash": 12,
+        "Stab": 18,
+        "Crush": 14,
+        "Pierce": 24,
+        "Puncture": 12,
+        "Air": 14,
+        "Fire": 14,
+        "Water": 14,
+        "Earth": 14
+      },
+      "sequence": [
+        "t8-rift-hound:bite",
+        "t8-rift-hound:rift-lunge",
+        "t8-rift-hound:bite"
+      ],
+      "xp": 371,
+      "gold": 32,
+      "loot": [
+        {
+          "item": "combat.loot.t8_beast_trophy",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t8_beast_trophy",
+      "unlockRequirements": [],
+      "actions": {
+        "t8-rift-hound:bite": {
+          "name": "Bite",
+          "type": "Stab",
+          "multiplier": 1,
+          "id": "t8-rift-hound:bite",
+          "damageEnabled": true
+        },
+        "t8-rift-hound:rift-lunge": {
+          "name": "Rift Lunge",
+          "type": "Stab",
+          "multiplier": 1.3,
+          "status": {
+            "type": "EvasionDown",
+            "magnitude": 0.1,
+            "durationMs": 6000
+          },
+          "id": "t8-rift-hound:rift-lunge",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t8-prism-archer": {
+      "id": "t8-prism-archer",
+      "name": "Prism Archer",
+      "tier": 8,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid",
+        "Archer"
+      ],
+      "areaId": "t8-aetherfall-expanse",
+      "style": "Ranged",
+      "basicDamageType": "Pierce",
+      "maxHp": 1160,
+      "accuracy": 470,
+      "minHit": 60,
+      "maxHit": 82,
+      "intervalMs": 3000,
+      "evasion": 350,
+      "evasions": {
+        "Melee": 350,
+        "Ranged": 350,
+        "Magic": 350
+      },
+      "resistanceProfile": "R-A",
+      "resistances": {
+        "Slash": -8,
+        "Stab": 0,
+        "Crush": 4,
+        "Pierce": 16,
+        "Puncture": 18,
+        "Air": 32,
+        "Fire": 32,
+        "Water": 32,
+        "Earth": 32
+      },
+      "sequence": [
+        "t8-prism-archer:arrow",
+        "t8-prism-archer:prism-shot",
+        "t8-prism-archer:arrow"
+      ],
+      "xp": 371,
+      "gold": 32,
+      "loot": [
+        {
+          "item": "combat.loot.t8_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t8_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t8-prism-archer:arrow": {
+          "name": "Arrow",
+          "type": "Pierce",
+          "multiplier": 1,
+          "id": "t8-prism-archer:arrow",
+          "damageEnabled": true
+        },
+        "t8-prism-archer:prism-shot": {
+          "name": "Prism Shot",
+          "type": "Pierce",
+          "multiplier": 1.2,
+          "status": {
+            "type": "AccuracyDown",
+            "magnitude": 0.12,
+            "durationMs": 6000
+          },
+          "id": "t8-prism-archer:prism-shot",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t8-aether-seer": {
+      "id": "t8-aether-seer",
+      "name": "Aether Seer",
+      "tier": 8,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Caster",
+      "tags": [
+        "Caster"
+      ],
+      "areaId": "t8-aetherfall-expanse",
+      "style": "Magic",
+      "basicDamageType": "Air",
+      "maxHp": 1160,
+      "accuracy": 470,
+      "minHit": 60,
+      "maxHit": 82,
+      "intervalMs": 3000,
+      "evasion": 350,
+      "evasions": {
+        "Melee": 350,
+        "Ranged": 350,
+        "Magic": 350
+      },
+      "resistanceProfile": "G-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 30,
+        "Crush": 22,
+        "Pierce": 0,
+        "Puncture": -12,
+        "Air": 26,
+        "Fire": 26,
+        "Water": 26,
+        "Earth": 26
+      },
+      "sequence": [
+        "t8-aether-seer:air-bolt",
+        "t8-aether-seer:water-bolt",
+        "t8-aether-seer:earth-bolt",
+        "t8-aether-seer:fire-bolt"
+      ],
+      "xp": 371,
+      "gold": 32,
+      "loot": [
+        {
+          "item": "combat.loot.t8_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t8_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "t8-aether-seer:air-bolt": {
+          "name": "Air Bolt",
+          "type": "Air",
+          "multiplier": 1,
+          "id": "t8-aether-seer:air-bolt",
+          "damageEnabled": true
+        },
+        "t8-aether-seer:water-bolt": {
+          "name": "Water Bolt",
+          "type": "Water",
+          "multiplier": 1,
+          "id": "t8-aether-seer:water-bolt",
+          "damageEnabled": true
+        },
+        "t8-aether-seer:earth-bolt": {
+          "name": "Earth Bolt",
+          "type": "Earth",
+          "multiplier": 1,
+          "id": "t8-aether-seer:earth-bolt",
+          "damageEnabled": true
+        },
+        "t8-aether-seer:fire-bolt": {
+          "name": "Fire Bolt",
+          "type": "Fire",
+          "multiplier": 1,
+          "id": "t8-aether-seer:fire-bolt",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t8-prismcoil-serpent": {
+      "id": "t8-prismcoil-serpent",
+      "name": "Prismcoil Serpent",
+      "tier": 8,
+      "rank": "Elite",
+      "combatClass": "Elite",
+      "kind": "Beast",
+      "tags": [
+        "Beast",
+        "Elite"
+      ],
+      "areaId": "t8-aetherfall-expanse",
+      "style": "Melee",
+      "basicDamageType": "Stab",
+      "maxHp": 2610,
+      "accuracy": 494,
+      "minHit": 68,
+      "maxHit": 94,
+      "intervalMs": 3000,
+      "evasion": 350,
+      "evasions": {
+        "Melee": 350,
+        "Ranged": 350,
+        "Magic": 350
+      },
+      "resistanceProfile": "M-C",
+      "resistances": {
+        "Slash": -10,
+        "Stab": 18,
+        "Crush": 14,
+        "Pierce": 24,
+        "Puncture": 20,
+        "Air": 22,
+        "Fire": 22,
+        "Water": 22,
+        "Earth": 22
+      },
+      "sequence": [
+        "t8-prismcoil-serpent:fang",
+        "t8-prismcoil-serpent:prism-coil",
+        "t8-prismcoil-serpent:fang",
+        "t8-prismcoil-serpent:aether-venom"
+      ],
+      "xp": 371,
+      "gold": 37,
+      "loot": [
+        {
+          "item": "combat.loot.t8_beast_trophy",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t8_beast_trophy",
+      "unlockRequirements": [
+        {
+          "type": "defeatAll",
+          "targets": [
+            "t8-aetherblade",
+            "t8-rift-hound",
+            "t8-prism-archer",
+            "t8-aether-seer"
+          ]
+        }
+      ],
+      "firstKillReward": [
+        {
+          "item": "combat.loot.t8_elite_component",
+          "chance": 1,
+          "min": 1,
+          "max": 1,
+          "guaranteed": true,
+          "firstKillOnly": true,
+          "protected": true
+        }
+      ],
+      "eliteComponent": "Prismatic Coil",
+      "actions": {
+        "t8-prismcoil-serpent:fang": {
+          "name": "Fang",
+          "type": "Stab",
+          "multiplier": 1,
+          "id": "t8-prismcoil-serpent:fang",
+          "damageEnabled": true
+        },
+        "t8-prismcoil-serpent:prism-coil": {
+          "name": "Prism Coil",
+          "type": "Crush",
+          "multiplier": 1.2,
+          "id": "t8-prismcoil-serpent:prism-coil",
+          "damageEnabled": true
+        },
+        "t8-prismcoil-serpent:aether-venom": {
+          "name": "Aether Venom",
+          "status": {
+            "type": "Poison",
+            "magnitude": 0.07,
+            "durationMs": 10000
+          },
+          "id": "t8-prismcoil-serpent:aether-venom",
+          "damageEnabled": false
+        }
+      }
+    },
+    "t8-aetherglass-sentinel": {
+      "id": "t8-aetherglass-sentinel",
+      "name": "Aetherglass Sentinel",
+      "tier": 8,
+      "rank": "Dungeon",
+      "combatClass": "Dungeon",
+      "kind": "Construct",
+      "tags": [
+        "Construct",
+        "Dungeon"
+      ],
+      "areaId": "t8-aetherglass-sanctum",
+      "style": "Melee",
+      "basicDamageType": "Crush",
+      "maxHp": 1450,
+      "accuracy": 494,
+      "minHit": 62,
+      "maxHit": 86,
+      "intervalMs": 3000,
+      "evasion": 350,
+      "evasions": {
+        "Melee": 350,
+        "Ranged": 350,
+        "Magic": 350
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 18,
+        "Crush": 42,
+        "Pierce": 32,
+        "Puncture": 28,
+        "Air": 20,
+        "Fire": 20,
+        "Water": 20,
+        "Earth": 20
+      },
+      "sequence": [
+        "t8-aetherglass-sentinel:hammer",
+        "t8-aetherglass-sentinel:hammer",
+        "t8-aetherglass-sentinel:glassbreak"
+      ],
+      "xp": 371,
+      "gold": 34,
+      "loot": [
+        {
+          "item": "combat.loot.t8_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t8_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "t8-aetherglass-sentinel:hammer": {
+          "name": "Hammer",
+          "type": "Crush",
+          "multiplier": 1,
+          "id": "t8-aetherglass-sentinel:hammer",
+          "damageEnabled": true
+        },
+        "t8-aetherglass-sentinel:glassbreak": {
+          "name": "Glassbreak",
+          "type": "Crush",
+          "multiplier": 1.55,
+          "status": {
+            "type": "ResistanceDown",
+            "magnitude": 12,
+            "durationMs": 8000
+          },
+          "resistanceDownTypes": [
+            "Crush"
+          ],
+          "id": "t8-aetherglass-sentinel:glassbreak",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t8-prismatic-channeler": {
+      "id": "t8-prismatic-channeler",
+      "name": "Prismatic Channeler",
+      "tier": 8,
+      "rank": "Dungeon",
+      "combatClass": "Dungeon",
+      "kind": "Caster",
+      "tags": [
+        "Caster",
+        "Dungeon"
+      ],
+      "areaId": "t8-aetherglass-sanctum",
+      "style": "Magic",
+      "basicDamageType": "Fire",
+      "maxHp": 1450,
+      "accuracy": 494,
+      "minHit": 62,
+      "maxHit": 86,
+      "intervalMs": 3000,
+      "evasion": 350,
+      "evasions": {
+        "Melee": 350,
+        "Ranged": 350,
+        "Magic": 350
+      },
+      "resistanceProfile": "G-C",
+      "resistances": {
+        "Slash": 32,
+        "Stab": 26,
+        "Crush": 24,
+        "Pierce": -15,
+        "Puncture": -5,
+        "Air": 28,
+        "Fire": 28,
+        "Water": 28,
+        "Earth": 28
+      },
+      "sequence": [
+        "t8-prismatic-channeler:fire",
+        "t8-prismatic-channeler:water",
+        "t8-prismatic-channeler:air",
+        "t8-prismatic-channeler:earth",
+        "t8-prismatic-channeler:prism-collapse"
+      ],
+      "xp": 371,
+      "gold": 34,
+      "loot": [
+        {
+          "item": "combat.loot.t8_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t8_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "t8-prismatic-channeler:fire": {
+          "name": "Fire",
+          "type": "Fire",
+          "multiplier": 0.9,
+          "id": "t8-prismatic-channeler:fire",
+          "damageEnabled": true
+        },
+        "t8-prismatic-channeler:water": {
+          "name": "Water",
+          "type": "Water",
+          "multiplier": 0.9,
+          "id": "t8-prismatic-channeler:water",
+          "damageEnabled": true
+        },
+        "t8-prismatic-channeler:air": {
+          "name": "Air",
+          "type": "Air",
+          "multiplier": 0.9,
+          "id": "t8-prismatic-channeler:air",
+          "damageEnabled": true
+        },
+        "t8-prismatic-channeler:earth": {
+          "name": "Earth",
+          "type": "Earth",
+          "multiplier": 0.9,
+          "id": "t8-prismatic-channeler:earth",
+          "damageEnabled": true
+        },
+        "t8-prismatic-channeler:prism-collapse": {
+          "name": "Prism Collapse",
+          "type": "Fire",
+          "multiplier": 1.35,
+          "dynamicTypeRule": "lowestPlayerElementResistance",
+          "id": "t8-prismatic-channeler:prism-collapse",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t8-aetherbound-oracle": {
+      "id": "t8-aetherbound-oracle",
+      "name": "Aetherbound Oracle",
+      "tier": 8,
+      "rank": "Boss",
+      "combatClass": "Boss",
+      "kind": "Boss",
+      "tags": [
+        "Boss",
+        "Dungeon"
+      ],
+      "areaId": "t8-aetherglass-sanctum",
+      "style": "Magic",
+      "basicDamageType": "Air",
+      "maxHp": 5800,
+      "accuracy": 517,
+      "minHit": 75,
+      "maxHit": 103,
+      "intervalMs": 3000,
+      "evasion": 350,
+      "evasions": {
+        "Melee": 350,
+        "Ranged": 350,
+        "Magic": 350
+      },
+      "resistanceProfile": "G-C",
+      "resistances": {
+        "Slash": 32,
+        "Stab": 26,
+        "Crush": 24,
+        "Pierce": -18,
+        "Puncture": -14,
+        "Air": 34,
+        "Fire": 34,
+        "Water": 34,
+        "Earth": 34
+      },
+      "sequence": [
+        "t8-aetherbound-oracle:air-decree",
+        "t8-aetherbound-oracle:water-decree",
+        "t8-aetherbound-oracle:earth-decree",
+        "t8-aetherbound-oracle:fire-decree"
+      ],
+      "xp": 371,
+      "gold": 40,
+      "loot": [
+        {
+          "item": "combat.loot.t8_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t8_arcane_remnant",
+      "unlockRequirements": [],
+      "bossComponent": "Oracle Lens",
+      "uniqueHook": "combat.unique.t8.oracle_prism",
+      "firstKillReward": [
+        {
+          "item": "combat.loot.t8_boss_component",
+          "chance": 1,
+          "min": 1,
+          "max": 1,
+          "guaranteed": true,
+          "firstKillOnly": true,
+          "protected": true
+        }
+      ],
+      "phases": [
+        {
+          "thresholdPct": 66,
+          "sequence": [
+            "t8-aetherbound-oracle:prism-lance",
+            "t8-aetherbound-oracle:air-decree",
+            "t8-aetherbound-oracle:prism-lance",
+            "t8-aetherbound-oracle:water-decree"
+          ]
+        },
+        {
+          "thresholdPct": 33,
+          "sequence": [
+            "t8-aetherbound-oracle:prism-collapse",
+            "t8-aetherbound-oracle:fire-decree",
+            "t8-aetherbound-oracle:earth-decree"
+          ]
+        }
+      ],
+      "actions": {
+        "t8-aetherbound-oracle:air-decree": {
+          "name": "Air Decree",
+          "type": "Air",
+          "multiplier": 1.1,
+          "id": "t8-aetherbound-oracle:air-decree",
+          "damageEnabled": true
+        },
+        "t8-aetherbound-oracle:water-decree": {
+          "name": "Water Decree",
+          "type": "Water",
+          "multiplier": 1.1,
+          "id": "t8-aetherbound-oracle:water-decree",
+          "damageEnabled": true
+        },
+        "t8-aetherbound-oracle:earth-decree": {
+          "name": "Earth Decree",
+          "type": "Earth",
+          "multiplier": 1.1,
+          "id": "t8-aetherbound-oracle:earth-decree",
+          "damageEnabled": true
+        },
+        "t8-aetherbound-oracle:fire-decree": {
+          "name": "Fire Decree",
+          "type": "Fire",
+          "multiplier": 1.1,
+          "id": "t8-aetherbound-oracle:fire-decree",
+          "damageEnabled": true
+        },
+        "t8-aetherbound-oracle:prism-lance": {
+          "name": "Prism Lance",
+          "type": "Air",
+          "multiplier": 1.45,
+          "penetrationPp": 10,
+          "dynamicTypeRule": "sequenceElement",
+          "id": "t8-aetherbound-oracle:prism-lance",
+          "damageEnabled": true
+        },
+        "t8-aetherbound-oracle:prism-collapse": {
+          "name": "Prism Collapse",
+          "type": "Air",
+          "multiplier": 1.4,
+          "dynamicTypeRule": "lowestPlayerElementResistance",
+          "id": "t8-aetherbound-oracle:prism-collapse",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t9-nightstalker": {
+      "id": "t9-nightstalker",
+      "name": "Nightstalker",
+      "tier": 9,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Beast",
+      "tags": [
+        "Beast"
+      ],
+      "areaId": "t9-umbral-depths",
+      "style": "Melee",
+      "basicDamageType": "Stab",
+      "maxHp": 1500,
+      "accuracy": 540,
+      "minHit": 72,
+      "maxHit": 100,
+      "intervalMs": 3000,
+      "evasion": 405,
+      "evasions": {
+        "Melee": 405,
+        "Ranged": 405,
+        "Magic": 405
+      },
+      "resistanceProfile": "M-C",
+      "resistances": {
+        "Slash": 12,
+        "Stab": 18,
+        "Crush": 14,
+        "Pierce": 24,
+        "Puncture": 20,
+        "Air": 18,
+        "Fire": -12,
+        "Water": 8,
+        "Earth": -8
+      },
+      "sequence": [
+        "t9-nightstalker:stab",
+        "t9-nightstalker:stab",
+        "t9-nightstalker:shadow-pounce"
+      ],
+      "xp": 480,
+      "gold": 36,
+      "loot": [
+        {
+          "item": "combat.loot.t9_beast_trophy",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t9_beast_trophy",
+      "unlockRequirements": [],
+      "actions": {
+        "t9-nightstalker:stab": {
+          "name": "Stab",
+          "type": "Stab",
+          "multiplier": 1,
+          "id": "t9-nightstalker:stab",
+          "damageEnabled": true
+        },
+        "t9-nightstalker:shadow-pounce": {
+          "name": "Shadow Pounce",
+          "type": "Stab",
+          "multiplier": 1.35,
+          "status": {
+            "type": "EvasionDown",
+            "magnitude": 0.12,
+            "durationMs": 6000
+          },
+          "id": "t9-nightstalker:shadow-pounce",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t9-umbral-reaver": {
+      "id": "t9-umbral-reaver",
+      "name": "Umbral Reaver",
+      "tier": 9,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid"
+      ],
+      "areaId": "t9-umbral-depths",
+      "style": "Melee",
+      "basicDamageType": "Slash",
+      "maxHp": 1500,
+      "accuracy": 540,
+      "minHit": 72,
+      "maxHit": 100,
+      "intervalMs": 3000,
+      "evasion": 405,
+      "evasions": {
+        "Melee": 405,
+        "Ranged": 405,
+        "Magic": 405
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 18,
+        "Crush": 28,
+        "Pierce": 32,
+        "Puncture": 28,
+        "Air": -5,
+        "Fire": -10,
+        "Water": 18,
+        "Earth": 8
+      },
+      "sequence": [
+        "t9-umbral-reaver:slash",
+        "t9-umbral-reaver:slash",
+        "t9-umbral-reaver:dread-cleave"
+      ],
+      "xp": 480,
+      "gold": 36,
+      "loot": [
+        {
+          "item": "combat.loot.t9_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t9_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t9-umbral-reaver:slash": {
+          "name": "Slash",
+          "type": "Slash",
+          "multiplier": 1,
+          "id": "t9-umbral-reaver:slash",
+          "damageEnabled": true
+        },
+        "t9-umbral-reaver:dread-cleave": {
+          "name": "Dread Cleave",
+          "type": "Slash",
+          "multiplier": 1.4,
+          "status": {
+            "type": "AccuracyDown",
+            "magnitude": 0.12,
+            "durationMs": 6000
+          },
+          "id": "t9-umbral-reaver:dread-cleave",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t9-shade-archer": {
+      "id": "t9-shade-archer",
+      "name": "Shade Archer",
+      "tier": 9,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid",
+        "Archer"
+      ],
+      "areaId": "t9-umbral-depths",
+      "style": "Ranged",
+      "basicDamageType": "Pierce",
+      "maxHp": 1500,
+      "accuracy": 540,
+      "minHit": 72,
+      "maxHit": 100,
+      "intervalMs": 3000,
+      "evasion": 405,
+      "evasions": {
+        "Melee": 405,
+        "Ranged": 405,
+        "Magic": 405
+      },
+      "resistanceProfile": "R-C",
+      "resistances": {
+        "Slash": -10,
+        "Stab": 2,
+        "Crush": 0,
+        "Pierce": 14,
+        "Puncture": 22,
+        "Air": 28,
+        "Fire": -10,
+        "Water": 18,
+        "Earth": 24
+      },
+      "sequence": [
+        "t9-shade-archer:arrow",
+        "t9-shade-archer:darkshot",
+        "t9-shade-archer:arrow"
+      ],
+      "xp": 480,
+      "gold": 36,
+      "loot": [
+        {
+          "item": "combat.loot.t9_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t9_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t9-shade-archer:arrow": {
+          "name": "Arrow",
+          "type": "Pierce",
+          "multiplier": 1,
+          "id": "t9-shade-archer:arrow",
+          "damageEnabled": true
+        },
+        "t9-shade-archer:darkshot": {
+          "name": "Darkshot",
+          "type": "Pierce",
+          "multiplier": 1.25,
+          "status": {
+            "type": "ResistanceDown",
+            "magnitude": 8,
+            "durationMs": 7000
+          },
+          "resistanceDownTypes": [
+            "Pierce"
+          ],
+          "id": "t9-shade-archer:darkshot",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t9-voidcaller": {
+      "id": "t9-voidcaller",
+      "name": "Voidcaller",
+      "tier": 9,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Caster",
+      "tags": [
+        "Caster"
+      ],
+      "areaId": "t9-umbral-depths",
+      "style": "Magic",
+      "basicDamageType": "Earth",
+      "maxHp": 1500,
+      "accuracy": 540,
+      "minHit": 72,
+      "maxHit": 100,
+      "intervalMs": 3000,
+      "evasion": 405,
+      "evasions": {
+        "Melee": 405,
+        "Ranged": 405,
+        "Magic": 405
+      },
+      "resistanceProfile": "G-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 30,
+        "Crush": 22,
+        "Pierce": 0,
+        "Puncture": -6,
+        "Air": 20,
+        "Fire": -18,
+        "Water": 18,
+        "Earth": 30
+      },
+      "sequence": [
+        "t9-voidcaller:earth-bolt",
+        "t9-voidcaller:air-bolt",
+        "t9-voidcaller:dread-pulse"
+      ],
+      "xp": 480,
+      "gold": 36,
+      "loot": [
+        {
+          "item": "combat.loot.t9_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t9_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "t9-voidcaller:earth-bolt": {
+          "name": "Earth Bolt",
+          "type": "Earth",
+          "multiplier": 1,
+          "id": "t9-voidcaller:earth-bolt",
+          "damageEnabled": true
+        },
+        "t9-voidcaller:air-bolt": {
+          "name": "Air Bolt",
+          "type": "Air",
+          "multiplier": 1,
+          "id": "t9-voidcaller:air-bolt",
+          "damageEnabled": true
+        },
+        "t9-voidcaller:dread-pulse": {
+          "name": "Dread Pulse",
+          "type": "Earth",
+          "multiplier": 1.2,
+          "status": {
+            "type": "AccuracyDown",
+            "magnitude": 0.15,
+            "durationMs": 7000
+          },
+          "id": "t9-voidcaller:dread-pulse",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t9-nightglass-devourer": {
+      "id": "t9-nightglass-devourer",
+      "name": "Nightglass Devourer",
+      "tier": 9,
+      "rank": "Elite",
+      "combatClass": "Elite",
+      "kind": "Beast",
+      "tags": [
+        "Beast",
+        "Elite"
+      ],
+      "areaId": "t9-umbral-depths",
+      "style": "Melee",
+      "basicDamageType": "Crush",
+      "maxHp": 3375,
+      "accuracy": 567,
+      "minHit": 83,
+      "maxHit": 115,
+      "intervalMs": 3000,
+      "evasion": 405,
+      "evasions": {
+        "Melee": 405,
+        "Ranged": 405,
+        "Magic": 405
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 18,
+        "Crush": 42,
+        "Pierce": 32,
+        "Puncture": 38,
+        "Air": -5,
+        "Fire": -20,
+        "Water": 0,
+        "Earth": 8
+      },
+      "sequence": [
+        "t9-nightglass-devourer:bite",
+        "t9-nightglass-devourer:glass-crush",
+        "t9-nightglass-devourer:bite",
+        "t9-nightglass-devourer:devour"
+      ],
+      "xp": 480,
+      "gold": 41,
+      "loot": [
+        {
+          "item": "combat.loot.t9_beast_trophy",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t9_beast_trophy",
+      "unlockRequirements": [
+        {
+          "type": "defeatAll",
+          "targets": [
+            "t9-nightstalker",
+            "t9-umbral-reaver",
+            "t9-shade-archer",
+            "t9-voidcaller"
+          ]
+        }
+      ],
+      "firstKillReward": [
+        {
+          "item": "combat.loot.t9_elite_component",
+          "chance": 1,
+          "min": 1,
+          "max": 1,
+          "guaranteed": true,
+          "firstKillOnly": true,
+          "protected": true
+        }
+      ],
+      "eliteComponent": "Nightglass Core",
+      "actions": {
+        "t9-nightglass-devourer:bite": {
+          "name": "Bite",
+          "type": "Crush",
+          "multiplier": 1,
+          "id": "t9-nightglass-devourer:bite",
+          "damageEnabled": true
+        },
+        "t9-nightglass-devourer:glass-crush": {
+          "name": "Glass Crush",
+          "type": "Crush",
+          "multiplier": 1.55,
+          "id": "t9-nightglass-devourer:glass-crush",
+          "damageEnabled": true
+        },
+        "t9-nightglass-devourer:devour": {
+          "name": "Devour",
+          "type": "Stab",
+          "multiplier": 1.2,
+          "healSelfPct": 3,
+          "id": "t9-nightglass-devourer:devour",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t9-citadel-reaper": {
+      "id": "t9-citadel-reaper",
+      "name": "Citadel Reaper",
+      "tier": 9,
+      "rank": "Dungeon",
+      "combatClass": "Dungeon",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid",
+        "Dungeon"
+      ],
+      "areaId": "t9-umbral-citadel",
+      "style": "Melee",
+      "basicDamageType": "Slash",
+      "maxHp": 1875,
+      "accuracy": 567,
+      "minHit": 76,
+      "maxHit": 105,
+      "intervalMs": 3000,
+      "evasion": 405,
+      "evasions": {
+        "Melee": 405,
+        "Ranged": 405,
+        "Magic": 405
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 18,
+        "Crush": 28,
+        "Pierce": 32,
+        "Puncture": 28,
+        "Air": -5,
+        "Fire": -15,
+        "Water": 0,
+        "Earth": 8
+      },
+      "sequence": [
+        "t9-citadel-reaper:slash",
+        "t9-citadel-reaper:slash",
+        "t9-citadel-reaper:umbral-break"
+      ],
+      "xp": 480,
+      "gold": 38,
+      "loot": [
+        {
+          "item": "combat.loot.t9_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t9_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t9-citadel-reaper:slash": {
+          "name": "Slash",
+          "type": "Slash",
+          "multiplier": 1,
+          "id": "t9-citadel-reaper:slash",
+          "damageEnabled": true
+        },
+        "t9-citadel-reaper:umbral-break": {
+          "name": "Umbral Break",
+          "type": "Slash",
+          "multiplier": 1.4,
+          "status": {
+            "type": "ResistanceDown",
+            "magnitude": 12,
+            "durationMs": 8000
+          },
+          "resistanceDownTypes": [
+            "Slash"
+          ],
+          "id": "t9-citadel-reaper:umbral-break",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t9-hollow-magus": {
+      "id": "t9-hollow-magus",
+      "name": "Hollow Magus",
+      "tier": 9,
+      "rank": "Dungeon",
+      "combatClass": "Dungeon",
+      "kind": "Caster",
+      "tags": [
+        "Caster",
+        "Dungeon"
+      ],
+      "areaId": "t9-umbral-citadel",
+      "style": "Magic",
+      "basicDamageType": "Earth",
+      "maxHp": 1875,
+      "accuracy": 567,
+      "minHit": 76,
+      "maxHit": 105,
+      "intervalMs": 3000,
+      "evasion": 405,
+      "evasions": {
+        "Melee": 405,
+        "Ranged": 405,
+        "Magic": 405
+      },
+      "resistanceProfile": "G-C",
+      "resistances": {
+        "Slash": 32,
+        "Stab": 26,
+        "Crush": 24,
+        "Pierce": -18,
+        "Puncture": -5,
+        "Air": 14,
+        "Fire": -20,
+        "Water": 16,
+        "Earth": 18
+      },
+      "sequence": [
+        "t9-hollow-magus:earth-lance",
+        "t9-hollow-magus:air-lance",
+        "t9-hollow-magus:hollow-ward"
+      ],
+      "xp": 480,
+      "gold": 38,
+      "loot": [
+        {
+          "item": "combat.loot.t9_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t9_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "t9-hollow-magus:earth-lance": {
+          "name": "Earth Lance",
+          "type": "Earth",
+          "multiplier": 1,
+          "id": "t9-hollow-magus:earth-lance",
+          "damageEnabled": true
+        },
+        "t9-hollow-magus:air-lance": {
+          "name": "Air Lance",
+          "type": "Air",
+          "multiplier": 1,
+          "id": "t9-hollow-magus:air-lance",
+          "damageEnabled": true
+        },
+        "t9-hollow-magus:hollow-ward": {
+          "name": "Hollow Ward",
+          "selfResistancePp": 12,
+          "selfResistanceActions": 2,
+          "selfResistanceTypes": [],
+          "selfResistanceScope": "all",
+          "id": "t9-hollow-magus:hollow-ward",
+          "damageEnabled": false
+        }
+      }
+    },
+    "t9-the-hollow-regent": {
+      "id": "t9-the-hollow-regent",
+      "name": "The Hollow Regent",
+      "tier": 9,
+      "rank": "Boss",
+      "combatClass": "Boss",
+      "kind": "Boss",
+      "tags": [
+        "Boss",
+        "Dungeon"
+      ],
+      "areaId": "t9-umbral-citadel",
+      "style": "Melee",
+      "basicDamageType": "Slash",
+      "maxHp": 7500,
+      "accuracy": 594,
+      "minHit": 90,
+      "maxHit": 125,
+      "intervalMs": 3000,
+      "evasion": 405,
+      "evasions": {
+        "Melee": 405,
+        "Ranged": 405,
+        "Magic": 405
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 42,
+        "Stab": 18,
+        "Crush": 28,
+        "Pierce": 32,
+        "Puncture": 40,
+        "Air": -5,
+        "Fire": -25,
+        "Water": 0,
+        "Earth": 8
+      },
+      "sequence": [
+        "t9-the-hollow-regent:regent-slash",
+        "t9-the-hollow-regent:regent-slash",
+        "t9-the-hollow-regent:hollow-decree"
+      ],
+      "xp": 480,
+      "gold": 45,
+      "loot": [
+        {
+          "item": "combat.loot.t9_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t9_arcane_remnant",
+      "unlockRequirements": [],
+      "bossComponent": "Hollow Crown",
+      "uniqueHook": "combat.unique.t9.nightglass_carapace",
+      "firstKillReward": [
+        {
+          "item": "combat.loot.t9_boss_component",
+          "chance": 1,
+          "min": 1,
+          "max": 1,
+          "guaranteed": true,
+          "firstKillOnly": true,
+          "protected": true
+        }
+      ],
+      "phases": [
+        {
+          "thresholdPct": 60,
+          "sequence": [
+            "t9-the-hollow-regent:hollow-decree",
+            "t9-the-hollow-regent:nightglass-crush",
+            "t9-the-hollow-regent:regent-slash"
+          ]
+        },
+        {
+          "thresholdPct": 30,
+          "sequence": [
+            "t9-the-hollow-regent:nightglass-crush",
+            "t9-the-hollow-regent:devouring-crown",
+            "t9-the-hollow-regent:regent-slash"
+          ]
+        }
+      ],
+      "actions": {
+        "t9-the-hollow-regent:regent-slash": {
+          "name": "Regent Slash",
+          "type": "Slash",
+          "multiplier": 1.1,
+          "id": "t9-the-hollow-regent:regent-slash",
+          "damageEnabled": true
+        },
+        "t9-the-hollow-regent:hollow-decree": {
+          "name": "Hollow Decree",
+          "type": "Earth",
+          "multiplier": 1.2,
+          "status": {
+            "type": "ResistanceDown",
+            "magnitude": 10,
+            "durationMs": 8000
+          },
+          "resistanceDownTypes": [
+            "Earth"
+          ],
+          "id": "t9-the-hollow-regent:hollow-decree",
+          "damageEnabled": true
+        },
+        "t9-the-hollow-regent:nightglass-crush": {
+          "name": "Nightglass Crush",
+          "type": "Crush",
+          "multiplier": 1.6,
+          "id": "t9-the-hollow-regent:nightglass-crush",
+          "damageEnabled": true
+        },
+        "t9-the-hollow-regent:devouring-crown": {
+          "name": "Devouring Crown",
+          "type": "Stab",
+          "multiplier": 1.25,
+          "healSelfPct": 4,
+          "id": "t9-the-hollow-regent:devouring-crown",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t10-starforged-sentinel": {
+      "id": "t10-starforged-sentinel",
+      "name": "Starforged Sentinel",
+      "tier": 10,
+      "rank": "Heavy",
+      "combatClass": "Heavy",
+      "kind": "Construct",
+      "tags": [
+        "Construct"
+      ],
+      "areaId": "t10-astral-verge",
+      "style": "Melee",
+      "basicDamageType": "Crush",
+      "maxHp": 2375,
+      "accuracy": 584,
+      "minHit": 96,
+      "maxHit": 132,
+      "intervalMs": 3000,
+      "evasion": 465,
+      "evasions": {
+        "Melee": 465,
+        "Ranged": 465,
+        "Magic": 465
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 18,
+        "Crush": 44,
+        "Pierce": 32,
+        "Puncture": 28,
+        "Air": 14,
+        "Fire": 14,
+        "Water": 14,
+        "Earth": 14
+      },
+      "sequence": [
+        "t10-starforged-sentinel:hammer",
+        "t10-starforged-sentinel:hammer",
+        "t10-starforged-sentinel:starfall-slam"
+      ],
+      "xp": 608,
+      "gold": 44,
+      "loot": [
+        {
+          "item": "combat.loot.t10_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t10_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "t10-starforged-sentinel:hammer": {
+          "name": "Hammer",
+          "type": "Crush",
+          "multiplier": 1,
+          "id": "t10-starforged-sentinel:hammer",
+          "damageEnabled": true
+        },
+        "t10-starforged-sentinel:starfall-slam": {
+          "name": "Starfall Slam",
+          "type": "Crush",
+          "multiplier": 1.55,
+          "status": {
+            "type": "ResistanceDown",
+            "magnitude": 10,
+            "durationMs": 8000
+          },
+          "resistanceDownTypes": [
+            "Crush"
+          ],
+          "id": "t10-starforged-sentinel:starfall-slam",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t10-prism-beast": {
+      "id": "t10-prism-beast",
+      "name": "Prism Beast",
+      "tier": 10,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Beast",
+      "tags": [
+        "Beast"
+      ],
+      "areaId": "t10-astral-verge",
+      "style": "Melee",
+      "basicDamageType": "Stab",
+      "maxHp": 1900,
+      "accuracy": 615,
+      "minHit": 87,
+      "maxHit": 120,
+      "intervalMs": 3000,
+      "evasion": 465,
+      "evasions": {
+        "Melee": 465,
+        "Ranged": 465,
+        "Magic": 465
+      },
+      "resistanceProfile": "M-C",
+      "resistances": {
+        "Slash": -12,
+        "Stab": 18,
+        "Crush": 14,
+        "Pierce": 24,
+        "Puncture": 20,
+        "Air": 20,
+        "Fire": 20,
+        "Water": 20,
+        "Earth": 20
+      },
+      "sequence": [
+        "t10-prism-beast:claw",
+        "t10-prism-beast:prism-fang",
+        "t10-prism-beast:claw"
+      ],
+      "xp": 608,
+      "gold": 40,
+      "loot": [
+        {
+          "item": "combat.loot.t10_beast_trophy",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t10_beast_trophy",
+      "unlockRequirements": [],
+      "actions": {
+        "t10-prism-beast:claw": {
+          "name": "Claw",
+          "type": "Stab",
+          "multiplier": 1,
+          "id": "t10-prism-beast:claw",
+          "damageEnabled": true
+        },
+        "t10-prism-beast:prism-fang": {
+          "name": "Prism Fang",
+          "type": "Stab",
+          "multiplier": 1.25,
+          "dynamicTypeRule": "sequenceElement",
+          "id": "t10-prism-beast:prism-fang",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t10-astral-ranger": {
+      "id": "t10-astral-ranger",
+      "name": "Astral Ranger",
+      "tier": 10,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Humanoid",
+      "tags": [
+        "Humanoid",
+        "Archer"
+      ],
+      "areaId": "t10-astral-verge",
+      "style": "Ranged",
+      "basicDamageType": "Puncture",
+      "maxHp": 1900,
+      "accuracy": 615,
+      "minHit": 87,
+      "maxHit": 120,
+      "intervalMs": 3000,
+      "evasion": 465,
+      "evasions": {
+        "Melee": 465,
+        "Ranged": 465,
+        "Magic": 465
+      },
+      "resistanceProfile": "R-B",
+      "resistances": {
+        "Slash": -12,
+        "Stab": -5,
+        "Crush": 6,
+        "Pierce": 22,
+        "Puncture": 16,
+        "Air": 36,
+        "Fire": 36,
+        "Water": 36,
+        "Earth": 36
+      },
+      "sequence": [
+        "t10-astral-ranger:bolt",
+        "t10-astral-ranger:bolt",
+        "t10-astral-ranger:starpiercer"
+      ],
+      "xp": 608,
+      "gold": 40,
+      "loot": [
+        {
+          "item": "combat.loot.t10_war_mark",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t10_war_mark",
+      "unlockRequirements": [],
+      "actions": {
+        "t10-astral-ranger:bolt": {
+          "name": "Bolt",
+          "type": "Puncture",
+          "multiplier": 1,
+          "id": "t10-astral-ranger:bolt",
+          "damageEnabled": true
+        },
+        "t10-astral-ranger:starpiercer": {
+          "name": "Starpiercer",
+          "type": "Puncture",
+          "multiplier": 1.55,
+          "penetrationPp": 15,
+          "id": "t10-astral-ranger:starpiercer",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t10-celestial-magus": {
+      "id": "t10-celestial-magus",
+      "name": "Celestial Magus",
+      "tier": 10,
+      "rank": "Normal",
+      "combatClass": "Normal",
+      "kind": "Caster",
+      "tags": [
+        "Caster"
+      ],
+      "areaId": "t10-astral-verge",
+      "style": "Magic",
+      "basicDamageType": "Fire",
+      "maxHp": 1900,
+      "accuracy": 615,
+      "minHit": 87,
+      "maxHit": 120,
+      "intervalMs": 3000,
+      "evasion": 465,
+      "evasions": {
+        "Melee": 465,
+        "Ranged": 465,
+        "Magic": 465
+      },
+      "resistanceProfile": "G-C",
+      "resistances": {
+        "Slash": 32,
+        "Stab": 26,
+        "Crush": 24,
+        "Pierce": -20,
+        "Puncture": -5,
+        "Air": 30,
+        "Fire": 30,
+        "Water": 30,
+        "Earth": 30
+      },
+      "sequence": [
+        "t10-celestial-magus:air",
+        "t10-celestial-magus:fire",
+        "t10-celestial-magus:water",
+        "t10-celestial-magus:earth"
+      ],
+      "xp": 608,
+      "gold": 40,
+      "loot": [
+        {
+          "item": "combat.loot.t10_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t10_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "t10-celestial-magus:air": {
+          "name": "Air",
+          "type": "Air",
+          "multiplier": 1.05,
+          "id": "t10-celestial-magus:air",
+          "damageEnabled": true
+        },
+        "t10-celestial-magus:fire": {
+          "name": "Fire",
+          "type": "Fire",
+          "multiplier": 1.05,
+          "id": "t10-celestial-magus:fire",
+          "damageEnabled": true
+        },
+        "t10-celestial-magus:water": {
+          "name": "Water",
+          "type": "Water",
+          "multiplier": 1.05,
+          "id": "t10-celestial-magus:water",
+          "damageEnabled": true
+        },
+        "t10-celestial-magus:earth": {
+          "name": "Earth",
+          "type": "Earth",
+          "multiplier": 1.05,
+          "id": "t10-celestial-magus:earth",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t10-astral-behemoth": {
+      "id": "t10-astral-behemoth",
+      "name": "Astral Behemoth",
+      "tier": 10,
+      "rank": "Elite",
+      "combatClass": "Elite",
+      "kind": "Beast",
+      "tags": [
+        "Beast",
+        "Elite"
+      ],
+      "areaId": "t10-astral-verge",
+      "style": "Melee",
+      "basicDamageType": "Crush",
+      "maxHp": 4275,
+      "accuracy": 646,
+      "minHit": 100,
+      "maxHit": 138,
+      "intervalMs": 3000,
+      "evasion": 465,
+      "evasions": {
+        "Melee": 465,
+        "Ranged": 465,
+        "Magic": 465
+      },
+      "resistanceProfile": "M-B",
+      "resistances": {
+        "Slash": 24,
+        "Stab": 18,
+        "Crush": 50,
+        "Pierce": 32,
+        "Puncture": 40,
+        "Air": -5,
+        "Fire": -10,
+        "Water": -12,
+        "Earth": 8
+      },
+      "sequence": [
+        "t10-astral-behemoth:crush",
+        "t10-astral-behemoth:crush",
+        "t10-astral-behemoth:meteor-charge",
+        "t10-astral-behemoth:starquake"
+      ],
+      "xp": 608,
+      "gold": 46,
+      "loot": [
+        {
+          "item": "combat.loot.t10_beast_trophy",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t10_beast_trophy",
+      "unlockRequirements": [
+        {
+          "type": "defeatAll",
+          "targets": [
+            "t10-starforged-sentinel",
+            "t10-prism-beast",
+            "t10-astral-ranger",
+            "t10-celestial-magus"
+          ]
+        }
+      ],
+      "firstKillReward": [
+        {
+          "item": "combat.loot.t10_elite_component",
+          "chance": 1,
+          "min": 1,
+          "max": 1,
+          "guaranteed": true,
+          "firstKillOnly": true,
+          "protected": true
+        }
+      ],
+      "eliteComponent": "Astral Heart",
+      "actions": {
+        "t10-astral-behemoth:crush": {
+          "name": "Crush",
+          "type": "Crush",
+          "multiplier": 1,
+          "id": "t10-astral-behemoth:crush",
+          "damageEnabled": true
+        },
+        "t10-astral-behemoth:meteor-charge": {
+          "name": "Meteor Charge",
+          "type": "Crush",
+          "multiplier": 1.65,
+          "id": "t10-astral-behemoth:meteor-charge",
+          "damageEnabled": true
+        },
+        "t10-astral-behemoth:starquake": {
+          "name": "Starquake",
+          "type": "Earth",
+          "multiplier": 1.3,
+          "status": {
+            "type": "Stun",
+            "magnitude": 1,
+            "durationMs": 1000
+          },
+          "id": "t10-astral-behemoth:starquake",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t10-nexus-guardian": {
+      "id": "t10-nexus-guardian",
+      "name": "Nexus Guardian",
+      "tier": 10,
+      "rank": "Dungeon",
+      "combatClass": "Dungeon",
+      "kind": "Construct",
+      "tags": [
+        "Construct",
+        "Dungeon"
+      ],
+      "areaId": "t10-astral-nexus",
+      "style": "Ranged",
+      "basicDamageType": "Puncture",
+      "maxHp": 2375,
+      "accuracy": 646,
+      "minHit": 91,
+      "maxHit": 126,
+      "intervalMs": 3000,
+      "evasion": 465,
+      "evasions": {
+        "Melee": 465,
+        "Ranged": 465,
+        "Magic": 465
+      },
+      "resistanceProfile": "R-B",
+      "resistances": {
+        "Slash": -15,
+        "Stab": -5,
+        "Crush": 6,
+        "Pierce": 22,
+        "Puncture": 16,
+        "Air": 40,
+        "Fire": 40,
+        "Water": 40,
+        "Earth": 40
+      },
+      "sequence": [
+        "t10-nexus-guardian:bolt",
+        "t10-nexus-guardian:bolt",
+        "t10-nexus-guardian:astral-barrage"
+      ],
+      "xp": 608,
+      "gold": 42,
+      "loot": [
+        {
+          "item": "combat.loot.t10_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t10_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "t10-nexus-guardian:bolt": {
+          "name": "Bolt",
+          "type": "Puncture",
+          "multiplier": 1,
+          "id": "t10-nexus-guardian:bolt",
+          "damageEnabled": true
+        },
+        "t10-nexus-guardian:astral-barrage": {
+          "name": "Astral Barrage",
+          "type": "Puncture",
+          "multiplier": 0.6,
+          "hits": 3,
+          "separateHitRolls": true,
+          "id": "t10-nexus-guardian:astral-barrage",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t10-nexus-hierophant": {
+      "id": "t10-nexus-hierophant",
+      "name": "Nexus Hierophant",
+      "tier": 10,
+      "rank": "Dungeon",
+      "combatClass": "Dungeon",
+      "kind": "Caster",
+      "tags": [
+        "Caster",
+        "Dungeon"
+      ],
+      "areaId": "t10-astral-nexus",
+      "style": "Magic",
+      "basicDamageType": "Air",
+      "maxHp": 2375,
+      "accuracy": 646,
+      "minHit": 91,
+      "maxHit": 126,
+      "intervalMs": 3000,
+      "evasion": 465,
+      "evasions": {
+        "Melee": 465,
+        "Ranged": 465,
+        "Magic": 465
+      },
+      "resistanceProfile": "G-C",
+      "resistances": {
+        "Slash": 32,
+        "Stab": 26,
+        "Crush": 24,
+        "Pierce": -20,
+        "Puncture": -5,
+        "Air": 36,
+        "Fire": 36,
+        "Water": 36,
+        "Earth": 36
+      },
+      "sequence": [
+        "t10-nexus-hierophant:air",
+        "t10-nexus-hierophant:water",
+        "t10-nexus-hierophant:fire",
+        "t10-nexus-hierophant:earth",
+        "t10-nexus-hierophant:zenith-seal"
+      ],
+      "xp": 608,
+      "gold": 42,
+      "loot": [
+        {
+          "item": "combat.loot.t10_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t10_arcane_remnant",
+      "unlockRequirements": [],
+      "actions": {
+        "t10-nexus-hierophant:air": {
+          "name": "Air",
+          "type": "Air",
+          "multiplier": 0.95,
+          "id": "t10-nexus-hierophant:air",
+          "damageEnabled": true
+        },
+        "t10-nexus-hierophant:water": {
+          "name": "Water",
+          "type": "Water",
+          "multiplier": 0.95,
+          "id": "t10-nexus-hierophant:water",
+          "damageEnabled": true
+        },
+        "t10-nexus-hierophant:fire": {
+          "name": "Fire",
+          "type": "Fire",
+          "multiplier": 0.95,
+          "id": "t10-nexus-hierophant:fire",
+          "damageEnabled": true
+        },
+        "t10-nexus-hierophant:earth": {
+          "name": "Earth",
+          "type": "Earth",
+          "multiplier": 0.95,
+          "id": "t10-nexus-hierophant:earth",
+          "damageEnabled": true
+        },
+        "t10-nexus-hierophant:zenith-seal": {
+          "name": "Zenith Seal",
+          "type": "Earth",
+          "multiplier": 1.3,
+          "status": {
+            "type": "ResistanceDown",
+            "magnitude": 12,
+            "durationMs": 8000
+          },
+          "resistanceDownTypes": [
+            "Air",
+            "Fire",
+            "Water",
+            "Earth"
+          ],
+          "id": "t10-nexus-hierophant:zenith-seal",
+          "damageEnabled": true
+        }
+      }
+    },
+    "t10-the-zenith-warden": {
+      "id": "t10-the-zenith-warden",
+      "name": "The Zenith Warden",
+      "tier": 10,
+      "rank": "Boss",
+      "combatClass": "Boss",
+      "kind": "Boss",
+      "tags": [
+        "Boss",
+        "Dungeon"
+      ],
+      "areaId": "t10-astral-nexus",
+      "style": "Magic",
+      "basicDamageType": "Earth",
+      "maxHp": 9500,
+      "accuracy": 677,
+      "minHit": 108,
+      "maxHit": 150,
+      "intervalMs": 3000,
+      "evasion": 465,
+      "evasions": {
+        "Melee": 465,
+        "Ranged": 465,
+        "Magic": 465
+      },
+      "resistanceProfile": "G-C",
+      "resistances": {
+        "Slash": 32,
+        "Stab": 26,
+        "Crush": 24,
+        "Pierce": -22,
+        "Puncture": -18,
+        "Air": 40,
+        "Fire": 40,
+        "Water": 40,
+        "Earth": 40
+      },
+      "sequence": [
+        "t10-the-zenith-warden:air-judgment",
+        "t10-the-zenith-warden:water-judgment",
+        "t10-the-zenith-warden:fire-judgment",
+        "t10-the-zenith-warden:earth-judgment"
+      ],
+      "xp": 608,
+      "gold": 50,
+      "loot": [
+        {
+          "item": "combat.loot.t10_arcane_remnant",
+          "chance": 0.3,
+          "min": 1,
+          "max": 1
+        }
+      ],
+      "offering": "combat.loot.t10_arcane_remnant",
+      "unlockRequirements": [],
+      "bossComponent": "Zenith Core",
+      "uniqueHook": "combat.unique.t10.zenith_staff",
+      "firstKillReward": [
+        {
+          "item": "combat.loot.t10_boss_component",
+          "chance": 1,
+          "min": 1,
+          "max": 1,
+          "guaranteed": true,
+          "firstKillOnly": true,
+          "protected": true
+        }
+      ],
+      "phases": [
+        {
+          "thresholdPct": 70,
+          "sequence": [
+            "t10-the-zenith-warden:zenith-lance",
+            "t10-the-zenith-warden:fire-judgment",
+            "t10-the-zenith-warden:zenith-lance",
+            "t10-the-zenith-warden:water-judgment"
+          ]
+        },
+        {
+          "thresholdPct": 35,
+          "sequence": [
+            "t10-the-zenith-warden:astral-collapse",
+            "t10-the-zenith-warden:earth-judgment",
+            "t10-the-zenith-warden:starfall",
+            "t10-the-zenith-warden:air-judgment"
+          ]
+        }
+      ],
+      "actions": {
+        "t10-the-zenith-warden:air-judgment": {
+          "name": "Air Judgment",
+          "type": "Air",
+          "multiplier": 1.1,
+          "id": "t10-the-zenith-warden:air-judgment",
+          "damageEnabled": true
+        },
+        "t10-the-zenith-warden:water-judgment": {
+          "name": "Water Judgment",
+          "type": "Water",
+          "multiplier": 1.1,
+          "id": "t10-the-zenith-warden:water-judgment",
+          "damageEnabled": true
+        },
+        "t10-the-zenith-warden:fire-judgment": {
+          "name": "Fire Judgment",
+          "type": "Fire",
+          "multiplier": 1.1,
+          "id": "t10-the-zenith-warden:fire-judgment",
+          "damageEnabled": true
+        },
+        "t10-the-zenith-warden:earth-judgment": {
+          "name": "Earth Judgment",
+          "type": "Earth",
+          "multiplier": 1.1,
+          "id": "t10-the-zenith-warden:earth-judgment",
+          "damageEnabled": true
+        },
+        "t10-the-zenith-warden:zenith-lance": {
+          "name": "Zenith Lance",
+          "type": "Earth",
+          "multiplier": 1.55,
+          "penetrationPp": 12,
+          "dynamicTypeRule": "sequenceElement",
+          "id": "t10-the-zenith-warden:zenith-lance",
+          "damageEnabled": true
+        },
+        "t10-the-zenith-warden:astral-collapse": {
+          "name": "Astral Collapse",
+          "type": "Earth",
+          "multiplier": 1.45,
+          "dynamicTypeRule": "lowestPlayerElementResistance",
+          "id": "t10-the-zenith-warden:astral-collapse",
+          "damageEnabled": true
+        },
+        "t10-the-zenith-warden:starfall": {
+          "name": "Starfall",
+          "type": "Earth",
+          "multiplier": 1.6,
+          "status": {
+            "type": "Stun",
+            "magnitude": 1,
+            "durationMs": 1000
+          },
+          "id": "t10-the-zenith-warden:starfall",
+          "damageEnabled": true
+        }
+      }
+    }
+  },
+  "areas": {
+    "broken-road": {
+      "id": "broken-road",
+      "name": "Broken Road",
+      "tier": 1,
+      "kind": "area",
+      "enemies": [
+        "road-wolf",
+        "dust-rat",
+        "ragged-poacher",
+        "hedge-spark"
+      ],
+      "unlockRequirements": []
+    },
+    "t1-ironjaw-boar-elite": {
+      "id": "t1-ironjaw-boar-elite",
+      "name": "Ironjaw Boar · Elite",
+      "tier": 1,
+      "kind": "elite",
+      "enemies": [
+        "ironjaw-boar"
+      ],
+      "unlockRequirements": [
+        {
+          "type": "defeatAll",
+          "targets": [
+            "road-wolf",
+            "dust-rat",
+            "ragged-poacher",
+            "hedge-spark"
+          ]
+        }
+      ]
+    },
+    "t1-ruined-watch": {
+      "id": "t1-ruined-watch",
+      "name": "Ruined Watch",
+      "tier": 1,
+      "kind": "dungeon",
+      "enemies": [
+        "t1-watch-deserter",
+        "t1-tower-bowman",
+        "ironjaw-boar",
+        "captain-veyr"
+      ],
+      "unlockRequirements": []
+    },
+    "t2-thornfen": {
+      "id": "t2-thornfen",
+      "name": "Thornfen",
+      "tier": 2,
+      "kind": "area",
+      "enemies": [
+        "t2-mirewolf",
+        "t2-shellback-toad",
+        "t2-briar-archer",
+        "t2-bog-witch"
+      ],
+      "unlockRequirements": []
+    },
+    "t2-mirecoil-serpent-elite": {
+      "id": "t2-mirecoil-serpent-elite",
+      "name": "Mirecoil Serpent · Elite",
+      "tier": 2,
+      "kind": "elite",
+      "enemies": [
+        "t2-mirecoil-serpent"
+      ],
+      "unlockRequirements": [
+        {
+          "type": "defeatAll",
+          "targets": [
+            "t2-mirewolf",
+            "t2-shellback-toad",
+            "t2-briar-archer",
+            "t2-bog-witch"
+          ]
+        }
+      ]
+    },
+    "t2-drowned-burrow": {
+      "id": "t2-drowned-burrow",
+      "name": "Drowned Burrow",
+      "tier": 2,
+      "kind": "dungeon",
+      "enemies": [
+        "t2-drowned-stalker",
+        "t2-fen-channeler",
+        "t2-mirecoil-serpent",
+        "t2-miremother-ilyss"
+      ],
+      "unlockRequirements": []
+    },
+    "t3-ironcliff-pass": {
+      "id": "t3-ironcliff-pass",
+      "name": "Ironcliff Pass",
+      "tier": 3,
+      "kind": "area",
+      "enemies": [
+        "t3-cliff-ram",
+        "t3-ironcloak-skirmisher",
+        "t3-cragbow-scout",
+        "t3-stonecaller"
+      ],
+      "unlockRequirements": []
+    },
+    "t3-graniteback-ram-elite": {
+      "id": "t3-graniteback-ram-elite",
+      "name": "Graniteback Ram · Elite",
+      "tier": 3,
+      "kind": "elite",
+      "enemies": [
+        "t3-graniteback-ram"
+      ],
+      "unlockRequirements": [
+        {
+          "type": "defeatAll",
+          "targets": [
+            "t3-cliff-ram",
+            "t3-ironcloak-skirmisher",
+            "t3-cragbow-scout",
+            "t3-stonecaller"
+          ]
+        }
+      ]
+    },
+    "t3-hollow-forge": {
+      "id": "t3-hollow-forge",
+      "name": "Hollow Forge",
+      "tier": 3,
+      "kind": "dungeon",
+      "enemies": [
+        "t3-forge-thrall",
+        "t3-cinder-smith",
+        "t3-graniteback-ram",
+        "t3-forgemaster-korr"
+      ],
+      "unlockRequirements": []
+    },
+    "t4-moonlit-barrows": {
+      "id": "t4-moonlit-barrows",
+      "name": "Moonlit Barrows",
+      "tier": 4,
+      "kind": "area",
+      "enemies": [
+        "t4-graveblade",
+        "t4-wight-hound",
+        "t4-bone-archer",
+        "t4-pale-hexer"
+      ],
+      "unlockRequirements": []
+    },
+    "t4-moonbound-knight-elite": {
+      "id": "t4-moonbound-knight-elite",
+      "name": "Moonbound Knight · Elite",
+      "tier": 4,
+      "kind": "elite",
+      "enemies": [
+        "t4-moonbound-knight"
+      ],
+      "unlockRequirements": [
+        {
+          "type": "defeatAll",
+          "targets": [
+            "t4-graveblade",
+            "t4-wight-hound",
+            "t4-bone-archer",
+            "t4-pale-hexer"
+          ]
+        }
+      ]
+    },
+    "t4-mooncrypt": {
+      "id": "t4-mooncrypt",
+      "name": "Mooncrypt",
+      "tier": 4,
+      "kind": "dungeon",
+      "enemies": [
+        "t4-crypt-sentinel",
+        "t4-moon-priest",
+        "t4-moonbound-knight",
+        "t4-the-pale-castellan"
+      ],
+      "unlockRequirements": []
+    },
+    "t5-cinder-wastes": {
+      "id": "t5-cinder-wastes",
+      "name": "Cinder Wastes",
+      "tier": 5,
+      "kind": "area",
+      "enemies": [
+        "t5-emberclaw",
+        "t5-ash-reaver",
+        "t5-cinder-archer",
+        "t5-flame-seer"
+      ],
+      "unlockRequirements": []
+    },
+    "t5-magmahorn-elite": {
+      "id": "t5-magmahorn-elite",
+      "name": "Magmahorn · Elite",
+      "tier": 5,
+      "kind": "elite",
+      "enemies": [
+        "t5-magmahorn"
+      ],
+      "unlockRequirements": [
+        {
+          "type": "defeatAll",
+          "targets": [
+            "t5-emberclaw",
+            "t5-ash-reaver",
+            "t5-cinder-archer",
+            "t5-flame-seer"
+          ]
+        }
+      ]
+    },
+    "t5-embervault": {
+      "id": "t5-embervault",
+      "name": "Embervault",
+      "tier": 5,
+      "kind": "dungeon",
+      "enemies": [
+        "t5-ember-guard",
+        "t5-pyre-channeler",
+        "t5-magmahorn",
+        "t5-cindermaw"
+      ],
+      "unlockRequirements": []
+    },
+    "t6-frostbound-vale": {
+      "id": "t6-frostbound-vale",
+      "name": "Frostbound Vale",
+      "tier": 6,
+      "kind": "area",
+      "enemies": [
+        "t6-frostfang-wolf",
+        "t6-iceguard-raider",
+        "t6-snowstalker-archer",
+        "t6-rimecaller"
+      ],
+      "unlockRequirements": []
+    },
+    "t6-whitehorn-mammoth-elite": {
+      "id": "t6-whitehorn-mammoth-elite",
+      "name": "Whitehorn Mammoth · Elite",
+      "tier": 6,
+      "kind": "elite",
+      "enemies": [
+        "t6-whitehorn-mammoth"
+      ],
+      "unlockRequirements": [
+        {
+          "type": "defeatAll",
+          "targets": [
+            "t6-frostfang-wolf",
+            "t6-iceguard-raider",
+            "t6-snowstalker-archer",
+            "t6-rimecaller"
+          ]
+        }
+      ]
+    },
+    "t6-frostspire": {
+      "id": "t6-frostspire",
+      "name": "Frostspire",
+      "tier": 6,
+      "kind": "dungeon",
+      "enemies": [
+        "t6-frost-warden",
+        "t6-glacial-adept",
+        "t6-whitehorn-mammoth",
+        "t6-winter-matriarch"
+      ],
+      "unlockRequirements": []
+    },
+    "t7-stormreach-heights": {
+      "id": "t7-stormreach-heights",
+      "name": "Stormreach Heights",
+      "tier": 7,
+      "kind": "area",
+      "enemies": [
+        "t7-stormfang",
+        "t7-gale-raider",
+        "t7-thunderbow",
+        "t7-tempest-adept"
+      ],
+      "unlockRequirements": []
+    },
+    "t7-stormcoil-viper-elite": {
+      "id": "t7-stormcoil-viper-elite",
+      "name": "Stormcoil Viper · Elite",
+      "tier": 7,
+      "kind": "elite",
+      "enemies": [
+        "t7-stormcoil-viper"
+      ],
+      "unlockRequirements": [
+        {
+          "type": "defeatAll",
+          "targets": [
+            "t7-stormfang",
+            "t7-gale-raider",
+            "t7-thunderbow",
+            "t7-tempest-adept"
+          ]
+        }
+      ]
+    },
+    "t7-tempest-bastion": {
+      "id": "t7-tempest-bastion",
+      "name": "Tempest Bastion",
+      "tier": 7,
+      "kind": "dungeon",
+      "enemies": [
+        "t7-tempest-guard",
+        "t7-storm-savant",
+        "t7-stormcoil-viper",
+        "t7-skybreaker-raal"
+      ],
+      "unlockRequirements": []
+    },
+    "t8-aetherfall-expanse": {
+      "id": "t8-aetherfall-expanse",
+      "name": "Aetherfall Expanse",
+      "tier": 8,
+      "kind": "area",
+      "enemies": [
+        "t8-aetherblade",
+        "t8-rift-hound",
+        "t8-prism-archer",
+        "t8-aether-seer"
+      ],
+      "unlockRequirements": []
+    },
+    "t8-prismcoil-serpent-elite": {
+      "id": "t8-prismcoil-serpent-elite",
+      "name": "Prismcoil Serpent · Elite",
+      "tier": 8,
+      "kind": "elite",
+      "enemies": [
+        "t8-prismcoil-serpent"
+      ],
+      "unlockRequirements": [
+        {
+          "type": "defeatAll",
+          "targets": [
+            "t8-aetherblade",
+            "t8-rift-hound",
+            "t8-prism-archer",
+            "t8-aether-seer"
+          ]
+        }
+      ]
+    },
+    "t8-aetherglass-sanctum": {
+      "id": "t8-aetherglass-sanctum",
+      "name": "Aetherglass Sanctum",
+      "tier": 8,
+      "kind": "dungeon",
+      "enemies": [
+        "t8-aetherglass-sentinel",
+        "t8-prismatic-channeler",
+        "t8-prismcoil-serpent",
+        "t8-aetherbound-oracle"
+      ],
+      "unlockRequirements": []
+    },
+    "t9-umbral-depths": {
+      "id": "t9-umbral-depths",
+      "name": "Umbral Depths",
+      "tier": 9,
+      "kind": "area",
+      "enemies": [
+        "t9-nightstalker",
+        "t9-umbral-reaver",
+        "t9-shade-archer",
+        "t9-voidcaller"
+      ],
+      "unlockRequirements": []
+    },
+    "t9-nightglass-devourer-elite": {
+      "id": "t9-nightglass-devourer-elite",
+      "name": "Nightglass Devourer · Elite",
+      "tier": 9,
+      "kind": "elite",
+      "enemies": [
+        "t9-nightglass-devourer"
+      ],
+      "unlockRequirements": [
+        {
+          "type": "defeatAll",
+          "targets": [
+            "t9-nightstalker",
+            "t9-umbral-reaver",
+            "t9-shade-archer",
+            "t9-voidcaller"
+          ]
+        }
+      ]
+    },
+    "t9-umbral-citadel": {
+      "id": "t9-umbral-citadel",
+      "name": "Umbral Citadel",
+      "tier": 9,
+      "kind": "dungeon",
+      "enemies": [
+        "t9-citadel-reaper",
+        "t9-hollow-magus",
+        "t9-nightglass-devourer",
+        "t9-the-hollow-regent"
+      ],
+      "unlockRequirements": []
+    },
+    "t10-astral-verge": {
+      "id": "t10-astral-verge",
+      "name": "Astral Verge",
+      "tier": 10,
+      "kind": "area",
+      "enemies": [
+        "t10-starforged-sentinel",
+        "t10-prism-beast",
+        "t10-astral-ranger",
+        "t10-celestial-magus"
+      ],
+      "unlockRequirements": []
+    },
+    "t10-astral-behemoth-elite": {
+      "id": "t10-astral-behemoth-elite",
+      "name": "Astral Behemoth · Elite",
+      "tier": 10,
+      "kind": "elite",
+      "enemies": [
+        "t10-astral-behemoth"
+      ],
+      "unlockRequirements": [
+        {
+          "type": "defeatAll",
+          "targets": [
+            "t10-starforged-sentinel",
+            "t10-prism-beast",
+            "t10-astral-ranger",
+            "t10-celestial-magus"
+          ]
+        }
+      ]
+    },
+    "t10-astral-nexus": {
+      "id": "t10-astral-nexus",
+      "name": "Astral Nexus",
+      "tier": 10,
+      "kind": "dungeon",
+      "enemies": [
+        "t10-nexus-guardian",
+        "t10-nexus-hierophant",
+        "t10-astral-behemoth",
+        "t10-the-zenith-warden"
+      ],
+      "unlockRequirements": []
+    }
+  },
+  "dungeons": {
+    "t1-ruined-watch": {
+      "id": "t1-ruined-watch",
+      "name": "Ruined Watch",
+      "tier": 1,
+      "encounters": [
+        "t1-watch-deserter",
+        "t1-tower-bowman",
+        "ironjaw-boar",
+        "captain-veyr"
+      ],
+      "bossId": "captain-veyr",
+      "unlockRequirements": [],
+      "bossComponent": "combat.loot.t1_boss_component",
+      "uniqueHook": "combat.unique.t1.rusthook_blade"
+    },
+    "t2-drowned-burrow": {
+      "id": "t2-drowned-burrow",
+      "name": "Drowned Burrow",
+      "tier": 2,
+      "encounters": [
+        "t2-drowned-stalker",
+        "t2-fen-channeler",
+        "t2-mirecoil-serpent",
+        "t2-miremother-ilyss"
+      ],
+      "bossId": "t2-miremother-ilyss",
+      "unlockRequirements": [],
+      "bossComponent": "combat.loot.t2_boss_component",
+      "uniqueHook": "combat.unique.t2.mirecoil_whip"
+    },
+    "t3-hollow-forge": {
+      "id": "t3-hollow-forge",
+      "name": "Hollow Forge",
+      "tier": 3,
+      "encounters": [
+        "t3-forge-thrall",
+        "t3-cinder-smith",
+        "t3-graniteback-ram",
+        "t3-forgemaster-korr"
+      ],
+      "bossId": "t3-forgemaster-korr",
+      "unlockRequirements": [],
+      "bossComponent": "combat.loot.t3_boss_component",
+      "uniqueHook": "combat.unique.t3.forgeheart_maul"
+    },
+    "t4-mooncrypt": {
+      "id": "t4-mooncrypt",
+      "name": "Mooncrypt",
+      "tier": 4,
+      "encounters": [
+        "t4-crypt-sentinel",
+        "t4-moon-priest",
+        "t4-moonbound-knight",
+        "t4-the-pale-castellan"
+      ],
+      "bossId": "t4-the-pale-castellan",
+      "unlockRequirements": [],
+      "bossComponent": "combat.loot.t4_boss_component",
+      "uniqueHook": "combat.unique.t4.moonward_bulwark"
+    },
+    "t5-embervault": {
+      "id": "t5-embervault",
+      "name": "Embervault",
+      "tier": 5,
+      "encounters": [
+        "t5-ember-guard",
+        "t5-pyre-channeler",
+        "t5-magmahorn",
+        "t5-cindermaw"
+      ],
+      "bossId": "t5-cindermaw",
+      "unlockRequirements": [],
+      "bossComponent": "combat.loot.t5_boss_component",
+      "uniqueHook": "combat.unique.t5.cinderchain_whip"
+    },
+    "t6-frostspire": {
+      "id": "t6-frostspire",
+      "name": "Frostspire",
+      "tier": 6,
+      "encounters": [
+        "t6-frost-warden",
+        "t6-glacial-adept",
+        "t6-whitehorn-mammoth",
+        "t6-winter-matriarch"
+      ],
+      "bossId": "t6-winter-matriarch",
+      "unlockRequirements": [],
+      "bossComponent": "combat.loot.t6_boss_component",
+      "uniqueHook": "combat.unique.t6.winterheart_ward"
+    },
+    "t7-tempest-bastion": {
+      "id": "t7-tempest-bastion",
+      "name": "Tempest Bastion",
+      "tier": 7,
+      "encounters": [
+        "t7-tempest-guard",
+        "t7-storm-savant",
+        "t7-stormcoil-viper",
+        "t7-skybreaker-raal"
+      ],
+      "bossId": "t7-skybreaker-raal",
+      "unlockRequirements": [],
+      "bossComponent": "combat.loot.t7_boss_component",
+      "uniqueHook": "combat.unique.t7.venomglass_blowpipe"
+    },
+    "t8-aetherglass-sanctum": {
+      "id": "t8-aetherglass-sanctum",
+      "name": "Aetherglass Sanctum",
+      "tier": 8,
+      "encounters": [
+        "t8-aetherglass-sentinel",
+        "t8-prismatic-channeler",
+        "t8-prismcoil-serpent",
+        "t8-aetherbound-oracle"
+      ],
+      "bossId": "t8-aetherbound-oracle",
+      "unlockRequirements": [],
+      "bossComponent": "combat.loot.t8_boss_component",
+      "uniqueHook": "combat.unique.t8.oracle_prism"
+    },
+    "t9-umbral-citadel": {
+      "id": "t9-umbral-citadel",
+      "name": "Umbral Citadel",
+      "tier": 9,
+      "encounters": [
+        "t9-citadel-reaper",
+        "t9-hollow-magus",
+        "t9-nightglass-devourer",
+        "t9-the-hollow-regent"
+      ],
+      "bossId": "t9-the-hollow-regent",
+      "unlockRequirements": [],
+      "bossComponent": "combat.loot.t9_boss_component",
+      "uniqueHook": "combat.unique.t9.nightglass_carapace"
+    },
+    "t10-astral-nexus": {
+      "id": "t10-astral-nexus",
+      "name": "Astral Nexus",
+      "tier": 10,
+      "encounters": [
+        "t10-nexus-guardian",
+        "t10-nexus-hierophant",
+        "t10-astral-behemoth",
+        "t10-the-zenith-warden"
+      ],
+      "bossId": "t10-the-zenith-warden",
+      "unlockRequirements": [],
+      "bossComponent": "combat.loot.t10_boss_component",
+      "uniqueHook": "combat.unique.t10.zenith_staff"
+    }
+  }
+}

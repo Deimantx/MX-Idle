@@ -485,7 +485,7 @@ They should not be required for basic deterministic crafted progression.
 |---|---|---|---|---|
 | T1 | Captain Veyr | Veyr's Broken Crest | Rusthook Blade (unique hook; stats later) | Unlock next Combat Tier |
 | T2 | Miremother Ilyss | Miremother Broodheart | Mirecoil Whip (standalone Melee unique hook) | Unlock next Combat Tier |
-| T3 | Forgemaster Korr | Korr's Forge Sigil | Forgeheart Mace upgrade component | Unlock next Combat Tier |
+| T3 | Forgemaster Korr | Korr's Forge Sigil | Forgeheart Maul upgrade component | Unlock next Combat Tier |
 | T4 | The Pale Castellan | Pale Crown Fragment | Moonward Shield component | Unlock next Combat Tier |
 | T5 | Cindermaw | Cindermaw Core | Cinderchain Whip component | Unlock next Combat Tier |
 | T6 | Winter Matriarch | Winterheart | Winterheart Ward component | Unlock next Combat Tier |
@@ -701,7 +701,7 @@ Mire Bolt = 1.00× Water; Brood Chill = 1.25× Water + Chill 10% for 6s; Venom W
 **Target band:** 21–30  
 **Elite:** Graniteback Ram  
 **Dungeon:** Hollow Forge  
-**Boss:** {'name': 'Forgemaster Korr', 'style': 'Melee', 'dtype': 'Crush', 'profile': 'M-B', 'overrides': 'Crush +40; Water -18; Fire +22', 'phases': [('>40% HP', 'Hammer → Hammer → Furnace Slam → Tempered Guard → repeat'), ('≤40% HP', 'Furnace Slam → Molten Hammer → Hammer → repeat')], 'actions': 'Hammer = 1.00× Crush; Furnace Slam = 1.50× Crush + Burn 12% hit over 6s; Tempered Guard = self +10 pp Melee/Ranged Resistance for next 2 actions; Molten Hammer = 1.35× Crush + 0.35× Fire component (future hybrid hook; baseline may resolve as Crush+Fire components)', 'component': "Korr's Forge Sigil", 'unique': 'Forgeheart Mace upgrade component'}
+**Boss:** {'name': 'Forgemaster Korr', 'style': 'Melee', 'dtype': 'Crush', 'profile': 'M-B', 'overrides': 'Crush +40; Water -18; Fire +22', 'phases': [('>40% HP', 'Hammer → Hammer → Furnace Slam → Tempered Guard → repeat'), ('≤40% HP', 'Furnace Slam → Molten Hammer → Hammer → repeat')], 'actions': 'Hammer = 1.00× Crush; Furnace Slam = 1.50× Crush + Burn 12% hit over 6s; Tempered Guard = self +10 pp Melee/Ranged Resistance for next 2 actions; Molten Hammer = 1.35× Crush + 0.35× Fire component (future hybrid hook; baseline may resolve as Crush+Fire components)', 'component': "Korr's Forge Sigil", 'unique': 'Forgeheart Maul upgrade component'}
 
 The Tier follows the global normal → Elite → Dungeon flow.
 
@@ -756,7 +756,7 @@ Hammer = 1.00× Crush; Furnace Slam = 1.50× Crush + Burn 12% hit over 6s; Tempe
 
 ### Unique equipment hook
 
-**Forgeheart Mace upgrade component**
+**Forgeheart Maul upgrade component**
 
 ## Dungeon encounter order
 

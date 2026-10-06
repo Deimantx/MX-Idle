@@ -30,7 +30,6 @@ const BASE_ITEMS = {
   'combat.armor.heavy.copper_gauntlets': { name: 'Copper Gauntlets', icon: 'gloves', category: 'Equipment', desc: 'Copper hand protection.', tier: 1 },
   'combat.armor.heavy.copper_greaves': { name: 'Copper Greaves', icon: 'greaves', category: 'Equipment', desc: 'Copper leg protection.', tier: 1 },
   'combat.offhand.melee.copper_shield': { name: 'Copper Shield', icon: 'shield', category: 'Equipment', desc: '1H Melee off-hand · +0.10s attack interval.', tier: 1 },
-  'combat.loot.beast_trophy': { name: 'Beast Trophy', icon: 'trophy', category: 'Combat Loot', desc: 'A mark of a dangerous hunt.', tier: 1, offeringValue:5 },
 } satisfies Record<Exclude<ItemId, `fishing.${string}` | `cooking.${string}`>, ItemDefinition>;
 const FISHING_ITEMS = Object.fromEntries([
   ...FISH_SPECIES.map((fish) => [fish.id,{name:fish.name,icon:'fish',category:'Raw Fish',desc:`${fish.rarity} ${fish.cookingClass} · ${fish.xp} Fishing XP`,tier:fish.tier,rarity:fish.rarity==='Very Rare'?'Rare':fish.rarity==='Rare'?'Uncommon':'Common'}]),

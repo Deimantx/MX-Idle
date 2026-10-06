@@ -4,7 +4,7 @@ import { getCoreMaterialChance, getMiningPower, getPrimaryExpectedQuantity, reso
 import { MELEE_WEAPONS } from '../content/combat/meleeWeapons';
 
 const ORE = 'item.mining.copper_ore', INGOT = 'item.smithing.copper_ingot';
-const SWORD = 'combat.weapon.melee.copper_sword', HELM = 'combat.armor.heavy.copper_helm', TROPHY = 'combat.loot.beast_trophy';
+const SWORD = 'combat.weapon.melee.copper_sword', HELM = 'combat.armor.heavy.copper_helm', TROPHY = 'combat.loot.t1_beast_trophy';
 
 describe('Mining content and simulation', () => {
   it('resolves each active deposit and smithing recipe through registered item IDs', () => {
@@ -140,7 +140,7 @@ describe('Combat compatibility', () => {
   it('keeps deterministic combat and awards namespaced trophies', () => {
     const s = freshState(); s.skills.Attack.level = 5; s.equipped.weapon = SWORD; s.equipped.head = HELM; startActivity(s, 'combat');
     const a = advance(s, 60_000), b = advance(s, 60_000);
-    expect(a.rng).toBe(b.rng); expect(a.combat.kills).toBeGreaterThan(0); expect(a.bank[TROPHY]).toBe(a.combat.kills);
+    expect(a.rng).toBe(b.rng); expect(a.combat.kills).toBeGreaterThan(0); expect(a.bank[TROPHY]??0).toBeLessThanOrEqual(a.combat.kills);
     expect(a.gold).toBe(a.combat.kills * PROVISIONAL_FIRST_SLICE_COMBAT_VALUES.gold); expect(a.skills.Attack.xp).toBeGreaterThan(0);
   });
   it('reveals the Ironjaw Boar after each normal enemy has been defeated', () => {

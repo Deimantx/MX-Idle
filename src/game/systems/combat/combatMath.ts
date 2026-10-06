@@ -25,8 +25,12 @@ export function getWeaponSpecial(game: SaveState) {
 }
 export function getPlayerAccuracy(game: SaveState) {
   const weapon = game.equipped.weapon ? MELEE_WEAPONS[game.equipped.weapon as keyof typeof MELEE_WEAPONS] : undefined;
-  const down = game.combat.statuses.some((status) => status.target === 'player' && status.type === 'AccuracyDown') ? .08 : 0;
+  const down = game.combat.statuses.filter((status) => status.target === 'player' && status.type === 'AccuracyDown').reduce((sum,status)=>sum+(status.magnitude??0),0);
   return (100 + game.skills.Attack.level * 6 + (weapon?.accuracyBonus ?? 0)) * (1 - down);
+}
+export function getCurrentPlayerBasicDamageType(game:SaveState):DamageType {
+  const weapon=game.equipped.weapon?MELEE_WEAPONS[game.equipped.weapon as keyof typeof MELEE_WEAPONS]:undefined;
+  return weapon?.stances.find(stance=>stance.damageType===game.combat.pendingStance)?.damageType??weapon?.stances.find(stance=>stance.id===weapon.defaultStance)?.damageType??game.combat.pendingStance;
 }
 export function getPlayerEvasion(game: SaveState) {
   return getPlayerEvasions(game).Melee;
@@ -91,7 +95,7 @@ export function isValidEquipmentForSlot(game: SaveState, item: ItemId, slot: str
 }
 export function canStartCombat(game: SaveState) { return canUseWeapon(game, game.equipped.weapon); }
 export function tierUnlockRequirement(tier:number){return tier<=1?null:{bossId:Object.values(DUNGEONS).find(d=>d.tier===tier-1)?.bossId??'',attackLevel:(tier-1)*10};}
-export function isTierUnlocked(game:SaveState,tier:number){if(tier===1)return true;if(game.combatProgress.unlockedTiers.includes(tier))return true;const gate=tierUnlockRequirement(tier);return Boolean(gate&&game.combatProgress.bossFirstKills[gate.bossId]&&game.skills.Attack.level>=gate.attackLevel);}
+export function isTierUnlocked(game:SaveState,tier:number){return tier===1||game.combatProgress.unlockedTiers.includes(tier);}
 export function enemyUnlocked(game: SaveState, id: EnemyId) { const enemy = ENEMIES[id]; if(!enemy||!isTierUnlocked(game,enemy.tier))return false;if(enemy.rank==='Light'||enemy.rank==='Normal'||enemy.rank==='Heavy')return true;if(enemy.rank==='Elite')return evaluateRequirements(game,enemy.unlockRequirements);const elite=Object.values(ENEMIES).find(x=>x.tier===enemy.tier&&x.rank==='Elite');return Boolean(elite&&game.combatProgress.eliteFirstKills[elite.id]); }
 export function areaUnlocked(game: SaveState, areaId: string) { const area = COMBAT_AREAS[areaId]; if(!area||!isTierUnlocked(game,area.tier))return false;if(area.kind==='area')return true;if(area.kind==='elite')return evaluateRequirements(game,area.unlockRequirements);const elite=Object.values(ENEMIES).find(x=>x.tier===area.tier&&x.rank==='Elite');return Boolean(elite&&game.combatProgress.eliteFirstKills[elite.id]); }
 export function getCombatHitChance(accuracy: number, evasion: number) { return hitChance(accuracy, evasion); }
