@@ -538,20 +538,6 @@
 .smith-tool-card b { color: #d9d2c3; font-size: calc(9px * var(--ui-scale) * var(--text-scale)); }
 .smith-tool-card small { color: #919994; font-size: calc(7px * var(--ui-scale) * var(--text-scale)); }
 
-.recipe-mastery {
-  display: grid;
-  gap: calc(5px * var(--ui-scale));
-  margin-top: calc(7px * var(--ui-scale));
-  padding: calc(8px * var(--ui-scale)) calc(9px * var(--ui-scale));
-  background: #1a2021;
-  border: 1px solid #343c3b;
-  border-radius: calc(4px * var(--ui-scale));
-}
-
-.recipe-mastery>div:first-child { display: flex; justify-content: space-between; gap: calc(8px * var(--ui-scale)); color: #c8c9bf; font-size: calc(8px * var(--ui-scale) * var(--text-scale)); }
-.recipe-mastery>div:first-child b { color: #dfbd91; font-variant-numeric: tabular-nums; }
-.recipe-mastery small { color: #959d97; font-size: calc(7px * var(--ui-scale) * var(--text-scale)); line-height: 1.4; }
-
 .workpiece-art {
   height: calc(142px * var(--ui-scale));
   margin: 0 calc(-16px * var(--ui-scale)) calc(12px * var(--ui-scale));

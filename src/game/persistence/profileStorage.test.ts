@@ -31,6 +31,12 @@ describe('three save profiles', () => {
     expect(memory.getItem(profileSaveKey(2))).not.toBeNull();
   });
 
+  it('loads a current v5 profile after creating it',()=>{
+    initializeProfiles();createProfile(1,'Current');
+    expect(JSON.parse(memory.getItem(profileSaveKey(1))!).version).toBe(5);
+    expect(loadProfile(1).profile.name).toBe('Current');
+  });
+
   it('migrates a valid legacy save without simulating or removing it', () => {
     const state = freshState(1000); state.gold = 17;
     const legacy = JSON.stringify({ version: 1, savedAt: 1000, state }); memory.setItem('mx-idle-save-v1', legacy);

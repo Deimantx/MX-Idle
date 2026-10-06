@@ -1,7 +1,9 @@
 # Phase 1 Fishing, Cooking, and Combat Core Report
 
-**Status:** Systems/content foundation implemented; balance remains provisional.  
-**Save schema:** v4 (`mx-idle-save-v4`)  
+> Superseded: the current Mastery implementation was removed in the later Phase-1 audit. This report records historical implementation state only.
+
+**Status:** Systems/content foundation implemented; balance remains provisional.
+**Save schema:** v4 (`mx-idle-save-v4`)
 **Next content task:** Phase 1 Combat World / Content Expansion
 
 ## Architecture

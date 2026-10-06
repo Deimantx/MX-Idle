@@ -1,7 +1,11 @@
-﻿# MX-Idle Professions Overview v1.0
+> **MASTERY STATUS — REMOVED FROM CURRENT BASELINE**
+>
+> Historical Mastery references in this overview are deprecated. Do not implement Mastery, Mastery XP, milestones, or worker-Proven rules unless a future progression redesign explicitly restores them.
 
-**Status:** Canonical overview  
-**Companion canon:** [Global Game Rules](../00_GLOBAL_GAME_RULES.md)  
+# MX-Idle Professions Overview v1.0
+
+**Status:** Canonical overview
+**Companion canon:** [Global Game Rules](../00_GLOBAL_GAME_RULES.md)
 
 **Shared canon:** [00_GLOBAL_GAME_RULES.md](../00_GLOBAL_GAME_RULES.md) · [Item Registry](../Registries/ITEM_REGISTRY.md) · [Recipe Registry](../Registries/RECIPE_REGISTRY.md)
 **Detail:** Each linked profession document remains the source for its complete tables, formulas, unlocks, and unique mechanics.
@@ -115,8 +119,3 @@ Selective World/Primal/Astral endgame remains without a full T11 item ladder. Wo
 - [Activity Planner](../16_ACTIVITY_PLANNER.md)
 - [Endgame Resource DAG](../17_ENDGAME_RESOURCE_DAG.md)
 - [Integration Hardening Report](../PROFESSION_INTEGRATION_HARDENING_REPORT.md)
-
-
-
-
-

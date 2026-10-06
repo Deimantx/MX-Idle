@@ -1,8 +1,8 @@
 # DEVELOPMENT_PHASES
 
-**Project:** MX-Idle  
-**Status:** High-level development roadmap  
-**Location:** `Docs/DEVELOPMENT_PHASES.md`  
+**Project:** MX-Idle
+**Status:** High-level development roadmap
+**Location:** `Docs/DEVELOPMENT_PHASES.md`
 **Purpose:** Keep implementation focused on playable phases instead of expanding many unfinished systems at once.
 
 ---
@@ -19,10 +19,10 @@ Each implementation slice should follow:
 
 ```text
 Implement
-→ Play
-→ Fix blockers / UX problems
-→ Expand
-→ Play again
+â†’ Play
+â†’ Fix blockers / UX problems
+â†’ Expand
+â†’ Play again
 ```
 
 Avoid long periods of design-only work after implementation has started.
@@ -33,26 +33,26 @@ Avoid long periods of design-only work after implementation has started.
 
 The baseline game uses:
 
-**10 tiers / Levels 1–100**
+**10 tiers / Levels 1â€“100**
 
 ```text
-T1   1–10
-T2  11–20
-T3  21–30
-T4  31–40
-T5  41–50
-T6  51–60
-T7  61–70
-T8  71–80
-T9  81–90
-T10 91–100
+T1   1â€“10
+T2  11â€“20
+T3  21â€“30
+T4  31â€“40
+T5  41â€“50
+T6  51â€“60
+T7  61â€“70
+T8  71â€“80
+T9  81â€“90
+T10 91â€“100
 ```
 
 When this roadmap says a system is **complete**, it means its planned baseline progression exists through **T10 / Level 100**, not only the first tutorial tier.
 
 ---
 
-# 3. PHASE 1 — CORE MELEE GAME
+# 3. PHASE 1 â€” CORE MELEE GAME
 
 ## Goal
 
@@ -66,7 +66,7 @@ Create a fully playable MX-Idle game based around:
 
 All five reach their complete baseline:
 
-**T1 → T10 / Level 1 → 100**
+**T1 â†’ T10 / Level 1 â†’ 100**
 
 Melee Combat must contain substantial content across the full progression, not only one arena per ten levels.
 
@@ -80,13 +80,13 @@ Primary Phase 1 loop:
 
 ```text
 Mining
-↓
+â†“
 Smithing
-↓
+â†“
 Melee Equipment
-↓
+â†“
 Combat
-↓
+â†“
 Loot / progression
 ```
 
@@ -94,11 +94,11 @@ Parallel sustain loop:
 
 ```text
 Fishing
-↓
+â†“
 Cooking
-↓
+â†“
 Food
-↓
+â†“
 Combat Sustain
 ```
 
@@ -167,38 +167,14 @@ F. remaining Phase-1 content fill
 G. Phase-1 balancing / QA / polish
 ```
 
-Once a system's architecture is ready, its baseline content may be implemented across T1�T10. Correctness and regression checks remain continuous. Tier-by-tier balance certification is deferred to the Phase 1 completion pass.
+Once a system's architecture is ready, its baseline content may be implemented across T1–T10. Correctness and regression checks remain continuous. Tier-by-tier balance certification is deferred to the Phase 1 completion pass.
 
 ---
-# 8. PHASE 1A — FOUNDATION HARDENING
+# 8. Foundation / architecture status
 
-Current stage.
-
-Complete the post–First Victory audit before expanding heavily.
-
-Required:
-
-- Activity telemetry correctness
-- readable ETA formatting
-- one authoritative XP curve
-- explicit simulation events
-- remove remaining `lastEvent` dependency
-- correct Forge ETA
-- remove fixed Activity HUD height regressions
-- README cleanup
-- persistence cleanup where safe
-- browser QA
-
-Reference:
-
-`29_POST_FIRST_VICTORY_AUDIT_AND_NEXT_SLICE.md`
-
-This is a short hardening pass.
-
-Do not turn it into another redesign.
+The former Phase 1A foundation-hardening checklist is historical. Current work follows the system-complete blocks and risk-based verification policy below. Do not treat Phase 1A or tier-wave gates as current sequencing requirements.
 
 ---
-
 # 9. Phase 1 implementation detail
 
 Implementation follows the system-complete blocks above. Tier bands are content data, not mandatory implementation or balance gates.
@@ -209,11 +185,11 @@ Harden shared save, simulation, telemetry, registry, and reusable UI contracts. 
 
 ## B. Mining + Smithing
 
-Implement the full T1�T10 Mining and Smithing economy with data-driven deposits, tools, materials, recipes, equipment, Mastery, and offline progress.
+Implement the full T1–T10 Mining and Smithing economy with data-driven deposits, tools, materials, recipes, equipment, and offline progress.
 
 ## C. Fishing + Cooking
 
-Implement Fishing 1�100 with ten Spots, weighted pools and all forty baseline species. Implement Cooking 1�100 with all canonical recipes, tagged ingredients, utility outputs, Mastery, and explicit temporary Phase-1 dependency bridges.
+Implement Fishing 1–100 with ten Spots, weighted pools and all forty baseline species. Implement Cooking 1–100 with all canonical recipes, tagged ingredients, utility outputs, and explicit temporary dependency bridges.
 
 ## D. Food / Combat sustain + Combat core
 
@@ -232,14 +208,14 @@ Complete cross-system recipe, item, gear, and progression registries that belong
 After the systems and content exist, run integrated progression, economy, XP, drop, Combat, offline, accessibility, responsive UI, and long-session performance passes. Balance certification happens here rather than after each tier or small tier group.
 
 ---
-# 21. PHASE 1F — PHASE COMPLETION PASS
+# 21. PHASE 1F â€” PHASE COMPLETION PASS
 
 Before starting Ranged:
 
 perform:
 
 - full fresh-profile playthrough
-- T1–T10 progression test
+- T1â€“T10 progression test
 - save/offline testing
 - economy sanity
 - combat sanity
@@ -265,7 +241,7 @@ UI is improved continuously, but not all at once.
 
 Use three rules.
 
-## Rule A — Fix blockers immediately
+## Rule A â€” Fix blockers immediately
 
 Fix immediately if UI:
 
@@ -280,7 +256,7 @@ Fix immediately if UI:
 
 ---
 
-# 23. Rule B — Fix severe annoyances when encountered
+# 23. Rule B â€” Fix severe annoyances when encountered
 
 Examples:
 
@@ -295,7 +271,7 @@ These should be fixed during normal implementation.
 
 ---
 
-# 24. Rule C — Delay full aesthetic polish
+# 24. Rule C â€” Delay full aesthetic polish
 
 Do NOT spend weeks finalizing:
 
@@ -311,7 +287,7 @@ A final design decision should be made with realistic content density.
 
 ---
 
-# 25. PHASE 2 — RANGED ERA
+# 25. PHASE 2 â€” RANGED ERA
 
 After Phase 1 completion, add playable:
 
@@ -332,7 +308,7 @@ Potential supporting systems are integrated only when actually required.
 
 # 26. Phase 2 goals
 
-Implement through T1–T10 / Level 1–100 where applicable:
+Implement through T1â€“T10 / Level 1â€“100 where applicable:
 
 - Woodcutting
 - Fletching
@@ -348,13 +324,13 @@ Implement through T1–T10 / Level 1–100 where applicable:
 - Ranged Combat presets
 - existing Combat content support for Ranged
 
-The existing T1–T10 combat world should be reused.
+The existing T1â€“T10 combat world should be reused.
 
 Do not build a completely separate Ranged world.
 
 ---
 
-# 27. PHASE 3 — MAGIC ERA
+# 27. PHASE 3 â€” MAGIC ERA
 
 Add playable:
 
@@ -392,7 +368,7 @@ reuse the existing combat world.
 
 ---
 
-# 28. PHASE 4 — REMAINING PROFESSIONS / META SYSTEMS
+# 28. PHASE 4 â€” REMAINING PROFESSIONS / META SYSTEMS
 
 After the three primary combat/economy eras are playable, expand remaining systems.
 
@@ -413,7 +389,7 @@ Exact sequencing may change based on what the playable game needs.
 
 ---
 
-# 29. PHASE 5 — COMPLETION / POLISH / QA
+# 29. PHASE 5 â€” COMPLETION / POLISH / QA
 
 Only when all primary gameplay pillars exist:
 
@@ -461,154 +437,23 @@ not developer roadmap terminology.
 
 ---
 
-# 31. Immediate next step from current repo
+# 31. Current implementation direction
 
-The project is currently inside:
+Work proceeds in the system-complete blocks in sections 7 and 9. Mining and Smithing now have broad T1–T10 content, while the current playable Combat world remains an early slice. Complete and integrate the Phase 1 professions, then continue the separate Combat world/content expansion. Do not require completing an entire tier across every system before moving to the next system.
 
-# **Phase 1A — Foundation Hardening**
+Mining, Smithing, Fishing, and Cooking have Skill Levels, tools, content unlocks, and authored choices. The former Mastery design is removed and must not return through historical requirements below.
 
-Current first vertical slice:
-
-```text
-Copper Mining
-→ Copper Smithing
-→ Equipment
-→ Road Wolf
-→ First Victory
-```
-
-already works.
-
-Immediate action:
-
-finish the issues identified in:
-
-`29_POST_FIRST_VICTORY_AUDIT_AND_NEXT_SLICE.md`
-
-Then begin:
-
-# **Phase 1B — Complete T1 Ecosystem**
-
-Recommended internal order:
-
-```text
-1. Hardening
-2. Generalize Mining / Smithing / Combat data architecture
-3. Finish T1 Mining + Smithing progression
-4. Implement T1 Fishing
-5. Implement T1 Cooking
-6. Implement Food / sustain
-7. Expand T1 Melee Combat normals / Elite
-8. Implement T1 Dungeon / Captain Veyr
-9. Play complete T1
-10. Fix
-11. Begin T2
-```
+The screens should continue to improve as content density grows. Use realistic registry sizes when tuning layout and keep visual polish alongside implementation instead of deferring all UI work to a final tier pass.
 
 ---
 
-# 32. Why not go straight to T2 Mining now?
+# 32. Definition of Phase 1 Complete
 
-Because T1 is not yet a complete Phase 1 ecosystem.
+Phase 1 is complete only when its baseline Mining, Smithing, Fishing, Cooking, and Melee Combat progressions are playable through T10 / Level 100; the economy loops integrate; saves and offline progression remain stable; and realistic content density is usable across the core UI.
 
-Without Fishing / Cooking / Food sustain:
-
-- Combat survival loop is incomplete;
-- Dungeon/Boss design is missing a core mechanic;
-- profession integration is unproven.
-
-Complete one full tier across the Phase 1 ecosystem first.
-
-Then scaling to T2–T10 becomes safer.
+Historical details below this heading are superseded if they conflict with the system-complete roadmap, current implementation reports, or the Mastery removal notice.
 
 ---
-
-# 33. Why not fully polish UI now?
-
-Because the current screens do not yet contain realistic content density.
-
-Examples:
-
-- Mining has too few selectable deposits;
-- Smithing has too few recipes;
-- Combat has too few enemies;
-- Bank has too few item types.
-
-A layout that looks perfect with one item can fail with 30.
-
-Therefore:
-
-- fix broken/annoying UI now;
-- continue improving game feel;
-- do a serious density/design pass after enough content exists;
-- do final polish after Phase 1 content is complete.
-
----
-
-# 34. Definition of Phase 1 Complete
-
-Phase 1 is complete only when:
-
-## Mining
-
-- full baseline Level 1–100
-- all intended T1–T10 content
-- tools
-- mastery/progression hooks
-- offline
-- UI scales with full content
-
-## Smithing
-
-- full Level 1–100
-- T1–T10 metals
-- tools
-- melee equipment
-- Heat/Reheat
-- recipe progression
-- offline
-
-## Fishing
-
-- full Level 1–100
-- T1–T10 fishing content
-- weighted catches
-- meaningful fish progression
-- offline
-
-## Cooking
-
-- full Level 1–100
-- T1–T10 food
-- real Combat sustain
-- food priority loadout
-- offline
-
-## Melee Combat
-
-- full T1–T10 baseline
-- substantial enemy roster
-- multiple areas/arenas
-- Elites
-- Dungeons
-- Bosses
-- food sustain
-- armor/resistance gameplay
-- weapon choices
-- Specials/Stamina
-- loot
-- offline
-
-## General
-
-- fresh profile can progress through the entire Phase 1 game
-- no mandatory Ranged/Magic player progression
-- save/reload/offline stable
-- core UI usable at realistic content density
-- major bugs fixed
-
----
-
 # 35. Final roadmap principle
 
 Do not optimize development around completing documents.

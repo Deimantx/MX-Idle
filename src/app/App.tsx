@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { advance, advanceWithEvents, ENEMIES, FORGING_RECIPES, getDepositStageDensity, masteryXpForLevel, selectDeposit, setCombatTarget, startActivity, stopActivity, getForgeWorkRequired, xpForLevel, FISHING_RODS, FISHING_SPOTS, COOKING_RECIPES, eatFood, type Activity, type DamageType, type EnemyId, type ForgingRecipeId, type ItemId, type SaveState } from '../game/game';
+import { advance, advanceWithEvents, ENEMIES, FORGING_RECIPES, SMELTING_RECIPES, getDepositStageDensity, selectDeposit, setCombatTarget, startActivity, stopActivity, getForgeWorkRequired, xpForLevel, FISHING_RODS, FISHING_SPOTS, COOKING_RECIPES, eatFood, type Activity, type DamageType, type EnemyId, type ForgingRecipeId, type ItemId, type SaveState } from '../game/game';
 import { GAME_SCREENS, screenLockReason, type GameScreenId } from './screenRegistry';
 import { MiningScreen } from '../features/professions/mining/MiningScreen';
 import { SmithingScreen } from '../features/professions/smithing/SmithingScreen';
@@ -19,6 +19,12 @@ import type { AppSettings } from '../game/persistence/settingsStorage';
 import type { GameFeedbackEvent } from '../features/feedback/feedback.types';
 import { adaptGameEvents } from '../features/feedback/gameFeedbackAdapter';
 import { useActivityTelemetry } from './useActivityTelemetry';
+import { MINING_TOOLS } from '../game/content/mining/miningTools';
+import { FORGE_HAMMERS } from '../game/content/smithing/smithingTools';
+import { MELEE_WEAPONS } from '../game/content/combat/meleeWeapons';
+import { HEAVY_ARMOR } from '../game/content/combat/heavyArmor';
+import { OFFHANDS } from '../game/content/combat/offhands';
+import { FISHING_TACKLE } from '../game/content/fishing/fishingContent';
 
 type Page = GameScreenId;
 const xpProgress = (s: SaveState, id: keyof SaveState['skills']) => ({ value: s.skills[id].xp, max: xpForLevel(s.skills[id].level) });
@@ -69,15 +75,19 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
   const go = (page: Page) => { setScreen(page); mut((s) => { s.page = page; }); sound(300, .035, .035); };
   const start = (a: Exclude<Activity, null>) => { mut((s) => startActivity(s, a)); sound(a === 'combat' ? 220 : 380, .07); };
   const stop = () => { mut(stopActivity); sound(190, .05, .035); };
+  const chooseSmeltRecipe = (id:string) => mut((s)=>{ if(s.activity==='smelting')return; const recipe=SMELTING_RECIPES[id]; if(recipe&&s.skills.Smithing.level>=recipe.unlockLevel){s.smithing.smeltRecipe=id;s.smithing.warm=false;s.smithing.timer=0;s.smithing.message='';} });
   const buyForgeRecipe = (id: ForgingRecipeId) => mut((s) => { if (s.activity === 'forging' || (s.smithing.reserved && s.smithing.recipe !== id)) return; s.smithing.recipe = id; s.smithing.category = FORGING_RECIPES[id].category; s.smithing.work = getForgeWorkRequired(id); s.smithing.heat = 100; s.smithing.message = ''; });
   const equip = (item: ItemId, slot: 'weapon' | 'head' | 'armor' | 'hands' | 'feet' | 'offhand' | 'miningTool' | 'smithingHammer') => mut((s) => {
     if ((s.bank[item] ?? 0) < 1) return;
-    if (['combat.weapon.melee.copper_battle_axe', 'combat.weapon.melee.copper_mace'].includes(item) && s.skills.Attack.level < 5) return;
-    if (['item.mining.copper_pickaxe', 'item.smithing.copper_smithing_hammer', 'combat.offhand.melee.copper_shield'].includes(item) && s.skills.Smithing.level < 5) return;
-    if (['combat.armor.heavy.copper_helm', 'combat.armor.heavy.copper_armor', 'combat.armor.heavy.copper_gauntlets', 'combat.armor.heavy.copper_greaves'].includes(item) && s.skills.Defence.level < 1) return;
+    if (slot === 'weapon' && (!(item in MELEE_WEAPONS) || s.skills.Attack.level < MELEE_WEAPONS[item as keyof typeof MELEE_WEAPONS].attackLevel)) return;
+    if (slot === 'offhand' && (!(item in OFFHANDS) || !s.equipped.weapon || !(s.equipped.weapon in MELEE_WEAPONS) || s.skills.Smithing.level < OFFHANDS[item as keyof typeof OFFHANDS].smithingLevel)) return;
+    const armorSlot = slot === 'head' ? 'head' : slot === 'armor' ? 'armor' : slot === 'hands' ? 'hands' : slot === 'feet' ? 'feet' : null;
+    if (armorSlot && (!(item in HEAVY_ARMOR) || HEAVY_ARMOR[item as keyof typeof HEAVY_ARMOR].slot !== armorSlot || s.skills.Defence.level < HEAVY_ARMOR[item as keyof typeof HEAVY_ARMOR].smithingLevel)) return;
+    if (slot === 'miningTool' && (!(item in MINING_TOOLS)||s.skills.Mining.level<MINING_TOOLS[item as keyof typeof MINING_TOOLS].equipLevel)) return;
+    if (slot === 'smithingHammer' && (!(item in FORGE_HAMMERS)||s.skills.Smithing.level<FORGE_HAMMERS[item as keyof typeof FORGE_HAMMERS].equipLevel)) return;
     const old = s.equipped[slot]; if (old) gainItem(s, old as ItemId);
-    if (slot === 'miningTool') { if (item !== 'item.mining.worn_pickaxe' && item !== 'item.mining.copper_pickaxe') return; s.equipped.miningTool = item; }
-    else if (slot === 'smithingHammer') { if (item !== 'item.smithing.worn_smithing_hammer' && item !== 'item.smithing.copper_smithing_hammer') return; s.equipped.smithingHammer = item; }
+    if (slot === 'miningTool') s.equipped.miningTool = item;
+    else if (slot === 'smithingHammer') s.equipped.smithingHammer = item;
     else s.equipped[slot] = item as never;
     const n = (s.bank[item] ?? 1) - 1; if (n) s.bank[item] = n; else delete s.bank[item]; sound(540, .085, .06);
   });
@@ -86,25 +96,23 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
   const grantT1Kit = () => mut((s) => { for (const item of ['item.mining.copper_pickaxe','item.smithing.copper_smithing_hammer','combat.weapon.melee.copper_battle_axe','combat.weapon.melee.copper_mace','combat.offhand.melee.copper_shield','combat.armor.heavy.copper_armor','combat.armor.heavy.copper_gauntlets','combat.armor.heavy.copper_greaves'] as ItemId[]) gainItem(s,item); s.skills.Mining.level = Math.max(5,s.skills.Mining.level); s.skills.Smithing.level = Math.max(5,s.skills.Smithing.level); s.skills.Attack.level = Math.max(5,s.skills.Attack.level); s.skills.Defence.level = Math.max(5,s.skills.Defence.level); });
   const devSetDeposit = (id: SaveState['mining']['deposit']) => mut((s) => { s.skills.Mining.level = Math.max(5, s.skills.Mining.level); selectDeposit(s, id); });
   const devSetStage = (stage: number) => mut((s) => { const runtime = s.mining.deposits[s.mining.deposit]!; runtime.stageIndex = stage; runtime.densityRemaining = getDepositStageDensity(stage, s.mining.deposit); s.mining.stage = stage; s.mining.density = runtime.densityRemaining; });
-  const devSetMastery = (domain: 'mining' | 'smithing', level: number) => mut((s) => { const progress = domain === 'mining' ? s.mining.deposits[s.mining.deposit]!.mastery : (s.smithing.mastery[s.smithing.recipe] ??= { xp: 0, level: 1 }); progress.level = level; progress.xp = masteryXpForLevel(level); });
-  const fishingSpot = (id:string) => mut((s)=>{const spot=FISHING_SPOTS.find(x=>x.id===id);if(spot&&s.skills.Fishing.level>=spot.unlockLevel){if(s.activity==='fishing')s.activity=null;s.fishing.spot=id;s.fishing.phase='bite';s.fishing.selectedFish=null;s.fishing.timer=0;}});
+  const fishingSpot = (id:string) => mut((s)=>{const spot=FISHING_SPOTS.find(x=>x.id===id);if(spot&&s.skills.Fishing.level>=spot.unlockLevel){if(s.activity==='fishing')s.activity=null;s.fishing.spot=id;s.fishing.phase='bite';s.fishing.actionSerial++;s.fishing.selectedFish=null;s.fishing.timer=0;}});
   const fishingChange = (patch:Partial<SaveState['fishing']>) => mut((s)=>{if(s.activity==='fishing'&&('bait'in patch||'tackle'in patch||'specialization'in patch||'preferredSpecies'in patch))return;Object.assign(s.fishing,patch);});
-  const bridgeRod = () => mut((s)=>{if(s.activity==='fishing')return;const i=FISHING_RODS.findIndex(x=>x.id===s.fishing.rod),next=FISHING_RODS[i+1];if(!next||s.skills.Fishing.level<next.unlockLevel)return;const available=FISHING_SPOTS.filter(x=>x.unlockLevel<=s.skills.Fishing.level),source=available[available.length-1],cost=source?.findId as ItemId|undefined;if(!cost||(s.bank[cost]??0)<1)return;s.bank[cost]!--;s.fishing.rod=next.id as ItemId;});
+  const bridgeRod = () => mut((s)=>{if(s.activity==='fishing')return;const next=FISHING_RODS.find(x=>x.previousRod===s.fishing.rod);if(!next||s.skills.Fishing.level<next.unlockLevel||!next.bridgeItem)return;const cost=next.bridgeItem as ItemId;if((s.bank[cost]??0)<1)return;s.bank[cost]!--;s.fishing.rod=next.id as ItemId;});
   const buyBait = (id:string) => mut((s)=>{if(s.gold<1)return;s.gold--;gainItem(s,id as ItemId);});
   const chooseCookingRecipe = (id:string) => mut((s)=>{if(s.activity==='cooking')return;const recipe=COOKING_RECIPES.find(x=>x.id===id);if(recipe&&s.skills.Cooking.level>=recipe.unlockLevel){s.cooking.recipe=id;s.cooking.message='';s.cooking.phase='prep';s.cooking.timer=0;}});
   const chooseKitchenKnife = (id:ItemId) => mut((s)=>{if(s.activity==='cooking'||s.cooking.knife===id||(s.bank[id]??0)<1)return;const old=s.cooking.knife;s.bank[id]!--;if(old!=='cooking.tool.worn_kitchen_knife')gainItem(s,old);s.cooking.knife=id;});
+  const equipProfessionItem = (id:ItemId) => mut((s)=>{ if(s.activity==='fishing'||s.activity==='cooking')return; if(id.startsWith('fishing.tackle.')){const tackle=FISHING_TACKLE.find(x=>x.id===id);if(tackle&&s.skills.Fishing.level>=tackle.level)s.fishing.tackle=id;return;} if((s.bank[id]??0)<1)return; if(id.startsWith('cooking.tool.')){const old=s.cooking.knife;s.bank[id]!--;if(old!=='cooking.tool.worn_kitchen_knife')gainItem(s,old);s.cooking.knife=id;}else if(id.startsWith('fishing.tool.')){const old=s.fishing.rod;s.bank[id]!--;if(old!=='fishing.tool.old_handline')gainItem(s,old);s.fishing.rod=id;} });
   const setCookingSpecialization = (value:string|null) => mut((s)=>{if(s.activity!=='cooking'&&s.skills.Cooking.level>=35)s.cooking.specialization=value;});
-  const devSetFishingSpot = (id:string) => mut((s)=>{s.fishing.spot=id;s.fishing.phase='bite';s.fishing.selectedFish=null;s.fishing.timer=0;});
-  const devSetFishingMastery = (id:string,level:number) => mut((s)=>{s.fishing.mastery[id]={xp:masteryXpForLevel(level),level};});
+  const devSetFishingSpot = (id:string) => mut((s)=>{s.fishing.spot=id;s.fishing.phase='bite';s.fishing.actionSerial++;s.fishing.selectedFish=null;s.fishing.timer=0;});
   const devSetFishingForce = (species:string|null,double:boolean,find:boolean) => mut((s)=>{s.fishing.forceSpecies=species;s.fishing.forceDouble=double;s.fishing.forceFind=find;});
-  const devSetCookingMastery = (id:string,level:number) => mut((s)=>{s.cooking.mastery[id]={xp:masteryXpForLevel(level),level};});
   const devSetCookingForce = (preserve:boolean,extra:boolean) => mut((s)=>{s.cooking.forcePreservation=preserve;s.cooking.forceExtraServing=extra;});
   const devSetFoodStock = (item:ItemId,amount:number) => mut((s)=>{s.bank[item]=amount;s.food.slots[0]!.item=item;s.food.slots[0]!.enabled=true;});
   const devClearFoodLock = () => mut((s)=>{s.food.foodLockMs=0;s.food.stunMs=0;});
   const buyPantry = (id:ItemId) => mut((s)=>{if(s.gold<1)return;s.gold--;gainItem(s,id);});
   const setFoodSlot = (index:number,item:ItemId|null) => mut((s)=>{const slot=s.food.slots[index];if(!slot||s.activity==='combat')return;if(item&&!COOKING_RECIPES.some(r=>r.output===item&&r.foodValue>0))return;slot.item=item;slot.enabled=true;});
   const eat = (index:number) => mut((s)=>{eatFood(s,index,false,[]);});
-  const setAutoEat = (enabled:boolean,threshold:number) => mut((s)=>{s.food.autoEat=enabled;s.food.threshold=Math.max(1,Math.min(95,threshold));});
+  const setAutoEat = (enabled:boolean,threshold:number) => mut((s)=>{s.food.autoEat=enabled;s.food.threshold=Math.max(1,Math.min(99,threshold));});
   const offlineSim = (ms: number) => { setGame((old) => advance(old, ms)); };
   const xp = useMemo(() => ({ mining: xpProgress(game, 'Mining'), smithing: xpProgress(game, 'Smithing') }), [game.skills]);
   const tab = game.smithing.mode;
@@ -120,24 +128,24 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
         const item = <button key={name} aria-label={lockReason ? `${name}. Locked. ${lockReason}` : name} aria-disabled={locked} className={`nav-item ${screen === name ? 'selected' : ''} ${locked ? 'nav-locked' : ''}`} onClick={() => { if (!locked) go(name); }} aria-current={screen === name ? 'page' : undefined}><Icon name={icon} size={19} /><span>{name}</span>{name === 'Smithing' && !locked && <i className="new-dot" />}{name === 'Combat' && locked && <span className="lock-mark">·</span>}</button>;
         return lockReason ? <Tip key={`${name}-tip`} content={lockReason} focusable={false} className="nav-tip-wrap">{item}</Tip> : item;
       })}</nav>
-      <div className="sidebar-bottom"><div className="mini-save"><span className="save-dot" />Save {saveStatus}</div><button className="nav-item settings-nav" onClick={onOpenSettings}><Icon name="gear" size={18} /><span>Settings</span></button><button className="nav-item profile-nav" onClick={() => { persist(gameRef.current); onBackToProfiles(); }}><span>↩</span><span>Profile Select</span></button><div className="build-tag">FIRST PLAYABLE <span>0.1</span></div></div>
+      <div className="sidebar-bottom"><div className="mini-save"><span className="save-dot" />Save {saveStatus}</div><button className="nav-item settings-nav" onClick={onOpenSettings}><Icon name="gear" size={18} /><span>Settings</span></button><button className="nav-item profile-nav" onClick={() => { persist(gameRef.current); onBackToProfiles(); }}><span>←</span><span>Profile Select</span></button><div className="build-tag">FIRST PLAYABLE <span>0.1</span></div></div>
     </aside>
     <main className="main-frame">
       <header className="topbar"><div className="active-profile"><b>{profile.name}</b><small>PROFILE {profile.slot}</small></div><div className="top-status"><div className="gold-chip"><Icon name="gold" size={17} /><span>{fmt(game.gold)}</span><small>GOLD</small></div><div className="status-divider" /><div className="skill-chip"><span className="skill-glyph">{screen === 'Mining' ? 'M' : screen === 'Smithing' ? 'S' : screen === 'Combat' ? 'A' : '•'}</span><div><b>{screen === 'Mining' ? `Mining ${game.skills.Mining.level}` : screen === 'Smithing' ? `Smithing ${game.skills.Smithing.level}` : screen === 'Combat' ? `Attack ${game.skills.Attack.level}` : 'Adventurer'}</b><div className="mini-xp"><span style={{ width: `${Math.min(100, (screen === 'Mining' ? xp.mining.value / xp.mining.max : xp.smithing.value / xp.smithing.max) * 100)}%` }} /></div></div></div><div className="save-label"><span className="save-dot" />{saveStatus}</div><button className="icon-button top-settings" aria-label="Settings" onClick={onOpenSettings}><Icon name="gear" size={19} /></button></div></header>
       <div className="content-scroll" id="game-content" tabIndex={-1}><div className="content-wrap">
         {!game.objectives.victory && <FirstStepsPanel game={game} minimized={minimized} onToggle={() => { setMinimized(!minimized); mut((s) => { s.objectives.dismissed = !s.objectives.dismissed; }); }} />}
         {screen === 'Mining' && <MiningScreen game={game} xp={xp.mining.value} maxXp={xp.mining.max} speedMultiplier={speed} metrics={metrics} select={(id) => mut((s) => { selectDeposit(s, id); })} equipTool={(item) => equip(item, 'miningTool')} start={() => start('mining')} stop={stop} />}
-        {screen === 'Smithing' && <SmithingScreen game={game} speedMultiplier={speed} mode={tab} setMode={setMode} start={start} stop={stop} choose={buyForgeRecipe} setCategory={(category) => mut((s) => { s.smithing.category = category; })} equipHammer={(item) => equip(item, 'smithingHammer')} />}
+        {screen === 'Smithing' && <SmithingScreen game={game} speedMultiplier={speed} mode={tab} setMode={setMode} start={start} stop={stop} choose={buyForgeRecipe} chooseSmelt={chooseSmeltRecipe} setCategory={(category) => mut((s) => { s.smithing.category = category; })} equipHammer={(item) => equip(item, 'smithingHammer')} />}
         {screen === 'Fishing' && <FishingScreen game={game} start={() => start('fishing')} stop={stop} selectSpot={fishingSpot} change={fishingChange} bridgeRod={bridgeRod} buyBait={buyBait} />}
         {screen === 'Cooking' && <CookingScreen game={game} start={() => start('cooking')} stop={stop} choose={chooseCookingRecipe} buyPantry={buyPantry} chooseKnife={chooseKitchenKnife} setSpecialization={setCookingSpecialization} />}
-        {screen === 'Equipment' && <EquipmentScreen game={game} equip={equip} unequip={unequip} />}
+    {screen === 'Equipment' && <EquipmentScreen game={game} equip={equip} unequip={unequip} equipProfession={equipProfessionItem} />}
         {screen === 'Combat' && <CombatScreen game={game} speedMultiplier={speed} start={() => start('combat')} stop={stop} stance={(stance: DamageType) => mut((s) => { s.combat.stance = stance; })} target={(id: EnemyId) => mut((s) => { setCombatTarget(s, id); })} queueSpecial={() => mut((s) => { if (!s.combat.queuedSpecial) s.combat.queuedSpecial = true; })} setSpecialMode={(mode) => mut((s) => { s.combat.specialMode = mode; if (mode === 'Off') s.combat.queuedSpecial = false; })} setFoodSlot={setFoodSlot} eat={eat} setAutoEat={setAutoEat} />}
         {screen === 'Bank' && <BankScreen game={game} filter={filter} setFilter={setFilter} />}
       </div></div>
       <ActivityHud game={game} stop={stop} onNavigate={go} speed={speed} metrics={metrics} events={feedbackEvents} settings={appSettings.feedback} reducedMotion={isMotionReduced} />
     </main>
     {toast && <div className="toast" role="status"><span className="toast-mark"><Icon name="ore" size={18} /></span>{toast}</div>}
-    {import.meta.env.DEV && <DevPanel game={game} grant={grant} grantT1Kit={grantT1Kit} simulate={offlineSim} setSpeed={setSpeed} setLevel={(skill, level) => mut((s) => { s.skills[skill].level = level; s.skills[skill].xp = 0; })} setHp={(hp) => mut((s) => { s.combat.playerHp = hp; })} resetWolf={() => mut((s) => { s.combat.enemyHp = ENEMIES[s.combat.targetId].hp; s.combat.respawn = 0; s.combat.sequenceIndex = 0; })} unlockElite={() => mut((s) => { for (const enemy of ['road-wolf','dust-rat','ragged-poacher','hedge-spark'] as const) s.combat.defeated[enemy] = Math.max(1, s.combat.defeated[enemy] ?? 0); s.combat.eliteUnlocked = true; })} setDeposit={devSetDeposit} setStage={devSetStage} setMastery={devSetMastery} setForge={(work, heat) => mut((s) => { s.smithing.work = work; s.smithing.heat = heat; })} setPreservation={(enabled) => mut((s) => { s.smithing.forcePreservation = enabled; })} setFishingSpot={devSetFishingSpot} setFishingMastery={devSetFishingMastery} setFishingForce={devSetFishingForce} setCookingRecipe={chooseCookingRecipe} setCookingMastery={devSetCookingMastery} setCookingForce={devSetCookingForce} setSatiety={(value)=>mut((s)=>{s.food.satiety=Math.max(0,Math.min(100,value));})} setFoodStock={devSetFoodStock} clearFoodLock={devClearFoodLock} reset={() => {}} />}
+    {import.meta.env.DEV && <DevPanel game={game} grant={grant} grantT1Kit={grantT1Kit} simulate={offlineSim} setSpeed={setSpeed} setLevel={(skill, level) => mut((s) => { s.skills[skill].level = level; s.skills[skill].xp = 0; })} setHp={(hp) => mut((s) => { s.combat.playerHp = hp; })} resetWolf={() => mut((s) => { s.combat.enemyHp = ENEMIES[s.combat.targetId].hp; s.combat.respawn = 0; s.combat.sequenceIndex = 0; })} unlockElite={() => mut((s) => { for (const enemy of ['road-wolf','dust-rat','ragged-poacher','hedge-spark'] as const) s.combat.defeated[enemy] = Math.max(1, s.combat.defeated[enemy] ?? 0); s.combat.eliteUnlocked = true; })} setDeposit={devSetDeposit} setStage={devSetStage} setForge={(work, heat) => mut((s) => { s.smithing.work = work; s.smithing.heat = heat; })} setPreservation={(enabled) => mut((s) => { s.smithing.forcePreservation = enabled; })} setFishingSpot={devSetFishingSpot} setFishingForce={devSetFishingForce} setCookingRecipe={chooseCookingRecipe} setCookingForce={devSetCookingForce} setSatiety={(value)=>mut((s)=>{s.food.satiety=Math.max(0,Math.min(100,value));})} setFoodStock={devSetFoodStock} clearFoodLock={devClearFoodLock} reset={() => {}} />}
   </div>;
 }
 

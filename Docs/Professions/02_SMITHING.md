@@ -1,8 +1,12 @@
-﻿# 02 — SMITHING
+> **MASTERY STATUS — REMOVED FROM CURRENT BASELINE**
+>
+> The earlier per-deposit / per-recipe / per-species Mastery system is no longer part of the active MX-Idle baseline. Ignore all historical Mastery sections, rewards, XP formulas, worker-Proven rules, and Mastery-based modifiers unless a future dedicated progression redesign explicitly restores them.
 
-**Status:** Complete Design Draft  
-**Version:** 1.0  
-**Parent:** `00_PROFESSIONS_OVERVIEW.md` / Skills & Professions foundation  
+# 02 — SMITHING
+
+**Status:** Complete Design Draft
+**Version:** 1.0
+**Parent:** `00_PROFESSIONS_OVERVIEW.md` / Skills & Professions foundation
 **Reference Professions:** `Mining.md`, `Woodcutting.md`, `Fletching.md`, `Leatherworking.md`, `Runecrafting.md`
 **Purpose:** Define Smithing as one complete profession in a single source-of-truth file: core loop, Smelting, Forging, Heat, Work Required, 10-tier metal progression, alloys, recipe families, tools, heavy equipment, profession gear, Mastery, Specializations, Estate Forge, automation, workers, Chronicles, UI, formulas, balance rules, and endgame progression.
 
@@ -916,11 +920,11 @@ Every Strike removes Work equal to:
 
 Recommended calculation:
 
-**Base Hammer Forge Power  
-× Mastery Forge Power modifier  
-× Specialization modifier  
-× profession gear modifier  
-× jewelry modifier  
+**Base Hammer Forge Power
+× Mastery Forge Power modifier
+× Specialization modifier
+× profession gear modifier
+× jewelry modifier
 × global Smithing modifier**
 
 A stronger Hammer visibly reduces:
@@ -1757,15 +1761,15 @@ Smithing should support chained production.
 
 Example:
 
-> Smelt 500 Iron Ingots  
-> → produce 200 Hardened Iron  
-> → craft 20 Iron Pickaxes  
+> Smelt 500 Iron Ingots
+> → produce 200 Hardened Iron
+> → craft 20 Iron Pickaxes
 > → craft Hardened Fittings until Bank reaches 100.
 
 Another:
 
-> Maintain 2,000 Stormiron Ingots.  
-> If below 2,000 → smelt Stormiron.  
+> Maintain 2,000 Stormiron Ingots.
+> If below 2,000 → smelt Stormiron.
 > Otherwise → produce Stormsilver.
 
 This is a major mid/late-game idle planning tool.
@@ -2093,7 +2097,7 @@ Coal Assist:
 
 Fluxstone Assist:
 
-**Reheat Time × 0.45**  
+**Reheat Time × 0.45**
 **Heat Loss × 0.90**
 
 ## Aether Essence
@@ -2102,7 +2106,7 @@ Fluxstone Assist:
 
 Aether Assist:
 
-**Reheat Time × 0.35**  
+**Reheat Time × 0.35**
 **Heat Loss × 0.85**
 
 Only one Heat Assist mode can be active at a time.
@@ -2360,10 +2364,10 @@ and
 
 Example:
 
-> Astralite Chestplate  
-> Work: 148 / 310  
-> Heat: 72 / 100  
-> Hammer Power: 54  
+> Astralite Chestplate
+> Work: 148 / 310
+> Heat: 72 / 100
+> Hammer Power: 54
 > Next Reheat in ~2 strikes
 
 This makes profession progression tangible.
@@ -2722,6 +2726,7 @@ Bigger batches provide modest efficiency but not multiplied resources.
 
 ---
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Should Smelting and Forging share Mastery?
 
 **No.**
@@ -2732,6 +2737,7 @@ Copper Ingot and Copper Sword are separate Masteries.
 
 ---
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Should every equipment recipe have Mastery?
 
 **Yes.**
@@ -2740,6 +2746,7 @@ This supports long-tail completion and recipe specialization.
 
 ---
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Should Mastery 100 be required for progression?
 
 **No.**
@@ -2814,6 +2821,7 @@ But management uses templates / bulk assignment.
 
 ---
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Should Worker Smithing have individual Recipe Mastery?
 
 **No.**
@@ -3119,10 +3127,3 @@ Fletching uses Basic at T1–T3, Reinforced at T4–T6, Precision Trigger/Runic 
 - Jeweler's Tools/Lapidary Kit: Smithing makes the tiered precision metal frame from 2 current-tier Ingots; Jewelcrafting assembles the Kit with its existing precision parts.
 
 Smithing is the metal-component producer; it does not take ownership of finished profession kits.
-
-
-
-
-
-
-

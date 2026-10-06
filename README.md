@@ -4,13 +4,10 @@ MX-Idle is a premium, browser-based, single-player idle RPG. It is designed to f
 
 ## Current playable scope
 
-The current playable slice includes Mining and Smithing, Fishing 1–100 with ten spots and 40 fish, Cooking 1–100 with 43 recipes, and Combat Food/Satiety/Auto Eat. Fishing and Cooking use provisional Phase 1 dependency bridges while Farming, Foraging, Woodcutting/Fletching, Alchemy/Runecrafting, and Estate progression are not yet implemented. Combat currently covers the Broken Road enemies and Ironjaw Boar Elite; the broader T1–T10 world remains the next content expansion. Balance values remain provisional.
+The current playable slice includes Mining and Smithing through T1–T10 content, Fishing 1–100 with ten spots and 40 fish, Cooking 1–100 with 43 recipes, and Combat Food/Satiety/Auto Eat. Fishing rods and Cooking ingredients/stations currently use temporary profession bridges while Farming, Foraging, Woodcutting/Fletching, Alchemy/Runecrafting, and Estate progression are not yet implemented. Combat currently covers the Broken Road enemies and Ironjaw Boar Elite; the broader T1–T10 world remains the next content expansion. Balance values remain provisional.
 
-### Phase 1 dependency bridges
-
-Angler Rod Bridge provides temporary rod progression from aquatic finds. The Field Pantry Bridge supplies temporary recipe ingredients, and the Field Kitchen Bridge represents temporary station progression. These keep the profession ladders playable; they are scaffolding, not final economy or profession design. See the [Fishing/Cooking/Combat core implementation report](Docs/Implementation/PHASE1_FISHING_COOKING_COMBAT_CORE_REPORT.md) for replacement plans and limitations.
-
-Saves are local to the browser. Profile Select offers three independent character slots. An unnamed legacy save is migrated to a profile named **Adventurer** and the original legacy data is retained. Character saves use schema v4; older saves initialize Fishing, Cooking, and Food fields during migration.
+See the [Fishing/Cooking/Combat core implementation report](Docs/Implementation/PHASE1_FISHING_COOKING_COMBAT_CORE_REPORT.md) for bridge details and replacement plans.
+Saves are local to the browser. Profile Select offers three independent character slots. An unnamed legacy save is migrated to a profile named **Adventurer** and the original legacy data is retained. Character saves use schema v5. Migration preserves progression and resources while discarding the removed Mastery data without compensation.
 
 ## Requirements
 
@@ -22,7 +19,7 @@ Saves are local to the browser. Profile Select offers three independent characte
 
 ```bash
 npm install
-npm run dev
+npm run dev <<<<<<<<<<<<<<< 
 ```
 
 Open the local URL printed by Vite, usually [http://localhost:5173](http://localhost:5173).
@@ -36,7 +33,7 @@ npm run build
 npm run qa
 ```
 
-`npm run qa` launches the Vite app and runs the Playwright first-playable browser flow. `npm run qa:professions` runs the Fishing/Cooking browser flow at desktop and 768px widths. Run either with a working browser installation. `npm run preview` serves the production build locally after `npm run build`.
+`npm run qa` runs one focused Playwright smoke flow across Mining, Smithing, Equipment, Fishing, and Cooking at desktop, with an Equipment check at 768px. `npm run qa:professions` runs a focused Fishing/Cooking browser flow and checks the narrower layout. Both need a working browser installation. `npm run preview` serves the production build locally after `npm run build`.
 
 ## Project structure
 
@@ -58,7 +55,7 @@ tests/            Browser QA flows
 
 Character profiles are stored separately in browser local storage. Interface scale, text size, audio, and accessibility preferences use the device-wide `mx-idle-settings-v1` settings key and apply before Profile Select. Clearing browser storage removes local progress; manage character data with the in-game profile controls.
 
-The runtime migrates v1–v3 character data, mapping legacy item, deposit, and recipe IDs into namespaced IDs while retaining bank, equipment, activity, and progression state. Profile migration preserves the original legacy save.
+The runtime migrates character data from save versions 1 through 5, mapping legacy item, deposit, and recipe IDs into namespaced IDs while retaining bank, equipment, activity, and progression state. The v5 migration discards historical Mastery fields without compensation. Profile migration preserves the original legacy save.
 
 See [the Phase 1B Mining and Smithing implementation report](Docs/Implementation/PHASE1B_T1_MINING_SMITHING_REPORT.md) and [the Fishing/Cooking/Combat core implementation report](Docs/Implementation/PHASE1_FISHING_COOKING_COMBAT_CORE_REPORT.md) for formulas, migration behavior, temporary dependency bridges, and verification notes.
 

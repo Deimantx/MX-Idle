@@ -1,6 +1,5 @@
 import type { ItemId, SmithingToolId } from '../../types/gameTypes';
-export type SmithingToolDefinition = { item: ItemId; name: string; power: number; strikeMs: number; equipLevel: number };
-export const FORGE_HAMMERS: Record<SmithingToolId, SmithingToolDefinition> = {
-  'item.smithing.worn_smithing_hammer': { item: 'item.smithing.worn_smithing_hammer', name: 'Worn Smithing Hammer', power: 5, strikeMs: 2200, equipLevel: 1 },
-  'item.smithing.copper_smithing_hammer': { item: 'item.smithing.copper_smithing_hammer', name: 'Copper Smithing Hammer', power: 7, strikeMs: 2140, equipLevel: 5 },
-};
+export type SmithingToolEffects = { heatLossMultiplier?: number; reheatMultiplier?: number; preservationPp?: number; forgePowerMultiplier?: number };
+export type SmithingToolDefinition = { item: ItemId; name: string; power: number; strikeMs: number; equipLevel: number; effects: SmithingToolEffects };
+const rows=[['worn',1,5,2200,{}],['copper',5,7,2140,{}],['iron',15,9,2080,{heatLossMultiplier:.98}],['cobalt',25,12,2020,{}],['argent',35,15,1960,{reheatMultiplier:.95}],['emberite',45,19,1900,{heatLossMultiplier:.95}],['frostsilver',55,24,1840,{preservationPp:2}],['stormiron',65,30,1780,{reheatMultiplier:.90}],['aetherite',75,37,1720,{forgePowerMultiplier:1.05}],['umbral',85,45,1660,{heatLossMultiplier:.90}],['astralite',95,54,1600,{forgePowerMultiplier:1.08}]] as const;
+export const FORGE_HAMMERS:Record<SmithingToolId,SmithingToolDefinition>=Object.fromEntries(rows.map(([metal,equipLevel,power,strikeMs,effects])=>{const key=metal==='worn'?'worn_smithing_hammer':`${metal}_smithing_hammer`;return [`item.smithing.${key}`,{item:`item.smithing.${key}` as ItemId,name:`${metal==='worn'?'Worn':metal[0]!.toUpperCase()+metal.slice(1)} Smithing Hammer`,power,strikeMs,equipLevel,effects}]})) as Record<SmithingToolId,SmithingToolDefinition>;

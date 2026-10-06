@@ -1,7 +1,7 @@
 /** Compatibility barrel. Domain content lives in items/, mining/, smithing/, and combat/. */
 export { ITEMS } from './items/itemRegistry';
-export { MINING_STAGE_MODEL, MINING_DEPOSITS, MINING_TOOLS, MINING_MASTERY_EFFECTS, MINING_MASTERY_MILESTONES } from './mining/miningContent';
-export { SMELTING_RECIPES, FORGING_RECIPES, FORGE_HAMMERS, SMITHING_MASTERY_EFFECTS, SMITHING_MASTERY_MILESTONES } from './smithing/smithingContent';
+export { MINING_STAGE_MODEL, MINING_DEPOSITS, MINING_TOOLS } from './mining/miningContent';
+export { SMELTING_RECIPES, FORGING_RECIPES, FORGE_HAMMERS } from './smithing/smithingContent';
 export { ENEMIES, NORMAL_ENEMIES, RESISTANCES } from './combat/t1Enemies';
 export type { EnemyAction, EnemyDefinition } from './combat/t1Enemies';
 import { FORGING_RECIPES } from './smithing/forgingRecipes';

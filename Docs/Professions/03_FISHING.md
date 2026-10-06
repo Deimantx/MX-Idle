@@ -1,8 +1,12 @@
-﻿# 03 â€” FISHING
+> **MASTERY STATUS — REMOVED FROM CURRENT BASELINE**
+>
+> The earlier per-deposit / per-recipe / per-species Mastery system is no longer part of the active MX-Idle baseline. Ignore all historical Mastery sections, rewards, XP formulas, worker-Proven rules, and Mastery-based modifiers unless a future dedicated progression redesign explicitly restores them.
 
-**Status:** Complete Design Draft  
-**Version:** 1.0  
-**Parent:** `00_PROFESSIONS_OVERVIEW.md` / Skills & Professions foundation  
+# 03 â€” FISHING
+
+**Status:** Complete Design Draft
+**Version:** 1.0
+**Parent:** `00_PROFESSIONS_OVERVIEW.md` / Skills & Professions foundation
 **Reference Professions:** `Fletching.md`, `Cooking.md`, `Jewelcrafting.md`, `Alchemy.md`
 
 **Shared canon:** [00_GLOBAL_GAME_RULES.md](../00_GLOBAL_GAME_RULES.md) · [Item Registry](../Registries/ITEM_REGISTRY.md) · [Recipe Registry](../Registries/RECIPE_REGISTRY.md)
@@ -1095,6 +1099,7 @@ Recommended saved presets:
 - Fine Hook / Astral Lure;
 - rare-weight gear.
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Mastery
 
 - Barbless Hook;
@@ -1518,14 +1523,14 @@ Holdings:
 
 Important later workflow:
 
-> Fish River Salmon until Bank contains 2,000  
-> â†’ switch to Cooking  
-> â†’ cook until finished  
+> Fish River Salmon until Bank contains 2,000
+> â†’ switch to Cooking
+> â†’ cook until finished
 > â†’ return to Fishing.
 
 Another:
 
-> Maintain 5,000 cooked food.  
+> Maintain 5,000 cooked food.
 > If cooked food falls below target:
 > - Fishing worker supplies Fish;
 > - Cooking worker processes Fish.
@@ -1716,12 +1721,12 @@ Minimum:
 
 For each eligible Fish:
 
-**Effective Weight = Base Weight  
-Ã— Preferred Bait Multiplier  
-Ã— Tackle Tag Multiplier  
-Ã— Specialization Multiplier  
-Ã— Species Mastery Multiplier  
-Ã— Gear/Jewelry Multiplier  
+**Effective Weight = Base Weight
+Ã— Preferred Bait Multiplier
+Ã— Tackle Tag Multiplier
+Ã— Specialization Multiplier
+Ã— Species Mastery Multiplier
+Ã— Gear/Jewelry Multiplier
 Ã— Preferred Species Multiplier**
 
 Final displayed chance:
@@ -2693,6 +2698,7 @@ If later added, keep them optional novelty/collection content rather than mandat
 
 ---
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Should every Fish have Species Mastery?
 
 **Yes.**
@@ -2701,6 +2707,7 @@ This creates a reason to target different Fish and supports long-term progressio
 
 ---
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Should Mastery directly increase Fish weight?
 
 **Yes, modestly.**
@@ -2781,6 +2788,7 @@ with configurable alternatives.
 
 ---
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Should Workers receive Fishing XP / Species Mastery for player?
 
 **No player Fishing XP and no player Species Mastery.**
@@ -3011,11 +3019,3 @@ Later:
 Core Fishing identity:
 
 > **You do not choose the catch directly. You build the setup that makes the water give you what you want.**
-
-
-
-
-
-
-
-

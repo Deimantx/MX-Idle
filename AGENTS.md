@@ -1,4 +1,4 @@
-# AGENTS.md — MX-Idle
+# AGENTS.md â€” MX-Idle
 ## Project identity
 MX-Idle is a premium browser-based single-player idle RPG. It must feel like a GAME first and a web app second.
 Do not let it resemble a SaaS dashboard, admin panel, generic Tailwind demo, spreadsheet with decoration, or lightly reskinned website.
@@ -174,18 +174,15 @@ During implementation:
 4. add polish after hierarchy works;
 5. keep performance in mind.
 
-Before finishing:
-1. run project checks/tests;
-2. inspect the actual rendered result in the browser;
-3. verify desktop layout;
-4. verify a narrower viewport;
-5. verify hover/pressed/focus states;
-6. verify relevant modals/tooltips;
-7. check console warnings/errors;
-8. test repeated interaction;
-9. confirm long-running effects clean up correctly.
+Verification is risk-based:
 
-A successful build is not visual QA.
+- Small UI-only task: run `npm run typecheck`, then inspect the touched screen if practical. Skip the full unit suite and unrelated browser flows.
+- Small gameplay or content task: run targeted changed-domain tests and `npm run typecheck`.
+- Large system, save, or simulation task: use targeted tests during development, then run the full unit suite once, `npm run typecheck`, and `npm run build` once at the end.
+- Phase completion or release: run the full unit suite, relevant browser QA, multiple resolutions, save migration and offline checks, and a longer regression pass.
+
+Run `npm run qa` or `npm run qa:professions` only when its flow changed, a regression is suspected, a phase milestone is being reviewed, or the user explicitly asks. Do not run both for unrelated copy or CSS changes. Keep browser QA focused on the changed flow and check console output. Add narrow viewport checks when the touched layout uses responsive behavior that could break.
+
 
 ## Visual anti-patterns
 Avoid unless explicitly justified:

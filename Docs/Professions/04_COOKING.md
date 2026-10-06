@@ -1,8 +1,12 @@
-﻿# 04 â€” COOKING
+> **MASTERY STATUS — REMOVED FROM CURRENT BASELINE**
+>
+> The earlier per-deposit / per-recipe / per-species Mastery system is no longer part of the active MX-Idle baseline. Ignore all historical Mastery sections, rewards, XP formulas, worker-Proven rules, and Mastery-based modifiers unless a future dedicated progression redesign explicitly restores them.
 
-**Status:** Complete Design Draft  
-**Version:** 1.0  
-**Parent:** `00_PROFESSIONS_OVERVIEW.md` / Skills & Professions foundation  
+# 04 â€” COOKING
+
+**Status:** Complete Design Draft
+**Version:** 1.0
+**Parent:** `00_PROFESSIONS_OVERVIEW.md` / Skills & Professions foundation
 **Reference Professions:** `Fishing.md`, `Farming.md`, `Hunting.md`, `Foraging.md`
 
 **Shared canon:** [00_GLOBAL_GAME_RULES.md](../00_GLOBAL_GAME_RULES.md) · [Item Registry](../Registries/ITEM_REGISTRY.md) · [Recipe Registry](../Registries/RECIPE_REGISTRY.md)
@@ -1064,6 +1068,7 @@ Recommended saved presets:
 - Prep speed;
 - endgame rare meals.
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Mastery
 
 - Mastery XP equipment;
@@ -1370,8 +1375,8 @@ Workers must respect:
 
 Example:
 
-> Cook Storm Rations while Raw Fish > 5,000.  
-> Never consume Starveil Marlin.  
+> Cook Storm Rations while Raw Fish > 5,000.
+> Never consume Starveil Marlin.
 > If Fish reserve falls below 5,000, switch to Roasted Root Bowl.
 
 This is critical for long unattended sessions.
@@ -1422,14 +1427,14 @@ Holdings:
 
 Example player chain:
 
-> Fish River Salmon until 2,000  
-> â†’ cook compatible Oily Fish recipe  
-> â†’ stop when prepared food reaches 2,000  
+> Fish River Salmon until 2,000
+> â†’ cook compatible Oily Fish recipe
+> â†’ stop when prepared food reaches 2,000
 > â†’ switch activity.
 
 Worker version:
 
-> Fishing Team maintains raw Fish reserve.  
+> Fishing Team maintains raw Fish reserve.
 > Cooking Team converts overflow into meals.
 
 This is one of the first major profession automation chains.
@@ -1441,15 +1446,15 @@ This is one of the first major profession automation chains.
 Future examples:
 
 **Farming**
-â†’ Grain / Vegetables / Herbs  
+â†’ Grain / Vegetables / Herbs
 â†’ Cooking.
 
 **Hunting**
-â†’ Game Meat  
+â†’ Game Meat
 â†’ Cooking.
 
 **Foraging**
-â†’ Mushrooms / Herbs / Berries  
+â†’ Mushrooms / Herbs / Berries
 â†’ Cooking.
 
 Cooking should become a consumer that gives all three gathering professions permanent relevance.
@@ -1854,9 +1859,9 @@ Extra Serving does not multiply Mastery XP.
 
 Recommended:
 
-**Final Prep Time = Base Prep Time  
-Ã— Complexity Multiplier  
-Ã— (10 / (10 + Prep Power))  
+**Final Prep Time = Base Prep Time
+Ã— Complexity Multiplier
+Ã— (10 / (10 + Prep Power))
 Ã— Prep modifiers**
 
 Banquet Station applies its Complexity reduction before final multiplicative time bonuses.
@@ -2658,6 +2663,7 @@ Workers gain Proficiency only.
 
 ---
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Should Cooking workers have their own Recipe Mastery?
 
 **No.**
@@ -2927,11 +2933,3 @@ Cooking recipes that accept [Fruit] may use eligible Farming Orchard fruit items
 
 
 Roasted Root Bowl provides the T1/T2 [Fruit] sink at Cooking 8; later [Fruit] sinks at Cooking 38, 68, and 98 align with Farming T4, T7, and T10 Orchard unlocks. Every Orchard output tagged [Fruit] is eligible; the tag is virtual, not an inventory item.
-
-
-
-
-
-
-
-

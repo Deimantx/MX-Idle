@@ -1,7 +1,12 @@
-export type HeavyArmorId = 'combat.armor.heavy.copper_helm' | 'combat.armor.heavy.copper_armor' | 'combat.armor.heavy.copper_gauntlets' | 'combat.armor.heavy.copper_greaves';
-export const HEAVY_ARMOR: Record<HeavyArmorId, { id: HeavyArmorId; name: string; slot: 'head' | 'armor' | 'hands' | 'feet'; smithingLevel: number; physicalResistance: number; evasion: number }> = {
-  'combat.armor.heavy.copper_helm': { id: 'combat.armor.heavy.copper_helm', name: 'Copper Helm', slot: 'head', smithingLevel: 5, physicalResistance: 2, evasion: 0 },
-  'combat.armor.heavy.copper_armor': { id: 'combat.armor.heavy.copper_armor', name: 'Copper Plate Armor', slot: 'armor', smithingLevel: 5, physicalResistance: 4, evasion: 0 },
-  'combat.armor.heavy.copper_gauntlets': { id: 'combat.armor.heavy.copper_gauntlets', name: 'Copper Gauntlets', slot: 'hands', smithingLevel: 5, physicalResistance: 1, evasion: 0 },
-  'combat.armor.heavy.copper_greaves': { id: 'combat.armor.heavy.copper_greaves', name: 'Copper Greaves', slot: 'feet', smithingLevel: 5, physicalResistance: 1, evasion: 0 },
-};
+export type HeavyArmorId=`combat.armor.heavy.${string}`;
+export type HeavyArmorDefinition={id:HeavyArmorId;name:string;slot:'head'|'armor'|'hands'|'feet';smithingLevel:number;physicalResistance:number;evasion:number;slashResistance:number;pierceResistance:number;magicResistance:number};
+const metals=['copper','iron','cobalt','argent','emberite','frostsilver','stormiron','aetherite','umbral','astralite'];
+const names=['Copper','Iron','Cobalt','Argent','Emberite','Frostsilver','Stormiron','Aetherite','Umbral','Astralite'];
+const levels=[5,15,25,35,45,55,65,75,85,95];
+// Authored as Slash/Stab/Crush, Pierce/Puncture, and elemental resistance.
+const table=[
+ [[2,2,0],[4,6,0],[2,2,0],[2,2,0]],[[2,3,0],[6,8,1],[2,2,0],[2,2,0]],[[3,4,0],[7,8,1],[2,3,0],[2,3,0]],[[3,4,0],[9,10,2],[2,3,0],[2,3,0]],[[4,4,0],[8,12,2],[3,3,0],[3,3,0]],[[4,5,1],[10,12,2],[3,4,0],[3,4,0]],[[4,6,1],[12,14,1],[3,4,1],[3,4,1]],[[5,6,1],[11,16,2],[4,4,1],[4,4,1]],[[5,7,1],[14,17,3],[4,5,1],[4,5,1]],[[6,8,2],[16,18,4],[4,6,1],[4,6,1]],
+] as const;
+const defs:HeavyArmorDefinition[]=[];
+for(let i=0;i<metals.length;i++)for(const [suffix,label,slot,index] of [['helm','Helm','head',0],['armor','Plate Armor','armor',1],['gauntlets','Gauntlets','hands',2],['greaves','Greaves','feet',3]] as const){const res=table[i]![index]!;defs.push({id:`combat.armor.heavy.${metals[i]}_${suffix}`,name:`${names[i]} ${label}`,slot,smithingLevel:levels[i]!,physicalResistance:res[1],evasion:0,slashResistance:res[0],pierceResistance:res[1],magicResistance:res[2]});}
+export const HEAVY_ARMOR:Record<HeavyArmorId,HeavyArmorDefinition>=Object.fromEntries(defs.map(x=>[x.id,x])) as Record<HeavyArmorId,HeavyArmorDefinition>;

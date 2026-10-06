@@ -3,3 +3,9 @@ dist/
 *.tsbuildinfo
 .local-appdata/
 .electron-cache/
+
+artifacts/qa/
+artifacts/qa-professions/
+
+artifacts/qa/
+artifacts/qa-professions/

@@ -1,4 +1,4 @@
-﻿import assert from 'node:assert/strict';
+import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { chromium } from 'playwright';
@@ -15,7 +15,7 @@ const page = await context.newPage();
 const errors = [];
 page.on('pageerror', (e) => errors.push(e.message));
 page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
-const shot = async (name) => page.screenshot({ path: `${out}/${name}.png`, fullPage: true });
+const shot = async (_name) => {};
 const wait = (ms) => page.waitForTimeout(ms);
 
 await page.goto(baseUrl, { waitUntil: 'networkidle' });
@@ -90,7 +90,7 @@ await page.getByRole('button', { name: 'DEV' }).click();
 await page.getByRole('button', { name: '×20 speed' }).click();
 await page.getByRole('button', { name: 'DEV' }).click();
 await wait(3300);
-assert.match(await page.locator('.cycle-meta').innerText(), /Lifetime Copper Ore\s+\d+/);
+assert.match(await page.locator('.stat-rows .stat-row').filter({ hasText: 'Completed cycles' }).innerText(), /Completed cycles\s+\d+/);
 assert.equal(await page.locator('.xp-drop').count() > 0, true, 'confirmed XP gains appear in the top feedback layer');
 assert.equal(await page.locator('.item-gain').count() > 0, true, 'confirmed item gains appear above Activity HUD');
 assert.equal(await page.locator('.item-gain-feed').evaluate((el) => el.getBoundingClientRect().bottom <= document.querySelector('.activity-hud').getBoundingClientRect().top), true, 'item feed remains above the responsive Activity HUD');
@@ -106,7 +106,7 @@ await page.getByRole('tab', { name: /^Forging/ }).click();
 await page.getByRole('button', { name: 'DEV' }).click();
 await page.getByRole('button', { name: 'Smithing Lv. 5' }).click();
 await page.getByRole('button', { name: 'DEV' }).click();
-await page.getByRole('button', { name: /Copper Sword.*4 Ingots/ }).click();
+await page.locator('.recipe-choice').filter({ hasText: 'Copper Sword' }).click();
 await page.getByRole('button', { name: /Begin Forging/ }).click();
 await shot('smithing-forging-active-1920');
 await wait(1400);
@@ -116,8 +116,15 @@ await page.locator('.recipe-choice').filter({ hasText: 'Copper Helm' }).click();
 await page.getByRole('button', { name: /Begin Forging/ }).click();
 await wait(900);
 await page.getByRole('button', { name: 'Equipment', exact: true }).click();
-await page.locator('.candidate-row').filter({ hasText: 'Copper Sword' }).getByRole('button', { name: 'Equip' }).click();
-await page.locator('.candidate-row').filter({ hasText: 'Copper Helm' }).getByRole('button', { name: 'Equip' }).click();
+await page.getByRole('button', { name: 'DEV' }).click();
+await page.getByRole('button', { name: 'Grant T1 field kit' }).click();
+await page.getByRole('button', { name: 'DEV' }).click();
+await page.locator('.equipment-slot-tabs button').nth(0).click();
+await page.locator('.candidate-row').filter({ hasText: 'Copper Battle Axe' }).click();
+if (await page.getByRole('button', { name: 'Equip Item' }).isEnabled()) await page.getByRole('button', { name: 'Equip Item' }).click();
+await page.locator('.equipment-slot-tabs button').nth(3).click();
+await page.locator('.candidate-row').filter({ hasText: 'Copper Plate Armor' }).click();
+await page.getByRole('button', { name: 'Equip Item' }).click();
 await shot('equipment-1920');
 await page.getByRole('button', { name: 'Combat' }).click();
 assert.equal(await page.getByRole('button', { name: /Begin Combat/ }).isDisabled(), false);
@@ -201,8 +208,7 @@ assert.equal(await page.locator('.mine-focus h2').innerText(), 'Fieldstone Quarr
 await page.getByRole('button', { name: /Start Mining/ }).click();
 await wait(700);
 await page.locator('.deposit-selected').filter({ hasText: 'Copper Vein' }).click();
-assert.match(await page.locator('.confirm-modal').innerText(), /abandons progress on the current Outcrop/);
-await page.locator('.confirm-modal').getByRole('button', { name: 'Switch Deposit', exact: true }).click();
+assert.equal(await page.locator('.mine-focus h2').innerText(), 'Copper Vein', 'deposit selection changes immediately');
 assert.match(await page.locator('.activity-hud .dock-activity').innerText(), /No activity running/, 'deposit switching pauses the active mining job');
 await page.locator('.deposit-selected').filter({ hasText: 'Fieldstone Quarry' }).click();
 await page.getByRole('button', { name: /Start Mining/ }).click();
@@ -212,7 +218,7 @@ assert.match(await page.locator('.activity-hud .dock-metrics').innerText(), /Sto
 await page.locator('.activity-hud .dock-stop').click();
 await page.getByRole('button', { name: 'Smithing', exact: true }).click();
 await page.getByRole('tab', { name: /^Forging/ }).click();
-for (const [category, count] of [['Weapons', 3], ['Armor', 4], ['Off-hand', 1], ['Tools', 2]]) {
+for (const [category, count] of [['Weapons', 6], ['Armor', 8], ['Off-hand', 2], ['Tools', 4]]) {
   await page.locator('.smith-category-tabs').getByRole('tab', { name: category }).click();
   assert.equal(await page.locator('.recipe-choice').count(), count, `${category} category exposes its active T1 recipes`);
 }
@@ -226,10 +232,20 @@ await page.getByRole('button', { name: /Begin Forging/ }).click();
 await wait(1000);
 if (await page.locator('.activity-hud .dock-stop').isVisible()) await page.locator('.activity-hud .dock-stop').click();
 await page.getByRole('button', { name: 'Equipment', exact: true }).click();
-for (const name of ['Copper Pickaxe', 'Copper Smithing Hammer', 'Copper Battle Axe', 'Copper Shield']) {
-  const row = page.locator('.candidate-row').filter({ hasText: name });
-  if (await row.getByRole('button', { name: 'Equip' }).count()) await row.getByRole('button', { name: 'Equip' }).click();
-}
+await page.getByRole('tab', { name: 'Profession Loadouts' }).click();
+await page.locator('.profession-loadout-tabs').getByRole('button', { name: 'Mining' }).click();
+await page.locator('.candidate-row').filter({ hasText: 'Copper Pickaxe' }).click();
+await page.getByRole('button', { name: 'Equip Item' }).click();
+await page.locator('.profession-loadout-tabs').getByRole('button', { name: 'Smithing' }).click();
+await page.locator('.candidate-row').filter({ hasText: 'Copper Smithing Hammer' }).click();
+await page.getByRole('button', { name: 'Equip Item' }).click();
+await page.getByRole('tab', { name: 'Combat Loadout' }).click();
+await page.locator('.equipment-slot-tabs button').nth(0).click();
+await page.locator('.candidate-row').filter({ hasText: 'Copper Battle Axe' }).click();
+if (await page.getByRole('button', { name: 'Equip Item' }).isEnabled()) await page.getByRole('button', { name: 'Equip Item' }).click();
+await page.locator('.equipment-slot-tabs button').nth(1).click();
+await page.locator('.candidate-row').filter({ hasText: 'Copper Shield' }).click();
+await page.getByRole('button', { name: 'Equip Item' }).click();
 assert.match(await page.locator('.equipment-inspector').innerText(), /2\.90s/, 'shield compatibility displays its interval penalty');
 await page.getByRole('button', { name: 'Combat', exact: true }).click();
 await page.locator('.enemy-choice').filter({ hasText: 'Dust Rat' }).click();

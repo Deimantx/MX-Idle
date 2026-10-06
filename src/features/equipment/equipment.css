@@ -202,3 +202,30 @@
   font-size: calc(8px * var(--ui-scale) * var(--text-scale));
 
 }
+
+.equipment-modes,.profession-loadout-tabs,.equipment-slot-tabs { display:flex; gap:6px; flex-wrap:wrap; margin:0 0 12px; }
+.equipment-modes button,.profession-loadout-tabs button,.equipment-slot-tabs button { border:1px solid var(--border); background:var(--surface-raised); color:var(--text-muted); border-radius:4px; padding:7px 10px; font:inherit; cursor:pointer; }
+.equipment-modes button.selected,.profession-loadout-tabs button.selected,.equipment-slot-tabs button.selected { color:var(--text); border-color:#8d704d; background:#30291f; }
+.equipment-layout.equipment-picker-layout { grid-template-columns:minmax(260px,.8fr) minmax(420px,1.2fr); align-items:stretch; }
+.equipment-slot-tabs button { min-width:115px; display:grid; text-align:left; gap:4px; }
+.equipment-slot-tabs button span,.equipment-filters label { font-size:9px; color:var(--text-muted); text-transform:uppercase; letter-spacing:.06em; }
+.equipment-slot-tabs button b { color:var(--text); font-size:11px; }
+.combat-summary-strip { display:flex; flex-wrap:wrap; gap:6px; border:1px solid var(--border); background:var(--surface-inset); padding:8px; margin:10px 0; }
+.combat-summary-strip span { color:var(--text-muted); font-size:9px; padding:3px 5px; }
+.combat-summary-strip b { color:var(--text); font-variant-numeric:tabular-nums; margin-left:4px; }
+.equipment-filters { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+.equipment-filters input:not([type=checkbox]) { flex:1; min-width:100px; background:#202627; border:1px solid #51595b; border-radius:4px; color:var(--text); padding:7px 9px; font:inherit; }
+.equipment-filters label { display:flex; align-items:center; gap:5px; white-space:nowrap; }
+.equipment-picker-layout .candidate-list { max-height:min(42vh,470px); min-height:155px; overflow:auto; overscroll-behavior:contain; }
+.candidate-row { width:100%; display:flex; align-items:center; gap:9px; text-align:left; color:var(--text); }
+.candidate-row.selected { background:#2b332f; border-color:#82907a; }
+.candidate-row.equipped .candidate-copy:after { content:'EQUIPPED'; display:block; color:#adc28c; font-size:8px; letter-spacing:.08em; margin-top:2px; }
+.candidate-copy { flex:1; min-width:0; display:grid; gap:3px; }
+.candidate-copy small { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.item-compare { margin-top:12px; padding:12px; border-top:1px solid var(--border); background:var(--surface-inset); }
+.item-compare-heading { display:flex; gap:10px; align-items:center; margin-bottom:10px; }
+.item-compare-heading h3 { margin:3px 0; }
+.compare-stats { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:10px; }
+.compare-stats>div { min-width:0; }
+.compare-stats>div>b { display:block; font-size:10px; color:var(--text-muted); margin-bottom:4px; text-transform:uppercase; }
+.selected-slot-actions { min-height:32px; }

@@ -1,8 +1,12 @@
-﻿# 01 â€” MINING
+> **MASTERY STATUS — REMOVED FROM CURRENT BASELINE**
+>
+> The earlier per-deposit / per-recipe / per-species Mastery system is no longer part of the active MX-Idle baseline. Ignore all historical Mastery sections, rewards, XP formulas, worker-Proven rules, and Mastery-based modifiers unless a future dedicated progression redesign explicitly restores them.
 
-**Status:** Complete Design Draft â€” Core Loop Corrected  
-**Version:** 1.1  
-**Parent:** `00_PROFESSIONS_OVERVIEW.md` / Skills & Professions foundation  
+# 01 â€” MINING
+
+**Status:** Complete Design Draft â€” Core Loop Corrected
+**Version:** 1.1
+**Parent:** `00_PROFESSIONS_OVERVIEW.md` / Skills & Professions foundation
 **Reference Professions:** `Smithing.md`, `Jewelcrafting.md`, `Runecrafting.md`
 **Purpose:** Define Mining as a full profession: its core loop, unique mechanics, 10-tier progression, resources, tools, profession gear, Mastery, Specializations, facilities, automation, workers, UI, economy links, and long-term relevance.
 
@@ -732,6 +736,7 @@ More primary Ore.
 
 Better Gem / rare-material chance.
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Mastery Setup
 
 More Mastery XP.
@@ -766,6 +771,7 @@ Examples:
 - Prospector specialization;
 - useful when rare secondary resources are the objective.
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ### Mastery
 
 - Mastery-focused equipment;
@@ -804,22 +810,27 @@ Mastery belongs to the Deposit/action, not to individual item drops.
 
 Recommended baseline:
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Mastery 10
 
 Small Mining Power bonus on that Deposit.
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Mastery 25
 
 Improved Primary Quantity.
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Mastery 50
 
 Improved Deep Seam / Core efficiency.
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Mastery 75
 
 Improved by-product / Gem / Crystal extraction.
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Mastery 100
 
 Major Deposit-specific Core bonus.
@@ -1213,6 +1224,7 @@ Mine Iron until Bank contains 10,000 Iron Ore, then finish the current Stage and
 
 Mine Astralite until 20 Astral Core Fragments are obtained, then finish the current Deposit and move to Worldheart.
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ### Mastery Plan
 
 Mine Cobalt until Deposit Mastery reaches 75, then finish the current Stage and proceed to the next queued profession action.
@@ -1509,7 +1521,7 @@ Example:
 
 Below it:
 
-**Mining Power: 14 per strike**  
+**Mining Power: 14 per strike**
 **Estimated Strikes Remaining: 3**
 
 The player should immediately see two things:
@@ -2176,6 +2188,7 @@ Player Deposit Mastery reduces that penalty.
 
 ---
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Should workers have full Deposit Mastery?
 
 **No.**
@@ -2231,6 +2244,7 @@ Only add a fourth if it creates a genuinely different build.
 
 ---
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Should Mining Mastery go beyond 100?
 
 **No for baseline.**
@@ -2244,6 +2258,7 @@ Post-100 systems can be considered with future endgame expansion.
 
 ---
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Is Mastery 100 required for normal progression?
 
 **No.**
@@ -3212,6 +3227,7 @@ Mastery does not let the player skip Stages.
 
 It makes the full cycle more efficient and more valuable.
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Skill-Wide Mining Mastery
 
 Completion:
@@ -3613,6 +3629,7 @@ Fractional Quantity becomes an extra-item roll.
 
 **Stage-1 Base XP Ã— Stage XP Multiplier Ã— XP modifiers**
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Mastery XP
 
 **Stage-1 Base XP Ã— 0.35 Ã— Stage Mastery Multiplier Ã— Mastery modifiers**
@@ -3662,6 +3679,7 @@ Mining Power bonus only for Deep Seam and Core.
 
 Normal profession XP modifier.
 
+[DEPRECATED — DO NOT IMPLEMENT]
 ## Mining Mastery XP
 
 Deposit Mastery modifier.
@@ -3824,14 +3842,3 @@ Over the account lifetime:
 # INTEGRATION HARDENING — ESSENCE ACCESS
 
 Essence deposits align to the Runecrafting grade bands: Raw Essence Seam unlocks at Mining 1/T1 with Worn Pickaxe; Runic Crystal Seam at Mining 31/T4 with Copper Pickaxe; Aether Essence Core at Mining 61/T7 with Frostsilver Pickaxe. Essence deposits were rebalanced after their unlock levels moved earlier during cross-profession integration. Density and Stage-1 XP are tuned to their new bands; five-stage identity and normal metal progression are unchanged. Astral Essence remains a Runecrafting refinement from Aether Essence and Astral Core Fragment. See the Unlock Dependency Matrix for the cross-skill contract.
-
-
-
-
-
-
-
-
-
-
-

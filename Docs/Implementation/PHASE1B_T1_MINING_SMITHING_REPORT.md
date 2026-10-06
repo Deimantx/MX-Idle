@@ -1,6 +1,8 @@
 # Phase 1B: T1 Mining + Smithing Foundation & Completion
 
-**Status:** Implemented; verification recorded below  
+> Superseded: the current Mastery implementation was removed in the later Phase-1 audit. This report records historical implementation state only.
+
+**Status:** Implemented; verification recorded below
 **Scope:** T1 Copper Vein and Fieldstone Quarry, Copper Smelting, T1 Forging, profession tools, combat equipment data, v3 save migration.
 
 ## Player loop
