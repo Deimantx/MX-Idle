@@ -29,7 +29,7 @@ export function CombatScreen({ game: g, start, stop, stance, target, setArea, qu
   ];
   const combatLocations=Object.values(COMBAT_AREAS).filter(entry=>entry.kind==='area').sort((a,b)=>a.tier-b.tier);
   return <div className="screen combat-screen combat-v2" data-feedback-screen="Combat" data-area={area.id} data-region={area.name.toLowerCase().replace(/[^a-z0-9]+/g,'-')} data-combat-state={active?'active':'ready'}>
-    <ScreenHeading eyebrow={`${area.name.toUpperCase()}  /  TIER ${area.tier}`} title={area.name} sub="Read the encounter, prepare your loadout, and watch attack rhythms for openings." accent="combat" level={g.skills.Attack.level} xp={g.skills.Attack.xp} maxXp={xpForLevel(g.skills.Attack.level)}><Badge tone={active ? 'live' : 'level-badge'}>{active ? 'IN COMBAT' : enemy.rank.toUpperCase()}</Badge></ScreenHeading>
+    <ScreenHeading eyebrow={`${area.name.toUpperCase()}  /  TIER ${area.tier}`} title={area.name} sub="Read the encounter, prepare your loadout, and watch attack rhythms for openings." accent="combat" skill="Attack" level={g.skills.Attack.level} xp={g.skills.Attack.xp} maxXp={xpForLevel(g.skills.Attack.level)}><Badge tone={active ? 'live' : 'ready'}>{active ? 'IN COMBAT' : enemy.rank.toUpperCase()}</Badge></ScreenHeading>
     <div className="combat-layout">
       <div className="combat-main">
         <Panel className="world-browser" title="Combat World" action={<span className="tiny-label">TIER {tier} / 10</span>}>

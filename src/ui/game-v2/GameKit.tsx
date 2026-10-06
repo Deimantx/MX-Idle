@@ -1,6 +1,8 @@
 import type { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from 'react';
 import { Badge, Icon } from '../primitives';
-import { ItemMark } from '../game/ItemDisplay';
+import { ItemMark, ItemTip } from '../game/ItemDisplay';
+import { ITEMS, type ItemId } from '../../game/game';
+import type { ItemTooltipContext } from '../game/itemTooltip.model';
 
 export type GameAccent = 'neutral' | 'mining' | 'smithing' | 'fishing' | 'cooking' | 'combat' | 'equipment' | 'bank';
 export function GameSurface({ as: Tag = 'section', accent = 'neutral', className = '', children, ...props }: HTMLAttributes<HTMLElement> & { as?: 'section' | 'div' | 'article'; accent?: GameAccent }) {
@@ -15,14 +17,15 @@ export function GameAction({ children, action = 'secondary', icon, className = '
   return <button className={`g2-action g2-action-${action} ${className}`} {...props}>{icon && <Icon name={icon} size={18}/>}<span>{children}</span></button>;
 }
 
-export function GameItemFrame({ id, size = 'regular', state = 'normal', count, tier, label, className = '' }: { id: string; size?: 'compact' | 'regular' | 'hero'; state?: 'normal' | 'selected' | 'equipped' | 'locked' | 'reward'; count?: ReactNode; tier?: number; label?: string; className?: string }) {
-  return <span className={`g2-item-frame g2-item-${size} g2-item-${state} ${className}`} aria-label={label}>
+export function GameItemFrame({ id, size = 'regular', state = 'normal', count, tier, label, className = '', inspect = true, inspectContext, focusable = true }: { id: string; size?: 'compact' | 'regular' | 'hero'; state?: 'normal' | 'selected' | 'equipped' | 'locked' | 'reward'; count?: ReactNode; tier?: number; label?: string; className?: string; inspect?: boolean; inspectContext?: ItemTooltipContext; focusable?: boolean }) {
+  const frame = <span className={`g2-item-frame g2-item-${size} g2-item-${state} ${className}`} aria-label={label}>
     {tier !== undefined && <i className="g2-item-tier">T{tier}</i>}
     <ItemMark id={id} large={size === 'hero'}/>
     {count !== undefined && <b className="g2-item-count">{count}</b>}
     {state === 'equipped' && <i className="g2-item-state">WORN</i>}
     {state === 'locked' && <i className="g2-item-state">LOCKED</i>}
   </span>;
+  return inspect && id in ITEMS ? <ItemTip id={id as ItemId} context={inspectContext} focusable={focusable}>{frame}</ItemTip> : frame;
 }
 
 export function GameValue({ label, value, accent = 'neutral', detail }: { label: string; value: ReactNode; accent?: GameAccent | 'positive' | 'negative'; detail?: ReactNode }) {
@@ -41,4 +44,3 @@ export function GameProgress({ value, max, kind = 'activity', label }: { value: 
 export function GameEmpty({ icon = 'bank', title, detail }: { icon?: string; title: string; detail: string }) {
   return <div className="g2-empty"><span><Icon name={icon} size={24}/></span><b>{title}</b><small>{detail}</small></div>;
 }
-

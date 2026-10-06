@@ -1,6 +1,6 @@
 ﻿import { useMemo, useState } from 'react';
 import { Badge, Button, Icon, Panel } from '../../../ui/primitives';
-import { ItemMark } from '../../../ui/game/ItemDisplay';
+import { ItemMark, ItemTip } from '../../../ui/game/ItemDisplay';
 import { ScreenHeading, Stat } from '../../../ui/game/ScreenPrimitives';
 import { fmt, formatActionTime, formatDuration } from '../../../ui/game/formatters';
 import { MINING_DEPOSITS, MINING_STAGE_MODEL, MINING_TOOLS, type DepositId, type ItemId, type SaveState } from '../../../game/game';
@@ -48,7 +48,7 @@ export function MiningScreen({ game: g, xp, maxXp, start, stop, select, equipToo
   };
 
   return <div className="screen mining-screen mining-v2" data-profession="mining" data-feedback-screen="Mining">
-    <ScreenHeading eyebrow="PROFESSION / GEOLOGY" title="Mining" sub="Choose a seam, read its strata, and work each layer down to the core." accent="mining" level={g.skills.Mining.level} xp={xp} maxXp={maxXp} />
+    <ScreenHeading eyebrow="PROFESSION / GEOLOGY" title="Mining" sub="Choose a seam, read its strata, and work each layer down to the core." accent="mining" skill="Mining" level={g.skills.Mining.level} xp={xp} maxXp={maxXp} />
     <div className="mine-browser-tools">
       <div className="mine-category-nav" role="tablist" aria-label="Deposit materials">{CATEGORIES.map(item => <button key={item} type="button" role="tab" aria-selected={category === item} className={category === item ? 'selected' : ''} onClick={() => setCategory(item)}>{item === 'All' ? 'All Deposits' : item}</button>)}</div>
       <label className="mine-search"><span className="sr-only">Search deposits</span><input value={query} onChange={event => setQuery(event.target.value)} placeholder="Find a deposit or resource" /></label>
@@ -62,7 +62,7 @@ export function MiningScreen({ game: g, xp, maxXp, start, stop, select, equipToo
           const locked = levelLocked || toolLocked || Boolean(entry.endgameGated);
           const selected = entry.id === deposit.id;
           return <button key={entry.id} type="button" className={`deposit-selected ${selected ? 'selected' : ''} ${locked ? 'locked' : ''}`} onClick={() => inspectDeposit(entry)} aria-pressed={selected}>
-            <span className="selection-edge" /><ItemMark id={entry.primary} />
+            <span className="selection-edge" /><ItemTip id={entry.primary} focusable={false}><ItemMark id={entry.primary}/></ItemTip>
             <span className="deposit-label"><b>{entry.name}</b><small>{entry.resourceName} / T{entry.tier} / {entry.endgameGated ? 'Endgame gated' : levelLocked ? `Mining ${entry.unlockLevel} required` : toolLocked ? `${MINING_TOOLS[entry.requiredTool as keyof typeof MINING_TOOLS]?.name ?? 'Pickaxe'} required` : 'Ready to mine'}</small></span>
             <GameState tone={locked?'locked':active&&selected?'active':selected?'ready':'neutral'} icon={locked?'shield':active&&selected?'mining':undefined}>{entry.endgameGated?'GATED':toolLocked?'TOOL':levelLocked?`LV ${entry.unlockLevel}`:active&&selected?'WORKING':selected?'SELECTED':'READY'}</GameState>
           </button>;
@@ -80,7 +80,7 @@ export function MiningScreen({ game: g, xp, maxXp, start, stop, select, equipToo
           <div className="mine-strata-depth" aria-label="Five excavation layers">{MINING_STAGE_MODEL.map((item,index)=><span key={item.id} className={index<runtime.stageIndex?'cleared':index===runtime.stageIndex?'current':''}><i/>{String(index+1).padStart(2,'0')}</span>)}</div>
           <div className="vein-depth"><span>{stage.name.toUpperCase()}</span><b>STRATUM {runtime.stageIndex+1} / 5</b></div><div className="vein-vignette"/>
         </div>
-        <div className="stage-name-line"><div><span className="tiny-label">CURRENT LAYER</span><h3>{stage.name}</h3></div><div className="stage-reward"><span>EXPECTED YIELD</span><b><ItemMark id={deposit.primary} /> {getPrimaryExpectedQuantity(runtime.stageIndex, deposit.id).toFixed(2)} x {deposit.resourceName}</b></div></div>
+        <div className="stage-name-line"><div><span className="tiny-label">CURRENT LAYER</span><h3>{stage.name}</h3></div><div className="stage-reward"><span>EXPECTED YIELD</span><b><ItemTip id={deposit.primary} focusable={false}><ItemMark id={deposit.primary}/></ItemTip> {getPrimaryExpectedQuantity(runtime.stageIndex, deposit.id).toFixed(2)} x {deposit.resourceName}</b></div></div>
         <div className="bar-label mine-density-heading"><span>Deposit density <small>geological resistance</small></span><b>{runtime.densityRemaining.toFixed(1)} <small>/ {maxDensity}</small></b></div><GameProgress value={runtime.densityRemaining} max={maxDensity} kind="density" label={`Deposit density, ${strikes} strikes remaining`}/><div className="density-strike-marks" aria-hidden="true">{Array.from({length:Math.min(10,Math.max(1,strikes))},(_,index)=><i key={index}/>)}</div>
         <div className="mine-action-progress"><div><span className="tiny-label">NEXT SWING</span><b>{active ? formatActionTime(g.mining.timer) : formatActionTime(strikeMs)}</b></div><ActionProgress active={active} remainingMs={g.mining.timer || strikeMs} durationMs={strikeMs} phaseKey={`${deposit.id}:${g.mining.strikes}`} speedMultiplier={speedMultiplier} label="Mining swing progress" /></div>
         <div className="mine-controls"><Button tone="copper" onClick={active ? stop : start}><Icon name={active?'combat':'pick'} size={18}/>{active ? 'Stop Mining' : 'Start Mining'}</Button></div>
@@ -88,7 +88,7 @@ export function MiningScreen({ game: g, xp, maxXp, start, stop, select, equipToo
       </Panel>
 
       <Panel className="mine-inspector mine-shift-panel" title="Current Shift" action={<Badge tone={active ? 'live' : ''}>{active ? 'ON THE SEAM' : 'STANDBY'}</Badge>}>
-        <section className="shift-tool-module"><div className="tool-insignia"><ItemMark id={tool.item} /></div><div><span className="tiny-label">EQUIPPED PICKAXE</span><b>{tool.name}</b><small>Power {power} · {tool.effect}</small></div><Badge tone="equipped">EQUIPPED</Badge>
+        <section className="shift-tool-module"><ItemTip id={tool.item} focusable={false}><div className="tool-insignia"><ItemMark id={tool.item}/></div></ItemTip><div><span className="tiny-label">EQUIPPED PICKAXE</span><b>{tool.name}</b><small>Power {power} · {tool.effect}</small></div><Badge tone="equipped">EQUIPPED</Badge>
           {equipTool && <div className="tool-picker"><Button tone="quiet" aria-expanded={toolPickerOpen} onClick={() => setToolPickerOpen(!toolPickerOpen)}><Icon name="pick" size={15}/>{toolPickerOpen ? 'Close pickaxe list' : 'Change pickaxe'}</Button>{toolPickerOpen && <div className="tool-upgrades" role="group" aria-label="Choose owned pickaxe">{Object.values(MINING_TOOLS).filter(candidate => (g.bank[candidate.item] ?? 0) > 0 && candidate.item !== tool.item).map(candidate => <Button key={candidate.item} tone="quiet" onClick={() => { equipTool(candidate.item); setToolPickerOpen(false); }}>{candidate.name} · Power {candidate.power}</Button>)}</div>}</div>}
         </section>
         <div className="mine-shift-grid">

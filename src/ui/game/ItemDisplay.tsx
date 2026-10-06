@@ -4,9 +4,9 @@ import { getItemTooltipModel, type ItemTooltipContext } from './itemTooltip.mode
 
 export function ItemMark({ id, large = false }: { id: string; large?: boolean }) { return <span className={`item-mark ${large ? 'large' : ''} ${id}`}><Icon name={ITEMS[id as ItemId]?.icon ?? id} size={large ? 40 : 24} /></span>; }
 
-export function ItemTip({ id, children, context }: { id: ItemId; children: import('react').ReactNode; context?: ItemTooltipContext }) {
+export function ItemTip({ id, children, context, focusable = true }: { id: ItemId; children: import('react').ReactNode; context?: ItemTooltipContext; focusable?: boolean }) {
   const model = getItemTooltipModel(id, context);
-  return <Tip placement="auto" delayMs={260} className="item-inspect-tip" content={<article className="item-tooltip-v2">
+  return <Tip placement="auto" delayMs={220} focusable={focusable} className="item-inspect-tip" content={<article className="item-tooltip-v2">
     <header><ItemMark id={id}/><div><strong>{model.name}</strong><span>{model.category}{model.tier ? ` · Tier ${model.tier}` : ''} · {model.rarity}</span></div></header>
     <p>{model.description}</p>
     {model.requirement && <div className={`item-requirement ${model.requirement.met === false ? 'missing' : ''}`}><small>REQUIRES</small><b>{model.requirement.skill} {model.requirement.level}</b>{model.requirement.met !== undefined && <em>{model.requirement.met ? 'Met' : 'Not met'}</em>}</div>}

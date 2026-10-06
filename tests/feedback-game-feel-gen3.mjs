@@ -11,20 +11,39 @@ page.on('pageerror',error=>errors.push(error.message));
 page.on('console',message=>{if(message.type()==='error')errors.push(message.text());});
 await mkdir(output,{recursive:true});
 const shot=async(name)=>page.screenshot({path:`${output}/${name}.png`,fullPage:true});
-const preview=async(name)=>{await page.getByRole('button',{name:'DEV'}).click();await page.locator('.dev-nav').getByRole('button',{name:'UI Lab'}).click();const button=page.locator('.feedback-preview-bench').getByRole('button',{name,exact:true});if(await button.count()===0) throw new Error(`Missing preview ${name}: ${await page.locator('.dev-active-page').innerText()}`);await button.click();await page.getByRole('button',{name:'Close developer tools'}).click();};
+const preview=async(name)=>{await page.getByRole('button',{name:'DEV'}).click();await page.locator('.dev-nav').getByRole('button',{name:'Feedback Preview'}).click();const button=page.locator('.feedback-preview-bench').getByRole('button',{name,exact:true});if(await button.count()===0) throw new Error(`Missing preview ${name}: ${await page.locator('.dev-active-page').innerText()}`);await button.click();await page.getByRole('button',{name:'Close developer tools'}).click();};
 try {
   await page.goto(process.env.BASE_URL??'http://127.0.0.1:5174/',{waitUntil:'networkidle'});
   await page.getByRole('button',{name:'Create Profile'}).first().click();
   await page.getByLabel('Name your adventurer').fill('Feedback QA');
   await page.getByRole('button',{name:'Begin'}).click();
+  await page.getByRole('button',{name:'DEV'}).click();
+  assert.equal(await page.locator('.dev-controls').getAttribute('aria-modal'),'false','DevTools is a floating non-modal workspace');
+  assert.equal(await page.getByRole('button',{name:'Close developer tools'}).locator('svg').count(),1,'close action uses an icon');
+  await shot('devtools-floating');
+  const titlebar=await page.locator('.dev-workspace-head').boundingBox();
+  await page.mouse.move(titlebar.x+titlebar.width*.52,titlebar.y+titlebar.height*.55); await page.mouse.down(); await page.mouse.move(titlebar.x+titlebar.width*.52+120,titlebar.y+titlebar.height*.55+70,{steps:5}); await page.mouse.up();
+  const windowBox=await page.locator('.dev-controls').boundingBox();
+  assert.ok(windowBox.x>0&&windowBox.y>0,'developer window can be dragged while remaining in view');
+  assert.equal(await page.locator('.dev-controls').evaluate(element=>getComputedStyle(element).resize),'both','developer window exposes native resize handles');
+  await page.mouse.move(windowBox.x+windowBox.width-3,windowBox.y+windowBox.height-3); await page.mouse.down(); await page.mouse.move(windowBox.x+windowBox.width+100,windowBox.y+windowBox.height+70,{steps:5}); await page.mouse.up(); await page.waitForTimeout(120);
+  const resized=await page.locator('.dev-controls').boundingBox(); assert.ok(resized.width>=windowBox.width&&resized.height>=windowBox.height,'developer window resizes within its minimum bounds'); await shot('devtools-resized');
+  await page.getByRole('button',{name:'Minimize developer tools'}).click(); assert.ok(await page.locator('.dev-controls.is-minimized').count()); await shot('devtools-minimized');
+  await page.getByRole('button',{name:'Restore developer tools'}).click(); await page.getByRole('button',{name:'Dock developer tools'}).click(); assert.ok(await page.locator('.dev-controls.is-docked').count()); await shot('devtools-docked');
+  await page.getByRole('button',{name:'Undock developer tools'}).click(); await page.getByRole('button',{name:'Close developer tools'}).click();
   await page.getByRole('button',{name:'Fishing',exact:true}).click();
+  assert.equal(await page.locator('.heading-xp').count(),1,'Fishing uses the shared skill progression header');
   await page.getByRole('button',{name:'Start Fishing'}).click();
   await page.getByRole('button',{name:'Mining',exact:true}).click();
   await preview('Fishing XP');
   await page.locator('.xp-skill-orb.fishing').waitFor();
+  const ring=await page.locator('.xp-ring-progress').first().evaluate(element=>({progress:getComputedStyle(element).strokeWidth,track:getComputedStyle(element.parentElement.querySelector('.xp-ring-track')).strokeWidth})); assert.ok(parseFloat(ring.progress)>=5.5&&parseFloat(ring.track)>=6.5,'XP progress stroke and inactive track remain visually substantial');
   assert.equal(await page.locator('.xp-skill-orb.mining').count(),0,'Fishing preview must not fabricate Mining XP');
   await shot('fishing-active-mining-screen');
   await page.locator('.activity-hud .dock-stop').click();
+  await page.waitForTimeout(10_000);
+  assert.ok(await page.locator('.global-xp-hud .xp-skill-orb').count()>0,'XP circles remain visible after ten seconds of inactivity');
+  await shot('xp-circles-after-10s');
   await page.waitForFunction(()=>document.querySelectorAll('.global-xp-hud .xp-skill-orb').length===0,{timeout:12_000});
 
   await page.getByRole('button',{name:'DEV'}).click();
@@ -33,6 +52,7 @@ try {
   await page.getByRole('button',{name:'Grant & Equip'}).click();
   await page.getByRole('button',{name:'Close developer tools'}).click();
   await page.getByRole('button',{name:'Combat',exact:true}).click();
+  assert.equal(await page.locator('.heading-xp').count(),1,'Combat uses the shared skill progression header');
   await preview('Combat multi-XP');
   await page.locator('.xp-skill-orb.attack').waitFor();
   assert.equal(await page.locator('.xp-skill-orb').count(),3,'combat XP displays three skill circles');
@@ -50,22 +70,37 @@ try {
   const sword=page.locator('.eq-item-tile').filter({hasText:'Copper Sword'}).first();
   if(await sword.count()) { await sword.locator('.tip-wrap').hover(); await page.waitForTimeout(350); await shot('equipment-weapon-tooltip'); assert.equal(await page.locator('.item-tooltip-v2').count(),1); }
 
+  await page.getByRole('button',{name:'Mining',exact:true}).click();
+  await page.locator('.shift-tool-module .item-inspect-tip').hover(); await page.waitForTimeout(300); assert.equal(await page.locator('.item-tooltip-v2').count(),1,'Mining pickaxe inspection is available'); await shot('mining-pickaxe-tooltip');
   await page.getByRole('button',{name:'Smithing',exact:true}).click();
+  assert.equal(await page.locator('.heading-xp').count(),1,'Smithing uses the shared skill progression header'); assert.equal(await page.locator('.smith-xp-strip-v2').count(),0,'Smithing has no duplicate bottom XP strip');
+  await page.locator('.smith-recipe-card .item-inspect-tip').first().hover(); await page.waitForTimeout(300); assert.equal(await page.locator('.item-tooltip-v2').count(),1,'Smithing recipe output inspection is available'); await shot('smithing-recipe-tooltip');
   await preview('Smithing');
   await page.locator('.local-game-feedback').waitFor();
   await shot('smithing-action-feedback');
   await page.getByRole('button',{name:'Mining',exact:true}).click();
+  assert.equal(await page.locator('.heading-xp').count(),1,'Mining uses the shared skill progression header');
+  await page.locator('.mine-impact-ring').waitFor();
   await preview('Mining');
   await page.locator('.local-game-feedback').waitFor();
   await shot('mining-action-feedback');
   await page.getByRole('button',{name:'Cooking',exact:true}).click();
+  assert.equal(await page.locator('.heading-xp').count(),1,'Cooking uses the shared skill progression header');
+  await page.locator('.cooking-recipe-tile .item-inspect-tip').first().hover(); await page.waitForTimeout(300); assert.equal(await page.locator('.item-tooltip-v2').count(),1,'Cooking recipe ingredient/output inspection is available'); await shot('cooking-recipe-tooltip');
   await preview('Cooking');
   await page.locator('.local-game-feedback').waitFor();
   await shot('cooking-action-feedback');
+  await page.getByRole('button',{name:'Fishing',exact:true}).click();
+  assert.equal(await page.locator('.heading-xp').count(),1,'progression layout remains consistent on Fishing');
+  await page.locator('.water-choice .tip-wrap').first().hover(); await page.waitForTimeout(300); assert.equal(await page.locator('.spot-tooltip').count(),1,'Fishing atlas spot inspection is available'); await shot('fishing-spot-tooltip');
 
-  for(const viewport of [{width:1920,height:1080},{width:1440,height:900}]) {
+  for(const viewport of [{width:2560,height:1440},{width:1920,height:1080},{width:1440,height:900}]) {
     await page.setViewportSize(viewport); await page.waitForTimeout(100);
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,`UI fits ${viewport.width}px`);
+    await page.getByRole('button',{name:'Smithing',exact:true}).click(); await page.locator('.smith-station-card.furnace').click();
+    const furnace=await page.evaluate(()=>{const scene=document.querySelector('.smith-furnace-scene'),rect=(selector)=>{const value=scene?.querySelector(selector)?.getBoundingClientRect();return value&&{left:value.left,top:value.top,right:value.right,bottom:value.bottom};},wall=rect('.furnace-wall'),feed=rect('.furnace-feed'),output=rect('.furnace-output'),caption=rect('.furnace-state-caption'),icon=rect('.furnace-output .g2-item-frame'),copy=rect('.furnace-output>span:last-child');const overlap=(a,b)=>Boolean(a&&b&&a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top);return{scene:scene?.getBoundingClientRect().toJSON(),wall,feed,output,caption,outputIconCopyOverlap:overlap(icon,copy),wallFeedOverlap:overlap(wall,feed),wallOutputOverlap:overlap(wall,output),wallCaptionOverlap:overlap(wall,caption)};});
+    assert.equal(furnace.outputIconCopyOverlap,false,`Furnace output icon and text stay separated at ${viewport.width}px`); assert.equal(furnace.wallFeedOverlap,false,`Furnace wall and charge card do not overlap at ${viewport.width}px`); assert.equal(furnace.wallOutputOverlap,false,`Furnace wall and output card do not overlap at ${viewport.width}px`); assert.equal(furnace.wallCaptionOverlap,false,`Furnace wall and state caption do not overlap at ${viewport.width}px`); await shot(`smithing-furnace-${viewport.width}`);
+    await page.getByRole('button',{name:'Fishing',exact:true}).click();
     await preview('All seven skills');
     assert.equal(await page.locator('.xp-skill-orb').count(),7,'seven-skill preview displays every skill');
     const geometry=await page.evaluate(()=>{const hud=document.querySelector('.global-xp-hud')?.getBoundingClientRect(),right=document.querySelector('.topbar-right')?.getBoundingClientRect();return {hud:hud&&{left:hud.left,right:hud.right,top:hud.top,bottom:hud.bottom},right:right&&{left:right.left,right:right.right,top:right.top,bottom:right.bottom}};}); const overlap=Boolean(geometry.hud&&geometry.right&&geometry.hud.right>geometry.right.left&&geometry.hud.left<geometry.right.right&&geometry.hud.bottom>geometry.right.top&&geometry.hud.top<geometry.right.bottom);console.log(viewport.width,geometry);
@@ -81,5 +116,5 @@ try {
   await settings(); await page.getByRole('switch',{name:'XP Skill Circles'}).click(); await page.getByRole('button',{name:'Close',exact:true}).click();
   await preview('Fishing XP'); assert.equal(await page.locator('.global-xp-hud').count(),0,'both XP display settings off hide XP presentation');
   assert.deepEqual(errors,[],'no browser console or page errors');
-  console.log(JSON.stringify({screenshots:output,consoleErrors:errors,allSkills:7,expiry:'passed',settingsCombinations:'passed'},null,2));
+  console.log(JSON.stringify({screenshots:output,consoleErrors:errors,allSkills:7,idleVisibility:'10s visible; fades around 20s',settingsCombinations:'passed'},null,2));
 } finally { await browser.close(); }

@@ -36,7 +36,7 @@ export function SmithingScreen({game:g,mode,setMode,start,stop,choose,chooseSmel
 
  const startOrStop=()=>active?stop():start(mode==='smelting'?'smelting':'forging');
  return <div className="screen smith-screen smithing-v2" data-profession="smithing" data-feedback-screen="Smithing">
-  <ScreenHeading eyebrow="PROFESSION / FOUNDRY" title="Smithing" sub="Prepare material at the furnace, then shape durable gear at the anvil." accent="smithing" level={g.skills.Smithing.level} xp={g.skills.Smithing.xp} maxXp={xpForLevel(g.skills.Smithing.level)}><Badge tone={active?'live':'level-badge'}>{active?activeLabel.toUpperCase():`LEVEL ${g.skills.Smithing.level}`}</Badge></ScreenHeading>
+  <ScreenHeading eyebrow="PROFESSION / FOUNDRY" title="Smithing" sub="Prepare material at the furnace, then shape durable gear at the anvil." accent="smithing" skill="Smithing" level={g.skills.Smithing.level} xp={g.skills.Smithing.xp} maxXp={xpForLevel(g.skills.Smithing.level)}><Badge tone={active?'live':'ready'}>{active?activeLabel.toUpperCase():'READY'}</Badge></ScreenHeading>
   <nav className="smith-station-v2" role="tablist" aria-label="Smithing station">
    <button role="tab" aria-selected={mode==='smelting'} className={`smith-station-card furnace ${mode==='smelting'?'selected':''} ${smeltActive?'active':''}`} onClick={()=>setMode('smelting')}><span className="station-art"><Icon name="furnace" size={32}/><i/></span><span><small>01 / REFINE</small><b>Furnace</b><em>Smelting · ingots and alloys</em></span><i className="station-status">{smeltActive?'RUNNING':mode==='smelting'?'SELECTED':'AVAILABLE'}</i></button>
    <button role="tab" aria-selected={mode==='forging'} className={`smith-station-card anvil ${mode==='forging'?'selected':''} ${forgeActive?'active':''}`} onClick={()=>setMode('forging')}><span className="station-art"><Icon name="anvil" size={32}/><i/></span><span><small>02 / SHAPE</small><b>Anvil</b><em>Forging · weapons and tools</em></span><i className="station-status">{forgeActive?'RUNNING':mode==='forging'?'SELECTED':'AVAILABLE'}</i></button>
@@ -89,7 +89,6 @@ export function SmithingScreen({game:g,mode,setMode,start,stop,choose,chooseSmel
     <footer className="smith-inspector-foot"><span><i className={canStart||active?'ready':''}/>{active?'Station is processing':!unlocked?`Locked until Smithing ${mode==='smelting'?smeltRecipe.unlockLevel:recipe.unlockLevel}`:!hasInputs?'Required materials are missing':'Pattern is ready to work'}</span></footer>
    </aside>
   </div>
-  <div className="smith-xp-strip-v2"><span><Icon name="anvil" size={17}/> Smithing <b>LV {g.skills.Smithing.level}</b></span><GameProgress value={g.skills.Smithing.xp} max={Math.round(15+(g.skills.Smithing.level-1)*2)} kind="xp" label="Smithing experience"/><small>{fmt(g.skills.Smithing.xp)} XP · next level</small></div>
  </div>;
 }
 
@@ -97,7 +96,7 @@ function ITEMS_NAME(id:ItemId){return id.split('.').slice(-1)[0]?.split('_').map
 
 function ForgeStage({recipeName,output,family,work,required,heat,reheat,active,timer,progress,speed}:{recipeName:string;output:ItemId;family:string;work:number;required:number;heat:number;reheat:boolean;active:boolean;timer:number;progress:number;speed:number}) {
  const remaining=work||required,completion=required?Math.max(0,(required-remaining)/required):0;
- return <div data-feedback-anchor="Smithing" className={`smith-forge-scene ${active?'working':''}`}>
+ return <div key={`${work}:${heat}:${reheat}`} data-feedback-anchor="Smithing" className={`smith-forge-scene ${active?'working':''}`}>
   <div className="forge-halo"/><div className="forge-embers"><i/><i/><i/><i/><i/></div><div className="forge-beam beam-left"/><div className="forge-beam beam-right"/>
   <div className="forge-workpiece"><span className="forge-workpiece-light"/><GameItemFrame id={output} size="hero" state={completion>=1?'reward':'selected'}/><b>{recipeName}</b><small>{family} / CURRENT PATTERN</small></div>
   <div className="forge-anvil"><Icon name="anvil" size={76}/><span/></div>
@@ -112,7 +111,7 @@ function FurnaceStage({recipe,active,warm,output}:{recipe:typeof SMELTING_RECIPE
  return <><div data-feedback-anchor="Smithing" className={`smith-furnace-scene ${active?'working':''}`}>
   <div className="furnace-wall"><div className="furnace-stack"><i/><i/><i/></div><div className="furnace-chamber"><span className="furnace-mouth"><i/><b/></span><div className="furnace-flame"><i/><i/><i/></div><span className="furnace-heat-waves"><i/><i/><i/></span></div><div className="furnace-base"><i/><i/><i/></div></div>
   <div className="furnace-feed"><GameItemFrame id={input.item} size="regular" count={`×${input.amount}`}/><span><small>CHARGE</small><b>{ITEMS_NAME(input.item)}</b><i>{input.amount} units per recipe</i></span></div>
-  <div className="furnace-output"><GameItemFrame id={recipe.output.item} size="hero" state="reward" count={`×${recipe.output.amount}`}/><span><small>REFINED OUTPUT</small><b>{recipe.name}</b><i>{output} produced this run</i></span></div>
+  <div className="furnace-output"><GameItemFrame id={recipe.output.item} size="regular" state="reward" count={`×${recipe.output.amount}`}/><span><small>REFINED OUTPUT</small><b>{recipe.name}</b><i>{output} produced this run</i></span></div>
   <div className="furnace-state-caption"><span>{active?(warm?'SMELTING A UNIT':'BRINGING TO HEAT'):'FURNACE IDLE'}</span></div>
  </div><section className={`furnace-heat-meter ${warm?'is-warm':''} ${active&&!warm?'is-heating':''}`} aria-label="Chamber temperature">
    <div className="heat-meter-heading"><span><Icon name="furnace" size={16}/>CHAMBER TEMPERATURE</span><b>{warm?'WORKING RANGE':active?'HEATING':'COLD'}</b></div>

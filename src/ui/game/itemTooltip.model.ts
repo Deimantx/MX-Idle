@@ -10,7 +10,12 @@ export type ItemTooltipSection = { title: string; rows: ItemTooltipRow[] };
 export type ItemTooltipModel = { name: string; category: string; tier?: number; rarity: string; description: string; requirement?: { skill: SkillId; level: number; met?: boolean }; sections: ItemTooltipSection[]; owned?: number; equipped: boolean };
 
 const titleCase = (value: string) => value.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/[-_]/g, ' ').replace(/\b\w/g, (letter) => letter.toUpperCase());
-const readable = (value: string) => value.replace(/Â·/g, '·').replace(/â€™/g, '’').replace(/â€œ|â€/g, '“').replace(/Ã—/g, '×');
+const readable = (value: string) => value
+  .replace(/\u00c2\u00b7/g, '·')
+  .replace(/\u00e2\u20ac\u2122/g, '’')
+  .replace(/\u00e2\u20ac\u0153/g, '“')
+  .replace(/\u00e2\u20ac\u009d/g, '”')
+  .replace(/\u00c3\u0097/g, '×');
 const semanticRows = (stats: Record<string, string|number>): ItemTooltipRow[] => Object.entries(stats).map(([label, value]) => ({
   label: titleCase(label), value,
   tone: /power|damage/i.test(label) ? 'power' : /accuracy|crit/i.test(label) ? 'accuracy' : /resist|evasion|defence/i.test(label) ? 'defence' : /heal/i.test(label) ? 'healing' : undefined,

@@ -12,7 +12,7 @@ export const SKILL_PRESENTATION: Record<SkillId, SkillPresentation> = {
   Hitpoints: { icon: 'heart', accent: 'hitpoints', label: 'HP' },
 };
 
-export const XP_ORB_IDLE_MS = 10_000;
-export const XP_ORB_FADE_MS = 750;
+export const XP_ORB_IDLE_MS = 20_000;
+export const XP_ORB_FADE_MS = 1_000;
 export const XP_PULSE_MERGE_MS = 400;
 export const XP_PULSE_LIFETIME_MS = 1_400;
