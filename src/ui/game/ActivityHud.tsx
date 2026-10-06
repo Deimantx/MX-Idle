@@ -10,10 +10,7 @@ import { MINING_STAGE_MODEL } from '../../game/content/mining/miningStages';
 import { MINING_TOOLS } from '../../game/content/mining/miningTools';
 import { estimateForgeCompletion, getPlayerAttackInterval, maxHitpoints, type SaveState, xpForLevel, getMiningStrikeTime, smithingActionTime } from '../../game/game';
 import { GAME_SCREENS, screenLockReason, type GameScreenId } from '../../app/screenRegistry';
-import type { GameFeedbackEvent } from '../../features/feedback/feedback.types';
-import type { AppSettings } from '../../game/persistence/settingsStorage';
 import type { ItemId, SkillId } from '../../game/types/gameTypes';
-import { FeedbackLayer } from '../../features/feedback/FeedbackLayer';
 import { FISHING_SPOTS, FISH_SPECIES } from '../../game/content/fishing/fishingContent';
 import { COOKING_RECIPES } from '../../game/content/cooking/cookingContent';
 import { fishingBiteTime, fishingLandingTime, cookingPrepTime, cookingMethodTime } from '../../game/systems/simulation';
@@ -22,8 +19,8 @@ function iconForActivity(activity: SaveState['activity']) { return activity === 
 type Metric = { sessionXp: number; xpHour: number };
 type Metrics = Record<SkillId, Metric> & { key: string; activeMs: number; outputs: Partial<Record<ItemId, number>>; killsHour: number; forged: number };
 
-export function ActivityHud({ game: g, stop, onNavigate, speed, metrics, events, settings, reducedMotion }: {
-  game: SaveState; stop: () => void; onNavigate: (page: GameScreenId) => void; speed: number; metrics: Metrics; events: GameFeedbackEvent[]; settings: AppSettings['feedback']; reducedMotion: boolean;
+export function ActivityHud({ game: g, stop, onNavigate, speed, metrics }: {
+  game: SaveState; stop: () => void; onNavigate: (page: GameScreenId) => void; speed: number; metrics: Metrics;
 }) {
   const [chooserOpen, setChooserOpen] = useState(false);
   const a = g.activity;
@@ -56,7 +53,6 @@ export function ActivityHud({ game: g, stop, onNavigate, speed, metrics, events,
     : a === 'cooking' ? Math.round(metrics.outputs[cookingRecipe.output as ItemId] ?? 0).toLocaleString()
     : metrics.killsHour.toFixed(1);
   return <div className="activity-hud-wrap">
-    <FeedbackLayer events={events} settings={settings} reducedMotion={reducedMotion}/>
     <footer className={`activity-hud ${a ? 'running' : 'idle'}`}>
       {!a ? <>
         <div className="dock-idle-mark"><Icon name="spark" size={18}/></div>

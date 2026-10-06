@@ -28,7 +28,7 @@
 .mine-strata-map path:nth-child(4) { fill:#b17743; stroke:#d8ad6c; stroke-width:2; filter:drop-shadow(0 0 7px #d3984b); }
 .mine-cutaway-edge { position:absolute; z-index:2; left:0; right:0; bottom:0; height:25%; border-top:2px solid #a68256; background:repeating-linear-gradient(0deg,#34332b 0 11px,#4e493a 12px 13px,#262b27 14px 23px); opacity:.72; clip-path:polygon(0 34%,12% 12%,22% 44%,34% 5%,48% 33%,57% 14%,70% 52%,83% 18%,100% 42%,100% 100%,0 100%); }
 .mine-impact-ring { position:absolute; z-index:3; left:49%; top:57%; width:56px; height:32px; transform:translate(-50%,-50%); border:1px solid #edc1778a; border-radius:50%; box-shadow:0 0 0 5px #d7954930,0 0 13px #e0a45899; opacity:.55; }
-.mining-v2 .is-active .mine-impact-ring { animation:mine-impact 1100ms ease-in-out infinite; }
+.mining-v2 .is-active .mine-impact-ring { animation:mine-impact 320ms ease-out 1; }
 @keyframes mine-impact { 50%{transform:translate(-50%,-50%) scale(.84);opacity:.95;box-shadow:0 0 0 9px #d7954914,0 0 17px #e0a458b3} }
 .mine-drill-point { position:absolute; z-index:4; left:49%; top:56%; width:30px; height:30px; transform:translate(-50%,-50%) rotate(-28deg); display:grid; place-items:center; color:#e2bb7a; filter:drop-shadow(0 2px 3px #000); }
 .mine-strata-depth { position:absolute; z-index:4; top:15px; right:14px; display:flex; gap:4px; }

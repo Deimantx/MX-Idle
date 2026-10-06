@@ -306,33 +306,12 @@ nav {
 .mine-action-progress,.smith-timer-progress { display:grid; grid-template-columns:minmax(90px,auto) minmax(0,1fr); align-items:center; gap:12px; margin-top:12px; }
 .mine-action-progress>div:first-child { display:grid; gap:3px; }
 .mine-action-progress b { font-variant-numeric:tabular-nums; }
-.xp-orb-anchor { position:fixed; z-index:20; top:calc(7px * var(--ui-scale)); left:50%; transform:translateX(-50%); }
-.xp-orb { width:calc(44px * var(--ui-scale)); height:calc(44px * var(--ui-scale)); position:relative; display:grid; place-items:center; color:#e5bd8e; filter:drop-shadow(0 2px 5px #0009); }
-.xp-orb>svg { position:absolute; inset:0; width:100%; height:100%; transform:rotate(-90deg); }
-.xp-orb circle { fill:#202729; stroke:#4b5553; stroke-width:3; }
-.xp-orb circle.xp-ring { fill:none; stroke:#d1945e; stroke-dasharray:113.1; transition:stroke-dashoffset 180ms ease-out; }
-
-.xp-orb>small { position:absolute; bottom:-2px; right:-4px; border:1px solid #70513a; border-radius:8px; background:#202527; color:#f0dfc7; font-size:calc(8px * var(--ui-scale)); line-height:1; padding:2px 4px; }
-
-.xp-orb-skill-icon { position:absolute; inset:0; display:grid; place-items:center; z-index:1; }
-.xp-orb-skill-icon svg { position:relative; inset:auto; width:calc(21px * var(--ui-scale))!important; height:calc(21px * var(--ui-scale))!important; transform:none; }
-.xp-orb-anchor .tip-wrap { cursor:help; }
-.xp-drop-stack { position:fixed; z-index:19; top:calc(56px * var(--ui-scale)); left:50%; transform:translateX(-50%); display:grid; justify-items:center; gap:4px; pointer-events:none; }
-.xp-drop { display:flex; align-items:center; gap:7px; padding:5px 10px; border:1px solid #725a42; border-radius:5px; background:linear-gradient(180deg,#332c24,#222627); color:#f0d5b2; box-shadow:0 5px 16px #0007; animation:xp-rise 1.65s ease-out both; white-space:nowrap; }
-.xp-drop small { color:#c4b9a9; font-size:.7em; }
-.xp-drop-batch { gap:10px; padding:5px 8px; }
-.xp-batch-skill { display:inline-flex; align-items:center; gap:4px; }
-.xp-drop.level-up { border-color:#c49356; color:#ffe0a3; }
-.xp-drop-stack.still .xp-drop,.item-gain-feed.still .item-gain { animation:none; }
-@keyframes xp-rise { 0%{opacity:0;transform:translateY(12px) scale(.96)} 12%{opacity:1;transform:translateY(0) scale(1)} 75%{opacity:1} 100%{opacity:0;transform:translateY(-15px)} }
+.item-gain-feed.still .item-gain { animation:none; }
 .item-gain-feed { position:absolute; z-index:8; left:50%; bottom:calc(100% + 10px); transform:translateX(-50%); display:grid; justify-items:center; gap:5px; width:max-content; max-width:min(90vw,500px); pointer-events:none; }
 .item-gain { display:flex; align-items:center; gap:8px; padding:5px 10px 5px 5px; border:1px solid #68543d; border-radius:5px; background:linear-gradient(180deg,#302d27,#1d2425); box-shadow:0 6px 20px #0009; color:#ead8bd; animation:gain-in 1.8s ease-out both; }
 .item-gain .item-mark { width:28px; height:28px; }
 .gain-reward { display:flex; align-items:center; gap:6px; }
 @keyframes gain-in { 0%{opacity:0;transform:translateY(8px)} 12%,78%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(-9px)} }
-.xp-orb-tip { display:grid; gap:5px; min-width:190px; }
-.xp-orb-tip b { color:#e9c08f; }
-.xp-orb-tip span { display:flex; justify-content:space-between; gap:14px; font-size:.78em; }
 .confirm-modal { width:min(28rem,calc(100vw - 2rem)); }
 .confirm-modal>p { color:var(--secondary); line-height:1.6; }
 .confirm-actions { display:flex; justify-content:flex-end; gap:8px; margin-top:1.2rem; }
@@ -358,11 +337,9 @@ nav {
   .dock-activity { grid-column:1; }
   .topbar { grid-template-columns:minmax(0,1fr) auto; }
   .top-status { grid-column:2; }
-  .xp-orb-anchor { top:calc(58px * var(--ui-scale)); }
-  .xp-drop-stack { top:calc(108px * var(--ui-scale)); }
 }
 @media (max-width:500px) { .dock-metrics { font-size:calc(9px * var(--ui-scale) * var(--text-scale)); } .dock-metrics span:first-child { flex-basis:100%; } }
-@media (prefers-reduced-motion:reduce) { .xp-drop,.item-gain { animation:none!important; } .xp-orb circle.xp-ring { transition:none; } }
+@media (prefers-reduced-motion:reduce) { .item-gain { animation:none!important; } }
 
 .active-profile { display:flex; align-items:baseline; gap:calc(10px * var(--ui-scale)); min-width:0; }
 .active-profile b { color:#e8e1d6; font:calc(16px * var(--ui-scale) * var(--text-scale)) Marcellus,serif; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }

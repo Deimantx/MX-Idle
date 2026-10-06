@@ -4,14 +4,14 @@ export type AppSettings = {
   interface: { scaleMode: 'auto' | 'manual'; manualScale: number; textScale: number; customCursor: boolean };
   audio: { muted: boolean; masterVolume: number };
   accessibility: { reducedMotion: 'system' | 'on' | 'off' };
-  feedback: { showXpDrops: boolean; showXpOrb: boolean; showItemGainFeed: boolean; levelUpEffects: boolean; systemToasts: boolean };
+  feedback: { showXpCircles: boolean; showXpNumbers: boolean; showItemGainFeed: boolean; levelUpEffects: boolean; systemToasts: boolean };
 };
 
 export const DEFAULT_APP_SETTINGS: AppSettings = {
   interface: { scaleMode: 'auto', manualScale: 1, textScale: 1, customCursor: true },
   audio: { muted: false, masterVolume: .35 },
   accessibility: { reducedMotion: 'system' },
-  feedback: { showXpDrops: true, showXpOrb: true, showItemGainFeed: true, levelUpEffects: true, systemToasts: true },
+  feedback: { showXpCircles: true, showXpNumbers: true, showItemGainFeed: true, levelUpEffects: true, systemToasts: true },
 };
 
 const clampStep = (value: unknown, min: number, max: number, step: number, fallback: number) => {
@@ -25,7 +25,7 @@ export function normalizeAppSettings(raw: unknown): AppSettings {
   const ui = value.interface;
   const audio = value.audio;
   const access = value.accessibility;
-  const feedback = value.feedback;
+  const feedback = value.feedback as (Partial<AppSettings['feedback']> & { showXpOrb?: boolean; showXpDrops?: boolean }) | undefined;
   return {
     interface: {
       scaleMode: ui?.scaleMode === 'manual' ? 'manual' : 'auto',
@@ -39,8 +39,8 @@ export function normalizeAppSettings(raw: unknown): AppSettings {
     },
     accessibility: { reducedMotion: access?.reducedMotion === 'on' || access?.reducedMotion === 'off' ? access.reducedMotion : 'system' },
     feedback: {
-      showXpDrops: feedback?.showXpDrops !== false,
-      showXpOrb: feedback?.showXpOrb !== false,
+      showXpCircles: feedback?.showXpCircles ?? feedback?.showXpOrb !== false,
+      showXpNumbers: feedback?.showXpNumbers ?? feedback?.showXpDrops !== false,
       showItemGainFeed: feedback?.showItemGainFeed !== false,
       levelUpEffects: feedback?.levelUpEffects !== false,
       systemToasts: feedback?.systemToasts !== false,

@@ -47,7 +47,7 @@ export function BankScreen({ game: g, filter, setFilter }: { game: SaveState; fi
     return () => window.removeEventListener('keydown', onKeyDown);
   }, []);
 
-  return <div className="screen bank-screen bank-v2">
+  return <div className="screen bank-screen bank-v2" data-feedback-screen="Bank">
     <ScreenHeading eyebrow="ADVENTURER / STASH" title="Bank" sub="Materials, provisions, gear, and the spoils of your travels." accent="bank"/>
     <div className="bank-v2-layout">
       <aside className="bank-v2-tree g2-surface g2-bank" aria-label="Bank categories">
@@ -69,7 +69,7 @@ export function BankScreen({ game: g, filter, setFilter }: { game: SaveState; fi
             const definition = ITEMS[id], count = g.bank[id] ?? 0, isRare = definition.rarity === 'Rare', isSelected = selectedItem === id;
             return <button key={id} className={`vault-item ${isSelected ? 'selected' : ''} ${isRare ? 'rare' : ''} ${equipped && isSelected ? 'worn' : ''}`} onClick={() => setSelected(id)} aria-pressed={isSelected} role="option" aria-selected={isSelected}>
               <span className="vault-item-top"><small>{definition.tier ? `T${definition.tier}` : definition.rarity ?? 'Common'}</small>{equipped && isSelected && <i>WORN</i>}</span>
-              <ItemTip id={id}><GameItemFrame id={id} size="regular" state={isSelected ? 'selected' : isRare ? 'reward' : 'normal'} count={`×${fmt(count)}`} tier={definition.tier}/></ItemTip>
+              <ItemTip id={id} context={{owned:count,equipped:Boolean(equipped&&isSelected),skillLevels:{Mining:g.skills.Mining.level,Smithing:g.skills.Smithing.level,Fishing:g.skills.Fishing.level,Cooking:g.skills.Cooking.level,Attack:g.skills.Attack.level,Defence:g.skills.Defence.level,Hitpoints:g.skills.Hitpoints.level}}}><GameItemFrame id={id} size="regular" state={isSelected ? 'selected' : isRare ? 'reward' : 'normal'} count={`×${fmt(count)}`} tier={definition.tier}/></ItemTip>
               <b>{definition.name}</b><span className="vault-item-foot"><span className={`rarity-dot ${isRare ? 'rare' : ''}`}/>{definition.rarity ?? 'Common'}</span>
             </button>;
           }) : <div className="bank-v2-empty"><GameEmpty icon={search ? 'search' : 'bank'} title={search ? 'No matching items' : `No ${filter === 'All' ? 'items' : filter.toLowerCase()} yet`} detail={search ? `Nothing in your stash matches “${search}”.` : 'Gather materials, prepare provisions, and craft new equipment to fill your bank.'}/></div>}

@@ -26,6 +26,9 @@ export type GameEvent =
   | { type: 'gold-gained'; amount: number; source: string }
   | { type: 'enemy-killed'; enemyId: EnemyId }
   | { type: 'stage-completed'; depositId: DepositId; stage: number }
+  | { type: 'mining-strike'; depositId: DepositId; stage: number; power: number; remaining: number }
+  | { type: 'smithing-feedback'; action: 'warm'|'smelt'|'strike'|'reheat' }
+  | { type: 'combat-feedback'; action: 'hit'|'miss'|'critical'|'special'|'phase'|'enemy-hit' }
   | { type: 'craft-completed'; recipeId: RecipeId; item: ItemId }
   | { type: 'fishing-bite-complete'; spotId: string }
   | { type: 'fish-selected'; fishId: string }

@@ -15,6 +15,7 @@ describe('application interface settings', () => {
     expect(settings.audio).toEqual({ muted: true, masterVolume: 1 });
     expect(settings.accessibility.reducedMotion).toBe('on');
     expect(normalizeAppSettings({ interface: { manualScale: .1, textScale: 9 } }).interface).toEqual({ scaleMode: 'auto', manualScale: .8, textScale: 1.4, customCursor: true });
-    expect(normalizeAppSettings({ feedback: { showXpDrops: false } }).feedback).toEqual({ showXpDrops: false, showXpOrb: true, showItemGainFeed: true, levelUpEffects: true, systemToasts: true });
+    expect(normalizeAppSettings({ feedback: { showXpDrops: false, showXpOrb: false } }).feedback).toEqual({ showXpNumbers: false, showXpCircles: false, showItemGainFeed: true, levelUpEffects: true, systemToasts: true });
+    expect(normalizeAppSettings({ feedback: { showXpNumbers: false } }).feedback.showXpCircles).toBe(true);
   });
 });

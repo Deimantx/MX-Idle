@@ -1,31 +1,23 @@
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { ENEMIES, ITEMS } from '../../game/content/firstSlice';
-import type { SkillId } from '../../game/types/gameTypes';
 import type { GameFeedbackEvent, FeedbackSettings } from './feedback.types';
 import { Icon } from '../../ui/primitives';
 import { ItemMark } from '../../ui/game/ItemDisplay';
 import { GameItemFrame } from '../../ui/game-v2/GameKit';
 
-const skillIcon: Record<SkillId, string> = { Mining: 'mining', Smithing: 'anvil', Fishing: 'fish', Cooking: 'food', Attack: 'sword', Defence: 'shield', Hitpoints: 'heart' };
-export function FeedbackLayer({ events, settings, reducedMotion }: { events: GameFeedbackEvent[]; settings: FeedbackSettings; reducedMotion: boolean }) {
-  const [drops, setDrops] = useState<GameFeedbackEvent[]>([]), [gains, setGains] = useState<Extract<GameFeedbackEvent,{type:'item'|'gold'}>[]>([]);
+export function FeedbackLayer({ events, settings, reducedMotion, screen }: { events: GameFeedbackEvent[]; settings: FeedbackSettings; reducedMotion: boolean; screen: string }) {
+  const [gains, setGains] = useState<Extract<GameFeedbackEvent,{type:'item'|'gold'}>[]>([]);
+  const [feel, setFeel] = useState<Extract<GameFeedbackEvent,{type:'game-feel'}>[]>([]);
   const seen = useRef(0);
   useEffect(() => {
     if (!events.length) return;
     const fresh = events.filter((event) => event.id > seen.current);
     if (!fresh.length) return;
     seen.current = Math.max (...fresh.map((event) => event.id));
-    const xp = fresh.filter((event) => event.type === 'xp' || event.type === 'xp-batch' || event.type === 'level-up');
     const items = fresh.filter((event): event is Extract<GameFeedbackEvent,{type:'item'|'gold'}> => event.type === 'item' || event.type === 'gold');
-    if (settings.showXpDrops && xp.length) setDrops((old) => {
-      const next = [...old];
-      for (const event of xp) {
-        const previous = next[next.length - 1];
-        if (event.type === 'xp' && previous?.type === 'xp' && previous.skillId === event.skillId && event.occurredAt - previous.occurredAt <= 350) next[next.length - 1] = { ...event, amount: previous.amount + event.amount };
-        else next.push(event);
-      }
-      return next.slice(-8);
-    });
+    const actions = fresh.filter((event): event is Extract<GameFeedbackEvent,{type:'game-feel'}> => event.type === 'game-feel');
+    if (actions.length) setFeel((old) => [...old, ...actions].slice(-3));
     if (settings.showItemGainFeed && items.length) setGains((old) => {
       const next = [...old];
       for (const event of items) {
@@ -35,12 +27,19 @@ export function FeedbackLayer({ events, settings, reducedMotion }: { events: Gam
       }
       return next.slice(-4);
     });
-  }, [events, settings.showXpDrops, settings.showItemGainFeed]);
+  }, [events, settings.showItemGainFeed]);
   useEffect(() => {
-    if (!drops.length && !gains.length) return;
-    const timer = window.setTimeout(() => { setDrops((old) => old.slice(1)); setGains((old) => old.slice(1)); }, 1850);
+    if (!feel.length) return;
+    const timer = window.setTimeout(() => setFeel((old) => old.slice(1)), 1300);
     return () => window.clearTimeout(timer);
-  }, [drops, gains]);
+  }, [feel]);
+  useEffect(() => {
+    if (!gains.length) return;
+    const head = gains[0];
+    const duration = head?.type === 'item' && ITEMS[head.itemId].rarity === 'Rare' ? 2700 : 1850;
+    const timer = window.setTimeout(() => setGains((old) => old.slice(1)), duration);
+    return () => window.clearTimeout(timer);
+  }, [gains]);
   const gainGroups = gains.reduce<{ key: string; source: string; events: Extract<GameFeedbackEvent,{type:'item'|'gold'}>[] }[]>((groups, event) => {
     const key = event.source.startsWith('combat:') ? `combat-${event.occurredAt}` : `${event.type}-${event.id}`;
     const group = groups.find((entry) => entry.key === key);
@@ -48,7 +47,10 @@ export function FeedbackLayer({ events, settings, reducedMotion }: { events: Gam
     return groups;
   }, []);
   return <>
-    <div className={`xp-drop-stack ${reducedMotion ? 'still' : ''}`} aria-live="polite">{drops.map((event) => event.type === 'xp' ? <div className="xp-drop" key={event.id}><Icon name={skillIcon[event.skillId]} size={18}/><b>+{Number(event.amount.toFixed(1))} XP</b><small>{event.skillId}</small></div> : event.type === 'xp-batch' ? <div className="xp-drop xp-drop-batch" key={event.id}>{event.gains.map((gain)=><span className="xp-batch-skill" key={gain.skillId}><Icon name={skillIcon[gain.skillId]} size={15}/><b>+{Number(gain.amount.toFixed(1))} XP</b><small>{gain.skillId}</small></span>)}</div> : event.type === 'level-up' && settings.levelUpEffects ? <div className="xp-drop level-up" key={event.id}><Icon name={skillIcon[event.skillId]} size={18}/><b>{event.skillId} Level {event.newLevel}</b></div> : null)}</div>
-    <div className={`item-gain-feed ${reducedMotion ? 'still' : ''}`} aria-live="polite">{gainGroups.map((group) => <div className="item-gain" key={group.key}>{group.source.startsWith('combat:') && <small>{ENEMIES[group.source.slice(8) as keyof typeof ENEMIES]?.name.toUpperCase() ?? 'COMBAT'}</small>}{group.events.map((event) => event.type === 'item' ? <span className={`gain-reward ${ITEMS[event.itemId].rarity === 'Rare' ? 'gain-reward-rare' : ''}`} key={event.id}>{ITEMS[event.itemId].rarity === 'Rare' ? <GameItemFrame id={event.itemId} size="compact" state="reward" tier={ITEMS[event.itemId].tier}/> : <ItemMark id={event.itemId}/>}<b>+{event.amount} {ITEMS[event.itemId].name}</b></span> : <span className="gain-reward" key={event.id}><Icon name="gold" size={20}/><b>+{event.amount} Gold</b></span>)}</div>)}</div>
+    <div className={`item-gain-feed ${reducedMotion ? 'still' : ''}`} aria-live="polite">{gainGroups.map((group) => <div className={`item-gain ${group.events.some((event)=>event.type==='item'&&ITEMS[event.itemId].rarity==='Rare')?'rare':''}`} key={group.key}>{group.source.startsWith('combat:') && <small>{ENEMIES[group.source.slice(8) as keyof typeof ENEMIES]?.name.toUpperCase() ?? 'COMBAT'}</small>}{group.events.map((event) => event.type === 'item' ? <span className={`gain-reward ${ITEMS[event.itemId].rarity === 'Rare' ? 'gain-reward-rare' : ''}`} key={event.id}>{ITEMS[event.itemId].rarity === 'Rare' ? <GameItemFrame id={event.itemId} size="compact" state="reward" tier={ITEMS[event.itemId].tier}/> : <ItemMark id={event.itemId}/>}<b>+{event.amount} {ITEMS[event.itemId].name}</b></span> : <span className="gain-reward" key={event.id}><Icon name="gold" size={20}/><b>+{event.amount} Gold</b></span>)}</div>)}</div>
+    {feel.filter((event) => event.screen === screen).map((event) => {
+      const target = document.querySelector(`[data-feedback-anchor="${screen}"]`) ?? document.querySelector(`[data-feedback-screen="${screen}"]`);
+      return target ? createPortal(<div key={event.id} className={`local-game-feedback ${event.screen.toLowerCase()} ${event.kind} ${event.impact} ${reducedMotion ? 'still' : ''}`} role="status"><Icon name={event.screen==='Mining'?'mining':event.screen==='Smithing'?'anvil':event.screen==='Fishing'?'fish':event.screen==='Cooking'?'food':'combat'} size={17}/><span><b>{event.title}</b>{event.detail&&<small>{event.detail}</small>}</span></div>, target, String(event.id)) : null;
+    })}
   </>;
 }

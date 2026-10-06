@@ -39,7 +39,7 @@ function resolvePlayerDamage(s: SaveState, type: DamageType, multiplier: number,
   const c = s.combat, enemy = ENEMIES[c.targetId], equipped = weapon(s);
   const accuracy = getPlayerAccuracy(s) * (1 + accuracyBonus);
   const enemyEvasionDown=c.statuses.filter(status=>status.target==='enemy'&&status.type==='EvasionDown').reduce((sum,status)=>sum+(status.magnitude ?? 0),0);
-  if (ops.rand(s) > hitChance(accuracy, enemy.evasions.Melee*(1-enemyEvasionDown))) { line(s, 'Your attack misses.'); return; }
+  if (ops.rand(s) > hitChance(accuracy, enemy.evasions.Melee*(1-enemyEvasionDown))) { events.push({type:'combat-feedback',action:'miss'}); line(s, 'Your attack misses.'); return; }
   const components = specialData?.damageComponents;
   const attackComponents = components?.length ? components : [{ type, multiplier }];
   const executeMultiplier=specialData?.executeBonus&&c.enemyHp/enemy.maxHp<.3?1+specialData.executeBonus:1;
@@ -57,11 +57,12 @@ function resolvePlayerDamage(s: SaveState, type: DamageType, multiplier: number,
     totalDamage += Math.floor(damageAfterResistance(raw, enemy.resistances[component.type] - debuff + buff - penetration)*executeMultiplier);
   }
   const actualDamage=Math.min(c.enemyHp,totalDamage);c.enemyHp = Math.max (0, c.enemyHp - actualDamage);
+  events.push({type:'combat-feedback',action:specialData?'special':critical?'critical':'hit'});
   const attackXp=actualDamage*.4,hpXp=actualDamage*.1,defenceXp=actualDamage*.1;ops.addXp(s, 'Attack', attackXp,events); ops.addXp(s, 'Hitpoints', hpXp,events); ops.addXp(s, 'Defence', defenceXp,events);c.xp+=attackXp+hpXp+defenceXp;
   line(s, `${critical ? 'Critical hit' : 'You hit'} ${enemy.name} for ${actualDamage} ${attackComponents.map((part) => part.type).join('/')}.`);
   if (specialData?.resistanceDown) addStatus(s, { id: 'player-resistance-down', type: 'ResistanceDown', sourceId: 'player', target: 'enemy', remainingMs: 8000, magnitude: specialData.resistanceDown, damageTypes:['Slash','Stab','Crush'] });
   const newPhase = activePhaseIndex (enemy,c.enemyHp), phaseState = newPhase + 1;
-  if (phaseState !== c.activePhaseIndex) { c.activePhaseIndex= phaseState; c.sequenceIndex= 0; c.enemyActionSerial++;const phaseSequence=activeSequence(enemy,c.enemyHp);c.enemyTimer=enemy.intervalMs*(phaseSequence[0]?.intervalMultiplier ?? 1);if (newPhase >= 0) line(s, `${enemy.name} changes its attack pattern.`); }
+  if (phaseState !== c.activePhaseIndex) { c.activePhaseIndex= phaseState; c.sequenceIndex= 0; c.enemyActionSerial++;const phaseSequence=activeSequence(enemy,c.enemyHp);c.enemyTimer=enemy.intervalMs*(phaseSequence[0]?.intervalMultiplier ?? 1);if (newPhase >= 0) { events.push({type:'combat-feedback',action:'phase'}); line(s, `${enemy.name} changes its attack pattern.`); } }
 }
 function defeatEnemy(s: SaveState, events: GameEvent[], ops: CombatOps) {
   const c = s.combat, enemy = ENEMIES[c.targetId], firstKill=(c.defeated[enemy.id] ?? 0)===0; c.kills++; c.defeated[enemy.id] = (c.defeated[enemy.id] ?? 0) + 1; c.gold += enemy.gold; s.gold += enemy.gold;
@@ -99,7 +100,7 @@ function enemyAttack(s: SaveState, events: GameEvent[], ops: CombatOps) {
   const resistances = getPlayerResistances(s), defensiveAdjustment=getStyleResistanceAdjustment('Melee',enemy.style), components = action.damageComponents?.length ? action.damageComponents.map((part,i)=>i===0&&action.dynamicTypeRule?{...part,type:actionType}:part) : [{ type: actionType, multiplier: action.multiplier ?? 1 }];
   const hitDamage:number[]=[];let connected=false;for(let hit=0;hit<(action.hits ?? 1);hit++){if(ops.rand(s)>accuracyChance)continue;connected=true;if(!action.damageEnabled)continue;hitDamage.push(components.reduce((total, part) => total + damageAfterResistance(rollDirectDamage(enemy.maxHit,part.multiplier,()=>ops.rand(s)), resistances[part.type]+defensiveAdjustment-(action.penetrationPp ?? 0)), 0));}
   const damage=hitDamage.reduce((a,b)=>a+b,0);if(!connected){line(s,`${enemy.name} uses ${action.name}, but misses.`);finishAction();return;}
-  if(damage>0)c.playerHp -= damage; line(s, damage>0?`${enemy.name} uses ${action.name} for ${damage} ${components.map((part) => part.type).join('/')}.`:`${enemy.name} uses ${action.name}.`);
+  if(damage>0){c.playerHp -= damage;events.push({type:'combat-feedback',action:'enemy-hit'});} line(s, damage>0?`${enemy.name} uses ${action.name} for ${damage} ${components.map((part) => part.type).join('/')}.`:`${enemy.name} uses ${action.name}.`);
   if (action.status) { const dot=['Bleed','Burn','Poison'].includes(action.status.type);const basis=action.status.type==='Poison'?maxHitpoints(s.skills.Hitpoints.level):damage;const remainingDamage=dot?Math.max (1,Math.floor(basis*action.status.magnitude)):undefined;addStatus(s, { id: `${enemy.id}-${action.status.type}`, type: action.status.type, sourceId: enemy.id, target: 'player', remainingMs: action.status.durationMs, magnitude: action.status.magnitude, damageTypes:action.resistanceDownTypes, tickMs: dot ? 1000 : undefined, tickTimerMs: dot ? 1000 : undefined, stacks: dot ? Math.max (1, Math.floor(action.status.durationMs / 1000)) : undefined, remainingDamage }); if (action.status.type === 'Stun') c.playerTimer = Math.max (c.playerTimer,action.status.durationMs); }
   if(action.healSelfPct)s.combat.enemyHp=Math.min(enemy.maxHp,s.combat.enemyHp+Math.floor(enemy.maxHp*action.healSelfPct/100));
   finishAction();

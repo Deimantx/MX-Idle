@@ -16,6 +16,8 @@ import './styles/responsive.css';
 import './ui/game/gameplay-layout.css';
 import './ui/game/control-language.css';
 import './features/profiles/profiles.css';
+import './features/feedback/xp/xp-hud.css';
+import './features/feedback/feedback-v2.css';
 import './ui/game-v2/game-v2.css';
 import './features/equipment/equipment-v2.css';
 import './features/bank/bank-v2.css';

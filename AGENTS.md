@@ -221,6 +221,13 @@ When choosing between decoration and clarity, choose clarity.
 When choosing between another asset and a reusable design-system solution, prefer the reusable solution unless the asset materially improves the game world.
 When choosing between flashy and premium, choose premium.
 
+## Global gameplay feedback
+- Global progression feedback must come from authoritative `GameEvent` XP and level-up events, never from the screen currently open or inferred SaveState differences.
+- XP earned in a background activity remains visible when the player navigates elsewhere. Multi-skill rewards preserve a distinct signal for each skill.
+- Important RPG objects such as items, equipment, statuses, resistances, and profession tools use structured, source-backed tooltips.
+- Major gameplay actions receive restrained, event-driven acknowledgement beyond a moving progress bar alone.
+- Feedback animations remain local, inexpensive, temporary, and reduced-motion aware. They do not drive simulation state and do not keep timers or effects alive after cleanup.
+
 ## Major UI generation work
 - Major player-facing UI tasks must not default to preserving existing JSX or CSS. When the user requests a major redesign, structural rewrites are expected where needed.
 - Judge visual redesigns by browser output, not diff size, compile success, or component reuse.

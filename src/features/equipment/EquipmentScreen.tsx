@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Badge, Button, Icon } from '../../ui/primitives';
 import { ScreenHeading } from '../../ui/game/ScreenPrimitives';
 import { fmt } from '../../ui/game/formatters';
+import { ItemTip } from '../../ui/game/ItemDisplay';
 import { GameAction, GameItemFrame, GameValue } from '../../ui/game-v2/GameKit';
 import { ITEMS, MELEE_WEAPONS, maxHitpoints, getPlayerAttackInterval, getPlayerResistances, canEquip, type ItemId, type SaveState } from '../../game/game';
 import type { EquipmentMeta } from '../../game/content/items/itemRegistry';
@@ -60,7 +61,7 @@ export function EquipmentScreen({game:g,equip,unequip,equipProfession}:{game:Sav
    pulseTimer.current=window.setTimeout(()=>setPulseSlot(null),560);
  };
 
- return <div className={`screen equipment-screen equipment-v2 ${mode==='Profession'?'is-profession-kit':''}`}>
+ return <div className={`screen equipment-screen equipment-v2 ${mode==='Profession'?'is-profession-kit':''}`} data-feedback-screen="Equipment">
   <ScreenHeading eyebrow="ARMORY / LOADOUT" title="Equipment" sub="Shape a combat build or inspect the tools that define each profession." accent="equipment"><Badge tone="level-badge">{mode==='Combat'?'COMBAT GEAR':`${profession.toUpperCase()} KIT`}</Badge></ScreenHeading>
   <div className="equipment-v2-masthead">
    <div className="equipment-v2-mode control-segments" role="tablist" aria-label="Equipment context">
@@ -97,7 +98,7 @@ export function EquipmentScreen({game:g,equip,unequip,equipProfession}:{game:Sav
     <div className="eq-armory-context"><span><Icon name={SLOT_ICON[selectedSlot]} size={16}/>{SLOT_LABEL[selectedSlot]}</span><small>{mode==='Combat'?'Combat-compatible':'Profession-specific'} · Tier / owned count</small></div>
     <div className="eq-item-grid g2-scroll" role="listbox" aria-label={`${SLOT_LABEL[selectedSlot]} armory`}>
      {candidates.map(({id,item,meta,count})=><button key={id} type="button" role="option" aria-selected={inspector?.id===id} className={`eq-item-tile ${inspector?.id===id?'selected':''} ${current===id?'worn':''} ${count<1?'unowned':''}`} onClick={()=>setSelected(id)}>
-       <GameItemFrame id={id} state={inspector?.id===id?'selected':current===id?'equipped':'normal'} count={`×${fmt(count)}`} tier={meta.tier}/>
+       <ItemTip id={id} context={{owned:count,equipped:current===id,skillLevels:{Mining:g.skills.Mining.level,Smithing:g.skills.Smithing.level,Fishing:g.skills.Fishing.level,Cooking:g.skills.Cooking.level,Attack:g.skills.Attack.level,Defence:g.skills.Defence.level,Hitpoints:g.skills.Hitpoints.level}}}><GameItemFrame id={id} state={inspector?.id===id?'selected':current===id?'equipped':'normal'} count={`×${fmt(count)}`} tier={meta.tier}/></ItemTip>
        <span className="eq-tile-copy"><b>{item.name}</b><small>{meta.family??meta.profession??meta.slot} · {meta.handedness??`Tier ${meta.tier}`}</small><span>{Object.entries(meta.stats).filter(([key])=>['Power','Accuracy','Melee Evasion','Slash Resistance','Speed','Bite Speed','Prep Speed'].includes(key)).slice(0,2).map(([key,value])=><i key={key}>{key} <strong>{value}</strong></i>)}</span></span>
        <i className="eq-tile-marker">{current===id?'WORN':count<1?'UNOWNED':`T${meta.tier}`}</i>
       </button>)}

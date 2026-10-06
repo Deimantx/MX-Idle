@@ -10,6 +10,9 @@ import { CombatScreen } from '../features/combat/CombatScreen';
 import { BankScreen } from '../features/bank/BankScreen';
 import { ActivityHud } from '../ui/game/ActivityHud';
 import { GameTopBar } from '../ui/game/GameTopBar';
+import { FeedbackLayer } from '../features/feedback/FeedbackLayer';
+import { GlobalXpHud } from '../features/feedback/xp/GlobalXpHud';
+import { playFeedbackCue, unlockFeedbackAudio } from '../features/feedback/audioFeedback';
 import { DevPanel } from '../features/devtools/DevPanel';
 import { FirstStepsPanel } from '../features/onboarding/FirstStepsPanel';
 import { Icon, Tip } from '../ui/primitives';
@@ -25,8 +28,6 @@ import { FISHING_TACKLE } from '../game/content/fishing/fishingContent';
 
 type Page = GameScreenId;
 const xpProgress = (s: SaveState, id: keyof SaveState['skills']) => ({ value: s.skills[id].xp, max: xpForLevel(s.skills[id].level) });
-function voice(freq = 340, duration = .055, volume = .08) { try { const Ctx= window.AudioContext; const ctx= new Ctx (); const osc = ctx.createOscillator(); const gain = ctx.createGain(); osc.type = 'triangle'; osc.frequency.value = freq; gain.gain.value = volume; gain.gain.exponentialRampToValueAtTime(.001, ctx.currentTime + duration); osc.connect(gain); gain.connect(ctx.destination); osc.start(); osc.stop(ctx.currentTime + duration); osc.onended = () => void ctx.close(); } catch { /* browser audio is optional */ } }
-
 export function GameShell({ profile, initialState, appSettings, onOpenSettings, onBackToProfiles, onRegisterFlush }: { profile: ProfileRecord; initialState: SaveState; appSettings: AppSettings; onOpenSettings: () => void; onBackToProfiles: () => void; onRegisterFlush: (flush: (() => void) | null) => void }) {
   const [game, setGame] = useState<SaveState>(initialState);
   const [screen, setScreen] = useState<Page>((initialState.page as Page) || 'Mining');
@@ -60,18 +61,39 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
   useEffect(() => { const timer = window.setInterval(() => persist(gameRef.current), 4000); const save = () => persist(gameRef.current); const onVis = () => { if (document.visibilityState === 'hidden') { if (activeSince.current !== null) playedMs.current += Date.now() - activeSince.current; activeSince.current = null; save(); } else if (activeSince.current === null) activeSince.current = Date.now(); }; window.addEventListener('beforeunload', save); document.addEventListener('visibilitychange', onVis); return () => { window.clearInterval(timer); window.removeEventListener('beforeunload', save); document.removeEventListener('visibilitychange', onVis); persist(gameRef.current); }; }, [persist]);
   useEffect(() => { const systems = feedbackEvents.filter((event): event is Extract<GameFeedbackEvent,{type:'system'}> => event.type === 'system' && event.id > Number(toastSeen.current || 0)); const event = systems[systems.length - 1]; if (event && (event.tone === 'error' || event.tone === 'defeat' || event.tone === 'milestone' || appSettings.feedback.systemToasts)) { toastSeen.current = String(event.id); setToast(event.message); window.clearTimeout(toastTimer.current); toastTimer.current = window.setTimeout(() => setToast(''), event.tone === 'milestone' ? 4200 : 2600); } }, [feedbackEvents, appSettings.feedback.systemToasts]);
   const mut = (fn: (s: SaveState) => void) => { setGame((old) => { const s = structuredClone(old); fn(s); s.savedAt = Date.now(); return s; }); };
-  const sound = (freq: number, duration: number, intensity = .08) => { if (!appSettings.audio.muted && appSettings.audio.masterVolume > 0) voice(freq, duration, intensity * appSettings.audio.masterVolume); };
+  const previewFeedback = (kind: 'fishing-xp'|'combat-xp'|'all-skills'|'level-up'|'common-item'|'rare-item'|'unlock'|'error'|'equip'|'mining'|'smithing'|'cooking') => {
+    const id = ++eventId.current, occurredAt = Date.now();
+    const event: GameFeedbackEvent = kind === 'fishing-xp' ? { id, type:'xp', skillId:'Fishing', amount:12, occurredAt }
+      : kind === 'combat-xp' ? { id, type:'xp-batch', gains:[{skillId:'Attack',amount:8},{skillId:'Hitpoints',amount:2},{skillId:'Defence',amount:2}], occurredAt }
+      : kind === 'all-skills' ? { id, type:'xp-batch', gains:[{skillId:'Mining',amount:7},{skillId:'Smithing',amount:5},{skillId:'Fishing',amount:12},{skillId:'Cooking',amount:4},{skillId:'Attack',amount:8},{skillId:'Hitpoints',amount:2},{skillId:'Defence',amount:2}], occurredAt }
+      : kind === 'level-up' ? { id, type:'level-up', skillId:'Mining', oldLevel:31, newLevel:32, occurredAt }
+      : kind === 'common-item' ? { id, type:'item', itemId:'item.mining.copper_ore', amount:3, source:'preview', occurredAt }
+      : kind === 'rare-item' ? { id, type:'item', itemId:'item.mining.opal', amount:1, source:'preview', occurredAt }
+      : kind === 'unlock' ? { id, type:'system', message:'New waters unlocked', tone:'unlock', occurredAt }
+      : kind === 'error' ? { id, type:'system', message:'Not enough copper ore', tone:'error', occurredAt }
+      : { id, type:'game-feel', screen:kind==='mining'?'Mining':kind==='smithing'?'Smithing':kind==='cooking'?'Cooking':'Equipment', kind, cue:kind==='equip'?'equip':kind==='mining'?'mining-hit':kind==='smithing'?'forge-strike':'cook', title:kind==='equip'?'Copper Sword equipped':kind==='mining'?'Ore struck':kind==='smithing'?'Hammer meets the workpiece':'Batch ready', impact:'important', occurredAt };
+    setFeedbackEvents((old) => [...old, event].slice(-24));
+  };
+  const sound = (cue: Parameters<typeof playFeedbackCue>[0]) => playFeedbackCue(cue, appSettings.audio);
+  useEffect(() => {
+    const unlock = () => { unlockFeedbackAudio(); window.removeEventListener('pointerdown', unlock); window.removeEventListener('keydown', unlock); };
+    window.addEventListener('pointerdown', unlock, { once: true }); window.addEventListener('keydown', unlock, { once: true });
+    return () => { window.removeEventListener('pointerdown', unlock); window.removeEventListener('keydown', unlock); };
+  }, []);
   useEffect(() => {
     const fresh = feedbackEvents.filter((event) => event.id > soundEventSeen.current);
     if (!fresh.length) return;
     soundEventSeen.current = fresh[fresh.length - 1]!.id;
-    if (fresh.some((event) => event.type === 'level-up')) sound(760, .14, .07);
-    else if (fresh.some((event) => event.type === 'xp' || event.type === 'xp-batch')) sound(460, .045, .025);
-    else if (fresh.length) sound(520, .05, .03);
+    if (fresh.some((event) => event.type === 'level-up')) sound('level-up');
+    else if (fresh.some((event) => event.type === 'item' || event.type === 'gold')) sound('reward');
+    else {
+      const action = fresh.find((event): event is Extract<GameFeedbackEvent,{type:'game-feel'}> => event.type === 'game-feel' && (event.impact !== 'routine' || event.cue === 'fishing-bite'));
+      if (action) sound(action.cue);
+    }
   }, [feedbackEvents, appSettings.audio.muted, appSettings.audio.masterVolume]);
-  const go = (page: Page) => { setScreen(page); mut((s) => { s.page = page; }); sound(300, .035, .035); };
-  const start = (a: Exclude<Activity, null>) => { mut((s) => startActivity(s, a)); sound(a === 'combat' ? 220 : 380, .07); };
-  const stop = () => { mut(stopActivity); sound(190, .05, .035); };
+  const go = (page: Page) => { setScreen(page); mut((s) => { s.page = page; }); sound('navigate'); };
+  const start = (a: Exclude<Activity, null>) => { mut((s) => startActivity(s, a)); sound('start'); };
+  const stop = () => { mut(stopActivity); sound('stop'); };
   const chooseSmeltRecipe = (id:string) => mut((s)=>{ if(s.activity==='smelting')return; const recipe=SMELTING_RECIPES[id]; if(recipe&&s.skills.Smithing.level>=recipe.unlockLevel){s.smithing.smeltRecipe=id;s.smithing.warm=false;s.smithing.timer=0;s.smithing.message='';} });
   const buyForgeRecipe = (id: ForgingRecipeId) => mut((s) => { if (s.activity === 'forging' || (s.smithing.reserved && s.smithing.recipe !== id)) return; s.smithing.recipe = id; s.smithing.category = FORGING_RECIPES[id].category; s.smithing.work = getForgeWorkRequired(id); s.smithing.heat = 100; s.smithing.message = ''; });
   const equip = (item: ItemId, slot: 'weapon' | 'head' | 'armor' | 'hands' | 'feet' | 'offhand' | 'miningTool' | 'smithingHammer') => mut((s) => {
@@ -87,7 +109,7 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
     else if (slot === 'smithingHammer') s.equipped.smithingHammer = item;
     else s.equipped[slot] = item as never;
     if(slot==='weapon'&&item in MELEE_WEAPONS){const definition=MELEE_WEAPONS[item as keyof typeof MELEE_WEAPONS];s.combat.stance=definition.stances.find(x=>x.id===definition.defaultStance)?.damageType ?? definition.style;s.combat.pendingStance=s.combat.stance;}
-    const n = (s.bank[item] ?? 1) - 1; if (n) s.bank[item] = n; else delete s.bank[item]; sound(540, .085, .06);
+    const n = (s.bank[item] ?? 1) - 1; if (n) s.bank[item] = n; else delete s.bank[item]; sound('equip');
   });
   const unequip = (slot: 'weapon' | 'head' | 'armor' | 'hands' | 'feet' | 'offhand' | 'miningTool' | 'smithingHammer') => mut((s) => { if(s.activity==='combat')return;const old = s.equipped[slot]; if (old) { gainItem(s, old as ItemId); if (slot === 'miningTool') s.equipped.miningTool = null; else if (slot === 'smithingHammer') s.equipped.smithingHammer = null; else s.equipped[slot] = null; } });
   const grant = (item: ItemId, n = 1) => mut((s) => { gainItem(s, item, n); });
@@ -152,8 +174,10 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
       })}</nav>
       <div className="sidebar-bottom"><button className="nav-item profile-nav" onClick={() => { persist(gameRef.current); onBackToProfiles(); }}><Icon name="arrow-left" size={17}/><span>Profile Select</span></button><div className="build-tag">FIRST PLAYABLE <span>0.1</span></div></div>
     </aside>
-    <main className="main-frame">
+  <main className="main-frame">
       <GameTopBar game={game} screen={screen} profile={profile} saveStatus={saveStatus} onOpenSettings={onOpenSettings}/>
+      <GlobalXpHud game={game} events={feedbackEvents} settings={appSettings.feedback} reducedMotion={isMotionReduced}/>
+      <FeedbackLayer events={feedbackEvents} settings={appSettings.feedback} reducedMotion={isMotionReduced} screen={screen}/>
       <div className="content-scroll" id="game-content" tabIndex={-1}><div className="content-wrap">
         {!game.objectives.victory && <FirstStepsPanel game={game} minimized={minimized} onToggle={() => { setMinimized(!minimized); mut((s) => { s.objectives.dismissed = !s.objectives.dismissed; }); }} />}
         {screen === 'Mining' && <MiningScreen game={game} xp={xp.mining.value} maxXp={xp.mining.max} speedMultiplier={speed} metrics={metrics} select={(id) => mut((s) => { selectDeposit(s, id); })} equipTool={(item) => equip(item, 'miningTool')} start={() => start('mining')} stop={stop} />}
@@ -164,11 +188,11 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
         {screen === 'Combat' && <CombatScreen game={game} speedMultiplier={speed} start={() => start('combat')} stop={stop} stance={(stance: DamageType) => mut((s) => { s.combat.stance = stance; s.combat.pendingStance=stance; })} target={(id: EnemyId) => mut((s) => { setCombatTarget(s, id); })} setArea={(id)=>mut((s)=>{setCombatArea(s,id);})} queueSpecial={() => mut((s) => { if (!s.combat.queuedSpecial) s.combat.queuedSpecial = true; })} setSpecialMode={(mode) => mut((s) => { s.combat.specialMode = mode; if (mode === 'Off') s.combat.queuedSpecial = false; })} setFoodSlot={setFoodSlot} setFoodReserve={setFoodReserve} eat={eat} setAutoEat={setAutoEat} />}
         {screen === 'Bank' && <BankScreen game={game} filter={filter} setFilter={setFilter} />}
       </div></div>
-      <ActivityHud game={game} stop={stop} onNavigate={go} speed={speed} metrics={metrics} events={feedbackEvents} settings={appSettings.feedback} reducedMotion={isMotionReduced} />
+      <ActivityHud game={game} stop={stop} onNavigate={go} speed={speed} metrics={metrics} />
     </main>
     {toast && <div className="toast" role="status"><span className="toast-mark"><Icon name="ore" size={18} /></span>{toast}</div>}
     {import.meta.env.DEV && <DevPanel
-      game={game} grant={grant} grantT1Kit={grantT1Kit} simulate={offlineSim} setSpeed={setSpeed} setTierProgress={devSetTierProgress} setBossFirstKill={devSetBossFirstKill} resetTierProgress={devResetTierProgress} setEnemyHpPercent={devSetEnemyHpPercent} setEnemyPhase={devSetEnemyPhase} setSequenceStep={devSetSequenceStep} startDungeonAt={devStartDungeon}
+      game={game} grant={grant} grantT1Kit={grantT1Kit} simulate={offlineSim} setSpeed={setSpeed} previewFeedback={previewFeedback} setTierProgress={devSetTierProgress} setBossFirstKill={devSetBossFirstKill} resetTierProgress={devResetTierProgress} setEnemyHpPercent={devSetEnemyHpPercent} setEnemyPhase={devSetEnemyPhase} setSequenceStep={devSetSequenceStep} startDungeonAt={devStartDungeon}
       setLevel={(skill, level) => mut((s) => { s.skills[skill].level = level; s.skills[skill].xp = 0; })}
       setHp={(hp) => mut((s) => { s.combat.playerHp = hp; })}
       resetEnemy={() => mut((s) => { s.combat.enemyHp = ENEMIES[s.combat.targetId].maxHp; s.combat.respawn = 0; s.combat.sequenceIndex= 0; })}

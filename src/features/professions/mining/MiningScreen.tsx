@@ -47,7 +47,7 @@ export function MiningScreen({ game: g, xp, maxXp, start, stop, select, equipToo
     select(entry.id);
   };
 
-  return <div className="screen mining-screen mining-v2" data-profession="mining">
+  return <div className="screen mining-screen mining-v2" data-profession="mining" data-feedback-screen="Mining">
     <ScreenHeading eyebrow="PROFESSION / GEOLOGY" title="Mining" sub="Choose a seam, read its strata, and work each layer down to the core." accent="mining" level={g.skills.Mining.level} xp={xp} maxXp={maxXp} />
     <div className="mine-browser-tools">
       <div className="mine-category-nav" role="tablist" aria-label="Deposit materials">{CATEGORIES.map(item => <button key={item} type="button" role="tab" aria-selected={category === item} className={category === item ? 'selected' : ''} onClick={() => setCategory(item)}>{item === 'All' ? 'All Deposits' : item}</button>)}</div>
@@ -72,7 +72,7 @@ export function MiningScreen({ game: g, xp, maxXp, start, stop, select, equipToo
 
       <Panel className={`mine-focus ${active ? 'is-active' : ''}`}>
         <div className="focus-top"><div><span className="screen-overline">{deposit.category} / Tier {deposit.tier}</span><h2>{deposit.name}</h2><small>{deposit.resourceName} deposit</small></div><Badge tone={active ? 'live' : ''}>{active ? 'MINING' : 'READY'}</Badge></div>
-        <div key={`${deposit.id}:${g.mining.strikes}`} className={`vein-art mining-impact strata-${runtime.stageIndex+1} ${deposit.category==='Quarry'?'stone-vein-art':''}`} aria-label={`${deposit.resourceName} exposed in the mine face`}>
+        <div key={`${deposit.id}:${g.mining.strikes}`} data-feedback-anchor="Mining" className={`vein-art mining-impact strata-${runtime.stageIndex+1} ${deposit.category==='Quarry'?'stone-vein-art':''}`} aria-label={`${deposit.resourceName} exposed in the mine face`}>
           <div className="mine-face-label"><span>ACTIVE DEPOSIT</span><b>{deposit.resourceName.toUpperCase()}</b></div>
           <svg className="mine-strata-map" viewBox="0 0 800 300" preserveAspectRatio="none" aria-hidden="true"><path d="M0 202 72 176 126 198 207 149 286 182 359 136 433 169 525 124 609 160 688 110 800 145V300H0Z"/><path d="M0 223 95 198 177 217 264 181 335 211 437 171 518 195 631 157 705 178 800 150"/><path d="M0 255 101 234 194 251 283 219 368 246 463 215 551 236 642 198 734 216 800 196"/><path d="M175 196 229 178 269 185 286 199 252 211 211 206ZM482 179 524 149 568 157 586 171 548 190 509 193Z"/></svg>
           <div className="mine-cutaway-edge"/><div className="mine-impact-ring"/><div className="mine-drill-point"><Icon name="pick" size={22}/></div>

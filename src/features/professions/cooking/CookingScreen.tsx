@@ -31,7 +31,7 @@ export function CookingScreen({game:g,start,stop,choose,buyPantry,chooseKnife,se
  const prepTime=cookingPrepTime(g),cookTime=cookingMethodTime(g);
  const duration=c.phase==='prep'?prepTime:cookTime;
 
- return <div className="screen profession-screen cooking-screen cooking-v2">
+ return <div className="screen profession-screen cooking-screen cooking-v2" data-feedback-screen="Cooking">
   <ScreenHeading eyebrow="PROFESSION / HEARTH & FIELD" title="Cooking" sub="Choose a method, prepare the ingredients, and serve a useful batch." accent="cooking" level={g.skills.Cooking.level} xp={g.skills.Cooking.xp} maxXp={15+(g.skills.Cooking.level-1)*2}><Badge tone={active?'live':'level-badge'}>{active?c.phase.toUpperCase():`LEVEL ${g.skills.Cooking.level}`}</Badge></ScreenHeading>
   <div className="cooking-v2-tools"><nav className="cooking-method-rail" aria-label="Cooking method">{METHODS.map(value=><button key={value} type="button" aria-pressed={method===value} className={method===value?'selected':''} onClick={()=>setMethod(value)}><Icon name={METHOD_ICONS[value]??'food'} size={16}/><span>{value==='All'?'Recipe Book':value}</span>{value!=='All'&&<small>{g.skills.Cooking.level>=(COOKING_METHOD_UNLOCK as Record<string,number>)[value]?'OPEN':`LV ${(COOKING_METHOD_UNLOCK as Record<string,number>)[value]}`}</small>}</button>)}</nav><Button tone="quiet" aria-expanded={showSupplies} onClick={()=>setShowSupplies(true)}><Icon name="bank" size={16}/> Pantry &amp; kitchen</Button></div>
   <div className="cooking-v2-layout">
@@ -55,7 +55,7 @@ export function CookingScreen({game:g,start,stop,choose,buyPantry,chooseKnife,se
 
    <section className={`kitchen-v2-stage g2-surface g2-cooking ${active?'is-active':''}`} aria-label={`${recipe.method} kitchen station`}>
     <header className="kitchen-stage-head"><div><span className="g2-kicker">02 / FIELD KITCHEN</span><h2>{recipe.method} station</h2><small>Batch {recipe.name} · {recipe.quantity} output</small></div><GameState tone={active?'active':canStartCooking(g)?'ready':'warning'} icon={active?'spark':METHOD_ICONS[recipe.method]}>{active?c.phase==='prep'?'PREPARATION':'COOKING':canStartCooking(g)?'STOCKED':'NEEDS INGREDIENTS'}</GameState></header>
-    <div className={`kitchen-scene-v2 method-${recipe.method.toLowerCase().replace(/ /g,'-')}`} data-method={recipe.method}>
+    <div data-feedback-anchor="Cooking" className={`kitchen-scene-v2 method-${recipe.method.toLowerCase().replace(/ /g,'-')}`} data-method={recipe.method}>
      <div className="kitchen-wall-mark"><span/><i/><b>{recipe.method.toUpperCase()}</b></div>
      <div className="hearth-arch"><span className="hearth-back"><i/><i/><i/></span><div className="station-vessel"><span className="vessel-rim"/><i className="vessel-handle left"/><i className="vessel-handle right"/><span className="vessel-food"><GameItemFrame id={recipe.output} size="compact" state={outputCount?'reward':'normal'}/></span></div><span className="hearth-fire"><i/><i/><i/></span><span className="hearth-stone"/></div>
      <div className="kitchen-shelf shelf-left"><i/><i/><i/></div><div className="kitchen-shelf shelf-right"><i/><i/></div>

@@ -12,7 +12,7 @@ export function selectDeposit(s:SaveState,id:DepositId){const next=MINING_DEPOSI
 
 export function miningHit(s:SaveState,events:GameEvent[],hooks:MiningHooks){
  const m=s.mining,id=m.deposit,deposit=MINING_DEPOSITS[id],runtime=runtimeDeposit(s,id),stageIndex=runtime.stageIndex,stage=MINING_STAGE_MODEL[stageIndex]!,tool=MINING_TOOLS[(s.equipped.miningTool ?? 'item.mining.worn_pickaxe') as keyof typeof MINING_TOOLS];
- const power=getMiningPower(tool.power,stageIndex>=3?(tool.effects.deepCorePowerMultiplier ?? 1):1);runtime.densityRemaining=Math.max (0,runtime.densityRemaining-power);m.strikes++;
+ const power=getMiningPower(tool.power,stageIndex>=3?(tool.effects.deepCorePowerMultiplier ?? 1):1);runtime.densityRemaining=Math.max (0,runtime.densityRemaining-power);m.strikes++;events.push({type:'mining-strike',depositId:id,stage:stageIndex,power,remaining:runtime.densityRemaining});
  if(runtime.densityRemaining>0){syncMining(s);return;}
  const extraChance=tool.extraQuantityChance+(tool.effects.primaryExtraPp ?? 0),primaryQuantity=resolvePrimaryQuantity(getPrimaryExpectedQuantity(stageIndex,id),extraChance,()=>hooks.rand(s));
  if(deposit.category==='Gem'&&deposit.gemPool?.length){const weights=deposit.gemStageWeights?.[stageIndex] ?? deposit.gemWeights ?? deposit.gemPool.map(()=>1);for(let n=0;n<primaryQuantity;n++){let roll=hooks.rand(s),item=deposit.gemPool[deposit.gemPool.length-1]!;for(let i=0;i<deposit.gemPool.length;i++){roll-=weights[i] ?? 0;if(roll<=0){item=deposit.gemPool[i]!;break;}}hooks.gain(s,item,1,events,`mining:${id}:gem-roll`);}runtime.totalPrimary+=primaryQuantity;}
