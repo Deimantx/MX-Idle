@@ -84,6 +84,12 @@
 .mine-operations-grid { gap:10px; }
 .mine-operations-grid .stat-row { min-height:24px; padding:3px 0; }
 .mine-operations-grid section { padding:6px 10px; }
+.mine-focus .vein-art { transition:filter 180ms ease,transform 180ms ease; }
+.mine-focus.is-active .vein-art { filter:brightness(1.04) contrast(1.03); }
+.mine-focus.is-active .mine-action-progress .action-progress>span { box-shadow:inset 0 1px #fff3,0 0 9px #cf925b66; }
+.mine-focus .mine-action-progress { padding:7px 8px; border:1px solid #343d3e; border-radius:6px; background:linear-gradient(180deg,#1a2021,#222829); box-shadow:inset 0 2px 4px #0007; }
+.mine-focus.is-active .stage-node.current .node-mark { animation:stage-lock 1.3s ease-in-out infinite alternate; }
+@keyframes stage-lock { to { border-color:#9d744d; color:#f0cb9e; box-shadow:0 0 9px #bd85524d; } }
 
 /* Fishing is an atlas first, with the selected water and its ecosystem beside it. */
 .fishing-atlas { grid-template-columns:minmax(300px,.72fr) minmax(0,1.7fr); gap:12px; align-items:start; }

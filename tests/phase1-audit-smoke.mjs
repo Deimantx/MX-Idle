@@ -10,7 +10,7 @@ const page = await browser.newPage({ viewport: { width: 2560, height: 1440 }, re
 const errors = [];
 page.setDefaultTimeout(7000);
 await mkdir('artifacts/phase1-review', { recursive: true });
-const capture = async (name) => { await page.locator('.content-scroll').evaluate((node) => { node.scrollTop = 0; }); await page.screenshot({ path: `artifacts/phase1-review/${name}-2560.png` }); };
+const capture = async (name) => { await page.locator('.content-scroll').evaluate((node) => { node.scrollTop = 0; }); const { width, height } = page.viewportSize(); await page.screenshot({ path: `artifacts/phase1-review/${name}-${width}x${height}.png` }); };
 page.on('pageerror', (error) => errors.push(error.message));
 page.on('console', (message) => { if (message.type() === 'error') errors.push(message.text()); });
 
@@ -22,6 +22,8 @@ try {
   await page.getByRole('heading', { name: 'Mining' }).waitFor();
   await capture('mining');
   await page.getByRole('button', { name: 'DEV' }).click();
+  await page.locator('.dev-nav').getByRole('button', { name: 'UI Lab' }).click();
+  await capture('devtools');
   await page.locator('.dev-nav').getByRole('button', { name: 'Player' }).click();
   await page.getByRole('button', { name: 'Mining Lv. 100' }).click();
   await page.locator('.dev-nav').getByRole('button', { name: 'Mining' }).click();
@@ -48,6 +50,7 @@ try {
   const astraliteIngot = page.getByRole('button', { name: /^Astralite Ingot/ });
   assert.equal(await astraliteIngot.isEnabled(), true, 'Level 100 unlocks Astralite smelting');
   await astraliteIngot.click();
+  await page.getByRole('tab', { name: /Forging/ }).click();
   await capture('smithing');
   await page.getByRole('button', { name: 'Equipment', exact: true }).click();
   await page.getByRole('button', { name: 'DEV' }).click();
@@ -62,6 +65,12 @@ try {
   await astraliteSword.click();
   assert.match(await page.locator('.item-compare').innerText(), /Astralite Sword/);
   await capture('equipment');
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await capture('equipment');
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.evaluate(() => { document.documentElement.style.setProperty('--ui-scale', '1.08'); document.documentElement.style.setProperty('--text-scale', '1.12'); });
+  await capture('equipment-large-text');
+  await page.evaluate(() => { document.documentElement.style.removeProperty('--ui-scale'); document.documentElement.style.removeProperty('--text-scale'); });
   await page.setViewportSize({ width: 768, height: 900 });
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, 'Equipment fits at 768px');
   await page.setViewportSize({ width: 2560, height: 1440 });
@@ -90,11 +99,15 @@ try {
   await page.getByRole('button', { name: 'Combat', exact: true }).click();
   await page.getByText('Food & Satiety').waitFor();
   await page.getByRole('button', { name: /Fishing/ }).click();
+  await page.setViewportSize({ width: 2560, height: 1440 });
   await capture('fishing');
   assert.equal(await page.locator('.water-choice').filter({ hasText: 'Astral Expanse' }).isDisabled(), true, 'Fishing Spot 10 stays locked at Fishing 1');
   await page.getByRole('button', { name: /Cooking/ }).click();
   await capture('cooking');
   assert.equal(await page.locator('.recipe-choice').count() > 0, true, 'Cooking recipe browser renders');
+  await page.getByRole('button', { name: 'Bank', exact: true }).click();
+  await page.setViewportSize({ width: 2560, height: 1440 });
+  await capture('bank');
   assert.deepEqual(errors, [], 'Focused Phase 1 flow has no browser console errors');
   console.log(JSON.stringify(errors));
 } finally {

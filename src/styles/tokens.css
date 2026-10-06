@@ -53,7 +53,19 @@
   --shadow-panel: 0 calc(10px * var(--ui-scale)) calc(26px * var(--ui-scale)) #080a0b66,0 1px 0 #ffffff08 inset;
   --fast: 130ms;
   --normal: 220ms;
+  --motion-micro: 140ms;
+  --motion-control: 180ms;
+  --motion-panel: 240ms;
+  --motion-emphasis: 320ms;
   --ease: cubic-bezier(.2,.75,.25,1);
+  --ease-exit: cubic-bezier(.4,0,1,1);
+  --metal-edge: #4b5557;
+  --metal-highlight: #aeb5ae;
+  --brass: #be8a58;
+  --brass-lit: #e0b17e;
+  --slot-well: #13191b;
+  --slot-face: #262d30;
+  --slot-raised: #343b3d;
   --sidebar: calc(222px * var(--ui-scale));
   color-scheme: dark;
 

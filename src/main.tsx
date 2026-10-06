@@ -17,6 +17,7 @@ import './features/settings/settings.css';
 import './features/devtools/devtools.css';
 import './styles/responsive.css';
 import './ui/game/gameplay-layout.css';
+import './ui/game/control-language.css';
 import './features/profiles/profiles.css';
 
 const initialSettings = loadAppSettings();

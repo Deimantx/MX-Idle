@@ -232,3 +232,12 @@ Before finishing player-facing work, search changed files and relevant `src/` st
 
 ### One game, distinct gameplay interfaces
 Shared design tokens and components do not require shared screen layouts. Before redesigning a major system, identify its gameplay fantasy, primary decision, browseable content, active progress, optimization information, and distinct visual motif. Reuse small primitives such as buttons, panels, slots, badges, tooltips, progress bars, and stat rows. Do not copy the same tier rail, filter bar, card list, inspector placement, or three-column blueprint across unrelated systems. If two systems play differently, they must not look like simple reskins of one screen template.
+
+### Core controls need game-specific craft
+Player-facing core gameplay controls must not ship as minimally styled generic HTML rectangles. Important actions, category choices, item slots, combat targets, and profession modes need deliberate material, icon, hierarchy, and selection treatments. Native controls remain appropriate for settings, accessibility, DevTools, and low-priority utility forms.
+
+### Interactive states are part of each control
+Player-facing controls must define default, hover, pressed, selected, focus-visible, disabled, locked, and active/in-progress states where relevant. Important selection cannot rely on border color alone. Use a fitting combination of material shift, edge or inset treatment, marker, icon/text emphasis, or restrained movement. Locked choices must explain their requirement.
+
+### Visual QA is part of implementation
+For major player-facing UI, compilation is not completion. Capture and inspect browser screenshots at the primary desktop resolution, critique the result against the screen's gameplay role, and make at least one polish iteration. Include relevant narrow or scaled layouts, keyboard focus, and reduced-motion behavior in the review.

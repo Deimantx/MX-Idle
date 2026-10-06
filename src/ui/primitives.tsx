@@ -1,8 +1,9 @@
 import { useEffect, useId, useLayoutEffect, useRef, useState, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
-export function Button({ children, tone = 'steel', className = '', ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { tone?: 'steel' | 'copper' | 'quiet' | 'danger' }) {
-  return <button className={`game-button ${tone} ${className}`} {...props}>{children}</button>;
+export function Button({ children, tone = 'steel', className = '', ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { tone?: 'steel' | 'copper' | 'quiet' | 'danger' | 'icon' }) {
+  const role = tone === 'copper' ? 'role-primary' : tone === 'quiet' ? 'role-quiet' : tone === 'danger' ? 'role-danger' : tone === 'icon' ? 'role-icon' : 'role-secondary';
+  return <button className={`game-button ${tone} ${role} ${className}`} {...props}>{children}</button>;
 }
 export function Panel({ title, action, children, className = '', ...props }: { title?: ReactNode; action?: ReactNode; children: ReactNode; className?: string; [key: string]: any }) {
   return <section className={`panel ${className}`} {...props}>{title && <header className="panel-head"><h2>{title}</h2>{action}</header>}{children}</section>;
@@ -69,6 +70,33 @@ export function Modal({ title, eyebrow, children, onClose, className = '' }: { t
 export function Icon({ name, size = 22 }: { name: string; size?: number }) {
   const common = { width: size, height: size, style: { width: `calc(${size}px  * var(--ui-scale))`, height: `calc(${size}px  * var(--ui-scale))`, flex: 'none' }, viewBox: '0 0 48 48', fill: 'none', stroke: 'currentColor', strokeWidth: 2.1, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, 'aria-hidden': true as const };
   const paths: Record<string, React.ReactNode> = {
-    pick: <><path d="M11 13c9-8 20-8 27 0M17 18l-6 23m18-25 7 22"/><path d="M8 41h9m12-26h10"/></>, hammer: <><path d="M13 10h23v11H13zM24 21l-8 19m4-24h11"/><path d="m12 10 4-5h17l4 5"/></>, ore: <><path d="m24 5 16 9v19l-16 9-16-9V14z"/><path d="m8 14 16 10 16-10M24 24v18M17 9l16 11"/></>, ingot: <><path d="m11 18 4-8h20l4 8-4 20H13z"/><path d="M11 18h28M19 10l-3 8m17-8 3 8"/></>, sword: <><path d="M34 6 16 25l8 7L42 13zM16 25l-7 7m8-1-6 7m13-6-7 7"/><path d="m35 6 7 7"/></>, helm: <><path d="M8 27c0-12 7-20 16-20s16 8 16 20v9H8zM8 27h32M24 8v19m-7 0 2 9m12-9-2 9"/></>, armor: <><path d="m14 7 10 4 10-4 8 7-5 8v19H11V22l-5-8zM14 7v11h20V7M24 11v30"/></>, trophy: <><path d="M15 7h18v11c0 8-4 13-9 13s-9-5-9-13zM15 11H7v5c0 6 4 9 9 9m17-14h8v5c0 6-4 9-9 9m-8 5v8m-8 4h16"/></>, gloves: <><path d="M13 23V9c0-3 5-3 5 0v10-12c0-3 5-3 5 0v12-10c0-3 5-3 5 0v11-7c0-3 5-3 5 0v14c0 9-4 14-12 14-7 0-11-4-12-10l-2-7c-1-4 4-5 6-1z"/></>, greaves: <><path d="M13 7h22l-2 15 5 17H25l-3-12-4 12H7l5-17zM13 23h20"/></>, shield: <><path d="M24 5 40 11v11c0 10-6 17-16 21C14 39 8 32 8 22V11zM24 9v29m-12-23 12-5 12 5"/></>, settings: <><circle cx="24" cy="24" r="7"/><path d="M24 4v5m0 30v5M4 24h5m30 0h5M10 10l4 4m20 20 4 4M38 10l-4 4M14 34l-4 4"/></>, mining: <><path d="m8 12 31 3M13 12l-4 7m30-4-4 8M10 40 22 22m6 18 8-17"/></>, anvil: <><path d="M7 17h34l-5 10H17l-3 7h22l3 7H8l4-7-4-7zM15 17V9h17l6 8"/></>, bank: <><path d="m5 17 19-11 19 11M9 19v19m10-19v19m10-19v19m10-19v19M5 42h38M7 18h34"/></>, combat: <><path d="m9 9 30 30m0-30L9 39M7 7l9 2-7 7zm34 34-9-2 7-7zM41 7l-9 2 7 7zM7 41l9-2-7-7z"/></>, gear: <><circle cx="24" cy="24" r="7"/><path d="M20 5h8l2 5 5 2 5-1 4 7-4 4v5l4 4-4 7-5-1-5 2-2 5h-8l-2-5-5-2-5 1-4-7 4-4v-5l-4-4 4-7 5 1 5-2z"/></>, gold: <><circle cx="24" cy="24" r="18"/><path d="M30 16c-2-3-12-4-12 2 0 7 13 2 13 9 0 6-10 8-15 4m8-20v26"/></>, heart: <><path d="M24 40S7 30 7 18C7 8 19 6 24 16 29 6 41 8 41 18c0 12-17 22-17 22z"/><path d="m11 23 8 0 3-6 5 13 3-7h7"/></>, bow: <><path d="M11 6c20 9 20 27 0 36m26-36C17 15 17 33 37 42M12 24h24m-12-8 6 8-6 8"/></>, spark: <><path d="m26 4-15 23h12l-2 17 16-25H25z"/><path d="m8 9 2 4m30 20 2 4"/></> };
+    pick: <><path d="M8 15c9-10 23-10 32 0M18 17 9 42m21-27 8 27"/><path d="M6 42h8m20 0h8"/></>,
+    hammer: <><path d="M10 8h28v13H10zM24 21 14 43m7-28h15"/><path d="m9 8 5-5h20l5 5"/></>,
+    ore: <><path d="m24 4 18 10v20L24 44 6 34V14z"/><path d="m6 14 18 11 18-11M24 25v19M16 9l17 12"/></>,
+    ingot: <><path d="m10 18 5-9h18l5 9-4 21H14z"/><path d="M10 18h28M18 9l-3 9m18-9 5 9"/></>,
+    sword: <><path d="M35 5 16 25l8 8 19-20zM16 25l-8 8m9-1-6 8m13-6-7 7"/></>,
+    helm: <><path d="M7 27C7 15 14 7 24 7s17 8 17 20v10H7zM7 27h34M24 8v19m-7 0 2 10m12-10-2 10"/></>,
+    armor: <><path d="m14 7 10 4 10-4 9 7-5 9v19H10V23l-5-9zM14 7v11h20V7M24 11v31"/></>,
+    trophy: <><path d="M15 7h18v11c0 8-4 13-9 13s-9-5-9-13zM15 11H7v5c0 6 4 9 9 9m17-14h8v5c0 6-4 9-9 9m-8 5v8m-8 4h16"/></>,
+    gloves: <><path d="M13 23V9c0-3 5-3 5 0v10-12c0-3 5-3 5 0v12-10c0-3 5-3 5 0v11-7c0-3 5-3 5 0v14c0 9-4 14-12 14-7 0-11-4-12-10l-2-7c-1-4 4-5 6-1z"/></>,
+    greaves: <><path d="M13 7h22l-2 15 5 17H25l-3-12-4 12H7l5-17zM13 23h20"/></>,
+    shield: <><path d="M24 5 40 11v11c0 10-6 17-16 21C14 39 8 32 8 22V11zM24 9v29m-12-23 12-5 12 5"/></>,
+    settings: <><circle cx="24" cy="24" r="7"/><path d="M24 4v5m0 30v5M4 24h5m30 0h5M10 10l4 4m20 20 4 4M38 10l-4 4M14 34l-4 4"/></>,
+    mining: <><path d="m8 12 31 3M13 12l-4 7m30-4-4 8M10 40 22 22m6 18 8-17"/></>,
+    anvil: <><path d="M7 17h34l-5 10H17l-3 7h22l3 7H8l4-7-4-7zM15 17V9h17l6 8"/></>,
+    bank: <><path d="m5 17 19-11 19 11M9 19v19m10-19v19m10-19v19m10-19v19M5 42h38M7 18h34"/></>,
+    combat: <><path d="m9 9 30 30m0-30L9 39M7 7l9 2-7 7zm34 34-9-2 7-7zM41 7l-9 2 7 7zM7 41l9-2-7-7z"/></>,
+    gear: <><circle cx="24" cy="24" r="7"/><path d="M20 5h8l2 5 5 2 5-1 4 7-4 4v5l4 4-4 7-5-1-5 2-2 5h-8l-2-5-5-2-5 1-4-7 4-4v-5l-4-4 4-7 5 1 5-2z"/></>,
+    gold: <><circle cx="24" cy="24" r="18"/><path d="M30 16c-2-3-12-4-12 2 0 7 13 2 13 9 0 6-10 8-15 4m8-20v26"/></>,
+    heart: <><path d="M24 40S7 30 7 18C7 8 19 6 24 16 29 6 41 8 41 18c0 12-17 22-17 22z"/><path d="m11 23 8 0 3-6 5 13 3-7h7"/></>,
+    bow: <><path d="M11 6c20 9 20 27 0 36m26-36C17 15 17 33 37 42M12 24h24m-12-8 6 8-6 8"/></>,
+    spark: <><path d="m26 4-15 23h12l-2 17 16-25H25z"/><path d="m8 9 2 4m30 20 2 4"/></>,
+    axe: <><path d="M8 10c13-4 24 0 31 11L27 33c-11-5-16-12-19-23zM23 26 12 42m11-16 8 8"/></>,
+    mace: <><path d="M18 11 31 6l11 11-5 13-13 3-11-11zM27 30 13 44"/><path d="m24 11 13 13M15 17l13 13"/></>,
+    spear: <><path d="m37 5 6 6-25 25-9-9zM13 31 7 41l10-4"/><path d="m31 11 6 6"/></>,
+    hook: <><path d="M24 5v23c0 9 13 10 17 2 3-6-1-12-7-12-4 0-7 3-7 7"/><path d="M18 5h12m-6 0v6"/></>,
+    knife: <><path d="M9 39 34 8c4-5 10-1 7 4L20 39zM8 42l12-3"/></>,
+    furnace: <><path d="M10 42V20L24 6l14 14v22H10zM17 42V29a7 7 0 0 1 14 0v13"/><path d="M15 21h18m-9-10v5m-4 15c1-3 3-4 4-8 3 3 4 6 4 9"/></>
+  };
   return <svg {...common}>{paths[name] ?? <circle cx="24" cy="24" r="16" />}</svg>;
 }

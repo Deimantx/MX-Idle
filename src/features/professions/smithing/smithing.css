@@ -3,6 +3,44 @@
 
 }
 
+/* Forge stations use a rail for modes and a separate catalogue hierarchy. */
+.smith-tabs.control-segments { width:100%; padding:5px; margin-bottom:14px; border-radius:8px 8px 2px 2px; border-bottom-color:#68523c; }
+.smith-tabs.control-segments>button { min-width:205px; min-height:52px; padding:5px 13px; justify-content:flex-start; text-align:left; }
+.smith-tabs .station-mark { width:34px; height:34px; display:grid; place-items:center; color:#a6afaa; border:1px solid #485150; border-radius:6px; background:linear-gradient(145deg,#252b2c,#171c1d); box-shadow:inset 0 1px #ffffff10,inset 0 -2px #080b0c; }
+.smith-tabs button[aria-selected="true"] .station-mark { color:#e1b27f; border-color:#8a6848; background:linear-gradient(145deg,#44352a,#252523); }
+.smith-tabs button>span:last-child { display:grid; gap:3px; }
+.smith-tabs button b { color:#e0ded5; font-size:12px; }
+.smith-tabs button small { color:#969f99; font-size:10px; font-weight:400; }
+.smith-layout .recipe-list-panel { background:linear-gradient(155deg,#282d2d,#202526 78%); }
+.smith-category-tabs.forge-categories { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px; margin:10px 0 8px; }
+.forge-categories>button { min-width:0; min-height:64px; position:relative; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:5px; padding:7px 9px; color:#aeb5af; text-align:left; border:1px solid #394244; border-radius:7px; background:linear-gradient(155deg,#252c2e,#1c2224); box-shadow:inset 0 1px #ffffff0a,inset 0 -2px #111617,0 2px 4px #0003; cursor:pointer; transition:transform 140ms var(--ease),border-color 180ms var(--ease),background 180ms var(--ease),box-shadow 180ms var(--ease),color 180ms var(--ease); }
+.forge-categories>button svg { color:#b8a184; }
+.forge-categories>button span { font-size:11px; font-weight:700; }
+.forge-categories>button i { position:absolute; right:7px; top:7px; color:#89928d; font-size:9px; font-style:normal; font-variant-numeric:tabular-nums; }
+.forge-categories>button:hover { transform:translateY(-1px); border-color:#68716d; background:linear-gradient(155deg,#333a3a,#22292a); }
+.forge-categories>button:active { transform:translateY(1px); }
+.forge-categories>button[aria-selected="true"] { color:#f0d7b5; border-color:#98724d; background:linear-gradient(155deg,#40382c,#292a27); box-shadow:inset 0 1px #ffe7c522,inset 0 -2px #151918,0 3px 7px #0006; }
+.forge-categories>button[aria-selected="true"]::after { content:""; position:absolute; inset:auto 8px -1px; height:2px; background:#d3a06b; box-shadow:0 0 8px #ce945b55; }
+.forge-categories>button[aria-selected="true"] svg { color:#e4b984; }
+.smith-family-tabs.engraved-rail { display:flex; flex-wrap:wrap; gap:2px; margin:0 0 8px; padding:4px 2px; border-bottom:1px solid #41494a; background:linear-gradient(180deg,#191f20,#222728); }
+.engraved-rail>button { display:flex; align-items:center; gap:5px; min-height:32px; padding:0 9px; border:1px solid transparent; border-radius:4px 4px 2px 2px; background:transparent; color:#a0a8a2; font-size:10px; cursor:pointer; transition:background 160ms var(--ease),color 160ms var(--ease),box-shadow 160ms var(--ease); }
+.engraved-rail>button svg { color:#888f88; }
+.engraved-rail>button:hover { color:#e6e0d4; background:#ffffff08; }
+.engraved-rail>button[aria-selected="true"] { color:#efd5b2; border-color:#65513c; background:linear-gradient(180deg,#342e27,#252827); box-shadow:inset 0 1px #e8c4981c,inset 0 -2px #111617; }
+.engraved-rail>button[aria-selected="true"] svg { color:#d8ac7a; }
+.recipe-choice { min-height:58px; border-radius:6px; transition:transform 140ms var(--ease),background 180ms var(--ease),border-color 180ms var(--ease),box-shadow 180ms var(--ease); }
+.recipe-choice:hover:not(:disabled) { transform:translateX(2px); border-color:#616b67; background:linear-gradient(100deg,#303636,#252b2c); }
+.recipe-choice:active:not(:disabled) { transform:translateY(1px); }
+.recipe-choice.selected { border-color:#8e704e; background:linear-gradient(100deg,#383329,#262a29); box-shadow:inset 3px 0 #ce985e,inset 0 1px #eed4ae13; }
+.recipe-choice.locked { cursor:not-allowed; color:#a7aaa2; background:linear-gradient(100deg,#25292a,#1d2223); }
+.workpiece-panel { background:radial-gradient(ellipse at 56% 12%,#3a3028 0,#292b29 37%,#202627 78%); }
+.workpiece-panel .workpiece-title { min-height:88px; padding:10px 12px; border:1px solid #4c4539; border-radius:7px; background:linear-gradient(110deg,#292b29,#1d2324); box-shadow:inset 0 1px #ffffff0c,0 3px 8px #0004; }
+.workpiece-panel .workpiece-title .item-mark { width:62px; height:62px; border-radius:9px; box-shadow:inset 0 1px #ffffff18,0 3px 8px #0006; }
+.workpiece-panel .forge-action-row .game-button { min-width:148px; min-height:42px; }
+.furnace-panel .recipe-equation { padding:12px 0; border-block:1px solid #393f3e; }
+.recipe-list-panel .recipe-choice small { font-size:10px; }
+@media(max-width:720px) { .smith-category-tabs.forge-categories { grid-template-columns:repeat(2,minmax(0,1fr)); }.smith-tabs.control-segments { width:100%; }.smith-tabs.control-segments>button { min-width:0; flex:1; } }
+
 .screen-heading.smithing .screen-overline {
   color: #bb916c;
 
