@@ -439,9 +439,9 @@ not developer roadmap terminology.
 
 # 31. Current implementation direction
 
-Work proceeds in the system-complete blocks in sections 7 and 9. Mining and Smithing now have broad T1–T10 content, while the current playable Combat world remains an early slice. Complete and integrate the Phase 1 professions, then continue the separate Combat world/content expansion. Do not require completing an entire tier across every system before moving to the next system.
+Work proceeds in the system-complete blocks in sections 7 and 9. Mining, Smithing, Fishing, Cooking, and the T1–T10 Melee Combat world are implemented as the Phase 1 playable scope. The next implementation task is Phase 1 Integration / Balance / UI Polish: play the full loop, validate pacing and save/offline behavior, then refine interaction where the complete content reveals friction. Do not automatically start Phase 2 Ranged.
 
-Mining, Smithing, Fishing, and Cooking have Skill Levels, tools, content unlocks, and authored choices. The former Mastery design is removed and must not return through historical requirements below. Their broad baseline and sustain integration are in place; the immediate next implementation task is the full T1-T10 Combat world and content expansion.
+The former Mastery design is removed and must not return through historical requirements below. The combat budgets and reward economy remain provisional until the Phase 1 completion pass.
 
 The screens should continue to improve as content density grows. Use realistic registry sizes when tuning layout and keep visual polish alongside implementation instead of deferring all UI work to a final tier pass.
 

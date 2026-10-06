@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+﻿import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { freshState } from '../state/initialState';
 import { startActivity } from '../systems/simulation';
 import { createProfile, deleteProfile, initializeProfiles, loadProfile, profileSaveKey, readProfileIndex, renameProfile, saveProfile } from './profileStorage';
@@ -31,9 +31,9 @@ describe('three save profiles', () => {
     expect(memory.getItem(profileSaveKey(2))).not.toBeNull();
   });
 
-  it('loads a current v5 profile after creating it',()=>{
+  it('loads a current v6 profile after creating it',()=>{
     initializeProfiles();createProfile(1,'Current');
-    expect(JSON.parse(memory.getItem(profileSaveKey(1))!).version).toBe(5);
+    expect(JSON.parse(memory.getItem(profileSaveKey(1))!).version).toBe(6);
     expect(loadProfile(1).profile.name).toBe('Current');
   });
 

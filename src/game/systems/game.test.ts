@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+﻿import { describe, expect, it } from 'vitest';
 import { advance, advanceWithEvents, damageAfterResistance, estimateForgeCompletion, freshState, hitChance, loadState, ITEMS, MINING_DEPOSITS, MINING_STAGE_MODEL, FORGING_RECIPES, SMELTING_RECIPES, PROVISIONAL_FIRST_SLICE_COMBAT_VALUES, SAVE_KEY, selectDeposit, setCombatTarget, stageDensity, stageStrikes, startActivity, stopActivity, smithingActionTime, type SaveState } from '../game';
 import { getCoreMaterialChance, getMiningPower, getPrimaryExpectedQuantity, resolvePrimaryQuantity } from './gameMath';
 import { MELEE_WEAPONS } from '../content/combat/meleeWeapons';
@@ -151,10 +151,10 @@ describe('Combat compatibility', () => {
 });
 
 describe('Persistence and offline parity', () => {
-  it('migrates legacy v1 bank, equipped gear, deposit state, and recipe IDs to v5', () => {
+  it('migrates legacy v1 bank, equipped gear, deposit state, and recipe IDs to v6', () => {
     const legacy = { version: 1, savedAt: 1000, state: { version: 1, skills: { Mining: { xp: 0, level: 1 } }, bank: { ore: 8, ingot: 2, sword: 1 }, equipped: { tool: true, weapon: 'sword' }, mining: { deposit: 'copper-vein', stage: 2, density: 13 }, smithing: { recipe: 'sword' }, activity: null } };
     const loaded = loadState(JSON.stringify(legacy), 1000);
-    expect(loaded.fresh).toBe(false); expect(loaded.state.version).toBe(5); expect(loaded.state.skills.Fishing.level).toBe(1); expect(loaded.state.skills.Cooking.level).toBe(1); expect(loaded.state.bank[ORE]).toBe(8); expect(loaded.state.bank[INGOT]).toBe(2);
+    expect(loaded.fresh).toBe(false); expect(loaded.state.version).toBe(6); expect(loaded.state.skills.Fishing.level).toBe(1); expect(loaded.state.skills.Cooking.level).toBe(1); expect(loaded.state.bank[ORE]).toBe(8); expect(loaded.state.bank[INGOT]).toBe(2);
     expect(loaded.state.equipped.weapon).toBe(SWORD); expect(loaded.state.mining.deposit).toBe('mining.deposit.copper_vein'); expect(loaded.state.mining.density).toBe(13);
     expect(loaded.state.smithing.recipe).toBe('recipe.smithing.copper_sword');
   });
@@ -162,14 +162,14 @@ describe('Persistence and offline parity', () => {
     const legacy:any=freshState(2000);
     legacy.version=4;legacy.mining.mastery={deposit:100};legacy.smithing.mastery={recipe:100};legacy.fishing.mastery={fish:100};legacy.cooking.mastery={recipe:100};legacy.food.threshold=100;
     const state=loadState(JSON.stringify({version:4,savedAt:2000,state:legacy}),2000).state;
-    expect(state.version).toBe(5);expect(state.food.threshold).toBe(99);for(const record of [state.mining,state.smithing,state.fishing,state.cooking])expect('mastery'in record).toBe(false);
+    expect(state.version).toBe(6);expect(state.food.threshold).toBe(99);for(const record of [state.mining,state.smithing,state.fishing,state.cooking])expect('mastery'in record).toBe(false);
   });
   it('round-trips current saves and safely falls back from corrupt JSON', () => {
     const original = freshState(1000); original.skills.Mining.xp = 27; original.bank[ORE] = 19; original.mining.stage = 2; original.mining.density = 13;
     original.mining.deposits[original.mining.deposit]!.stageIndex = 2; original.mining.deposits[original.mining.deposit]!.densityRemaining = 13;
     const loaded = loadState(JSON.stringify({ version: 3, savedAt: 1000, state: original }), 1000).state;
     expect(loaded.skills.Mining.xp).toBe(27); expect(loaded.bank[ORE]).toBe(19); expect(loaded.mining).toMatchObject({ stage: 2, density: 13 });
-    expect(loadState('{broken').fresh).toBe(true); expect(SAVE_KEY).toBe('mx-idle-save-v5');
+    expect(loadState('{broken').fresh).toBe(true); expect(SAVE_KEY).toBe('mx-idle-save-v6');
   });
   it('matches batched simulation with repeated active ticks for Mining and Smelting', () => {
     const mining = freshState(); startActivity(mining, 'mining'); const onlineMine = tick(mining, 60_000), offlineMine = advance(mining, 60_000);

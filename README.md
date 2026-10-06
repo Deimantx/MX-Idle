@@ -4,10 +4,10 @@ MX-Idle is a premium, browser-based, single-player idle RPG. It is designed to f
 
 ## Current playable scope
 
-The current playable slice includes Mining and Smithing through T1–T10 content, Fishing 1–100 with ten spots and 40 fish, Cooking 1–100 with 43 recipes, and Combat Food/Satiety/Auto Eat. Fishing rods and Cooking ingredients/stations currently use temporary profession bridges while Farming, Foraging, Woodcutting/Fletching, Alchemy/Runecrafting, and Estate progression are not yet implemented. Combat currently covers the Broken Road enemies and Ironjaw Boar Elite; the broader T1–T10 world remains the next content expansion. Balance values remain provisional.
+The playable Phase 1 scope includes Mining 1–100, Smithing 1–100, Fishing 1–100, Cooking 1–100, and Melee Combat T1–T10 across 10 Areas, 10 Elites, 10 Dungeons, and 10 Bosses, with Food, Satiety, and Auto Eat. Combat numeric balance remains provisional until the Phase 1 completion pass. Fishing rods and Cooking ingredients/stations still use temporary profession bridges while Farming, Foraging, Woodcutting/Fletching, Alchemy/Runecrafting, and Estate progression are not yet implemented.
 
 See the [Fishing/Cooking/Combat core implementation report](Docs/Implementation/PHASE1_FISHING_COOKING_COMBAT_CORE_REPORT.md) for bridge details and replacement plans.
-Saves are local to the browser. Profile Select offers three independent character slots. An unnamed legacy save is migrated to a profile named **Adventurer** and the original legacy data is retained. Character saves use schema v5. Migration preserves progression and resources while discarding the removed Mastery data without compensation.
+Saves are local to the browser. Profile Select offers three independent character slots. An unnamed legacy save is migrated to a profile named **Adventurer** and the original legacy data is retained. Character saves use schema v6. Migration preserves progression and resources while discarding the removed Mastery data without compensation.
 
 ## Requirements
 
@@ -55,7 +55,7 @@ tests/            Browser QA flows
 
 Character profiles are stored separately in browser local storage. Interface scale, text size, audio, and accessibility preferences use the device-wide `mx-idle-settings-v1` settings key and apply before Profile Select. Clearing browser storage removes local progress; manage character data with the in-game profile controls.
 
-The runtime migrates character data from save versions 1 through 5, mapping legacy item, deposit, and recipe IDs into namespaced IDs while retaining bank, equipment, activity, and progression state. The v5 migration discards historical Mastery fields without compensation. Profile migration preserves the original legacy save.
+The runtime migrates character data from save versions 1 through 6, mapping legacy item, deposit, and recipe IDs into namespaced IDs while retaining bank, equipment, activity, and progression state. The v5 migration discards historical Mastery fields without compensation; v6 adds permanent Combat tier, Elite, Dungeon, and Boss progression. Profile migration preserves the original legacy save.
 
 See [the Phase 1B Mining and Smithing implementation report](Docs/Implementation/PHASE1B_T1_MINING_SMITHING_REPORT.md) and [the Fishing/Cooking/Combat core implementation report](Docs/Implementation/PHASE1_FISHING_COOKING_COMBAT_CORE_REPORT.md) for formulas, migration behavior, temporary dependency bridges, and verification notes.
 

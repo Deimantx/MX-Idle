@@ -1,4 +1,5 @@
-import { COMBAT_AREAS, DAMAGE_TYPES, ENEMIES, validateCombatContent } from './combat/t1Enemies';
+import { COMBAT_AREAS, DAMAGE_TYPES, DUNGEONS, ENEMIES, validateCombatContent } from './combat/t1Enemies';
+import { BOSS_COMPONENTS, COMBAT_LOOT_ITEMS, ELITE_COMPONENTS, OFFERINGS } from './combat/combatLoot';
 import { ITEMS } from './items/itemRegistry';
 import { MINING_DEPOSITS } from './mining/miningDeposits';
 import { MINING_STAGE_MODEL } from './mining/miningStages';
@@ -50,6 +51,17 @@ export function validateCombatRegistry() {
   for (const enemy of Object.values(ENEMIES)) for (const drop of [...enemy.loot,...(enemy.firstKillReward??[])]) if (!hasItem(drop.item)) errors.push(`${enemy.id} references missing loot item ${drop.item}`);
   for (const enemy of Object.values(ENEMIES)) if (enemy.offering && !hasItem(enemy.offering)) errors.push(`${enemy.id} references missing Offering item ${enemy.offering}`);
   if (DAMAGE_TYPES.length !== 9) errors.push('Combat must define nine typed damage resistances');
+  if(Object.keys(ENEMIES).filter(id=>ENEMIES[id]!.rank==='Boss').length!==10)errors.push('Expected 10 Combat bosses');
+  if(Object.keys(ENEMIES).filter(id=>ENEMIES[id]!.rank==='Elite').length!==10)errors.push('Expected 10 Combat Elites');
+  if(Object.keys(ENEMIES).filter(id=>ENEMIES[id]!.rank==='Dungeon').length!==20)errors.push('Expected 20 Dungeon-only enemies');
+  if(Object.keys(ENEMIES).filter(id=>['Light','Normal','Heavy'].includes(ENEMIES[id]!.rank)).length!==40)errors.push('Expected 40 normal Area enemies');
+  if(Object.keys(DUNGEONS).length!==10)errors.push('Expected 10 Dungeons');
+  for(const dungeon of Object.values(DUNGEONS)){if(dungeon.encounters.length!==4)errors.push(`${dungeon.id} must have 4 ordered encounters`);if(dungeon.encounters[2]!==Object.values(ENEMIES).find(e=>e.tier===dungeon.tier&&e.rank==='Elite')?.id)errors.push(`${dungeon.id} must place the Elite third`);if(dungeon.encounters[3]!==dungeon.bossId)errors.push(`${dungeon.id} must place its Boss fourth`);}
+  if(OFFERINGS.length!==30)errors.push('Expected 30 Offering items');
+  if(ELITE_COMPONENTS.length!==10)errors.push('Expected 10 Elite Components');
+  if(BOSS_COMPONENTS.length!==10)errors.push('Expected 10 protected Boss Components');
+  if(COMBAT_LOOT_ITEMS.some(item=>!hasItem(item.id)))errors.push('A generated Combat reward has no registered item definition');
+  for(const enemy of Object.values(ENEMIES)){if(!enemy.tags.length||!enemy.resistanceProfile||!['Melee','Ranged','Magic'].includes(enemy.style))errors.push(`${enemy.id} is missing Bestiary identity data`);for(const action of [...enemy.sequence,...(enemy.phases??[]).flatMap(phase=>phase.sequence)]){if(!Number.isFinite(action.multiplier)||action.multiplier<=0)errors.push(`${enemy.id}/${action.name} has an invalid multiplier`);if(action.status&&(!Number.isFinite(action.status.durationMs)||action.status.durationMs<=0||!Number.isFinite(action.status.magnitude)))errors.push(`${enemy.id}/${action.name} has an invalid effect`);if(action.hits!==undefined&&action.hits<1)errors.push(`${enemy.id}/${action.name} has invalid hit count`);if(action.damageComponents&&action.damageComponents.some(part=>!DAMAGE_TYPES.includes(part.type)||!Number.isFinite(part.ratio)||part.ratio<=0))errors.push(`${enemy.id}/${action.name} has invalid damage components`);}}
   return errors;
 }
 

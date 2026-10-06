@@ -1,5 +1,6 @@
 import { freshState } from '../state/initialState';
 import { ENEMIES } from '../content/combat/t1Enemies';
+import { MELEE_WEAPONS } from '../content/combat/meleeWeapons';
 import { enemyUnlocked, isValidEquipmentForSlot } from '../systems/combat/combatMath';
 import { FORGING_RECIPES } from '../content/smithing/forgingRecipes';
 import { SMELTING_RECIPES } from '../content/smithing/smeltingRecipes';
@@ -14,7 +15,7 @@ import { advance, getForgeWorkRequired } from '../systems/simulation';
 import { getDepositStageDensity } from '../systems/gameMath';
 import { ITEM_IDS, type DepositId, type EnemyId, type ForgingRecipeId, type ItemId, type SaveState } from '../types/gameTypes';
 
-export const SAVE_KEY = 'mx-idle-save-v5';
+export const SAVE_KEY = 'mx-idle-save-v6';
 const LEGACY_ITEMS: Record<string, ItemId> = {
   pickaxe: 'item.mining.worn_pickaxe', copperPickaxe: 'item.mining.copper_pickaxe', hammer: 'item.smithing.worn_smithing_hammer', copperHammer: 'item.smithing.copper_smithing_hammer',
   ore: 'item.mining.copper_ore', stone: 'item.mining.stone', opal: 'item.mining.opal', mineralCoreFragment: 'item.mining.mineral_core_fragment', ingot: 'item.smithing.copper_ingot',
@@ -29,9 +30,9 @@ export function decodeSave(raw: string | null, now = Date.now()): { state: SaveS
   if (!raw) return null;
   try {
     const envelope = JSON.parse(raw), legacy = envelope?.state;
-    if (![1, 2, 3, 4, 5].includes(envelope?.version) || !legacy || typeof legacy !== 'object' || Array.isArray(legacy)) return null;
+    if (![1, 2, 3, 4, 5, 6].includes(envelope?.version) || !legacy || typeof legacy !== 'object' || Array.isArray(legacy)) return null;
     const defaults = freshState(now), state = legacy as any, version = Number(state.version ?? 1);
-    if (version < 1 || version > 5) return null;
+    if (version < 1 || version > 6) return null;
     if (state.skills && (typeof state.skills !== 'object' || Array.isArray(state.skills))) return null;
     if (state.skills && Object.values(state.skills).some((skill: any) => !skill || typeof skill !== 'object' || (skill.xp !== undefined && (!Number.isFinite(skill.xp) || skill.xp < 0)) || (skill.level !== undefined && (!Number.isFinite(skill.level) || skill.level < 1)))) return null;
     if (state.bank && (typeof state.bank !== 'object' || Array.isArray(state.bank) || Object.values(state.bank).some((q: any) => typeof q !== 'number' || !Number.isFinite(q) || q < 0))) return null;
@@ -66,7 +67,7 @@ export function decodeSave(raw: string | null, now = Date.now()): { state: SaveS
     for (const [key, amount] of Object.entries(oldSmithing.reservedItems ?? {})) { const id = toItem(key); if (id && Number.isFinite(amount)) reservedItems[id] = Math.max(0, Number(amount)); }
     if (!Object.keys(reservedItems).length && oldSmithing.reserved > 0 && recipe in FORGING_RECIPES) reservedItems['item.smithing.copper_ingot'] = Math.min(oldSmithing.reserved, FORGING_RECIPES[recipe as keyof typeof FORGING_RECIPES]?.inputs.find((i) => i.item === 'item.smithing.copper_ingot')?.amount ?? 0);
     const s: SaveState = {
-      ...defaults, ...state, version: 5, bank,
+      ...defaults, ...state, version: 6, bank,
       skills: { ...defaults.skills, ...(state.skills ?? {}) },
       fishing: { ...defaults.fishing, ...(state.fishing ?? {}), spot:FISHING_SPOTS.some((spot)=>spot.id===state.fishing?.spot)?state.fishing.spot:defaults.fishing.spot, rod: FISHING_RODS.some((rod)=>rod.id===state.fishing?.rod)?state.fishing.rod:defaults.fishing.rod, tackle:FISHING_TACKLE.some((tackle)=>tackle.id===state.fishing?.tackle)?state.fishing.tackle:null, selectedFish:FISH_SPECIES.some((fish)=>fish.id===state.fishing?.selectedFish)?state.fishing.selectedFish:null, bait:toItem(String(state.fishing?.bait??''))?.startsWith('fishing.bait.')?state.fishing.bait:null, actionSerial: Number.isFinite(state.fishing?.actionSerial) ? Math.max(0, state.fishing.actionSerial) : 0, sessionFish: migratedBank(state.fishing?.sessionFish) },
       cooking: { ...defaults.cooking, ...(state.cooking ?? {}), recipe: COOKING_RECIPES.some((item)=>item.id===state.cooking?.recipe)?state.cooking.recipe:defaults.cooking.recipe, knife: COOKING_KNIVES.some((item)=>item.id===state.cooking?.knife)?state.cooking.knife:defaults.cooking.knife, actionSerial: Number.isFinite(state.cooking?.actionSerial) ? Math.max(0, state.cooking.actionSerial) : 0, selectedInputs: { ...defaults.cooking.selectedInputs, ...(state.cooking?.selectedInputs ?? {}) }, reservedInputs: Array.isArray(state.cooking?.reservedInputs) ? state.cooking.reservedInputs.filter((x:any)=>toItem(String(x?.item??''))&&Number.isFinite(x?.amount)&&x.amount>0).map((x:any)=>({item:toItem(String(x.item))!,amount:Math.max(0,Math.floor(x.amount))})) : defaults.cooking.reservedInputs, sessionOutputs: { ...defaults.cooking.sessionOutputs, ...(state.cooking?.sessionOutputs ?? {}) } },
@@ -75,6 +76,7 @@ export function decodeSave(raw: string | null, now = Date.now()): { state: SaveS
       mining: { ...defaults.mining, deposits, deposit: depositId, stage: selectedRuntime.stageIndex, density: selectedRuntime.densityRemaining, cycles: selectedRuntime.cyclesCompleted, strikes: Math.max(0, oldMining.strikes ?? 0), timer: Number.isFinite(oldMining.timer) ? Math.max(0, oldMining.timer) : MINING_DEPOSITS[depositId].strikeMs, sessionOutputs: { ...(oldMining.sessionOutputs ?? {}), ...(oldMining.sessionOre ? { 'item.mining.copper_ore': oldMining.sessionOre } : {}) }, sessionXp: Math.max(0, oldMining.sessionXp ?? 0) },
       smithing: { ...defaults.smithing, ...oldSmithing, recipe, smeltRecipe: oldSmithing.smeltRecipe in SMELTING_RECIPES ? oldSmithing.smeltRecipe : defaults.smithing.smeltRecipe, reservedItems, reservedEquipment: equipment(oldSmithing.reservedEquipment), category: oldSmithing.category ?? (recipe in FORGING_RECIPES ? FORGING_RECIPES[recipe as keyof typeof FORGING_RECIPES].category : 'weapons') },
       combat: { ...defaults.combat, ...oldCombat, targetId: combatTarget, areaId: ENEMIES[combatTarget].areaId, dungeonId: typeof oldCombat.dungeonId==='string'?oldCombat.dungeonId:null, encounterIndex: Number.isFinite(oldCombat.encounterIndex)?Math.max(0,oldCombat.encounterIndex):0, runState: ['idle','active','ended'].includes(oldCombat.runState)?oldCombat.runState:'idle', enemyHp: Number.isFinite(oldCombat.enemyHp) ? Math.max(0,Math.min(ENEMIES[combatTarget].maxHp,oldCombat.enemyHp)) : ENEMIES[combatTarget].maxHp, sequenceIndex: Number.isFinite(oldCombat.sequenceIndex ?? oldCombat.seq) ? Math.max(0,oldCombat.sequenceIndex ?? oldCombat.seq) : 0, activePhaseIndex: Number.isFinite(oldCombat.activePhaseIndex)?Math.max(0,oldCombat.activePhaseIndex):0, playerActionSerial: oldCombat.playerActionSerial ?? 0, enemyActionSerial: oldCombat.enemyActionSerial ?? 0, statuses: Array.isArray(oldCombat.statuses) ? oldCombat.statuses.filter((status:any)=>status&&typeof status.type==='string'&&typeof status.remainingMs==='number').map((status: any) => ({ ...status, target: status.target === 'enemy' ? 'enemy' : 'player' })) : [], stamina: oldCombat.stamina ?? 100, queuedSpecial: oldCombat.queuedSpecial ?? false, specialMode: ['Auto','Manual','Off'].includes(oldCombat.specialMode)?oldCombat.specialMode:'Auto', defeated: oldCombat.defeated && typeof oldCombat.defeated==='object' ? oldCombat.defeated : {} },
+      combatProgress: (()=>{const old=state.combatProgress&&typeof state.combatProgress==='object'?state.combatProgress:{};const unlocked=Array.isArray(old.unlockedTiers)?old.unlockedTiers.filter((x:any)=>Number.isInteger(x)&&x>=1&&x<=10):[1];if(!unlocked.includes(1))unlocked.unshift(1);const validFlags=(value:any)=>value&&typeof value==='object'&&!Array.isArray(value)?Object.fromEntries(Object.entries(value).filter(([id,v])=>Object.prototype.hasOwnProperty.call(ENEMIES,id)&&v===true)):{};const completions=old.dungeonCompletions&&typeof old.dungeonCompletions==='object'?Object.fromEntries(Object.entries(old.dungeonCompletions).filter(([,v])=>Number.isFinite(v)&&Number(v)>=0).map(([id,v])=>[id,Math.floor(Number(v))])):{};const hooks=Array.isArray(old.uniqueHooks)?old.uniqueHooks.filter((x:any)=>typeof x==='string'):[];const eliteFirstKills=validFlags(old.eliteFirstKills);if((oldCombat.defeated?.['ironjaw-boar']??0)>0)eliteFirstKills['ironjaw-boar']=true;return{unlockedTiers:[...new Set(unlocked)],bossFirstKills:validFlags(old.bossFirstKills),eliteFirstKills,dungeonCompletions:completions,uniqueHooks:[...new Set(hooks)]};})(),
       objectives: { ...defaults.objectives, ...(state.objectives ?? {}) }, rng: Number.isFinite(state.rng) ? state.rng : defaults.rng,
     };
     if (!s.mining.deposits[depositId]) s.mining.deposits[depositId] = freshDepositState(depositId);
@@ -84,6 +86,7 @@ export function decodeSave(raw: string | null, now = Date.now()): { state: SaveS
     for (const [slot, value] of Object.entries({ weapon:s.equipped.weapon, offhand:s.equipped.offhand, head:s.equipped.head, armor:s.equipped.armor, hands:s.equipped.hands, feet:s.equipped.feet })) {
       if (value && !isValidEquipmentForSlot(s, value, slot)) s.equipped[slot as keyof typeof s.equipped] = null;
     }
+    const equippedWeapon=s.equipped.weapon?MELEE_WEAPONS[s.equipped.weapon as keyof typeof MELEE_WEAPONS]:undefined;if(equippedWeapon){const fallback=equippedWeapon.stances.find(stance=>stance.id===equippedWeapon.defaultStance)?.damageType??equippedWeapon.style;if(!equippedWeapon.stances.some(stance=>stance.damageType===s.combat.stance))s.combat.stance=fallback;if(!equippedWeapon.stances.some(stance=>stance.damageType===s.combat.pendingStance))s.combat.pendingStance=s.combat.stance;}else if(!['Slash','Stab','Crush','Pierce','Puncture','Air','Fire','Water','Earth'].includes(s.combat.stance))s.combat.stance=defaults.combat.stance;
     if (!enemyUnlocked(s, s.combat.targetId)) { s.combat.targetId = defaults.combat.targetId; s.combat.areaId = defaults.combat.areaId; s.combat.enemyHp = ENEMIES[defaults.combat.targetId].maxHp; }
     if (!s.skills.Mining || !s.bank || !s.combat || !Number.isFinite(envelope.savedAt ?? s.savedAt)) return null;
     const savedAt = envelope.savedAt ?? s.savedAt; s.savedAt = savedAt;

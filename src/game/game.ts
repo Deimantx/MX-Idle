@@ -8,6 +8,8 @@ export * from './content/smithing/smithingContent';
 export * from './content/combat/meleeWeapons';
 export * from './content/combat/heavyArmor';
 export * from './content/combat/offhands';
+export * from './content/combat/combatLoot';
+export * from './content/combat/combatTierBudgets';
 export * from './content/combat/t1Enemies';
 export * from './content/contentValidators';
 export * from './systems/combat/combatMath';

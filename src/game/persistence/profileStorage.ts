@@ -25,7 +25,7 @@ export function initializeProfiles(): ProfileIndex {
     const key = profileSaveKey(1);
     const previous = storage().getItem(key);
     try {
-      storage().setItem(key, JSON.stringify({ version: 5, savedAt: decoded.state.savedAt, state: decoded.state }));
+      storage().setItem(key, JSON.stringify({ version: 6, savedAt: decoded.state.savedAt, state: decoded.state }));
       index.slots[0] = record;
       writeIndex(index);
     } catch (error) {
@@ -46,7 +46,7 @@ export function createProfile(slot: ProfileSlotId, name: string): ProfileRecord 
   const now = Date.now(), state = freshState(now), record = makeRecord(slot, clean, state, now);
   const key = profileSaveKey(slot), old = storage().getItem(key);
   try {
-    storage().setItem(key, JSON.stringify({ version: 5, savedAt: now, state }));
+    storage().setItem(key, JSON.stringify({ version: 6, savedAt: now, state }));
     index.slots[slot - 1] = record;
     writeIndex(index);
   } catch (error) {
@@ -66,7 +66,7 @@ export function readProfileSource(slot: ProfileSlotId) {
 export function validateProfileSource(raw: string | null) {
   try {
     const envelope = JSON.parse(raw ?? 'null');
-    if (![1, 2, 3, 4, 5].includes(envelope?.version) || !envelope.state || typeof envelope.state !== 'object') throw Error();
+    if (![1, 2, 3, 4, 5, 6].includes(envelope?.version) || !envelope.state || typeof envelope.state !== 'object') throw Error();
   } catch { throw new Error('This profile could not be loaded because its save is damaged. The file was preserved. Return to Profile Select and retry after restoring a backup.'); }
 }
 
@@ -95,7 +95,7 @@ export function saveProfile(slot: ProfileSlotId, state: SaveState, activeDeltaMs
   const now = Date.now(), value = { ...state, savedAt: now };
   const key = profileSaveKey(slot), previous = storage().getItem(key);
   try {
-    storage().setItem(key, JSON.stringify({ version: 5, savedAt: now, state: value }));
+    storage().setItem(key, JSON.stringify({ version: 6, savedAt: now, state: value }));
     index.slots[slot - 1] = { ...record, lastPlayedAt: now, activePlayTimeMs: record.activePlayTimeMs + Math.max(0, activeDeltaMs), summary: profileSummary(value) };
     writeIndex(index);
   } catch (error) {
