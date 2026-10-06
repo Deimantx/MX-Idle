@@ -221,6 +221,12 @@ When choosing between decoration and clarity, choose clarity.
 When choosing between another asset and a reusable design-system solution, prefer the reusable solution unless the asset materially improves the game world.
 When choosing between flashy and premium, choose premium.
 
+## Major UI generation work
+- Major player-facing UI tasks must not default to preserving existing JSX or CSS. When the user requests a major redesign, structural rewrites are expected where needed.
+- Judge visual redesigns by browser output, not diff size, compile success, or component reuse.
+- Do not claim “AAA,” “premium,” or “finished” when only surface styling changed and the underlying player interaction still looks generic.
+- Screenshots, design docs, generated files, and tests do not count as implementation scope. For UI work, progress means real changes under `src/`, especially TSX, CSS, game UI primitives, interaction code, and responsive behavior.
+
 ## UI integrity and text encoding rules
 
 ### Mojibake is forbidden

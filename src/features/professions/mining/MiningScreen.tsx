@@ -1,5 +1,5 @@
 ﻿import { useMemo, useState } from 'react';
-import { Bar, Badge, Button, Panel } from '../../../ui/primitives';
+import { Badge, Button, Icon, Panel } from '../../../ui/primitives';
 import { ItemMark } from '../../../ui/game/ItemDisplay';
 import { ScreenHeading, Stat } from '../../../ui/game/ScreenPrimitives';
 import { fmt, formatActionTime, formatDuration } from '../../../ui/game/formatters';
@@ -7,6 +7,7 @@ import { MINING_DEPOSITS, MINING_STAGE_MODEL, MINING_TOOLS, type DepositId, type
 import { getDepositStageDensity, getMiningPower, getMiningStrikeTime, getPrimaryExpectedQuantity } from '../../../game/systems/gameMath';
 import { ActionProgress } from '../../../ui/game/ActionProgress';
 import { canMineDeposit } from '../../../game/systems/mining/miningResolver';
+import { GameProgress, GameState } from '../../../ui/game-v2/GameKit';
 
 type Metrics = { outputs: Partial<Record<ItemId, number>>; Mining: { xpHour: number } };
 const CATEGORIES = ['All', 'Ore', 'Quarry', 'Catalyst', 'Gem', 'Essence', 'Deep-Core'] as const;
@@ -45,7 +46,7 @@ export function MiningScreen({ game: g, xp, maxXp, start, stop, select, equipToo
     select(entry.id);
   };
 
-  return <div className="screen mining-screen" data-profession="mining">
+  return <div className="screen mining-screen mining-v2" data-profession="mining">
     <ScreenHeading eyebrow="PROFESSION / GEOLOGY" title="Mining" sub="Choose a seam, read its strata, and work each layer down to the core." accent="mining" level={g.skills.Mining.level} xp={xp} maxXp={maxXp} />
     <div className="mine-browser-tools">
       <div className="mine-category-nav" role="tablist" aria-label="Deposit materials">{CATEGORIES.map(item => <button key={item} type="button" role="tab" aria-selected={category === item} className={category === item ? 'selected' : ''} onClick={() => setCategory(item)}>{item === 'All' ? 'All Deposits' : item}</button>)}</div>
@@ -62,7 +63,7 @@ export function MiningScreen({ game: g, xp, maxXp, start, stop, select, equipToo
           return <button key={entry.id} type="button" className={`deposit-selected ${selected ? 'selected' : ''} ${locked ? 'locked' : ''}`} onClick={() => inspectDeposit(entry)} aria-pressed={selected}>
             <span className="selection-edge" /><ItemMark id={entry.primary} />
             <span className="deposit-label"><b>{entry.name}</b><small>{entry.resourceName} / T{entry.tier} / {entry.endgameGated ? 'Endgame gated' : levelLocked ? `Mining ${entry.unlockLevel} required` : toolLocked ? `${MINING_TOOLS[entry.requiredTool as keyof typeof MINING_TOOLS]?.name ?? 'Pickaxe'} required` : 'Ready to mine'}</small></span>
-            <Badge tone={locked ? 'missing' : selected ? 'live' : 'ready'}>{entry.endgameGated ? 'GATED' : toolLocked ? 'TOOL' : levelLocked ? `LV ${entry.unlockLevel}` : selected ? 'ACTIVE' : 'READY'}</Badge>
+            <GameState tone={locked?'locked':active&&selected?'active':selected?'ready':'neutral'} icon={locked?'shield':active&&selected?'mining':undefined}>{entry.endgameGated?'GATED':toolLocked?'TOOL':levelLocked?`LV ${entry.unlockLevel}`:active&&selected?'WORKING':selected?'SELECTED':'READY'}</GameState>
           </button>;
         })}</div>
         <div className="deposit-req"><div><span>REQUIRES</span><b>Mining {deposit.unlockLevel}</b></div><div><span>PICKAXE</span><b>{MINING_TOOLS[deposit.requiredTool as keyof typeof MINING_TOOLS]?.name ?? '-'}</b></div><div><span>YIELDS</span><b>{deposit.resourceName} x{deposit.baseQuantity}</b></div><div><span>STRIKE</span><b>{(deposit.strikeMs / 1000).toFixed(2)}s</b></div></div>
@@ -70,11 +71,18 @@ export function MiningScreen({ game: g, xp, maxXp, start, stop, select, equipToo
 
       <Panel className={`mine-focus ${active ? 'is-active' : ''}`}>
         <div className="focus-top"><div><span className="screen-overline">{deposit.category} / Tier {deposit.tier}</span><h2>{deposit.name}</h2><small>{deposit.resourceName} deposit</small></div><Badge tone={active ? 'live' : ''}>{active ? 'MINING' : 'READY'}</Badge></div>
-        <div key={`${deposit.id}:${g.mining.strikes}`} className={`vein-art mining-impact ${deposit.category === 'Quarry' ? 'stone-vein-art' : ''}`} aria-label={`${deposit.resourceName} exposed in the mine face`}><div className="cave-ridge ridge-a" /><div className="cave-ridge ridge-b" /><div className="ore-face"><i /><i /><i /><i /><i /></div><div className="ore-glint g1" /><div className="ore-glint g2" /><div className="vein-depth"><span>{deposit.resourceName.toUpperCase()}</span><b>Layer {runtime.stageIndex  + 1} / 5</b></div><div className="vein-vignette" /></div>
+        <div key={`${deposit.id}:${g.mining.strikes}`} className={`vein-art mining-impact strata-${runtime.stageIndex+1} ${deposit.category==='Quarry'?'stone-vein-art':''}`} aria-label={`${deposit.resourceName} exposed in the mine face`}>
+          <div className="mine-face-label"><span>ACTIVE DEPOSIT</span><b>{deposit.resourceName.toUpperCase()}</b></div>
+          <svg className="mine-strata-map" viewBox="0 0 800 300" preserveAspectRatio="none" aria-hidden="true"><path d="M0 202 72 176 126 198 207 149 286 182 359 136 433 169 525 124 609 160 688 110 800 145V300H0Z"/><path d="M0 223 95 198 177 217 264 181 335 211 437 171 518 195 631 157 705 178 800 150"/><path d="M0 255 101 234 194 251 283 219 368 246 463 215 551 236 642 198 734 216 800 196"/><path d="M175 196 229 178 269 185 286 199 252 211 211 206ZM482 179 524 149 568 157 586 171 548 190 509 193Z"/></svg>
+          <div className="mine-cutaway-edge"/><div className="mine-impact-ring"/><div className="mine-drill-point"><Icon name="pick" size={22}/></div>
+          <div className="ore-face"><i/><i/><i/><i/><i/></div><div className="ore-glint g1"/><div className="ore-glint g2"/>
+          <div className="mine-strata-depth" aria-label="Five excavation layers">{MINING_STAGE_MODEL.map((item,index)=><span key={item.id} className={index<runtime.stageIndex?'cleared':index===runtime.stageIndex?'current':''}><i/>{String(index+1).padStart(2,'0')}</span>)}</div>
+          <div className="vein-depth"><span>{stage.name.toUpperCase()}</span><b>STRATUM {runtime.stageIndex+1} / 5</b></div><div className="vein-vignette"/>
+        </div>
         <div className="stage-name-line"><div><span className="tiny-label">CURRENT LAYER</span><h3>{stage.name}</h3></div><div className="stage-reward"><span>EXPECTED YIELD</span><b><ItemMark id={deposit.primary} /> {getPrimaryExpectedQuantity(runtime.stageIndex, deposit.id).toFixed(2)} x {deposit.resourceName}</b></div></div>
-        <div className="bar-label"><span>Rock density</span><b>{runtime.densityRemaining.toFixed(1)} <small>/ {maxDensity}</small></b></div><Bar value={runtime.densityRemaining} max={maxDensity} accent="copper" className="density-bar" label={`${strikes} strikes remaining`} />
+        <div className="bar-label mine-density-heading"><span>Deposit density <small>geological resistance</small></span><b>{runtime.densityRemaining.toFixed(1)} <small>/ {maxDensity}</small></b></div><GameProgress value={runtime.densityRemaining} max={maxDensity} kind="density" label={`Deposit density, ${strikes} strikes remaining`}/><div className="density-strike-marks" aria-hidden="true">{Array.from({length:Math.min(10,Math.max(1,strikes))},(_,index)=><i key={index}/>)}</div>
         <div className="mine-action-progress"><div><span className="tiny-label">NEXT SWING</span><b>{active ? formatActionTime(g.mining.timer) : formatActionTime(strikeMs)}</b></div><ActionProgress active={active} remainingMs={g.mining.timer || strikeMs} durationMs={strikeMs} phaseKey={`${deposit.id}:${g.mining.strikes}`} speedMultiplier={speedMultiplier} label="Mining swing progress" /></div>
-        <div className="mine-controls"><div className="strike-readout"><span className={`pulse-dot ${active ? 'pulsing' : ''}`} /><div><b>{active ? 'Next strike' : 'Strike time'}</b><small>{formatActionTime(strikeMs)} / {power} power</small></div></div><Button tone="copper" onClick={active ? stop : start}>{active ? 'Stop Mining' : 'Start Mining'}</Button></div>
+        <div className="mine-controls"><div className="strike-readout"><span className={`pulse-dot ${active ? 'pulsing' : ''}`} /><div><b>{active ? 'Next strike' : 'Strike time'}</b><small>{formatActionTime(strikeMs)} / {power} power</small></div></div><Button tone="copper" onClick={active ? stop : start}><Icon name={active?'combat':'pick'} size={18}/>{active ? 'Stop Mining' : 'Start Mining'}</Button></div>
         <div className="stage-path" aria-label="Excavation depth">{MINING_STAGE_MODEL.map((item, index) => <div key={item.id} className={`stage-node ${index  < runtime.stageIndex  ? 'complete' : ''} ${index=== runtime.stageIndex  ? 'current' : ''}`}><div className="node-head"><span className="node-mark">{index  < runtime.stageIndex  ? 'DONE' : `0${index  + 1}`}</span><span className="node-join" /></div><b>{item.name}</b><small>{getPrimaryExpectedQuantity(index, deposit.id).toFixed(2)} x / {index  < runtime.stageIndex  ? 'cleared' : index=== runtime.stageIndex  ? 'working' : 'ahead'}</small></div>)}</div>
       </Panel>
 

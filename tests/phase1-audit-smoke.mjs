@@ -9,8 +9,8 @@ const browser = await chromium.launch({ headless: true, executablePath, args: ['
 const page = await browser.newPage({ viewport: { width: 2560, height: 1440 }, reducedMotion: 'reduce' });
 const errors = [];
 page.setDefaultTimeout(7000);
-await mkdir('artifacts/phase1-review', { recursive: true });
-const capture = async (name) => { await page.locator('.content-scroll').evaluate((node) => { node.scrollTop = 0; }); const { width, height } = page.viewportSize(); await page.screenshot({ path: `artifacts/phase1-review/${name}-${width}x${height}.png` }); };
+await mkdir('artifacts/ui-generation-2', { recursive: true });
+const capture = async (name) => { await page.locator('.content-scroll').evaluate((node) => { node.scrollTop = 0; }); const { width, height } = page.viewportSize(); await page.screenshot({ path: `artifacts/ui-generation-2/${name}-${width}x${height}.png` }); };
 page.on('pageerror', (error) => errors.push(error.message));
 page.on('console', (message) => { if (message.type() === 'error') errors.push(message.text()); });
 
@@ -60,10 +60,10 @@ try {
   await page.getByLabel('Dev Combat gear').selectOption('combat.weapon.melee.astralite_sword');
   await page.getByRole('button', { name: 'Grant & Equip', exact: true }).click();
   await page.getByRole('button', { name: 'Close developer tools' }).click();
-  const astraliteSword = page.locator('.candidate-row').filter({ hasText: 'Astralite Sword' });
+  const astraliteSword = page.locator('.eq-item-tile').filter({ hasText: 'Astralite Sword' });
   assert.equal(await astraliteSword.count(), 1, 'Metadata picker shows the owned T10 weapon');
   await astraliteSword.click();
-  assert.match(await page.locator('.item-compare').innerText(), /Astralite Sword/);
+  assert.match(await page.locator('.equipment-v2-inspector').innerText(), /Astralite Sword/);
   await capture('equipment');
   await page.setViewportSize({ width: 1920, height: 1080 });
   await capture('equipment');
@@ -104,7 +104,7 @@ try {
   assert.equal(await page.locator('.water-choice').filter({ hasText: 'Astral Expanse' }).isDisabled(), true, 'Fishing Spot 10 stays locked at Fishing 1');
   await page.getByRole('button', { name: /Cooking/ }).click();
   await capture('cooking');
-  assert.equal(await page.locator('.recipe-choice').count() > 0, true, 'Cooking recipe browser renders');
+  assert.equal(await page.locator('.cooking-recipe-tile').count() > 0, true, 'Cooking recipe browser renders');
   await page.getByRole('button', { name: 'Bank', exact: true }).click();
   await page.setViewportSize({ width: 2560, height: 1440 });
   await capture('bank');

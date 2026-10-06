@@ -3,6 +3,8 @@ dist/
 *.tsbuildinfo
 .local-appdata/
 .electron-cache/
+__pycache__/
+*.pyc
 
 artifacts/qa/
 artifacts/qa-professions/

@@ -1,0 +1,9 @@
+/* Shared game frame finish: compact status rail, clear active ownership, and scaling-safe controls. */
+.topbar { min-height:58px; border-bottom-color:#394243; background:linear-gradient(180deg,#242b2d,#1b2224); box-shadow:inset 0 1px #ffffff0a,0 3px 12px #0003; }
+.active-profile b { color:#ece7dc; letter-spacing:.01em; }
+.active-profile small,.top-status .gold-chip small { color:#88948f; letter-spacing:.11em; }
+.gold-chip { min-height:34px; padding:5px 9px; border:1px solid #4d4738; border-radius:5px; background:linear-gradient(145deg,#2c2a22,#202526); box-shadow:inset 0 1px #ffffff0d,inset 0 -2px #0003; }
+.save-label { color:#a6b4a5; }
+.content-scroll { scrollbar-color:#46514e #171d1f; scrollbar-width:thin; }
+.main-frame:focus-visible,.content-scroll:focus-visible { outline:none; }
+@media(max-width:760px) { .topbar { min-height:52px; } .top-status { gap:7px; } .gold-chip { min-height:31px; } }
