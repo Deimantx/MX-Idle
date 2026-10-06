@@ -1,7 +1,7 @@
 import type { DamageType } from '../../types/gameTypes';
 export type MeleeWeaponId=`combat.weapon.melee.${string}`;
 export type WeaponStance = { id: string; name: string; damageType: DamageType; accuracyMultiplier?: number; maxHitMultiplier?: number; penetrationPp?: number };
-export type MeleeWeaponDefinition={id:MeleeWeaponId;name:string;power:number;accuracyBonus:number;intervalMs:number;attackLevel:number;style:DamageType;handedness:'1H'|'2H';allowedOffhandTypes?:readonly string[];defaultStance:string;stances:readonly WeaponStance[];critRateBonus:number;critDamageBonus:number;penetrationType?:DamageType;penetrationPp?:number;special:{name:string;stamina:number;multiplier:number;type:DamageType;damageComponents?:Array<{type:DamageType;ratio:number}>;accuracyBonus:number;executeBonus?:number;resistanceDownPp?:number}};
+export type MeleeWeaponDefinition={id:MeleeWeaponId;name:string;power:number;accuracyBonus:number;intervalMs:number;attackLevel:number;style:DamageType;handedness:'1H'|'2H';allowedOffhandTypes?:readonly string[];defaultStance:string;stances:readonly WeaponStance[];critRateBonus:number;critDamageBonus:number;penetrationType?:DamageType;penetrationPp?:number;special:{name:string;stamina:number;multiplier:number;type:DamageType;damageComponents?:Array<{type:DamageType;multiplier:number}>;accuracyBonus:number;executeBonus?:number;resistanceDownPp?:number}};
 const metals=['copper','iron','cobalt','argent','emberite','frostsilver','stormiron','aetherite','umbral','astralite'];
 const names=['Copper','Iron','Cobalt','Argent','Emberite','Frostsilver','Stormiron','Aetherite','Umbral','Astralite'];
 const levels=[1,15,25,35,45,55,65,75,85,95];

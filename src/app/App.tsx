@@ -66,7 +66,7 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
     if (!fresh.length) return;
     soundEventSeen.current = fresh[fresh.length - 1]!.id;
     if (fresh.some((event) => event.type === 'level-up')) sound(760, .14, .07);
-    else if (fresh.some((event) => event.type === 'xp')) sound(460, .045, .025);
+    else if (fresh.some((event) => event.type === 'xp' || event.type === 'xp-batch')) sound(460, .045, .025);
     else if (fresh.length) sound(520, .05, .03);
   }, [feedbackEvents, appSettings.audio.muted, appSettings.audio.masterVolume]);
   const go = (page: Page) => { setScreen(page); mut((s) => { s.page = page; }); sound(300, .035, .035); };

@@ -701,7 +701,7 @@ Mire Bolt = 1.00× Water; Brood Chill = 1.25× Water + Chill 10% for 6s; Venom W
 **Target band:** 21–30  
 **Elite:** Graniteback Ram  
 **Dungeon:** Hollow Forge  
-**Boss:** {'name': 'Forgemaster Korr', 'style': 'Melee', 'dtype': 'Crush', 'profile': 'M-B', 'overrides': 'Crush +40; Water -18; Fire +22', 'phases': [('>40% HP', 'Hammer → Hammer → Furnace Slam → Tempered Guard → repeat'), ('≤40% HP', 'Furnace Slam → Molten Hammer → Hammer → repeat')], 'actions': 'Hammer = 1.00× Crush; Furnace Slam = 1.50× Crush + Burn 12% hit over 6s; Tempered Guard = self +10 pp Melee/Ranged Resistance for next 2 actions; Molten Hammer = 1.35× Crush + 0.35× Fire component (future hybrid hook; baseline may resolve as Crush+Fire components)', 'component': "Korr's Forge Sigil", 'unique': 'Forgeheart Maul upgrade component'}
+**Boss:** {'name': 'Forgemaster Korr', 'style': 'Melee', 'dtype': 'Crush', 'profile': 'M-B', 'overrides': 'Crush +40; Water -18; Fire +22', 'phases': [('>40% HP', 'Hammer → Hammer → Furnace Slam → Tempered Guard → repeat'), ('≤40% HP', 'Furnace Slam → Molten Hammer → Hammer → repeat')], 'actions': 'Hammer = 1.00× Crush; Furnace Slam = 1.50× Crush + Burn 12% hit over 6s; Tempered Guard = self +10 pp Melee/Ranged Resistance for next 2 actions; Molten Hammer = 1.35× Crush + 0.35× Fire component (resolves as separate absolute Crush and Fire multipliers)', 'component': "Korr's Forge Sigil", 'unique': 'Forgeheart Maul upgrade component'}
 
 The Tier follows the global normal → Elite → Dungeon flow.
 
@@ -729,7 +729,7 @@ The Tier follows the global normal → Elite → Dungeon flow.
 | Graniteback Ram | Granite Charge = 1.55× Crush; Quake = 1.20× Earth + Stun 1.0s |
 | Forge Thrall | Furnace Smash = 1.40× Crush + Burn 10% hit over 6s |
 | Cinder Smith | Molten Brand = 1.20× Fire + -8 pp Fire Resistance for 6s |
-| Forgemaster Korr | Hammer = 1.00× Crush; Furnace Slam = 1.50× Crush + Burn 12% hit over 6s; Tempered Guard = self +10 pp Melee/Ranged Resistance for next 2 actions; Molten Hammer = 1.35× Crush + 0.35× Fire component (future hybrid hook; baseline may resolve as Crush+Fire components) |
+| Forgemaster Korr | Hammer = 1.00× Crush; Furnace Slam = 1.50× Crush + Burn 12% hit over 6s; Tempered Guard = self +10 pp Melee/Ranged Resistance for next 2 actions; Molten Hammer = 1.35× Crush + 0.35× Fire component (resolves as separate absolute Crush and Fire multipliers) |
 
 ## Boss — Forgemaster Korr
 
@@ -748,7 +748,7 @@ The Tier follows the global normal → Elite → Dungeon flow.
 
 ### Boss action definitions
 
-Hammer = 1.00× Crush; Furnace Slam = 1.50× Crush + Burn 12% hit over 6s; Tempered Guard = self +10 pp Melee/Ranged Resistance for next 2 actions; Molten Hammer = 1.35× Crush + 0.35× Fire component (future hybrid hook; baseline may resolve as Crush+Fire components)
+Hammer = 1.00× Crush; Furnace Slam = 1.50× Crush + Burn 12% hit over 6s; Tempered Guard = self +10 pp Melee/Ranged Resistance for next 2 actions; Molten Hammer = 1.35× Crush + 0.35× Fire component (resolves as separate absolute Crush and Fire multipliers)
 
 ### Boss component
 

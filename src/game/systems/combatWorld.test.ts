@@ -1,5 +1,5 @@
 ﻿import { describe, expect, it } from 'vitest';
-import { advanceWithEvents, BOSS_COMPONENTS, COMBAT_AREAS, DUNGEONS, devForceCurrentEnemyDefeat, ENEMIES, evaluateCombatTierUnlocks, freshState, getCurrentPlayerBasicDamageType, getPlayerEvasions, getPlayerResistances, getStyleDamageMultiplier, getStyleMatchup, getStyleResistanceAdjustment, isTierUnlocked, loadState, MELEE_WEAPONS, OFFERINGS, setCombatTarget, startActivity, startDungeon, validateCombatContent, validateCombatRegistry, type ItemId } from '../game';
+import { advanceWithEvents, BOSS_COMPONENTS, COMBAT_AREAS, DUNGEONS, devForceCurrentEnemyDefeat, ENEMIES, evaluateCombatTierUnlocks, freshState, getCurrentPlayerBasicDamageType, getEnemyMinHit, getPlayerEvasions, getPlayerResistances, getStyleDamageMultiplier, getStyleMatchup, getStyleResistanceAdjustment, isTierUnlocked, loadState, MELEE_WEAPONS, OFFERINGS, setCombatTarget, startActivity, startDungeon, stopActivity, validateCombatContent, validateCombatRegistry, type ItemId } from '../game';
 import { FORGING_RECIPES } from '../content/smithing/forgingRecipes';
 import { HEAVY_ARMOR } from '../content/combat/heavyArmor';
 import { rollDirectDamage } from './combat/combatResolver';
@@ -37,7 +37,7 @@ describe('Phase 1 combat world',()=>{
     const cinder=ENEMIES['t5-cindermaw']!,decree=[...ENEMIES['t4-the-pale-castellan']!.sequence,...(ENEMIES['t4-the-pale-castellan']!.phases??[]).flatMap(x=>x.sequence)].find(x=>x.name==='Grave Decree')!,ward=[...ENEMIES['t2-fen-channeler']!.sequence,...(ENEMIES['t2-fen-channeler']!.phases??[]).flatMap(x=>x.sequence)].find(x=>x.name==='Silt Ward')!,barrage=ENEMIES['t7-skybreaker-raal']!.phases?.flatMap(x=>x.sequence).find(x=>x.name==='Tempest Barrage');
     expect(cinder.phases?.map(x=>x.thresholdPct)).toEqual([60,30]);
     expect(decree.resistanceDownTypes).toEqual(['Air','Fire','Water','Earth']);
-    expect(ward.selfResistanceScope).toBe('Melee');expect(ward.selfResistanceActions).toBe(2);
+    expect(ward.selfResistanceTypes).toEqual(['Slash','Stab','Crush']);expect(ward.selfResistanceActions).toBe(2);
     expect(barrage).toMatchObject({hits:3,separateHitRolls:true});
   });
 
@@ -66,6 +66,7 @@ describe('Phase 1 combat world',()=>{
   it('keeps pure buffs and pure status actions from inventing direct hits',()=>{
     const resolve=(id:string,name:string)=>{const state=freshState();const enemy=ENEMIES[id]!;state.combat.targetId=enemy.id;state.combat.enemyHp=enemy.maxHp;state.combat.sequenceIndex=enemy.sequence.findIndex(action=>action.name===name);state.combat.playerHp=1000;state.combat.playerTimer=90_000;state.combat.enemyTimer=1;state.activity='combat';state.combat.runState='active';return advanceWithEvents(state,1).state;};
     const guard=resolve('t3-forgemaster-korr','Tempered Guard');expect(guard.combat.playerHp).toBe(1000);expect(guard.combat.statuses.some(x=>x.type==='ResistanceUp'&&x.target==='enemy'&&x.remainingActions===2)).toBe(true);
+    const pale=resolve('t4-moon-priest','Pale Ward'),ward=pale.combat.statuses.find(x=>x.type==='ResistanceUp'&&x.target==='enemy');expect(pale.combat.playerHp).toBe(1000);expect(ward?.damageTypes).toEqual(['Air','Fire','Water','Earth']);expect(pale.combat.log[0]).toBe('Moon Priest uses Pale Ward.');expect(pale.combat.log[0]).not.toContain('miss');
     const venom=resolve('t8-prismcoil-serpent','Aether Venom');expect(venom.combat.playerHp).toBe(1000);expect(venom.combat.statuses.some(x=>x.type==='Poison'&&x.target==='player')).toBe(true);
   });
 
@@ -77,7 +78,39 @@ describe('Phase 1 combat world',()=>{
   it('schedules the queued action interval and uses a 20–100% direct-damage roll',()=>{
     const state=freshState();state.equipped.weapon='combat.weapon.melee.copper_sword';expect(setCombatTarget(state,'dust-rat')).toBe(true);state.combat.sequenceIndex=1;state.combat.enemyTimer=0;startActivity(state,'combat');expect(state.combat.enemyTimer).toBe(2250);
     state.combat.playerTimer=90_000;state.combat.enemyTimer=1;const after=advanceWithEvents(state,1).state;expect(after.combat.enemyTimer).toBe(3000);
-    expect(rollDirectDamage(100,1,1,()=>0)).toBe(20);expect(rollDirectDamage(100,1,1,()=>1)).toBe(100);
+    expect(rollDirectDamage(100,1,()=>0)).toBe(20);expect(rollDirectDamage(100,1,()=>1)).toBe(100);
+  });
+
+  it('keeps six authored resistance effects explicit and scoped',()=>{
+    const action=(enemy:string,name:string)=>Object.values(ENEMIES[enemy]!.actions).find(value=>value.name===name)!;
+    expect(action('t2-fen-channeler','Silt Ward')).toMatchObject({selfResistancePp:8,selfResistanceActions:2,selfResistanceTypes:['Slash','Stab','Crush']});
+    expect(action('t4-moon-priest','Pale Ward')).toMatchObject({selfResistancePp:8,selfResistanceActions:2,selfResistanceTypes:['Air','Fire','Water','Earth'],requiresHitRoll:false});
+    expect(action('t5-ember-guard','Heat Guard')).toMatchObject({selfResistancePp:10,selfResistanceActions:1,selfResistanceTypes:['Slash','Stab','Crush']});
+    expect(action('t4-moonbound-knight','Guard Break').resistanceDownTypes).toEqual(['Slash','Stab','Crush']);
+    expect(action('t9-citadel-reaper','Umbral Break').resistanceDownTypes).toEqual(['Slash','Stab','Crush']);
+    expect(action('t9-the-hollow-regent','Hollow Decree').resistanceDownTypes).toEqual(['Slash','Stab','Crush','Pierce','Puncture','Air','Fire','Water','Earth']);
+    expect(Object.values(ENEMIES).flatMap(enemy=>Object.values(enemy.actions)).some(value=>'selfResistanceScope' in value)).toBe(false);
+  });
+
+  it('clears encounter effects on normal kill, Dungeon transition, death, and manual leave',()=>{
+    const normal=freshState();normal.combat.statuses.push({id:'guard',type:'ResistanceUp',sourceId:'t3-forgemaster-korr',target:'enemy',remainingMs:9999,remainingActions:2,magnitude:10,damageTypes:['Slash']});devForceCurrentEnemyDefeat(normal);expect(normal.combat.statuses).toEqual([]);
+    const korr=freshState(),boss=ENEMIES['t3-forgemaster-korr']!;korr.combat.targetId=boss.id;korr.combat.enemyHp=boss.maxHp;korr.combat.sequenceIndex=boss.sequence.findIndex(action=>action.name==='Tempered Guard');korr.combat.enemyTimer=1;korr.combat.playerTimer=90000;korr.activity='combat';korr.combat.runState='active';const guarded=advanceWithEvents(korr,1).state;expect(guarded.combat.statuses.some(status=>status.sourceId===boss.id&&status.type==='ResistanceUp')).toBe(true);devForceCurrentEnemyDefeat(guarded);expect(guarded.combat.statuses).toEqual([]);expect(setCombatTarget(guarded,'road-wolf')).toBe(true);expect(guarded.combat.statuses).toEqual([]);
+    const dungeon=freshState();dungeon.skills.Attack.level=10;dungeon.equipped.weapon='combat.weapon.melee.copper_sword';dungeon.combatProgress.eliteFirstKills['ironjaw-boar']=true;startDungeon(dungeon,'t1-ruined-watch');dungeon.combat.statuses.push({id:'poison',type:'Poison',sourceId:'captain-veyr',target:'player',remainingMs:1000});startActivity(dungeon,'combat');devForceCurrentEnemyDefeat(dungeon);expect(dungeon.combat.statuses).toEqual([]);const next=advanceWithEvents(dungeon,3001).state;expect(next.combat.targetId).toBe('t1-tower-bowman');expect(next.combat.statuses).toEqual([]);
+    const death=freshState();death.combat.playerHp=1;death.combat.playerTimer=50000;death.combat.enemyTimer=50000;death.activity='combat';death.combat.runState='active';death.combat.statuses.push({id:'poison',type:'Poison',sourceId:'enemy',target:'player',remainingMs:2000,tickMs:1000,tickTimerMs:1000,stacks:2,remainingDamage:10});expect(advanceWithEvents(death,1000).state.combat.statuses).toEqual([]);
+    const leave=freshState();leave.activity='combat';leave.combat.runState='active';leave.combat.statuses.push({id:'chill',type:'Chill',sourceId:'enemy',target:'player',remainingMs:2000,magnitude:.2});stopActivity(leave);expect(leave.combat.statuses).toEqual([]);
+  });
+
+  it('uses derived 20 percent enemy minimum hits and absolute hybrid damage multipliers',()=>{
+    expect(getEnemyMinHit(ENEMIES['road-wolf']!)).toBe(2);expect(getEnemyMinHit(ENEMIES['t10-the-zenith-warden']!)).toBe(30);
+    const molten=Object.values(ENEMIES['t3-forgemaster-korr']!.actions).find(value=>value.name==='Molten Hammer')!;
+    expect(molten.damageComponents).toEqual([{type:'Crush',multiplier:1.35},{type:'Fire',multiplier:.35}]);
+    expect(rollDirectDamage(100,molten.damageComponents![0]!.multiplier,()=>0)).toBe(27);expect(rollDirectDamage(100,molten.damageComponents![1]!.multiplier,()=>0)).toBe(7);
+  });
+
+  it('restarts a Boss phase with its first action timer and emits Combat XP events',()=>{
+    const boss=ENEMIES['t5-cindermaw']!,phaseAction=boss.phases![1]!.sequence[0]!;const state=freshState();state.equipped.weapon='combat.weapon.melee.copper_sword';state.skills.Attack.level=100;state.combat.targetId=boss.id;state.combat.enemyHp=Math.floor(boss.maxHp*.3)+1;state.combat.playerTimer=1;state.combat.enemyTimer=123;state.combat.activePhaseIndex=1;state.combat.specialMode='Off';state.rng=1;state.activity='combat';state.combat.runState='active';const result=advanceWithEvents(state,1);
+    expect(result.state.combat.activePhaseIndex).toBe(2);expect(result.state.combat.sequenceIndex).toBe(0);expect(result.state.combat.enemyTimer).toBe(boss.intervalMs*(phaseAction.intervalMultiplier??1));expect(result.state.combat.enemyActionSerial).toBe(1);
+    expect(result.events.filter(event=>event.type==='xp-gained'&&['Attack','Hitpoints','Defence'].includes(event.skill))).toHaveLength(3);
   });
 
   it('executes documented late-tier element multipliers and per-element resistance overrides',()=>{
@@ -103,6 +136,7 @@ describe('Phase 1 combat world',()=>{
   it('rejects action records without explicit damage behavior and highlights the selected Sword type',()=>{
     const state=freshState();state.equipped.weapon='combat.weapon.melee.copper_sword';state.combat.pendingStance='Stab';expect(getCurrentPlayerBasicDamageType(state)).toBe('Stab');
     const broken=structuredClone(ENEMIES);(broken['road-wolf']!.sequence[0] as any).damageEnabled=undefined;expect(validateCombatContent(broken,COMBAT_AREAS).some(error=>error.includes('missing explicit damage behavior'))).toBe(true);
+    const invalidWard=structuredClone(ENEMIES);const pale=Object.values(invalidWard['t4-moon-priest']!.actions).find(action=>action.name==='Pale Ward')!;pale.selfResistanceTypes=[];expect(validateCombatContent(invalidWard,COMBAT_AREAS).some(error=>error.includes('invalid self resistance data'))).toBe(true);
   });
 
   it('migrates legacy Road Wolf trophy stacks into the T1 Beast Trophy',()=>{
