@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react';
-import { Badge, Bar, Button, Panel } from '../../../ui/primitives';
+﻿import { useMemo, useState } from 'react';
+import { Bar, Badge, Button, Panel } from '../../../ui/primitives';
 import { ItemMark } from '../../../ui/game/ItemDisplay';
 import { ScreenHeading, Stat } from '../../../ui/game/ScreenPrimitives';
 import { fmt, formatActionTime, formatDuration } from '../../../ui/game/formatters';
@@ -7,16 +7,86 @@ import { MINING_DEPOSITS, MINING_STAGE_MODEL, MINING_TOOLS, type DepositId, type
 import { getDepositStageDensity, getMiningPower, getMiningStrikeTime, getPrimaryExpectedQuantity } from '../../../game/systems/gameMath';
 import { ActionProgress } from '../../../ui/game/ActionProgress';
 import { canMineDeposit } from '../../../game/systems/mining/miningResolver';
-type Metrics={outputs:Partial<Record<ItemId,number>>;Mining:{xpHour:number}};
-export function MiningScreen({game:g,xp,maxXp,start,stop,select,equipTool,speedMultiplier=1,metrics}:{game:SaveState;xp:number;maxXp:number;start:()=>void;stop:()=>void;select:(id:DepositId)=>void;equipTool?:(item:ItemId)=>void;speedMultiplier?:number;metrics?:Metrics}){
- const [tier,setTier]=useState('All'),[category,setCategory]=useState('All'),[query,setQuery]=useState('');const active=g.activity==='mining',deposit=MINING_DEPOSITS[g.mining.deposit],runtime=g.mining.deposits[g.mining.deposit]!,stage=MINING_STAGE_MODEL[runtime.stageIndex]!,tool=MINING_TOOLS[(g.equipped.miningTool??'item.mining.worn_pickaxe') as keyof typeof MINING_TOOLS];
- const power=getMiningPower(tool.power,deposit.category==='Deep-Core'?(tool.effects.deepCorePowerMultiplier??1):1),strikeMs=getMiningStrikeTime(deposit.strikeMs,tool.speed),maxDensity=getDepositStageDensity(runtime.stageIndex,deposit.id),strikes=Math.ceil(runtime.densityRemaining/power),rate=metrics?.outputs[deposit.primary]??0;
- const deposits=useMemo(()=>Object.values(MINING_DEPOSITS).filter(d=>(tier==='All'||String(d.tier)===tier)&&(category==='All'||d.category===category)&&d.name.toLowerCase().includes(query.toLowerCase())),[tier,category,query]);
- const cycleMs=MINING_STAGE_MODEL.reduce((sum,_,i)=>sum+Math.ceil(getDepositStageDensity(i,deposit.id)/power)*strikeMs,0);
- return <div className="screen mining-screen" data-profession="mining"><ScreenHeading eyebrow="PROFESSION · UNDERGROUND" title="Mining" sub="Choose a deposit, read its strata, and work each seam down to the core." accent="mining"><Badge tone="level-badge">LEVEL {g.skills.Mining.level}</Badge></ScreenHeading>
-  <div className="mine-layout"><Panel className="deposit-rail" title="Deposits" action={<Badge>{Object.keys(MINING_DEPOSITS).length} SITES</Badge>}><div className="recipe-filters"><select aria-label="Deposit tier" value={tier} onChange={e=>setTier(e.target.value)}><option>All</option>{[1,2,3,4,5,6,7,8,9,10].map(x=><option key={x} value={x}>Tier {x}</option>)}</select><select aria-label="Deposit type" value={category} onChange={e=>setCategory(e.target.value)}><option>All</option>{['Ore','Quarry','Catalyst','Gem','Essence','Deep-Core'].map(x=><option key={x}>{x}</option>)}</select><input aria-label="Search deposits" placeholder="Search deposits" value={query} onChange={e=>setQuery(e.target.value)}/></div><div className="deposit-browser">{deposits.map(entry=>{const levelLocked=g.skills.Mining.level<entry.unlockLevel,toolLocked=!levelLocked&&!canMineDeposit(g,entry.id),locked=levelLocked||toolLocked||Boolean(entry.endgameGated),selected=entry.id===deposit.id;return <button className={`deposit-selected ${selected?'selected':''} ${locked?'locked':''}`} key={entry.id} onClick={()=>!locked&&select(entry.id)} disabled={locked} aria-pressed={selected}><span className="selection-edge"/><ItemMark id={entry.primary}/><div className="deposit-label"><b>{entry.name}</b><small>T{entry.tier} · {entry.category} · {entry.endgameGated?'Endgame requirement not yet available':levelLocked?`Mining ${entry.unlockLevel} required`:toolLocked?`${MINING_TOOLS[entry.requiredTool as keyof typeof MINING_TOOLS]?.name??'Required pickaxe'} required`:entry.resourceName}</small></div><Badge tone={locked?'missing':selected?'live':'ready'}>{entry.endgameGated?'ENDGAME':toolLocked?'TOOL':levelLocked?`LV ${entry.unlockLevel}`:selected?'ACTIVE':'READY'}</Badge></button>})}</div><div className="deposit-req"><div><span>REQUIRES</span><b>Mining {deposit.unlockLevel}</b></div><div><span>PICKAXE</span><b>{MINING_TOOLS[deposit.requiredTool as keyof typeof MINING_TOOLS]?.name??'—'}</b></div><div><span>YIELDS</span><b>{deposit.resourceName} ×{deposit.baseQuantity}</b></div><div><span>STRIKE</span><b>{(deposit.strikeMs/1000).toFixed(2)}s</b></div></div></Panel>
-   <Panel className={`mine-focus ${active?'is-active':''}`}><div className="focus-top"><div><span className="screen-overline">TIER {deposit.tier} · {deposit.category.toUpperCase()}</span><h2>{deposit.name}</h2></div><Badge tone={active?'live':''}>{active?'MINING':'READY'}</Badge></div><div className={`vein-art mining-impact ${deposit.category==='Quarry'?'stone-vein-art':''}`}><div className="cave-ridge ridge-a"/><div className="cave-ridge ridge-b"/><div className="ore-face"><i/><i/><i/><i/><i/></div><div className="ore-glint g1"/><div className="ore-glint g2"/><div className="vein-depth"><span>{deposit.resourceName.toUpperCase()}</span><b>{String(runtime.stageIndex+1).padStart(2,'0')} / 05</b></div><div className="vein-vignette"/></div>
-    <div className="stage-name-line"><div><span className="tiny-label">CURRENT LAYER</span><h3>{stage.name}</h3></div><div className="stage-reward"><span>EXPECTED PRIMARY</span><b><ItemMark id={deposit.primary}/> {getPrimaryExpectedQuantity(runtime.stageIndex,deposit.id).toFixed(2)}× {deposit.resourceName}</b></div></div><div className="bar-label"><span>Stage Density</span><b>{runtime.densityRemaining.toFixed(1)} <small>/ {maxDensity}</small></b></div><Bar value={runtime.densityRemaining} max={maxDensity} accent="copper" className="density-bar" label={`${strikes} strikes remaining`}/><div className="mine-action-progress"><div><span className="tiny-label">NEXT SWING</span><b>{active?formatActionTime(g.mining.timer):formatActionTime(strikeMs)}</b></div><ActionProgress active={active} remainingMs={g.mining.timer||strikeMs} durationMs={strikeMs} phaseKey={`${deposit.id}:${g.mining.strikes}`} speedMultiplier={speedMultiplier} label="Mining swing progress"/></div><div className="mine-controls"><div className="strike-readout"><span className={`pulse-dot ${active?'pulsing':''}`}/><div><b>{active?'Next strike':'Strike time'}</b><small>{formatActionTime(strikeMs)} · {power} power</small></div></div><Button tone="copper" onClick={active?stop:start}>{active?'Stop Mining':'Start Mining'}</Button></div><div className="stage-path">{MINING_STAGE_MODEL.map((item,index)=><div key={item.id} className={`stage-node ${index<runtime.stageIndex?'complete':''} ${index===runtime.stageIndex?'current':''}`}><div className="node-head"><span className="node-mark">{index<runtime.stageIndex?'✓':`0${index+1}`}</span><span className="node-join"/></div><b>{item.name}</b><small>×{getPrimaryExpectedQuantity(index,deposit.id).toFixed(2)} · {index<runtime.stageIndex?'cleared':index===runtime.stageIndex?'here now':'ahead'}</small></div>)}</div></Panel>
-   <Panel className="mine-inspector" title="Field Readings"><div className="tool-card"><div className="tool-insignia"><ItemMark id={tool.item}/></div><div><span className="tiny-label">EQUIPPED PICKAXE</span><b>{tool.name}</b><small>Power {tool.power} · Speed +{Math.round(tool.speed*100)}% · {tool.effect}</small></div><Badge tone="equipped">EQUIPPED</Badge></div><div className="stat-rows"><Stat label="Mining Power" value={`${power}`}/><Stat label="Final strike time" value={formatActionTime(strikeMs)}/><Stat label="Primary extra quantity" value={`${tool.extraQuantityChance+(tool.effects.primaryExtraPp??0)} pp`}/><Stat label={`${deposit.resourceName} / hour`} value={rate?Math.round(rate).toLocaleString():'Estimating…'} accent="copper-text"/><Stat label="Mining XP / hour" value={metrics?.Mining.xpHour?Math.round(metrics.Mining.xpHour).toLocaleString():'Estimating…'} accent="xp-text"/><Stat label="Next Mining level ETA" value={metrics?.Mining.xpHour?formatDuration(Math.max(0,maxXp-xp)/metrics.Mining.xpHour*3_600_000):'Estimating…'}/><Stat label="Stage strikes" value={`${strikes} remaining`}/><Stat label="Full stage cycle" value={`~${formatDuration(cycleMs)}`}/><Stat label="Completed cycles" value={fmt(runtime.cyclesCompleted)}/></div><div className="xp-block"><div><span>Mining XP</span><b>Lv. {g.skills.Mining.level}</b></div><Bar value={xp} max={maxXp} accent="xp"/><small>{fmt(xp)} / {fmt(maxXp)} XP to next level</small></div>{equipTool&&<div className="tool-upgrades">{Object.values(MINING_TOOLS).filter(t=>t.item!==tool.item&&(g.bank[t.item]??0)>0).map(t=><Button key={t.item} tone="quiet" onClick={()=>equipTool(t.item)}>{t.name} · Power {t.power}</Button>)}</div>}</Panel>
-  </div></div>;
+
+type Metrics = { outputs: Partial<Record<ItemId, number>>; Mining: { xpHour: number } };
+const CATEGORIES = ['All', 'Ore', 'Quarry', 'Catalyst', 'Gem', 'Essence', 'Deep-Core'] as const;
+
+export function MiningScreen({ game: g, xp, maxXp, start, stop, select, equipTool, speedMultiplier = 1, metrics }: {
+  game: SaveState; xp: number; maxXp: number; start: () => void; stop: () => void; select: (id: DepositId) => void;
+  equipTool?: (item: ItemId) => void; speedMultiplier?: number; metrics?: Metrics;
+}) {
+  const [category, setCategory] = useState<(typeof CATEGORIES)[number]>('All');
+  const [query, setQuery] = useState('');
+  const [toolPickerOpen, setToolPickerOpen] = useState(false);
+  const [lockedReason, setLockedReason] = useState('');
+  const active = g.activity === 'mining';
+  const deposit = MINING_DEPOSITS[g.mining.deposit];
+  const runtime = g.mining.deposits[g.mining.deposit]!;
+  const stage = MINING_STAGE_MODEL[runtime.stageIndex]!;
+  const tool = MINING_TOOLS[(g.equipped.miningTool ?? 'item.mining.worn_pickaxe') as keyof typeof MINING_TOOLS];
+  const power = getMiningPower(tool.power, deposit.category === 'Deep-Core' ? (tool.effects.deepCorePowerMultiplier ?? 1) : 1);
+  const strikeMs = getMiningStrikeTime(deposit.strikeMs, tool.speed);
+  const maxDensity = getDepositStageDensity(runtime.stageIndex, deposit.id);
+  const strikes = Math.ceil(runtime.densityRemaining / power);
+  const rate = metrics?.outputs[deposit.primary] ?? 0;
+  const deposits = useMemo(() => Object.values(MINING_DEPOSITS).filter(entry =>
+    (category === 'All' || entry.category === category) &&
+    `${entry.name} ${entry.resourceName}`.toLowerCase().includes(query.toLowerCase())), [category, query]);
+  const cycleMs = MINING_STAGE_MODEL.reduce((sum, _, index) =>
+    sum + Math.ceil(getDepositStageDensity(index, deposit.id) / power) * strikeMs, 0);
+
+  const inspectDeposit = (entry: typeof deposit) => {
+    const levelLocked = g.skills.Mining.level < entry.unlockLevel;
+    const toolLocked = !levelLocked && !canMineDeposit(g, entry.id);
+    if (entry.endgameGated) return setLockedReason('This deposit requires an endgame unlock that is not available yet.');
+    if (levelLocked) return setLockedReason(`Mining ${entry.unlockLevel} is required to work this deposit.`);
+    if (toolLocked) return setLockedReason(`${MINING_TOOLS[entry.requiredTool as keyof typeof MINING_TOOLS]?.name ?? 'A stronger pickaxe'} is required.`);
+    setLockedReason('');
+    select(entry.id);
+  };
+
+  return <div className="screen mining-screen" data-profession="mining">
+    <ScreenHeading eyebrow="PROFESSION / GEOLOGY" title="Mining" sub="Choose a seam, read its strata, and work each layer down to the core." accent="mining" level={g.skills.Mining.level} xp={xp} maxXp={maxXp} />
+    <div className="mine-browser-tools">
+      <div className="mine-category-nav" role="tablist" aria-label="Deposit materials">{CATEGORIES.map(item => <button key={item} type="button" role="tab" aria-selected={category === item} className={category === item ? 'selected' : ''} onClick={() => setCategory(item)}>{item === 'All' ? 'All Deposits' : item}</button>)}</div>
+      <label className="mine-search"><span className="sr-only">Search deposits</span><input value={query} onChange={event => setQuery(event.target.value)} placeholder="Find a deposit or resource" /></label>
+    </div>
+    <div className="mine-layout">
+      <Panel className="deposit-rail" title={category === 'All' ? 'Deposit Library' : `${category} deposits`} action={<Badge>{deposits.length} sites</Badge>}>
+        {lockedReason && <div className="mine-lock-note" role="status">{lockedReason}</div>}
+        <div className="deposit-browser">{deposits.map(entry => {
+          const levelLocked = g.skills.Mining.level < entry.unlockLevel;
+          const toolLocked = !levelLocked && !canMineDeposit(g, entry.id);
+          const locked = levelLocked || toolLocked || Boolean(entry.endgameGated);
+          const selected = entry.id === deposit.id;
+          return <button key={entry.id} type="button" className={`deposit-selected ${selected ? 'selected' : ''} ${locked ? 'locked' : ''}`} onClick={() => inspectDeposit(entry)} aria-pressed={selected}>
+            <span className="selection-edge" /><ItemMark id={entry.primary} />
+            <span className="deposit-label"><b>{entry.name}</b><small>{entry.resourceName} / T{entry.tier} / {entry.endgameGated ? 'Endgame gated' : levelLocked ? `Mining ${entry.unlockLevel} required` : toolLocked ? `${MINING_TOOLS[entry.requiredTool as keyof typeof MINING_TOOLS]?.name ?? 'Pickaxe'} required` : 'Ready to mine'}</small></span>
+            <Badge tone={locked ? 'missing' : selected ? 'live' : 'ready'}>{entry.endgameGated ? 'GATED' : toolLocked ? 'TOOL' : levelLocked ? `LV ${entry.unlockLevel}` : selected ? 'ACTIVE' : 'READY'}</Badge>
+          </button>;
+        })}</div>
+        <div className="deposit-req"><div><span>REQUIRES</span><b>Mining {deposit.unlockLevel}</b></div><div><span>PICKAXE</span><b>{MINING_TOOLS[deposit.requiredTool as keyof typeof MINING_TOOLS]?.name ?? '-'}</b></div><div><span>YIELDS</span><b>{deposit.resourceName} x{deposit.baseQuantity}</b></div><div><span>STRIKE</span><b>{(deposit.strikeMs / 1000).toFixed(2)}s</b></div></div>
+      </Panel>
+
+      <Panel className={`mine-focus ${active ? 'is-active' : ''}`}>
+        <div className="focus-top"><div><span className="screen-overline">{deposit.category} / Tier {deposit.tier}</span><h2>{deposit.name}</h2><small>{deposit.resourceName} deposit</small></div><Badge tone={active ? 'live' : ''}>{active ? 'MINING' : 'READY'}</Badge></div>
+        <div className={`vein-art mining-impact ${deposit.category === 'Quarry' ? 'stone-vein-art' : ''}`} aria-label={`${deposit.resourceName} exposed in the mine face`}><div className="cave-ridge ridge-a" /><div className="cave-ridge ridge-b" /><div className="ore-face"><i /><i /><i /><i /><i /></div><div className="ore-glint g1" /><div className="ore-glint g2" /><div className="vein-depth"><span>{deposit.resourceName.toUpperCase()}</span><b>Layer {runtime.stageIndex  + 1} / 5</b></div><div className="vein-vignette" /></div>
+        <div className="stage-name-line"><div><span className="tiny-label">CURRENT LAYER</span><h3>{stage.name}</h3></div><div className="stage-reward"><span>EXPECTED YIELD</span><b><ItemMark id={deposit.primary} /> {getPrimaryExpectedQuantity(runtime.stageIndex, deposit.id).toFixed(2)} x {deposit.resourceName}</b></div></div>
+        <div className="bar-label"><span>Rock density</span><b>{runtime.densityRemaining.toFixed(1)} <small>/ {maxDensity}</small></b></div><Bar value={runtime.densityRemaining} max={maxDensity} accent="copper" className="density-bar" label={`${strikes} strikes remaining`} />
+        <div className="mine-action-progress"><div><span className="tiny-label">NEXT SWING</span><b>{active ? formatActionTime(g.mining.timer) : formatActionTime(strikeMs)}</b></div><ActionProgress active={active} remainingMs={g.mining.timer || strikeMs} durationMs={strikeMs} phaseKey={`${deposit.id}:${g.mining.strikes}`} speedMultiplier={speedMultiplier} label="Mining swing progress" /></div>
+        <div className="mine-controls"><div className="strike-readout"><span className={`pulse-dot ${active ? 'pulsing' : ''}`} /><div><b>{active ? 'Next strike' : 'Strike time'}</b><small>{formatActionTime(strikeMs)} / {power} power</small></div></div><Button tone="copper" onClick={active ? stop : start}>{active ? 'Stop Mining' : 'Start Mining'}</Button></div>
+        <div className="stage-path" aria-label="Excavation depth">{MINING_STAGE_MODEL.map((item, index) => <div key={item.id} className={`stage-node ${index  < runtime.stageIndex  ? 'complete' : ''} ${index=== runtime.stageIndex  ? 'current' : ''}`}><div className="node-head"><span className="node-mark">{index  < runtime.stageIndex  ? 'DONE' : `0${index  + 1}`}</span><span className="node-join" /></div><b>{item.name}</b><small>{getPrimaryExpectedQuantity(index, deposit.id).toFixed(2)} x / {index  < runtime.stageIndex  ? 'cleared' : index=== runtime.stageIndex  ? 'working' : 'ahead'}</small></div>)}</div>
+      </Panel>
+
+      <Panel className="mine-inspector" title="Mine Operations">
+        <div className="tool-card"><div className="tool-insignia"><ItemMark id={tool.item} /></div><div><span className="tiny-label">EQUIPPED PICKAXE</span><b>{tool.name}</b><small>Power {tool.power} / Speed +{Math.round(tool.speed * 100)}% / {tool.effect}</small></div><Badge tone="equipped">EQUIPPED</Badge></div>
+        {equipTool && <div className="tool-picker"><Button tone="quiet" aria-expanded={toolPickerOpen} onClick={() => setToolPickerOpen(!toolPickerOpen)}>Pickaxe slot / {toolPickerOpen ? 'Close' : 'Change'}</Button>{toolPickerOpen && <div className="tool-upgrades" role="group" aria-label="Choose owned pickaxe">{Object.values(MINING_TOOLS).filter(candidate => (g.bank[candidate.item] ?? 0) > 0 && candidate.item !== tool.item).map(candidate => <Button key={candidate.item} tone="quiet" onClick={() => { equipTool(candidate.item); setToolPickerOpen(false); }}>{candidate.name} / Power {candidate.power}</Button>)}</div>}</div>}
+        <div className="mine-operations-grid">
+          <section><h3>Yield</h3><Stat label={`${deposit.resourceName} per hour`} value={rate ? Math.round(rate).toLocaleString() : 'Estimating'} accent="copper-text" /><Stat label="Mining XP per hour" value={metrics?.Mining.xpHour ? Math.round(metrics.Mining.xpHour).toLocaleString() : 'Estimating'} accent="xp-text" /><Stat label="Next level" value={metrics?.Mining.xpHour ? formatDuration(Math.max (0, maxXp - xp) / metrics.Mining.xpHour * 3_600_000) : 'Estimating'} /></section>
+          <section><h3>Excavation</h3><Stat label="Mining power" value={`${power}`} /><Stat label="Strikes left" value={`${strikes}`} /><Stat label="Stage time" value={formatDuration(strikes * strikeMs)} /><Stat label="Full deposit cycle" value={`~${formatDuration(cycleMs)}`} /><Stat label="Cycles completed" value={fmt(runtime.cyclesCompleted)} /></section>
+          <section><h3>Tool effect</h3><Stat label="Strike interval" value={formatActionTime(strikeMs)} /><Stat label="Extra yield chance" value={`${tool.extraQuantityChance + (tool.effects.primaryExtraPp ?? 0)} pp`} /></section>
+        </div>
+      </Panel>
+    </div>
+  </div>;
 }

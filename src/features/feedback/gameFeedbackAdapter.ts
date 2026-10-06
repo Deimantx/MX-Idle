@@ -10,7 +10,7 @@ export function adaptGameEvents(events: GameEvent[], nextId: () => number, occur
       xpBatchAdded=true;
       return [{id:nextId(),type:'xp-batch',gains:xpGains,occurredAt}];
     }
-    if (event.type === 'level-up') return [{ id: nextId(), type: 'level-up', skillId: event.skill, oldLevel: Math.max(1, event.level - 1), newLevel: event.level, occurredAt }];
+    if (event.type === 'level-up') return [{ id: nextId(), type: 'level-up', skillId: event.skill, oldLevel: Math.max (1, event.level - 1), newLevel: event.level, occurredAt }];
     if (event.type === 'item-gained') return [{ id: nextId(), type: 'item', itemId: event.item, amount: event.amount, source: event.source, occurredAt }];
     if (event.type === 'gold-gained') return [{ id: nextId(), type: 'gold', amount: event.amount, source: event.source, occurredAt }];
     if (event.type === 'unlock') return [{ id: nextId(), type: 'system', message: event.label, tone: 'unlock', occurredAt }];

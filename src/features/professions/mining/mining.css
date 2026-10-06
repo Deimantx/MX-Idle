@@ -449,3 +449,30 @@
 .mine-action-progress { margin:calc(12px * var(--ui-scale)) 0 0; }
 .vein-art.mining-impact { animation: vein-impact 220ms ease-out; }
 @keyframes vein-impact { 0% { transform:translateX(0); filter:brightness(1); } 28% { transform:translateX(-1px); filter:brightness(1.18); } 60% { transform:translateX(1px); } 100% { transform:translateX(0); filter:brightness(1); } }
+.mine-layout {
+  grid-template-columns: minmax(300px, .72fr) minmax(0, 2.28fr);
+  align-items: start;
+}
+.mine-inspector { grid-column: 1 / -1; }
+.mine-operations-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+.mine-operations-grid section { min-width:0; padding:10px 12px; border-left:2px solid #73543a; background:linear-gradient(90deg,#24231f,#1a1f20); }
+.mine-operations-grid h3 { margin:0 0 9px; color:#d0a271; font:16px Marcellus,serif; }
+.mine-operations-grid .stat-row { padding:5px 0; font-size:12px; }
+.deposit-browser { max-height:min(42vh,460px); min-height:0; }
+.deposit-req { grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px 16px; margin-top:auto; }
+.vein-art { height:clamp(170px,17vh,230px); }
+.mine-focus { padding-block:12px; }
+.stage-path { margin-top:11px; padding-top:9px; }
+.mine-browser-tools { margin-bottom:10px; }
+.mine-category-nav button { min-height:34px; font-size:12px; }
+.mine-search input { min-height:36px; font-size:13px; }
+.deposit-label b { font-size:13px; }
+.deposit-label small { font-size:11px; }
+.stage-node b { font-size:11px; }
+.stage-node small { font-size:10px; }
+.mine-controls { margin-top:8px; }
+@media (max-width: 1100px) {
+  .mine-layout { grid-template-columns:minmax(0,1fr); }
+  .mine-inspector { grid-column:1; }
+  .mine-operations-grid { grid-template-columns:1fr; }
+}

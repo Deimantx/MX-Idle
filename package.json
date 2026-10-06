@@ -14,6 +14,7 @@
     "qa": "node tests/phase1-audit-smoke.mjs",
     "qa:professions": "node tests/fishing-cooking-flow.mjs",
     "typecheck": "tsc -b --pretty false",
+    "check:text": "node scripts/check-text-encoding.mjs",
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {

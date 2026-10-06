@@ -3,15 +3,15 @@ import { useEffect, useState } from 'react';
 type Props = { active: boolean; remainingMs: number; durationMs: number; phaseKey: string | number; speedMultiplier?: number; label?: string; tone?: string };
 
 export function interpolateProgress(remainingMs: number, elapsedMs: number, durationMs: number, speedMultiplier = 1) {
-  const duration = Math.max(1, durationMs);
-  const remaining = Math.max(0, Math.min(duration, remainingMs - Math.max(0, elapsedMs) * Math.max(0, speedMultiplier)));
-  return Math.max(0, Math.min(1, 1 - remaining / duration));
+  const duration = Math.max (1, durationMs);
+  const remaining = Math.max (0, Math.min(duration, remainingMs - Math.max (0, elapsedMs) * Math.max (0, speedMultiplier)));
+  return Math.max (0, Math.min(1, 1 - remaining / duration));
 }
 
 export function ActionProgress({ active, remainingMs, durationMs, phaseKey, speedMultiplier = 1, label = 'Action progress', tone = 'copper' }: Props) {
   const [progress, setProgress] = useState(0);
   useEffect(() => {
-    const duration = Math.max(1, durationMs);
+    const duration = Math.max (1, durationMs);
     let frame = 0, last = 0;
     const snapshotAt = performance.now();
     const draw = (now: number) => {

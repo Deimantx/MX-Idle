@@ -1,71 +1,44 @@
-.dev-panel {
-  position: fixed;
-  right: calc(10px * var(--ui-scale));
-  bottom: calc(82px * var(--ui-scale));
-  z-index: 15;
-
-}
-
-.dev-panel>button {
-  background: #442d23;
-  border: 1px solid #795339;
-  border-radius: calc(4px * var(--ui-scale));
-  padding: calc(5px * var(--ui-scale)) calc(8px * var(--ui-scale));
-  color: #e3ab78;
-  font-size: calc(8px * var(--ui-scale) * var(--text-scale));
-  letter-spacing: 1px;
-  cursor: pointer;
-
-}
-
-.dev-controls {
-  position: absolute;
-  right: 0;
-  bottom: calc(29px * var(--ui-scale));
-  width: min(calc(440px * var(--ui-scale)), calc(100vw - 24px));
-  max-height: calc(100dvh - 130px);
-  overflow: auto;
-  overscroll-behavior: contain;
-  padding: calc(11px * var(--ui-scale));
-  background: #171d1f;
-  border: 1px solid #525b59;
-  border-radius: calc(6px * var(--ui-scale));
-  box-shadow: 0 calc(8px * var(--ui-scale)) calc(25px * var(--ui-scale)) #000b;
-
-}
-
-.dev-controls>b {
-  display: block;
-  font-size: calc(10px * var(--ui-scale) * var(--text-scale));
-  margin-bottom: calc(8px * var(--ui-scale));
-
-}
-
-.dev-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: calc(4px * var(--ui-scale));
-  margin: calc(5px * var(--ui-scale)) 0;
-
-}
-
-.dev-row select {
-  max-width: 100%;
-  min-width: 0;
-}
-
-.dev-row .game-button {
-  font-size: calc(8px * var(--ui-scale) * var(--text-scale));
-  min-height: calc(27px * var(--ui-scale));
-  gap: calc(4px * var(--ui-scale));
-  padding: 0 calc(6px * var(--ui-scale));
-  flex: 1;
-
-}
-
-.dev-controls>.game-button {
-  width: 100%;
-  min-height: calc(29px * var(--ui-scale));
-  margin-top: calc(4px * var(--ui-scale));
-
+.dev-panel { position: fixed; right: calc(10px * var(--ui-scale)); bottom: calc(82px * var(--ui-scale)); z-index: 850; }
+.dev-panel>button { background: #442d23; border: 1px solid #795339; border-radius: 5px; padding: 6px 10px; color: #e3ab78; font-size: 11px; letter-spacing: 1px; cursor: pointer; }
+.dev-panel.open { position: fixed; inset: 0; display: grid; place-items: center; padding: 3vh 3vw; }
+.dev-panel.open::before { content: ''; position: fixed; inset: 0; background: #090b0cbb; backdrop-filter: blur(2px); z-index: 0; }
+.dev-panel.open > button { display:none; }
+.dev-controls { position:relative;z-index:1;width: min(1180px,94vw); height: min(840px,92dvh); display: grid; grid-template-columns: 180px minmax(0,1fr); grid-template-rows:auto auto minmax(0,1fr); gap: 0 18px; overflow: hidden; padding: 18px; background: linear-gradient(155deg,#23292b,#171c1e 65%); border: 1px solid #515a58; border-radius: 10px; box-shadow: 0 24px 70px #000b,inset 0 1px #ffffff12; }
+.dev-workspace-head { grid-column: 1/-1; display:flex; align-items:center; justify-content:space-between; padding-bottom:14px; border-bottom:1px solid #3c4445; }
+.dev-workspace-head div { display:grid; gap:4px; }
+.dev-workspace-head b { font-size:18px; }
+.dev-workspace-head small { color:#a0a8a2; font-size:12px; }
+.dev-workspace-head>button { width:36px;height:36px;color:#d8d6ce;background:#202729;border:1px solid #485153;border-radius:5px;font-size:22px;cursor:pointer; }
+.dev-nav { display:flex; flex-direction:column; gap:3px; padding:12px 0; border-right:1px solid #343c3e; }
+.dev-nav button { min-height:34px;padding:6px 10px;color:#b9beb8;text-align:left;background:transparent;border:1px solid transparent;border-radius:4px;cursor:pointer; }
+.dev-nav button:hover { background:#262d2f; }
+.dev-nav button.selected { color:#efce9f;background:#302b24;border-color:#69563e;box-shadow:inset 2px 0 #d18a52; }
+.dev-nav button:focus-visible,.dev-workspace-head>button:focus-visible { outline:2px solid #d6b870;outline-offset:2px; }
+.dev-active-page { min-width:0; overflow:auto; overscroll-behavior:contain; padding:12px 4px 8px 2px; }
+.dev-active-page h2 { margin:0 0 14px;font-size:17px; }
+.dev-active-page p { color:#aeb4ac;font-size:13px; }
+.dev-overview-actions { display:flex;flex-wrap:wrap;gap:8px; }
+.dev-row { display:flex;flex-wrap:wrap;align-items:end;gap:8px;margin:0 0 13px;padding:12px;background:#1a2022;border:1px solid #333c3e;border-radius:6px; }
+.dev-row select,.dev-row input { max-width:100%;min-width:150px;min-height:34px;padding:5px 8px;color:#e0e0d7;background:#14191b;border:1px solid #40494b;border-radius:4px; }
+.dev-row label { display:grid;gap:4px;color:#aab0a9;font-size:11px; }
+.dev-row .game-button { min-height:34px; }
+.dev-controls[data-section="Overview"] .dev-row { display:none; }
+.dev-controls[data-section]:not([data-section="Overview"]) .dev-active-page>p,.dev-controls[data-section]:not([data-section="Overview"]) .dev-overview-actions { display:none; }
+.dev-controls[data-section="Player"] .dev-row:not([data-dev-section~="Player"]),
+.dev-controls[data-section="Inventory"] .dev-row:not([data-dev-section~="Inventory"]),
+.dev-controls[data-section="Mining"] .dev-row:not([data-dev-section~="Mining"]),
+.dev-controls[data-section="Smithing"] .dev-row:not([data-dev-section~="Smithing"]),
+.dev-controls[data-section="Fishing"] .dev-row:not([data-dev-section~="Fishing"]),
+.dev-controls[data-section="Cooking"] .dev-row:not([data-dev-section~="Cooking"]),
+.dev-controls[data-section="Equipment"] .dev-row:not([data-dev-section~="Equipment"]),
+.dev-controls[data-section="Combat"] .dev-row:not([data-dev-section~="Combat"]),
+.dev-controls[data-section="Simulation"] .dev-row:not([data-dev-section~="Simulation"]),
+.dev-controls[data-section="Save"] .dev-row { display:none; }
+.dev-controls[data-section="Save"] .game-button { margin-top:0; }
+@media(max-width:700px) {
+ .dev-panel.open { padding:0; }
+ .dev-controls { width:100%;height:100dvh;border-radius:0;grid-template-columns:1fr;grid-template-rows:auto auto minmax(0,1fr);padding:12px; }
+ .dev-workspace-head { grid-column:1; }
+ .dev-nav { flex-direction:row;overflow:auto;border-right:0;border-bottom:1px solid #343c3e;padding:8px 0; }
+ .dev-nav button { flex:none; }
 }

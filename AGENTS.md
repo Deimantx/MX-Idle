@@ -220,3 +220,15 @@ A player-facing feature is done only when applicable requirements are satisfied:
 When choosing between decoration and clarity, choose clarity.
 When choosing between another asset and a reusable design-system solution, prefer the reusable solution unless the asset materially improves the game world.
 When choosing between flashy and premium, choose premium.
+
+## UI integrity and text encoding rules
+
+### Mojibake is forbidden
+Player-visible text must never contain broken encoding or mojibake, including corrupted UTF-8 sequences such as `Ã‚`, `Ãƒ`, `Ã¢`, `ï¿½`, or `�` and related variants. Check screen text, buttons, tooltips, item descriptions, labels, headings, notifications, DevTools copy, generated UI strings, and player-facing instructions.
+
+All source and text files must be valid UTF-8. Prefer ordinary ASCII punctuation when it reads naturally. Use Unicode punctuation only intentionally and verify it in the browser. Do not copy corrupted punctuation from old source or terminal output; repair it when found.
+
+Before finishing player-facing work, search changed files and relevant `src/` strings for suspicious encoding, inspect matches, fix corrupted text, and verify the rendered interface in a browser. TypeScript compiling is not proof that text is valid.
+
+### One game, distinct gameplay interfaces
+Shared design tokens and components do not require shared screen layouts. Before redesigning a major system, identify its gameplay fantasy, primary decision, browseable content, active progress, optimization information, and distinct visual motif. Reuse small primitives such as buttons, panels, slots, badges, tooltips, progress bars, and stat rows. Do not copy the same tier rail, filter bar, card list, inspector placement, or three-column blueprint across unrelated systems. If two systems play differently, they must not look like simple reskins of one screen template.

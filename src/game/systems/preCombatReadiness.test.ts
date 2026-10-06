@@ -1,4 +1,4 @@
-﻿import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { activeSequence, advanceWithEvents, canEquip, canMineDeposit, COMBAT_AREAS, ENEMIES, freshState, getPlayerAttackInterval, getPlayerResistances, getWeaponSpecial, loadState, MELEE_WEAPONS, MINING_DEPOSITS, SAVE_KEY, selectDeposit, setCombatTarget, SMELTING_RECIPES, startActivity, validateCoreContent } from '../game';
 
 describe('pre-combat expansion readiness', () => {

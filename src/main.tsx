@@ -16,6 +16,7 @@ import './ui/overlays/overlays.css';
 import './features/settings/settings.css';
 import './features/devtools/devtools.css';
 import './styles/responsive.css';
+import './ui/game/gameplay-layout.css';
 import './features/profiles/profiles.css';
 
 const initialSettings = loadAppSettings();

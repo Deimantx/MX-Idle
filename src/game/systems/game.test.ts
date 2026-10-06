@@ -1,4 +1,4 @@
-﻿import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { advance, advanceWithEvents, damageAfterResistance, estimateForgeCompletion, freshState, hitChance, loadState, ITEMS, MINING_DEPOSITS, MINING_STAGE_MODEL, FORGING_RECIPES, SMELTING_RECIPES, PROVISIONAL_FIRST_SLICE_COMBAT_VALUES, SAVE_KEY, selectDeposit, setCombatTarget, stageDensity, stageStrikes, startActivity, stopActivity, smithingActionTime, type SaveState } from '../game';
 import { getCoreMaterialChance, getMiningPower, getPrimaryExpectedQuantity, resolvePrimaryQuantity } from './gameMath';
 import { MELEE_WEAPONS } from '../content/combat/meleeWeapons';
@@ -10,7 +10,7 @@ describe('Mining content and simulation', () => {
   it('resolves each active deposit and smithing recipe through registered item IDs', () => {
     for (const deposit of Object.values(MINING_DEPOSITS)) {
       expect(ITEMS[deposit.primary]).toBeDefined(); expect(ITEMS[deposit.requiredTool]).toBeDefined(); expect(deposit.unlockLevel).toBeGreaterThan(0);
-      for(const item of [deposit.structuralItem,deposit.coreItem,...(deposit.gemPool??[]),...(deposit.additionalDrops??[]).map(drop=>drop.item)].filter(Boolean))expect(ITEMS[item!]).toBeDefined();
+      for(const item of [deposit.structuralItem,deposit.coreItem,...(deposit.gemPool ?? []),...(deposit.additionalDrops ?? []).map(drop=>drop.item)].filter(Boolean))expect(ITEMS[item!]).toBeDefined();
     }
     for (const recipe of Object.values(SMELTING_RECIPES)) {
       expect(ITEMS[recipe.output.item]).toBeDefined(); for (const input of recipe.inputs) expect(ITEMS[input.item]).toBeDefined();
@@ -140,7 +140,7 @@ describe('Combat compatibility', () => {
   it('keeps deterministic combat and awards namespaced trophies', () => {
     const s = freshState(); s.skills.Attack.level = 5; s.equipped.weapon = SWORD; s.equipped.head = HELM; startActivity(s, 'combat');
     const a = advance(s, 60_000), b = advance(s, 60_000);
-    expect(a.rng).toBe(b.rng); expect(a.combat.kills).toBeGreaterThan(0); expect(a.bank[TROPHY]??0).toBeLessThanOrEqual(a.combat.kills);
+    expect(a.rng).toBe(b.rng); expect(a.combat.kills).toBeGreaterThan(0); expect(a.bank[TROPHY] ?? 0).toBeLessThanOrEqual(a.combat.kills);
     expect(a.gold).toBe(a.combat.kills * PROVISIONAL_FIRST_SLICE_COMBAT_VALUES.gold); expect(a.skills.Attack.xp).toBeGreaterThan(0);
   });
   it('reveals the Ironjaw Boar after each normal enemy has been defeated', () => {
@@ -166,7 +166,7 @@ describe('Persistence and offline parity', () => {
   });
   it('round-trips current saves and safely falls back from corrupt JSON', () => {
     const original = freshState(1000); original.skills.Mining.xp = 27; original.bank[ORE] = 19; original.mining.stage = 2; original.mining.density = 13;
-    original.mining.deposits[original.mining.deposit]!.stageIndex = 2; original.mining.deposits[original.mining.deposit]!.densityRemaining = 13;
+    original.mining.deposits[original.mining.deposit]!.stageIndex= 2; original.mining.deposits[original.mining.deposit]!.densityRemaining = 13;
     const loaded = loadState(JSON.stringify({ version: 3, savedAt: 1000, state: original }), 1000).state;
     expect(loaded.skills.Mining.xp).toBe(27); expect(loaded.bank[ORE]).toBe(19); expect(loaded.mining).toMatchObject({ stage: 2, density: 13 });
     expect(loadState('{broken').fresh).toBe(true); expect(SAVE_KEY).toBe('mx-idle-save-v6');

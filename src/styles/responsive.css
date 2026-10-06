@@ -776,7 +776,6 @@ html[data-scale-tier="large"] .smithing-layout.forging-layout {
   grid-template-columns: minmax(0,1fr);
 }
 html[data-scale-tier="large"] .game-shell { min-height:100dvh; }
-html[data-scale-tier="large"] .deposit-rail { display:none; }
 html[data-scale-tier="large"] .mine-focus { grid-row:1; }
 html[data-scale-tier="large"] .mine-inspector,
 html[data-scale-tier="large"] .combat-intel { grid-column:auto; }

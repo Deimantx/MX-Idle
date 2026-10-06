@@ -1,4 +1,4 @@
-﻿import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { freshState } from '../state/initialState';
 import { startActivity } from '../systems/simulation';
 import { createProfile, deleteProfile, initializeProfiles, loadProfile, profileSaveKey, readProfileIndex, renameProfile, saveProfile } from './profileStorage';
@@ -23,11 +23,11 @@ describe('three save profiles', () => {
     initializeProfiles();
     createProfile(1, '  Rowan  '); createProfile(2, 'Rowan');
     const state = freshState(); state.gold = 42; saveProfile(1, state, 12_000);
-    expect(readProfileIndex().slots.map((item) => item?.name ?? null)).toEqual(['Rowan', 'Rowan', null]);
-    expect(readProfileIndex().slots[0]?.activePlayTimeMs).toBe(12_000);
+    expect(readProfileIndex ().slots.map((item) => item?.name ?? null)).toEqual(['Rowan', 'Rowan', null]);
+    expect(readProfileIndex ().slots[0]?.activePlayTimeMs).toBe(12_000);
     renameProfile(1, 'Rowan II'); deleteProfile(1);
-    expect(readProfileIndex().slots[0]).toBeNull();
-    expect(readProfileIndex().slots[1]?.name).toBe('Rowan');
+    expect(readProfileIndex ().slots[0]).toBeNull();
+    expect(readProfileIndex ().slots[1]?.name).toBe('Rowan');
     expect(memory.getItem(profileSaveKey(2))).not.toBeNull();
   });
 
@@ -40,7 +40,7 @@ describe('three save profiles', () => {
   it('migrates a valid legacy save without simulating or removing it', () => {
     const state = freshState(1000); state.gold = 17;
     const legacy = JSON.stringify({ version: 1, savedAt: 1000, state }); memory.setItem('mx-idle-save-v1', legacy);
-    const index = initializeProfiles();
+    const index= initializeProfiles();
     expect(index.slots[0]?.name).toBe('Adventurer');
     expect(memory.getItem('mx-idle-save-v1')).toBe(legacy);
     expect(JSON.parse(memory.getItem(profileSaveKey(1))!).state.gold).toBe(17);
@@ -48,11 +48,11 @@ describe('three save profiles', () => {
   });
 
   it('normalizes old placeholder profile names for already-migrated indexes', () => {
-    const index = initializeProfiles(); createProfile(1, 'Miner');
+    const index= initializeProfiles(); createProfile(1, 'Miner');
     const saved = JSON.parse(memory.getItem(PROFILE_INDEX_KEY)!);
     saved.slots[0].name = 'Existing Save Profile 1';
     memory.setItem(PROFILE_INDEX_KEY, JSON.stringify(saved));
-    expect(readProfileIndex().slots[0]?.name).toBe('Adventurer');
+    expect(readProfileIndex ().slots[0]?.name).toBe('Adventurer');
     void index;
   });
 
@@ -76,7 +76,7 @@ describe('three save profiles', () => {
     expect(memory.getItem(profileSaveKey(3))).toBe('{broken');
   });
 
-  it('does not replace a damaged profile index with empty slots', () => {
+  it('does not replace a damaged profile index  with empty slots', () => {
     memory.setItem(PROFILE_INDEX_KEY, '{broken');
     expect(() => initializeProfiles()).toThrow(/profile list is damaged/i);
     expect(memory.getItem(PROFILE_INDEX_KEY)).toBe('{broken');

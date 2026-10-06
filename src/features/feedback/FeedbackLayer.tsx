@@ -15,7 +15,7 @@ export function FeedbackLayer({ events, game, metrics, settings, reducedMotion }
     if (!events.length) return;
     const fresh = events.filter((event) => event.id > seen.current);
     if (!fresh.length) return;
-    seen.current = Math.max(...fresh.map((event) => event.id));
+    seen.current = Math.max (...fresh.map((event) => event.id));
     const xp = fresh.filter((event) => event.type === 'xp' || event.type === 'xp-batch' || event.type === 'level-up');
     const items = fresh.filter((event): event is Extract<GameFeedbackEvent,{type:'item'|'gold'}> => event.type === 'item' || event.type === 'gold');
     if (settings.showXpDrops && xp.length) setDrops((old) => {
@@ -49,7 +49,7 @@ export function FeedbackLayer({ events, game, metrics, settings, reducedMotion }
     if (group) group.events.push(event); else groups.push({ key, source: event.source, events: [event] });
     return groups;
   }, []);
-  const data = game.skills[skill], remaining = Math.max(0, xpForLevel(data.level) - data.xp), rate = metrics[skill]?.xpHour ?? 0;
+  const data = game.skills[skill], remaining = Math.max (0, xpForLevel(data.level) - data.xp), rate = metrics[skill]?.xpHour ?? 0;
   const eta = data.level >= 100 ? 'MAX' : rate > 0 ? formatDuration(remaining / rate * 3_600_000) : 'Calculating…';
   return <>
     {settings.showXpOrb && <div className="xp-orb-anchor"><Tip content={<div className="xp-orb-tip"><b>{skill}</b><span>Level {data.level}</span><span>{data.xp.toLocaleString()} / {xpForLevel(data.level).toLocaleString()} XP</span><span>{remaining.toLocaleString()} XP remaining</span><span>{rate ? `${Math.round(rate).toLocaleString()} XP / hour` : 'XP / hour · Calculating…'}</span><span>Level ETA · {eta}</span><span>Session XP · {(metrics[skill]?.sessionXp ?? 0).toLocaleString()}</span></div>}><div className="xp-orb" aria-label={`${skill} level ${data.level}, ${Math.round(data.xp / xpForLevel(data.level) * 100)} percent to next level`}><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="18"/><circle className="xp-ring" cx="22" cy="22" r="18" style={{ strokeDashoffset: `${113.1 * (1 - data.xp / xpForLevel(data.level))}` }}/></svg><span className="xp-orb-skill-icon"><Icon name={skillIcon[skill]} size={20}/></span><small>{data.level}</small></div></Tip></div>}

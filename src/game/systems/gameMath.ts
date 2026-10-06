@@ -15,7 +15,7 @@ export function resolvePrimaryQuantity(expected: number, extraChancePp: number, 
 export function getCoreMaterialChance(baseChance: number, stage: number, stageMultipliers: readonly number[], toolMultiplier = 1) { return baseChance * (stageMultipliers[stage] ?? 0) * toolMultiplier; }
 export function getMiningPower(basePower: number, toolMultiplier = 1) { return basePower * toolMultiplier; }
 export function getMiningStrikeTime(baseMs: number, speed: number) { return baseMs * (1 - speed); }
-export function hitChance(accuracy: number, evasion: number) { const ratio = accuracy < evasion ? .5 * accuracy / evasion : 1 - .5 * evasion / accuracy; return Math.max(.05, Math.min(.95, ratio)); }
-export function damageAfterResistance(raw: number, resistance: number) { return Math.max(1, Math.floor(raw * (1 - Math.max(-25, Math.min(75, resistance)) / 100))); }
+export function hitChance(accuracy: number, evasion: number) { const ratio = accuracy < evasion ? .5 * accuracy / evasion : 1 - .5 * evasion / accuracy; return Math.max (.05, Math.min(.95, ratio)); }
+export function damageAfterResistance(raw: number, resistance: number) { return Math.max (1, Math.floor(raw * (1 - Math.max (-25, Math.min(75, resistance)) / 100))); }
 export function xpForLevel(level: number) { return PROVISIONAL_FIRST_SLICE_XP_CURVE(level); }
 export function maxHitpoints(level: number) { return 90 + level * 10; }

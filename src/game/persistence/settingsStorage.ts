@@ -16,7 +16,7 @@ export const DEFAULT_APP_SETTINGS: AppSettings = {
 
 const clampStep = (value: unknown, min: number, max: number, step: number, fallback: number) => {
   const n = Number(value);
-  return Number.isFinite(n) ? Number(Math.min(max, Math.max(min, Math.round((n - min) / step) * step + min)).toFixed(2)) : fallback;
+  return Number.isFinite(n) ? Number(Math.min(max, Math.max (min, Math.round((n - min) / step) * step + min)).toFixed(2)) : fallback;
 };
 
 export function normalizeAppSettings(raw: unknown): AppSettings {
@@ -35,7 +35,7 @@ export function normalizeAppSettings(raw: unknown): AppSettings {
     },
     audio: {
       muted: audio?.muted === true,
-      masterVolume: Number.isFinite(Number(audio?.masterVolume)) ? Math.min(1, Math.max(0, Number(audio?.masterVolume))) : .35,
+      masterVolume: Number.isFinite(Number(audio?.masterVolume)) ? Math.min(1, Math.max (0, Number(audio?.masterVolume))) : .35,
     },
     accessibility: { reducedMotion: access?.reducedMotion === 'on' || access?.reducedMotion === 'off' ? access.reducedMotion : 'system' },
     feedback: {
@@ -50,7 +50,7 @@ export function normalizeAppSettings(raw: unknown): AppSettings {
 
 export function calculateAutoScale(width: number, height: number): number {
   const raw = Math.min(width / 1920, height / 1080);
-  return Math.round(Math.min(1.5, Math.max(.9, raw)) / .05) * .05;
+  return Math.round(Math.min(1.5, Math.max (.9, raw)) / .05) * .05;
 }
 
 export function effectiveScale(settings: AppSettings, width = window.innerWidth, height = window.innerHeight): number {

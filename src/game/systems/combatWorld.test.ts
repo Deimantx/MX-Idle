@@ -1,4 +1,4 @@
-﻿import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { advanceWithEvents, BOSS_COMPONENTS, COMBAT_AREAS, DUNGEONS, devForceCurrentEnemyDefeat, ENEMIES, evaluateCombatTierUnlocks, freshState, getCurrentPlayerBasicDamageType, getEnemyMinHit, getPlayerEvasions, getPlayerResistances, getStyleDamageMultiplier, getStyleMatchup, getStyleResistanceAdjustment, isTierUnlocked, loadState, MELEE_WEAPONS, OFFERINGS, setCombatTarget, startActivity, startDungeon, stopActivity, validateCombatContent, validateCombatRegistry, type ItemId } from '../game';
 import { FORGING_RECIPES } from '../content/smithing/forgingRecipes';
 import { HEAVY_ARMOR } from '../content/combat/heavyArmor';
@@ -34,7 +34,7 @@ describe('Phase 1 combat world',()=>{
   });
 
   it('materializes authored phases and scoped enemy action mechanics',()=>{
-    const cinder=ENEMIES['t5-cindermaw']!,decree=[...ENEMIES['t4-the-pale-castellan']!.sequence,...(ENEMIES['t4-the-pale-castellan']!.phases??[]).flatMap(x=>x.sequence)].find(x=>x.name==='Grave Decree')!,ward=[...ENEMIES['t2-fen-channeler']!.sequence,...(ENEMIES['t2-fen-channeler']!.phases??[]).flatMap(x=>x.sequence)].find(x=>x.name==='Silt Ward')!,barrage=ENEMIES['t7-skybreaker-raal']!.phases?.flatMap(x=>x.sequence).find(x=>x.name==='Tempest Barrage');
+    const cinder=ENEMIES['t5-cindermaw']!,decree=[...ENEMIES['t4-the-pale-castellan']!.sequence,...(ENEMIES['t4-the-pale-castellan']!.phases ?? []).flatMap(x=>x.sequence)].find(x=>x.name==='Grave Decree')!,ward=[...ENEMIES['t2-fen-channeler']!.sequence,...(ENEMIES['t2-fen-channeler']!.phases ?? []).flatMap(x=>x.sequence)].find(x=>x.name==='Silt Ward')!,barrage=ENEMIES['t7-skybreaker-raal']!.phases?.flatMap(x=>x.sequence).find(x=>x.name==='Tempest Barrage');
     expect(cinder.phases?.map(x=>x.thresholdPct)).toEqual([60,30]);
     expect(decree.resistanceDownTypes).toEqual(['Air','Fire','Water','Earth']);
     expect(ward.selfResistanceTypes).toEqual(['Slash','Stab','Crush']);expect(ward.selfResistanceActions).toBe(2);
@@ -64,7 +64,7 @@ describe('Phase 1 combat world',()=>{
   });
 
   it('keeps pure buffs and pure status actions from inventing direct hits',()=>{
-    const resolve=(id:string,name:string)=>{const state=freshState();const enemy=ENEMIES[id]!;state.combat.targetId=enemy.id;state.combat.enemyHp=enemy.maxHp;state.combat.sequenceIndex=enemy.sequence.findIndex(action=>action.name===name);state.combat.playerHp=1000;state.combat.playerTimer=90_000;state.combat.enemyTimer=1;state.activity='combat';state.combat.runState='active';return advanceWithEvents(state,1).state;};
+    const resolve=(id:string,name:string)=>{const state=freshState();const enemy=ENEMIES[id]!;state.combat.targetId=enemy.id;state.combat.enemyHp=enemy.maxHp;state.combat.sequenceIndex=enemy.sequence.findIndex (action=>action.name===name);state.combat.playerHp=1000;state.combat.playerTimer=90_000;state.combat.enemyTimer=1;state.activity='combat';state.combat.runState='active';return advanceWithEvents(state,1).state;};
     const guard=resolve('t3-forgemaster-korr','Tempered Guard');expect(guard.combat.playerHp).toBe(1000);expect(guard.combat.statuses.some(x=>x.type==='ResistanceUp'&&x.target==='enemy'&&x.remainingActions===2)).toBe(true);
     const pale=resolve('t4-moon-priest','Pale Ward'),ward=pale.combat.statuses.find(x=>x.type==='ResistanceUp'&&x.target==='enemy');expect(pale.combat.playerHp).toBe(1000);expect(ward?.damageTypes).toEqual(['Air','Fire','Water','Earth']);expect(pale.combat.log[0]).toBe('Moon Priest uses Pale Ward.');expect(pale.combat.log[0]).not.toContain('miss');
     const venom=resolve('t8-prismcoil-serpent','Aether Venom');expect(venom.combat.playerHp).toBe(1000);expect(venom.combat.statuses.some(x=>x.type==='Poison'&&x.target==='player')).toBe(true);
@@ -81,7 +81,7 @@ describe('Phase 1 combat world',()=>{
     expect(rollDirectDamage(100,1,()=>0)).toBe(20);expect(rollDirectDamage(100,1,()=>1)).toBe(100);
   });
 
-  it('keeps six authored resistance effects explicit and scoped',()=>{
+  it('keeps six  authored resistance effects explicit and scoped',()=>{
     const action=(enemy:string,name:string)=>Object.values(ENEMIES[enemy]!.actions).find(value=>value.name===name)!;
     expect(action('t2-fen-channeler','Silt Ward')).toMatchObject({selfResistancePp:8,selfResistanceActions:2,selfResistanceTypes:['Slash','Stab','Crush']});
     expect(action('t4-moon-priest','Pale Ward')).toMatchObject({selfResistancePp:8,selfResistanceActions:2,selfResistanceTypes:['Air','Fire','Water','Earth'],requiresHitRoll:false});
@@ -94,7 +94,7 @@ describe('Phase 1 combat world',()=>{
 
   it('clears encounter effects on normal kill, Dungeon transition, death, and manual leave',()=>{
     const normal=freshState();normal.combat.statuses.push({id:'guard',type:'ResistanceUp',sourceId:'t3-forgemaster-korr',target:'enemy',remainingMs:9999,remainingActions:2,magnitude:10,damageTypes:['Slash']});devForceCurrentEnemyDefeat(normal);expect(normal.combat.statuses).toEqual([]);
-    const korr=freshState(),boss=ENEMIES['t3-forgemaster-korr']!;korr.combat.targetId=boss.id;korr.combat.enemyHp=boss.maxHp;korr.combat.sequenceIndex=boss.sequence.findIndex(action=>action.name==='Tempered Guard');korr.combat.enemyTimer=1;korr.combat.playerTimer=90000;korr.activity='combat';korr.combat.runState='active';const guarded=advanceWithEvents(korr,1).state;expect(guarded.combat.statuses.some(status=>status.sourceId===boss.id&&status.type==='ResistanceUp')).toBe(true);devForceCurrentEnemyDefeat(guarded);expect(guarded.combat.statuses).toEqual([]);expect(setCombatTarget(guarded,'road-wolf')).toBe(true);expect(guarded.combat.statuses).toEqual([]);
+    const korr=freshState(),boss=ENEMIES['t3-forgemaster-korr']!;korr.combat.targetId=boss.id;korr.combat.enemyHp=boss.maxHp;korr.combat.sequenceIndex=boss.sequence.findIndex (action=>action.name==='Tempered Guard');korr.combat.enemyTimer=1;korr.combat.playerTimer=90000;korr.activity='combat';korr.combat.runState='active';const guarded=advanceWithEvents(korr,1).state;expect(guarded.combat.statuses.some(status=>status.sourceId===boss.id&&status.type==='ResistanceUp')).toBe(true);devForceCurrentEnemyDefeat(guarded);expect(guarded.combat.statuses).toEqual([]);expect(setCombatTarget(guarded,'road-wolf')).toBe(true);expect(guarded.combat.statuses).toEqual([]);
     const dungeon=freshState();dungeon.skills.Attack.level=10;dungeon.equipped.weapon='combat.weapon.melee.copper_sword';dungeon.combatProgress.eliteFirstKills['ironjaw-boar']=true;startDungeon(dungeon,'t1-ruined-watch');dungeon.combat.statuses.push({id:'poison',type:'Poison',sourceId:'captain-veyr',target:'player',remainingMs:1000});startActivity(dungeon,'combat');devForceCurrentEnemyDefeat(dungeon);expect(dungeon.combat.statuses).toEqual([]);const next=advanceWithEvents(dungeon,3001).state;expect(next.combat.targetId).toBe('t1-tower-bowman');expect(next.combat.statuses).toEqual([]);
     const death=freshState();death.combat.playerHp=1;death.combat.playerTimer=50000;death.combat.enemyTimer=50000;death.activity='combat';death.combat.runState='active';death.combat.statuses.push({id:'poison',type:'Poison',sourceId:'enemy',target:'player',remainingMs:2000,tickMs:1000,tickTimerMs:1000,stacks:2,remainingDamage:10});expect(advanceWithEvents(death,1000).state.combat.statuses).toEqual([]);
     const leave=freshState();leave.activity='combat';leave.combat.runState='active';leave.combat.statuses.push({id:'chill',type:'Chill',sourceId:'enemy',target:'player',remainingMs:2000,magnitude:.2});stopActivity(leave);expect(leave.combat.statuses).toEqual([]);
@@ -109,7 +109,7 @@ describe('Phase 1 combat world',()=>{
 
   it('restarts a Boss phase with its first action timer and emits Combat XP events',()=>{
     const boss=ENEMIES['t5-cindermaw']!,phaseAction=boss.phases![1]!.sequence[0]!;const state=freshState();state.equipped.weapon='combat.weapon.melee.copper_sword';state.skills.Attack.level=100;state.combat.targetId=boss.id;state.combat.enemyHp=Math.floor(boss.maxHp*.3)+1;state.combat.playerTimer=1;state.combat.enemyTimer=123;state.combat.activePhaseIndex=1;state.combat.specialMode='Off';state.rng=1;state.activity='combat';state.combat.runState='active';const result=advanceWithEvents(state,1);
-    expect(result.state.combat.activePhaseIndex).toBe(2);expect(result.state.combat.sequenceIndex).toBe(0);expect(result.state.combat.enemyTimer).toBe(boss.intervalMs*(phaseAction.intervalMultiplier??1));expect(result.state.combat.enemyActionSerial).toBe(1);
+    expect(result.state.combat.activePhaseIndex).toBe(2);expect(result.state.combat.sequenceIndex).toBe(0);expect(result.state.combat.enemyTimer).toBe(boss.intervalMs*(phaseAction.intervalMultiplier ?? 1));expect(result.state.combat.enemyActionSerial).toBe(1);
     expect(result.events.filter(event=>event.type==='xp-gained'&&['Attack','Hitpoints','Defence'].includes(event.skill))).toHaveLength(3);
   });
 
@@ -127,7 +127,7 @@ describe('Phase 1 combat world',()=>{
 
   it('applies Executioner execute damage and scopes Concussive Blow to Melee resistances',()=>{
     const specialHit=(weapon:ItemId,hpPercent:number)=>{const state=freshState();state.skills.Attack.level=100;state.equipped.weapon=weapon;state.combat.targetId='captain-veyr';state.combat.enemyHp=ENEMIES['captain-veyr']!.maxHp*hpPercent;state.combat.playerTimer=1;state.combat.enemyTimer=90_000;state.combat.stamina=100;state.combat.queuedSpecial=true;state.combat.specialMode='Manual';state.rng=177;state.activity='combat';state.combat.runState='active';return advanceWithEvents(state,1).state;};
-    const execute=specialHit('combat.weapon.melee.copper_battle_axe',.29),normal=specialHit('combat.weapon.melee.copper_battle_axe',.31),damage=(state:any)=>Number(state.combat.log[0]?.match(/for (\d+)/)?.[1]??0);
+    const execute=specialHit('combat.weapon.melee.copper_battle_axe',.29),normal=specialHit('combat.weapon.melee.copper_battle_axe',.31),damage=(state:any)=>Number(state.combat.log[0]?.match(/for (\d+)/)?.[1] ?? 0);
     expect(damage(execute)).toBeGreaterThan(damage(normal));
     const mace=specialHit('combat.weapon.melee.copper_mace',1),down=mace.combat.statuses.find(x=>x.type==='ResistanceDown'&&x.sourceId==='player');expect(down?.damageTypes).toEqual(['Slash','Stab','Crush']);expect(down?.remainingMs).toBe(8000);
     expect(MELEE_WEAPONS['combat.weapon.melee.copper_sword'].special).toMatchObject({name:'Precision Lunge',type:'Stab',accuracyBonus:.25});
@@ -159,4 +159,3 @@ describe('Phase 1 combat world',()=>{
     expect(loaded.version).toBe(6);expect(loaded.combatProgress.eliteFirstKills['ironjaw-boar']).toBe(true);expect(loaded.combatProgress.bossFirstKills['captain-veyr']).toBeUndefined();expect(loaded.combatProgress.unlockedTiers).toEqual([1]);
   });
 });
-

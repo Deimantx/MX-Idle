@@ -100,3 +100,11 @@
 .objective-progress i { display:block; height:100%; background:linear-gradient(90deg,#916443,#d69d68); transition:width 180ms ease; }
 .objective-guidance { margin:calc(9px * var(--ui-scale)) 0 0; color:#aab0a8; font-size:calc(10px * var(--ui-scale) * var(--text-scale)); }
 @media(max-width:680px) { .objective-minimized { align-items:stretch; flex-direction:column; gap:calc(8px * var(--ui-scale)); } .objective-progress { max-width:none; } }
+.objectives-panel { padding:8px 12px; margin-bottom:8px; }
+.objectives-panel .panel-head { height:20px; min-height:0; margin-bottom:2px; padding:0; }
+.objectives-panel .objective-topline { display:none; }
+.objective-minimized { padding:0 2px; gap:10px; }
+.objective-minimized>div:first-child { flex-direction:row; align-items:center; gap:9px; }
+.objective-minimized b { white-space:nowrap; }
+.objective-progress { max-width:100px; }
+@media(max-width:680px) { .objectives-panel .objective-topline { display:flex; }.objective-minimized>div:first-child { align-items:flex-start;flex-direction:column;gap:3px; } }

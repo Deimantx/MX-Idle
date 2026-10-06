@@ -229,3 +229,7 @@
 .compare-stats>div { min-width:0; }
 .compare-stats>div>b { display:block; font-size:10px; color:var(--text-muted); margin-bottom:4px; text-transform:uppercase; }
 .selected-slot-actions { min-height:32px; }
+.equipment-filters { display:flex;flex-wrap:wrap;align-items:center;gap:6px; }
+.equipment-filters>button { min-height:30px;padding:5px 9px;color:#b7beb7;background:#202729;border:1px solid #394244;border-radius:4px;cursor:pointer;font-size:10px; }
+.equipment-filters>button.selected { color:#f0d6ac;background:#332c23;border-color:#8a6c48; }
+.equipment-filters>button:focus-visible { outline:2px solid #d6b870;outline-offset:2px; }

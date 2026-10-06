@@ -11,7 +11,7 @@ export function fishingBiteTime(s: SaveState) {
   if (s.fishing.tackle === 'fishing.tackle.fine_hook') multiplier *= 1.03;
   if (s.fishing.tackle === 'fishing.tackle.aether_spinner') multiplier *= .94;
   if (s.fishing.specialization === 'Provisioner') multiplier *= .92;
-  return Math.max(spot.baseBiteMs * .4, spot.baseBiteMs * multiplier);
+  return Math.max (spot.baseBiteMs * .4, spot.baseBiteMs * multiplier);
 }
 
 export function fishingLandingTime(s: SaveState, fish: (typeof FISH_SPECIES)[number]) {
@@ -23,7 +23,7 @@ export function fishingLandingTime(s: SaveState, fish: (typeof FISH_SPECIES)[num
   if (s.fishing.tackle === 'fishing.tackle.umbral_sinker') multiplier *= .92;
   if (s.fishing.specialization === 'Trophy Angler' && (fish.rarity === 'Rare' || fish.rarity === 'Very Rare')) multiplier *= .88;
   if (s.fishing.specialization === 'Deepwater Fisher' && fish.water === 'Bottom') multiplier *= .9;
-  return Math.max(600, (750 + fish.fight / Math.max(1, rod.power) * 750) * multiplier);
+  return Math.max (600, (750 + fish.fight / Math.max (1, rod.power) * 750) * multiplier);
 }
 
 export function fishingCatchWeights(s: SaveState) {

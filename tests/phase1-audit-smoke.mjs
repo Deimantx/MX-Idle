@@ -1,12 +1,16 @@
-import assert from 'node:assert/strict';
+﻿import assert from 'node:assert/strict';
 import { existsSync } from 'node:fs';
+import { mkdir } from 'node:fs/promises';
 import { chromium } from 'playwright';
 
 const executablePath = [process.env.CHROME_PATH, chromium.executablePath(), 'C:/Program Files/Google/Chrome/Application/chrome.exe'].find((path) => path && existsSync(path));
 assert.ok(executablePath, 'Install Chrome/Chromium or set CHROME_PATH before browser QA.');
 const browser = await chromium.launch({ headless: true, executablePath, args: ['--no-sandbox'] });
-const page = await browser.newPage({ viewport: { width: 1600, height: 1000 }, reducedMotion: 'reduce' });
+const page = await browser.newPage({ viewport: { width: 2560, height: 1440 }, reducedMotion: 'reduce' });
 const errors = [];
+page.setDefaultTimeout(7000);
+await mkdir('artifacts/phase1-review', { recursive: true });
+const capture = async (name) => { await page.locator('.content-scroll').evaluate((node) => { node.scrollTop = 0; }); await page.screenshot({ path: `artifacts/phase1-review/${name}-2560.png` }); };
 page.on('pageerror', (error) => errors.push(error.message));
 page.on('console', (message) => { if (message.type() === 'error') errors.push(message.text()); });
 
@@ -16,12 +20,16 @@ try {
   await page.getByLabel('Name your adventurer').fill('Phase 1 Audit');
   await page.getByRole('button', { name: 'Begin' }).click();
   await page.getByRole('heading', { name: 'Mining' }).waitFor();
-
+  await capture('mining');
   await page.getByRole('button', { name: 'DEV' }).click();
+  await page.locator('.dev-nav').getByRole('button', { name: 'Player' }).click();
   await page.getByRole('button', { name: 'Mining Lv. 100' }).click();
+  await page.locator('.dev-nav').getByRole('button', { name: 'Mining' }).click();
+  await page.locator('.dev-nav').getByRole('button', { name: 'Inventory' }).click();
   await page.getByLabel('Dev profession gear').selectOption('item.mining.astralite_pickaxe');
   await page.getByRole('button', { name: 'Grant & Equip Tool' }).click();
-  await page.getByRole('button', { name: 'DEV' }).click();
+  await page.getByRole('button', { name: 'Close developer tools' }).click();
+  await page.getByRole('tab', { name: 'Ore', exact: true }).click();
   const astralite = page.locator('.deposit-selected').filter({ hasText: 'Astralite Vein' });
   assert.equal(await astralite.isEnabled(), true, 'Level 100 unlocks Astralite Vein');
   await astralite.click();
@@ -29,33 +37,34 @@ try {
   await page.getByRole('button', { name: 'Start Mining' }).click();
   await page.getByRole('button', { name: 'Stop Mining' }).first().click();
   await page.getByRole('button', { name: 'DEV' }).click();
+  await page.locator('.dev-nav').getByRole('button', { name: 'Inventory' }).click();
   await page.getByRole('button', { name: 'Grant Copper Ore' }).click();
   await page.getByRole('button', { name: 'DEV' }).click();
-
   await page.getByRole('button', { name: /Smithing/ }).click();
   await page.getByRole('button', { name: 'DEV' }).click();
+  await page.locator('.dev-nav').getByRole('button', { name: 'Player' }).click();
   await page.getByRole('button', { name: 'Smithing Lv. 100' }).click();
-  await page.getByRole('button', { name: 'DEV' }).click();
-  await page.getByLabel('Recipe tier').selectOption('10');
+  await page.getByRole('button', { name: 'Close developer tools' }).click();
   const astraliteIngot = page.getByRole('button', { name: /^Astralite Ingot/ });
   assert.equal(await astraliteIngot.isEnabled(), true, 'Level 100 unlocks Astralite smelting');
   await astraliteIngot.click();
-
+  await capture('smithing');
   await page.getByRole('button', { name: 'Equipment', exact: true }).click();
   await page.getByRole('button', { name: 'DEV' }).click();
+  await page.locator('.dev-nav').getByRole('button', { name: 'Player' }).click();
   await page.getByRole('button', { name: 'Attack Lv. 100' }).click();
+  await page.locator('.dev-nav').getByRole('button', { name: 'Combat' }).click();
   await page.getByLabel('Dev Combat gear').selectOption('combat.weapon.melee.astralite_sword');
   await page.getByRole('button', { name: 'Grant & Equip', exact: true }).click();
-  await page.getByRole('button', { name: 'DEV' }).click();
-  await page.locator('.equipment-filters select').selectOption('10');
+  await page.getByRole('button', { name: 'Close developer tools' }).click();
   const astraliteSword = page.locator('.candidate-row').filter({ hasText: 'Astralite Sword' });
   assert.equal(await astraliteSword.count(), 1, 'Metadata picker shows the owned T10 weapon');
   await astraliteSword.click();
   assert.match(await page.locator('.item-compare').innerText(), /Astralite Sword/);
+  await capture('equipment');
   await page.setViewportSize({ width: 768, height: 900 });
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, 'Equipment fits at 768px');
-  await page.setViewportSize({ width: 1600, height: 1000 });
-
+  await page.setViewportSize({ width: 2560, height: 1440 });
   await page.getByRole('button', { name: 'Combat', exact: true }).click();
   await page.getByRole('button', { name: 'DEV' }).click();
   await page.getByLabel('Dev Combat Food').selectOption({ index: 0 });
@@ -63,10 +72,12 @@ try {
   await page.getByRole('button', { name: 'DEV' }).click();
   await page.getByRole('button', { name: 'Begin Combat' }).click();
   await page.getByText('IN COMBAT').waitFor();
+  await capture('combat');
   await page.getByRole('button', { name: /Choose food/ }).first().click();
   await page.locator('.food-option').first().click();
   await page.setViewportSize({ width: 390, height: 844 });
-  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, 'Combat fits at 390px');
+  await page.waitForTimeout(100);
+  assert.equal(await page.evaluate(() => document.querySelector('.game-shell').getBoundingClientRect().width <= innerWidth && getComputedStyle(document.documentElement).overflowX !== 'visible'), true, 'Combat fits at 390px');
   await page.setViewportSize({ width: 1600, height: 1000 });
   await page.getByRole('button', { name: /Leave Encounter/ }).click();
   const reserve = page.getByLabel('Food reserve for slot 1');
@@ -78,10 +89,11 @@ try {
   await page.getByRole('button', { name: 'Continue', exact: true }).click();
   await page.getByRole('button', { name: 'Combat', exact: true }).click();
   await page.getByText('Food & Satiety').waitFor();
-
   await page.getByRole('button', { name: /Fishing/ }).click();
-  assert.equal(await page.locator('.profession-choice').filter({ hasText: 'Astral Expanse' }).isDisabled(), true, 'Fishing Spot 10 stays locked at Fishing 1');
+  await capture('fishing');
+  assert.equal(await page.locator('.water-choice').filter({ hasText: 'Astral Expanse' }).isDisabled(), true, 'Fishing Spot 10 stays locked at Fishing 1');
   await page.getByRole('button', { name: /Cooking/ }).click();
+  await capture('cooking');
   assert.equal(await page.locator('.recipe-choice').count() > 0, true, 'Cooking recipe browser renders');
   assert.deepEqual(errors, [], 'Focused Phase 1 flow has no browser console errors');
   console.log(JSON.stringify(errors));

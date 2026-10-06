@@ -19,8 +19,8 @@ export function BootFlow({ settings, onOpenSettings }: { settings: AppSettings; 
   const [phase, setPhase] = useState<Phase>('profile-select'), [index, setIndex] = useState<ProfileIndex>({ version: 1, slots: [null, null, null] });
   const [active, setActive] = useState<Active | null>(null), [slot, setSlot] = useState<ProfileSlotId | null>(null), [stage, setStage] = useState<LoadStage>('Reading Save'), [error, setError] = useState('');
   const flushGame = useRef<(() => void) | null>(null);
-  const refresh = useCallback(() => setIndex(readProfileIndex()), []);
-  useEffect(() => { try { setIndex(initializeProfiles()); } catch (cause) { setError(cause instanceof Error ? cause.message : 'Could not read profile data.'); setPhase('error'); } }, []);
+  const refresh = useCallback(() => setIndex (readProfileIndex ()), []);
+  useEffect(() => { try { setIndex (initializeProfiles()); } catch (cause) { setError(cause instanceof Error ? cause.message : 'Could not read profile data.'); setPhase('error'); } }, []);
 
   const beginLoad = useCallback(async (selected: ProfileSlotId) => {
     setSlot(selected); setError(''); setStage('Reading Save'); setPhase('profile-loading'); await pauseFrame();
@@ -41,8 +41,8 @@ export function BootFlow({ settings, onOpenSettings }: { settings: AppSettings; 
   }, [refresh]);
 
   if (phase === 'profile-loading') return <ProfileLoadScreen name={index.slots[(slot ?? 1) - 1]?.name ?? 'your adventurer'} stage={stage} error={error || undefined} onRetry={() => slot && void beginLoad(slot)} onBack={() => { setError(''); setPhase('profile-select'); }} />;
-  if (phase === 'error') return <main className="profile-load"><div className="load-emblem">MX</div><p>LOCAL PROFILE DATA</p><h1>Profile list needs attention</h1><div className="profile-error" role="alert">{error}</div><div className="load-actions"><Button tone="copper" onClick={() => { try { setIndex(initializeProfiles()); setError(''); setPhase('profile-select'); } catch (cause) { setError(cause instanceof Error ? cause.message : 'Profile data could not be read.'); } }}>Retry</Button><Button onClick={() => onOpenSettings(null)}>Settings</Button></div></main>;
-  if (phase === 'profile-select') return <ProfileSelectScreen index={index} onChoose={(selected) => void beginLoad(selected)} onCreate={(selected, name) => { createProfile(selected, name); refresh(); void beginLoad(selected); }} onRename={(slot, name) => { renameProfile(slot, name); refresh(); }} onDelete={(slot) => { deleteProfile(slot); refresh(); }} onSettings={() => onOpenSettings(null)} onRetry={() => { try { setIndex(initializeProfiles()); setError(''); setPhase('profile-select'); } catch (cause) { setError(cause instanceof Error ? cause.message : 'Profile data could not be read.'); } }} />;
+  if (phase === 'error') return <main className="profile-load"><div className="load-emblem">MX</div><p>LOCAL PROFILE DATA</p><h1>Profile list needs attention</h1><div className="profile-error" role="alert">{error}</div><div className="load-actions"><Button tone="copper" onClick={() => { try { setIndex (initializeProfiles()); setError(''); setPhase('profile-select'); } catch (cause) { setError(cause instanceof Error ? cause.message : 'Profile data could not be read.'); } }}>Retry</Button><Button onClick={() => onOpenSettings(null)}>Settings</Button></div></main>;
+  if (phase === 'profile-select') return <ProfileSelectScreen index={index} onChoose={(selected) => void beginLoad(selected)} onCreate={(selected, name) => { createProfile(selected, name); refresh(); void beginLoad(selected); }} onRename={(slot, name) => { renameProfile(slot, name); refresh(); }} onDelete={(slot) => { deleteProfile(slot); refresh(); }} onSettings={() => onOpenSettings(null)} onRetry={() => { try { setIndex (initializeProfiles()); setError(''); setPhase('profile-select'); } catch (cause) { setError(cause instanceof Error ? cause.message : 'Profile data could not be read.'); } }} />;
 
   const switchProfile = () => { flushGame.current?.(); setActive(null); setPhase('profile-select'); refresh(); };
   const rename = (name: string) => { if (!active) return; const profile = renameProfile(active.profile.slot, name); setActive({ ...active, profile }); refresh(); };

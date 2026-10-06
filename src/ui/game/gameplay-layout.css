@@ -1,0 +1,190 @@
+.content-wrap { width:min(100%,2180px);max-width:min(calc(2180px * var(--ui-scale)),100%); }
+.gameplay-heading { min-height:66px;margin:0 0 14px;padding:0 0 12px;border-bottom:1px solid var(--line-soft); }
+.gameplay-heading-identity { display:flex;align-items:center;gap:12px; }
+.gameplay-heading-mark { width:42px;height:42px;display:grid;place-items:center;flex:none;color:var(--profession-accent,var(--copper));background:linear-gradient(145deg,#303638,#1a1f21);border:1px solid #4a5050;border-radius:8px;box-shadow:inset 0 1px #ffffff12,0 4px 12px #080a0b55;font-size:19px;font-weight:700; }
+.gameplay-heading h1 { margin:0;font-size:clamp(20px,1.35vw,27px);line-height:1.15; }
+.gameplay-heading p { margin:3px 0 0;color:#b2b7af;font-size:14px; }
+.gameplay-heading .screen-overline { margin-bottom:2px;font-size:10px; }
+.heading-xp { width:min(250px,24vw);align-self:center;display:grid;gap:5px;margin-left:auto; }
+.heading-xp>div:first-child { display:flex;align-items:center;justify-content:space-between;gap:8px;color:#b8beb7;font-size:12px;font-variant-numeric:tabular-nums; }
+.heading-xp>div:first-child b { color:#e2c49a;font-size:13px; }
+.heading-xp-track { height:7px;overflow:hidden;background:#151a1c;border:1px solid #363e40;border-radius:4px; }
+.heading-xp-track i { display:block;height:100%;background:linear-gradient(90deg,#7b8ea5,#a9b8c9); }
+.comparison-table { margin:12px 0;border-top:1px solid #353e40; }
+.comparison-header,.comparison-row { display:grid;grid-template-columns:minmax(80px,1fr) repeat(3,minmax(52px,.65fr));gap:8px;align-items:center;padding:7px 4px;border-bottom:1px solid #30383a;font-size:12px;font-variant-numeric:tabular-nums; }
+.comparison-header { color:#a1a9a2;font-size:10px;letter-spacing:.06em; }
+.comparison-row>span:not(:first-child),.comparison-row>b { text-align:right; }
+.comparison-row .better { color:#8db497; }
+.comparison-row .worse { color:#d48a78; }
+.comparison-row .even { color:#adb4ac; }
+.dev-save-actions { display:grid;gap:12px; }
+.dev-save-actions>div { display:grid;gap:7px;margin-top:16px;padding:14px;border:1px solid #75413c;border-radius:6px;background:#2b1e1d; }
+.dev-save-actions>div small { color:#d1aaa3; }
+.mine-browser-tools { display:flex;align-items:center;gap:12px;margin:0 0 12px;padding:0 2px; }
+.mine-category-nav { display:flex;flex-wrap:wrap;gap:5px; }
+.mine-category-nav button { min-height:36px;padding:6px 12px;color:#bdc3bc;background:#202729;border:1px solid #394244;border-radius:5px;cursor:pointer;font-size:13px; }
+.mine-category-nav button:hover { background:#2a3032;border-color:#6c6658; }
+.mine-category-nav button.selected { color:#f0d6ac;background:#332c23;border-color:#8a6c48;box-shadow:inset 0 1px #ffffff10; }
+.mine-category-nav button:focus-visible,.mine-search input:focus-visible { outline:2px solid #d6b870;outline-offset:2px; }
+.mine-search { margin-left:auto; }
+.mine-search input { width:min(280px,26vw);min-height:36px;padding:6px 10px;color:#e3e0d7;background:#171d1e;border:1px solid #3b4446;border-radius:5px;font:inherit;font-size:13px; }
+.mine-layout { display:grid;grid-template-columns:minmax(290px,.72fr) minmax(0,1.9fr);grid-template-rows:auto auto;gap:16px;align-items:start; }
+.mine-layout>.panel { min-width:0; }
+.deposit-rail { grid-column:1;grid-row:1; }
+.mine-focus { grid-column:2;grid-row:1; }
+.mine-inspector { grid-column:1/-1;grid-row:2; }
+.deposit-selected { min-height:62px; }
+.deposit-label b { font-size:14px; }
+.deposit-label small { font-size:12px;line-height:1.35; }
+.mine-lock-note { margin:0 0 8px;padding:8px 10px;color:#e4c58f;background:#2c271f;border-left:2px solid #c69558;font-size:13px; }
+.mine-focus { padding:16px; }
+.mine-focus .vein-art { height:clamp(250px,24vh,340px);margin:12px -2px 14px;border-radius:4px; }
+.mine-focus .vein-art::after { content:'';position:absolute;inset:18% 28%;background:radial-gradient(ellipse at 50% 55%,#d9a45824,transparent 68%);pointer-events:none; }
+.mine-focus .stage-name-line h3 { font-size:20px; }
+.mine-focus .stage-path { margin-top:15px;padding-top:11px;border-top:1px solid #45403a; }
+.mine-focus .stage-node b { font-size:12px; }
+.mine-focus .stage-node small { font-size:11px; }
+.mine-focus .node-mark { min-width:35px;min-height:24px;font-size:10px; }
+.mine-inspector { display:grid;grid-template-columns:minmax(220px,.75fr) minmax(0,2fr);gap:12px 20px;align-items:start; }
+.mine-inspector>.panel-head { grid-column:1/-1; }
+.mine-inspector .tool-card { grid-column:1; }
+.mine-inspector .tool-picker { grid-column:1; }
+.mine-operations-grid { grid-column:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px; }
+.mine-operations-grid section { padding-left:14px;border-left:1px solid #384143; }
+.mine-operations-grid h3 { margin:0 0 5px;color:#d7b17f;font-size:13px;font-weight:600; }
+.mine-operations-grid .stat-row { min-height:31px;font-size:12px; }
+.mine-operations-grid .stat-row>b { font-variant-numeric:tabular-nums; }
+@media(max-width:1150px) {
+ .mine-layout { grid-template-columns:minmax(260px,.8fr) minmax(0,1.4fr); }
+ .mine-inspector { grid-template-columns:1fr; }
+ .mine-operations-grid { grid-column:1; }
+}
+@media(max-width:850px) {
+ .mine-browser-tools { align-items:stretch;flex-direction:column; }
+ .mine-search { margin:0; }
+ .mine-search input { width:100%; }
+ .mine-layout { grid-template-columns:minmax(0,1fr); }
+ .deposit-rail,.mine-focus,.mine-inspector { grid-column:1;grid-row:auto; }
+ .mine-operations-grid { grid-template-columns:1fr; }
+ .mine-operations-grid section { padding:8px 0 0;border-left:0;border-top:1px solid #384143; }
+}
+@media (max-width:1000px) { .gameplay-heading { flex-wrap:wrap;gap:8px; }.heading-xp { width:min(100%,280px);margin-left:54px; } }
+/* Mining should fit the excavation and operating readouts in one glance. */
+.mine-layout { grid-template-columns:minmax(320px,.72fr) minmax(0,1.9fr); gap:12px; }
+.deposit-browser { max-height:min(35vh,380px); }
+.mine-focus { padding:10px 14px; }
+.mine-focus .focus-top { min-height:54px; }
+.mine-focus .vein-art { height:180px !important; margin:8px -2px 9px; }
+.mine-focus .stage-name-line { min-height:42px; }
+.mine-focus .mine-action-progress { margin-top:4px; }
+.mine-focus .mine-controls { margin-top:5px; }
+.mine-focus .stage-path { margin-top:7px; padding-top:7px; }
+.mine-inspector { padding:9px 12px; }
+.mine-inspector .tool-card { padding:6px; }
+.mine-operations-grid { gap:10px; }
+.mine-operations-grid .stat-row { min-height:24px; padding:3px 0; }
+.mine-operations-grid section { padding:6px 10px; }
+
+/* Fishing is an atlas first, with the selected water and its ecosystem beside it. */
+.fishing-atlas { grid-template-columns:minmax(300px,.72fr) minmax(0,1.7fr); gap:12px; align-items:start; }
+.fishing-atlas .waters-panel { grid-column:1; grid-row:1 / span 2; }
+.fishing-atlas .profession-focus { grid-column:2; grid-row:1; }
+.fishing-atlas .profession-inspector { grid-column:2; grid-row:2; }
+.fishing-atlas .profession-stats { grid-column:1 / -1; }
+.waters-list { display:grid; gap:5px; max-height:min(47vh,560px); overflow:auto; }
+.water-choice { min-height:62px; }
+.water-choice:focus-visible { outline:2px solid var(--profession-accent); outline-offset:2px; }
+.water-choice:disabled { opacity:.55; cursor:not-allowed; }
+.water-emblem { display:grid; place-items:center; width:34px; height:34px; flex:none; border-radius:50%; color:#a8d0c8; background:radial-gradient(circle,#355960,#172426); border:1px solid #587274; font:18px Marcellus,serif; }
+.water-scene { height:190px; }
+.fishing-controls { align-items:end; }
+@media(max-width:1000px) {
+ .fishing-atlas { grid-template-columns:minmax(0,1fr); }
+ .fishing-atlas .waters-panel,.fishing-atlas .profession-focus,.fishing-atlas .profession-inspector,.fishing-atlas .profession-stats { grid-column:1; grid-row:auto; }
+}
+
+/* Cooking keeps the recipe book and active kitchen in view; supplies stay optional. */
+.cooking-supply-toggle { display:flex; align-items:center; gap:12px; margin:0 0 9px; }
+.cooking-supply-toggle span { color:#919b95; font-size:11px; }
+.cooking-grid { grid-template-columns:minmax(270px,.78fr) minmax(0,1.6fr); gap:12px; }
+.cooking-grid .recipe-browser { grid-column:1; grid-row:1; }
+.cooking-grid .kitchen-focus { grid-column:2; grid-row:1; }
+.cooking-grid .pantry-panel { grid-column:1/-1; }
+.cooking-grid .recipe-list { max-height:min(58vh,650px); }
+.cooking-grid .recipe-filters label:not(.sr-only) { display:flex; gap:5px; align-items:center; font-size:11px; }
+@media(max-width:900px) { .cooking-grid { grid-template-columns:minmax(0,1fr); }.cooking-grid .recipe-browser,.cooking-grid .kitchen-focus,.cooking-grid .pantry-panel { grid-column:1;grid-row:auto; } }
+
+/* Bank navigation follows inventory groups rather than profession filters. */
+.bank-workspace { display:grid; grid-template-columns:minmax(190px,.62fr) minmax(0,2.1fr) minmax(230px,.78fr); gap:12px; align-items:start; }
+.bank-categories nav { display:grid; gap:14px; }
+.bank-category-group { display:grid; gap:4px; }
+.bank-category-group>b { color:#9b8769; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:0 7px 4px; }
+.bank-category-group button { min-height:32px; text-align:left; padding:6px 9px; color:#b7beb7; background:transparent; border:1px solid transparent; border-radius:4px; cursor:pointer; }
+.bank-category-group button:hover { background:#292f30; }
+.bank-category-group button.selected { color:#edd0a5; border-color:#72563a; background:#332d25; }
+.bank-category-group button:focus-visible { outline:2px solid #d6b870; outline-offset:2px; }
+.bank-detail-panel { position:sticky; top:12px; }
+.bank-search input { width:min(380px,100%); min-height:36px; padding:6px 10px; color:#eee8dc; background:#151a1c; border:1px solid #3b4446; border-radius:5px; }
+.bank-item:focus-visible { outline:2px solid #d6b870; outline-offset:2px; }
+.bank-item .stack-count { font-variant-numeric:tabular-nums; }
+@media(max-width:1050px) { .bank-workspace { grid-template-columns:minmax(150px,.5fr) minmax(0,1fr); }.bank-detail-panel { grid-column:1/-1;position:static; } }
+@media(max-width:700px) { .bank-workspace { grid-template-columns:minmax(0,1fr); }.bank-categories nav { display:flex;flex-wrap:wrap; }.bank-category-group { display:flex;flex-wrap:wrap; }.bank-category-group>b { width:100%; } }
+
+/* Combat slots read as an equipped kit rather than a filter list. */
+.equipment-screen .equipment-slot-tabs { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); grid-template-areas:"head head head" "weapon armor offhand" "hands hands hands" "feet feet feet"; gap:7px; }
+.equipment-screen .equipment-slot-tabs>button:nth-child(1) { grid-area:weapon; }
+.equipment-screen .equipment-slot-tabs>button:nth-child(2) { grid-area:offhand; }
+.equipment-screen .equipment-slot-tabs>button:nth-child(3) { grid-area:head; }
+.equipment-screen .equipment-slot-tabs>button:nth-child(4) { grid-area:armor; }
+.equipment-screen .equipment-slot-tabs>button:nth-child(5) { grid-area:hands; }
+.equipment-screen .equipment-slot-tabs>button:nth-child(6) { grid-area:feet; }
+.equipment-screen .equipment-slot-tabs>button { min-height:54px; }
+.equipment-screen .comparison-row { font-size:13px; }
+
+/* Combat navigation is a route map; elite and dungeon paths remain separate. */
+.combat-map { display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:6px;margin:8px 0 12px;max-height:210px;overflow:auto; }
+.combat-map button { min-height:54px;display:flex;align-items:center;gap:8px;padding:7px 9px;text-align:left;color:#d9ded5;background:linear-gradient(110deg,#202729,#1a2021);border:1px solid #3d4848;border-radius:5px;cursor:pointer; }
+.combat-map button:hover:not(:disabled) { border-color:#8b6d4a;background:#2b2b27; }
+.combat-map button.selected { border-color:#c08a52;background:#30281f;box-shadow:inset 2px 0 #cf985d; }
+.combat-map button:disabled { opacity:.48;cursor:not-allowed; }
+.combat-map button:focus-visible { outline:2px solid #d6b870;outline-offset:2px; }
+.combat-map .map-mark { width:28px;height:28px;display:grid;place-items:center;flex:none;color:#cfac7e;background:#181d1e;border:1px solid #61533f;border-radius:50%;font-size:10px;font-variant-numeric:tabular-nums; }
+.combat-map button>span:nth-child(2) { min-width:0;flex:1; }
+.combat-map b,.combat-map small { display:block; }
+.combat-map b { font-size:12px; }
+.combat-map small { margin-top:3px;color:#929d98;font-size:10px; }
+.combat-map i { color:#dfb27d;font-size:8px;font-style:normal;letter-spacing:.1em; }
+.water-choice { width:100%;display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:9px;align-items:center;text-align:left;padding:8px 9px;color:#e4e2d8;background:linear-gradient(105deg,#202a2c,#1a2224);border:1px solid #354345;border-radius:6px;cursor:pointer; }
+.water-choice:hover:not(:disabled) { background:linear-gradient(105deg,#293638,#20292a);border-color:#607c7d; }
+.water-choice.selected { border-color:#84aaa3;background:linear-gradient(105deg,#293d3e,#202e30);box-shadow:inset 2px 0 #90b6ad; }
+.water-choice>span:nth-child(2) { min-width:0; }
+.water-choice b,.water-choice small { display:block; }
+.water-choice b { font-size:13px;line-height:1.25; }
+.water-choice small { margin-top:3px;color:#a2afaa;font-size:10px;line-height:1.35;overflow-wrap:anywhere; }
+.water-choice .badge { font-size:9px;padding:4px 6px; }
+@media(max-width:800px) {
+ html[data-scale-tier="large"] .activity-hud { grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto auto; }
+ html[data-scale-tier="large"] .dock-activity { grid-row:1;grid-column:1; }
+ html[data-scale-tier="large"] .dock-progress { grid-row:2;grid-column:1/-1; }
+ html[data-scale-tier="large"] .dock-metrics { grid-row:3;grid-column:1/-1; }
+ html[data-scale-tier="large"] .dock-stop,html[data-scale-tier="large"] .dock-choose { grid-row:1;grid-column:2; }
+}
+@media(max-width:500px) {
+ html[data-scale-tier="large"] .brand { width:100px;padding-inline:5px; }
+ html[data-scale-tier="large"] nav { gap:0;padding-inline:4px; }
+ html[data-scale-tier="large"] nav .nav-item { width:25px;height:34px; }
+ html[data-scale-tier="large"] .lock-mark { display:none; }
+}
+@media(max-width:930px) {
+ .game-shell { grid-template-columns:minmax(0,1fr); }
+ .sidebar,.main-frame { min-width:0;width:100%; }
+}
+@media(max-width:930px) {
+ html,body,#root { max-width:100%;overflow-x:clip; }
+ .game-shell { width:100vw;max-width:100vw;overflow-x:clip; }
+ .content-scroll,.content-wrap,.screen,.combat-layout { min-width:0;max-width:100%; }
+}
+@media(max-width:930px) {
+ html,body,#root,.game-shell,.sidebar,.main-frame { width:100vw!important;min-width:0!important;max-width:100vw!important; }
+ html,body,#root,.game-shell { overflow-x:hidden!important; }
+}

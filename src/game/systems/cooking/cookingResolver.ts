@@ -60,7 +60,7 @@ export function cookingPrepTime(s: SaveState) {
   if (s.cooking.specialization === 'Hearth Chef') modifier *= recipe.foodValue > 0 ? .92 : 1.05;
   if (s.cooking.specialization === 'Provisioner' && recipe.method === 'Banquet Station') modifier *= 1.05;
   if (s.cooking.specialization === 'Gourmet Chef') modifier *= .88;
-  return Math.max(base * .3, base * (10 / (10 + knife.power)) * (1 - knife.prepSpeed) * modifier);
+  return Math.max (base * .3, base * (10 / (10 + knife.power)) * (1 - knife.prepSpeed) * modifier);
 }
 
 export function cookingMethodTime(s: SaveState) {
@@ -72,5 +72,5 @@ export function cookingMethodTime(s: SaveState) {
   if (s.cooking.specialization === 'Hearth Chef' && (recipe.method === 'Grill' || recipe.method === 'Oven')) modifier *= .88;
   if (s.cooking.specialization === 'Gourmet Chef' && recipe.method === 'Banquet Station') modifier *= .9;
   if (s.cooking.specialization === 'Gourmet Chef' && recipe.complexity <= 2) modifier *= 1.05;
-  return Math.max(1000, recipe.cookSeconds * 1000 * modifier);
+  return Math.max (1000, recipe.cookSeconds * 1000 * modifier);
 }

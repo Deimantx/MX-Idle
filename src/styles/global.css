@@ -498,7 +498,7 @@ nav {
 }
 
 .content-wrap {
-  max-width: calc(1770px * var(--ui-scale));
+  max-width: min(calc(2180px * var(--ui-scale)), 100%);
   margin: 0 auto;
   padding: calc(23px * var(--ui-scale)) calc(30px * var(--ui-scale)) calc(100px * var(--ui-scale));
 
