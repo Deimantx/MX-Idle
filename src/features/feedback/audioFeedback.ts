@@ -21,8 +21,8 @@ const priority: Record<FeedbackCue, number> = {
 };
 const tones: Record<FeedbackCue, { notes: number[]; type: OscillatorType; duration: number; level: number }> = {
   navigate: { notes: [294], type: 'sine', duration: .035, level: .025 }, start: { notes: [392, 523], type: 'triangle', duration: .09, level: .045 }, stop: { notes: [247], type: 'triangle', duration: .075, level: .035 },
-  'mining-hit': { notes: [156, 117], type: 'triangle', duration: .07, level: .045 }, 'mining-stage': { notes: [392, 494, 659], type: 'triangle', duration: .16, level: .055 },
-  'forge-strike': { notes: [207, 311], type: 'triangle', duration: .065, level: .04 }, craft: { notes: [392, 523, 659], type: 'triangle', duration: .16, level: .05 },
+  'mining-hit': { notes: [146, 110], type: 'triangle', duration: .085, level: .058 }, 'mining-stage': { notes: [392, 494, 659], type: 'triangle', duration: .16, level: .055 },
+  'forge-strike': { notes: [196, 294], type: 'triangle', duration: .08, level: .052 }, craft: { notes: [392, 523, 659], type: 'triangle', duration: .16, level: .05 },
   'fishing-bite': { notes: [523, 659], type: 'sine', duration: .1, level: .04 }, 'fish-landed': { notes: [392, 523], type: 'sine', duration: .12, level: .045 }, 'aquatic-find': { notes: [523, 659, 784], type: 'sine', duration: .22, level: .06 },
   'cooking-prep': { notes: [330, 440], type: 'triangle', duration: .08, level: .035 }, cook: { notes: [392, 494, 587], type: 'triangle', duration: .15, level: .05 }, equip: { notes: [440, 349], type: 'triangle', duration: .09, level: .04 },
   'combat-hit': { notes: [174, 130], type: 'triangle', duration: .065, level: .045 }, 'combat-miss': { notes: [220], type: 'sine', duration: .06, level: .03 }, 'combat-crit': { notes: [196, 294, 392], type: 'sawtooth', duration: .12, level: .045 }, special: { notes: [247, 370, 494], type: 'triangle', duration: .14, level: .05 }, 'enemy-hit': { notes: [147, 110], type: 'triangle', duration: .075, level: .045 },
@@ -54,9 +54,11 @@ export function playFeedbackCue(cue: FeedbackCue, options: AudioOptions) {
   gain.gain.setValueAtTime(Math.max(.0001, preset.level * Math.min(1, options.masterVolume)), ctx.currentTime);
   gain.gain.exponentialRampToValueAtTime(.0001, ctx.currentTime + preset.duration);
   gain.connect(ctx.destination);
+  const variableStrike = cue === 'mining-hit' || cue === 'forge-strike';
+  const pitch = variableStrike ? 1 + (Math.random() - .5) * .035 : 1;
   const oscillators = preset.notes.map((frequency, index) => {
     const oscillator = ctx.createOscillator(); oscillator.type = preset.type;
-    oscillator.frequency.setValueAtTime(frequency, ctx.currentTime + index * .035);
+    oscillator.frequency.setValueAtTime(frequency * pitch, ctx.currentTime + index * .035);
     oscillator.connect(gain); oscillator.start(ctx.currentTime + index * .035); oscillator.stop(ctx.currentTime + preset.duration + index * .035);
     return oscillator;
   });

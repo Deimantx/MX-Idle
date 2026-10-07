@@ -67,7 +67,7 @@ export function BankScreen({ game: g, filter, setFilter }: { game: SaveState; fi
         <div className="bank-v2-grid g2-scroll" role="listbox" aria-label="Bank items">
           {entries.length ? entries.map(id => {
             const definition = ITEMS[id], count = g.bank[id] ?? 0, isRare = definition.rarity === 'Rare', isSelected = selectedItem === id;
-            return <button key={id} className={`vault-item ${isSelected ? 'selected' : ''} ${isRare ? 'rare' : ''} ${equipped && isSelected ? 'worn' : ''}`} onClick={() => setSelected(id)} aria-pressed={isSelected} role="option" aria-selected={isSelected}>
+            return <button key={id} data-bank-item={id} className={`vault-item ${isSelected ? 'selected' : ''} ${isRare ? 'rare' : ''} ${equipped && isSelected ? 'worn' : ''}`} onClick={() => setSelected(id)} aria-pressed={isSelected} role="option" aria-selected={isSelected}>
               <span className="vault-item-top"><small>{definition.tier ? `T${definition.tier}` : definition.rarity ?? 'Common'}</small>{equipped && isSelected && <i>WORN</i>}</span>
               <ItemTip id={id} context={{owned:count,equipped:Boolean(equipped&&isSelected),skillLevels:{Mining:g.skills.Mining.level,Smithing:g.skills.Smithing.level,Fishing:g.skills.Fishing.level,Cooking:g.skills.Cooking.level,Attack:g.skills.Attack.level,Defence:g.skills.Defence.level,Hitpoints:g.skills.Hitpoints.level}}}><GameItemFrame inspect={false} id={id} size="regular" state={isSelected ? 'selected' : isRare ? 'reward' : 'normal'} count={`×${fmt(count)}`} tier={definition.tier}/></ItemTip>
               <b>{definition.name}</b><span className="vault-item-foot"><span className={`rarity-dot ${isRare ? 'rare' : ''}`}/>{definition.rarity ?? 'Common'}</span>

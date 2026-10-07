@@ -12,6 +12,7 @@ import { ActivityHud } from '../ui/game/ActivityHud';
 import { GameTopBar } from '../ui/game/GameTopBar';
 import { FeedbackLayer } from '../features/feedback/FeedbackLayer';
 import { GlobalXpHud } from '../features/feedback/xp/GlobalXpHud';
+import { GameFxLayer } from '../features/feedback/GameFxLayer';
 import { playFeedbackCue, unlockFeedbackAudio } from '../features/feedback/audioFeedback';
 import { DevPanel } from '../features/devtools/DevPanel';
 import { FirstStepsPanel } from '../features/onboarding/FirstStepsPanel';
@@ -178,6 +179,7 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
       <GameTopBar game={game} screen={screen} profile={profile} saveStatus={saveStatus} onOpenSettings={onOpenSettings}/>
       <GlobalXpHud game={game} events={feedbackEvents} settings={appSettings.feedback} reducedMotion={isMotionReduced}/>
       <FeedbackLayer events={feedbackEvents} settings={appSettings.feedback} reducedMotion={isMotionReduced} screen={screen}/>
+      <GameFxLayer events={feedbackEvents} screen={screen} reducedMotion={isMotionReduced}/>
       <div className="content-scroll" id="game-content" tabIndex={-1}><div className="content-wrap">
         {!game.objectives.victory && <FirstStepsPanel game={game} minimized={minimized} onToggle={() => { setMinimized(!minimized); mut((s) => { s.objectives.dismissed = !s.objectives.dismissed; }); }} />}
         {screen === 'Mining' && <MiningScreen game={game} xp={xp.mining.value} maxXp={xp.mining.max} speedMultiplier={speed} metrics={metrics} select={(id) => mut((s) => { selectDeposit(s, id); })} equipTool={(item) => equip(item, 'miningTool')} start={() => start('mining')} stop={stop} />}

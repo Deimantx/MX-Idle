@@ -20,14 +20,19 @@ function SkillTooltip({ game, skillId }: { game: SaveState; skillId: SkillId }) 
 function XpSkillOrb({ game, entry, settings, onInspect }: { game: SaveState; entry: VisibleSkillXp; settings: FeedbackSettings; onInspect: (skill: SkillId, active: boolean) => void }) {
   const state = game.skills[entry.skillId], threshold = xpForLevel(state.level), maxed = state.level >= 100;
   const progress = maxed ? 1 : Math.max(0, Math.min(1, state.xp / Math.max(1, threshold)));
-  const circumference = 2 * Math.PI * 36;
+  const circumference = 2 * Math.PI * 43;
   const latestPulse = entry.pulses[entry.pulses.length - 1];
   const levelUp = settings.levelUpEffects && entry.levelUp && Date.now() - entry.levelUp.startedAt < 1200;
   const presentation = SKILL_PRESENTATION[entry.skillId];
   const label = `${entry.skillId}, level ${state.level}${maxed ? ', maximum level' : ''}, ${number(state.xp)} of ${number(threshold)} XP${maxed ? '' : `, ${number(Math.max(0, threshold - state.xp))} XP to next level`}`;
   return <Tip placement="bottom" delayMs={120} onOpenChange={(open) => onInspect(entry.skillId, open)} className={`xp-orb-tip ${presentation.accent}`} content={<SkillTooltip game={game} skillId={entry.skillId}/> }>
     <div className={`xp-skill-orb ${presentation.accent} ${entry.phase} ${Date.now()-entry.lastGainAt<240?'gaining':''} ${levelUp ? 'leveling' : ''}`} role="img" aria-label={label}>
-      <svg className="xp-orb-ring" viewBox="0 0 84 84" aria-hidden="true"><circle className="xp-ring-track" cx="42" cy="42" r="36"/><circle className="xp-ring-progress" cx="42" cy="42" r="36" strokeDasharray={circumference} strokeDashoffset={circumference * (1 - progress)}/><circle className="xp-ring-glint" cx="42" cy="42" r="36" strokeDasharray="1 225" strokeDashoffset={circumference * (1 - progress)}/></svg>
+      <svg className="xp-orb-ring" viewBox="0 0 100 100" shapeRendering="geometricPrecision" aria-hidden="true">
+        <circle className="xp-ring-rim" cx="50" cy="50" r="48" />
+        <circle className="xp-ring-bead" cx="50" cy="50" r="45" />
+        <circle className="xp-ring-track" cx="50" cy="50" r="43" />
+        <circle className="xp-ring-progress" cx="50" cy="50" r="43" strokeDasharray={circumference} strokeDashoffset={circumference * (1 - progress)} />
+      </svg>
       <span className="xp-orb-core"><Icon name={presentation.icon} size={22}/><b>{state.level}</b></span>
       {latestPulse && settings.showXpNumbers && <span className="xp-gain-pulse" key={latestPulse.id}>+{formatXpAmount(latestPulse.amount)} XP</span>}
       {levelUp && <span className="xp-level-plate" key={`${entry.levelUp!.startedAt}-${entry.levelUp!.to}`}>LEVEL UP <b>{entry.levelUp!.from} → {entry.levelUp!.to}</b></span>}

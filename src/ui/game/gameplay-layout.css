@@ -5,7 +5,7 @@
 .gameplay-heading h1 { margin:0;font-size:clamp(20px,1.35vw,27px);line-height:1.15; }
 .gameplay-heading p { margin:3px 0 0;color:#b2b7af;font-size:14px; }
 .gameplay-heading .screen-overline { margin-bottom:2px;font-size:10px; }
-.heading-xp { --heading-accent:#c79562;width:min(390px,31vw);min-width:280px;align-self:center;display:grid;gap:6px;margin-left:auto;padding:9px 12px;border:1px solid #444b47;border-left:2px solid var(--heading-accent);border-radius:5px;background:linear-gradient(135deg,#252b2a,#1b2122);box-shadow:inset 0 1px #ffffff0c,0 4px 10px #0003; }
+.heading-xp { --heading-accent:#c79562;width:clamp(440px,38vw,700px);min-width:0;align-self:center;display:grid;gap:7px;margin-left:auto;padding:10px 13px;border:1px solid #444b47;border-left:2px solid var(--heading-accent);border-radius:5px;background:linear-gradient(135deg,#252b2a,#1b2122);box-shadow:inset 0 1px #ffffff0c,0 4px 10px #0003; }
 .gameplay-heading.mining .heading-xp { --heading-accent:#c89a62; }.gameplay-heading.smithing .heading-xp { --heading-accent:#d27b4f; }.gameplay-heading.fishing .heading-xp { --heading-accent:#78b2b2; }.gameplay-heading.cooking .heading-xp { --heading-accent:#d0b86c; }.gameplay-heading.combat .heading-xp { --heading-accent:#d77865; }
 .heading-xp>header,.heading-xp>header>span,.heading-xp>footer { display:flex;align-items:center;justify-content:space-between;gap:8px; }
 .heading-xp>header>span { justify-content:flex-start;color:#c1c5bc;font-size:calc(11px * var(--ui-scale) * var(--text-scale)); }
@@ -13,8 +13,8 @@
 .heading-xp>header b { color:#e8e1d3;font-size:calc(12px * var(--ui-scale) * var(--text-scale)); }
 .heading-xp>header strong { padding-left:7px;border-left:1px solid #4b504a;color:#f0d1a3;font-size:calc(11px * var(--ui-scale) * var(--text-scale));font-variant-numeric:tabular-nums; }
 .heading-xp>header>small { color:#b7a990;font-size:calc(9px * var(--ui-scale) * var(--text-scale));font-weight:750;letter-spacing:.07em;white-space:nowrap; }
-.heading-xp-track { height:10px;overflow:hidden;background:linear-gradient(180deg,#101516,#171e1e);border:1px solid #46504c;border-radius:3px;box-shadow:inset 0 2px 3px #0009; }
-.heading-xp-track i { display:block;width:100%;height:100%;transform-origin:left center;background:linear-gradient(180deg,color-mix(in srgb,var(--heading-accent),#fff 28%),var(--heading-accent));box-shadow:0 0 8px color-mix(in srgb,var(--heading-accent),transparent 60%);transition:transform 280ms cubic-bezier(.2,.7,.2,1); }
+.heading-xp-track { height:9px;overflow:hidden;background:linear-gradient(180deg,#101516,#171e1e);border:1px solid #46504c;border-radius:3px;box-shadow:inset 0 2px 3px #0009; }
+.heading-xp-track i { display:block;width:100%;height:100%;transform-origin:left center;background:linear-gradient(180deg,color-mix(in srgb,var(--heading-accent),#fff 22%),var(--heading-accent));transition:transform 280ms cubic-bezier(.2,.7,.2,1); }
 .heading-xp>footer { color:#c8c4b9;font-size:calc(10px * var(--ui-scale) * var(--text-scale));font-variant-numeric:tabular-nums; }
 .heading-xp>footer b { color:#e9e3d7;font-weight:650; }.heading-xp>footer i { padding:0 3px;color:#738078;font-style:normal; }.heading-xp>footer span { color:#919c94; }
 .comparison-table { margin:12px 0;border-top:1px solid #353e40; }
@@ -75,7 +75,7 @@
  .mine-operations-grid { grid-template-columns:1fr; }
  .mine-operations-grid section { padding:8px 0 0;border-left:0;border-top:1px solid #384143; }
 }
-@media (max-width:1000px) { .gameplay-heading { flex-wrap:wrap;gap:8px; }.heading-xp { width:min(100%,390px);min-width:min(280px,calc(100vw - 36px));margin-left:54px; } }
+@media (max-width:1000px) { .gameplay-heading { flex-wrap:wrap;gap:8px; }.heading-xp { width:min(100%,700px);min-width:min(280px,calc(100vw - 36px));margin-left:54px; } }
 @media(prefers-reduced-motion:reduce) { .heading-xp-track i { transition:none; } }
 /* Mining should fit the excavation and operating readouts in one glance. */
 .mine-layout { grid-template-columns:minmax(320px,.72fr) minmax(0,1.9fr); gap:12px; }
