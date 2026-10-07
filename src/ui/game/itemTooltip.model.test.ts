@@ -18,6 +18,11 @@ describe('item inspection model', () => {
     expect(model.sections[0]?.rows.map((row) => row.label)).toContain('Power');
   });
 
+  it('formats accessory critical rates as percentages in the shared tooltip', () => {
+    const model=getItemTooltipModel('combat.accessory.ring.qa_fixture',{owned:1,equipped:true,skillLevels:{Attack:1}});
+    expect(model.sections.flatMap(section=>section.rows)).toContainEqual(expect.objectContaining({label:'Crit Rate',value:'5%'}));
+  });
+
   it('shows nutrition stats from cooking recipe data', () => {
     const model = getItemTooltipModel('cooking.food.grilled_river_fish');
     expect(model.sections.find((section) => section.title === 'NUTRITION')?.rows.map((row) => row.label)).toEqual(['Heal', 'Satiety', 'Food value']);

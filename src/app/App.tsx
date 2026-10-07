@@ -114,7 +114,7 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
   });
   const unequip = (slot: 'weapon' | 'head' | 'armor' | 'hands' | 'feet' | 'offhand' | 'ring' | 'necklace' | 'cape' | 'miningTool' | 'smithingHammer') => mut((s) => {
     if(slot==='miningTool'||slot==='smithingHammer'){if(s.activity==='combat')return;const old=s.equipped[slot];if(old){gainItem(s,old as ItemId);s.equipped[slot]=null;}return;}
-    if(unequipCombatItem(s,slot))sound('equip');
+    if(unequipCombatItem(s,slot)){s.combat.playerHp=Math.min(s.combat.playerHp,getPlayerMaxHitpoints(s));sound('equip');}
   });
   const grant = (item: ItemId, n = 1) => mut((s) => { gainItem(s, item, n); });
   const grantT1Kit = () => mut((s) => { for (const item of ['item.mining.copper_pickaxe','item.smithing.copper_smithing_hammer','combat.weapon.melee.copper_battle_axe','combat.weapon.melee.copper_mace','combat.offhand.melee.copper_shield','combat.armor.heavy.copper_armor','combat.armor.heavy.copper_gauntlets','combat.armor.heavy.copper_greaves'] as ItemId[]) gainItem(s,item); s.skills.Mining.level = Math.max (5,s.skills.Mining.level); s.skills.Smithing.level = Math.max (5,s.skills.Smithing.level); s.skills.Attack.level = Math.max (5,s.skills.Attack.level); s.skills.Defence.level = Math.max (5,s.skills.Defence.level); });

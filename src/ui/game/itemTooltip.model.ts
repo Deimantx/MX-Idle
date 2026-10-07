@@ -17,8 +17,9 @@ const readable = (value: string) => value
   .replace(/\u00e2\u20ac\u2122/g, "'")
   .replace(/\u00e2\u20ac\u0153|\u00e2\u20ac\u009d/g, '"')
   .replace(/\u00c3\u0097|\u00c3\u2014/g, ' x ');
+const readableStat = (label:string,value:string|number):string|number => typeof value==='number'&&/crit rate|crit damage/i.test(label)&&Math.abs(value)<=1?`${Math.round(value*100)}%`:value;
 const semanticRows = (stats: Record<string, string|number>): ItemTooltipRow[] => Object.entries(stats).map(([label, value]) => ({
-  label: titleCase(label), value,
+  label: titleCase(label), value:readableStat(label,value),
   tone: /power|damage/i.test(label) ? 'power' : /accuracy|crit/i.test(label) ? 'accuracy' : /resist|evasion|defence/i.test(label) ? 'defence' : /heal/i.test(label) ? 'healing' : undefined,
 }));
 

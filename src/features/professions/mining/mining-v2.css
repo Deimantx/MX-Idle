@@ -92,3 +92,97 @@
 .mining-v2 .mine-inspector .shift-tool-module { min-height:70px; }
 @media (max-width:860px) { .mining-v2 .mine-search-row { margin-top:1px; }.mining-v2 .mine-layer-rail span { font-size:9px; }.mining-v2 .mine-layer-rail { overflow-x:auto; } }
 @media (max-width:560px) { .mining-v2 .mine-layer-rail { grid-template-columns:repeat(5,minmax(58px,1fr)); }.mining-v2 .deposit-selected .g2-state { min-width:48px; } }
+.mining-v2 .stage-name-line { gap:14px; align-items:center; }
+.mining-v2 .stage-name-line>div:first-child { display:grid; gap:3px; flex:1; min-width:0; }
+.mining-v2 .stage-name-line h3 { margin:0; }
+.mining-v2 .stage-reward { min-width:max-content; }
+.mining-v2 .vein-depth { display:none; }
+@media (min-width:2100px) { .mining-v2 .mine-operations-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+
+/* Mining's browser and cockpit use separate tracks; operations owns the available width. */
+.mining-v2 .mine-layout { grid-template-columns:minmax(285px,.76fr) minmax(0,2.24fr); grid-template-rows:auto auto; gap:15px; align-items:start; }
+.mining-v2 .mine-library-track { min-width:0; display:grid; align-content:start; gap:10px; }
+.mining-v2 .mine-layout .deposit-rail { grid-column:auto; grid-row:auto; min-width:0; }
+.mining-v2 .mine-layout .mine-focus { grid-column:auto; grid-row:auto; min-width:0; padding:15px 20px 13px; }
+.mining-v2 .mine-layout .mine-shift-panel { grid-column:1/-1; min-width:0; }
+.mining-v2 .mine-browser-tools { margin:0; padding:0 1px; }
+.mining-v2 .mine-category-nav { display:flex; flex-wrap:wrap; gap:6px; overflow:visible; }
+.mining-v2 .mine-category-nav button { min-height:30px; padding:5px 9px; border-color:#3c4440; color:#b5b9ae; background:linear-gradient(180deg,#292e2b,#202523); font-size:11px; transition:transform 120ms ease,border-color 150ms ease,background 150ms ease,color 150ms ease; }
+.mining-v2 .mine-category-nav button:hover { transform:translateY(-1px); border-color:#8e7753; color:#ece2cc; }
+.mining-v2 .mine-category-nav button.selected { color:#f0d6ac; border-color:#9a7a4d; background:linear-gradient(180deg,#453a29,#302c24); box-shadow:inset 0 1px #fff2,0 2px 6px #0005; }
+.mining-v2 .mine-category-nav button:focus-visible,.mining-v2 .mine-search-row:focus-within { outline:2px solid #b9955c; outline-offset:2px; }
+.mining-v2 .mine-search-row { min-width:0; margin:0 0 1px; padding:5px 8px; }
+.mining-v2 .mine-search-row .mine-search { min-width:0; }
+.mining-v2 .mine-search-row input { min-width:0; outline:none; }
+.mining-v2 .mine-search-row:focus-within { border-color:#927648; box-shadow:0 0 0 1px #92764844; }
+.mining-v2 .mine-search-clear { width:26px; height:26px; flex:none; display:grid; place-items:center; border:1px solid #454c46; border-radius:4px; color:#c4c5b9; background:#272d29; cursor:pointer; }
+.mining-v2 .mine-search-clear:hover { color:#f2ddbb; border-color:#a18455; }
+.mining-v2 .mine-library-empty { min-height:150px; display:grid; align-content:center; justify-items:center; gap:7px; color:#8e9990; text-align:center; }
+.mining-v2 .mine-library-empty b { color:#d8d7cb; font-size:12px; }
+.mining-v2 .mine-library-empty span { max-width:28ch; font-size:10px; line-height:1.45; }
+.mining-v2 .deposit-browser { max-height:clamp(240px,35vh,540px); }
+.mining-v2 .focus-top { min-height:50px; }
+.mining-v2 .mine-deposit-identity { min-width:0; display:flex; align-items:center; gap:10px; }
+.mining-v2 .mine-identity-mark { width:34px; height:34px; flex:none; display:grid; place-items:center; border:1px solid #66543a; border-radius:5px; color:#d6b479; background:linear-gradient(145deg,#393329,#202522); box-shadow:inset 0 1px #fff2,inset 0 -2px #101412; }
+.mining-v2 .mine-deposit-identity>div { min-width:0; display:grid; gap:3px; }
+.mining-v2 .mine-deposit-identity h2 { margin:0; color:#eee5d5; font:600 19px 'Marcellus',Georgia,serif; }
+.mining-v2 .mine-deposit-identity>div>span { color:#aeb0a3; font-size:11px; }
+.mining-v2 .mine-identity-mark .item-mark { width:24px; height:24px; border:0; background:transparent; box-shadow:none; }
+.mining-v2 .vein-art { height:clamp(260px,30vh,405px); margin:9px -20px 11px; }
+.mining-v2 .mine-face-label { left:18px; top:auto; bottom:13px; }
+.mining-v2 .mine-face-label span { color:#c5ad7e; font-size:9px; letter-spacing:.1em; }
+.mining-v2 .mine-drill-point { width:36px; height:36px; border:1px solid #d2ad7280; border-radius:50%; background:radial-gradient(circle,#644a2a99,#1c211faa 72%); }
+.mining-v2 .stage-name-line { min-height:54px; padding:0 2px 8px; }
+.mining-v2 .stage-name-line h3 { color:#f0dfc3; font-size:17px; }
+.mining-v2 .stage-reward>span { color:#a79b84; font-size:9px; letter-spacing:.08em; }
+.mining-v2 .stage-reward>b { color:#ddd7c8; font-variant-numeric:tabular-nums; }
+.mining-v2 .mine-density-heading { margin:9px 0 5px; }
+.mining-v2 .mine-density-heading>span { display:flex; flex-wrap:wrap; align-items:baseline; gap:8px; color:#ded4c0; font-size:11px; font-weight:700; letter-spacing:.04em; }
+.mining-v2 .mine-density-heading>span>small { font-size:10px; font-weight:500; letter-spacing:0; }
+.mining-v2 .mine-action-row { display:grid; grid-template-columns:minmax(0,1fr) minmax(160px,.34fr); align-items:stretch; gap:12px; margin-top:8px; }
+.mining-v2 .mine-action-progress { min-width:0; margin:0; display:grid; grid-template-columns:auto minmax(100px,1fr); align-items:center; gap:12px; padding:9px 11px; }
+.mining-v2 .mine-action-progress>div:first-child { min-width:64px; display:grid; gap:3px; }
+.mining-v2 .mine-action-progress>div:first-child>b { color:#e5d6b9; font:600 18px ui-monospace,monospace; font-variant-numeric:tabular-nums; }
+.mining-v2 .mine-controls { margin:0; padding:0; display:flex; }
+.mining-v2 .mine-controls .game-button { width:100%; min-height:54px; justify-content:center; font-size:14px; box-shadow:inset 0 1px #fff2,0 3px 7px #0005; }
+.mining-v2 .mine-layer-rail { grid-template-columns:repeat(5,minmax(0,1fr)); gap:6px; margin-top:12px; padding-top:10px; }
+.mining-v2 .mine-layer-rail .tip-trigger { min-width:0; }
+.mining-v2 .mine-layer-rail span { justify-content:center; min-height:24px; color:#737d76; }
+.mining-v2 .mine-layer-rail span i { width:100%; height:5px; border-radius:2px; color:transparent; background:#272d29; border-color:#424a42; font-size:0; }
+.mining-v2 .mine-layer-rail span.complete i { border-color:#6d805b; background:#6e8057; }
+.mining-v2 .mine-layer-rail span.current i { border-color:#c09a5f; background:linear-gradient(90deg,#d5a862,#80613b); box-shadow:0 0 8px #d89b5144; }
+.mining-v2 .mine-shift-panel { margin-top:0; }
+.mining-v2 .mine-shift-panel .mine-operations-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+@media (max-width:1100px) {
+ .mining-v2 .mine-layout { grid-template-columns:minmax(245px,.72fr) minmax(0,1.6fr); gap:11px; }
+ .mining-v2 .mine-layout .mine-focus { padding-inline:15px; }
+ .mining-v2 .vein-art { margin-inline:-15px; }
+ .mining-v2 .mine-action-row { grid-template-columns:minmax(0,1fr) minmax(145px,.42fr); gap:8px; }
+}
+@media (max-width:860px) {
+ .mining-v2 .mine-layout { grid-template-columns:minmax(0,1fr); }
+ .mining-v2 .mine-library-track,.mining-v2 .mine-layout .deposit-rail,.mining-v2 .mine-layout .mine-focus,.mining-v2 .mine-layout .mine-shift-panel { grid-column:1; grid-row:auto; }
+ .mining-v2 .mine-category-nav { flex-wrap:nowrap; overflow-x:auto; padding:2px 1px 5px; }
+ .mining-v2 .mine-category-nav button { flex:none; }
+ .mining-v2 .deposit-browser { max-height:340px; }
+ .mining-v2 .mine-shift-panel .mine-operations-grid { grid-template-columns:1fr; }
+ .mining-v2 .mine-layout .deposit-rail { height:auto; }
+}
+@media (max-width:560px) {
+ .mining-v2 .mine-layout .mine-focus { padding:12px; }
+ .mining-v2 .vein-art { height:clamp(225px,32vh,280px); margin-inline:-12px; }
+ .mining-v2 .mine-action-row { grid-template-columns:minmax(0,1fr); }
+ .mining-v2 .mine-action-progress { grid-template-columns:72px minmax(0,1fr); }
+ .mining-v2 .mine-controls .game-button { min-height:48px; }
+ .mining-v2 .mine-layer-rail { gap:4px; }
+}
+@media (prefers-reduced-motion:reduce) {
+ .mining-v2 .mine-category-nav button { transition:none; }
+}
+@media (min-width:861px) {
+ .mining-v2 .mine-library-track { grid-column:1; grid-row:1/3; align-self:stretch; grid-template-rows:auto auto minmax(0,1fr); }
+ .mining-v2 .mine-layout .mine-focus { grid-column:2; grid-row:1; }
+ .mining-v2 .mine-layout .mine-shift-panel { grid-column:2; grid-row:2; }
+ .mining-v2 .mine-layout .deposit-rail { height:100%; display:flex; flex-direction:column; }
+ .mining-v2 .deposit-browser { flex:1; }
+}
