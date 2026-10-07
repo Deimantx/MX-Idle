@@ -8,7 +8,7 @@ import { SMELTING_RECIPES } from '../../game/content/smithing/smeltingRecipes';
 import { MINING_DEPOSITS } from '../../game/content/mining/miningDeposits';
 import { MINING_STAGE_MODEL } from '../../game/content/mining/miningStages';
 import { MINING_TOOLS } from '../../game/content/mining/miningTools';
-import { estimateForgeCompletion, getPlayerAttackInterval, maxHitpoints, type SaveState, xpForLevel, getMiningStrikeTime, smithingActionTime } from '../../game/game';
+import { estimateForgeCompletion, getPlayerAttackInterval, getPlayerMaxHitpoints, type SaveState, xpForLevel, getMiningStrikeTime, smithingActionTime } from '../../game/game';
 import { GAME_SCREENS, screenLockReason, type GameScreenId } from '../../app/screenRegistry';
 import type { ItemId, SkillId } from '../../game/types/gameTypes';
 import { FISHING_SPOTS, FISH_SPECIES } from '../../game/content/fishing/fishingContent';
@@ -80,7 +80,7 @@ export function ActivityHud({ game: g, stop, onNavigate, speed, metrics, rewardF
       </> : <>
         <div className="dock-activity"><span className={`dock-icon active ${a}`}><Icon name={iconForActivity(a)} size={19}/></span><div><span className="tiny-label">{a === 'combat' ? 'ENCOUNTER' : a === 'smelting' || a === 'forging' ? 'SMITHING' : a.toUpperCase()}</span><b>{activityTitle}</b><small className="dock-phase-name">{phaseLabel}</small></div></div>
         <div className="dock-progress"><div className="dock-progress-caption"><b>{actionName}</b><span>{formatActionTime(remaining)}</span></div><ActionProgress active remainingMs={remaining} durationMs={duration} phaseKey={`${a}:${g.mining.strikes}:${g.smithing.work}:${g.fishing.phase}:${g.cooking.phase}:${g.combat.playerActionSerial}`} speedMultiplier={speed} label={`${activityTitle} progress`} tone={a === 'combat' ? 'danger' : a === 'mining' ? 'copper' : 'heat'}/></div>
-        <div className="dock-metrics">{dataStable ? <><div className="dock-metric"><small>{outputLabel}</small><b>{outputValue ?? '—'}</b></div><div className="dock-metric"><small>{a === 'combat' ? 'Attack XP/h' : `${skill} XP/h`}</small><b>{rate > 0 ? Math.round(rate).toLocaleString() : '—'}</b></div>{a === 'combat' ? <div className="dock-metric"><small>Health</small><b className={g.combat.playerHp / maxHitpoints(g.skills.Hitpoints.level) <= .35 ? 'critical' : ''}>{g.combat.playerHp} / {maxHitpoints(g.skills.Hitpoints.level)}</b></div> : eta && <div className="dock-metric"><small>Next level</small><b>{eta}</b></div>}</> : <span className="dock-collecting">Collecting rate data…</span>}</div>
+        <div className="dock-metrics">{dataStable ? <><div className="dock-metric"><small>{outputLabel}</small><b>{outputValue ?? '—'}</b></div><div className="dock-metric"><small>{a === 'combat' ? 'Attack XP/h' : `${skill} XP/h`}</small><b>{rate > 0 ? Math.round(rate).toLocaleString() : '—'}</b></div>{a === 'combat' ? <div className="dock-metric"><small>Health</small><b className={g.combat.playerHp / getPlayerMaxHitpoints(g) <= .35 ? 'critical' : ''}>{g.combat.playerHp} / {getPlayerMaxHitpoints(g)}</b></div> : eta && <div className="dock-metric"><small>Next level</small><b>{eta}</b></div>}</> : <span className="dock-collecting">Collecting rate data…</span>}</div>
         <Button tone="quiet" className="dock-stop" onClick={stop}><Icon name="stop" size={14}/>Stop</Button>
       </>}
     </footer>

@@ -1,5 +1,5 @@
 ﻿import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { advance, advanceWithEvents, activeSequence, COMBAT_AREAS, DUNGEONS, ENEMIES, ITEMS, FORGING_RECIPES, SMELTING_RECIPES, getDepositStageDensity, selectDeposit, setCombatTarget, setCombatArea, devForceCurrentEnemyDefeat, startActivity, stopActivity, getForgeWorkRequired, xpForLevel, FISHING_RODS, FISHING_SPOTS, COOKING_RECIPES, eatFood, canEquip, MELEE_WEAPONS, freshState, type Activity, type DamageType, type EnemyId, type ForgingRecipeId, type ItemId, type SaveState } from '../game/game';
+import { advance, advanceWithEvents, activeSequence, COMBAT_AREAS, DUNGEONS, ENEMIES, ITEMS, FORGING_RECIPES, SMELTING_RECIPES, getDepositStageDensity, selectDeposit, setCombatTarget, setCombatArea, devForceCurrentEnemyDefeat, startActivity, stopActivity, getForgeWorkRequired, xpForLevel, FISHING_RODS, FISHING_SPOTS, COOKING_RECIPES, eatFood, getPlayerMaxHitpoints, equipCombatItem, unequipCombatItem, MELEE_WEAPONS, freshState, type Activity, type DamageType, type EnemyId, type ForgingRecipeId, type ItemId, type SaveState } from '../game/game';
 import { GAME_SCREENS, screenLockReason, type GameScreenId } from './screenRegistry';
 import { MiningScreen } from '../features/professions/mining/MiningScreen';
 import { SmithingScreen } from '../features/professions/smithing/SmithingScreen';
@@ -98,22 +98,24 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
   const stop = () => { mut(stopActivity); sound('stop'); };
   const chooseSmeltRecipe = (id:string) => mut((s)=>{ if(s.activity==='smelting')return; const recipe=SMELTING_RECIPES[id]; if(recipe&&s.skills.Smithing.level>=recipe.unlockLevel){s.smithing.smeltRecipe=id;s.smithing.warm=false;s.smithing.timer=0;s.smithing.message='';} });
   const buyForgeRecipe = (id: ForgingRecipeId) => mut((s) => { if (s.activity === 'forging' || (s.smithing.reserved && s.smithing.recipe !== id)) return; s.smithing.recipe = id; s.smithing.category = FORGING_RECIPES[id].category; s.smithing.work = getForgeWorkRequired(id); s.smithing.heat = 100; s.smithing.message = ''; });
-  const equip = (item: ItemId, slot: 'weapon' | 'head' | 'armor' | 'hands' | 'feet' | 'offhand' | 'miningTool' | 'smithingHammer') => mut((s) => {
-    if (s.activity === 'combat') return;
-    if (slot !== 'miningTool' && slot !== 'smithingHammer' && !canEquip(s,item,slot,true)) return;
-    if ((s.bank[item] ?? 0) < 1) return;
-    if (slot === 'weapon' && item in MELEE_WEAPONS && MELEE_WEAPONS[item as keyof typeof MELEE_WEAPONS].handedness === '2H' && s.equipped.offhand) { gainItem(s,s.equipped.offhand); s.equipped.offhand=null; }
-    if (slot === 'offhand' && !canEquip(s,item,slot,true)) return;
-    if (slot === 'miningTool' && (!(item in MINING_TOOLS)||s.skills.Mining.level<MINING_TOOLS[item as keyof typeof MINING_TOOLS].equipLevel)) return;
-    if (slot === 'smithingHammer' && (!(item in FORGE_HAMMERS)||s.skills.Smithing.level<FORGE_HAMMERS[item as keyof typeof FORGE_HAMMERS].equipLevel)) return;
-    const old = s.equipped[slot]; if (old) gainItem(s, old as ItemId);
-    if (slot === 'miningTool') s.equipped.miningTool = item;
-    else if (slot === 'smithingHammer') s.equipped.smithingHammer = item;
-    else s.equipped[slot] = item as never;
-    if(slot==='weapon'&&item in MELEE_WEAPONS){const definition=MELEE_WEAPONS[item as keyof typeof MELEE_WEAPONS];s.combat.stance=definition.stances.find(x=>x.id===definition.defaultStance)?.damageType ?? definition.style;s.combat.pendingStance=s.combat.stance;}
-    const n = (s.bank[item] ?? 1) - 1; if (n) s.bank[item] = n; else delete s.bank[item]; sound('equip');
+  const equip = (item: ItemId, slot: 'weapon' | 'head' | 'armor' | 'hands' | 'feet' | 'offhand' | 'ring' | 'necklace' | 'cape' | 'miningTool' | 'smithingHammer') => mut((s) => {
+    if (slot === 'miningTool' || slot === 'smithingHammer') {
+      if (s.activity === 'combat' || (s.bank[item] ?? 0) < 1) return;
+      if (slot === 'miningTool' && (!(item in MINING_TOOLS)||s.skills.Mining.level<MINING_TOOLS[item as keyof typeof MINING_TOOLS].equipLevel)) return;
+      if (slot === 'smithingHammer' && (!(item in FORGE_HAMMERS)||s.skills.Smithing.level<FORGE_HAMMERS[item as keyof typeof FORGE_HAMMERS].equipLevel)) return;
+      const old=s.equipped[slot]; if(old)gainItem(s,old as ItemId);
+      s.equipped[slot]=item as never; const count=(s.bank[item]??1)-1; if(count) s.bank[item]=count; else delete s.bank[item]; sound('equip'); return;
+    }
+    if (equipCombatItem(s,item,slot)) {
+      if(slot==='weapon'&&item in MELEE_WEAPONS){const definition=MELEE_WEAPONS[item as keyof typeof MELEE_WEAPONS];s.combat.stance=definition.stances.find(x=>x.id===definition.defaultStance)?.damageType ?? definition.style;s.combat.pendingStance=s.combat.stance;}
+      s.combat.playerHp=Math.min(s.combat.playerHp,getPlayerMaxHitpoints(s));
+      sound('equip');
+    }
   });
-  const unequip = (slot: 'weapon' | 'head' | 'armor' | 'hands' | 'feet' | 'offhand' | 'miningTool' | 'smithingHammer') => mut((s) => { if(s.activity==='combat')return;const old = s.equipped[slot]; if (old) { gainItem(s, old as ItemId); if (slot === 'miningTool') s.equipped.miningTool = null; else if (slot === 'smithingHammer') s.equipped.smithingHammer = null; else s.equipped[slot] = null; } });
+  const unequip = (slot: 'weapon' | 'head' | 'armor' | 'hands' | 'feet' | 'offhand' | 'ring' | 'necklace' | 'cape' | 'miningTool' | 'smithingHammer') => mut((s) => {
+    if(slot==='miningTool'||slot==='smithingHammer'){if(s.activity==='combat')return;const old=s.equipped[slot];if(old){gainItem(s,old as ItemId);s.equipped[slot]=null;}return;}
+    if(unequipCombatItem(s,slot))sound('equip');
+  });
   const grant = (item: ItemId, n = 1) => mut((s) => { gainItem(s, item, n); });
   const grantT1Kit = () => mut((s) => { for (const item of ['item.mining.copper_pickaxe','item.smithing.copper_smithing_hammer','combat.weapon.melee.copper_battle_axe','combat.weapon.melee.copper_mace','combat.offhand.melee.copper_shield','combat.armor.heavy.copper_armor','combat.armor.heavy.copper_gauntlets','combat.armor.heavy.copper_greaves'] as ItemId[]) gainItem(s,item); s.skills.Mining.level = Math.max (5,s.skills.Mining.level); s.skills.Smithing.level = Math.max (5,s.skills.Smithing.level); s.skills.Attack.level = Math.max (5,s.skills.Attack.level); s.skills.Defence.level = Math.max (5,s.skills.Defence.level); });
   const devSetDeposit = (id: SaveState['mining']['deposit']) => mut((s) => { s.skills.Mining.level = Math.max (5, s.skills.Mining.level); selectDeposit(s, id); });
@@ -144,18 +146,20 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
   const devSetArea=(id:string)=>mut((s)=>{const area=COMBAT_AREAS[id];if(!area)return;s.combatProgress.unlockedTiers=[...new Set([...s.combatProgress.unlockedTiers,area.tier])];const elite=Object.values(ENEMIES).find(x=>x.tier===area.tier&&x.rank==='Elite');if(area.kind==='dungeon'&&elite)s.combatProgress.eliteFirstKills[elite.id]=true;for(const normal of Object.values(ENEMIES).filter(x=>x.tier===area.tier&&['Light','Normal','Heavy'].includes(x.rank)))s.combat.defeated[normal.id]=Math.max (1,s.combat.defeated[normal.id] ?? 0);const target=area.enemies[0];if(!target)return;s.activity=null;s.combat.areaId=id;s.combat.dungeonId=area.kind==='dungeon'?id:null;s.combat.encounterIndex=0;s.combat.targetId=target;s.combat.enemyHp=ENEMIES[target]!.maxHp;s.combat.enemyTimer=ENEMIES[target]!.intervalMs*(ENEMIES[target]!.sequence[0]?.intervalMultiplier ?? 1);s.combat.sequenceIndex=0;s.combat.activePhaseIndex=0;s.combat.runState='idle';});
   const devStartDungeon=(id:string,index:number)=>mut((s)=>{const dungeon=DUNGEONS[id],enemy=dungeon?.encounters[index];if(!dungeon||!enemy)return;s.combatProgress.unlockedTiers=[...new Set([...s.combatProgress.unlockedTiers,dungeon.tier])];const elite=Object.values(ENEMIES).find(x=>x.tier===dungeon.tier&&x.rank==='Elite');if(elite)s.combatProgress.eliteFirstKills[elite.id]=true;for(const normal of Object.values(ENEMIES).filter(x=>x.tier===dungeon.tier&&['Light','Normal','Heavy'].includes(x.rank)))s.combat.defeated[normal.id]=Math.max (1,s.combat.defeated[normal.id] ?? 0);s.activity=null;s.combat.targetId=enemy;s.combat.areaId=id;s.combat.dungeonId=id;s.combat.encounterIndex=index;s.combat.enemyHp=ENEMIES[enemy]!.maxHp;s.combat.enemyTimer=ENEMIES[enemy]!.intervalMs*(ENEMIES[enemy]!.sequence[0]?.intervalMultiplier ?? 1);s.combat.sequenceIndex=0;s.combat.activePhaseIndex=0;s.combat.respawn=0;s.combat.runState='idle';startActivity(s,'combat');});
   const devEquipCombatItem=(id:ItemId)=>mut((s)=>{
-    const meta=ITEMS[id]?.equipment;if(!meta)return;s.skills[meta.skill].level=Math.max (s.skills[meta.skill].level,meta.requiredLevel);
+    const meta=ITEMS[id]?.equipment;if(!meta)return;s.skills[meta.skill].level=Math.max(s.skills[meta.skill].level,meta.requiredLevel);
     if(meta.context==='combat'){
-      s.bank[id]=(s.bank[id] ?? 0)+1;const key=meta.slot.toLowerCase().replace('-','');const slot=key==='weapon'?'weapon':key==='offhand'?'offhand':key==='head'?'head':key==='armor'?'armor':key==='hands'?'hands':key==='feet'?'feet':null;
-      if(!slot||!canEquip(s,id,slot,true))return;const old=s.equipped[slot];if(old)gainItem(s,old);if(slot==='weapon'&&MELEE_WEAPONS[id as keyof typeof MELEE_WEAPONS]?.handedness==='2H'&&s.equipped.offhand){gainItem(s,s.equipped.offhand);s.equipped.offhand=null;}s.equipped[slot]=id as never;s.bank[id]!--;if(s.bank[id]===0)delete s.bank[id];return;
+      const slot=meta.slot.toLowerCase().replace('-','') as 'weapon'|'offhand'|'head'|'armor'|'hands'|'feet'|'ring'|'necklace'|'cape';
+      s.bank[id]=(s.bank[id]??0)+1;
+      if(equipCombatItem(s,id,slot)){if(slot==='weapon'&&MELEE_WEAPONS[id as keyof typeof MELEE_WEAPONS]){const definition=MELEE_WEAPONS[id as keyof typeof MELEE_WEAPONS];s.combat.stance=definition.stances.find(x=>x.id===definition.defaultStance)?.damageType??definition.style;s.combat.pendingStance=s.combat.stance;}s.combat.playerHp=Math.min(s.combat.playerHp,getPlayerMaxHitpoints(s));}
+      return;
     }
     if(meta.profession==='Fishing'&&meta.slot==='Tackle'){s.fishing.tackle=id;return;}
-    s.bank[id]=(s.bank[id] ?? 0)+1;
+    s.bank[id]=(s.bank[id]??0)+1;
     if(meta.profession==='Mining'){const old=s.equipped.miningTool;if(old)gainItem(s,old);s.equipped.miningTool=id;}
     else if(meta.profession==='Smithing'){const old=s.equipped.smithingHammer;if(old)gainItem(s,old);s.equipped.smithingHammer=id;}
     else if(meta.profession==='Fishing'){const old=s.fishing.rod;if(old!=='fishing.tool.old_handline')gainItem(s,old);s.fishing.rod=id;}
     else if(meta.profession==='Cooking'){const old=s.cooking.knife;if(old!=='cooking.tool.worn_kitchen_knife')gainItem(s,old);s.cooking.knife=id;}
-    const count=(s.bank[id] ?? 1)-1;if(count)s.bank[id]=count;else delete s.bank[id];
+    const count=(s.bank[id]??1)-1;if(count)s.bank[id]=count;else delete s.bank[id];
   });
   const eat = (index:number) => mut((s)=>{eatFood(s,index,false,[]);});
   const setAutoEat = (enabled:boolean,threshold:number) => mut((s)=>{s.food.autoEat=enabled;s.food.threshold=Math.max (1,Math.min(99,threshold));});
@@ -210,3 +214,4 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
 }
 
 function gainItem(s: SaveState, id: ItemId, n = 1) { s.bank[id] = (s.bank[id] ?? 0) + n; }
+

@@ -1,10 +1,21 @@
 import { COMBAT_AREAS, DAMAGE_TYPES, DUNGEONS, ENEMIES, type Requirement } from '../../content/combat/t1Enemies';
-import { HEAVY_ARMOR } from '../../content/combat/heavyArmor';
 import { MELEE_WEAPONS } from '../../content/combat/meleeWeapons';
 import { OFFHANDS } from '../../content/combat/offhands';
 import { ITEMS } from '../../content/items/itemRegistry';
 import type { DamageType, EnemyId, ItemId, SaveState } from '../../types/gameTypes';
-import { hitChance } from '../gameMath';
+import { hitChance, maxHitpoints } from '../gameMath';
+
+export type CombatEquipmentSlotKey = 'weapon'|'offhand'|'head'|'armor'|'hands'|'feet'|'ring'|'necklace'|'cape';
+export type EquippedCombatItem = { slot:CombatEquipmentSlotKey; id:ItemId; meta:NonNullable<typeof ITEMS[ItemId]['equipment']> };
+const COMBAT_SLOT_KEYS:readonly CombatEquipmentSlotKey[]=['weapon','offhand','head','armor','hands','feet','ring','necklace','cape'];
+const SLOT_KEYS:Record<string,CombatEquipmentSlotKey>={weapon:'weapon','off-hand':'offhand',offhand:'offhand',head:'head',armor:'armor',hands:'hands',feet:'feet',ring:'ring',necklace:'necklace',cape:'cape'};
+export function normalizeEquipmentSlot(slot:string):CombatEquipmentSlotKey|null{return SLOT_KEYS[slot.trim().toLowerCase()]??null;}
+export function getEquippedCombatItems(game:SaveState):EquippedCombatItem[]{
+ return COMBAT_SLOT_KEYS.flatMap(slot=>{const id=game.equipped[slot],meta=id?ITEMS[id]?.equipment:undefined;return id&&meta?.context==='combat'&&normalizeEquipmentSlot(meta.slot)===slot?[{slot,id,meta}]:[];});
+}
+function numericStat(item:EquippedCombatItem,key:string){const value=item.meta.stats[key];if(typeof value==='number')return Number.isFinite(value)?value:0;if(typeof value!=='string')return 0;const parsed=Number.parseFloat(value.replace('%',''));return Number.isFinite(parsed)?parsed:0;}
+export function getEquippedCombatStat(game:SaveState,key:string,excludeSlots:readonly CombatEquipmentSlotKey[]=[]){return getEquippedCombatItems(game).reduce((sum,item)=>excludeSlots.includes(item.slot)?sum:sum+numericStat(item,key),0);}
+export function getPlayerMaxHitpoints(game:SaveState){return maxHitpoints(game.skills.Hitpoints.level)+getEquippedCombatStat(game,'Max HP')+getEquippedCombatStat(game,'Hitpoints');}
 
 export function evaluateRequirements(game: SaveState, requirements: readonly Requirement[] = []) {
   return requirements.every((requirement) => requirement.type === 'skillLevel'
@@ -16,8 +27,7 @@ export function evaluateRequirements(game: SaveState, requirements: readonly Req
 
 export function getPlayerAttackInterval(game: SaveState) {
   const weapon = game.equipped.weapon ? MELEE_WEAPONS[game.equipped.weapon as keyof typeof MELEE_WEAPONS] : undefined;
-  const offhand = game.equipped.offhand ? OFFHANDS[game.equipped.offhand as keyof typeof OFFHANDS] : undefined;
-  return (weapon?.intervalMs ?? 2400) + (offhand?.attackIntervalPenaltyMs ?? 0);
+  return (weapon?.intervalMs ?? 2400) + getEquippedCombatStat(game,'Attack Interval');
 }
 export function getWeaponSpecial(game: SaveState) {
   const special = game.equipped.weapon ? MELEE_WEAPONS[game.equipped.weapon as keyof typeof MELEE_WEAPONS]?.special : undefined;
@@ -26,7 +36,7 @@ export function getWeaponSpecial(game: SaveState) {
 export function getPlayerAccuracy(game: SaveState) {
   const weapon = game.equipped.weapon ? MELEE_WEAPONS[game.equipped.weapon as keyof typeof MELEE_WEAPONS] : undefined;
   const down = game.combat.statuses.filter((status) => status.target === 'player' && status.type === 'AccuracyDown').reduce((sum,status)=>sum+(status.magnitude ?? 0),0);
-  return (100 + game.skills.Attack.level * 6 + (weapon?.accuracyBonus ?? 0)) * (1 - down);
+  return (100 + game.skills.Attack.level * 6 + (weapon?.accuracyBonus ?? 0) + getEquippedCombatStat(game,'Accuracy',['weapon'])) * (1 - down);
 }
 export function getCurrentPlayerBasicDamageType(game:SaveState):DamageType {
   const weapon=game.equipped.weapon?MELEE_WEAPONS[game.equipped.weapon as keyof typeof MELEE_WEAPONS]:undefined;
@@ -37,31 +47,24 @@ export function getPlayerEvasion(game: SaveState) {
 }
 export function getPlayerEvasions(game: SaveState) {
   const result = { Melee: 100 + game.skills.Defence.level * 4, Ranged: 100 + game.skills.Defence.level * 4, Magic: 100 + game.skills.Defence.level * 4 };
-  for (const id of [game.equipped.head, game.equipped.armor, game.equipped.hands, game.equipped.feet, game.equipped.offhand]) {
-    if (!id) continue;
-    const armor = HEAVY_ARMOR[id as keyof typeof HEAVY_ARMOR], offhand = OFFHANDS[id as keyof typeof OFFHANDS];
-    const evasion = armor?.evasions ?? offhand?.evasions;
-    if (evasion) { result.Melee += evasion.Melee; result.Ranged += evasion.Ranged; result.Magic += evasion.Magic; }
-  }
+  for(const item of getEquippedCombatItems(game)){result.Melee+=numericStat(item,'Melee Evasion');result.Ranged+=numericStat(item,'Ranged Evasion');result.Magic+=numericStat(item,'Magic Evasion');}
   const down = game.combat.statuses.filter((status) => status.target === 'player' && status.type === 'EvasionDown').reduce((total, status) => total + (status.magnitude ?? 0), 0);
   for (const key of Object.keys(result) as Array<keyof typeof result>) result[key] = Math.max (0, result[key] * (1 - Math.min(1, down)));
   return result;
 }
 export function getPlayerResistances(game: SaveState): Record<DamageType, number> {
   const result: Record<DamageType, number> = { Slash: 0, Stab: 0, Crush: 0, Pierce: 0, Puncture: 0, Air: 0, Fire: 0, Water: 0, Earth: 0 };
-  for (const id of [game.equipped.head, game.equipped.armor, game.equipped.hands, game.equipped.feet, game.equipped.offhand]) {
-    if (!id) continue;
-    const armor = HEAVY_ARMOR[id as keyof typeof HEAVY_ARMOR], offhand = OFFHANDS[id as keyof typeof OFFHANDS];
-    const resistance = armor?.resistances ?? offhand?.resistances;
-    if (resistance) for (const type of Object.keys(result) as DamageType[]) result[type] += resistance[type];
-  }
+  for(const item of getEquippedCombatItems(game))for(const type of Object.keys(result) as DamageType[])result[type]+=numericStat(item,`${type} Resistance`);
   for(const status of game.combat.statuses.filter(x=>x.target==='player'&&(x.type==='ResistanceDown'||x.type==='ResistanceUp')))for(const type of status.damageTypes?.length?status.damageTypes:DAMAGE_TYPES)result[type]+=(status.type==='ResistanceDown'?-1:1)*(status.magnitude ?? 0);
   return result;
 }
 export function getPlayerMaxHit(game: SaveState, type: DamageType = game.combat.stance) {
   const weapon = game.equipped.weapon ? MELEE_WEAPONS[game.equipped.weapon as keyof typeof MELEE_WEAPONS] : undefined;
-  return Math.max (0, (weapon?.power ?? 0) * (1 + game.skills.Attack.level / 100) * (weapon?.stances.find((stance) => stance.damageType === type)?.maxHitMultiplier ?? 1));
+  return Math.max (0, ((weapon?.power ?? 0)+getEquippedCombatStat(game,'Power',['weapon'])) * (1 + game.skills.Attack.level / 100) * (weapon?.stances.find((stance) => stance.damageType === type)?.maxHitMultiplier ?? 1));
 }
+export function getPlayerCritRateBonus(game:SaveState){const weapon=game.equipped.weapon?MELEE_WEAPONS[game.equipped.weapon as keyof typeof MELEE_WEAPONS]:undefined;const accessory=getEquippedCombatStat(game,'Crit Rate',['weapon']);return (weapon?.critRateBonus??0)+ (accessory>1?accessory/100:accessory);}
+export function getPlayerCritDamageBonus(game:SaveState){const weapon=game.equipped.weapon?MELEE_WEAPONS[game.equipped.weapon as keyof typeof MELEE_WEAPONS]:undefined;return (weapon?.critDamageBonus??0)+getEquippedCombatStat(game,'Crit Damage',['weapon']);}
+export function getPlayerPenetration(game:SaveState,type:DamageType){const weapon=game.equipped.weapon?MELEE_WEAPONS[game.equipped.weapon as keyof typeof MELEE_WEAPONS]:undefined;return (weapon?.penetrationType===type?weapon.penetrationPp??0:0)+getEquippedCombatStat(game,`${type} Penetration`,['weapon']);}
 export function getStyleMatchup(attacker: 'Melee'|'Ranged'|'Magic', defender: 'Melee'|'Ranged'|'Magic'): 'strong'|'neutral'|'weak' { if(attacker===defender)return 'neutral'; if((attacker==='Melee'&&defender==='Ranged')||(attacker==='Ranged'&&defender==='Magic')||(attacker==='Magic'&&defender==='Melee'))return 'strong'; return 'weak'; }
 export function getStyleDamageMultiplier(attacker: 'Melee'|'Ranged'|'Magic', defender: 'Melee'|'Ranged'|'Magic') { const matchup=getStyleMatchup(attacker,defender); return matchup==='strong'?1.1:matchup==='weak'?0.9:1; }
 export function getStyleResistanceAdjustment(playerStyle: 'Melee'|'Ranged'|'Magic', incomingStyle: 'Melee'|'Ranged'|'Magic') { const matchup=getStyleMatchup(playerStyle,incomingStyle); return matchup==='strong'?5:matchup==='weak'?-5:0; }
@@ -73,19 +76,17 @@ export function canUseWeapon(game: SaveState, item: ItemId | null): boolean {
 export function canEquip(game: SaveState, item: ItemId, slot?: string, requireOwned = true): boolean {
   const definition = ITEMS[item], meta = definition?.equipment;
   if (!meta || meta.context !== 'combat' || (requireOwned && (game.bank[item] ?? 0) < 1) || game.skills[meta.skill].level < meta.requiredLevel) return false;
-  if (slot && meta.slot.toLowerCase().replace('-', '') !== slot.toLowerCase().replace('-', '')) return false;
+  const target=normalizeEquipmentSlot(meta.slot);if(!target||slot&&normalizeEquipmentSlot(slot)!==target)return false;
   if (meta.slot === 'Off-hand') {
     const weapon = game.equipped.weapon ? MELEE_WEAPONS[game.equipped.weapon as keyof typeof MELEE_WEAPONS] : undefined;
     const offhand = OFFHANDS[item as keyof typeof OFFHANDS];
     if (!weapon || weapon.handedness !== '1H' || !weapon.allowedOffhandTypes?.includes(offhand?.offhandType ?? '')) return false;
   }
-  return Boolean(MELEE_WEAPONS[item as keyof typeof MELEE_WEAPONS] || HEAVY_ARMOR[item as keyof typeof HEAVY_ARMOR] || OFFHANDS[item as keyof typeof OFFHANDS]);
+  return true;
 }
 export function isValidEquipmentForSlot(game: SaveState, item: ItemId, slot: string): boolean {
   const meta=ITEMS[item]?.equipment;
-  if(!meta||meta.context!=='combat'||meta.slot.toLowerCase().replace('-','')!==slot.toLowerCase().replace('-',''))return false;
-  const registered=Boolean(MELEE_WEAPONS[item as keyof typeof MELEE_WEAPONS]||HEAVY_ARMOR[item as keyof typeof HEAVY_ARMOR]||OFFHANDS[item as keyof typeof OFFHANDS]);
-  if(!registered)return false;
+  if(!meta||meta.context!=='combat'||normalizeEquipmentSlot(meta.slot)!==normalizeEquipmentSlot(slot))return false;
   if(meta.slot==='Off-hand'){
     const weapon=game.equipped.weapon?MELEE_WEAPONS[game.equipped.weapon as keyof typeof MELEE_WEAPONS]:undefined;
     const offhand=OFFHANDS[item as keyof typeof OFFHANDS];

@@ -6,6 +6,7 @@ const ICONS: Record<string, LucideIcon> = {
   'arrow-left': ArrowLeft, close: X, minimize: Minimize, restore: Maximize, dock: Dock, undock: PanelsTopLeft,
   stop: Minus, pick: Pickaxe, mining: Pickaxe, hammer: Hammer, ore: Gem, ingot: Construction,
   sword: Sword, helm: Shield, armor: ShieldCheck, trophy: Trophy, gloves: Hand, greaves: Footprints,
+  gem: Gem, necklace: Sparkle, cape: Waves,
   shield: Shield, settings: Settings, anvil: Anvil, bank: Vault, combat: Swords, gear: Cog,
   gold: Coins, heart: HeartPulse, bow: Target, spark: Sparkles, axe: Axe, mace: Hammer, spear: Sword,
   hook: FishingRod, wave: Waves, food: Utensils, fish: Fish, knife: UtensilsCrossed, furnace: Flame,

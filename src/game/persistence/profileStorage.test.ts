@@ -31,9 +31,9 @@ describe('three save profiles', () => {
     expect(memory.getItem(profileSaveKey(2))).not.toBeNull();
   });
 
-  it('loads a current v6 profile after creating it',()=>{
+  it('loads a current v7 profile after creating it',()=>{
     initializeProfiles();createProfile(1,'Current');
-    expect(JSON.parse(memory.getItem(profileSaveKey(1))!).version).toBe(6);
+    expect(JSON.parse(memory.getItem(profileSaveKey(1))!).version).toBe(7);
     expect(loadProfile(1).profile.name).toBe('Current');
   });
 

@@ -13,6 +13,7 @@ export * from './content/combat/combatTierBudgets';
 export * from './content/combat/t1Enemies';
 export * from './content/contentValidators';
 export * from './systems/combat/combatMath';
+export * from './systems/combat/equipmentActions';
 export * from './systems/gameMath';
 export * from './state/initialState';
 export * from './systems/simulation';

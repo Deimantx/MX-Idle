@@ -17,7 +17,7 @@ describe('pre-combat expansion readiness', () => {
     old.fishing.spot = 'fishing.spot.removed'; old.cooking.recipe = 'cooking.recipe.removed'; old.equipped.weapon = 'combat.weapon.removed';
     old.combat.targetId = 'enemy.removed'; old.combat.mastery = { xp: 99 }; old.mastery = { skill: 100 };
     const loaded = loadState(JSON.stringify({ version: 4, savedAt: 1200, state: old }), 1200).state;
-    expect(loaded.version).toBe(6); expect(SAVE_KEY).toBe('mx-idle-save-v6');
+    expect(loaded.version).toBe(7); expect(SAVE_KEY).toBe('mx-idle-save-v7');
     expect(loaded.skills.Mining).toEqual({ xp: 321, level: 18 }); expect(loaded.bank['item.mining.iron_ore']).toBe(12);
     expect(loaded.mining.deposit).toBe(freshState(1200).mining.deposit); expect(loaded.mining.deposits['mining.deposit.copper_vein']?.totalPrimary).toBe(17);
     expect(loaded.smithing.recipe).toBe(freshState(1200).smithing.recipe); expect(loaded.smithing.smeltRecipe).toBe(freshState(1200).smithing.smeltRecipe);

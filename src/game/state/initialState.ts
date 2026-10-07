@@ -6,8 +6,8 @@ const freshDeposit = (id: keyof typeof MINING_DEPOSITS): DepositRuntimeState => 
 export function freshState(now = Date.now()): SaveState {
   const copperId = 'mining.deposit.copper_vein' as const;
   return {
-    version: 6, savedAt: now, lastSaved: now, rng: 19790321, page: 'Mining', activity: null, skills: emptySkills(), bank: {}, gold: 0,
-    equipped: { miningTool: 'item.mining.worn_pickaxe', smithingHammer: 'item.smithing.worn_smithing_hammer', weapon: null, offhand: null, head: null, armor: null, hands: null, feet: null },
+    version: 7, savedAt: now, lastSaved: now, rng: 19790321, page: 'Mining', activity: null, skills: emptySkills(), bank: {}, gold: 0,
+    equipped: { miningTool: 'item.mining.worn_pickaxe', smithingHammer: 'item.smithing.worn_smithing_hammer', weapon: null, offhand: null, head: null, armor: null, hands: null, feet: null, ring: null, necklace: null, cape: null },
     mining: { deposit: copperId, stage: 0, density: MINING_DEPOSITS[copperId].baseDensity, timer: MINING_DEPOSITS[copperId].strikeMs, cycles: 0, strikes: 0, sessionOutputs: {}, sessionXp: 0, deposits: { [copperId]: freshDeposit(copperId) } },
     smithing: { mode: 'smelting', recipe: 'recipe.smithing.copper_sword', smeltRecipe: 'recipe.smithing.copper_ingot', timer: 0, warm: false, produced: 0, work: 0, heat: 100, reserved: 0, reservedItems: {}, reservedEquipment: null, reheat: false, message: '', category: 'weapons' },
     fishing: { spot: 'fishing.spot.meadow_brook', phase: 'bite', timer: 0, actionSerial: 0, selectedFish: null, rod: 'fishing.tool.old_handline', bait: null, tackle: null, specialization: null, preferredSpecies: null, forceDouble: false, forceFind: false, forceSpecies: null, sessionFish: {}, sessionXp: 0 },

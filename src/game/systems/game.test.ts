@@ -37,13 +37,16 @@ describe('Mining content and simulation', () => {
     expect(result.state.bank[ORE]).toBeGreaterThan(0); expect(result.state.skills.Mining.xp).toBeGreaterThan(0);
     expect(result.events.some((e) => e.type === 'stage-completed' && e.depositId === 'mining.deposit.copper_vein')).toBe(true);
   });
-  it('preserves incomplete deposit density on stop and resets the abandoned stage when switching', () => {
+  it('preserves incomplete deposit density independently when switching deposits', () => {
     const s = freshState(); startActivity(s, 'mining'); let state = advance(s, 2 * 2400); stopActivity(state);
     expect(state.mining.density).toBe(24); state.skills.Mining.level = 5;
     expect(selectDeposit(state, 'mining.deposit.fieldstone_quarry')).toBe(true);
     expect(state.mining.density).toBe(42);
-    expect(state.mining.deposits['mining.deposit.copper_vein']!.densityRemaining).toBe(36);
+    expect(state.mining.deposits['mining.deposit.copper_vein']!.densityRemaining).toBe(24);
     expect(state.mining.deposits['mining.deposit.copper_vein']!.totalStagesCompleted).toBe(0);
+    expect(selectDeposit(state, 'mining.deposit.copper_vein')).toBe(true);
+    expect(state.mining.density).toBe(24);
+    expect(state.mining.deposits['mining.deposit.fieldstone_quarry']!.densityRemaining).toBe(42);
   });
   it('resolves a late-game mining action with its tier tool and registered rare outputs',()=>{
     const s=freshState();s.skills.Mining.level=100;s.equipped.miningTool='item.mining.astralite_pickaxe';selectDeposit(s,'mining.deposit.astralite_vein');startActivity(s,'mining');
@@ -154,7 +157,7 @@ describe('Persistence and offline parity', () => {
   it('migrates legacy v1 bank, equipped gear, deposit state, and recipe IDs to v6', () => {
     const legacy = { version: 1, savedAt: 1000, state: { version: 1, skills: { Mining: { xp: 0, level: 1 } }, bank: { ore: 8, ingot: 2, sword: 1 }, equipped: { tool: true, weapon: 'sword' }, mining: { deposit: 'copper-vein', stage: 2, density: 13 }, smithing: { recipe: 'sword' }, activity: null } };
     const loaded = loadState(JSON.stringify(legacy), 1000);
-    expect(loaded.fresh).toBe(false); expect(loaded.state.version).toBe(6); expect(loaded.state.skills.Fishing.level).toBe(1); expect(loaded.state.skills.Cooking.level).toBe(1); expect(loaded.state.bank[ORE]).toBe(8); expect(loaded.state.bank[INGOT]).toBe(2);
+    expect(loaded.fresh).toBe(false); expect(loaded.state.version).toBe(7); expect(loaded.state.skills.Fishing.level).toBe(1); expect(loaded.state.skills.Cooking.level).toBe(1); expect(loaded.state.bank[ORE]).toBe(8); expect(loaded.state.bank[INGOT]).toBe(2);
     expect(loaded.state.equipped.weapon).toBe(SWORD); expect(loaded.state.mining.deposit).toBe('mining.deposit.copper_vein'); expect(loaded.state.mining.density).toBe(13);
     expect(loaded.state.smithing.recipe).toBe('recipe.smithing.copper_sword');
   });
@@ -162,14 +165,14 @@ describe('Persistence and offline parity', () => {
     const legacy:any=freshState(2000);
     legacy.version=4;legacy.mining.mastery={deposit:100};legacy.smithing.mastery={recipe:100};legacy.fishing.mastery={fish:100};legacy.cooking.mastery={recipe:100};legacy.food.threshold=100;
     const state=loadState(JSON.stringify({version:4,savedAt:2000,state:legacy}),2000).state;
-    expect(state.version).toBe(6);expect(state.food.threshold).toBe(99);for(const record of [state.mining,state.smithing,state.fishing,state.cooking])expect('mastery'in record).toBe(false);
+    expect(state.version).toBe(7);expect(state.food.threshold).toBe(99);for(const record of [state.mining,state.smithing,state.fishing,state.cooking])expect('mastery'in record).toBe(false);
   });
   it('round-trips current saves and safely falls back from corrupt JSON', () => {
     const original = freshState(1000); original.skills.Mining.xp = 27; original.bank[ORE] = 19; original.mining.stage = 2; original.mining.density = 13;
     original.mining.deposits[original.mining.deposit]!.stageIndex= 2; original.mining.deposits[original.mining.deposit]!.densityRemaining = 13;
     const loaded = loadState(JSON.stringify({ version: 3, savedAt: 1000, state: original }), 1000).state;
     expect(loaded.skills.Mining.xp).toBe(27); expect(loaded.bank[ORE]).toBe(19); expect(loaded.mining).toMatchObject({ stage: 2, density: 13 });
-    expect(loadState('{broken').fresh).toBe(true); expect(SAVE_KEY).toBe('mx-idle-save-v6');
+    expect(loadState('{broken').fresh).toBe(true); expect(SAVE_KEY).toBe('mx-idle-save-v7');
   });
   it('matches batched simulation with repeated active ticks for Mining and Smelting', () => {
     const mining = freshState(); startActivity(mining, 'mining'); const onlineMine = tick(mining, 60_000), offlineMine = advance(mining, 60_000);

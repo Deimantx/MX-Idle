@@ -139,3 +139,23 @@
 @media (max-width:900px) { .equipment-v2-masthead { align-items:stretch; flex-direction:column; }.equipment-v2-mode { width:100%; }.equipment-v2-mode button { min-width:0; flex:1; }.profession-switch { overflow:auto; }.equipment-v2-zones { grid-template-columns:minmax(0,1fr); }.equipment-v2-inspector { grid-column:auto; }.equipment-v2-zones>section { min-height:unset; }.eq-item-grid { max-height:460px; grid-template-columns:repeat(2,minmax(0,1fr)); }.eq-loadout-stage { min-height:350px; }.eq-slot-board { height:326px; grid-template-rows:repeat(3,minmax(96px,1fr)); } }
 @media (max-width:560px) { .eq-slot-board { height:auto; grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:none; grid-template-areas:none; }.eq-slot { min-height:104px; }.eq-slot-head,.eq-slot-weapon,.eq-slot-offhand,.eq-slot-armor,.eq-slot-hands,.eq-slot-feet { grid-area:auto; }.eq-character-crest { display:none; }.eq-link-map { display:none; }.eq-item-grid { grid-template-columns:1fr; }.eq-derived-stats { grid-template-columns:repeat(2,minmax(0,1fr)); }.eq-family-rail { overflow:auto; }.eq-armory-toolbar { align-items:stretch; flex-direction:column; }.eq-owned-toggle { justify-content:flex-start; } }
 @media (prefers-reduced-motion:reduce) { .eq-slot,.eq-item-tile,.eq-family-rail button,.eq-toggle-track i { transition:none; }.eq-slot.equip-pulse { animation:none; } }
+.equipment-v2-zones { grid-template-columns:minmax(390px,1.08fr) minmax(420px,1.14fr) minmax(285px,.8fr); }
+.eq-loadout-stage { min-height:418px; }
+.eq-slot-board { height:390px; grid-template-areas:"head cape necklace" "weapon armor ring" "offhand hands feet"; gap:9px; }
+.eq-slot-weapon { grid-column:1; }
+.eq-slot-armor { transform:scale(1.035); z-index:2; border-color:#8b7655; background:linear-gradient(145deg,#40372b,#282d2c 72%); }
+.eq-slot-armor:hover,.eq-slot-armor.selected { transform:scale(1.055) translateY(-2px); }
+.eq-slot-ring { border-radius:28px; border-color:#655949; background:radial-gradient(ellipse at 48% 34%,#3b3831,#252a2b 76%); }
+.eq-slot-necklace { border-radius:16px 16px 24px 24px; border-color:#615c4d; }
+.eq-slot-cape { width:100%; border-radius:9px 9px 18px 18px; border-color:#665344; background:linear-gradient(115deg,#3a302a,#282b2b 76%); }
+.eq-slot-ring .eq-empty-sigil,.eq-slot-necklace .eq-empty-sigil,.eq-slot-cape .eq-empty-sigil { color:#9a805e; }
+.eq-slot-tooltip-copy { grid-column:2; align-self:start; overflow:hidden; color:#9da69f; font-size:calc(9px * var(--ui-scale) * var(--text-scale)); text-overflow:ellipsis; white-space:nowrap; }
+.eq-slot.empty .eq-slot-name { color:#aab2ab; }
+.eq-item-tile.locked { border-style:dashed; }
+.eq-item-tile.locked .eq-tile-marker { color:#d4a17e; }
+.eq-item-tile:hover { transform:translateY(-1px); }
+@media (max-width:1800px) { .equipment-v2-zones { grid-template-columns:minmax(320px,.95fr) minmax(380px,1.15fr) minmax(275px,.8fr); } }
+@media (max-width:1450px) { .equipment-v2-zones { grid-template-columns:minmax(310px,.9fr) minmax(0,1.1fr); }.eq-loadout-stage { min-height:410px; } }
+@media (max-width:900px) { .eq-slot-board { height:380px; grid-template-rows:repeat(3,minmax(108px,1fr)); } }
+@media (max-width:560px) { .eq-slot-board { height:auto; grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:none; grid-template-areas:none; }.eq-slot { min-height:104px; }.eq-slot-cape { width:auto; justify-self:stretch; }.eq-slot-armor { transform:none; }.eq-slot-armor:hover,.eq-slot-armor.selected { transform:translateY(-2px); }.eq-slot-head,.eq-slot-weapon,.eq-slot-offhand,.eq-slot-armor,.eq-slot-hands,.eq-slot-feet,.eq-slot-ring,.eq-slot-necklace,.eq-slot-cape { grid-area:auto; } }
+@media (prefers-reduced-motion:reduce) { .eq-item-tile:hover { transform:none; } }

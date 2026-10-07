@@ -156,6 +156,6 @@ describe('Phase 1 combat world',()=>{
   it('migrates v5 Combat progression safely and does not invent a Captain Veyr kill',()=>{
     const old:any=freshState(500);old.version=5;old.combatProgress=undefined;old.combat.defeated['ironjaw-boar']=1;
     const loaded=loadState(JSON.stringify({version:5,savedAt:500,state:old}),500).state;
-    expect(loaded.version).toBe(6);expect(loaded.combatProgress.eliteFirstKills['ironjaw-boar']).toBe(true);expect(loaded.combatProgress.bossFirstKills['captain-veyr']).toBeUndefined();expect(loaded.combatProgress.unlockedTiers).toEqual([1]);
+    expect(loaded.version).toBe(7);expect(loaded.combatProgress.eliteFirstKills['ironjaw-boar']).toBe(true);expect(loaded.combatProgress.bossFirstKills['captain-veyr']).toBeUndefined();expect(loaded.combatProgress.unlockedTiers).toEqual([1]);
   });
 });
