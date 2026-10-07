@@ -1,10 +1,11 @@
 export type FeedbackCue = 'navigate'|'start'|'stop'|'mining-hit'|'mining-stage'|'forge-strike'|'craft'|'fishing-bite'|'fish-landed'|'aquatic-find'|'cooking-prep'|'cook'|'equip'|'combat-hit'|'combat-miss'|'combat-crit'|'special'|'enemy-hit'|'level-up'|'reward'|'error';
 export type AudioOptions = { muted: boolean; masterVolume: number };
-type Voice = { priority: number; startedAt: number; oscillators: OscillatorNode[]; gain: GainNode };
+type Voice = { priority: number; startedAt: number; oscillators: OscillatorNode[]; sources: AudioScheduledSourceNode[]; gain: GainNode };
 
 const MAX_VOICES = 4;
 const contextConstructor = () => typeof window === 'undefined' ? undefined : window.AudioContext;
 let context: AudioContext | undefined;
+let textureBuffer: AudioBuffer | undefined;
 const voices = new Set<Voice>();
 const lastPlayed = new Map<FeedbackCue, number>();
 const cooldowns: Record<FeedbackCue, number> = {
@@ -38,6 +39,28 @@ function ensureContext() {
 
 export function unlockFeedbackAudio() { ensureContext(); }
 
+function textureFor(ctx: AudioContext, cue: FeedbackCue, destination: AudioNode, endAt: number) {
+  const settings: Partial<Record<FeedbackCue, { filter: BiquadFilterType; frequency: number; gain: number; duration: number }>> = {
+    'mining-hit': { filter:'lowpass', frequency:720, gain:.18, duration:.075 }, 'forge-strike': { filter:'highpass', frequency:1150, gain:.13, duration:.055 },
+    'fishing-bite': { filter:'bandpass', frequency:1850, gain:.09, duration:.065 }, 'fish-landed': { filter:'lowpass', frequency:950, gain:.12, duration:.1 },
+    'cooking-prep': { filter:'highpass', frequency:2600, gain:.07, duration:.045 }, cook: { filter:'lowpass', frequency:1250, gain:.1, duration:.1 },
+    'combat-hit': { filter:'lowpass', frequency:620, gain:.12, duration:.055 }, 'combat-crit': { filter:'highpass', frequency:1400, gain:.13, duration:.095 }, equip: { filter:'highpass', frequency:3000, gain:.08, duration:.07 }, reward: { filter:'highpass', frequency:2200, gain:.06, duration:.12 },
+  };
+  const profile = settings[cue];
+  if (!profile) return undefined;
+  if (!textureBuffer) {
+    textureBuffer = ctx.createBuffer(1, Math.ceil(ctx.sampleRate * .2), ctx.sampleRate);
+    const samples = textureBuffer.getChannelData(0);
+    for (let index = 0; index < samples.length; index++) samples[index] = Math.random() * 2 - 1;
+  }
+  const source = ctx.createBufferSource(), filter = ctx.createBiquadFilter(), envelope = ctx.createGain();
+  source.buffer = textureBuffer; filter.type = profile.filter; filter.frequency.value = profile.frequency;
+  envelope.gain.setValueAtTime(profile.gain, ctx.currentTime); envelope.gain.exponentialRampToValueAtTime(.0001, ctx.currentTime + profile.duration);
+  source.connect(filter); filter.connect(envelope); envelope.connect(destination); source.start(); source.stop(endAt);
+  source.addEventListener('ended', () => { source.disconnect(); filter.disconnect(); envelope.disconnect(); }, { once:true });
+  return source;
+}
+
 export function playFeedbackCue(cue: FeedbackCue, options: AudioOptions) {
   if (options.muted || options.masterVolume <= 0) return;
   const nowMs = performance.now();
@@ -62,11 +85,14 @@ export function playFeedbackCue(cue: FeedbackCue, options: AudioOptions) {
     oscillator.connect(gain); oscillator.start(ctx.currentTime + index * .035); oscillator.stop(ctx.currentTime + preset.duration + index * .035);
     return oscillator;
   });
-  const voice: Voice = { priority: priority[cue], startedAt: nowMs, oscillators, gain };
+  const sources: AudioScheduledSourceNode[] = [...oscillators];
+  const texture = textureFor(ctx, cue, gain, ctx.currentTime + preset.duration);
+  if (texture) sources.push(texture);
+  const voice: Voice = { priority: priority[cue], startedAt: nowMs, oscillators, sources, gain };
   voices.add(voice);
   oscillators[oscillators.length - 1]!.addEventListener('ended', () => {
     voices.delete(voice);
-    for (const oscillator of oscillators) oscillator.disconnect();
+    for (const source of sources) source.disconnect();
     gain.disconnect();
   }, { once: true });
 }

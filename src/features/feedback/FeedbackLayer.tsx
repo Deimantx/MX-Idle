@@ -36,7 +36,7 @@ export function FeedbackLayer({ events, settings, reducedMotion, screen }: { eve
   useEffect(() => {
     if (!gains.length) return;
     const head = gains[0];
-    const duration = head?.type === 'item' && ITEMS[head.itemId].rarity === 'Rare' ? 2700 : 1850;
+    const duration = head?.type === 'item' && ITEMS[head.itemId].rarity === 'Rare' ? 3500 : 2200;
     const timer = window.setTimeout(() => setGains((old) => old.slice(1)), duration);
     return () => window.clearTimeout(timer);
   }, [gains]);
@@ -47,7 +47,7 @@ export function FeedbackLayer({ events, settings, reducedMotion, screen }: { eve
     return groups;
   }, []);
   return <>
-    <div className={`item-gain-feed ${reducedMotion ? 'still' : ''}`} aria-live="polite">{gainGroups.map((group) => <div className={`item-gain ${group.events.some((event)=>event.type==='item'&&ITEMS[event.itemId].rarity==='Rare')?'rare':''}`} key={group.key}>{group.source.startsWith('combat:') && <small>{ENEMIES[group.source.slice(8) as keyof typeof ENEMIES]?.name.toUpperCase() ?? 'COMBAT'}</small>}{group.events.map((event) => event.type === 'item' ? <span className={`gain-reward ${ITEMS[event.itemId].rarity === 'Rare' ? 'gain-reward-rare' : ''}`} key={event.id}>{ITEMS[event.itemId].rarity === 'Rare' ? <GameItemFrame id={event.itemId} size="compact" state="reward" tier={ITEMS[event.itemId].tier}/> : <ItemMark id={event.itemId}/>}<b>+{event.amount} {ITEMS[event.itemId].name}</b></span> : <span className="gain-reward" key={event.id}><Icon name="gold" size={20}/><b>+{event.amount} Gold</b></span>)}</div>)}</div>
+    <div className={`item-gain-feed global-reward-feed ${reducedMotion ? 'still' : ''}`} aria-live="polite">{gainGroups.map((group) => <div className={`item-gain ${group.events.some((event)=>event.type==='item'&&ITEMS[event.itemId].rarity==='Rare')?'rare':''}`} key={group.key}>{group.source.startsWith('combat:') && <small>{ENEMIES[group.source.slice(8) as keyof typeof ENEMIES]?.name.toUpperCase() ?? 'COMBAT'}</small>}{group.events.map((event) => event.type === 'item' ? <span className={`gain-reward ${ITEMS[event.itemId].rarity === 'Rare' ? 'gain-reward-rare' : ''}`} key={event.id}>{ITEMS[event.itemId].rarity === 'Rare' ? <GameItemFrame id={event.itemId} size="compact" state="reward" tier={ITEMS[event.itemId].tier}/> : <ItemMark id={event.itemId}/>}<b>+{event.amount} {ITEMS[event.itemId].name}</b></span> : <span className="gain-reward" key={event.id}><Icon name="gold" size={20}/><b>+{event.amount} Gold</b></span>)}</div>)}</div>
     {feel.filter((event) => event.screen === screen).map((event) => {
       const target = document.querySelector(`[data-feedback-anchor="${screen}"]`) ?? document.querySelector(`[data-feedback-screen="${screen}"]`);
       return target ? createPortal(<div key={event.id} className={`local-game-feedback ${event.screen.toLowerCase()} ${event.kind} ${event.impact} ${reducedMotion ? 'still' : ''}`} role="status"><Icon name={event.screen==='Mining'?'mining':event.screen==='Smithing'?'anvil':event.screen==='Fishing'?'fish':event.screen==='Cooking'?'food':'combat'} size={17}/><span><b>{event.title}</b>{event.detail&&<small>{event.detail}</small>}</span></div>, target, String(event.id)) : null;

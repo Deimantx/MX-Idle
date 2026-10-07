@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { ITEMS } from '../../game/content/items/itemRegistry';
 import type { GameFeedbackEvent } from './feedback.types';
+import { materialProfileFor } from './gameFeelProfiles';
 
-type FxBurst = { id: number; anchor: Element; screen: string; kind: string; rare: boolean };
+type FxBurst = { id: number; anchor: Element; screen: string; kind: string; rare: boolean; material:string; impact:string };
 
 export function GameFxLayer({ events, screen, reducedMotion }: { events: GameFeedbackEvent[]; screen: string; reducedMotion: boolean }) {
   const [bursts, setBursts] = useState<FxBurst[]>([]);
@@ -27,7 +28,9 @@ export function GameFxLayer({ events, screen, reducedMotion }: { events: GameFee
         rare = ITEMS[event.itemId]?.rarity === 'Rare';
       }
       if (!anchor) continue;
-      const burst = { id: event.id, anchor, screen: event.type === 'game-feel' ? event.screen : 'Bank', kind, rare };
+      const screenId = event.type === 'game-feel' ? event.screen : 'Bank';
+      const profile = materialProfileFor(event, screenId);
+      const burst = { id: event.id, anchor, screen: screenId, kind, rare, material:profile.id, impact:profile.impact };
       next.push(burst);
       const timer = window.setTimeout(() => {
         timers.current.delete(event.id);
@@ -44,7 +47,7 @@ export function GameFxLayer({ events, screen, reducedMotion }: { events: GameFee
   }, []);
 
   return <>{bursts.map((burst) => createPortal(
-    <span key={burst.id} className={`game-fx-burst ${burst.screen.toLowerCase()} ${burst.kind} ${burst.rare ? 'rare' : ''}`} aria-hidden="true">
+    <span key={burst.id} className={`game-fx-burst ${burst.screen.toLowerCase()} material-${burst.material} impact-${burst.impact} ${burst.kind} ${burst.rare ? 'rare' : ''}`} aria-hidden="true">
       {Array.from({ length: burst.rare ? 6 : 4 }, (_, index) => <i key={index} />)}
     </span>, burst.anchor, `fx-${burst.id}`,
   ))}</>;

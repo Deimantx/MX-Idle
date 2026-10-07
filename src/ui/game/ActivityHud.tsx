@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { ActionProgress } from './ActionProgress';
 import { Button, Icon, Modal } from '../primitives';
 import { formatActionTime, formatDuration } from './formatters';
@@ -19,8 +19,8 @@ function iconForActivity(activity: SaveState['activity']) { return activity === 
 type Metric = { sessionXp: number; xpHour: number };
 type Metrics = Record<SkillId, Metric> & { key: string; activeMs: number; outputs: Partial<Record<ItemId, number>>; killsHour: number; forged: number };
 
-export function ActivityHud({ game: g, stop, onNavigate, speed, metrics }: {
-  game: SaveState; stop: () => void; onNavigate: (page: GameScreenId) => void; speed: number; metrics: Metrics;
+export function ActivityHud({ game: g, stop, onNavigate, speed, metrics, rewardFeed }: {
+  game: SaveState; stop: () => void; onNavigate: (page: GameScreenId) => void; speed: number; metrics: Metrics; rewardFeed?: ReactNode;
 }) {
   const [chooserOpen, setChooserOpen] = useState(false);
   const a = g.activity;
@@ -45,6 +45,24 @@ export function ActivityHud({ game: g, stop, onNavigate, speed, metrics }: {
     : a === 'combat' ? (g.combat.playerTimer <= g.combat.enemyTimer ? getPlayerAttackInterval(g) : enemy.intervalMs * (sequence[g.combat.sequenceIndex % sequence.length]?.intervalMultiplier ?? 1)) : 1;
   const activityTitle = a === 'mining' ? deposit.name : a === 'fishing' ? spot.name : a === 'cooking' ? cookingRecipe.name : a === 'combat' ? enemy.name : a === 'smelting' ? smeltRecipe.name : a === 'forging' ? recipe.name : '';
   const actionName = a === 'combat' ? sequence[g.combat.sequenceIndex % sequence.length]?.name : a === 'mining' ? 'Next swing' : a === 'smelting' ? g.smithing.warm ? 'Smelting unit' : 'Heating the furnace' : a === 'forging' ? g.smithing.reheat ? 'Reheating workpiece' : 'Hammer strike' : a === 'fishing' ? fish ? `Landing ${fish.name}` : 'Waiting for a bite' : a === 'cooking' ? g.cooking.phase === 'prep' ? 'Preparing ingredients' : 'Cooking batch' : '';
+  const phaseLabel = a === 'mining' ? `MINING / ${stageName} / ${g.mining.strikes} strikes`
+    : a === 'smelting' ? g.smithing.warm ? 'SMELTING' : 'HEATING'
+    : a === 'forging' ? g.smithing.reheat ? 'REHEATING' : 'FORGING'
+    : a === 'fishing' ? g.fishing.phase === 'bite' ? 'LINE ACTIVE / WAITING FOR A BITE' : 'LINE ACTIVE / FISH ON THE LINE'
+    : a === 'cooking' ? g.cooking.phase === 'prep' ? 'PREPARING' : 'COOKING'
+    : a === 'combat' ? 'ATTACKING' : '';
+  const phaseKey = a === 'mining' ? `${a}:${g.mining.strikes}` : a === 'smelting' ? `${a}:${g.smithing.warm}` : a === 'forging' ? `${a}:${g.smithing.reheat}:${g.smithing.work}` : a === 'fishing' ? `${a}:${g.fishing.phase}` : a === 'cooking' ? `${a}:${g.cooking.phase}` : a === 'combat' ? `${a}:${g.combat.sequenceIndex}:${g.combat.enemyHp}` : 'idle';
+  const previousPhase = useRef(phaseKey), phaseTimer = useRef<number | undefined>();
+  const [phasePulse, setPhasePulse] = useState(false);
+  useEffect(() => {
+    if (phaseKey === previousPhase.current) return;
+    previousPhase.current = phaseKey;
+    setPhasePulse(true);
+    window.clearTimeout(phaseTimer.current);
+    phaseTimer.current = window.setTimeout(() => setPhasePulse(false), 280);
+    return () => window.clearTimeout(phaseTimer.current);
+  }, [phaseKey]);
+  useEffect(() => () => window.clearTimeout(phaseTimer.current), []);
   const outputLabel = a === 'mining' ? `${deposit.resourceName}/h` : a === 'smelting' ? `${smeltRecipe.name}/h` : a === 'forging' ? 'Workpiece ETA' : a === 'fishing' ? 'Fish/h' : a === 'cooking' ? cookingRecipe.foodValue ? 'Servings/h' : 'Utility items/h' : 'Kills/h';
   const outputValue = !dataStable ? null : a === 'mining' ? Math.round(metrics.outputs[deposit.primary] ?? 0).toLocaleString()
     : a === 'smelting' ? Math.round(metrics.outputs[smeltRecipe.output.item] ?? 0).toLocaleString()
@@ -52,14 +70,15 @@ export function ActivityHud({ game: g, stop, onNavigate, speed, metrics }: {
     : a === 'fishing' ? Math.round(Object.entries(metrics.outputs).filter(([id]) => id.startsWith('fishing.fish.')).reduce((sum, [, value]) => sum + (value ?? 0), 0)).toLocaleString()
     : a === 'cooking' ? Math.round(metrics.outputs[cookingRecipe.output as ItemId] ?? 0).toLocaleString()
     : metrics.killsHour.toFixed(1);
-  return <div className="activity-hud-wrap">
-    <footer className={`activity-hud ${a ? 'running' : 'idle'}`}>
+  return <div className="activity-hud-wrap" data-reward-anchor>
+    {rewardFeed}
+    <footer className={`activity-hud ${a ? 'running' : 'idle'} ${phasePulse?'phase-pulse':''} ${a ? `activity-${a}` : ''}`} data-phase={phaseLabel.toLowerCase()}>
       {!a ? <>
         <div className="dock-idle-mark"><Icon name="spark" size={18}/></div>
         <div className="dock-idle-copy"><b>No activity active</b><small>Choose a profession or combat target to begin.</small></div>
         <Button tone="quiet" className="dock-choose" onClick={() => setChooserOpen(true)}>Choose activity <Icon name="spark" size={15}/></Button>
       </> : <>
-        <div className="dock-activity"><span className={`dock-icon active ${a}`}><Icon name={iconForActivity(a)} size={19}/></span><div><span className="tiny-label">{a === 'combat' ? 'ENCOUNTER' : 'CURRENT WORK'}</span><b>{activityTitle}</b><small className="dock-phase-name">{a === 'mining' ? `${stageName} · ${g.mining.strikes} strikes` : a === 'smelting' ? g.smithing.warm ? 'Refining a unit' : 'Warming the chamber' : actionName}</small></div></div>
+        <div className="dock-activity"><span className={`dock-icon active ${a}`}><Icon name={iconForActivity(a)} size={19}/></span><div><span className="tiny-label">{a === 'combat' ? 'ENCOUNTER' : a === 'smelting' || a === 'forging' ? 'SMITHING' : a.toUpperCase()}</span><b>{activityTitle}</b><small className="dock-phase-name">{phaseLabel}</small></div></div>
         <div className="dock-progress"><div className="dock-progress-caption"><b>{actionName}</b><span>{formatActionTime(remaining)}</span></div><ActionProgress active remainingMs={remaining} durationMs={duration} phaseKey={`${a}:${g.mining.strikes}:${g.smithing.work}:${g.fishing.phase}:${g.cooking.phase}:${g.combat.playerActionSerial}`} speedMultiplier={speed} label={`${activityTitle} progress`} tone={a === 'combat' ? 'danger' : a === 'mining' ? 'copper' : 'heat'}/></div>
         <div className="dock-metrics">{dataStable ? <><div className="dock-metric"><small>{outputLabel}</small><b>{outputValue ?? '—'}</b></div><div className="dock-metric"><small>{a === 'combat' ? 'Attack XP/h' : `${skill} XP/h`}</small><b>{rate > 0 ? Math.round(rate).toLocaleString() : '—'}</b></div>{a === 'combat' ? <div className="dock-metric"><small>Health</small><b className={g.combat.playerHp / maxHitpoints(g.skills.Hitpoints.level) <= .35 ? 'critical' : ''}>{g.combat.playerHp} / {maxHitpoints(g.skills.Hitpoints.level)}</b></div> : eta && <div className="dock-metric"><small>Next level</small><b>{eta}</b></div>}</> : <span className="dock-collecting">Collecting rate data…</span>}</div>
         <Button tone="quiet" className="dock-stop" onClick={stop}><Icon name="stop" size={14}/>Stop</Button>

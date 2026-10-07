@@ -13,6 +13,7 @@ import { GameTopBar } from '../ui/game/GameTopBar';
 import { FeedbackLayer } from '../features/feedback/FeedbackLayer';
 import { GlobalXpHud } from '../features/feedback/xp/GlobalXpHud';
 import { GameFxLayer } from '../features/feedback/GameFxLayer';
+import { RewardTrajectoryLayer } from '../features/feedback/RewardTrajectoryLayer';
 import { playFeedbackCue, unlockFeedbackAudio } from '../features/feedback/audioFeedback';
 import { DevPanel } from '../features/devtools/DevPanel';
 import { FirstStepsPanel } from '../features/onboarding/FirstStepsPanel';
@@ -62,17 +63,17 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
   useEffect(() => { const timer = window.setInterval(() => persist(gameRef.current), 4000); const save = () => persist(gameRef.current); const onVis = () => { if (document.visibilityState === 'hidden') { if (activeSince.current !== null) playedMs.current += Date.now() - activeSince.current; activeSince.current = null; save(); } else if (activeSince.current === null) activeSince.current = Date.now(); }; window.addEventListener('beforeunload', save); document.addEventListener('visibilitychange', onVis); return () => { window.clearInterval(timer); window.removeEventListener('beforeunload', save); document.removeEventListener('visibilitychange', onVis); persist(gameRef.current); }; }, [persist]);
   useEffect(() => { const systems = feedbackEvents.filter((event): event is Extract<GameFeedbackEvent,{type:'system'}> => event.type === 'system' && event.id > Number(toastSeen.current || 0)); const event = systems[systems.length - 1]; if (event && (event.tone === 'error' || event.tone === 'defeat' || event.tone === 'milestone' || appSettings.feedback.systemToasts)) { toastSeen.current = String(event.id); setToast(event.message); window.clearTimeout(toastTimer.current); toastTimer.current = window.setTimeout(() => setToast(''), event.tone === 'milestone' ? 4200 : 2600); } }, [feedbackEvents, appSettings.feedback.systemToasts]);
   const mut = (fn: (s: SaveState) => void) => { setGame((old) => { const s = structuredClone(old); fn(s); s.savedAt = Date.now(); return s; }); };
-  const previewFeedback = (kind: 'fishing-xp'|'combat-xp'|'all-skills'|'level-up'|'common-item'|'rare-item'|'unlock'|'error'|'equip'|'mining'|'smithing'|'cooking') => {
+  const previewFeedback = (kind: 'fishing-xp'|'combat-xp'|'all-skills'|'level-up'|'common-item'|'rare-item'|'unlock'|'error'|'equip'|'mining'|'smithing'|'fishing'|'cooking'|'combat') => {
     const id = ++eventId.current, occurredAt = Date.now();
     const event: GameFeedbackEvent = kind === 'fishing-xp' ? { id, type:'xp', skillId:'Fishing', amount:12, occurredAt }
       : kind === 'combat-xp' ? { id, type:'xp-batch', gains:[{skillId:'Attack',amount:8},{skillId:'Hitpoints',amount:2},{skillId:'Defence',amount:2}], occurredAt }
       : kind === 'all-skills' ? { id, type:'xp-batch', gains:[{skillId:'Mining',amount:7},{skillId:'Smithing',amount:5},{skillId:'Fishing',amount:12},{skillId:'Cooking',amount:4},{skillId:'Attack',amount:8},{skillId:'Hitpoints',amount:2},{skillId:'Defence',amount:2}], occurredAt }
       : kind === 'level-up' ? { id, type:'level-up', skillId:'Mining', oldLevel:31, newLevel:32, occurredAt }
-      : kind === 'common-item' ? { id, type:'item', itemId:'item.mining.copper_ore', amount:3, source:'preview', occurredAt }
-      : kind === 'rare-item' ? { id, type:'item', itemId:'item.mining.opal', amount:1, source:'preview', occurredAt }
+      : kind === 'common-item' ? { id, type:'item', itemId:'item.mining.copper_ore', amount:3, source:'mining', occurredAt }
+      : kind === 'rare-item' ? { id, type:'item', itemId:'item.mining.opal', amount:1, source:'mining', occurredAt }
       : kind === 'unlock' ? { id, type:'system', message:'New waters unlocked', tone:'unlock', occurredAt }
       : kind === 'error' ? { id, type:'system', message:'Not enough copper ore', tone:'error', occurredAt }
-      : { id, type:'game-feel', screen:kind==='mining'?'Mining':kind==='smithing'?'Smithing':kind==='cooking'?'Cooking':'Equipment', kind, cue:kind==='equip'?'equip':kind==='mining'?'mining-hit':kind==='smithing'?'forge-strike':'cook', title:kind==='equip'?'Copper Sword equipped':kind==='mining'?'Ore struck':kind==='smithing'?'Hammer meets the workpiece':'Batch ready', impact:'important', occurredAt };
+      : { id, type:'game-feel', screen:kind==='mining'?'Mining':kind==='smithing'?'Smithing':kind==='fishing'?'Fishing':kind==='cooking'?'Cooking':kind==='combat'?'Combat':'Equipment', kind, cue:kind==='equip'?'equip':kind==='mining'?'mining-hit':kind==='smithing'?'forge-strike':kind==='fishing'?'fish-landed':kind==='combat'?'combat-hit':'cook', title:kind==='equip'?'Copper Sword equipped':kind==='mining'?'Ore struck':kind==='smithing'?'Hammer meets the workpiece':kind==='fishing'?'A ripple breaks the surface':kind==='combat'?'A clean hit':'Batch ready', impact:'important', occurredAt };
     setFeedbackEvents((old) => [...old, event].slice(-24));
   };
   const sound = (cue: Parameters<typeof playFeedbackCue>[0]) => playFeedbackCue(cue, appSettings.audio);
@@ -88,7 +89,7 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
     if (fresh.some((event) => event.type === 'level-up')) sound('level-up');
     else if (fresh.some((event) => event.type === 'item' || event.type === 'gold')) sound('reward');
     else {
-      const action = fresh.find((event): event is Extract<GameFeedbackEvent,{type:'game-feel'}> => event.type === 'game-feel' && (event.impact !== 'routine' || event.cue === 'fishing-bite'));
+      const action = fresh.find((event): event is Extract<GameFeedbackEvent,{type:'game-feel'}> => event.type === 'game-feel' && (event.impact !== 'routine' || ['mining-hit','forge-strike','fishing-bite','fish-landed','cooking-prep','cook','combat-hit','combat-miss','enemy-hit'].includes(event.cue)));
       if (action) sound(action.cue);
     }
   }, [feedbackEvents, appSettings.audio.muted, appSettings.audio.masterVolume]);
@@ -178,8 +179,8 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
   <main className="main-frame">
       <GameTopBar game={game} screen={screen} profile={profile} saveStatus={saveStatus} onOpenSettings={onOpenSettings}/>
       <GlobalXpHud game={game} events={feedbackEvents} settings={appSettings.feedback} reducedMotion={isMotionReduced}/>
-      <FeedbackLayer events={feedbackEvents} settings={appSettings.feedback} reducedMotion={isMotionReduced} screen={screen}/>
       <GameFxLayer events={feedbackEvents} screen={screen} reducedMotion={isMotionReduced}/>
+      <RewardTrajectoryLayer events={feedbackEvents} screen={screen} enabled={appSettings.feedback.showItemGainFeed} reducedMotion={isMotionReduced}/>
       <div className="content-scroll" id="game-content" tabIndex={-1}><div className="content-wrap">
         {!game.objectives.victory && <FirstStepsPanel game={game} minimized={minimized} onToggle={() => { setMinimized(!minimized); mut((s) => { s.objectives.dismissed = !s.objectives.dismissed; }); }} />}
         {screen === 'Mining' && <MiningScreen game={game} xp={xp.mining.value} maxXp={xp.mining.max} speedMultiplier={speed} metrics={metrics} select={(id) => mut((s) => { selectDeposit(s, id); })} equipTool={(item) => equip(item, 'miningTool')} start={() => start('mining')} stop={stop} />}
@@ -190,7 +191,7 @@ export function GameShell({ profile, initialState, appSettings, onOpenSettings, 
         {screen === 'Combat' && <CombatScreen game={game} speedMultiplier={speed} start={() => start('combat')} stop={stop} stance={(stance: DamageType) => mut((s) => { s.combat.stance = stance; s.combat.pendingStance=stance; })} target={(id: EnemyId) => mut((s) => { setCombatTarget(s, id); })} setArea={(id)=>mut((s)=>{setCombatArea(s,id);})} queueSpecial={() => mut((s) => { if (!s.combat.queuedSpecial) s.combat.queuedSpecial = true; })} setSpecialMode={(mode) => mut((s) => { s.combat.specialMode = mode; if (mode === 'Off') s.combat.queuedSpecial = false; })} setFoodSlot={setFoodSlot} setFoodReserve={setFoodReserve} eat={eat} setAutoEat={setAutoEat} />}
         {screen === 'Bank' && <BankScreen game={game} filter={filter} setFilter={setFilter} />}
       </div></div>
-      <ActivityHud game={game} stop={stop} onNavigate={go} speed={speed} metrics={metrics} />
+      <ActivityHud game={game} stop={stop} onNavigate={go} speed={speed} metrics={metrics} rewardFeed={<FeedbackLayer events={feedbackEvents} settings={appSettings.feedback} reducedMotion={isMotionReduced} screen={screen}/>} />
     </main>
     {toast && <div className="toast" role="status"><span className="toast-mark"><Icon name="ore" size={18} /></span>{toast}</div>}
     {import.meta.env.DEV && <DevPanel

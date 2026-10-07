@@ -22,6 +22,12 @@ function XpSkillOrb({ game, entry, settings, onInspect }: { game: SaveState; ent
   const progress = maxed ? 1 : Math.max(0, Math.min(1, state.xp / Math.max(1, threshold)));
   const circumference = 2 * Math.PI * 43;
   const latestPulse = entry.pulses[entry.pulses.length - 1];
+  const priorProgress = useRef(progress);
+  const [ringEcho, setRingEcho] = useState<{ from: number; to: number; id: number } | null>(null);
+  useEffect(() => {
+    if (progress > priorProgress.current + .0001) setRingEcho({ from: priorProgress.current, to: progress, id: Date.now() });
+    priorProgress.current = progress;
+  }, [progress]);
   const levelUp = settings.levelUpEffects && entry.levelUp && Date.now() - entry.levelUp.startedAt < 1200;
   const presentation = SKILL_PRESENTATION[entry.skillId];
   const label = `${entry.skillId}, level ${state.level}${maxed ? ', maximum level' : ''}, ${number(state.xp)} of ${number(threshold)} XP${maxed ? '' : `, ${number(Math.max(0, threshold - state.xp))} XP to next level`}`;
@@ -32,6 +38,7 @@ function XpSkillOrb({ game, entry, settings, onInspect }: { game: SaveState; ent
         <circle className="xp-ring-bead" cx="50" cy="50" r="45" />
         <circle className="xp-ring-track" cx="50" cy="50" r="43" />
         <circle className="xp-ring-progress" cx="50" cy="50" r="43" strokeDasharray={circumference} strokeDashoffset={circumference * (1 - progress)} />
+        {ringEcho && <circle key={ringEcho.id} className="xp-ring-afterimage" cx="50" cy="50" r="43" strokeDasharray={`${circumference * (ringEcho.to-ringEcho.from)} ${circumference}`} strokeDashoffset={circumference * (1-ringEcho.from)} />}
       </svg>
       <span className="xp-orb-core"><Icon name={presentation.icon} size={22}/><b>{state.level}</b></span>
       {latestPulse && settings.showXpNumbers && <span className="xp-gain-pulse" key={latestPulse.id}>+{formatXpAmount(latestPulse.amount)} XP</span>}
