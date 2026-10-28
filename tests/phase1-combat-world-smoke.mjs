@@ -44,6 +44,10 @@ try{
   const combatViewport=await page.evaluate(()=>{const scroll=document.querySelector('.content-scroll'),wrap=document.querySelector('.content-wrap'),layout=document.querySelector('.combat-layout');return {scrollWidth:scroll?.clientWidth??0,wrapWidth:wrap?.getBoundingClientRect().width??0,layoutWidth:layout?.getBoundingClientRect().width??0,gridColumns:layout?getComputedStyle(layout).gridTemplateColumns:''};});
   assert.ok(combatViewport.scrollWidth>0&&combatViewport.wrapWidth>=combatViewport.scrollWidth-40,'Combat content wrapper should fill the main viewport: '+JSON.stringify(combatViewport));
   assert.ok(combatViewport.layoutWidth>=combatViewport.wrapWidth-90,'Combat panels should use the content wrapper width: '+JSON.stringify(combatViewport));
+  const combatArt=await page.evaluate(()=>{const scene=document.querySelector('.battle-scene'),player=scene?.querySelector('.player-battle-sprite'),enemy=scene?.querySelector('.enemy-battle-sprite');return {region:scene?.getAttribute('data-region'),background:getComputedStyle(scene).backgroundImage,playerSrc:player instanceof HTMLImageElement?player.currentSrc:'',playerLoaded:player instanceof HTMLImageElement&&player.complete&&player.naturalWidth>0,enemySrc:enemy instanceof HTMLImageElement?enemy.currentSrc:'',enemyLoaded:enemy instanceof HTMLImageElement&&enemy.complete&&enemy.naturalWidth>0};});
+  assert.ok(combatArt.background.includes('broken-road.svg'),'Broken Road renders its location background: '+JSON.stringify(combatArt));
+  assert.ok(combatArt.playerLoaded&&combatArt.playerSrc.includes('/assets/combat/player/adventurer.svg'),'Player battle art loads: '+JSON.stringify(combatArt));
+  assert.ok(combatArt.enemyLoaded&&combatArt.enemySrc.includes('/assets/combat/monsters/road-wolf.svg'),'Unique Road Wolf sprite loads: '+JSON.stringify(combatArt));
   await page.getByRole('button',{name:'Begin Combat'}).click();
   await waitForState(state=>(state.combat.defeated['road-wolf']??0)>0,'natural Road Wolf victory',120_000);
   const firstCombatState=await readState();
