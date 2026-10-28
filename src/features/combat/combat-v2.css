@@ -893,3 +893,11 @@
   .combat-v2 .food-picker-menu { min-width:0; }
   .combat-v2 .food-option { align-items:flex-start; flex-direction:column; gap:3px; }
 }
+
+
+/* Keep the food search in normal flow so it cannot cover the first result. */
+.combat-v2 .food-picker-menu > input {
+  position:relative;
+  top:auto;
+  z-index:auto;
+}
