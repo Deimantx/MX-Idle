@@ -24,11 +24,26 @@ try {
 
   const commandStrip=page.getByTestId('combat-command-strip');
   await commandStrip.waitFor();
-  assert.equal(await page.locator('.combat-resource-grid .health-unit, .combat-resource-grid .resource-meter').count(),4,'HP, enemy HP, stamina and satiety share one resource HUD');
-  assert.equal(await page.locator('.battle-scene .scene-combatant-tag').count(),2,'the scene clearly labels both sides of the encounter');
+  assert.equal(await page.locator('.combat-hp-topline .health-unit').count(),2,'player and enemy HP sit above the battle scene');
+  assert.equal(await page.locator('.combat-resource-grid .resource-meter').count(),2,'stamina and satiety remain visible beneath the battle scene');
+  assert.equal(await page.locator('.battle-scene .scene-combatant-tag').count(),1,'the enemy is labeled while the player sprite is omitted');
+  assert.equal(await page.locator('.battle-scene .player-battle-sprite').count(),0,'combat scene does not render a player sprite');
   assert.equal(await page.locator('.enemy-insight-strip > div').count(),3,'enemy inspection summarizes resistance, pattern and reward pool');
   await page.locator('.enemy-telegraph').waitFor();
   await page.locator('.sequence-flow').waitFor();
+  await page.getByRole('tab',{name:'Combat stats'}).click();
+  await page.getByText('YOUR RESISTANCES').waitFor();
+  await page.getByRole('tab',{name:'Equipment'}).click();
+  await page.getByRole('tab',{name:'Defenses'}).click();
+  await page.getByText('RESISTANCES & WEAKNESSES').waitFor();
+  await page.getByRole('tab',{name:'Attacks'}).click();
+  await page.getByText('ATTACK SEQUENCE').waitFor();
+  await page.getByRole('tab',{name:'Loot'}).click();
+  await page.getByText('POSSIBLE DROPS').waitFor();
+  await page.getByRole('tab',{name:'Overview'}).click();
+  await page.getByRole('button',{name:'Browse Combat Zones'}).click();
+  await page.getByRole('heading',{name:'Combat World'}).waitFor();
+  await page.getByRole('button',{name:'Close combat zones'}).click();
 
   const start=page.getByRole('button',{name:'Start Auto Combat'});
   assert.equal(await start.isEnabled(),true,'auto-combat can start with the equipped weapon');
