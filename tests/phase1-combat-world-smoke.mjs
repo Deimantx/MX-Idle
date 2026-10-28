@@ -48,9 +48,10 @@ try{
   assert.ok(combatArt.background.includes('broken-road.svg'),'Broken Road renders its location background: '+JSON.stringify(combatArt));
   assert.ok(combatArt.playerLoaded&&combatArt.playerSrc.includes('/assets/combat/player/adventurer.svg'),'Player battle art loads: '+JSON.stringify(combatArt));
   assert.ok(combatArt.enemyLoaded&&combatArt.enemySrc.includes('/assets/combat/monsters/road-wolf.svg'),'Unique Road Wolf sprite loads: '+JSON.stringify(combatArt));
-  const artInventory=await page.evaluate(async()=>{const atlas=await fetch('/assets/combat/monsters/monster-atlas.svg');const atlasText=await atlas.text();const paths=['broken-road.svg','heartlands.svg','wilds.svg','deep-frontier.svg','fenlands.svg','emberfall.svg','frostveil.svg','stormreach.svg','aetherfall.svg','nightglass.svg'];const backgrounds=await Promise.all(paths.map(async name=>({name,ok:(await fetch('/assets/combat/backgrounds/'+name)).ok})));return {atlasOk:atlas.ok,symbolCount:(atlasText.match(/<symbol id=/g)||[]).length,backgrounds};});
+  const artInventory=await page.evaluate(async()=>{const atlas=await fetch('/assets/combat/monsters/monster-atlas.svg');const atlasText=await atlas.text();const paths=['broken-road.svg','heartlands.svg','wilds.svg','deep-frontier.svg','fenlands.svg','emberfall.svg','frostveil.svg','stormreach.svg','aetherfall.svg','nightglass.svg'];const backgrounds=await Promise.all(paths.map(async name=>({name,ok:(await fetch('/assets/combat/backgrounds/'+name)).ok})));const dungeons=['ruined-watch','drowned-burrow','hollow-forge','mooncrypt','embervault','frostspire','tempest-bastion','aetherglass-sanctum','umbral-citadel','astral-nexus'];const dungeonBackgrounds=await Promise.all(dungeons.map(async name=>({name,ok:(await fetch('/assets/combat/backgrounds/dungeons/'+name+'.svg')).ok})));return {atlasOk:atlas.ok,symbolCount:(atlasText.match(/<symbol id=/g)||[]).length,backgrounds,dungeonBackgrounds};});
   assert.ok(artInventory.atlasOk&&artInventory.symbolCount>=80,'Unique sprite atlas covers the full combat roster: '+JSON.stringify(artInventory));
   assert.ok(artInventory.backgrounds.every(item=>item.ok),'Every tier-specific environment asset is served: '+JSON.stringify(artInventory));
+  assert.ok(artInventory.dungeonBackgrounds.every(item=>item.ok),'All ten bespoke dungeon interiors are served: '+JSON.stringify(artInventory));
   await page.getByRole('button',{name:'Begin Combat'}).click();
   await waitForState(state=>(state.combat.defeated['road-wolf']??0)>0,'natural Road Wolf victory',120_000);
   const firstCombatState=await readState();
@@ -106,6 +107,7 @@ try{
   await page.getByLabel('Dev Dungeon Encounter').selectOption('2');
   await page.getByRole('button',{name:'Full HP'}).click();
   await page.getByRole('button',{name:'Start Dungeon at encounter'}).click();
+  assert.ok((await page.locator('.battle-scene').evaluate(el=>getComputedStyle(el).backgroundImage)).includes('/dungeons/embervault.svg'),'Dungeon combat uses its bespoke interior rather than the outdoor biome');
   await page.getByRole('button',{name:'Force Enemy Defeat'}).click();
   await waitForState(state=>state.combat.targetId==='t5-cindermaw','dungeon advance to Cindermaw');
   await closeDev();
