@@ -14,6 +14,7 @@ function describeEvent(text: string): FeedEvent {
   if (/loot:|gold earned|reward|found .*×|first kill|received .*×/.test(value)) return { text, kind: 'loot', icon: Package, title: 'Loot gained' };
   if (/dungeon .*cleared|run is complete|defeated\./.test(value)) return { text, kind: 'victory', icon: CheckCircle2, title: 'Victory' };
   if (/changes its attack pattern|phase/.test(value)) return { text, kind: 'phase', icon: AlertTriangle, title: 'Enemy phase' };
+  if (/overeat|satiety|food lock|you eat|eats food|automatic eating|food supply/.test(value)) return { text, kind: 'sustain', icon: Utensils, title: 'Recovery and survival' };
   if (/your attack misses|you hit |your attack|you are stunned|you recover/.test(value)) return { text, kind: 'player', icon: Swords, title: 'Your action' };
   if (/uses .*for \d+|but misses|is stunned and loses|deals \d+ damage/.test(value)) return { text, kind: 'enemy', icon: Target, title: 'Enemy action' };
   if (/food|satiety|eat|overeat|stun|heal/.test(value)) return { text, kind: 'sustain', icon: Utensils, title: 'Recovery and survival' };
@@ -45,7 +46,7 @@ export function CombatFeed({ lines, active }: { lines: string[]; active: boolean
   return <section className="combat-feed" aria-label="Combat Feed">
     <header className="combat-feed-head">
       <div className="combat-feed-title"><span className={'combat-feed-live-dot ' + (active ? 'is-live' : '')} aria-hidden="true" /><div><b>Combat Feed</b><small>{active ? 'LIVE ENCOUNTER' : 'LATEST ENCOUNTER EVENTS'}</small></div></div>
-      <span className="combat-feed-count">{lines.length} / 24</span>
+      <div className="combat-feed-head-actions"><span className="combat-feed-count">{lines.length} / 24</span><span className={`combat-feed-follow-state ${followLatest?'is-following':''}`} aria-live="off">{followLatest?'FOLLOWING LATEST':'SCROLL PAUSED'}</span></div>
     </header>
     <div className="combat-feed-filters" role="group" aria-label="Filter combat events">
       {FILTERS.map(item => <button key={item.id} type="button" className={filter === item.id ? 'active' : ''} aria-pressed={filter === item.id} onClick={() => setFilter(item.id)}>{item.label}</button>)}
@@ -61,6 +62,6 @@ export function CombatFeed({ lines, active }: { lines: string[]; active: boolean
         </article>;
       }) : <div className="combat-feed-empty"><CircleHelp size={20}/><b>No matching events</b><span>Try another filter or start a combat encounter.</span></div>}
     </div>
-    {!followLatest && <button type="button" className="combat-feed-follow" onClick={() => { setFollowLatest(true); if (listRef.current) listRef.current.scrollTo({ top: listRef.current.scrollHeight, behavior: 'smooth' }); }}>↓ Jump to latest event</button>}
+    {!followLatest && <button type="button" className="combat-feed-follow" onClick={() => { setFollowLatest(true); if (listRef.current) listRef.current.scrollTo({ top: listRef.current.scrollHeight, behavior: 'auto' }); }}>Jump to latest event</button>}
   </section>;
 }

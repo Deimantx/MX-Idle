@@ -15,7 +15,8 @@
     "qa:professions": "node tests/fishing-cooking-flow.mjs",
     "typecheck": "tsc -b --pretty false",
     "check:text": "node scripts/check-ui-text.mjs",
-    "preview": "vite preview --host 0.0.0.0"
+    "preview": "vite preview --host 0.0.0.0",
+    "qa:combat-ui": "node tests/combat-interface-smoke.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.52.0",
