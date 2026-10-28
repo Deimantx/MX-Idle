@@ -114,9 +114,12 @@ try {
   await page.getByRole('button', { name: 'DEV' }).click();
   await page.getByRole('button', { name: 'Begin Combat' }).click();
   await page.getByText('IN COMBAT').waitFor();
+  assert.equal(await page.locator('.sequence-flow [aria-current="step"]').count(), 1, 'Combat sequence identifies the active enemy action');
   await capture('combat');
   const worldToggle = page.getByRole('button', { name: /Expand.*Combat World/ });
   await worldToggle.click();
+  assert.equal(await worldToggle.getAttribute('aria-expanded'), 'true', 'World panel toggle reports its expanded state');
+  assert.equal(await worldToggle.getAttribute('aria-controls'), 'combat-panel-world', 'World panel toggle points to its content');
   await page.locator('#combat-panel-world').waitFor({ state: 'visible' });
   await page.getByRole('button', { name: 'Mining', exact: true }).click();
   await page.getByRole('button', { name: 'Combat', exact: true }).click();
@@ -128,8 +131,12 @@ try {
   await foodSearch.fill('__no_food_matches__');
   assert.equal(await page.locator('.food-option').count(), 0, 'Food picker search filters recipes');
   assert.equal(await page.locator('.empty-copy').isVisible(), true, 'Food picker explains an empty search');
-  await foodSearch.fill('');
-  assert.equal(await page.locator('.food-option').count() > 0, true, 'Clearing food search restores owned options');
+  await foodSearch.press('Escape');
+  assert.equal(await page.locator('.food-option').count() > 0, true, 'Escape clears an active food search');
+  await foodSearch.press('Escape');
+  assert.equal(await page.locator('.food-picker-menu').count(), 0, 'Escape closes the empty food picker');
+  await page.locator('.food-picker-trigger').first().click();
+  assert.equal(await page.locator('.food-option').count() > 0, true, 'Reopening the picker restores owned food');
   await page.locator('.food-option').first().click();
   await page.setViewportSize({ width: 390, height: 844 });
   await page.waitForTimeout(100);
