@@ -252,3 +252,88 @@
   .dev-nav-group>small { display:none; }
   .dev-nav-group button { flex:none; }
 }
+
+
+/* Combat desktop layout: use the full main frame and explicit grid areas.
+   The old 3-column override conflicted with children still assigned to column 4,
+   creating an implicit track and leaving the whole encounter UI narrow. */
+.main-frame > .content-scroll > .content-wrap:has(> .screen.combat-screen) {
+  display:block;
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:16px 20px var(--activity-reserve);
+}
+.main-frame > .content-scroll > .content-wrap > .screen.combat-screen.combat-v2 {
+  display:block;
+  width:100%;
+  max-width:none;
+  min-width:0;
+  margin:0;
+}
+.screen.combat-screen.combat-v2 .combat-layout {
+  display:grid;
+  width:100%;
+  max-width:none;
+  grid-template-columns:minmax(270px,.9fr) minmax(0,1.8fr) minmax(260px,.9fr);
+  grid-template-areas:
+    "world battle intel"
+    "inspection battle intel";
+  gap:12px;
+  align-items:start;
+}
+.screen.combat-screen.combat-v2 .combat-main { display:contents; }
+.screen.combat-screen.combat-v2 .world-browser {
+  grid-area:world;
+  grid-column:auto;
+  grid-row:auto;
+  min-width:0;
+}
+.screen.combat-screen.combat-v2 .target-panel {
+  grid-area:inspection;
+  grid-column:auto;
+  grid-row:auto;
+  min-width:0;
+}
+.screen.combat-screen.combat-v2 .battle-panel {
+  grid-area:battle;
+  grid-column:auto;
+  grid-row:auto;
+  min-width:0;
+}
+.screen.combat-screen.combat-v2 .combat-intel {
+  grid-area:intel;
+  grid-column:auto;
+  grid-row:auto;
+  min-width:0;
+}
+.screen.combat-screen.combat-v2 .battle-scene {
+  height:clamp(380px,52vh,680px);
+  min-height:380px;
+}
+@media (max-width:1150px) {
+  .main-frame > .content-scroll > .content-wrap:has(> .screen.combat-screen) {
+    padding:12px 12px var(--activity-reserve);
+  }
+  .screen.combat-screen.combat-v2 .combat-layout {
+    grid-template-columns:minmax(240px,.85fr) minmax(0,1.4fr);
+    grid-template-areas:
+      "world battle"
+      "inspection battle"
+      "intel intel";
+  }
+}
+@media (max-width:760px) {
+  .screen.combat-screen.combat-v2 .combat-layout {
+    grid-template-columns:minmax(0,1fr);
+    grid-template-areas:
+      "world"
+      "inspection"
+      "battle"
+      "intel";
+  }
+  .screen.combat-screen.combat-v2 .battle-scene {
+    height:clamp(320px,50vh,500px);
+    min-height:320px;
+  }
+}
