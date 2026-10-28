@@ -115,15 +115,15 @@ try {
   await page.locator('.battle-panel.battle-active').waitFor();
   assert.equal(await page.locator('.sequence-flow [aria-current="step"]').count(), 1, 'Combat sequence identifies the active enemy action');
   await capture('combat');
-  const worldToggle = page.getByRole('button', { name: /Expand.*Combat World/ });
-  await worldToggle.click();
+  const worldToggle = page.locator('.world-browser .combat-collapse-toggle');
+  if (await worldToggle.getAttribute('aria-expanded') === 'false') await worldToggle.click();
   assert.equal(await worldToggle.getAttribute('aria-expanded'), 'true', 'World panel toggle reports its expanded state');
   assert.equal(await worldToggle.getAttribute('aria-controls'), 'combat-panel-world', 'World panel toggle points to its content');
   await page.locator('#combat-panel-world').waitFor({ state: 'visible' });
   await page.getByRole('button', { name: 'Mining', exact: true }).click();
   await page.getByRole('button', { name: 'Combat', exact: true }).click();
   await page.locator('#combat-panel-world').waitFor({ state: 'visible' });
-  await page.getByRole('button', { name: /Collapse.*Combat World/ }).click();
+  if (await worldToggle.getAttribute('aria-expanded') === 'true') await worldToggle.click();
   assert.equal(await page.locator('.food-settings input[type="checkbox"]').count(), 1, 'Auto Eat uses a real checkbox input');
   await page.getByRole('button', { name: /Choose food/ }).first().click();
   const foodSearch = page.getByLabel('Search owned food');
