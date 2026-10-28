@@ -1193,3 +1193,27 @@
 .combat-v2 .combat-intel .stat-row>b { font-size:calc(11px * var(--ui-scale) * var(--text-scale)); font-variant-numeric:tabular-nums; }
 @media (max-width:1250px) { .combat-v2 .combat-intel .stat-rows { grid-template-columns:repeat(4,minmax(0,1fr)); } }
 @media (max-width:820px) { .combat-v2 .combat-intel .stat-rows { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+
+/* Encounter settings are gathered behind one compact gear control instead of duplicating automation controls throughout the HUD. */
+.combat-v2 .battle-panel { position:relative; }
+.combat-v2 .combat-header-actions { display:flex; align-items:center; justify-content:flex-end; gap:7px; }
+.combat-v2 .combat-settings-trigger { display:inline-flex; align-items:center; justify-content:center; gap:5px; min-height:28px; padding:4px 8px; border:1px solid #48514a; border-radius:4px; color:#bfc9bc; background:#202725; font-size:9px; font-weight:700; cursor:pointer; }
+.combat-v2 .combat-settings-trigger:hover,.combat-v2 .combat-settings-trigger[aria-expanded="true"] { color:#f0d8b1; border-color:#8b7048; background:#342e23; }
+.combat-v2 .combat-settings-popover { position:absolute; z-index:30; top:48px; right:12px; width:min(310px,calc(100% - 24px)); padding:12px; border:1px solid #6c583e; border-radius:5px; background:linear-gradient(150deg,#2b302b,#1a2221 85%); box-shadow:0 14px 35px #000b,inset 0 1px #ffffff0b; }
+.combat-v2 .combat-settings-heading { display:flex; align-items:center; justify-content:space-between; gap:8px; padding-bottom:9px; margin-bottom:8px; border-bottom:1px solid #41483e; }
+.combat-v2 .combat-settings-heading>div { display:grid; gap:3px; }
+.combat-v2 .combat-settings-heading b { color:#eee3d0; font:600 14px 'Marcellus',Georgia,serif; }
+.combat-v2 .combat-settings-heading>button { display:grid; place-items:center; width:25px; height:25px; border:1px solid #465047; border-radius:3px; color:#b9c1b5; background:#202725; cursor:pointer; }
+.combat-v2 .combat-settings-toggle { display:flex; align-items:flex-start; gap:9px; padding:8px 0; cursor:pointer; }
+.combat-v2 .combat-settings-toggle input { width:15px; height:15px; margin:2px 0 0; accent-color:#b98c55; }
+.combat-v2 .combat-settings-toggle span { display:grid; gap:3px; }
+.combat-v2 .combat-settings-toggle b { color:#dfe4d8; font-size:11px; }
+.combat-v2 .combat-settings-toggle small { color:#9ca89d; font-size:9px; line-height:1.45; }
+.combat-v2 .combat-settings-field { display:grid; grid-template-columns:minmax(0,1fr) 110px; align-items:center; gap:8px; padding:8px 0; border-top:1px solid #ffffff0a; color:#bac4b8; font-size:10px; }
+.combat-v2 .combat-settings-field>div { display:flex; align-items:center; gap:5px; }
+.combat-v2 .combat-settings-field input,.combat-v2 .combat-settings-field select { width:100%; min-width:0; min-height:29px; padding:4px 6px; border:1px solid #4a554b; border-radius:3px; color:#e3e6da; background:#171e1c; }
+.combat-v2 .combat-settings-field>div>span { color:#a3ad9e; }
+.combat-v2 .combat-settings-note { margin:9px 0 0; padding:8px; border-left:2px solid #8b7048; color:#aeb9ac; background:#ffffff05; font-size:9px; line-height:1.55; }
+.combat-v2 .special-control { grid-template-columns:minmax(0,1fr) auto; }
+.combat-v2 .food-settings { display:block; }
+.combat-v2 .food-settings>span[role="status"] { display:block; padding-top:8px; }
