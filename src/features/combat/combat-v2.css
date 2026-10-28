@@ -2034,85 +2034,69 @@
   .combat-v2 .inline-target-list { grid-template-columns:1fr; }
 }
 
-
-/* Combat must use the available play area instead of inheriting the scaled global content cap. */
-.content-wrap:has(.combat-screen) {
+/* Combat layout: keep all panels at the top, with inspection below the world browser.
+   Explicit grid placement overrides older responsive rules that created an empty track. */
+.content-wrap:has(> .screen.combat-screen) {
   width:100%;
   max-width:none;
-  padding-left:clamp(12px,1.15vw,28px);
-  padding-right:clamp(12px,1.15vw,28px);
-}
-.combat-v2 {
-  width:100%;
-  max-width:none;
-  min-width:0;
-}
-.combat-v2 .combat-layout {
-  width:100%;
-  grid-template-columns:minmax(0,1fr) minmax(0,1.85fr) minmax(0,1fr);
-  gap:clamp(10px,0.75vw,16px);
-}
-.combat-v2 .world-browser,
-.combat-v2 .target-panel,
-.combat-v2 .battle-panel,
-.combat-v2 .combat-intel { min-width:0; }
-.combat-v2 .battle-scene {
-  height:clamp(360px,48vh,650px);
-}
-@media (max-width:1450px) {
-  .combat-v2 .combat-layout {
-    grid-template-columns:minmax(0,1fr) minmax(0,1.45fr);
-  }
-}
-@media (max-width:900px) {
-  .content-wrap:has(.combat-screen) {
-    padding-left:10px;
-    padding-right:10px;
-  }
-  .combat-v2 .combat-layout { grid-template-columns:minmax(0,1fr); }
-}
-
-
-/* Combat viewport correction: the global UI scale was shrinking the entire screen.
-   Reset scale only for Combat so the page uses the real available viewport dimensions. */
-.content-wrap:has(.combat-screen) {
-  --ui-scale: 1 !important;
-  width:100% !important;
-  max-width:none !important;
   box-sizing:border-box;
-  margin-left:0;
-  margin-right:0;
-  padding:22px 24px var(--activity-reserve);
+  padding:12px 14px var(--activity-reserve);
 }
-.content-wrap:has(.combat-screen) .combat-screen {
+.screen.combat-screen.combat-v2 {
   width:100%;
   max-width:none;
   min-width:0;
-  font-size:1rem;
+  margin:0;
 }
-.combat-v2 .combat-layout {
+.screen.combat-screen.combat-v2 .combat-layout {
+  display:grid;
   width:100%;
   max-width:none;
-  grid-template-columns:minmax(300px,.88fr) minmax(0,1.8fr) minmax(310px,.9fr);
-  gap:14px;
+  grid-template-columns:minmax(260px,.9fr) minmax(0,1.7fr) minmax(280px,.9fr);
+  grid-template-rows:auto auto;
+  gap:10px;
+  align-items:start;
 }
-.combat-v2 .battle-scene {
-  min-height:400px;
-  height:clamp(400px,48vh,680px);
+.screen.combat-screen.combat-v2 .combat-main { display:contents; }
+.screen.combat-screen.combat-v2 .world-browser {
+  grid-column:1 !important;
+  grid-row:1 !important;
+  min-width:0;
 }
-@media (max-width:1450px) {
-  .combat-v2 .combat-layout {
-    grid-template-columns:minmax(250px,.82fr) minmax(0,1.6fr);
+.screen.combat-screen.combat-v2 .target-panel {
+  grid-column:1 !important;
+  grid-row:2 !important;
+  min-width:0;
+}
+.screen.combat-screen.combat-v2 .battle-panel {
+  grid-column:2 !important;
+  grid-row:1 / span 2 !important;
+  min-width:0;
+}
+.screen.combat-screen.combat-v2 .combat-intel {
+  grid-column:3 !important;
+  grid-row:1 / span 2 !important;
+  min-width:0;
+}
+.screen.combat-screen.combat-v2 .battle-scene {
+  height:clamp(220px,30vh,360px);
+  min-height:220px;
+}
+@media (max-width:1150px) {
+  .screen.combat-screen.combat-v2 .combat-layout {
+    grid-template-columns:minmax(230px,.8fr) minmax(0,1.4fr);
   }
-  .combat-v2 .world-browser { grid-column:1;grid-row:1; }
-  .combat-v2 .target-panel { grid-column:1;grid-row:2; }
-  .combat-v2 .battle-panel { grid-column:2;grid-row:1; }
-  .combat-v2 .combat-intel { grid-column:2;grid-row:2; }
+  .screen.combat-screen.combat-v2 .world-browser { grid-column:1 !important;grid-row:1 !important; }
+  .screen.combat-screen.combat-v2 .target-panel { grid-column:1 !important;grid-row:2 !important; }
+  .screen.combat-screen.combat-v2 .battle-panel { grid-column:2 !important;grid-row:1 / span 2 !important; }
+  .screen.combat-screen.combat-v2 .combat-intel { grid-column:1 / -1 !important;grid-row:3 !important; }
 }
-@media (max-width:900px) {
-  .content-wrap:has(.combat-screen) { padding:12px 10px var(--activity-reserve); }
-  .combat-v2 .combat-layout { grid-template-columns:minmax(0,1fr); }
-  .combat-v2 .world-browser,.combat-v2 .target-panel,.combat-v2 .battle-panel,.combat-v2 .combat-intel {
-    grid-column:1;grid-row:auto;
-  }
+@media (max-width:760px) {
+  .content-wrap:has(> .screen.combat-screen) { padding:10px 8px var(--activity-reserve); }
+  .screen.combat-screen.combat-v2 .combat-layout { grid-template-columns:minmax(0,1fr); }
+  .screen.combat-screen.combat-v2 .world-browser,
+  .screen.combat-screen.combat-v2 .target-panel,
+  .screen.combat-screen.combat-v2 .battle-panel,
+  .screen.combat-screen.combat-v2 .combat-intel { grid-column:1 !important;grid-row:auto !important; }
+  .screen.combat-screen.combat-v2 .battle-scene { height:220px;min-height:220px; }
 }
