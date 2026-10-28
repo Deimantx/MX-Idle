@@ -1254,3 +1254,10 @@
 .combat-v2 .battle-scene[data-region*="frost"] .player-battle-sprite { filter:drop-shadow(0 0 5px #b7d9e033); }
 .combat-v2 .battle-scene[data-region*="astral"] .player-battle-sprite { filter:drop-shadow(0 0 8px #9da8d344); }
 @media (prefers-reduced-motion:reduce) { .combat-v2 .battle-scene .player-figure,.combat-v2 .battle-scene .battle-foe { animation:none!important; } }
+
+.combat-v2 .combat-loot-row[data-rarity="uncommon"] { border-left:2px solid #8bc4a2; background:linear-gradient(90deg,#24372c,#1e2522); }
+.combat-v2 .combat-loot-row[data-rarity="rare"] { border-left:2px solid #bda4e8; background:linear-gradient(90deg,#30283d,#202522); }
+.combat-v2 .combat-loot-row[data-rarity="uncommon"] .combat-loot-copy b { color:#a8d8b8; }
+.combat-v2 .combat-loot-row[data-rarity="rare"] .combat-loot-copy b { color:#d6c5f2; }
+.combat-v2 .combat-loot-row.is-guaranteed[data-rarity="rare"] .combat-loot-copy b,.combat-v2 .combat-loot-row.is-guaranteed[data-rarity="uncommon"] .combat-loot-copy b { color:#ead6ae; }
+.combat-v2 .combat-loadout-tip { border-bottom:1px dotted #887653; cursor:help; }
