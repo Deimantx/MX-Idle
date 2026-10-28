@@ -126,7 +126,7 @@ export function combatNextBoundary(s: SaveState) {
   const c = s.combat, enemy = ENEMIES[c.targetId];
   // Process already-due actions/effects on a tiny positive step; zero here can stall
   // advanceWithEvents because its remaining elapsed time never decreases.
-  if (c.playerTimer <= 0 || c.enemyTimer <= 0 || (c.enemyHp <= 0 && c.respawn <= 0) ||
+  if ((c.enemyHp > 0 && (c.playerTimer <= 0 || c.enemyTimer <= 0)) || (c.enemyHp <= 0 && c.respawn <= 0) ||
       c.statuses.some(status => status.remainingMs <= 0 || (status.tickTimerMs !== undefined && status.tickTimerMs <= 0))) return 1;
   const candidates = [c.playerTimer, c.enemyTimer, c.respawn, ...c.statuses.flatMap(status => [status.remainingMs, status.tickTimerMs ?? Infinity])]
     .filter(value => Number.isFinite(value) && value > 0);

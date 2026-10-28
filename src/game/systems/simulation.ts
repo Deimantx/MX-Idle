@@ -47,6 +47,7 @@ function startForge(s: SaveState) { const recipe = FORGING_RECIPES[s.smithing.re
   s.smithing.reservedItems = reserved; s.smithing.reservedEquipment = reservedEquipment; s.smithing.reserved = Object.values(reserved).reduce<number>((a, b) => a + (b ?? 0), 0); s.smithing.work = getForgeWorkRequired(s.smithing.recipe); s.smithing.heat = 100; s.smithing.reheat = false; return true;
 }
 export function startActivity(s: SaveState, activity: Exclude<Activity, null>) {
+  const wasCombatActive = s.activity === 'combat' && s.combat.runState === 'active';
   if(activity==='combat'&&s.combat.dungeonId&&s.combat.runState==='ended')return;
   if (activity === 'mining' && !canMineDeposit(s,s.mining.deposit)) return;
   if (activity === 'smelting' && s.skills.Smithing.level<selectedSmeltRecipe(s).unlockLevel) { s.smithing.message = `Smithing ${selectedSmeltRecipe(s).unlockLevel} required`; return; }
@@ -66,7 +67,7 @@ export function startActivity(s: SaveState, activity: Exclude<Activity, null>) {
     s.page = 'Combat';
     const enemy = ENEMIES[s.combat.targetId];
     // Starting from an idle/ended state begins a fresh encounter; don't resume stale HP/timers.
-    if (s.combat.runState !== 'active' || s.activity !== 'combat') {
+    if (!wasCombatActive) {
       clearEncounterStatuses(s);
       s.combat.enemyHp = enemy.maxHp;
       s.combat.sequenceIndex = 0;
