@@ -2394,3 +2394,15 @@
 @media (prefers-reduced-motion:reduce) {
   .screen.combat-screen .battle-scene::after { animation:none!important; }
 }
+
+/* Dedicated dungeon interiors override their outdoor tier landscape. */
+.screen.combat-screen .battle-scene[data-region="t1-ruined-watch"] { background-image:linear-gradient(180deg,rgba(5,9,13,.04),rgba(3,7,9,.54)),url('/assets/combat/backgrounds/dungeons/ruined-watch.svg'); }
+.screen.combat-screen .battle-scene[data-region="t2-drowned-burrow"] { background-image:linear-gradient(180deg,rgba(5,9,13,.04),rgba(3,7,9,.54)),url('/assets/combat/backgrounds/dungeons/drowned-burrow.svg'); }
+.screen.combat-screen .battle-scene[data-region="t3-hollow-forge"] { background-image:linear-gradient(180deg,rgba(5,9,13,.04),rgba(3,7,9,.54)),url('/assets/combat/backgrounds/dungeons/hollow-forge.svg'); }
+.screen.combat-screen .battle-scene[data-region="t4-mooncrypt"] { background-image:linear-gradient(180deg,rgba(5,9,13,.04),rgba(3,7,9,.54)),url('/assets/combat/backgrounds/dungeons/mooncrypt.svg'); }
+.screen.combat-screen .battle-scene[data-region="t5-embervault"] { background-image:linear-gradient(180deg,rgba(5,9,13,.04),rgba(3,7,9,.54)),url('/assets/combat/backgrounds/dungeons/embervault.svg'); }
+.screen.combat-screen .battle-scene[data-region="t6-frostspire"] { background-image:linear-gradient(180deg,rgba(5,9,13,.04),rgba(3,7,9,.54)),url('/assets/combat/backgrounds/dungeons/frostspire.svg'); }
+.screen.combat-screen .battle-scene[data-region="t7-tempest-bastion"] { background-image:linear-gradient(180deg,rgba(5,9,13,.04),rgba(3,7,9,.54)),url('/assets/combat/backgrounds/dungeons/tempest-bastion.svg'); }
+.screen.combat-screen .battle-scene[data-region="t8-aetherglass-sanctum"] { background-image:linear-gradient(180deg,rgba(5,9,13,.04),rgba(3,7,9,.54)),url('/assets/combat/backgrounds/dungeons/aetherglass-sanctum.svg'); }
+.screen.combat-screen .battle-scene[data-region="t9-umbral-citadel"] { background-image:linear-gradient(180deg,rgba(5,9,13,.04),rgba(3,7,9,.54)),url('/assets/combat/backgrounds/dungeons/umbral-citadel.svg'); }
+.screen.combat-screen .battle-scene[data-region="t10-astral-nexus"] { background-image:linear-gradient(180deg,rgba(5,9,13,.04),rgba(3,7,9,.54)),url('/assets/combat/backgrounds/dungeons/astral-nexus.svg'); }
