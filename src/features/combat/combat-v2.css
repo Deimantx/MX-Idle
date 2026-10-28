@@ -2033,3 +2033,41 @@
   .combat-v2 .combat-browser-tabs [role="tab"] { font-size:9px; letter-spacing:0; }
   .combat-v2 .inline-target-list { grid-template-columns:1fr; }
 }
+
+
+/* Combat must use the available play area instead of inheriting the scaled global content cap. */
+.content-wrap:has(.combat-screen) {
+  width:100%;
+  max-width:none;
+  padding-left:clamp(12px,1.15vw,28px);
+  padding-right:clamp(12px,1.15vw,28px);
+}
+.combat-v2 {
+  width:100%;
+  max-width:none;
+  min-width:0;
+}
+.combat-v2 .combat-layout {
+  width:100%;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.85fr) minmax(0,1fr);
+  gap:clamp(10px,0.75vw,16px);
+}
+.combat-v2 .world-browser,
+.combat-v2 .target-panel,
+.combat-v2 .battle-panel,
+.combat-v2 .combat-intel { min-width:0; }
+.combat-v2 .battle-scene {
+  height:clamp(360px,48vh,650px);
+}
+@media (max-width:1450px) {
+  .combat-v2 .combat-layout {
+    grid-template-columns:minmax(0,1fr) minmax(0,1.45fr);
+  }
+}
+@media (max-width:900px) {
+  .content-wrap:has(.combat-screen) {
+    padding-left:10px;
+    padding-right:10px;
+  }
+  .combat-v2 .combat-layout { grid-template-columns:minmax(0,1fr); }
+}
