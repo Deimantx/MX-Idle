@@ -1,18 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 190">
-<defs><linearGradient id="fur" x2="0.8" y2="1"><stop stop-color="#d1c4a1"/><stop offset=".5" stop-color="#877f66"/><stop offset="1" stop-color="#3d4337"/></linearGradient><linearGradient id="belly" x2="0" y2="1"><stop stop-color="#b8aa87"/><stop offset="1" stop-color="#706c58"/></linearGradient></defs>
-<ellipse cx="111" cy="171" rx="78" ry="9" fill="#07100c" opacity=".55"/>
-<g stroke="#252a22" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
-<path d="M59 83Q77 58 113 68L153 83 174 108 153 132 111 139 76 126 48 111Z" fill="url(#fur)"/>
-<path d="M81 112 73 151 88 155 104 126M122 126 128 158 143 158 147 119M155 111 177 137 189 131 174 100" fill="#686d57"/>
-<path d="M71 146 91 148 94 160 68 162 61 156ZM128 153 146 151 153 162 127 164Z" fill="#302f27"/>
-<path d="M59 86 37 79 18 61 25 39 43 54 59 48 77 68Z" fill="url(#fur)"/>
-<path d="M24 42 18 18 39 35M48 53 61 31 65 58" fill="#5b6150"/>
-<path d="M22 68 7 78 28 88 48 78Z" fill="#b8aa87"/>
-<path d="M32 78 21 77" stroke="#e3d6b5" stroke-width="4"/>
-<path d="M52 84Q44 104 59 119L77 128 83 113" fill="#454c3d"/>
-<path d="M44 89Q66 101 78 94" fill="none" stroke="#b3a581" stroke-width="3"/>
-<circle cx="39" cy="59" r="5" fill="#e8bc6d" stroke="#2e261b" stroke-width="2"/>
-<path d="M30 70 44 74" stroke="#292b21" stroke-width="3"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 210">
+<defs>
+ <linearGradient id="fur" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#b9b5a2"/><stop offset=".28" stop-color="#777d72"/><stop offset=".62" stop-color="#444d47"/><stop offset="1" stop-color="#202a27"/></linearGradient>
+ <linearGradient id="muzzle" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#8c8c79"/><stop offset="1" stop-color="#343b34"/></linearGradient>
+ <linearGradient id="underfur" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c1b59a"/><stop offset="1" stop-color="#68695b"/></linearGradient>
+ <linearGradient id="claw" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e5dcc4"/><stop offset="1" stop-color="#77796c"/></linearGradient>
+ <radialGradient id="eye"><stop stop-color="#fff1a2"/><stop offset=".3" stop-color="#e3a743"/><stop offset="1" stop-color="#9c4a1e"/></radialGradient>
+ <filter id="shadow"><feGaussianBlur stdDeviation="3"/></filter>
+</defs>
+<ellipse cx="133" cy="193" rx="102" ry="10" fill="#020706" opacity=".7" filter="url(#shadow)"/>
+<!-- tail, rear legs and body silhouette -->
+<path d="M69 106Q42 92 28 72Q20 60 8 69Q27 80 20 95Q12 113 42 124L78 132Z" fill="#353e37" stroke="#1c2622" stroke-width="5" stroke-linejoin="round"/>
+<path d="M72 132L54 164 47 181 65 186 83 169 102 143M132 137L147 162 151 182 169 185 177 174 166 133" fill="#3d4840" stroke="#202923" stroke-width="6" stroke-linejoin="round"/>
+<path d="M47 180L64 180 70 189 44 191 38 187ZM151 179L168 179 177 188 151 191 145 186Z" fill="#c1b49a" stroke="#282d26" stroke-width="3"/>
+<path d="M75 83Q105 61 145 79L183 96 200 121 184 151 148 165 103 154 70 133 57 111Z" fill="url(#fur)" stroke="#202923" stroke-width="6" stroke-linejoin="round"/>
+<!-- layered hackles -->
+<path d="M76 86L58 70 84 77 73 55 101 72 101 50 120 72 134 55 144 81 161 75 159 99Z" fill="#596259" stroke="#252e28" stroke-width="4" stroke-linejoin="round"/>
+<path d="M83 95L102 91 92 111 113 103 106 127 128 114 127 139 148 125 154 146 131 159 99 148 76 131Z" fill="#333d36" opacity=".95"/>
+<!-- front legs -->
+<path d="M162 131L178 146 188 170 207 177 210 187 181 189 166 181 153 154 143 144Z" fill="#596258" stroke="#202923" stroke-width="6" stroke-linejoin="round"/>
+<path d="M207 179L221 181 226 190 201 192 197 187Z" fill="#b7ac91" stroke="#252b25" stroke-width="3"/>
+<path d="M111 142L115 162 105 181 119 187 139 181 145 160 139 137Z" fill="#48534a" stroke="#202923" stroke-width="5" stroke-linejoin="round"/>
+<path d="M115 181L132 181 138 190 111 192 106 188Z" fill="#c0b49a" stroke="#252b25" stroke-width="3"/>
+<!-- neck mane and head -->
+<path d="M70 102L54 86 64 81 52 63 78 73 73 49 95 66 104 42 117 65 134 52 136 75 153 74 146 94 128 115Z" fill="#626b5f" stroke="#222c26" stroke-width="5" stroke-linejoin="round"/>
+<path d="M57 83L35 73 20 52 30 27 48 43 65 36 83 54 95 77Z" fill="url(#fur)" stroke="#202923" stroke-width="6" stroke-linejoin="round"/>
+<path d="M29 31L22 8 43 23 51 43ZM60 39L74 15 78 49" fill="#343e36" stroke="#202923" stroke-width="5" stroke-linejoin="round"/>
+<path d="M26 39L36 30 43 48 34 59Z" fill="#9b7768"/><path d="M62 39L71 27 69 50 61 54Z" fill="#9b7768"/>
+<!-- cheek tufts -->
+<path d="M38 58L13 63 33 75 16 82 47 87 62 72Z" fill="#7e8575" stroke="#28312a" stroke-width="4" stroke-linejoin="round"/>
+<path d="M71 63L91 75 103 92 94 111 77 115 61 101 57 82Z" fill="#606a5c" stroke="#202923" stroke-width="5" stroke-linejoin="round"/>
+<!-- muzzle and jaw -->
+<path d="M29 66Q45 58 64 68L81 82 74 99 51 106 30 94 18 82Z" fill="url(#muzzle)" stroke="#202923" stroke-width="5" stroke-linejoin="round"/>
+<path d="M23 82L45 82 65 88 60 102 39 104 24 94Z" fill="#b7aa8c" stroke="#282f28" stroke-width="3"/>
+<path d="M28 83L44 87 58 91 52 97 37 95Z" fill="#201f1b"/>
+<path d="M34 91L40 96 36 100M45 91L50 97 46 101M55 90L59 95" fill="none" stroke="#e4dcc6" stroke-width="3" stroke-linecap="round"/>
+<path d="M18 79L26 75 35 79 31 86Z" fill="#1b211d" stroke="#151b17" stroke-width="3"/>
+<!-- eye, brow and scar -->
+<path d="M42 60L61 54 70 62 58 69 44 67Z" fill="#252c25"/>
+<ellipse cx="55" cy="62" rx="7" ry="5" fill="url(#eye)"/><ellipse cx="57" cy="62" rx="2" ry="4" fill="#151a14"/>
+<path d="M42 51L60 46 71 53" fill="none" stroke="#c5c0a7" stroke-width="3" stroke-linecap="round"/>
+<path d="M33 53L40 58 35 65" fill="none" stroke="#d3bfa1" stroke-width="2.5" opacity=".8"/>
+<!-- fur striation detail -->
+<g fill="none" stroke-linecap="round">
+ <path d="M91 87L106 96M103 78L119 88M122 81L135 91M141 91L155 101M86 119L101 126M111 132L124 138M145 117L158 124" stroke="#a0a28e" stroke-width="2.5" opacity=".75"/>
+ <path d="M83 100L92 108M117 101L128 109M151 104L163 113M72 91L80 98" stroke="#202a24" stroke-width="3" opacity=".8"/>
 </g>
-<path d="M83 77Q108 67 134 83" fill="none" stroke="#e1d0a9" stroke-width="4" opacity=".65"/>
 </svg>
