@@ -112,7 +112,7 @@ try {
   await page.getByRole('button', { name: 'Set Food', exact: false }).click();
   await page.getByRole('button', { name: 'Close developer tools' }).click();
   await page.getByRole('button', { name: 'Begin Combat' }).click();
-  await page.getByText('IN COMBAT').waitFor();
+  await page.locator('.battle-panel.battle-active').waitFor();
   assert.equal(await page.locator('.sequence-flow [aria-current="step"]').count(), 1, 'Combat sequence identifies the active enemy action');
   await capture('combat');
   const worldToggle = page.getByRole('button', { name: /Expand.*Combat World/ });
