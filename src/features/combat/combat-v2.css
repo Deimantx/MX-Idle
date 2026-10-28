@@ -2346,3 +2346,51 @@
   .screen.combat-screen .battle-scene::after,
   .screen.combat-screen .battle-scene .floating-damage { animation:none!important; }
 }
+
+
+/* Environment-specific atmospheric motion: swamp motes, embers, snow, storm, rift motes and ash. */
+.screen.combat-screen .battle-scene[data-region^="t2-"]::after {
+  opacity:.22;
+  background:radial-gradient(circle at 18% 75%,#a7d0a1 0 1px,transparent 2px),radial-gradient(circle at 71% 62%,#a7d0a1 0 1px,transparent 2px),radial-gradient(circle at 54% 86%,#9cbf99 0 1px,transparent 2px);
+  background-size:137px 111px,181px 149px,223px 171px;
+  animation:combat-swamp-motes 16s linear infinite;
+}
+.screen.combat-screen .battle-scene[data-region^="t5-"]::after {
+  opacity:.3;
+  background:radial-gradient(circle,#ffbd70 0 1px,transparent 2px),radial-gradient(circle,#e47b45 0 1px,transparent 2px);
+  background-size:89px 103px,137px 149px;
+  animation:combat-embers 8s linear infinite;
+}
+.screen.combat-screen .battle-scene[data-region^="t6-"]::after {
+  opacity:.34;
+  background:radial-gradient(circle,#f0f6f2 0 1px,transparent 2px),radial-gradient(circle,#c3d9df 0 1px,transparent 2px);
+  background-size:63px 77px,109px 127px;
+  animation:combat-snowfall 10s linear infinite;
+}
+.screen.combat-screen .battle-scene[data-region^="t7-"]::after {
+  opacity:.25;
+  background:repeating-linear-gradient(108deg,transparent 0 15px,rgba(197,222,222,.36) 16px,transparent 17px 28px);
+  animation:combat-storm-rain .65s linear infinite;
+}
+.screen.combat-screen .battle-scene[data-region^="t8-"]::after,
+.screen.combat-screen .battle-scene[data-region^="t10-"]::after {
+  opacity:.25;
+  background:radial-gradient(circle,#e6d7ff 0 1px,transparent 2px),radial-gradient(circle,#9ed9e2 0 1px,transparent 2px);
+  background-size:113px 103px,167px 151px;
+  animation:combat-rift-motes 12s linear infinite;
+}
+.screen.combat-screen .battle-scene[data-region^="t9-"]::after {
+  opacity:.18;
+  background:radial-gradient(circle,#b6a7c8 0 1px,transparent 2px),radial-gradient(circle,#71667f 0 1px,transparent 2px);
+  background-size:97px 111px,151px 167px;
+  animation:combat-ashfall 15s linear infinite;
+}
+@keyframes combat-swamp-motes { from { background-position:0 0,40px 30px,90px 60px; } to { background-position:0 -130px,40px -190px,90px -220px; } }
+@keyframes combat-embers { from { background-position:0 120px,50px 180px; } to { background-position:0 -180px,50px -230px; } }
+@keyframes combat-snowfall { from { background-position:0 -40px,50px -70px; } to { background-position:0 220px,50px 260px; } }
+@keyframes combat-storm-rain { from { background-position:0 0; } to { background-position:70px 180px; } }
+@keyframes combat-rift-motes { from { background-position:0 0,30px 50px; } to { background-position:0 -170px,30px -220px; } }
+@keyframes combat-ashfall { from { background-position:0 -20px,60px -80px; } to { background-position:0 190px,60px 240px; } }
+@media (prefers-reduced-motion:reduce) {
+  .screen.combat-screen .battle-scene::after { animation:none!important; }
+}
