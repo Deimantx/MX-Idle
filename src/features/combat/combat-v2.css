@@ -1529,3 +1529,95 @@
 @media (max-width:1150px) {
   .combat-v2 .battle-scene { height:clamp(285px,38vh,390px); }
 }
+
+
+/* Reference-layout pass: one world rail, one dominant encounter canvas, one compact intel rail. */
+.combat-v2 .combat-layout {
+  grid-template-columns:minmax(270px, .78fr) minmax(490px, 1.9fr) minmax(270px, .82fr);
+  grid-template-rows:auto auto;
+  gap:10px;
+  align-items:stretch;
+}
+.combat-v2 .combat-main { display:contents; }
+.combat-v2 .world-browser { grid-column:1; grid-row:1; }
+.combat-v2 .target-panel { grid-column:1; grid-row:2; }
+.combat-v2 .battle-panel { grid-column:2; grid-row:1; }
+.combat-v2 .combat-intel { grid-column:3; grid-row:1 / span 2; }
+.combat-v2 .world-browser,
+.combat-v2 .target-panel,
+.combat-v2 .combat-intel,
+.combat-v2 .battle-panel {
+  min-width:0; border:1px solid #4a4b3e; border-radius:5px;
+  background:linear-gradient(180deg,#11191b,#0a1012 100%);
+  box-shadow:inset 0 1px #ffffff08,0 5px 16px #0005;
+}
+.combat-v2 .world-browser { border-top-color:#92784b; }
+.combat-v2 .world-browser .panel-head h2,
+.combat-v2 .target-panel .panel-head h2,
+.combat-v2 .combat-intel .panel-head h2,
+.combat-v2 .battle-panel>.panel-head h2 {
+  color:#e9e5d9; font-family:'Marcellus',Georgia,serif; letter-spacing:.035em;
+}
+.combat-v2 .combat-map { max-height:unset; overflow:visible; }
+.combat-v2 .combat-map>button {
+  min-height:49px; grid-template-columns:30px minmax(0,1fr) auto;
+  padding:6px 7px; border-radius:4px;
+  background:linear-gradient(100deg,#172124,#101719);
+}
+.combat-v2 .combat-map>button.selected {
+  border-color:#5592aa;
+  background:linear-gradient(100deg,#203947,#15252b);
+  box-shadow:inset 3px 0 #64b2d0,0 0 0 1px #1e4755;
+}
+.combat-v2 .combat-map>button.selected:before { background:#66b6d7; }
+.combat-v2 .map-mark {
+  width:29px;height:29px; border-color:#48585b; color:#c4d1cd;
+  background:linear-gradient(145deg,#2a393b,#121b1d);
+}
+.combat-v2 .combat-paths button {
+  background:linear-gradient(100deg,#172124,#101719);
+  border-color:#354346;
+}
+.combat-v2 .combat-paths button.active {
+  border-color:#5592aa; background:linear-gradient(100deg,#203947,#15252b);
+  box-shadow:inset 3px 0 #64b2d0;
+}
+.combat-v2 .battle-panel { padding:10px; }
+.combat-v2 .battle-scene {
+  height:clamp(360px,48vh,610px);
+  border-color:#4c5a58; border-radius:4px;
+  background:
+    radial-gradient(ellipse at 51% 15%,#d0dfdf33 0%,transparent 22%),
+    radial-gradient(ellipse at 50% 78%,#b6a07822 0%,transparent 40%),
+    linear-gradient(180deg,#0c1b28 0%,#172d39 35%,#243633 66%,#111918 100%);
+}
+.combat-v2 .battle-health .bar,
+.combat-v2 .health-unit .bar { height:14px; }
+.combat-v2 .health-unit { border-radius:3px; background:#101719; }
+.combat-v2 .log-panel { margin-top:9px; border-color:#594b35; }
+.combat-v2 .log-lines { height:clamp(130px,17vh,220px); }
+.combat-v2 .combat-intel { align-self:stretch; }
+.combat-v2 .combat-intel .panel-head { background:#11191b; }
+.combat-v2 .resist-group>div { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:4px; }
+.combat-v2 .resist-cell { justify-content:space-between; min-width:0; gap:3px; padding:4px; }
+.combat-v2 .resist-type { gap:3px; min-width:0; }
+.combat-v2 .resist-type>span { overflow:hidden; text-overflow:ellipsis; }
+.combat-v2 .combat-intel .stat-row { border-bottom:1px solid #ffffff0a; }
+.combat-v2 .combat-intel .sequence-flow>div.current-action { border-color:#b0844b; background:linear-gradient(100deg,#3b3020,#202321); }
+.combat-v2 .combat-panel-actions .combat-collapse-toggle { min-width:25px; }
+@media (min-width:2100px) {
+ .combat-v2 .combat-layout { grid-template-columns:minmax(300px,.78fr) minmax(760px,1.9fr) minmax(340px,.82fr); gap:12px; }
+ .combat-v2 .battle-scene { height:clamp(420px,48vh,650px); }
+}
+@media (max-width:1450px) {
+ .combat-v2 .combat-layout { grid-template-columns:minmax(240px,.75fr) minmax(420px,1.6fr); }
+ .combat-v2 .world-browser { grid-column:1;grid-row:1; }
+ .combat-v2 .target-panel { grid-column:1;grid-row:2; }
+ .combat-v2 .battle-panel { grid-column:2;grid-row:1; }
+ .combat-v2 .combat-intel { grid-column:2;grid-row:2; }
+}
+@media (max-width:900px) {
+ .combat-v2 .combat-layout { grid-template-columns:minmax(0,1fr); }
+ .combat-v2 .world-browser,.combat-v2 .target-panel,.combat-v2 .battle-panel,.combat-v2 .combat-intel { grid-column:1;grid-row:auto; }
+ .combat-v2 .battle-scene { height:clamp(300px,52vh,480px); }
+}
