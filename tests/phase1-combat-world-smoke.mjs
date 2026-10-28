@@ -88,6 +88,7 @@ try{
   await setDevArea('ELITE');
   await page.locator('.combat-paths button:nth-child(2)').click();
   assert.match(await page.locator('.target-panel').innerText(),/Magmahorn/);
+  await page.locator('.target-panel').getByRole('button',{name:/Magmahorn/}).click();
   const eliteSprite=await page.locator('.battle-scene .enemy-battle-sprite use').getAttribute('href');
   assert.equal(eliteSprite,'/assets/combat/monsters/monster-atlas.svg#t5-magmahorn','Elite enemy renders its own sprite-atlas symbol');
   await openDev();await page.getByRole('button',{name:'Full HP'}).click();await closeDev();
