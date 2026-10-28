@@ -74,11 +74,11 @@ export function CombatScreen({ game: g, start, stop, stance, target, setArea, qu
                     const locationArea=Object.values(COMBAT_AREAS).find(entry=>entry.kind==='area'&&entry.tier===location.tier)!;
                     const locationEliteArea=Object.values(COMBAT_AREAS).find(entry=>entry.kind==='elite'&&entry.tier===location.tier)!;
                     const locationDungeon=Object.values(DUNGEONS).find(entry=>entry.tier===location.tier)!;
-                    const locationElite=ENEMIES[locationDungeon.bossId]!;
+                    const locationElite=ENEMIES[locationEliteArea.enemies[0]!]!;
                     const normalCount=Object.values(ENEMIES).filter(entry=>entry.tier===location.tier&&entry.rank==='normal').length;
-                    const locationNormalKills=location.enemies.reduce((sum,id)=>sum+(c.defeated[id]??0),0);
-                    const locationEliteUnlocked=locationNormalKills>=4;
-                    const locationDungeonUnlocked=(c.defeated[locationElite.id]??0)>0;
+                    const locationNormalKills=location.enemies.filter(id=>(c.defeated[id]??0)>0).length;
+                    const locationEliteUnlocked=areaUnlocked(g,locationEliteArea.id);
+                    const locationDungeonUnlocked=areaUnlocked(g,locationDungeon.id);
                     return <div className={`combat-region-entry ${selected?'is-selected':''} ${locked?'is-locked':''} ${expanded?'is-expanded':''}`} key={location.id}>
                       <div className="combat-location-row">
                         <button type="button" className={`combat-location-select ${selected?'selected':''}`} aria-current={selected?'location':undefined} disabled={locked||active} onClick={()=>{setSelectedTier(location.tier);setExpandedTier(location.tier);setNode('area');setInspectedDungeonEnemy(null);setArea(location.id);}}>
