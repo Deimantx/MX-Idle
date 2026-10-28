@@ -1,34 +1,5 @@
 export function PlayerBattleSprite() {
-  return <svg className="battle-sprite player-battle-sprite" viewBox="0 0 120 170" aria-hidden="true" focusable="false">
-    <defs>
-      <linearGradient id="player-cloak" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#647966"/><stop offset="1" stopColor="#263b32"/></linearGradient>
-      <linearGradient id="player-steel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#d6d9c9"/><stop offset=".48" stopColor="#737f7a"/><stop offset="1" stopColor="#343e3b"/></linearGradient>
-      <linearGradient id="player-leather" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#956b43"/><stop offset="1" stopColor="#493728"/></linearGradient>
-    </defs>
-    <ellipse cx="59" cy="158" rx="36" ry="6" fill="#070c0b" opacity=".48"/>
-    <path d="M42 55 L27 67 L22 117 L35 146 L55 145 L63 110 L70 146 L91 144 L94 109 L85 68 L70 53Z" fill="url(#player-cloak)" stroke="#17221d" strokeWidth="3" strokeLinejoin="round"/>
-    <path d="M43 113 L39 150 L50 154 L61 119 L67 119 L72 154 L85 152 L82 110Z" fill="#313b35" stroke="#151e1b" strokeWidth="3" strokeLinejoin="round"/>
-    <path d="M37 148 L51 149 L52 160 L34 161 L29 157Z M70 149 L84 147 L92 157 L88 161 L70 160Z" fill="#4a392b" stroke="#151e1b" strokeWidth="2.5" strokeLinejoin="round"/>
-    <path d="M35 60 Q51 48 73 59 L82 93 L67 113 L36 105 L29 81Z" fill="url(#player-steel)" stroke="#17221d" strokeWidth="3" strokeLinejoin="round"/>
-    <path d="M38 66 L53 76 L69 65 L73 88 L60 102 L39 91Z" fill="#52645b" stroke="#2b3731" strokeWidth="2"/>
-    <path d="M49 75 L61 77 L59 101 L48 96Z" fill="#c1b48d" opacity=".8"/>
-    <path d="M32 64 L22 79 L28 104 L39 100 L42 82Z" fill="url(#player-cloak)" stroke="#17221d" strokeWidth="3" strokeLinejoin="round"/>
-    <path d="M73 64 L86 72 L82 94 L72 92 L66 79Z" fill="url(#player-steel)" stroke="#17221d" strokeWidth="3" strokeLinejoin="round"/>
-    <path d="M72 91 L84 95 L95 75 L89 69 L79 82Z" fill="#aeb8ad" stroke="#25312c" strokeWidth="2.5" strokeLinejoin="round"/>
-    <path d="M92 78 L110 25 L116 28 L101 83 L96 87Z" fill="url(#player-steel)" stroke="#d5d4c0" strokeWidth="1.4" strokeLinejoin="round"/>
-    <path d="M91 79 L101 83 L98 91 L88 87Z" fill="url(#player-leather)" stroke="#241f18" strokeWidth="2"/>
-    <path d="M87 89 L98 92 L96 97 L85 94Z" fill="#d1b16f" stroke="#4b3b25" strokeWidth="1.5"/>
-    <path d="M18 83 Q29 76 39 88 L40 115 Q28 125 15 112Z" fill="url(#player-steel)" stroke="#17221d" strokeWidth="3" strokeLinejoin="round"/>
-    <path d="M21 89 L32 86 L35 108 L27 114 L20 107Z" fill="#667c70" stroke="#27372f" strokeWidth="2"/>
-    <path d="M28 87 L29 112 M18 100 L38 99" stroke="#d1b16f" strokeWidth="2"/>
-    <path d="M39 49 Q38 36 48 27 L65 28 Q76 36 72 51 L66 62 L45 60Z" fill="url(#player-steel)" stroke="#17221d" strokeWidth="3" strokeLinejoin="round"/>
-    <path d="M39 43 L48 23 L68 22 L76 41 L65 36 L49 36Z" fill="#56645d" stroke="#17221d" strokeWidth="3" strokeLinejoin="round"/>
-    <path d="M48 43 L67 43 L64 52 L50 52Z" fill="#202a27" stroke="#d2b16f" strokeWidth="1.5"/>
-    <path d="M54 44 L61 44 L60 48 L54 48Z" fill="#c4d1c1"/>
-    <path d="M48 24 L55 13 L61 23" fill="#8b6c43" stroke="#342a1e" strokeWidth="2" strokeLinejoin="round"/>
-    <path d="M37 62 L56 69 L74 59 L80 68 L59 81 L34 72Z" fill="url(#player-leather)" stroke="#1a241f" strokeWidth="2.5" strokeLinejoin="round"/>
-    <rect x="53" y="68" width="12" height="8" rx="1" fill="#d1b16f" stroke="#483723" strokeWidth="1.5"/>
-  </svg>;
+  return <img className="battle-sprite player-battle-sprite" src="/assets/combat/player/adventurer.svg" alt="" aria-hidden="true" draggable="false"/>;
 }
 
 export function EnemyBattleSprite({ enemyId, style, rank }: { enemyId: string; style: string; rank: string }) {
