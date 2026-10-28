@@ -114,6 +114,7 @@ try {
   await page.getByRole('button', { name: 'Begin Combat' }).click();
   await page.locator('.battle-panel.battle-active').waitFor();
   assert.equal(await page.locator('.sequence-flow [aria-current="step"]').count(), 1, 'Combat sequence identifies the active enemy action');
+  assert.equal(await page.locator('.battle-scene .battle-sprite').count(), 2, 'Combat scene renders an illustrated player and enemy sprite');
   await capture('combat');
   const worldToggle = page.locator('.world-browser .combat-collapse-toggle');
   if (await worldToggle.getAttribute('aria-expanded') === 'false') await worldToggle.click();
