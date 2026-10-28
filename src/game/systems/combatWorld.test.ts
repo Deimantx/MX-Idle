@@ -112,7 +112,8 @@ describe('Phase 1 combat world',()=>{
   });
 
   it('schedules the queued action interval and uses a 20–100% direct-damage roll',()=>{
-    const state=freshState();state.equipped.weapon='combat.weapon.melee.copper_sword';expect(setCombatTarget(state,'dust-rat')).toBe(true);state.combat.sequenceIndex=1;state.combat.enemyTimer=0;startActivity(state,'combat');expect(state.combat.enemyTimer).toBe(2250);
+    const state=freshState();state.equipped.weapon='combat.weapon.melee.copper_sword';expect(setCombatTarget(state,'dust-rat')).toBe(true);state.combat.sequenceIndex=1;state.combat.enemyTimer=0;startActivity(state,'combat');expect(state.combat.sequenceIndex).toBe(0);expect(state.combat.enemyTimer).toBe(3000);
+    state.combat.sequenceIndex=1;state.combat.enemyTimer=0;startActivity(state,'combat');expect(state.combat.enemyTimer).toBe(2250);
     state.combat.playerTimer=90_000;state.combat.enemyTimer=1;const after=advanceWithEvents(state,1).state;expect(after.combat.enemyTimer).toBe(3000);
     expect(rollDirectDamage(100,1,()=>0)).toBe(20);expect(rollDirectDamage(100,1,()=>1)).toBe(100);
   });
