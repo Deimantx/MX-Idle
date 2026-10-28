@@ -105,7 +105,6 @@ export function CombatScreen({ game: g, start, stop, stance, target, setArea, qu
               </section>;
             })}
             </div>
-          </div>
           {!isTierUnlocked(g,tier)&&<div className="tier-lock-note">Defeat {previousBoss?ENEMIES[previousBoss.bossId]!.name:'the previous area Boss'} and reach Attack {(tier-1)*10}.</div>}
           {node==='dungeon'&&<div className="dungeon-route"><span>ENCOUNTER ORDER</span>{dungeon.encounters.map((id,i)=><b key={id}>{String(i+1).padStart(2,'0')} <i>{ENEMIES[id]!.name}</i>{i<3&&<em> -&gt; </em>}</b>)}<Button tone="copper" disabled={active||!dungeonUnlocked} onClick={()=>{setInspectedDungeonEnemy(null);setArea(dungeon.id);start();}}>{c.dungeonId===dungeon.id&&c.runState==='ended'?'Enter Again':'Enter Dungeon'}</Button></div>}
           </div>
