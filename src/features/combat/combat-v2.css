@@ -2100,3 +2100,90 @@
   .screen.combat-screen.combat-v2 .combat-intel { grid-column:1 !important;grid-row:auto !important; }
   .screen.combat-screen.combat-v2 .battle-scene { height:220px;min-height:220px; }
 }
+
+
+/* Combat environment art: location-specific hand-built SVG backgrounds. */
+.screen.combat-screen .battle-scene {
+  isolation:isolate;
+  overflow:hidden;
+  background-color:#14201f;
+  background-image:
+    linear-gradient(180deg,rgba(7,13,15,.08) 0%,rgba(8,15,14,.02) 42%,rgba(5,10,9,.55) 100%),
+    url('/assets/combat/backgrounds/broken-road.svg');
+  background-position:center,center 58%;
+  background-size:cover,cover;
+  background-repeat:no-repeat;
+}
+.screen.combat-screen .battle-scene[data-region="broken-road"] {
+  background-image:linear-gradient(180deg,rgba(7,13,15,.04),rgba(5,10,9,.48)),url('/assets/combat/backgrounds/broken-road.svg');
+}
+.screen.combat-screen .battle-scene[data-region^="t2-"],
+.screen.combat-screen .battle-scene[data-region^="t4-"],
+.screen.combat-screen .battle-scene[data-region^="t9-"] {
+  background-image:linear-gradient(180deg,rgba(7,13,15,.05),rgba(5,10,9,.48)),url('/assets/combat/backgrounds/wilds.svg');
+}
+.screen.combat-screen .battle-scene[data-region^="t3-"],
+.screen.combat-screen .battle-scene[data-region^="t5-"],
+.screen.combat-screen .battle-scene[data-region^="t6-"],
+.screen.combat-screen .battle-scene[data-region^="t10-"] {
+  background-image:linear-gradient(180deg,rgba(7,13,15,.04),rgba(5,10,9,.5)),url('/assets/combat/backgrounds/deep-frontier.svg');
+}
+.screen.combat-screen .battle-scene[data-region^="t7-"],
+.screen.combat-screen .battle-scene[data-region^="t8-"] {
+  background-image:linear-gradient(180deg,rgba(7,13,15,.04),rgba(5,10,9,.48)),url('/assets/combat/backgrounds/heartlands.svg');
+}
+.screen.combat-screen .battle-scene .scene-moon,
+.screen.combat-screen .battle-scene .scene-trees,
+.screen.combat-screen .battle-scene .scene-road {
+  display:none!important;
+}
+.screen.combat-screen .battle-scene .scene-fog {
+  display:block!important;
+  z-index:1;
+  pointer-events:none;
+  inset:34% -15% 7%;
+  height:auto;
+  background:linear-gradient(100deg,transparent 5%,rgba(171,190,166,.1) 32%,rgba(171,190,166,.18) 49%,transparent 76%);
+  filter:blur(16px);
+  animation:combat-world-mist 15s ease-in-out infinite alternate;
+}
+.screen.combat-screen .battle-scene .scene-groundline { z-index:2; }
+.screen.combat-screen .battle-scene .battle-figure,
+.screen.combat-screen .battle-scene .battle-foe { z-index:3; }
+.screen.combat-screen .battle-scene .stage-caption { z-index:5; }
+.screen.combat-screen .battle-scene .player-battle-sprite {
+  transform-origin:50% 92%;
+  animation:combat-player-idle 3.4s ease-in-out infinite;
+}
+.screen.combat-screen .battle-scene .enemy-battle-sprite {
+  transform-origin:50% 92%;
+  animation:combat-enemy-idle 2.8s ease-in-out infinite;
+}
+.screen.combat-screen .battle-scene .foe-alert .enemy-battle-sprite {
+  animation:combat-enemy-ready 1s ease-in-out infinite alternate;
+}
+.screen.combat-screen .battle-scene[data-enemy-rank="elite"] .enemy-battle-sprite,
+.screen.combat-screen .battle-scene[data-enemy-rank="boss"] .enemy-battle-sprite {
+  filter:drop-shadow(0 0 10px rgba(211,164,94,.42));
+}
+@keyframes combat-world-mist {
+  from { transform:translate3d(-2%,0,0); opacity:.52; }
+  to { transform:translate3d(3%,-5px,0); opacity:.95; }
+}
+@keyframes combat-player-idle {
+  0%,100% { translate:0 0; }
+  50% { translate:0 -2px; }
+}
+@keyframes combat-enemy-idle {
+  0%,100% { translate:0 0; }
+  45% { translate:0 -3px; }
+}
+@keyframes combat-enemy-ready {
+  from { translate:0 0; }
+  to { translate:-2px -2px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .screen.combat-screen .battle-scene .scene-fog,
+  .screen.combat-screen .battle-scene .player-battle-sprite,
+  .screen.combat-screen .battle-scene .enemy-battle-sprite { animation:none!important; }
+}
