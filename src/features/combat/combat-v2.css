@@ -1173,3 +1173,16 @@
 @keyframes combat-player-lunge { 0% { transform:translateX(0) translateY(0); } 38% { transform:translateX(13px) translateY(-4px); } 100% { transform:translateX(0) translateY(0); } }
 @keyframes combat-enemy-lunge { 0% { transform:translateX(0); } 35% { transform:translateX(-8px); } 100% { transform:translateX(0); } }
 @media (prefers-reduced-motion:reduce) { .combat-v2 .battle-scene .player-figure,.combat-v2 .battle-scene .battle-foe { animation:none; } }
+
+
+/* Distinct enemy silhouettes: preserve the shared arena, but let encounter identity change its visual weight. */
+.combat-v2 .battle-scene .enemy-glyph { position:relative; transition:color .2s,filter .2s,transform .2s; }
+.combat-v2 .battle-scene[data-enemy-rank="boss"] .enemy-glyph { color:#e2b57d; filter:drop-shadow(0 0 11px #d8a25c55) drop-shadow(0 10px 8px #000a); transform:scale(1.12); }
+.combat-v2 .battle-scene[data-enemy-rank="elite"] .enemy-glyph { color:#d5c29c; filter:drop-shadow(0 0 8px #bba06c3b) drop-shadow(0 9px 8px #000a); transform:scale(1.05); }
+.combat-v2 .battle-scene[data-enemy-style="magic"] .enemy-glyph { color:#a8c5df; filter:drop-shadow(0 0 13px #8c9fdf66) drop-shadow(0 8px 8px #000a); }
+.combat-v2 .battle-scene[data-enemy-style="ranged"] .enemy-glyph { color:#c2c49c; filter:drop-shadow(0 0 8px #b5c58a33) drop-shadow(0 8px 8px #000a); }
+.combat-v2 .battle-scene .enemy-glyph-dust-rat { color:#b6a18a; transform:scale(.72); }
+.combat-v2 .battle-scene .enemy-glyph-ragged-poacher { color:#b0b9a8; transform:scale(.9); }
+.combat-v2 .battle-scene .enemy-glyph-hedge-spark { color:#a6d9b9; filter:drop-shadow(0 0 15px #85d8b077); }
+.combat-v2 .battle-scene .enemy-glyph-ironjaw-boar { color:#d49a6b; transform:scale(1.2); }
+.combat-v2 .combat-feed-count { min-width:36px; text-align:center; }

@@ -7,7 +7,7 @@ import { evaluateCombatTierUnlocks } from './combatProgression';
 import { ITEMS } from '../../content/items/itemRegistry';
 
 type CombatOps = { rand: (s: SaveState) => number; gain: (s: SaveState, item: ItemId, n: number, events?: GameEvent[], source?: string) => void; addXp: (s: SaveState, skill: SkillId, amount: number, events?: GameEvent[]) => void };
-const line = (s: SaveState, value: string) => { s.combat.log = [value, ...s.combat.log].slice(0, 8); };
+const line = (s: SaveState, value: string) => { s.combat.log = [value, ...s.combat.log].slice(0, 24); };
 export function rollDirectDamage(maxHit:number,multiplier:number,rand:()=>number){return Math.max (1,Math.floor(maxHit*multiplier*(.2+rand()*.8)));}
 export function clearEncounterStatuses(s:SaveState){s.combat.statuses=[];}
 function addStatus(s: SaveState, status: ActiveStatus) { s.combat.statuses = s.combat.statuses.filter((old) => !(old.type === status.type && old.sourceId === status.sourceId && old.target === status.target)); s.combat.statuses.push(status); }

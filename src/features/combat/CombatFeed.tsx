@@ -46,7 +46,7 @@ export function CombatFeed({ lines, active }: { lines: string[]; active: boolean
   return <section className="combat-feed" aria-label="Combat Feed">
     <header className="combat-feed-head">
       <div className="combat-feed-title"><span className={'combat-feed-live-dot ' + (active ? 'is-live' : '')} aria-hidden="true" /><div><b>Combat Feed</b><small>{active ? 'LIVE ENCOUNTER' : 'LATEST ENCOUNTER EVENTS'}</small></div></div>
-      <span className="combat-feed-count">{lines.length} / 8</span>
+      <span className="combat-feed-count">{lines.length} / 24</span>
     </header>
     <div className="combat-feed-filters" role="group" aria-label="Filter combat events">
       {FILTERS.map(item => <button key={item.id} type="button" className={filter === item.id ? 'active' : ''} aria-pressed={filter === item.id} onClick={() => setFilter(item.id)}>{item.label}</button>)}
