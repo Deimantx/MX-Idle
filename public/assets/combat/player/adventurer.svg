@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 210">
+<defs>
+ <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e1e0cb"/><stop offset=".42" stop-color="#8d9a8e"/><stop offset="1" stop-color="#3c4a43"/></linearGradient>
+ <linearGradient id="cloak" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#75866b"/><stop offset="1" stop-color="#253d32"/></linearGradient>
+ <linearGradient id="leather" x2="0" y2="1"><stop stop-color="#9a7047"/><stop offset="1" stop-color="#463326"/></linearGradient>
+</defs>
+<ellipse cx="74" cy="198" rx="44" ry="8" fill="#06100c" opacity=".55"/>
+<g stroke="#17221d" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+ <path d="M52 77 34 91 28 141 42 171 64 169 74 134 83 170 106 169 117 137 109 91 91 75Z" fill="url(#cloak)"/>
+ <path d="M45 136 41 176 58 181 72 141 79 141 92 181 109 176 103 134Z" fill="#39453b"/>
+ <path d="M39 172 58 174 61 188 35 188 29 182ZM91 174 108 171 119 184 114 189 92 188Z" fill="url(#leather)"/>
+ <path d="M47 82 39 101 47 134 72 144 98 132 107 102 94 80Z" fill="url(#steel)"/>
+ <path d="M48 91 70 103 93 90 95 119 77 134 52 120Z" fill="#4f6658" stroke-width="2.5"/>
+ <path d="M65 104 77 108 76 132 65 127Z" fill="#c4b48b" opacity=".8" stroke="none"/>
+ <path d="M43 87 27 100 30 126 46 131 55 106Z" fill="url(#cloak)"/>
+ <path d="M95 86 111 95 106 119 92 119 87 103Z" fill="url(#steel)"/>
+ <path d="M104 116 116 121 132 85 124 80 112 106Z" fill="url(#steel)"/>
+ <path d="M127 86 143 24 149 27 136 91 131 96Z" fill="#d2d8c9" stroke="#56635a" stroke-width="2"/>
+ <path d="M115 119 129 124 127 132 113 128Z" fill="url(#leather)"/>
+ <path d="M22 104Q35 93 47 107L48 141Q33 152 17 137Z" fill="url(#steel)"/>
+ <path d="M24 112 37 107 41 134 29 140 22 132Z" fill="#536f60" stroke-width="2.5"/>
+ <path d="M29 109 32 138M19 124 46 122" stroke="#d5b979" stroke-width="2.5"/>
+ <path d="M54 69Q51 52 64 39L88 40Q101 53 94 73L84 84 61 82Z" fill="url(#steel)"/>
+ <path d="M50 55 60 31 89 29 103 55 89 50 63 50Z" fill="#596a5e"/>
+ <path d="M61 58 90 58 86 68 64 68Z" fill="#17221e" stroke="#d5b979" stroke-width="2"/>
+ <path d="M69 60 76 60" stroke="#d5dfd0" stroke-width="3"/>
+ <path d="M61 32 68 19 76 31" fill="#9a7448" stroke-width="2"/>
+ <path d="M47 82 72 93 96 79 103 90 76 108 43 95Z" fill="url(#leather)"/>
+ <rect x="69" y="91" width="14" height="9" rx="1" fill="#d8bd78" stroke="#514027" stroke-width="2"/>
+ <path d="M54 103 62 111M88 103 81 112" stroke="#d8dfd0" stroke-width="2" opacity=".7"/>
+</g>
+</svg>
