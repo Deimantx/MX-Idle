@@ -12,6 +12,7 @@ export function EnemyBattleSprite({ enemyId, style, rank }: { enemyId: string; s
   };
   const starterSprite = starterSprites[id];
   if (starterSprite) return <img className="battle-sprite enemy-battle-sprite" src={starterSprite} data-style={style.toLowerCase()} data-rank={rank.toLowerCase()} alt="" aria-hidden="true" draggable="false"/>;
+  return <svg className="battle-sprite enemy-battle-sprite" viewBox="0 0 170 180" data-style={style.toLowerCase()} data-rank={rank.toLowerCase()} aria-hidden="true" focusable="false"><use href={`/assets/combat/monsters/monster-atlas.svg#${id}`}/></svg>;
   const beast = /wolf|boar|rat|hound|spider|bear|wyrm|drake|beast|mole|stag|crow|serpent|fang/.test(id);
   const magic = style.toLowerCase() === 'magic';
   const ranged = style.toLowerCase() === 'ranged';
