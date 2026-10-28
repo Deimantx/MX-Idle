@@ -2909,3 +2909,13 @@
   .screen.combat-screen.combat-v2 .combat-zone-browser-trigger { flex:1 1 100%; }
   .screen.combat-screen.combat-v2 .enemy-tabs { grid-template-columns:repeat(4,minmax(0,1fr)); }
 }
+
+/* The player stats live in the Loadout tab; avoid duplicating the same dense block in the arena. */
+.screen.combat-screen.combat-v2 .combat-advanced-stats { display:none!important; }
+.screen.combat-screen.combat-v2 .combat-command-strip { align-items:center; }
+.screen.combat-screen.combat-v2 .combat-command-options { align-items:center; }
+.screen.combat-screen.combat-v2 .combat-feed { max-height:240px; }
+.screen.combat-screen.combat-v2 .combat-intel .stat-rows { grid-template-columns:repeat(4,minmax(0,1fr)); }
+@media (max-width:1100px) {
+  .screen.combat-screen.combat-v2 .combat-intel .stat-rows { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
