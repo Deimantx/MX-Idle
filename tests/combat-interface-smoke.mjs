@@ -16,9 +16,10 @@ try {
   await page.getByRole('heading',{name:'Mining'}).waitFor();
 
   await page.getByRole('button',{name:'DEV'}).click();
+  await page.locator('.dev-nav').getByRole('button',{name:'Combat',exact:true}).click();
   await page.getByLabel('Dev Combat gear').selectOption('combat.weapon.melee.copper_battle_axe');
   await page.getByRole('button',{name:'Grant & Equip',exact:true}).click();
-  await page.getByRole('button',{name:'DEV'}).click();
+  await page.getByRole('button',{name:'Close developer tools'}).click();
   await page.getByRole('button',{name:'Combat',exact:true}).click();
 
   const commandStrip=page.getByTestId('combat-command-strip');
