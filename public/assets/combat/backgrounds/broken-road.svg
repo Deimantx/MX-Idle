@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMid slice">
+<defs>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#142a35"/><stop offset=".52" stop-color="#263e43"/><stop offset="1" stop-color="#596052"/></linearGradient>
+ <linearGradient id="road" x2="0" y2="1"><stop stop-color="#55594b"/><stop offset="1" stop-color="#1b2522"/></linearGradient>
+ <linearGradient id="mist" x2="0" y2="1"><stop stop-color="#a6b3a0" stop-opacity="0"/><stop offset="1" stop-color="#a6b3a0" stop-opacity=".19"/></linearGradient>
+ <linearGradient id="vignette"><stop stop-color="#07100f" stop-opacity=".65"/><stop offset=".2" stop-color="#07100f" stop-opacity="0"/><stop offset=".8" stop-color="#07100f" stop-opacity="0"/><stop offset="1" stop-color="#07100f" stop-opacity=".7"/></linearGradient>
+ <g id="pine"><path d="M0 0 36 58 22 58 48 99 31 99 58 145H-58L-31 99H-48L-22 58H-36Z" fill="#101e1b"/><path d="M0 25 0 145" stroke="#26342b" stroke-width="5"/></g>
+</defs>
+<rect width="1600" height="700" fill="url(#sky)"/>
+<circle cx="1215" cy="118" r="44" fill="#c2c7ad" opacity=".7"/><circle cx="1215" cy="118" r="74" fill="#c2c7ad" opacity=".07"/>
+<path d="M0 315 190 237 340 296 510 215 690 302 840 225 1000 294 1180 232 1350 295 1600 224V700H0Z" fill="#273b37"/>
+<path d="M0 382 170 304 300 359 470 280 630 369 810 300 980 360 1150 288 1330 358 1490 290 1600 322V700H0Z" fill="#1d302b"/>
+<g opacity=".75"><use href="#pine" transform="translate(90 320) scale(1.1)"/><use href="#pine" transform="translate(210 350) scale(.76)"/><use href="#pine" transform="translate(390 340) scale(.8)"/><use href="#pine" transform="translate(1320 320) scale(.9)"/><use href="#pine" transform="translate(1460 340) scale(1.18)"/><use href="#pine" transform="translate(1540 360) scale(.72)"/></g>
+<path d="M690 265 920 265 1090 700H480Z" fill="#77806b" opacity=".2"/><path d="M748 286 870 286 1050 700H530Z" fill="url(#road)"/>
+<path d="M797 310 811 310 790 375 778 375ZM822 420 840 420 837 485 818 485ZM847 545 872 545 893 622 866 622Z" fill="#a1a08a" opacity=".24"/>
+<path d="M0 480Q250 425 480 492T900 475T1300 485T1600 455V700H0Z" fill="#172420"/>
+<g fill="#364337"><path d="M0 570 80 490 160 570 210 510 275 590 360 510 430 585 520 520 610 610 0 700Z"/><path d="M1600 560 1510 475 1430 560 1360 500 1280 590 1200 520 1110 610 1020 535 960 620 1600 700Z"/></g>
+<path d="M0 540Q320 500 580 550T1100 540T1600 520V700H0Z" fill="url(#mist)"/>
+<g fill="#8d987b" opacity=".35"><ellipse cx="380" cy="544" rx="210" ry="20"/><ellipse cx="1150" cy="520" rx="250" ry="24"/></g>
+<rect width="1600" height="700" fill="url(#vignette)"/>
+</svg>
