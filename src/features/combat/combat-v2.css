@@ -1946,3 +1946,90 @@
   .combat-v2 .combat-paths-inline button { padding:6px 5px; }
   .combat-v2 .combat-paths-inline .path-copy>b { font-size:9px; }
 }
+
+
+/* Global category tabs mirror the encounter-browser mockup. */
+.combat-v2 .combat-browser-tabs {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:7px;
+  padding:12px 12px 10px;
+  border-bottom:1px solid #354744;
+  background:linear-gradient(180deg,#172120,#111918);
+}
+.combat-v2 .combat-browser-tabs [role="tab"] {
+  min-width:0;
+  min-height:49px;
+  padding:10px 8px;
+  border:1px solid #3a4943;
+  border-radius:4px;
+  color:#c4cec3;
+  background:linear-gradient(180deg,#202b28,#151e1c);
+  font:600 11px 'Marcellus',Georgia,serif;
+  letter-spacing:.04em;
+  text-align:center;
+  transition:background .15s,border-color .15s,color .15s;
+}
+.combat-v2 .combat-browser-tabs [role="tab"]:hover:not(:disabled) {
+  border-color:#738878;
+  color:#f0ead9;
+  background:#27342e;
+}
+.combat-v2 .combat-browser-tabs [role="tab"].active,
+.combat-v2 .combat-browser-tabs [role="tab"][aria-selected="true"] {
+  border-color:#a38a5e;
+  color:#ead5a8;
+  background:linear-gradient(180deg,#393528,#242922);
+  box-shadow:inset 0 2px #c5a16a,0 0 0 1px #6b5a3c33;
+}
+.combat-v2 .combat-browser-tabs [role="tab"]:disabled {
+  opacity:.65;
+  cursor:not-allowed;
+}
+.combat-v2 .inline-encounters {
+  margin:0 7px 8px 11px;
+  padding:10px 10px 11px;
+  border:1px solid #354640;
+  border-top-color:#65796c;
+  border-radius:3px;
+  background:linear-gradient(180deg,#151f1d,#101716);
+}
+.combat-v2 .inline-encounters-head { margin-bottom:9px; }
+.combat-v2 .inline-encounters-head b { font-size:13px; }
+.combat-v2 .inline-target-list {
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  max-height:360px;
+}
+.combat-v2 .inline-target-list .enemy-choice {
+  grid-template-columns:25px minmax(0,1fr);
+  align-content:center;
+  min-height:62px;
+}
+.combat-v2 .inline-target-list .enemy-kills {
+  grid-column:2;
+  justify-self:start;
+  padding:0;
+}
+.combat-v2 .inline-encounter-lock {
+  margin:0;
+  padding:12px;
+  border:1px dashed #4d5141;
+  color:#b7ae92;
+  background:#1a1d19;
+  font-size:11px;
+  line-height:1.6;
+}
+.combat-v2 .combat-region-heading { border-radius:3px; }
+@media (max-width:1450px) {
+  .combat-v2 .inline-target-list { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (max-width:900px) {
+  .combat-v2 .combat-browser-tabs { gap:5px; padding:9px; }
+  .combat-v2 .combat-browser-tabs [role="tab"] { min-height:44px; padding:8px 4px; font-size:10px; }
+  .combat-v2 .inline-target-list { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (max-width:520px) {
+  .combat-v2 .combat-browser-tabs { gap:4px; padding:7px; }
+  .combat-v2 .combat-browser-tabs [role="tab"] { font-size:9px; letter-spacing:0; }
+  .combat-v2 .inline-target-list { grid-template-columns:1fr; }
+}
