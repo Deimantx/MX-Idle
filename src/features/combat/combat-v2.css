@@ -2406,3 +2406,96 @@
 .screen.combat-screen .battle-scene[data-region="t8-aetherglass-sanctum"] { background-image:linear-gradient(180deg,rgba(5,9,13,.04),rgba(3,7,9,.54)),url('/assets/combat/backgrounds/dungeons/aetherglass-sanctum.svg'); }
 .screen.combat-screen .battle-scene[data-region="t9-umbral-citadel"] { background-image:linear-gradient(180deg,rgba(5,9,13,.04),rgba(3,7,9,.54)),url('/assets/combat/backgrounds/dungeons/umbral-citadel.svg'); }
 .screen.combat-screen .battle-scene[data-region="t10-astral-nexus"] { background-image:linear-gradient(180deg,rgba(5,9,13,.04),rgba(3,7,9,.54)),url('/assets/combat/backgrounds/dungeons/astral-nexus.svg'); }
+
+
+/* Combat art pass: improve sprite integration, depth, and readable action feedback. */
+.screen.combat-screen .battle-scene {
+  --scene-edge: rgba(5, 9, 10, .68);
+  position:relative;
+  background-color:#101a19;
+  box-shadow:inset 0 0 0 1px rgba(174,190,164,.12), inset 0 -36px 56px rgba(4,8,8,.34);
+}
+.screen.combat-screen .battle-scene::before {
+  content:"";
+  position:absolute;
+  z-index:2;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(5,10,11,.28),transparent 22%,transparent 78%,rgba(5,10,11,.24)),
+    linear-gradient(180deg,rgba(4,8,10,.16),transparent 24%,transparent 62%,rgba(4,8,8,.48)),
+    radial-gradient(ellipse at 50% 48%,transparent 28%,rgba(2,6,7,.34) 100%);
+}
+.screen.combat-screen .battle-scene .battle-figure,
+.screen.combat-screen .battle-scene .battle-foe {
+  filter:drop-shadow(0 10px 7px rgba(0,0,0,.55));
+}
+.screen.combat-screen .battle-scene .battle-sprite {
+  image-rendering:auto;
+  backface-visibility:hidden;
+  transform-origin:50% 88%;
+  filter:drop-shadow(0 2px 1px rgba(0,0,0,.6)) drop-shadow(0 0 13px rgba(170,190,160,.08));
+}
+.screen.combat-screen .battle-scene .player-battle-sprite {
+  filter:drop-shadow(0 3px 2px rgba(0,0,0,.65)) drop-shadow(0 0 10px rgba(109,151,133,.12));
+}
+.screen.combat-screen .battle-scene[data-enemy-rank="elite"] .enemy-battle-sprite,
+.screen.combat-screen .battle-scene[data-enemy-rank="boss"] .enemy-battle-sprite {
+  filter:drop-shadow(0 4px 2px rgba(0,0,0,.72)) drop-shadow(0 0 14px rgba(208,155,83,.32));
+}
+.screen.combat-screen .battle-scene .scene-groundline {
+  height:18%;
+  bottom:7%;
+  background:radial-gradient(ellipse at center,rgba(2,6,6,.58),rgba(2,6,6,.18) 52%,transparent 76%);
+  filter:blur(4px);
+  pointer-events:none;
+}
+.screen.combat-screen .battle-scene .stage-caption {
+  text-shadow:0 2px 7px #000,0 0 18px rgba(0,0,0,.8);
+}
+.screen.combat-screen .battle-scene .floating-damage {
+  z-index:8;
+  text-shadow:0 2px 0 rgba(0,0,0,.95),0 0 12px rgba(0,0,0,.8);
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.65));
+}
+.screen.combat-screen .battle-scene[data-impact="player-hit"] .player-battle-sprite {
+  animation:combat-player-hit .28s ease-out;
+}
+.screen.combat-screen .battle-scene[data-impact="enemy-hit"] .enemy-battle-sprite {
+  animation:combat-enemy-hit .32s ease-out;
+}
+.screen.combat-screen .battle-scene[data-impact="critical"] .enemy-battle-sprite {
+  animation:combat-critical-hit .42s cubic-bezier(.2,.8,.25,1);
+}
+.screen.combat-screen .battle-scene[data-impact="critical"]::after {
+  content:"";
+  position:absolute;
+  z-index:4;
+  inset:0;
+  pointer-events:none;
+  background:radial-gradient(ellipse at 68% 54%,rgba(255,205,120,.26),transparent 48%);
+  animation:combat-impact-flash .36s ease-out both;
+}
+@keyframes combat-player-hit {
+  0%,100% { translate:0 0; }
+  25% { translate:-5px 1px; }
+  55% { translate:3px 0; }
+}
+@keyframes combat-enemy-hit {
+  0%,100% { translate:0 0; }
+  22% { translate:7px -1px; }
+  48% { translate:-3px 0; filter:brightness(1.65) drop-shadow(0 4px 2px rgba(0,0,0,.7)); }
+}
+@keyframes combat-critical-hit {
+  0%,100% { translate:0 0; }
+  18% { translate:10px -3px; filter:brightness(1.9) drop-shadow(0 0 18px rgba(255,177,82,.7)); }
+  52% { translate:-5px 1px; }
+}
+@keyframes combat-impact-flash {
+  0% { opacity:.9; }
+  100% { opacity:0; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .screen.combat-screen .battle-scene[data-impact] .battle-sprite,
+  .screen.combat-screen .battle-scene[data-impact]::after { animation:none!important; }
+}
