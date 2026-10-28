@@ -1186,3 +1186,10 @@
 .combat-v2 .battle-scene .enemy-glyph-hedge-spark { color:#a6d9b9; filter:drop-shadow(0 0 15px #85d8b077); }
 .combat-v2 .battle-scene .enemy-glyph-ironjaw-boar { color:#d49a6b; transform:scale(1.2); }
 .combat-v2 .combat-feed-count { min-width:36px; text-align:center; }
+
+.combat-v2 .combat-intel .stat-rows { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px 7px; }
+.combat-v2 .combat-intel .stat-row { min-width:0; padding:6px 5px; border:1px solid #323d38; border-radius:3px; background:#202827; }
+.combat-v2 .combat-intel .stat-row>span { font-size:calc(8px * var(--ui-scale) * var(--text-scale)); }
+.combat-v2 .combat-intel .stat-row>b { font-size:calc(11px * var(--ui-scale) * var(--text-scale)); font-variant-numeric:tabular-nums; }
+@media (max-width:1250px) { .combat-v2 .combat-intel .stat-rows { grid-template-columns:repeat(4,minmax(0,1fr)); } }
+@media (max-width:820px) { .combat-v2 .combat-intel .stat-rows { grid-template-columns:repeat(2,minmax(0,1fr)); } }
