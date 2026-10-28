@@ -82,10 +82,12 @@ export function CombatScreen({ game: g, start, stop, stance, target, setArea, qu
 }
 
 function enemyIconFor(style: string, rank: string): string {
-  if (style.toLowerCase() === 'magic') return 'spark';
-  if (style.toLowerCase() === 'ranged') return 'bow';
-  if (rank.toLowerCase() === 'boss') return 'warning';
-  if (rank.toLowerCase() === 'elite') return 'shield';
+  const normalizedRank = rank.toLowerCase();
+  const normalizedStyle = style.toLowerCase();
+  if (normalizedRank === 'boss') return 'warning';
+  if (normalizedRank === 'elite') return 'shield';
+  if (normalizedStyle === 'magic') return 'spark';
+  if (normalizedStyle === 'ranged') return 'bow';
   return 'combat';
 }
 
