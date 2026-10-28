@@ -48,7 +48,13 @@ export function CombatScreen({ game: g, start, stop, stance, target, setArea, qu
     <div className="combat-layout">
       <div className="combat-main">
         <Panel className={`world-browser ${collapsedPanels.world ? 'is-collapsed' : ''}`} title="Combat World" action={<div className="combat-panel-actions"><span className="tiny-label">AREA {tier} / 10</span>{panelToggle('world', 'Combat World')}</div>}>
-          <div id="combat-panel-world" className="combat-panel-content" hidden={collapsedPanels.world}><div className="combat-region-groups" aria-label="World regions">
+          <div id="combat-panel-world" className="combat-panel-content" hidden={collapsedPanels.world}>
+            <div className="combat-browser-tabs" role="tablist" aria-label="Combat activity type">
+              <button type="button" role="tab" aria-selected={node==='area'} className={node==='area'?'active':''} disabled={active} onClick={()=>{setNode('area');setInspectedDungeonEnemy(null);setArea(tierArea.id);}}>Areas</button>
+              <button type="button" role="tab" aria-selected={node==='elite'} className={node==='elite'?'active':''} disabled={active||!areaUnlocked(g,eliteArea.id)} onClick={()=>{setNode('elite');setInspectedDungeonEnemy(null);setArea(eliteArea.id);}}>Elite Areas</button>
+              <button type="button" role="tab" aria-selected={node==='dungeon'} className={node==='dungeon'?'active':''} disabled={active||!dungeonUnlocked} onClick={()=>{setNode('dungeon');setInspectedDungeonEnemy(null);setArea(dungeon.id);}}>Dungeons</button>
+            </div>
+            <div className="combat-region-groups" aria-label="World regions">
             {([
               { id:'frontier', label:'THE FRONTIER', range:'01–03', min:1, max:3 },
               { id:'heartlands', label:'THE HEARTLANDS', range:'04–06', min:4, max:6 },
@@ -60,7 +66,7 @@ export function CombatScreen({ game: g, start, stop, stance, target, setArea, qu
               const regionLocked=locations.every(location=>!isTierUnlocked(g,location.tier));
               const regionCollapsed=!!collapsedRegions[region.id];
               return <section className={`combat-region-group ${regionCollapsed?'is-collapsed':''} ${regionLocked?'is-locked':''}`} key={region.id}>
-                <button type="button" className="combat-region-heading" aria-expanded={!regionCollapsed} onClick={()=>setCollapsedRegions(current=>({...current,[region.id]:!current[region.id]}))}>
+                <button type="button" className="combat-region-heading" aria-expanded={!regionCollapsed} disabled={regionLocked} onClick={()=>setCollapsedRegions(current=>({...current,[region.id]:!current[region.id]}))}>
                   <span className="region-crest" aria-hidden="true">{region.id==='frontier'?'I':region.id==='heartlands'?'II':region.id==='wilds'?'III':'IV'}</span>
                   <span className="region-heading-copy"><b>{region.label}</b><small>AREAS {region.range}</small></span>
                   <span className="region-heading-count">{locations.filter(location=>isTierUnlocked(g,location.tier)).length}/{locations.length}</span>
@@ -74,33 +80,31 @@ export function CombatScreen({ game: g, start, stop, stance, target, setArea, qu
                     const locationArea=Object.values(COMBAT_AREAS).find(entry=>entry.kind==='area'&&entry.tier===location.tier)!;
                     const locationEliteArea=Object.values(COMBAT_AREAS).find(entry=>entry.kind==='elite'&&entry.tier===location.tier)!;
                     const locationDungeon=Object.values(DUNGEONS).find(entry=>entry.tier===location.tier)!;
-                    const locationElite=ENEMIES[locationEliteArea.enemies[0]!]!;
-                    const locationNormalKills=location.enemies.filter(id=>(c.defeated[id]??0)>0).length;
+                    const locationTargetIds=node==='area'?locationArea.enemies:node==='elite'?locationEliteArea.enemies:locationDungeon.encounters;
+                    const locationTargets=locationTargetIds.map(id=>ENEMIES[id]).filter(Boolean);
                     const locationEliteUnlocked=areaUnlocked(g,locationEliteArea.id);
                     const locationDungeonUnlocked=areaUnlocked(g,locationDungeon.id);
+                    const locationNormalKills=location.enemies.filter(id=>(c.defeated[id]??0)>0).length;
+                    const locationTitle=node==='area'?locationArea.name:node==='elite'?locationEliteArea.name:locationDungeon.name;
                     return <div className={`combat-region-entry ${selected?'is-selected':''} ${locked?'is-locked':''} ${expanded?'is-expanded':''}`} key={location.id}>
                       <div className="combat-location-row">
-                        <button type="button" className={`combat-location-select ${selected?'selected':''}`} aria-current={selected?'location':undefined} disabled={locked||active} onClick={()=>{setSelectedTier(location.tier);setExpandedTier(location.tier);setNode('area');setInspectedDungeonEnemy(null);setArea(location.id);}}>
+                        <button type="button" className={`combat-location-select ${selected?'selected':''}`} aria-current={selected?'location':undefined} disabled={locked||active} onClick={()=>{setSelectedTier(location.tier);setExpandedTier(location.tier);setInspectedDungeonEnemy(null);setArea(node==='area'?locationArea.id:node==='elite'?locationEliteArea.id:locationDungeon.id);}}>
                           <span className="map-mark" aria-hidden="true">{String(location.tier).padStart(2,'0')}</span>
-                          <span className="location-copy"><b>{location.name}</b><small>{locked?`Attack ${(location.tier-1)*10} + previous boss required`:`${location.enemies.length} enemy types · ${locationNormalKills} defeated`}</small></span>
+                          <span className="location-copy"><b>{location.name}</b><small>{locked?`Attack ${(location.tier-1)*10} + previous boss required`:node==='area'?`${location.enemies.length} enemy types · ${locationNormalKills} defeated`:node==='elite'?(locationEliteUnlocked?`${c.defeated[locationEliteArea.enemies[0]!]??0} victories`:`${locationNormalKills} / 4 normal kills`):(locationDungeonUnlocked?`${g.combatProgress.dungeonCompletions[locationDungeon.id]??0} clears · 4 encounters`:`Defeat elite to unlock`)}</small></span>
                           {selected&&<i className="location-here">CURRENT</i>}
                         </button>
-                        <button type="button" className="location-expand" aria-label={`${expanded?'Collapse':'Expand'} ${location.name} paths`} aria-expanded={expanded} disabled={locked} onClick={()=>{setSelectedTier(location.tier);setExpandedTier(expanded?null:location.tier);if(!selected){setNode('area');setArea(location.id);}}}>{expanded?'−':'+'}</button>
+                        <button type="button" className="location-expand" aria-label={`${expanded?'Collapse':'Expand'} ${location.name} encounters`} aria-expanded={expanded} disabled={locked} onClick={()=>{setSelectedTier(location.tier);setExpandedTier(expanded?null:location.tier);setInspectedDungeonEnemy(null);setArea(node==='area'?locationArea.id:node==='elite'?locationEliteArea.id:locationDungeon.id);}}>{expanded?'−':'+'}</button>
                       </div>
-                      {expanded&&selected&&<div className="combat-location-content"><div className="combat-paths combat-paths-inline" aria-label={`${location.name} progression paths`}>
-                        <button type="button" className={node==='area'?'active':''} disabled={active} onClick={()=>{setNode('area');setInspectedDungeonEnemy(null);setArea(locationArea.id);}}><span className="path-index">01</span><span className="path-copy"><small>AREAS</small><b>{locationArea.name}</b><em>{locationArea.enemies.length} normal targets</em></span><span className="path-status">{node==='area'?'ACTIVE':'OPEN'}</span></button>
-                        <button type="button" className={`path-elite ${node==='elite'?'active':''} ${locationEliteUnlocked?'':'locked'}`} disabled={active||!locationEliteUnlocked} onClick={()=>{setNode('elite');setInspectedDungeonEnemy(null);setArea(locationEliteArea.id);}}><span className="path-index">02</span><span className="path-copy"><small>ELITE AREAS</small><b>{locationElite.name}</b><em>{locationEliteUnlocked?`${c.defeated[locationElite.id]??0} victories`:`${locationNormalKills} / 4 normal kills`}</em></span><span className="path-status">{locationEliteUnlocked?'UNLOCKED':'LOCKED'}</span></button>
-                        <button type="button" className={`path-dungeon ${node==='dungeon'?'active':''} ${locationDungeonUnlocked?'':'locked'}`} disabled={active||!locationDungeonUnlocked} onClick={()=>{setNode('dungeon');setInspectedDungeonEnemy(null);setArea(locationDungeon.id);}}><span className="path-index">03</span><span className="path-copy"><small>DUNGEONS</small><b>{locationDungeon.name}</b><em>{locationDungeonUnlocked?`${g.combatProgress.dungeonCompletions[locationDungeon.id]??0} clears · 4 encounters`:`Defeat ${locationElite.name} once`}</em></span><span className="path-status">{locationDungeonUnlocked?'READY':'LOCKED'}</span></button>
-                      </div>
-                        <div className="inline-encounters">
-                          <div className="inline-encounters-head"><div><small>ENCOUNTER SELECTION</small><b>{node==='area'?'Choose a creature':node==='elite'?'Choose an elite target':'Dungeon encounters'}</b></div><span>{targetList.length} OPTIONS</span></div>
-                          <div className="target-list inline-target-list">{targetList.map((item)=>{const locked=!enemyUnlocked(g,item.id);const selected=node==='dungeon'?enemy.id===item.id:c.targetId===item.id;return <button key={item.id} type="button" className={'enemy-choice ' + (selected?'selected ':'') + (locked?'locked':'')} disabled={locked||active} aria-pressed={selected} onClick={()=>node==='dungeon'?setInspectedDungeonEnemy(item.id):target(item.id)}><span className="enemy-mark" data-rank={item.rank.toLowerCase()}><Icon name={enemyIconFor(item.style,item.rank)} size={18}/></span><span className="inline-enemy-copy"><b>{item.name}</b><small>{locked?'Not yet unlocked':item.rank + ' · ' + item.style + ' · ' + (item.sequence[0]?.type ?? 'Attack')}</small></span><span className="enemy-kills">{c.defeated[item.id]??0} K</span></button>})}</div>
-                        </div></div>}
+                      {expanded&&selected&&<div className="inline-encounters">
+                        <div className="inline-encounters-head"><div><small>{node==='area'?'AREA ENCOUNTERS':node==='elite'?'ELITE ENCOUNTERS':'DUNGEON ENCOUNTERS'}</small><b>{locationTitle}</b></div><span>{locationTargets.length} MONSTERS</span></div>
+                        {node==='elite'&&!locationEliteUnlocked?<p className="inline-encounter-lock">Defeat four regular enemies in this area to unlock the elite encounter.</p>:node==='dungeon'&&!locationDungeonUnlocked?<p className="inline-encounter-lock">Defeat this area's elite enemy to unlock the dungeon.</p>:<div className="target-list inline-target-list">{locationTargets.map(item=>{const targetLocked=!enemyUnlocked(g,item.id);const targetSelected=node==='dungeon'?enemy.id===item.id:c.targetId===item.id;return <button key={item.id} type="button" className={'enemy-choice '+(targetSelected?'selected ':'')+(targetLocked?'locked':'')} disabled={targetLocked||active} aria-pressed={targetSelected} onClick={()=>node==='dungeon'?setInspectedDungeonEnemy(item.id):target(item.id)}><span className="enemy-mark" data-rank={item.rank.toLowerCase()}><Icon name={enemyIconFor(item.style,item.rank)} size={18}/></span><span className="inline-enemy-copy"><b>{item.name}</b><small>{targetLocked?'Not yet unlocked':item.rank+' · '+item.style+' · '+(item.sequence[0]?.type??'Attack')}</small></span><span className="enemy-kills">{c.defeated[item.id]??0} K</span></button>})}</div>}
+                      </div>}
                     </div>;
                   })}
                 </div>}
               </section>;
             })}
+            </div>
           </div>
           {!isTierUnlocked(g,tier)&&<div className="tier-lock-note">Defeat {previousBoss?ENEMIES[previousBoss.bossId]!.name:'the previous area Boss'} and reach Attack {(tier-1)*10}.</div>}
           {node==='dungeon'&&<div className="dungeon-route"><span>ENCOUNTER ORDER</span>{dungeon.encounters.map((id,i)=><b key={id}>{String(i+1).padStart(2,'0')} <i>{ENEMIES[id]!.name}</i>{i<3&&<em> -&gt; </em>}</b>)}<Button tone="copper" disabled={active||!dungeonUnlocked} onClick={()=>{setInspectedDungeonEnemy(null);setArea(dungeon.id);start();}}>{c.dungeonId===dungeon.id&&c.runState==='ended'?'Enter Again':'Enter Dungeon'}</Button></div>}
