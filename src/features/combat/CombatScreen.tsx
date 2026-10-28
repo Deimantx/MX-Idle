@@ -51,8 +51,8 @@ export function CombatScreen({ game: g, start, stop, stance, target, setArea, qu
           <div id="combat-panel-world" className="combat-panel-content" hidden={collapsedPanels.world}>
             <div className="combat-browser-tabs" role="tablist" aria-label="Combat activity type">
               <button type="button" role="tab" aria-selected={node==='area'} className={node==='area'?'active':''} disabled={active} onClick={()=>{setNode('area');setInspectedDungeonEnemy(null);setArea(tierArea.id);}}>Areas</button>
-              <button type="button" role="tab" aria-selected={node==='elite'} className={node==='elite'?'active':''} disabled={active||!areaUnlocked(g,eliteArea.id)} onClick={()=>{setNode('elite');setInspectedDungeonEnemy(null);setArea(eliteArea.id);}}>Elite Areas</button>
-              <button type="button" role="tab" aria-selected={node==='dungeon'} className={node==='dungeon'?'active':''} disabled={active||!dungeonUnlocked} onClick={()=>{setNode('dungeon');setInspectedDungeonEnemy(null);setArea(dungeon.id);}}>Dungeons</button>
+              <button type="button" role="tab" aria-selected={node==='elite'} className={node==='elite'?'active':''} disabled={active} onClick={()=>{setNode('elite');setInspectedDungeonEnemy(null);setArea(eliteArea.id);}}>Elite Areas</button>
+              <button type="button" role="tab" aria-selected={node==='dungeon'} className={node==='dungeon'?'active':''} disabled={active} onClick={()=>{setNode('dungeon');setInspectedDungeonEnemy(null);setArea(dungeon.id);}}>Dungeons</button>
             </div>
             <div className="combat-region-groups" aria-label="World regions">
             {([
