@@ -1261,3 +1261,13 @@
 .combat-v2 .combat-loot-row[data-rarity="rare"] .combat-loot-copy b { color:#d6c5f2; }
 .combat-v2 .combat-loot-row.is-guaranteed[data-rarity="rare"] .combat-loot-copy b,.combat-v2 .combat-loot-row.is-guaranteed[data-rarity="uncommon"] .combat-loot-copy b { color:#ead6ae; }
 .combat-v2 .combat-loadout-tip { border-bottom:1px dotted #887653; cursor:help; }
+
+.combat-v2 .combat-loot-summary { margin:7px 0 10px; padding:8px; border:1px solid #424a3e; border-radius:4px; background:linear-gradient(135deg,#262b24,#1c2322); }
+.combat-v2 .combat-loot-summary>header { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:5px; }
+.combat-v2 .combat-loot-summary>header b { color:#e3d2ae; font:600 12px 'Marcellus',Georgia,serif; }
+.combat-v2 .combat-loot-summary>header small { color:#929b8b; font-size:8px; }
+.combat-v2 .combat-loot-summary>p { margin:7px 0 2px; color:#8f9b91; font-size:9px; line-height:1.5; }
+.combat-v2 .combat-loot-summary-row { display:grid; grid-template-columns:24px minmax(0,1fr) auto; align-items:center; gap:7px; min-height:30px; padding:4px 0; border-top:1px solid #ffffff08; }
+.combat-v2 .combat-loot-summary-row .item-mark { width:23px; height:23px; }
+.combat-v2 .combat-loot-summary-row>span { overflow:hidden; color:#cbd4c8; font-size:9px; text-overflow:ellipsis; white-space:nowrap; }
+.combat-v2 .combat-loot-summary-row>b { color:#e2c27f; font-size:10px; font-variant-numeric:tabular-nums; }

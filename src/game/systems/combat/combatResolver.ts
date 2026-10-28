@@ -15,18 +15,19 @@ function enemySelfResistance(s:SaveState,enemyId:string,action:ReturnType<typeof
 function sequenceFor(s: SaveState) { return activeSequence(ENEMIES[s.combat.targetId], s.combat.enemyHp); }
 function resetEnemy(s: SaveState) { clearEncounterStatuses(s);const dungeon=s.combat.dungeonId?DUNGEONS[s.combat.dungeonId]:undefined;if(dungeon){const nextId=dungeon.encounters[s.combat.encounterIndex];if(!nextId){s.combat.runState='ended';s.activity=null;return;}s.combat.targetId=nextId;}const enemy = ENEMIES[s.combat.targetId]; s.combat.enemyHp = enemy.maxHp; s.combat.sequenceIndex= 0; s.combat.activePhaseIndex= 0; s.combat.enemyTimer = enemy.intervalMs*(activeSequence(enemy,enemy.maxHp)[0]?.intervalMultiplier ?? 1); s.combat.respawn = 0; }
 
+function trackCombatLoot(s:SaveState,item:ItemId,amount:number){s.combat.lootGained={...(s.combat.lootGained ?? {}),[item]:(s.combat.lootGained?.[item] ?? 0)+amount};}
 function rollDrops(s: SaveState, events: GameEvent[], ops: CombatOps, drops: readonly EnemyLootDrop[]) {
   const enemy = ENEMIES[s.combat.targetId];
   for (const drop of drops) if (drop.guaranteed || ops.rand(s) < drop.chance) {
     const amount = drop.min + Math.floor(ops.rand(s) * (drop.max  - drop.min + 1));
-    ops.gain(s, drop.item, amount, events, `combat:${enemy.id}`); line(s, `Loot: ${amount} × ${ITEMS[drop.item]?.name ?? drop.item}.`);
+    ops.gain(s, drop.item, amount, events, `combat:${enemy.id}`); trackCombatLoot(s,drop.item,amount); line(s, `Loot: ${amount} × ${ITEMS[drop.item]?.name ?? drop.item}.`);
   }
 }
 function rollLoot(s: SaveState, events: GameEvent[], ops: CombatOps, firstKill: boolean) {
   const enemy = ENEMIES[s.combat.targetId];
   rollDrops(s,events,ops,enemy.loot);
   if(firstKill&&enemy.firstKillReward)rollDrops(s,events,ops,enemy.firstKillReward);
-  if (enemy.offering && !enemy.loot.some((drop) => drop.item === enemy.offering)) ops.gain(s, enemy.offering, 1, events, `combat:${enemy.id}:offering`);
+  if (enemy.offering && !enemy.loot.some((drop) => drop.item === enemy.offering)) { ops.gain(s, enemy.offering, 1, events, `combat:${enemy.id}:offering`); trackCombatLoot(s,enemy.offering,1); }
 }
 function resolveDeath(s: SaveState, events: GameEvent[]) {
   clearEncounterStatuses(s);

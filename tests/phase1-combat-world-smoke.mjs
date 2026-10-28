@@ -50,6 +50,7 @@ try{
   assert.ok(await page.locator('.combat-feed').count(),'The encounter view includes the rich Combat Feed');
   assert.ok(await page.locator('.combat-feed-event').count(),'Combat Feed shows the battle events');
   assert.ok(await page.locator('.combat-loot-table').count(),'Encounter inspector shows regular and bonus loot');
+  assert.ok(await page.locator('.combat-loot-summary').count(),'Combat Intel tracks items actually earned from combat');
   await page.getByRole('button',{name:'Open combat settings'}).click();
   assert.ok(await page.getByRole('region',{name:'Combat automation settings'}).count(),'Combat automation settings open from the encounter gear');
   assert.ok(await page.getByLabel('Automatic eating').count(),'Automation settings expose the real auto-eat toggle');
