@@ -33,6 +33,14 @@ export function PlayerBattleSprite() {
 
 export function EnemyBattleSprite({ enemyId, style, rank }: { enemyId: string; style: string; rank: string }) {
   const id = enemyId.toLowerCase();
+  const starterSprites: Record<string,string> = {
+    'road-wolf':'/assets/combat/monsters/road-wolf.svg',
+    'dust-rat':'/assets/combat/monsters/dust-rat.svg',
+    'ragged-poacher':'/assets/combat/monsters/ragged-poacher.svg',
+    'hedge-spark':'/assets/combat/monsters/hedge-spark.svg',
+  };
+  const starterSprite = starterSprites[id];
+  if (starterSprite) return <img className="battle-sprite enemy-battle-sprite" src={starterSprite} data-style={style.toLowerCase()} data-rank={rank.toLowerCase()} alt="" aria-hidden="true" draggable="false"/>;
   const beast = /wolf|boar|rat|hound|spider|bear|wyrm|drake|beast|mole|stag|crow|serpent|fang/.test(id);
   const magic = style.toLowerCase() === 'magic';
   const ranged = style.toLowerCase() === 'ranged';
