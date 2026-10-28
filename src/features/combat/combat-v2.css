@@ -2187,3 +2187,26 @@
   .screen.combat-screen .battle-scene .player-battle-sprite,
   .screen.combat-screen .battle-scene .enemy-battle-sprite { animation:none!important; }
 }
+
+
+/* SVG artwork is served as image elements so individual enemies can have unique silhouettes. */
+.screen.combat-screen .battle-sprite {
+  object-fit:contain;
+  object-position:center bottom;
+  user-select:none;
+  -webkit-user-drag:none;
+}
+.screen.combat-screen .player-battle-sprite { width:100%;height:100%; }
+.screen.combat-screen .enemy-battle-sprite { width:100%;height:100%; }
+.screen.combat-screen .battle-scene[data-enemy="hedge-spark"] .enemy-battle-sprite {
+  filter:drop-shadow(0 0 12px #86e3b277);
+}
+.screen.combat-screen .battle-scene[data-enemy="dust-rat"] .enemy-battle-sprite {
+  transform:scale(.86);
+}
+.screen.combat-screen .battle-scene[data-enemy="road-wolf"] .enemy-battle-sprite {
+  transform:scale(1.04);
+}
+.screen.combat-screen .battle-scene[data-enemy="ragged-poacher"] .enemy-battle-sprite {
+  transform:scale(.96);
+}
