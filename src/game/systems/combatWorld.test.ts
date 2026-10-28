@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { advanceWithEvents, BOSS_COMPONENTS, COMBAT_AREAS, DUNGEONS, devForceCurrentEnemyDefeat, ENEMIES, evaluateCombatTierUnlocks, freshState, getCurrentPlayerBasicDamageType, getEnemyMinHit, getPlayerEvasions, getPlayerResistances, getStyleDamageMultiplier, getStyleMatchup, getStyleResistanceAdjustment, isTierUnlocked, loadState, MELEE_WEAPONS, OFFERINGS, setCombatTarget, startActivity, startDungeon, stopActivity, validateCombatContent, validateCombatRegistry, type ItemId } from '../game';
 import { FORGING_RECIPES } from '../content/smithing/forgingRecipes';
 import { HEAVY_ARMOR } from '../content/combat/heavyArmor';
-import { rollDirectDamage } from './combat/combatResolver';
+import { combatNextBoundary, rollDirectDamage } from './combat/combatResolver';
 
 describe('Phase 1 combat world',()=>{
   it('validates the authored 10-tier registry and requested counts',()=>{
@@ -73,6 +73,42 @@ describe('Phase 1 combat world',()=>{
   it('starts dungeons at the first encounter and blocks normal target selection into the roster',()=>{
     const state=freshState();state.skills.Attack.level=10;state.combatProgress.eliteFirstKills['ironjaw-boar']=true;
     expect(startDungeon(state,'t1-ruined-watch')).toBe(true);expect(state.combat.encounterIndex).toBe(0);expect(setCombatTarget(state,'captain-veyr')).toBe(false);expect(setCombatTarget(state,'t1-tower-bowman')).toBe(false);
+  });
+
+  it('restarts an interrupted encounter with full enemy HP and clean action timers',()=>{
+    const state=freshState();
+    state.equipped.weapon='combat.weapon.melee.copper_sword';
+    expect(setCombatTarget(state,'dust-rat')).toBe(true);
+    startActivity(state,'combat');
+    state.combat.playerTimer=1;
+    state.combat.enemyTimer=90_000;
+    const damaged=advanceWithEvents(state,1).state;
+    expect(damaged.combat.enemyHp).toBeLessThan(ENEMIES['dust-rat']!.maxHp);
+    damaged.combat.statuses.push({id:'stale-guard',type:'ResistanceUp',sourceId:'dust-rat',target:'enemy',remainingMs:9000,magnitude:10});
+    stopActivity(damaged);
+    startActivity(damaged,'combat');
+    expect(damaged.combat.enemyHp).toBe(ENEMIES['dust-rat']!.maxHp);
+    expect(damaged.combat.sequenceIndex).toBe(0);
+    expect(damaged.combat.activePhaseIndex).toBe(0);
+    expect(damaged.combat.respawn).toBe(0);
+    expect(damaged.combat.statuses).toEqual([]);
+    expect(damaged.combat.playerTimer).toBeGreaterThan(0);
+    expect(damaged.combat.enemyTimer).toBeGreaterThan(0);
+  });
+
+  it('never returns a zero/invalid combat simulation boundary for due timers or expired effects',()=>{
+    const state=freshState();
+    state.equipped.weapon='combat.weapon.melee.copper_sword';
+    state.activity='combat';
+    state.combat.runState='active';
+    state.combat.playerTimer=0;
+    state.combat.enemyTimer=0;
+    state.combat.statuses=[{id:'expired',type:'Bleed',sourceId:'test',target:'player',remainingMs:0,tickMs:1000,tickTimerMs:0,stacks:0,remainingDamage:0}];
+    expect(combatNextBoundary(state)).toBeGreaterThan(0);
+    expect(Number.isFinite(combatNextBoundary(state))).toBe(true);
+    const advanced=advanceWithEvents(state,250).state;
+    expect(advanced.combat.playerTimer).toBeGreaterThan(0);
+    expect(advanced.combat.enemyTimer).toBeGreaterThan(0);
   });
 
   it('schedules the queued action interval and uses a 20–100% direct-damage roll',()=>{

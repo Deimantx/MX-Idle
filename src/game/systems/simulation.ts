@@ -62,7 +62,27 @@ export function startActivity(s: SaveState, activity: Exclude<Activity, null>) {
   if (activity === 'forging') { s.page = 'Smithing'; s.smithing.mode = 'forging'; s.smithing.message = ''; if (!s.smithing.reserved && !startForge(s)) { s.activity = null; s.smithing.message = 'Recipe inputs are no longer available'; return; } s.smithing.timer ||= smithingActionTime(s, s.smithing.recipe); }
   if (activity === 'fishing') { s.page = 'Fishing'; s.fishing.phase = 'bite'; s.fishing.actionSerial++; s.fishing.timer = fishingBiteTime(s); s.fishing.selectedFish = null; }
   if (activity === 'cooking') { s.page = 'Cooking'; if (!reserveCookingInputs(s)) { s.activity = null; s.cooking.message = 'Recipe inputs are no longer available'; return; } s.cooking.phase = 'prep'; s.cooking.actionSerial++; s.cooking.timer = cookingPrepTime(s); }
-  if (activity === 'combat') { s.page = 'Combat'; s.combat.runState = 'active'; s.combat.playerTimer ||= getPlayerAttackInterval(s); const enemy=ENEMIES[s.combat.targetId],sequence=activeSequence(enemy,s.combat.enemyHp);s.combat.enemyTimer ||= enemy.intervalMs*(sequence[s.combat.sequenceIndex%sequence.length]?.intervalMultiplier ?? 1); }
+  if (activity === 'combat') {
+    s.page = 'Combat';
+    const enemy = ENEMIES[s.combat.targetId];
+    // Starting from an idle/ended state begins a fresh encounter; don't resume stale HP/timers.
+    if (s.combat.runState !== 'active' || s.activity !== 'combat') {
+      clearEncounterStatuses(s);
+      s.combat.enemyHp = enemy.maxHp;
+      s.combat.sequenceIndex = 0;
+      s.combat.activePhaseIndex = 0;
+      s.combat.respawn = 0;
+      s.combat.playerTimer = getPlayerAttackInterval(s);
+      s.combat.enemyTimer = enemy.intervalMs * (activeSequence(enemy, enemy.maxHp)[0]?.intervalMultiplier ?? 1);
+      s.combat.playerActionSerial++;
+      s.combat.enemyActionSerial++;
+    } else {
+      s.combat.playerTimer = Number.isFinite(s.combat.playerTimer) && s.combat.playerTimer > 0 ? s.combat.playerTimer : getPlayerAttackInterval(s);
+      const sequence = activeSequence(enemy, s.combat.enemyHp);
+      s.combat.enemyTimer = Number.isFinite(s.combat.enemyTimer) && s.combat.enemyTimer > 0 ? s.combat.enemyTimer : enemy.intervalMs * (sequence[s.combat.sequenceIndex % sequence.length]?.intervalMultiplier ?? 1);
+    }
+    s.combat.runState = 'active';
+  }
 }
 export function stopActivity(s: SaveState) { if (s.activity === 'mining') syncMining(s); if(s.activity==='cooking'){for(const input of s.cooking.reservedInputs)gain(s,input.item,input.amount);s.cooking.reservedInputs=[];s.cooking.selectedInputs={};s.cooking.timer=0;} if(s.activity==='combat')clearEncounterStatuses(s);s.activity = null; if (s.combat.runState === 'active') s.combat.runState = s.combat.dungeonId?'ended':'idle'; }
 function preservationChance(s: SaveState, _recipeId: RecipeId) { if (s.smithing.forcePreservation) return 1; return Math.min(.5, (equippedHammer(s).effects.preservationPp ?? 0) / 100); }
