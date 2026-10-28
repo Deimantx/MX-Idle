@@ -49,6 +49,12 @@ try{
   assert.ok((firstCombatState.combat.damageTaken??0)>=0,'Combat damage-taken counter stays numeric');
   assert.ok(await page.locator('.combat-feed').count(),'The encounter view includes the rich Combat Feed');
   assert.ok(await page.locator('.combat-feed-event').count(),'Combat Feed shows the battle events');
+  assert.ok(await page.locator('.combat-loot-table').count(),'Encounter inspector shows regular and bonus loot');
+  await page.getByRole('button',{name:'Open combat settings'}).click();
+  assert.ok(await page.getByRole('region',{name:'Combat automation settings'}).count(),'Combat automation settings open from the encounter gear');
+  assert.ok(await page.getByLabel('Automatic eating').count(),'Automation settings expose the real auto-eat toggle');
+  await page.getByRole('button',{name:'Close combat settings'}).click();
+
 
   await page.getByRole('button',{name:/Leave Encounter/}).click();
 
