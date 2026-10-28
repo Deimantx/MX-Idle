@@ -1,9 +1,10 @@
-﻿import { activePhaseIndex, activeSequence, DUNGEONS, ENEMIES, type EnemyLootDrop } from '../../content/combat/t1Enemies';
+import { activePhaseIndex, activeSequence, DUNGEONS, ENEMIES, type EnemyLootDrop } from '../../content/combat/t1Enemies';
 import { MELEE_WEAPONS } from '../../content/combat/meleeWeapons';
 import type { ActiveStatus, DamageType, GameEvent, ItemId, SaveState, SkillId } from '../../types/gameTypes';
 import { damageAfterResistance, hitChance } from '../gameMath';
 import { getCurrentPlayerBasicDamageType, getPlayerAccuracy, getPlayerAttackInterval, getPlayerCritDamageBonus, getPlayerCritRateBonus, getPlayerEvasions, getPlayerMaxHit, getPlayerMaxHitpoints, getPlayerPenetration, getPlayerResistances, getStyleDamageMultiplier, getStyleResistanceAdjustment, getWeaponSpecial } from './combatMath';
 import { evaluateCombatTierUnlocks } from './combatProgression';
+import { ITEMS } from '../../content/items/itemRegistry';
 
 type CombatOps = { rand: (s: SaveState) => number; gain: (s: SaveState, item: ItemId, n: number, events?: GameEvent[], source?: string) => void; addXp: (s: SaveState, skill: SkillId, amount: number, events?: GameEvent[]) => void };
 const line = (s: SaveState, value: string) => { s.combat.log = [value, ...s.combat.log].slice(0, 8); };
@@ -18,7 +19,7 @@ function rollDrops(s: SaveState, events: GameEvent[], ops: CombatOps, drops: rea
   const enemy = ENEMIES[s.combat.targetId];
   for (const drop of drops) if (drop.guaranteed || ops.rand(s) < drop.chance) {
     const amount = drop.min + Math.floor(ops.rand(s) * (drop.max  - drop.min + 1));
-    ops.gain(s, drop.item, amount, events, `combat:${enemy.id}`);
+    ops.gain(s, drop.item, amount, events, `combat:${enemy.id}`); line(s, `Loot: ${amount} × ${ITEMS[drop.item]?.name ?? drop.item}.`);
   }
 }
 function rollLoot(s: SaveState, events: GameEvent[], ops: CombatOps, firstKill: boolean) {
@@ -62,7 +63,7 @@ function resolvePlayerDamage(s: SaveState, type: DamageType, multiplier: number,
   if (phaseState !== c.activePhaseIndex) { c.activePhaseIndex= phaseState; c.sequenceIndex= 0; c.enemyActionSerial++;const phaseSequence=activeSequence(enemy,c.enemyHp);c.enemyTimer=enemy.intervalMs*(phaseSequence[0]?.intervalMultiplier ?? 1);if (newPhase >= 0) { events.push({type:'combat-feedback',action:'phase'}); line(s, `${enemy.name} changes its attack pattern.`); } }
 }
 function defeatEnemy(s: SaveState, events: GameEvent[], ops: CombatOps) {
-  const c = s.combat, enemy = ENEMIES[c.targetId], firstKill=(c.defeated[enemy.id] ?? 0)===0; c.kills++; c.defeated[enemy.id] = (c.defeated[enemy.id] ?? 0) + 1; c.gold += enemy.gold; s.gold += enemy.gold;
+  const c = s.combat, enemy = ENEMIES[c.targetId], firstKill=(c.defeated[enemy.id] ?? 0)===0; c.kills++; c.defeated[enemy.id] = (c.defeated[enemy.id] ?? 0) + 1; c.gold += enemy.gold; s.gold += enemy.gold; line(s, `+ ${enemy.gold} gold earned for defeating ${enemy.name}.`);
   events.push({ type: 'gold-gained', amount: enemy.gold, source: 'combat' }); rollLoot(s, events, ops, firstKill);
   if (enemy.id==='road-wolf'&&!s.objectives.victory) { s.objectives.victory = true; if (!s.objectives.firstStepsCompleteSeen) { events.push({ type: 'first-steps-complete' }); s.objectives.firstStepsCompleteSeen = true; } }
   if(enemy.rank==='Elite'&&firstKill)s.combatProgress.eliteFirstKills[enemy.id]=true;

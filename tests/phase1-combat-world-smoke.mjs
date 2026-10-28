@@ -106,6 +106,11 @@ try{
   await closeDev();await stopCombatIfActive();
   await page.locator('.target-panel').getByRole('button',{name:/The Zenith Warden/}).click();
   assert.match(await page.locator('.enemy-prep-data').innerText(),/BOSS PHASES/);
+  assert.ok(await page.locator('.combat-feed').count(),'Combat screen exposes the event-first Combat Feed');
+  assert.ok(await page.getByRole('group',{name:'Filter combat events'}).getByRole('button',{name:'All'}).count(),'Combat Feed provides event filters');
+  assert.ok(await page.locator('.combat-feed-event').count(),'Combat Feed renders readable event entries');
+  await page.getByRole('group',{name:'Filter combat events'}).getByRole('button',{name:'Loot'}).click();
+  assert.ok((await page.locator('.combat-feed').innerText()).includes('Loot') || (await page.locator('.combat-feed').innerText()).includes('No matching events'),'Combat Feed filter changes content without breaking the view');
   assert.deepEqual(errors,[],'Combat world browser smoke has no page or console errors');
   console.log('Fresh Copper path, Road Wolf victory, T1 locks, T5 Elite/Embervault/Cindermaw, and T10 Astral Nexus/Zenith Warden passed.');
 }finally{await browser.close();}
