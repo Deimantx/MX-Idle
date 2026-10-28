@@ -32,7 +32,6 @@ export function CombatFeed({ lines, active }: { lines: string[]; active: boolean
   const [filter, setFilter] = useState<FeedFilter>('all');
   const [followLatest, setFollowLatest] = useState(true);
   const listRef = useRef<HTMLDivElement>(null);
-  const endRef = useRef<HTMLDivElement>(null);
   const events = useMemo(() => lines.map(describeEvent).filter(event => matchesFilter(event, filter)).reverse(), [lines, filter]);
   const newest = lines[0];
   useEffect(() => { if (followLatest && listRef.current) listRef.current.scrollTop = listRef.current.scrollHeight; }, [lines, filter, followLatest]);
@@ -61,7 +60,6 @@ export function CombatFeed({ lines, active }: { lines: string[]; active: boolean
           {isNewest && <span className="combat-feed-new">NEW</span>}
         </article>;
       }) : <div className="combat-feed-empty"><CircleHelp size={20}/><b>No matching events</b><span>Try another filter or start a combat encounter.</span></div>}
-      <div ref={endRef} />
     </div>
     {!followLatest && <button type="button" className="combat-feed-follow" onClick={() => { setFollowLatest(true); if (listRef.current) listRef.current.scrollTo({ top: listRef.current.scrollHeight, behavior: 'smooth' }); }}>↓ Jump to latest event</button>}
   </section>;
