@@ -16,7 +16,7 @@ export function CombatScreen({ game: g, start, stop, stance, target, setArea, qu
   const [foodOpenSlot, setFoodOpenSlot] = useState<number | null>(null), [foodQuery, setFoodQuery] = useState(''), [selectedTier,setSelectedTier]=useState<number|null>(null), [node,setNode]=useState<'area'|'elite'|'dungeon'>('area'),[inspectedDungeonEnemy,setInspectedDungeonEnemy]=useState<EnemyId|null>(null);
   type PanelKey = 'world' | 'targets' | 'intel';
   const [collapsedPanels, setCollapsedPanels] = useState<Record<PanelKey, boolean>>(() => {
-    const defaults: Record<PanelKey, boolean> = { world: true, targets: true, intel: true };
+    const defaults: Record<PanelKey, boolean> = { world: false, targets: false, intel: false };
     try { const saved = window.localStorage.getItem('mx-idle:combat-panels:v1'); if (!saved) return defaults; const parsed: unknown = JSON.parse(saved); if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return defaults; const value = parsed as Partial<Record<PanelKey, unknown>>; return { world: typeof value.world === 'boolean' ? value.world : defaults.world, targets: typeof value.targets === 'boolean' ? value.targets : defaults.targets, intel: typeof value.intel === 'boolean' ? value.intel : defaults.intel }; } catch { return defaults; }
   });
   useEffect(() => { try { window.localStorage.setItem('mx-idle:combat-panels:v1', JSON.stringify(collapsedPanels)); } catch { /* Storage may be unavailable; the screen still works. */ } }, [collapsedPanels]);
