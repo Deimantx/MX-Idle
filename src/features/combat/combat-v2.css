@@ -2527,6 +2527,7 @@
 .combat-quick-toggle { min-width:112px; position:relative; display:flex; align-items:center; gap:8px; padding:5px 9px; border:1px solid #485348; border-radius:4px; background:#202a23; cursor:pointer; }
 .combat-quick-toggle input { position:absolute; width:1px; height:1px; opacity:0; }
 .combat-toggle-track { position:relative; flex:0 0 25px; width:25px; height:14px; border:1px solid #59645a; border-radius:10px; background:#353d36; transition:background .16s,border-color .16s; }
+.combat-toggle-track,.combat-toggle-copy { pointer-events:none; }
 .combat-toggle-track::after { content:""; position:absolute; top:2px; left:2px; width:8px; height:8px; border-radius:50%; background:#a3ac9e; transition:transform .16s,background .16s; }
 .combat-quick-toggle input:checked+.combat-toggle-track { background:#5a754b; border-color:#88a26f; }
 .combat-quick-toggle input:checked+.combat-toggle-track::after { background:#e1ecc8; transform:translateX(11px); }
