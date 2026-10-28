@@ -124,7 +124,10 @@ try {
   await page.getByRole('button', { name: 'Combat', exact: true }).click();
   await page.locator('#combat-panel-world').waitFor({ state: 'visible' });
   if (await worldToggle.getAttribute('aria-expanded') === 'true') await worldToggle.click();
-  assert.equal(await page.locator('.food-settings input[type="checkbox"]').count(), 1, 'Auto Eat uses a real checkbox input');
+  await page.getByRole('button', { name: 'Open combat settings' }).click();
+  assert.equal(await page.locator('#combat-settings-popover input[type="checkbox"]').count(), 1, 'Auto Eat uses a real checkbox input in combat settings');
+  assert.equal(await page.getByLabel('Eat below HP').count(), 1, 'Auto Eat threshold remains adjustable from combat settings');
+  await page.getByRole('button', { name: 'Close combat settings' }).click();
   await page.getByRole('button', { name: /Choose food/ }).first().click();
   const foodSearch = page.getByLabel('Search owned food');
   await foodSearch.fill('__no_food_matches__');
