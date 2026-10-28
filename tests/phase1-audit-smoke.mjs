@@ -60,7 +60,7 @@ try {
   await page.getByRole('button', { name: 'DEV' }).click();
   await page.locator('.dev-nav').getByRole('button', { name: 'Inventory' }).click();
   await page.getByRole('button', { name: 'Grant Copper Ore' }).click();
-  await page.getByRole('button', { name: 'DEV' }).click();
+  await page.getByRole('button', { name: 'Close developer tools' }).click();
   await page.getByRole('button', { name: /Smithing/ }).click();
   await page.getByRole('button', { name: 'DEV' }).click();
   await page.locator('.dev-nav').getByRole('button', { name: 'Player' }).click();
@@ -110,7 +110,7 @@ try {
   await page.getByRole('button', { name: 'DEV' }).click();
   await page.getByLabel('Dev Combat Food').selectOption({ index: 0 });
   await page.getByRole('button', { name: 'Set Food', exact: false }).click();
-  await page.getByRole('button', { name: 'DEV' }).click();
+  await page.getByRole('button', { name: 'Close developer tools' }).click();
   await page.getByRole('button', { name: 'Begin Combat' }).click();
   await page.getByText('IN COMBAT').waitFor();
   assert.equal(await page.locator('.sequence-flow [aria-current="step"]').count(), 1, 'Combat sequence identifies the active enemy action');
