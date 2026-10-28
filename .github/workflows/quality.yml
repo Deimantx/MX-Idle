@@ -2,7 +2,7 @@ name: MX-Idle Quality Gate
 
 on:
   push:
-    branches: [main, combat-ui-redesign]
+    branches: [main]
   pull_request:
     branches: [main]
 
