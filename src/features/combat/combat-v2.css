@@ -769,3 +769,38 @@
     transition-duration: .01ms !important;
   }
 }
+
+
+/* Final combat interaction pass: visible selection, stronger focus states, and compact mobile controls. */
+.combat-v2 .combat-collapse-toggle { display:inline-flex; align-items:center; justify-content:center; gap:6px; white-space:nowrap; }
+.combat-v2 .combat-panel-content[hidden] { display:none !important; }
+.combat-v2 .enemy-mark[data-rank="boss"], .combat-v2 .enemy-large-mark[data-rank="boss"] { color:#e3b27b; border-color:#9b7046; background:linear-gradient(145deg,#403126,#292b27); box-shadow:inset 0 1px #f3d0a21c,0 0 18px #bb86551b; }
+.combat-v2 .enemy-mark[data-rank="elite"], .combat-v2 .enemy-large-mark[data-rank="elite"] { color:#b7c6a8; border-color:#61765e; background:linear-gradient(145deg,#2e3b30,#252c28); }
+.combat-v2 .enemy-choice.selected { border-color:#c29a64; background:linear-gradient(105deg,#3a352a,#252d29); box-shadow:inset 3px 0 #c29a64,0 3px 12px #0002; }
+.combat-v2 .enemy-choice.selected .enemy-mark { border-color:#b18b5a; }
+.combat-v2 .enemy-choice .enemy-kills { font-variant-numeric:tabular-nums; }
+.combat-v2 .food-picker-menu { z-index:20; max-height:min(360px,48vh); overflow:auto; overscroll-behavior:contain; scrollbar-color:#56645a transparent; }
+.combat-v2 .food-picker-menu > input { position:sticky; top:0; z-index:2; width:100%; min-height:36px; border:1px solid #65705f; border-radius:4px; color:#eee9dc; background:#171e1b; }
+.combat-v2 .food-picker-clear { min-height:28px; margin:3px 4px; padding:4px 8px; border:1px solid #414d44; border-radius:3px; color:#c5cabb; background:#252d28; cursor:pointer; }
+.combat-v2 .food-picker-clear:hover, .combat-v2 .food-picker-clear:focus-visible { border-color:#c29a64; color:#f0dfc0; }
+.combat-v2 .food-option { width:100%; min-height:42px; display:flex; align-items:center; justify-content:space-between; gap:10px; text-align:left; }
+.combat-v2 .food-option.selected-food { border-color:#b78d58; background:linear-gradient(100deg,#403627,#2a3029); box-shadow:inset 2px 0 #c29a64; }
+.combat-v2 .food-option small { flex-shrink:0; color:#a9b4a5; font-variant-numeric:tabular-nums; }
+.combat-v2 .food-option:focus-visible, .combat-v2 .food-picker-trigger:focus-visible, .combat-v2 .food-picker-clear:focus-visible { outline:2px solid #d1a66c; outline-offset:2px; }
+.combat-v2 .food-picker-menu .empty-copy { display:block; padding:12px 10px; color:#aeb6aa; text-align:center; }
+.combat-v2 .food-satiety > span { font-size:10px; font-weight:700; letter-spacing:.06em; font-variant-numeric:tabular-nums; }
+.combat-v2 .food-settings > span[role="status"] { min-width:0; color:#d1b98f; overflow-wrap:anywhere; }
+.combat-v2 .battle-scene[role="group"] { outline:none; }
+.combat-v2 .sequence-flow > [aria-current="step"] { position:relative; }
+.combat-v2 .sequence-flow > [aria-current="step"]::after { content:"ACTIVE"; position:absolute; top:4px; right:5px; color:#d7b27b; font-size:8px; font-weight:800; letter-spacing:.08em; }
+.combat-v2 .log-lines { overscroll-behavior:contain; scrollbar-width:thin; }
+.combat-v2 .battle-footer .game-button { min-height:42px; font-weight:800; letter-spacing:.035em; }
+@media (max-width:640px) {
+  .combat-v2 .food-slots { grid-template-columns:1fr; }
+  .combat-v2 .food-slot { grid-template-columns:22px minmax(0,1fr); }
+  .combat-v2 .food-slot > .food-reserve, .combat-v2 .food-slot > .game-button { grid-column:2; }
+  .combat-v2 .food-option { align-items:flex-start; flex-direction:column; gap:3px; }
+  .combat-v2 .food-picker-menu { max-height:42vh; }
+  .combat-v2 .combat-panel-actions { gap:4px; }
+  .combat-v2 .combat-collapse-toggle { min-height:32px; padding-inline:7px; }
+}
