@@ -49,7 +49,7 @@ try {
   assert.equal(await start.isEnabled(),true,'auto-combat can start with the equipped weapon');
   await start.click();
   assert.equal(await page.locator('.combat-auto-toggle').getAttribute('aria-pressed'),'true','auto-combat control exposes its running state');
-  await page.getByRole('button',{name:'Stop Auto Combat'}).click();
+  await page.getByRole('button',{name:'Pause Fight'}).click();
   assert.equal(await page.locator('.combat-auto-toggle').getAttribute('aria-pressed'),'false','stopping combat restores the paused state');
 
   await page.getByRole('button',{name:'Open combat settings'}).click();
