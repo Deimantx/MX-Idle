@@ -43,7 +43,13 @@ try{
   await page.getByRole('button',{name:'Combat',exact:true}).click();
   await page.getByRole('button',{name:'Begin Combat'}).click();
   await waitForState(state=>(state.combat.defeated['road-wolf']??0)>0,'natural Road Wolf victory',120_000);
-  assert.equal((await readState()).objectives.victory,true,'First Steps remains attached to the Road Wolf milestone');
+  const firstCombatState=await readState();
+  assert.equal(firstCombatState.objectives.victory,true,'First Steps remains attached to the Road Wolf milestone');
+  assert.ok((firstCombatState.combat.damageDealt??0)>0,'Combat records real damage dealt during the first victory');
+  assert.ok((firstCombatState.combat.damageTaken??0)>=0,'Combat damage-taken counter stays numeric');
+  assert.ok(await page.locator('.combat-feed').count(),'The encounter view includes the rich Combat Feed');
+  assert.ok(await page.locator('.combat-feed-event').count(),'Combat Feed shows the battle events');
+
   await page.getByRole('button',{name:/Leave Encounter/}).click();
 
   await page.locator('.combat-paths button:nth-child(2)').click();
