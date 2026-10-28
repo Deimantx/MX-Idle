@@ -11,6 +11,7 @@ export function EnemyBattleSprite({ enemyId, style, rank }: { enemyId: string; s
     'hedge-spark':'/assets/combat/monsters/hedge-spark.svg',
     'bog-leech':'/assets/combat/monsters/bog-leech.svg',
     'carrion-crow':'/assets/combat/monsters/carrion-crow.svg',
+    'rotten-slime':'/assets/combat/monsters/rotten-slime.svg',
   };
   const starterSprite = starterSprites[id];
   if (starterSprite) return <img className="battle-sprite enemy-battle-sprite" src={starterSprite} data-style={style.toLowerCase()} data-rank={rank.toLowerCase()} alt="" aria-hidden="true" draggable="false"/>;
