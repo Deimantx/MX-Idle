@@ -1853,3 +1853,96 @@
   .combat-v2 .combat-region-entry,.combat-v2 .combat-region-heading,.combat-v2 .combat-location-select,
   .combat-v2 .combat-paths-inline button { transition:none; }
 }
+
+
+/* Encounter browser: distinct activity tabs and the creature list stays beside its location. */
+.combat-v2 .combat-paths-inline {
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:3px;
+  margin:0; padding:7px 7px 0; border-top:1px solid #354744;
+  background:#101819;
+}
+.combat-v2 .combat-paths-inline button {
+  min-width:0; min-height:49px; display:flex; flex-direction:column;
+  justify-content:center; align-items:flex-start; gap:4px;
+  padding:7px 8px; border:1px solid #2d3b38; border-bottom-color:#4b5b54;
+  border-radius:3px 3px 0 0; background:linear-gradient(180deg,#1b2523,#131b1b);
+}
+.combat-v2 .combat-paths-inline button.active {
+  border-color:#8f7955; border-bottom-color:#d0b37d;
+  background:linear-gradient(180deg,#373326,#242923);
+  box-shadow:inset 0 2px #c5a16a;
+}
+.combat-v2 .combat-paths-inline .path-index { display:none; }
+.combat-v2 .combat-paths-inline .path-copy { width:100%; gap:3px; }
+.combat-v2 .combat-paths-inline .path-copy>small { color:#9ca99d; font-size:8px; letter-spacing:.1em; }
+.combat-v2 .combat-paths-inline .path-copy>b { font-size:10px; }
+.combat-v2 .combat-paths-inline .path-copy>em { display:none; }
+.combat-v2 .combat-paths-inline .path-status {
+  position:absolute; right:5px; top:4px; padding:1px 3px;
+  border:0; background:transparent; font-size:7px;
+}
+.combat-v2 .combat-paths-inline button { position:relative; }
+.combat-v2 .inline-encounters {
+  padding:9px 8px 8px; border-top:1px solid #354744;
+  background:linear-gradient(180deg,#131d1d,#0f1718);
+}
+.combat-v2 .inline-encounters-head {
+  display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:7px;
+}
+.combat-v2 .inline-encounters-head>div { display:grid; gap:3px; }
+.combat-v2 .inline-encounters-head small {
+  color:#9eac9d; font-size:8px; letter-spacing:.13em;
+}
+.combat-v2 .inline-encounters-head b {
+  color:#e2e0d4; font:600 12px 'Marcellus',Georgia,serif;
+}
+.combat-v2 .inline-encounters-head>span {
+  flex:none; color:#9eaa9e; font:600 8px ui-monospace,monospace; letter-spacing:.06em;
+}
+.combat-v2 .inline-target-list {
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:5px;
+  max-height:310px; min-height:0; overflow:auto; padding:1px 3px 2px 1px;
+}
+.combat-v2 .inline-target-list .enemy-choice {
+  min-width:0; min-height:56px; margin:0;
+  grid-template-columns:29px minmax(0,1fr) auto; gap:7px;
+  padding:6px; border-radius:3px; background:linear-gradient(110deg,#192321,#121a1a);
+}
+.combat-v2 .inline-target-list .enemy-choice.selected {
+  border-color:#a18454; background:linear-gradient(100deg,#332f23,#1d2724);
+  box-shadow:inset 2px 0 #c3a06a;
+}
+.combat-v2 .inline-target-list .enemy-mark { width:27px; height:27px; }
+.combat-v2 .inline-enemy-copy { min-width:0; display:grid; gap:3px; }
+.combat-v2 .inline-enemy-copy>b {
+  overflow:hidden; color:#e1e3d8; font:600 10px 'Marcellus',Georgia,serif;
+  text-overflow:ellipsis; white-space:nowrap;
+}
+.combat-v2 .inline-enemy-copy>small {
+  overflow:hidden; color:#94a197; font-size:8px;
+  text-overflow:ellipsis; white-space:nowrap;
+}
+.combat-v2 .inline-target-list .enemy-kills { font-size:8px; }
+.combat-v2 .monster-inspection-panel { border-top:2px solid #6b7770; }
+.combat-v2 .monster-inspection-panel .panel-head h2 { font-size:14px; }
+.combat-v2 .inspection-context {
+  display:flex; justify-content:space-between; gap:8px; margin:0 0 7px;
+  color:#9da99e; font-size:9px;
+}
+.combat-v2 .monster-inspection-panel .enemy-card { margin-top:0; }
+.combat-v2 .monster-inspection-panel .target-stats { grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:12px; }
+.combat-v2 .monster-inspection-panel .resist-group>div { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.combat-v2 .monster-inspection-panel .enemy-prep-data { margin-top:10px; }
+@media (max-width:1450px) {
+  .combat-v2 .inline-target-list { grid-template-columns:1fr; max-height:300px; }
+}
+@media (max-width:900px) {
+  .combat-v2 .combat-paths-inline { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .combat-v2 .inline-target-list { grid-template-columns:repeat(2,minmax(0,1fr)); max-height:360px; }
+  .combat-v2 .monster-inspection-panel .target-stats { grid-template-columns:1fr; }
+}
+@media (max-width:520px) {
+  .combat-v2 .inline-target-list { grid-template-columns:1fr; }
+  .combat-v2 .combat-paths-inline button { padding:6px 5px; }
+  .combat-v2 .combat-paths-inline .path-copy>b { font-size:9px; }
+}
