@@ -1240,3 +1240,17 @@
 .combat-v2 .combat-loot-row.is-first-kill { background:linear-gradient(90deg,#3a3020,#252722); }
 .combat-v2 .combat-loot-row.is-offering { background:#252b26; }
 @media (max-width:820px) { .combat-v2 .combat-loot-row { grid-template-columns:26px minmax(0,1fr) auto; gap:6px; padding:6px; } }
+
+
+/* Actual illustrated combat sprites replace the empty CSS figure and generic enemy glyph. */
+.combat-v2 .battle-figure.player-figure { left:19%; bottom:calc(14px * var(--ui-scale)); width:calc(94px * var(--ui-scale)); height:calc(150px * var(--ui-scale)); }
+.combat-v2 .battle-sprite { display:block; width:100%; height:100%; overflow:visible; }
+.combat-v2 .enemy-glyph { width:100%; height:100%; display:grid; place-items:end center; }
+.combat-v2 .enemy-battle-sprite { filter:drop-shadow(0 5px 5px #0008); }
+.combat-v2 .battle-scene[data-enemy-rank="Boss"] .enemy-battle-sprite { filter:drop-shadow(0 0 11px #d8a25c55) drop-shadow(0 10px 8px #000a); }
+.combat-v2 .battle-scene[data-enemy-rank="Elite"] .enemy-battle-sprite { filter:drop-shadow(0 0 8px #bba06c3b) drop-shadow(0 9px 8px #000a); }
+.combat-v2 .battle-scene[data-impact="critical"] .enemy-battle-sprite { filter:brightness(1.18) drop-shadow(0 0 16px #f4a94777); }
+.combat-v2 .battle-scene .battle-foe.foe-alert { animation:combat-enemy-lunge .28s ease-out both,combat-presence 800ms ease-in-out alternate infinite; }
+.combat-v2 .battle-scene[data-region*="frost"] .player-battle-sprite { filter:drop-shadow(0 0 5px #b7d9e033); }
+.combat-v2 .battle-scene[data-region*="astral"] .player-battle-sprite { filter:drop-shadow(0 0 8px #9da8d344); }
+@media (prefers-reduced-motion:reduce) { .combat-v2 .battle-scene .player-figure,.combat-v2 .battle-scene .battle-foe { animation:none!important; } }
