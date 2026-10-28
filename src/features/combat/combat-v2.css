@@ -1161,3 +1161,15 @@
 @keyframes combat-feed-enter { from { opacity:.35; transform:translateY(3px); } to { opacity:1; transform:translateY(0); } }
 @media (prefers-reduced-motion:reduce) { .combat-v2 .combat-feed-live-dot.is-live,.combat-v2 .combat-feed-event { animation:none; }.combat-v2 .combat-feed-copy p,.combat-v2 .health-unit .bar>span { transition:none; } }
 @media (max-width:820px) { .combat-v2 .combat-feed-list { max-height:300px; }.combat-v2 .combat-feed-filters { flex-wrap:wrap; }.combat-v2 .combat-feed-event { padding:7px 3px; } }
+
+
+/* Moment-to-moment combat feedback: readable damage direction and restrained strike motion. */
+.combat-v2 .battle-scene[data-impact="player"] .floating-damage { color:#9fe0b9; text-shadow:0 2px 7px #000,0 0 15px #63c99a77; }
+.combat-v2 .battle-scene[data-impact="critical"] .floating-damage { color:#ffd08a; font-size:clamp(17px,2vw,27px); letter-spacing:.04em; text-shadow:0 2px 8px #000,0 0 20px #f4a947aa; }
+.combat-v2 .battle-scene[data-impact="enemy"] .floating-damage { color:#f19c8d; text-shadow:0 2px 8px #000,0 0 15px #df6e5c88; }
+.combat-v2 .battle-scene[data-impact="miss"] .floating-damage { color:#c4c7bd; font-size:clamp(12px,1.3vw,17px); letter-spacing:.12em; text-shadow:0 2px 7px #000; }
+.combat-v2 .battle-scene .player-figure { animation:combat-player-lunge .32s cubic-bezier(.2,.7,.3,1) both; }
+.combat-v2 .battle-scene .battle-foe { animation:combat-enemy-lunge .28s ease-out both; }
+@keyframes combat-player-lunge { 0% { transform:translateX(0) translateY(0); } 38% { transform:translateX(13px) translateY(-4px); } 100% { transform:translateX(0) translateY(0); } }
+@keyframes combat-enemy-lunge { 0% { transform:translateX(0); } 35% { transform:translateX(-8px); } 100% { transform:translateX(0); } }
+@media (prefers-reduced-motion:reduce) { .combat-v2 .battle-scene .player-figure,.combat-v2 .battle-scene .battle-foe { animation:none; } }
