@@ -54,7 +54,7 @@ try {
     await page.setViewportSize({width,height:900});
     await page.waitForTimeout(60);
     const layout=page.locator('.combat-layout');
-    const columns=await layout.evaluate(element=>getComputedStyle(element).gridTemplateColumns.trim().split(/\\s+/).filter(Boolean).length);
+    const columns=await layout.evaluate(element=>getComputedStyle(element).gridTemplateColumns.trim().split(/\s+/).filter(Boolean).length);
     assert.equal(columns,expectedColumns,`combat layout uses ${expectedColumns} columns at ${width}px`);
     const metrics=await layout.evaluate(element=>({clientWidth:element.clientWidth,scrollWidth:element.scrollWidth}));
     assert.ok(metrics.scrollWidth<=metrics.clientWidth+3,`combat layout has no horizontal overflow at ${width}px: ${JSON.stringify(metrics)}`);
