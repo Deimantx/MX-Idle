@@ -31,7 +31,7 @@ export function CombatScreen({ game: g, start, stop, stance, target, setArea, qu
   const battleActivePhase=active?battleEnemy.phases?.map((phase,index)=>({phase,index})).filter(({phase})=>c.enemyHp/battleEnemy.maxHp*100<=phase.thresholdPct).sort((a,b)=>a.phase.thresholdPct-b.phase.thresholdPct)[0]:undefined;
   const weapon = g.equipped.weapon ? MELEE_WEAPONS[g.equipped.weapon as keyof typeof MELEE_WEAPONS] : undefined;
   const special = getWeaponSpecial(g), playerResistances = getPlayerResistances(g), basicDamageType=getCurrentPlayerBasicDamageType(g),basicStance=weapon?.stances.find(item=>item.damageType===basicDamageType),accuracy = getPlayerAccuracy(g), hit = getCombatHitChance(accuracy*(1+(basicStance?.accuracyMultiplier ?? 0)), enemy.evasions.Melee), canBegin = Boolean(weapon && g.skills.Attack.level >= weapon.attackLevel);
-  const targetIds=node==='area'?tierArea.enemies:node==='elite'?eliteArea.enemies:dungeon.encounters, targetList = targetIds.map((id) => ENEMIES[id]).filter(Boolean), normalKills=tierArea.enemies.filter(id=>(c.defeated[id] ?? 0)>0).length,elite=ENEMIES[eliteArea.enemies[0]!]!,eliteUnlocked=areaUnlocked(g,eliteArea.id),dungeonUnlocked=areaUnlocked(g,dungeon.id),evasions=getPlayerEvasions(g),previousBoss=Object.values(DUNGEONS).find(x=>x.tier===tier-1);
+  const targetIds=node==='area'?tierArea.enemies:node==='elite'?eliteArea.enemies:dungeon.encounters, targetList = targetIds.map((id) => ENEMIES[id]).filter(Boolean), dungeonUnlocked=areaUnlocked(g,dungeon.id),evasions=getPlayerEvasions(g),previousBoss=Object.values(DUNGEONS).find(x=>x.tier===tier-1);
   const ownedFood = useMemo(() => COOKING_RECIPES.filter((recipe) => recipe.foodValue > 0 && (g.bank[recipe.output as ItemId] ?? 0) > 0 && recipe.outputName.toLowerCase().includes(foodQuery.trim().toLowerCase())), [g.bank, foodQuery]);
   const recordEnemy = active ? battleEnemy : enemy, recordFirstKillLoot = recordEnemy.firstKillReward ?? [];
   const combatLootSummary=(Object.entries(c.lootGained ?? {}) as Array<[ItemId,number]>).filter(([,amount])=>amount>0).sort((a,b)=>b[1]-a[1]).slice(0,4);
@@ -75,7 +75,6 @@ export function CombatScreen({ game: g, start, stop, stance, target, setArea, qu
                     const locationEliteArea=Object.values(COMBAT_AREAS).find(entry=>entry.kind==='elite'&&entry.tier===location.tier)!;
                     const locationDungeon=Object.values(DUNGEONS).find(entry=>entry.tier===location.tier)!;
                     const locationElite=ENEMIES[locationEliteArea.enemies[0]!]!;
-                    const normalCount=Object.values(ENEMIES).filter(entry=>entry.tier===location.tier&&entry.rank==='normal').length;
                     const locationNormalKills=location.enemies.filter(id=>(c.defeated[id]??0)>0).length;
                     const locationEliteUnlocked=areaUnlocked(g,locationEliteArea.id);
                     const locationDungeonUnlocked=areaUnlocked(g,locationDungeon.id);
