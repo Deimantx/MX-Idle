@@ -21,7 +21,7 @@ try {
   await page.getByRole('button', { name: 'Begin' }).click();
   await page.getByRole('heading', { name: 'Mining' }).waitFor();
   assert.equal(await page.locator('.xp-orb-anchor').count(), 0, 'The shell has only one centered XP orb');
-  assert.equal(await page.locator('.level-orb').count(), 1);
+  assert.equal(await page.locator('.global-xp-hud').count(), 0, 'Transient XP HUD stays hidden until a skill gains XP');
   assert.equal(await page.locator('.activity-hud').evaluate(node => node.classList.contains('idle')), true, 'Idle HUD uses its compact state');
   assert.doesNotMatch(await page.locator('.activity-hud').innerText(), /XP\/h|Calculating|Estimating|Ready/);
   await page.getByRole('button', { name: /Choose activity/ }).click();
@@ -32,8 +32,7 @@ try {
   await page.setViewportSize({ width: 1920, height: 1080 });
   await capture('mining');
   await page.setViewportSize({ width: 2560, height: 1440 });
-  const orbAlignment = await page.evaluate(() => { const bar=document.querySelector('.topbar').getBoundingClientRect(),orb=document.querySelector('.level-orb').getBoundingClientRect();return Math.abs((bar.left+bar.width/2)-(orb.left+orb.width/2)); });
-  assert.ok(orbAlignment < 1, `Level orb remains mathematically centered (${orbAlignment}px)`);
+  assert.equal(await page.locator('.topbar-center-reserve').count(), 1, 'The top bar reserves its center without a permanent XP orb');
   await page.getByRole('button', { name: 'DEV' }).click();
   await page.locator('.dev-nav').getByRole('button', { name: 'UI Lab' }).click();
   await page.locator('.dev-nav-search input').fill('mining');
