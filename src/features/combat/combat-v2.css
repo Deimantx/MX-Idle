@@ -2210,3 +2210,139 @@
 .screen.combat-screen .battle-scene[data-enemy="ragged-poacher"] .enemy-battle-sprite {
   transform:scale(.96);
 }
+
+
+/* Region-specific world art: each area family gets its own palette and landscape. */
+.screen.combat-screen .battle-scene[data-region^="t2-"] {
+  background-image:linear-gradient(180deg,rgba(9,20,20,.03),rgba(5,12,10,.52)),url('/assets/combat/backgrounds/fenlands.svg');
+}
+.screen.combat-screen .battle-scene[data-region^="t3-"] {
+  background-image:linear-gradient(180deg,rgba(8,15,16,.03),rgba(5,10,9,.54)),url('/assets/combat/backgrounds/deep-frontier.svg');
+}
+.screen.combat-screen .battle-scene[data-region^="t4-"] {
+  background-image:linear-gradient(180deg,rgba(9,11,18,.05),rgba(5,8,13,.58)),url('/assets/combat/backgrounds/nightglass.svg');
+}
+.screen.combat-screen .battle-scene[data-region^="t5-"] {
+  background-image:linear-gradient(180deg,rgba(28,12,8,.04),rgba(17,9,7,.55)),url('/assets/combat/backgrounds/emberfall.svg');
+}
+.screen.combat-screen .battle-scene[data-region^="t6-"] {
+  background-image:linear-gradient(180deg,rgba(9,18,25,.02),rgba(5,13,19,.45)),url('/assets/combat/backgrounds/frostveil.svg');
+}
+.screen.combat-screen .battle-scene[data-region^="t7-"] {
+  background-image:linear-gradient(180deg,rgba(8,16,20,.04),rgba(5,12,12,.52)),url('/assets/combat/backgrounds/stormreach.svg');
+}
+.screen.combat-screen .battle-scene[data-region^="t8-"] {
+  background-image:linear-gradient(180deg,rgba(14,12,28,.04),rgba(8,8,18,.55)),url('/assets/combat/backgrounds/aetherfall.svg');
+}
+.screen.combat-screen .battle-scene[data-region^="t9-"] {
+  background-image:linear-gradient(180deg,rgba(9,9,17,.03),rgba(5,5,12,.58)),url('/assets/combat/backgrounds/nightglass.svg');
+}
+.screen.combat-screen .battle-scene[data-region^="t10-"] {
+  background-image:linear-gradient(180deg,rgba(14,12,28,.04),rgba(8,8,18,.55)),url('/assets/combat/backgrounds/aetherfall.svg');
+}
+
+/* Combat feel: attack cadence, impact feedback, enemy rank readability and ambient depth. */
+.screen.combat-screen .battle-scene::before,
+.screen.combat-screen .battle-scene::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:4;
+}
+.screen.combat-screen .battle-scene::before {
+  opacity:.22;
+  background:radial-gradient(ellipse at 50% 58%,transparent 20%,rgba(3,8,8,.5) 100%);
+}
+.screen.combat-screen .battle-scene::after {
+  opacity:.12;
+  background:repeating-linear-gradient(112deg,transparent 0 17px,rgba(205,219,199,.16) 18px,transparent 19px 33px);
+  mask-image:linear-gradient(180deg,transparent 10%,#000 90%);
+  animation:combat-air-drift 18s linear infinite;
+}
+.screen.combat-screen .battle-scene[data-impact="player"] .enemy-battle-sprite,
+.screen.combat-screen .battle-scene[data-impact="critical"] .enemy-battle-sprite {
+  animation:combat-enemy-hit .32s ease-out;
+  filter:brightness(1.7) drop-shadow(0 0 9px rgba(224,177,105,.75));
+}
+.screen.combat-screen .battle-scene[data-impact="enemy"] .player-battle-sprite {
+  animation:combat-player-hit .32s ease-out;
+  filter:brightness(1.45) drop-shadow(0 0 8px rgba(180,85,69,.7));
+}
+.screen.combat-screen .battle-scene[data-impact="miss"] .enemy-battle-sprite {
+  filter:brightness(1.12) drop-shadow(0 0 4px rgba(195,202,180,.2));
+}
+.screen.combat-screen .battle-scene[data-enemy-rank="elite"] .stage-caption,
+.screen.combat-screen .battle-scene[data-enemy-rank="boss"] .stage-caption {
+  border-color:rgba(202,157,94,.7);
+  box-shadow:0 0 18px rgba(202,157,94,.12);
+}
+.screen.combat-screen .battle-scene[data-enemy-rank="boss"] .stage-caption b {
+  color:#edc78d;
+  letter-spacing:.1em;
+}
+.screen.combat-screen .battle-scene[data-enemy-style="magic"] .enemy-battle-sprite {
+  filter:drop-shadow(0 0 8px rgba(130,190,202,.28));
+}
+.screen.combat-screen .battle-scene[data-enemy-kind="undead"] .enemy-battle-sprite {
+  filter:drop-shadow(0 0 8px rgba(171,177,194,.22));
+}
+.screen.combat-screen .battle-scene[data-enemy-kind="construct"] .enemy-battle-sprite {
+  filter:drop-shadow(0 0 8px rgba(191,170,128,.22));
+}
+.screen.combat-screen .battle-scene .floating-damage {
+  text-shadow:0 2px 8px #000,0 0 15px currentColor;
+  animation:combat-impact-number .72s cubic-bezier(.15,.75,.2,1) both;
+}
+.screen.combat-screen .battle-scene .impact-critical {
+  color:#ffd28b;
+  font-size:1.35em;
+  letter-spacing:.1em;
+}
+.screen.combat-screen .battle-scene .impact-enemy { color:#e7a18c; }
+.screen.combat-screen .battle-scene .impact-miss { color:#d0d5c8; }
+.screen.combat-screen .battle-scene .foe-fallen .enemy-battle-sprite {
+  filter:grayscale(.8) brightness(.65);
+  transform:translateY(12px) scaleY(.72);
+  opacity:.75;
+  transition:transform .35s ease,filter .35s ease,opacity .35s ease;
+}
+.screen.combat-screen .battle-scene .battle-figure,
+.screen.combat-screen .battle-scene .battle-foe {
+  transform-origin:50% 100%;
+}
+.screen.combat-screen .battle-scene .player-figure::after,
+.screen.combat-screen .battle-scene .battle-foe::after {
+  content:"";
+  position:absolute;
+  left:12%;right:12%;bottom:1%;
+  height:9%;
+  border-radius:50%;
+  background:#020605;
+  filter:blur(7px);
+  opacity:.4;
+  z-index:-1;
+}
+@keyframes combat-air-drift {
+  from { transform:translateX(-2%); }
+  to { transform:translateX(2%); }
+}
+@keyframes combat-enemy-hit {
+  0%,100% { transform:translateX(0); }
+  30% { transform:translateX(7px) rotate(2deg); }
+  60% { transform:translateX(-3px); }
+}
+@keyframes combat-player-hit {
+  0%,100% { transform:translateX(0); }
+  30% { transform:translateX(-6px) rotate(-1.5deg); }
+  60% { transform:translateX(2px); }
+}
+@keyframes combat-impact-number {
+  from { opacity:0; transform:translateY(12px) scale(.82); }
+  20% { opacity:1; }
+  to { opacity:0; transform:translateY(-26px) scale(1.05); }
+}
+@media (prefers-reduced-motion:reduce) {
+  .screen.combat-screen .battle-scene::after,
+  .screen.combat-screen .battle-scene .floating-damage { animation:none!important; }
+}
