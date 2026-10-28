@@ -60,7 +60,7 @@ export function CombatScreen({ game: g, start, stop, stance, target, setArea, qu
         <div className="combat-command-stat"><span>Weapon special</span><b>{c.specialMode}</b></div>
         <div className="combat-command-stat"><span>Food slots ready</span><b>{readyFoodSlots} / {g.food.slots.length}</b></div>
       </div>
-      <button type="button" className={`combat-auto-toggle ${active?'is-active':''}`} aria-pressed={active} disabled={!active&&!canBegin} onClick={active?stop:start}>{active?<><span aria-hidden="true">Ⅱ</span> Stop Auto Combat</>:<><span aria-hidden="true">▶</span> Start Auto Combat</>}</button>
+      <button type="button" className={`combat-auto-toggle ${active?'is-active':''}`} aria-pressed={active} disabled={!active&&!canBegin} onClick={active?stop:start}>{active?<><span aria-hidden="true">Ⅱ</span> Pause Fight</>:<><span aria-hidden="true">▶</span> Start Auto Combat</>}</button>
     </section>
     <div className="combat-layout">
       <div className="combat-main">
