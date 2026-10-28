@@ -41,6 +41,9 @@ try{
   await page.getByRole('button',{name:'Equip Item'}).click();
   assert.equal((await waitForState(state=>state.equipped.weapon==='combat.weapon.melee.copper_sword','Attack 1 Copper Sword equip')).skills.Attack.level,1);
   await page.getByRole('button',{name:'Combat',exact:true}).click();
+  const combatViewport=await page.evaluate(()=>{const scroll=document.querySelector('.content-scroll'),wrap=document.querySelector('.content-wrap'),layout=document.querySelector('.combat-layout');return {scrollWidth:scroll?.clientWidth??0,wrapWidth:wrap?.getBoundingClientRect().width??0,layoutWidth:layout?.getBoundingClientRect().width??0,gridColumns:layout?getComputedStyle(layout).gridTemplateColumns:''};});
+  assert.ok(combatViewport.scrollWidth>0&&combatViewport.wrapWidth>=combatViewport.scrollWidth-40,'Combat content wrapper should fill the main viewport: '+JSON.stringify(combatViewport));
+  assert.ok(combatViewport.layoutWidth>=combatViewport.wrapWidth-90,'Combat panels should use the content wrapper width: '+JSON.stringify(combatViewport));
   await page.getByRole('button',{name:'Begin Combat'}).click();
   await waitForState(state=>(state.combat.defeated['road-wolf']??0)>0,'natural Road Wolf victory',120_000);
   const firstCombatState=await readState();
